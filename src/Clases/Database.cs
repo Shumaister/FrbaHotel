@@ -1749,6 +1749,13 @@ namespace FrbaHotel
 
         #region Estadia
 
+        public static string estadiaObtenerID(Estadia estadia)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Estadia_ID FROM RIP.Estadias WHERE Estadia_ReservaID = @ReservaID");
+            consulta.Parameters.AddWithValue("@ReservaID", estadia.reserva.Codigo);
+            return consultaObtenerValor(consulta);
+        }
+
         public static void estadiaAgregarIngreso(Estadia estadia)
         {
             SqlCommand consulta = consultaCrear("INSERT INTO RIP.Estadias (Estadia_ReservaID, Estadia_FechaInicio, Estadia_CheckInUsuarioID) VALUES (@ReservaID, GETDATE(), @UsuarioID)");
@@ -1757,9 +1764,18 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
+        public static void estadiaAgregarReservaConIngreso(Estadia estadia)
+        {
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Reservas SET Reserva_EstadoReservaID = 4 WHERE Reserva_ID = @ReservaID");
+            consulta.Parameters.AddWithValue("@ReservaID", estadia.reserva.Codigo);
+            consultaEjecutar(consulta);
+        }
+
         public static void estadiaIngresoExitoso(Estadia estadia)
         {
             estadiaAgregarIngreso(estadia);
+            estadiaAgregarReservaConIngreso(estadia);
+            estadiaAgregarHuespedes(estadia);
             ventanaInformarExito("El ingreso de la estadia fue registrado con exito");
         }
 
@@ -1801,6 +1817,7 @@ namespace FrbaHotel
         public static void estadiaEgresoExitoso(Estadia estadia)
         {
             estadiaAgregarEgreso(estadia);
+            estadiaEgresoHuespedes(estadia);
             ventanaInformarExito("El egreso de la estadia fue registrado con exito");
         }
 
@@ -1838,19 +1855,28 @@ namespace FrbaHotel
     
         public static void estadiaAgregarHuesped(string clienteID, string estadiaID)
         {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Huespedes (Huesped_ClienteID, Huesped_EstadiaID) VALUES (@ClienteID, @EstadiaID)");
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Huespedes (Huesped_ClienteID, Huesped_EstadiaID, Huesped_Presente) VALUES (@ClienteID, @EstadiaID, 1)");
             consulta.Parameters.AddWithValue("@ClienteID", clienteID);
             consulta.Parameters.AddWithValue("@EstadiaID", estadiaID);
             consultaEjecutar(consulta);
         }
 
-        public static void estadiaAgregarHuespedes(List<string> clientes, string estadiaID)
+        public static void estadiaAgregarHuespedes(Estadia estadia)
         {
-            foreach (string clienteID in clientes)
-                estadiaAgregarHuesped(clienteID, estadiaID);
+            string estadiaID = estadiaObtenerID(estadia); 
+            estadiaAgregarHuesped(estadia.reserva.Cliente.id, estadiaObtenerID(estadia));
+            foreach (string clienteID in estadia.huespedes)
+                estadiaAgregarHuesped(clienteID, estadiaObtenerID(estadia));
         }
 
-        public static bool estadiaVerificarHuesped(Cliente cliente, List<string> huespedes)
+        public static void estadiaEgresoHuespedes(Estadia estadia)
+        {
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Huespedes SET Huesped_Presente = 0 WHERE Estadia_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", estadiaObtenerID(estadia));
+            consultaEjecutar(consulta);
+        }
+
+        public static bool estadiaVerificarHuesped(Cliente cliente, Estadia estadia)
         {
             if (!clienteHabilitado(cliente))
             {
@@ -1858,7 +1884,7 @@ namespace FrbaHotel
                 return false;
             }
                 
-            if(huespedes.Contains(cliente.id))
+            if(estadia.huespedes.Contains(cliente.id))
             {
                 ventanaInformarError("El cliente ya fue agregado a la lista");
                 return false;

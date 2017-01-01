@@ -169,7 +169,7 @@ namespace FrbaHotel.AbmCliente
                 if (funcion == "Buscar")
                 {
                     Cliente cliente = ventanaCrearClienteParaModificar(e);
-                    if (Database.estadiaVerificarHuesped(cliente, ventanaRegistrarIngreso.huespedes))
+                    if (Database.estadiaVerificarHuesped(cliente, ventanaRegistrarIngreso.estadia))
                     {
                         ventanaRegistrarIngreso.huesped = cliente;
                         this.Hide();

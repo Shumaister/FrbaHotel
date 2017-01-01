@@ -649,9 +649,9 @@ VALUES ('DNI'), ('Pasaporte')
 PRINT''
 PRINT '----- Realizando inserts a tabla RIP.EstadosReservas -----'
 INSERT INTO RIP.EstadosReservas (EstadoReserva_Descripcion) 
-VALUES ('Reserva correcta'),('Reserva modificada'),
-('Reserva cancelada por Recepción'),('Reserva cancelada por Cliente')
-,('Reserva cancelada por No-Show'),('Reserva con ingreso efectivo')
+VALUES ('Reserva cancelada por Cliente'), ('Reserva cancelada por No-Show'),
+('Reserva cancelada por Recepción'), ('Reserva con ingreso efectivo'),
+('Reserva correcta'), ('Reserva modificada')
 
 
 PRINT''

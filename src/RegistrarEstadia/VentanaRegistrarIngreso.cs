@@ -17,14 +17,12 @@ namespace FrbaHotel.RegistrarEstadia
         public Sesion sesion { get; set; }
         public Estadia estadia { get; set; }
         public Cliente huesped { get; set; }
-        public List<string> huespedes { get; set; }
         
         public VentanaRegistrarIngreso(Estadia estadia, Sesion sesion)
         {
             InitializeComponent();
             this.estadia = estadia;
             this.sesion = sesion;
-            this.huespedes = new List<string>();
         }
 
         private void VentanaRegistrarIngreso_Load(object sender, EventArgs e)
@@ -60,7 +58,7 @@ namespace FrbaHotel.RegistrarEstadia
             if (huesped != null)
             {
                 lbxHuespedes.Items.Add(huesped.persona.nombre + "-" + huesped.persona.apellido + "-" + huesped.persona.tipoDocumento + "-" + huesped.persona.numeroDocumento + "-" + huesped.persona.email);
-                huespedes.Add(Database.clienteObtenerID(huesped));
+                estadia.huespedes.Add(Database.clienteObtenerID(huesped));
                 huesped = null;
             }
         }
@@ -74,7 +72,7 @@ namespace FrbaHotel.RegistrarEstadia
                 Cliente cliente = new Cliente();
                 cliente.persona = new Persona();
                 cliente.persona.email = clienteDatos[4];
-                huespedes.Remove(Database.clienteObtenerID(cliente));
+                estadia.huespedes.Remove(Database.clienteObtenerID(cliente));
                 listBoxQuitarElemento(lbxHuespedes);
             }
 

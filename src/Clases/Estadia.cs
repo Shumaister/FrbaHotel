@@ -13,6 +13,7 @@ namespace FrbaHotel.Clases
         public DateTime fechaFin { get; set; }
         public string checkInUsuarioID { get; set; }
         public string checkOutUsuarioID { get; set; }
+        public List<string> huespedes { get; set; }
 
         public Estadia()
         { 
