@@ -27,7 +27,7 @@ namespace FrbaHotel.RegistrarEstadia
         {
             Estadia estadia = new Estadia();
             estadia.reservaID = reserva.Codigo;
-            estadia.checkOutUsuarioID = usuario.id;
+            estadia.checkOutUsuarioID = Database.usuarioObtenerID(usuario);
             Database.estadiaAgregarEgreso(estadia);
         }
 

@@ -29,8 +29,10 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void VentanaRegistrarIngreso_Load(object sender, EventArgs e)
         {
-            lblClienteNombre.Text = reserva.Cliente.persona.nombre + " " + reserva.Cliente.persona.apellido;
-            lblClienteDocumento.Text = reserva.Cliente.persona.tipoDocumento + " N° " + reserva.Cliente.persona.numeroDocumento;
+            lblClienteNombre.Text = reserva.Cliente.persona.nombre;
+            lblClienteApellido.Text = reserva.Cliente.persona.apellido;
+            lblTipoDocumento.Text = reserva.Cliente.persona.tipoDocumento;
+            lblClienteDocumento.Text = reserva.Cliente.persona.numeroDocumento;
             lblClienteEmail.Text = reserva.Cliente.persona.email;
         }
 
@@ -38,31 +40,50 @@ namespace FrbaHotel.RegistrarEstadia
         {
             Estadia estadia = new Estadia();
             estadia.reservaID = reserva.Codigo;
-            estadia.checkInUsuarioID = usuario.id;
-            Database.estadiaIngresoExitoso(estadia);     
+            estadia.checkInUsuarioID = Database.usuarioObtenerID(usuario);
+            if (Database.estadiaIngresoExitoso(estadia))
+            {
+                this.Hide();
+            }
+
+
         }
 
         private void btnAgregarClienteNuevo_Click(object sender, EventArgs e)
         {
             new VentanaCliente(this, "Nuevo").ShowDialog();
+            ventanaAgregarHuesped();
         }
 
         private void btnAgregarClienteExistente_Click(object sender, EventArgs e)
         {
             new VentanaCliente(this, "Buscar").ShowDialog();
-            lbxHuespedes.Items.Add(huesped.persona.nombre + " " + huesped.persona.apellido +  " " + huesped.persona.tipoDocumento + " " + huesped.persona.numeroDocumento + " " + huesped.persona.email);
-            huespedes.Add(huesped.id);
+            ventanaAgregarHuesped();
         }
 
-        
+        private void ventanaAgregarHuesped()
+        {
+            if (huesped != null)
+            {
+                lbxHuespedes.Items.Add(huesped.persona.nombre + "-" + huesped.persona.apellido + "-" + huesped.persona.tipoDocumento + "-" + huesped.persona.numeroDocumento + "-" + huesped.persona.email);
+                huespedes.Add(Database.clienteObtenerID(huesped));
+                huesped = null;
+            }
+        }
+
         private void btnQuitarCliente_Click(object sender, EventArgs e)
         {
-            string clienteListBox = lbxHuespedes.SelectedItem.ToString();
-            string[] clienteDatos = clienteListBox.Split('-');
-            Cliente cliente = new Cliente();
-            cliente.persona.email = clienteDatos[4];
-            huespedes.Remove(Database.clienteObtenerID(cliente));
-            listBoxQuitarElemento(lbxHuespedes);
+            if (lbxHuespedes.SelectedItem != null)
+            {
+                string clienteListBox = lbxHuespedes.SelectedItem.ToString();
+                string[] clienteDatos = clienteListBox.Split('-');
+                Cliente cliente = new Cliente();
+                cliente.persona = new Persona();
+                cliente.persona.email = clienteDatos[4];
+                huespedes.Remove(Database.clienteObtenerID(cliente));
+                listBoxQuitarElemento(lbxHuespedes);
+            }
+
         }
     }
 }

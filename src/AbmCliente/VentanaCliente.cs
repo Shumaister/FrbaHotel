@@ -43,7 +43,7 @@ namespace FrbaHotel.AbmCliente
                 tabControl.TabPages.Remove(pagModificar);
                 tabControl.TabPages.Remove(pagEliminar);     
             }
-            if (funcion == "Existente")
+            if (funcion == "Buscar")
             {
                 pagModificar.Text = "Buscar";
                 tabControl.TabPages.Remove(pagAgregar);
@@ -77,7 +77,17 @@ namespace FrbaHotel.AbmCliente
             {
                 Cliente cliente = ventanaCrearClienteParaAgregar();
                 if (Database.clienteAgregadoConExito(cliente))
-                    ventanaActualizar(sender, e);
+                {
+                    if (funcion == "ABM")
+                        ventanaActualizar(sender, e);
+                    if (funcion == "Nuevo")
+                    {
+                        ventanaRegistrarIngreso.huesped = cliente;
+                        this.Hide();
+                    }                      
+                }
+                    
+                
             }
         }
 
@@ -162,9 +172,9 @@ namespace FrbaHotel.AbmCliente
                     if (Database.estadiaVerificarHuesped(cliente, ventanaRegistrarIngreso.huespedes))
                     {
                         ventanaRegistrarIngreso.huesped = cliente;
+                        this.Hide();
                     }
-                    
-                    
+                                     
                 }
             }
         }
@@ -247,16 +257,16 @@ namespace FrbaHotel.AbmCliente
                 comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
             }
 
-            if (funcion == "Existente")
+            if (funcion == "Buscar")
             {             
                 comboBoxCargar(cbxFiltroTipoDocumentoModificar, Database.tipoDocumentoFiltroObtenerTodosEnLista());
                 btnFiltrarModificar_Click(sender, e);
                 dataGridViewAgregarBotonAgregar(dgvModificarClientes);
-                ventanaOcultarColumnas();
+                ventanaOcultarColumnasModificar();
             }
         }
 
-        private void ventanaOcultarColumnas()
+        private void ventanaOcultarColumnasModificar()
         {
             dgvModificarClientes.Columns["Cliente_ID"].Visible = false;
             dgvModificarClientes.Columns["Cliente_Estado"].Visible = false;
@@ -271,6 +281,10 @@ namespace FrbaHotel.AbmCliente
             dgvModificarClientes.Columns["Domicilio_NumeroCalle"].Visible = false;
             dgvModificarClientes.Columns["Domicilio_Piso"].Visible = false;
             dgvModificarClientes.Columns["Domicilio_Departamento"].Visible = false;
+        }
+
+        private void ventanaOcultarColumnasEliminar()
+        {
             dgvEliminarClientes.Columns["Cliente_ID"].Visible = false;
             dgvEliminarClientes.Columns["Persona_ID"].Visible = false;
             dgvEliminarClientes.Columns["Persona_Nacionalidad"].Visible = false;
@@ -283,6 +297,12 @@ namespace FrbaHotel.AbmCliente
             dgvEliminarClientes.Columns["Domicilio_NumeroCalle"].Visible = false;
             dgvEliminarClientes.Columns["Domicilio_Piso"].Visible = false;
             dgvEliminarClientes.Columns["Domicilio_Departamento"].Visible = false;
+        }
+
+        private void ventanaOcultarColumnas()
+        {
+            ventanaOcultarColumnasModificar();
+            ventanaOcultarColumnasEliminar();
         }
 
         private void tbxNombre_KeyPress(object sender, KeyPressEventArgs e)

@@ -48,6 +48,11 @@ namespace FrbaHotel
             this.email = email;
         }
 
+        public Persona()
+        {
+ 
+        }
+
         #endregion
     }
 }

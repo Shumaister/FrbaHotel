@@ -1535,10 +1535,11 @@ namespace FrbaHotel
 
         #endregion
 
-        public static string reservaObtenerHotel(string reservaID)
+        public static string reservaObtenerHotel(string reservaID, string hotelID)
         {
-            SqlCommand consulta = Database.consultaCrear("SELECT CONCAT(Domicilio_Pais, '-', Domicilio_Ciudad, '-', Domicilio_Calle, '-', Domicilio_NumeroCalle) FROM RIP.Reservas JOIN RIP.Hoteles ON Reserva_HotelID = Hotel_ID JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID WHERE Reserva_ID = @ID");
+            SqlCommand consulta = Database.consultaCrear("SELECT CONCAT(Domicilio_Pais, '-', Domicilio_Ciudad, '-', Domicilio_Calle, '-', Domicilio_NumeroCalle) FROM RIP.Reservas JOIN RIP.Hoteles ON Reserva_HotelID = Hotel_ID JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID WHERE Reserva_ID = @ID AND Reserva_HotelID = @HotelID");
             consulta.Parameters.AddWithValue("@ID", reservaID);
+            consulta.Parameters.AddWithValue("@HotelID", hotelID);
             return Database.consultaObtenerValor(consulta);
         }
 
@@ -1548,6 +1549,31 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@ID", reservaID);
             return Database.consultaObtenerValor(consulta);
         }
+
+        public static DataRow reservaObtenerDatos(string reservaID)
+        {
+            SqlCommand consulta = Database.consultaCrear("SELECT Reserva_ClienteID, Reserva_FechaInicio, Reserva_FechaFin, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Email FROM RIP.Reservas JOIN RIP.Clientes ON Reserva_ClienteID = Cliente_ID JOIN RIP.Personas ON Cliente_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID WHERE Reserva_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", reservaID);
+            return Database.consultaObtenerFila(consulta);
+        }
+        
+        public static Reserva reservaObtener(string reservaID)
+        {
+            Reserva reserva = new Reserva();
+            reserva.Cliente = new Cliente();
+            reserva.Cliente.persona = new Persona();
+            DataRow fila = reservaObtenerDatos(reservaID);
+            reserva.Codigo = reservaID;
+            reserva.FechaInicio = (DateTime)fila["Reserva_FechaInicio"];
+            reserva.FechaFin = (DateTime)fila["Reserva_FechaFin"];
+            reserva.Cliente.persona.nombre = (string)fila["Persona_Nombre"].ToString();
+            reserva.Cliente.persona.apellido = (string)fila["Persona_Apellido"].ToString();
+            reserva.Cliente.persona.tipoDocumento = (string)fila["TipoDocumento_Descripcion"].ToString();
+            reserva.Cliente.persona.numeroDocumento = (string)fila["Persona_NumeroDocumento"].ToString();
+            reserva.Cliente.persona.email = (string)fila["Persona_Email"].ToString();
+            return reserva;
+        }
+        
 
         #region Reserva
 
@@ -1731,16 +1757,24 @@ namespace FrbaHotel
 
         public static bool estadiaIngresoPermitido(Estadia estadia)
         {
-            Reserva reserva = ReservaObtenerById(estadia.reservaID);
+            Reserva reserva = reservaObtener(estadia.reservaID);
             return reserva.FechaInicio.Date == DateTime.Now.Date;
         }
 
-        public static void estadiaIngresoExitoso(Estadia estadia)
+        public static bool estadiaIngresoExitoso(Estadia estadia)
         {
             if (estadiaIngresoPermitido(estadia))
+            {
+                estadiaAgregarIngreso(estadia);
                 ventanaInformarExito("El ingreso fue establecido con exito");
+                return true;
+            }
             else
+            {
                 ventanaInformarError("No se puede realizar el ingreso antes o despues de la fecha de inicio");
+                return false;
+            }
+
         }
         
         #endregion

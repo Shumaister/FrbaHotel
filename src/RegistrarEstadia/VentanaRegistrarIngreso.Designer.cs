@@ -42,6 +42,10 @@
             this.lblClienteNombre = new System.Windows.Forms.Label();
             this.lblClienteDocumento = new System.Windows.Forms.Label();
             this.lblClienteEmail = new System.Windows.Forms.Label();
+            this.lblApellido = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblClienteApellido = new System.Windows.Forms.Label();
+            this.lblTipoDocumento = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.SuspendLayout();
@@ -55,7 +59,7 @@
             // 
             // btnQuitarCliente
             // 
-            this.btnQuitarCliente.Location = new System.Drawing.Point(347, 229);
+            this.btnQuitarCliente.Location = new System.Drawing.Point(347, 275);
             this.btnQuitarCliente.Name = "btnQuitarCliente";
             this.btnQuitarCliente.Size = new System.Drawing.Size(142, 23);
             this.btnQuitarCliente.TabIndex = 276;
@@ -66,7 +70,7 @@
             // lbxHuespedes
             // 
             this.lbxHuespedes.FormattingEnabled = true;
-            this.lbxHuespedes.Location = new System.Drawing.Point(12, 171);
+            this.lbxHuespedes.Location = new System.Drawing.Point(12, 217);
             this.lbxHuespedes.Name = "lbxHuespedes";
             this.lbxHuespedes.Size = new System.Drawing.Size(311, 95);
             this.lbxHuespedes.TabIndex = 274;
@@ -74,7 +78,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 144);
+            this.label2.Location = new System.Drawing.Point(9, 190);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(115, 13);
             this.label2.TabIndex = 273;
@@ -85,7 +89,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label1.Location = new System.Drawing.Point(9, 114);
+            this.label1.Location = new System.Drawing.Point(9, 160);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(163, 16);
             this.label1.TabIndex = 293;
@@ -93,7 +97,7 @@
             // 
             // btnGuardarIngreso
             // 
-            this.btnGuardarIngreso.Location = new System.Drawing.Point(239, 292);
+            this.btnGuardarIngreso.Location = new System.Drawing.Point(239, 338);
             this.btnGuardarIngreso.Name = "btnGuardarIngreso";
             this.btnGuardarIngreso.Size = new System.Drawing.Size(75, 23);
             this.btnGuardarIngreso.TabIndex = 295;
@@ -103,7 +107,7 @@
             // 
             // btnAgregarClienteNuevo
             // 
-            this.btnAgregarClienteNuevo.Location = new System.Drawing.Point(347, 171);
+            this.btnAgregarClienteNuevo.Location = new System.Drawing.Point(347, 217);
             this.btnAgregarClienteNuevo.Name = "btnAgregarClienteNuevo";
             this.btnAgregarClienteNuevo.Size = new System.Drawing.Size(142, 23);
             this.btnAgregarClienteNuevo.TabIndex = 296;
@@ -113,7 +117,7 @@
             // 
             // btnAgregarClienteExistente
             // 
-            this.btnAgregarClienteExistente.Location = new System.Drawing.Point(347, 200);
+            this.btnAgregarClienteExistente.Location = new System.Drawing.Point(347, 246);
             this.btnAgregarClienteExistente.Name = "btnAgregarClienteExistente";
             this.btnAgregarClienteExistente.Size = new System.Drawing.Size(142, 23);
             this.btnAgregarClienteExistente.TabIndex = 297;
@@ -144,7 +148,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 64);
+            this.label4.Location = new System.Drawing.Point(9, 108);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(68, 13);
             this.label4.TabIndex = 301;
@@ -153,7 +157,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 87);
+            this.label7.Location = new System.Drawing.Point(9, 131);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(38, 13);
             this.label7.TabIndex = 302;
@@ -171,7 +175,7 @@
             // lblClienteDocumento
             // 
             this.lblClienteDocumento.AutoSize = true;
-            this.lblClienteDocumento.Location = new System.Drawing.Point(83, 64);
+            this.lblClienteDocumento.Location = new System.Drawing.Point(83, 108);
             this.lblClienteDocumento.Name = "lblClienteDocumento";
             this.lblClienteDocumento.Size = new System.Drawing.Size(95, 13);
             this.lblClienteDocumento.TabIndex = 304;
@@ -180,17 +184,57 @@
             // lblClienteEmail
             // 
             this.lblClienteEmail.AutoSize = true;
-            this.lblClienteEmail.Location = new System.Drawing.Point(53, 87);
+            this.lblClienteEmail.Location = new System.Drawing.Point(53, 131);
             this.lblClienteEmail.Name = "lblClienteEmail";
             this.lblClienteEmail.Size = new System.Drawing.Size(66, 13);
             this.lblClienteEmail.TabIndex = 305;
             this.lblClienteEmail.Text = "Cliente email";
             // 
+            // lblApellido
+            // 
+            this.lblApellido.AutoSize = true;
+            this.lblApellido.Location = new System.Drawing.Point(9, 64);
+            this.lblApellido.Name = "lblApellido";
+            this.lblApellido.Size = new System.Drawing.Size(47, 13);
+            this.lblApellido.TabIndex = 306;
+            this.lblApellido.Text = "Apellido:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 87);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(87, 13);
+            this.label5.TabIndex = 307;
+            this.label5.Text = "Tipo documento:";
+            // 
+            // lblClienteApellido
+            // 
+            this.lblClienteApellido.AutoSize = true;
+            this.lblClienteApellido.Location = new System.Drawing.Point(62, 64);
+            this.lblClienteApellido.Name = "lblClienteApellido";
+            this.lblClienteApellido.Size = new System.Drawing.Size(78, 13);
+            this.lblClienteApellido.TabIndex = 308;
+            this.lblClienteApellido.Text = "Cliente apellido";
+            // 
+            // lblTipoDocumento
+            // 
+            this.lblTipoDocumento.AutoSize = true;
+            this.lblTipoDocumento.Location = new System.Drawing.Point(102, 87);
+            this.lblTipoDocumento.Name = "lblTipoDocumento";
+            this.lblTipoDocumento.Size = new System.Drawing.Size(115, 13);
+            this.lblTipoDocumento.TabIndex = 309;
+            this.lblTipoDocumento.Text = "Cliente tipo documento";
+            // 
             // VentanaRegistrarIngreso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(519, 322);
+            this.ClientSize = new System.Drawing.Size(519, 378);
+            this.Controls.Add(this.lblTipoDocumento);
+            this.Controls.Add(this.lblClienteApellido);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblApellido);
             this.Controls.Add(this.lblClienteEmail);
             this.Controls.Add(this.lblClienteDocumento);
             this.Controls.Add(this.lblClienteNombre);
@@ -223,6 +267,10 @@
             this.Controls.SetChildIndex(this.lblClienteNombre, 0);
             this.Controls.SetChildIndex(this.lblClienteDocumento, 0);
             this.Controls.SetChildIndex(this.lblClienteEmail, 0);
+            this.Controls.SetChildIndex(this.lblApellido, 0);
+            this.Controls.SetChildIndex(this.label5, 0);
+            this.Controls.SetChildIndex(this.lblClienteApellido, 0);
+            this.Controls.SetChildIndex(this.lblTipoDocumento, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.ResumeLayout(false);
@@ -246,5 +294,9 @@
         private System.Windows.Forms.Label lblClienteNombre;
         private System.Windows.Forms.Label lblClienteDocumento;
         private System.Windows.Forms.Label lblClienteEmail;
+        private System.Windows.Forms.Label lblApellido;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblClienteApellido;
+        private System.Windows.Forms.Label lblTipoDocumento;
     }
 }
