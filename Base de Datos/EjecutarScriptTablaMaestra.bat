@@ -1,0 +1,1 @@
+sqlcmd -S LAPTOP-26PDCK4Q\SQLSERVER2012 -U gdHotel2018 -P gd2018 -i gd_esquema.Schema.sql,gd_esquema.Maestra.Table.sql  -a 32767 -o resultado_output.txt
