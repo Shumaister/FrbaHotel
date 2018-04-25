@@ -16,5 +16,11 @@ namespace FrbaHotel
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string a = DB.AlgodelaDB();
+            this.label1.Text = a;
+        }
     }
 }
