@@ -225,7 +225,7 @@ IF NOT EXISTS (SELECT 1
             AND TABLE_NAME='Reserva' AND TABLE_SCHEMA='RIP') 
 BEGIN
 CREATE TABLE [RIP].[Reserva](
-	[Reserva_Codigo][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Reserva_Codigo][numeric](18,0) NOT NULL PRIMARY KEY,
 	[Reserva_Fecha_Inicio][datetime],
 	[Reserva_Cantidad_Noches][numeric](18,0),
 	[Reserva_Cliente_ID][numeric](18,0),
@@ -338,124 +338,66 @@ GO
 -----
 
 
---- Calles
+
+-- CALLES
 INSERT INTO RIP.Calles (calles_descripcion)
-select distinct hotel_calle from gd_esquema.Maestra
-UNION
+select distinct hotel_calle from gd_esquema.Maestra UNION
 select distinct cliente_dom_calle from gd_esquema.Maestra
-
-
+ --Personas
+ INSERT INTO RIP.Persona (persona_nombre,persona_apellido,persona_fecha_nacimiento)
+select distinct Cliente_Nombre,Cliente_Apellido,Cliente_Fecha_Nac from gd_esquema.Maestra
+---Nacionalidad
+INSERT INTO RIP.Nacionalidad (nacionalidad_descripcion)
+select distinct Cliente_Nacionalidad  from gd_esquema.Maestra
 --- ciudades
 INSERT INTO RIP.Ciudades (ciudades_descripcion)
 select distinct Hotel_Ciudad from gd_esquema.Maestra
-
-
---- Nacionalidad
-INSERT INTO RIP.Nacionalidad (nacionalidad_descripcion)
-select distinct Cliente_Nacionalidad  from gd_esquema.Maestra
-
-
---- Regimen 
+--Regimen 
 INSERT INTO RIP.Regimen (regimen_descripcion,regimen_precio)
-select distinct Regimen_Descripcion, Regimen_Precio from gd_esquema.Maestra
-
-
---- Personas
- INSERT INTO RIP.Persona (persona_nombre,persona_apellido,persona_fecha_nacimiento)
-select distinct Cliente_Nombre,Cliente_Apellido,Cliente_Fecha_Nac from gd_esquema.Maestra
-
-
---- Consumibles 
+select distinct Regimen_Descripcion,Regimen_Precio from gd_esquema.Maestra
+--consumibles 
 INSERT INTO RIP.Consumible (consumible_codigo,consumible_descripcion,consumible_precio)
 select distinct Consumible_Codigo,Consumible_Descripcion,Consumible_Precio from gd_esquema.Maestra where Consumible_Descripcion IS NOT NULL
-
-
 --- Habitaciones Descripcion
 INSERT INTO RIP.Habitaciones_Descripcion (habitaciones_descripcion_ID,habitaciones_descripcion_descripcion)
 select distinct Habitacion_Tipo_Codigo, Habitacion_Tipo_Descripcion from gd_esquema.Maestra
-
-
 --- Domicilio
-INSERT INTO rip.domicilio 
-            (domicilio_ciudad_id, 
-             domicilio_calle_id, 
-             domicilio_nro_calle) 
-SELECT DISTINCT ciudades_id, 
-                calles_id, 
-                hotel_nro_calle 
-FROM   gd_esquema.maestra 
-       JOIN rip.ciudades 
-         ON ciudades_descripcion = hotel_ciudad 
-       JOIN rip.calles 
-         ON calles_descripcion = hotel_calle 
-
-INSERT INTO rip.domicilio 
-            (domicilio_calle_id, 
-             domicilio_nro_calle, 
-             domicilio_depto, 
-             domicilio_piso) 
-SELECT DISTINCT calles_id, 
-                cliente_nro_calle, 
-                cliente_depto, 
-                cliente_piso 
-FROM   gd_esquema.maestra 
-       JOIN rip.calles 
-         ON calles_descripcion = cliente_dom_calle 
-
-
+INSERT INTO rip.Domicilio (domicilio_ciudad_ID,domicilio_calle_ID,domicilio_nro_calle)
+select distinct ciudades_ID,calles_ID,Hotel_Nro_Calle from gd_esquema.Maestra join rip.Ciudades on ciudades_descripcion=Hotel_Ciudad join rip.Calles on calles_descripcion=Hotel_Calle
+INSERT INTO rip.Domicilio (domicilio_calle_ID,domicilio_nro_calle,domicilio_depto,domicilio_piso)
+select distinct calles_ID,Cliente_Nro_Calle,Cliente_Depto,Cliente_Piso from gd_esquema.Maestra join rip.Calles on calles_descripcion=Cliente_Dom_Calle
 --Hoteles
-INSERT INTO rip.hoteles 
-            (hoteles_domicilio_id, 
-             hoteles_nro_estrella, 
-             hoteles_recarga_estrella) 
-SELECT DISTINCT domicilio_id, 
-                hotel_cantestrella, 
-                hotel_recarga_estrella 
-FROM   gd_esquema.maestra 
-       JOIN rip.domicilio 
-         ON hotel_nro_calle = domicilio_nro_calle 
-            AND domicilio_ciudad_id IS NOT NULL 
-
-
+INSERT INTO RIP.Hoteles (hoteles_domicilio_ID,hoteles_nro_estrella,hoteles_recarga_estrella)
+select distinct domicilio_ID,Hotel_CantEstrella,Hotel_Recarga_Estrella from gd_esquema.Maestra join RIP.Domicilio on Hotel_Nro_Calle=domicilio_nro_calle and domicilio_ciudad_ID is not null
 ---Habitaciones
-INSERT INTO rip.habitaciones 
-            (habitaciones_hotel_id, 
-             Habitaciones_Numero, 
-             habitaciones_frente, 
-             habitaciones_tipo_codigo) 
-SELECT DISTINCT hoteles_id, 
-                habitacion_numero, 
-                habitacion_frente, 
-                habitacion_tipo_codigo 
-FROM   gd_esquema.maestra 
-       JOIN rip.domicilio 
-         ON hotel_nro_calle = domicilio_nro_calle 
-            AND domicilio_ciudad_id IS NOT NULL 
-       JOIN rip.hoteles 
-         ON hoteles_domicilio_id = domicilio_id 
-ORDER  BY 1,2 
-
+INSERT INTO RIP.Habitaciones(habitaciones_hotel_ID,habitaciones_numero,habitaciones_frente,habitaciones_tipo_codigo)
+select distinct hoteles_ID,Habitacion_Numero,Habitacion_Frente,Habitacion_Tipo_Codigo from gd_esquema.Maestra
+join rip.Domicilio on Hotel_Nro_Calle=domicilio_nro_calle and domicilio_ciudad_ID is not null join RIP.Hoteles on hoteles_domicilio_ID=domicilio_ID
+ order by 1,2
 
 --Clientes
-INSERT INTO rip.clientes 
-            (cliente_persona_id, 
-             cliente_pasarporte_nro, 
-             cliente_domicilio_id, 
-             cliente_mail, 
-             cliente_nacionalidad_id) 
-SELECT DISTINCT persona_id, 
-                cliente_pasaporte_nro, 
-                domicilio_id, 
-                cliente_mail, 
-                1 
-FROM   gd_esquema.maestra 
-       JOIN rip.persona 
-         ON persona_nombre = cliente_nombre 
-            AND persona_apellido = cliente_apellido 
-            AND persona_fecha_nacimiento = cliente_fecha_nac 
-       JOIN rip.calles 
-         ON calles_descripcion = cliente_dom_calle 
-       JOIN rip.domicilio 
-         ON calles_id = domicilio_calle_id 
-            AND cliente_nro_calle = domicilio_nro_calle 
-ORDER  BY 2 
+INSERT INTO RIP.Clientes (cliente_persona_ID,cliente_Pasarporte_Nro,cliente_domicilio_ID,cliente_Mail,cliente_nacionalidad_ID)
+select distinct persona_ID,Cliente_Pasaporte_Nro,domicilio_ID,Cliente_Mail,1 from gd_esquema.Maestra
+join RIP.Persona on persona_nombre=Cliente_Nombre and persona_apellido=Cliente_Apellido and persona_fecha_nacimiento=Cliente_Fecha_Nac
+join rip.Calles on calles_descripcion=Cliente_Dom_Calle 
+join rip.Domicilio on calles_ID=domicilio_calle_ID and Cliente_Nro_Calle=domicilio_nro_calle and domicilio_depto=Cliente_Depto and domicilio_piso=Cliente_Piso
+
+--Reserva
+INSERT INTO RIP.Reserva (Reserva_Codigo,Reserva_Fecha_Inicio,Reserva_Cantidad_Noches,Reserva_Cliente_ID,Reserva_Hotel_ID,Reserva_Habitacion_ID,Reserva_Regimen_ID)
+select distinct Reserva_Codigo,Reserva_Fecha_Inicio,Reserva_Cant_Noches,clientes.cliente_Pasarporte_Nro,Hoteles_ID,Habitaciones_ID,Regimen_ID from gd_esquema.Maestra 
+join rip.Clientes on clientes.cliente_Pasarporte_Nro = gd_esquema.Maestra.Cliente_Pasaporte_Nro
+join rip.Domicilio on Domicilio_Nro_calle=Hotel_Nro_Calle and Domicilio_Ciudad_ID is not null
+join rip.Hoteles on Hoteles_Domicilio_ID=Domicilio_ID and Hoteles_Nro_Estrella=Hotel_CantEstrella
+join rip.Habitaciones on Habitaciones_hotel_ID=Hoteles_ID and Habitaciones_Numero=Habitacion_Numero and habitaciones_frente=Habitacion_Frente and habitaciones_tipo_codigo=Habitacion_Tipo_Codigo
+join rip.Regimen on regimen.regimen_descripcion=gd_esquema.Maestra.Regimen_Descripcion
+
+--Estadia
+INSERT INTO RIP.Estadia(Estadia_Fecha_Inicio,Estadia_Cantidad_Noches,Estadia_Cliente_ID,Estadia_Hotel_ID,Estadia_Habitacion_ID,Estadia_Precio_Total_Consumible,Estadia_Regimen_ID)
+select distinct Estadia_Fecha_Inicio,Estadia_Cant_Noches,clientes.cliente_Pasarporte_Nro,Hoteles_ID,Habitaciones_ID,sum(isnull(Consumible_Precio,0)),Regimen_ID from gd_esquema.Maestra
+join rip.Clientes on clientes.cliente_Pasarporte_Nro = gd_esquema.Maestra.Cliente_Pasaporte_Nro
+join rip.Domicilio on Domicilio_Nro_calle=Hotel_Nro_Calle and Domicilio_Ciudad_ID is not null
+join rip.Hoteles on Hoteles_Domicilio_ID=Domicilio_ID and Hoteles_Nro_Estrella=Hotel_CantEstrella
+join rip.Habitaciones on Habitaciones_hotel_ID=Hoteles_ID and Habitaciones_Numero=Habitacion_Numero and habitaciones_frente=Habitacion_Frente and habitaciones_tipo_codigo=Habitacion_Tipo_Codigo
+join rip.Regimen on regimen.regimen_descripcion=gd_esquema.Maestra.Regimen_Descripcion
+where Estadia_Fecha_Inicio is not null
+group by Estadia_Fecha_Inicio,Estadia_Cant_Noches,clientes.cliente_Pasarporte_Nro,Hoteles_ID,Habitaciones_ID,Regimen_ID
