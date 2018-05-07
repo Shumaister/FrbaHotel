@@ -17,4 +17,5 @@ C:\Users\Factotum\Documents\GitHub\FrbaHotel\bin\Debug\FrbaHotel.pdb
 C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
 C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.Properties.Resources.resources
 C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
-C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.Form1.resources
+C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.Login.ClienteUsuario.resources
+C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.Login.Login.resources

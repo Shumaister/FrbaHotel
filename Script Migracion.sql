@@ -112,11 +112,38 @@ GO
 IF NOT EXISTS (SELECT 1 
    FROM INFORMATION_SCHEMA.TABLES 
             WHERE TABLE_TYPE='BASE TABLE' 
+            AND TABLE_NAME='Funcionalidades' AND TABLE_SCHEMA='RIP') 
+BEGIN
+CREATE TABLE [RIP].[Funcionalidades](
+	[Funcionalidad_Id][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Funcionalidad_Funcionalidad] [nvarchar](50) NOT NULL
+)
+ PRINT '... tabla Funcionalidades creada ... '
+END
+GO
+
+IF NOT EXISTS (SELECT 1 
+   FROM INFORMATION_SCHEMA.TABLES 
+            WHERE TABLE_TYPE='BASE TABLE' 
+            AND TABLE_NAME='Rol_Funcionalidad' AND TABLE_SCHEMA='RIP') 
+BEGIN
+CREATE TABLE [RIP].[Rol_Funcionalidad](
+	[RolFunc_IdRol][numeric](18,0) NOT NULL,
+	[RolFunc_IdFuncionalidad] [numeric](18,0) NOT NULL
+)
+ PRINT '... tabla Rol_Funcionalidad creada ... '
+END
+GO
+
+
+IF NOT EXISTS (SELECT 1 
+   FROM INFORMATION_SCHEMA.TABLES 
+            WHERE TABLE_TYPE='BASE TABLE' 
             AND TABLE_NAME='Usuario_Rol' AND TABLE_SCHEMA='RIP') 
 BEGIN
 CREATE TABLE [RIP].[Usuario_Rol](
-	[Usuario_Rol_Usuario_ID] [numeric](18,0) not null,
-	[Usuario_Rol_Rol_ID] [numeric](18,0) not null
+	[Usuario_Rol_Usuario_ID] [numeric](18,0) NOT NULL,
+	[Usuario_Rol_Rol_ID] [numeric](18,0) NOT NULL
 )
  PRINT '... tabla Usuario_Rol creada ... '
 END
@@ -401,3 +428,45 @@ join rip.Habitaciones on Habitaciones_hotel_ID=Hoteles_ID and Habitaciones_Numer
 join rip.Regimen on regimen.regimen_descripcion=gd_esquema.Maestra.Regimen_Descripcion
 where Estadia_Fecha_Inicio is not null
 group by Estadia_Fecha_Inicio,Estadia_Cant_Noches,clientes.cliente_Pasarporte_Nro,Hoteles_ID,Habitaciones_ID,Regimen_ID
+
+
+--- Aniadimos constraints faltantes
+
+ALTER TABLE [RIP].[Rol_Funcionalidad]
+	ADD CONSTRAINT PK_ROL_FUNCIONALIDAD PRIMARY KEY ([RolFunc_IdRol], [RolFunc_IdFuncionalidad]),
+	CONSTRAINT FK_ROL_FUNCIONALIDAD_ROL FOREIGN KEY ([RolFunc_IdRol]) REFERENCES [RIP].[Roles] ([Rol_Id]),
+	CONSTRAINT FK_ROL_FUNCIONALIDAD_FUNCIONALIDAD FOREIGN KEY ([RolFunc_IdFuncionalidad]) REFERENCES [RIP].[Funcionalidades] ([Funcionalidad_Id])
+GO
+
+ALTER TABLE [RIP].[Usuario_Rol]
+	ADD CONSTRAINT PK_USUARIO_ROL PRIMARY KEY ([Usuario_Rol_Usuario_ID], [Usuario_Rol_Rol_ID]),
+	CONSTRAINT FK_USUARIO_ROL_USUARIO FOREIGN KEY ([Usuario_Rol_Usuario_ID]) REFERENCES [RIP].[Usuarios] ([Usuario_ID]),
+	CONSTRAINT FK_USUARIO_ROL_ROL FOREIGN KEY ([Usuario_Rol_Rol_ID]) REFERENCES [RIP].[Roles] (Rol_Id)
+GO
+
+--Insertar roles
+INSERT INTO RIP.Roles (Rol_Nombre) values('Administrador')
+INSERT INTO RIP.Roles (Rol_Nombre) values('Recepcionista')
+INSERT INTO RIP.Roles (Rol_Nombre) values('Guest')
+
+
+--- Creamos el usuario administrador y recepcionista genericos
+
+ 
+
+INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasena) values('admin',HASHBYTES('SHA2_256', 'w23e'))
+INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasena) values('recep',HASHBYTES('SHA2_256', 'w23e'))
+
+INSERT INTO RIP.Funcionalidades(Funcionalidad_Funcionalidad)
+values ('AMB_USUARIO'),('ABM_ROL'),('ABM_CLIENTE'),('ABM_HOTEL'),('ABM_RESERVA'),('ABM_ESTADIA')
+
+INSERT INTO RIP.Rol_Funcionalidad(RolFunc_IdRol,RolFunc_IdFuncionalidad)
+values(1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(2,6),(3,5)
+
+-- Asignamos rol al admin
+INSERT INTO RIP.Usuario_Rol(Usuario_Rol_Usuario_ID, Usuario_Rol_Rol_ID) values ( (select Usuario_ID from rip.Usuarios where Usuario_User = 'admin'), (select Rol_ID from rip.Roles where Rol_Nombre = 'Administrador'))
+
+
+select * from rip.Usuarios
+
+---
