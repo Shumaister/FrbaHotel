@@ -89,7 +89,7 @@ namespace FrbaHotel
             if (!Sha256_hash(pas).SequenceEqual(contrasenia))
             {
                 intentosFallidos++;
-              //  BD.modificarNumeroDeIntentosPorUsuario(username, intentosFallidos);
+                ActualizarIntentosLogueo(user, intentosFallidos);
 
                 if (intentosFallidos >= 3)
                     return new LogueoDTO(false, "El usuario se ha bloqueado por cantidad de intentos fallidos de contranenia.\nContactese con un administrador.");
@@ -98,11 +98,28 @@ namespace FrbaHotel
              }
              else
              {
-              //   BD.modificarNumeroDeIntentosPorUsuario(username, 0);
+                ActualizarIntentosLogueo(user, 0);
                 List<string> roles = new List<string>();
                 roles.Add("Hola");
                 return new LogueoDTO(true,"Exito!",usuario,roles);
              }
         }
+
+
+        public static void ActualizarIntentosLogueo(string user, int cant)
+        {
+            SqlConnection connection = getConnection();
+            connection.Open();
+            
+            SqlCommand query = new SqlCommand("UPDATE RIP.Usuarios SET Usuario_CantidadDeIntentos = @cant WHERE Usuario_User = @user");
+            query.Parameters.AddWithValue("user", user);
+            query.Parameters.AddWithValue("cant", cant);
+            query.Connection = connection;
+            query.ExecuteNonQuery();
+
+            connection.Close();
+        }    
+    
     }
+
 }
