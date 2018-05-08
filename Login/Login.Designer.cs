@@ -28,125 +28,93 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblUsuario = new System.Windows.Forms.Label();
+            this.lblContrasenia = new System.Windows.Forms.Label();
             this.txbUser = new System.Windows.Forms.TextBox();
             this.txbPass = new System.Windows.Forms.TextBox();
-            this.btnIngresoUsuario = new System.Windows.Forms.Button();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.lblErrorLogueo = new System.Windows.Forms.Label();
-            this.lblRol = new System.Windows.Forms.Label();
-            this.cbxRoles = new System.Windows.Forms.ComboBox();
-            this.btnIngresar = new System.Windows.Forms.Button();
-            this.lblErrorRol = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // pictureBox1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(66, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Usuario";
+            this.pictureBox1.Image = global::FrbaHotel.Properties.Resources.Logo_TP;
+            this.pictureBox1.Location = new System.Drawing.Point(33, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(210, 139);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 15;
+            this.pictureBox1.TabStop = false;
             // 
-            // label2
+            // lblUsuario
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(66, 87);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Contrasenia";
+            this.lblUsuario.AutoSize = true;
+            this.lblUsuario.Location = new System.Drawing.Point(75, 178);
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(43, 13);
+            this.lblUsuario.TabIndex = 16;
+            this.lblUsuario.Text = "Usuario";
+            // 
+            // lblContrasenia
+            // 
+            this.lblContrasenia.AutoSize = true;
+            this.lblContrasenia.Location = new System.Drawing.Point(75, 240);
+            this.lblContrasenia.Name = "lblContrasenia";
+            this.lblContrasenia.Size = new System.Drawing.Size(61, 13);
+            this.lblContrasenia.TabIndex = 17;
+            this.lblContrasenia.Text = "Contraseña";
             // 
             // txbUser
             // 
-            this.txbUser.Location = new System.Drawing.Point(165, 33);
+            this.txbUser.Location = new System.Drawing.Point(78, 207);
             this.txbUser.Name = "txbUser";
-            this.txbUser.Size = new System.Drawing.Size(100, 20);
-            this.txbUser.TabIndex = 2;
+            this.txbUser.Size = new System.Drawing.Size(126, 20);
+            this.txbUser.TabIndex = 18;
             // 
             // txbPass
             // 
-            this.txbPass.Location = new System.Drawing.Point(165, 84);
+            this.txbPass.Location = new System.Drawing.Point(78, 268);
             this.txbPass.Name = "txbPass";
-            this.txbPass.Size = new System.Drawing.Size(100, 20);
-            this.txbPass.TabIndex = 3;
+            this.txbPass.Size = new System.Drawing.Size(126, 20);
+            this.txbPass.TabIndex = 19;
             this.txbPass.UseSystemPasswordChar = true;
             // 
-            // btnIngresoUsuario
+            // btnLogin
             // 
-            this.btnIngresoUsuario.Location = new System.Drawing.Point(176, 150);
-            this.btnIngresoUsuario.Name = "btnIngresoUsuario";
-            this.btnIngresoUsuario.Size = new System.Drawing.Size(75, 23);
-            this.btnIngresoUsuario.TabIndex = 4;
-            this.btnIngresoUsuario.Text = "Login";
-            this.btnIngresoUsuario.UseVisualStyleBackColor = true;
-            this.btnIngresoUsuario.Click += new System.EventHandler(this.btnIngresoUsuario_Click);
+            this.btnLogin.Location = new System.Drawing.Point(99, 307);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(89, 23);
+            this.btnLogin.TabIndex = 20;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // lblErrorLogueo
             // 
             this.lblErrorLogueo.AutoSize = true;
             this.lblErrorLogueo.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorLogueo.Location = new System.Drawing.Point(34, 121);
+            this.lblErrorLogueo.Location = new System.Drawing.Point(57, 155);
             this.lblErrorLogueo.Name = "lblErrorLogueo";
-            this.lblErrorLogueo.Size = new System.Drawing.Size(257, 13);
-            this.lblErrorLogueo.TabIndex = 5;
-            this.lblErrorLogueo.Text = "Error al loguearse. Usuario o Contrasenia incorrectos.";
-            // 
-            // lblRol
-            // 
-            this.lblRol.AutoSize = true;
-            this.lblRol.Location = new System.Drawing.Point(66, 214);
-            this.lblRol.Name = "lblRol";
-            this.lblRol.Size = new System.Drawing.Size(23, 13);
-            this.lblRol.TabIndex = 6;
-            this.lblRol.Text = "Rol";
-            // 
-            // cbxRoles
-            // 
-            this.cbxRoles.FormattingEnabled = true;
-            this.cbxRoles.Location = new System.Drawing.Point(165, 211);
-            this.cbxRoles.Name = "cbxRoles";
-            this.cbxRoles.Size = new System.Drawing.Size(100, 21);
-            this.cbxRoles.TabIndex = 7;
-            // 
-            // btnIngresar
-            // 
-            this.btnIngresar.Location = new System.Drawing.Point(120, 282);
-            this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(75, 23);
-            this.btnIngresar.TabIndex = 8;
-            this.btnIngresar.Text = "Ingresar";
-            this.btnIngresar.UseVisualStyleBackColor = true;
-            this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
-            // 
-            // lblErrorRol
-            // 
-            this.lblErrorRol.AutoSize = true;
-            this.lblErrorRol.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorRol.Location = new System.Drawing.Point(34, 250);
-            this.lblErrorRol.Name = "lblErrorRol";
-            this.lblErrorRol.Size = new System.Drawing.Size(236, 13);
-            this.lblErrorRol.TabIndex = 9;
-            this.lblErrorRol.Text = "Rol inhabilitado. Contactese con el administrador";
+            this.lblErrorLogueo.Size = new System.Drawing.Size(166, 13);
+            this.lblErrorLogueo.TabIndex = 21;
+            this.lblErrorLogueo.Text = "Usuario o contraseña incorrectos.";
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 352);
-            this.Controls.Add(this.lblErrorRol);
-            this.Controls.Add(this.btnIngresar);
-            this.Controls.Add(this.cbxRoles);
-            this.Controls.Add(this.lblRol);
+            this.ClientSize = new System.Drawing.Size(284, 347);
             this.Controls.Add(this.lblErrorLogueo);
-            this.Controls.Add(this.btnIngresoUsuario);
+            this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txbPass);
             this.Controls.Add(this.txbUser);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblContrasenia);
+            this.Controls.Add(this.lblUsuario);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "Login";
-            this.Text = "Login";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Login_FormClosed);
+            this.Load += new System.EventHandler(this.Login_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,15 +122,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lblUsuario;
+        private System.Windows.Forms.Label lblContrasenia;
         private System.Windows.Forms.TextBox txbUser;
         private System.Windows.Forms.TextBox txbPass;
-        private System.Windows.Forms.Button btnIngresoUsuario;
+        private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label lblErrorLogueo;
-        private System.Windows.Forms.Label lblRol;
-        private System.Windows.Forms.ComboBox cbxRoles;
-        private System.Windows.Forms.Button btnIngresar;
-        private System.Windows.Forms.Label lblErrorRol;
+
     }
 }

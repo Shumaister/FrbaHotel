@@ -16,10 +16,44 @@ namespace FrbaHotel.Login
         {
             InitializeComponent();
             lblErrorLogueo.Visible = false;
-            lblErrorRol.Visible = false;
-            MostrarRolSegun(false);
+            //lblErrorRol.Visible = false;
+            //MostrarRolSegun(false);
         }
 
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            lblErrorLogueo.Visible = false;
+
+            LogueoDTO logueo = DB.Autenticar(txbUser.Text, txbPass.Text);
+
+            if (logueo.Exito)
+            {
+                this.Hide();
+                //cbxRoles.DataSource = logueo.Roles;
+                new SeleccionRol().Show();
+            }
+            else
+            {
+                txbUser.Text = "";
+                txbPass.Text = "";
+                lblErrorLogueo.Visible = true;
+                //lblErrorLogueo.Text = logueo.MensajeError;
+            }
+
+        }
+
+        private void Login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        /*
+        
         private void MostrarRolSegun(bool buleano)
         {
             lblRol.Visible = buleano;
@@ -27,7 +61,7 @@ namespace FrbaHotel.Login
             btnIngresar.Visible = buleano;
         }
 
-
+         
         private void btnIngresoUsuario_Click(object sender, EventArgs e)
         {
             lblErrorLogueo.Visible = false;
@@ -51,10 +85,8 @@ namespace FrbaHotel.Login
             }
         }
 
-        private void btnIngresar_Click(object sender, EventArgs e)
-        {
+         */
 
-        }
 
     }
 }

@@ -19,7 +19,7 @@ namespace FrbaHotel
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ClienteUsuario());
+            Application.Run(new Principal());
         }
     }
 }

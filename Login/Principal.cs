@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.Login
 {
-    public partial class ClienteUsuario : Form
+    public partial class Principal : Form
     {
-        public ClienteUsuario()
+        public Principal()
         {
             InitializeComponent();
         }
@@ -26,6 +26,31 @@ namespace FrbaHotel.Login
         private void btnCliente_Click(object sender, EventArgs e)
         {
             // Re dirige a la pagina principal de acciones pero con rol de guest
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ClienteUsuario_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Principal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

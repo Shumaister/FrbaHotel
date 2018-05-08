@@ -19,3 +19,14 @@ C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.Properties.Reso
 C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
 C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.Login.ClienteUsuario.resources
 C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.Login.Login.resources
+D:\Dario\FrbaHotel\bin\Debug\FrbaHotel.exe.config
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.exe
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.pdb
+D:\Dario\FrbaHotel\bin\Debug\FrbaHotel.exe
+D:\Dario\FrbaHotel\bin\Debug\FrbaHotel.pdb
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Login.Login.resources
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Properties.Resources.resources
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Login.Principal.resources
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Login.SeleccionRol.resources
