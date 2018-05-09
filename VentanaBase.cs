@@ -15,11 +15,14 @@ namespace FrbaHotel
         public VentanaBase()
         {
             InitializeComponent();
+            ProgramTitle = "Frba Hotel";
         }
 
         private void VentanaBase_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }
+
+        protected string ProgramTitle { get; set; }
     }
 }

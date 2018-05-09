@@ -23,5 +23,10 @@ namespace FrbaHotel.Login
             DB.ComboBoxLlenar(cbxRoles);
         }
 
+        private void btnIngresar_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

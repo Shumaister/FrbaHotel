@@ -33,6 +33,7 @@
             this.cbxRoles = new System.Windows.Forms.ComboBox();
             this.lblRol = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // logo
@@ -57,6 +58,7 @@
             this.btnIngresar.TabIndex = 12;
             this.btnIngresar.Text = "Ingresar";
             this.btnIngresar.UseVisualStyleBackColor = true;
+            this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
             // 
             // cbxRoles
             // 
@@ -75,7 +77,7 @@
             this.lblRol.TabIndex = 10;
             this.lblRol.Text = "Por favor,  seleccione un rol.";
             // 
-            // SeleccionRol
+            // VentanaSeleccionRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -85,7 +87,7 @@
             this.Controls.Add(this.btnIngresar);
             this.Controls.Add(this.cbxRoles);
             this.Controls.Add(this.lblRol);
-            this.Name = "SeleccionRol";
+            this.Name = "VentanaSeleccionRol";
             this.Text = "SeleccionRol";
             this.Load += new System.EventHandler(this.SeleccionRol_Load);
             this.Controls.SetChildIndex(this.lblRol, 0);
@@ -94,6 +96,7 @@
             this.Controls.SetChildIndex(this.lblErrorRol, 0);
             this.Controls.SetChildIndex(this.logo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

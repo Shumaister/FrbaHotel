@@ -456,7 +456,9 @@ INSERT INTO RIP.Roles (Rol_Nombre) values('Guest')
 
 INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasena) values('admin',HASHBYTES('SHA2_256', 'w23e'))
 INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasena) values('recep',HASHBYTES('SHA2_256', 'w23e'))
+INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasena) values('gaby',HASHBYTES('SHA2_256', 'w23e'))
 
+<<<<<<< Updated upstream
 INSERT INTO RIP.Funcionalidades(Funcionalidad_Funcionalidad)
 values ('AMB_USUARIO'),('ABM_ROL'),('ABM_CLIENTE'),('ABM_HOTEL'),('ABM_RESERVA'),('ABM_ESTADIA')
 
@@ -466,7 +468,16 @@ values(1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(2,6),(3,5)
 -- Asignamos rol al admin
 INSERT INTO RIP.Usuario_Rol(Usuario_Rol_Usuario_ID, Usuario_Rol_Rol_ID) values ( (select Usuario_ID from rip.Usuarios where Usuario_User = 'admin'), (select Rol_ID from rip.Roles where Rol_Nombre = 'Administrador'))
 
+-- Asignamos rol al recepcionista
+INSERT INTO RIP.Usuario_Rol(Usuario_Rol_Usuario_ID, Usuario_Rol_Rol_ID) values ( (select Usuario_ID from rip.Usuarios where Usuario_User = 'recep'), (select Rol_ID from rip.Roles where Rol_Nombre = 'Recepcionista'))
 
-select * from rip.Usuarios
-
----
+-- Me asigno roles 
+INSERT INTO RIP.Usuario_Rol(Usuario_Rol_Usuario_ID, Usuario_Rol_Rol_ID) values ( (select Usuario_ID from rip.Usuarios where Usuario_User = 'gaby'), (select Rol_ID from rip.Roles where Rol_Nombre = 'Administrador'))
+INSERT INTO RIP.Usuario_Rol(Usuario_Rol_Usuario_ID, Usuario_Rol_Rol_ID) values ( (select Usuario_ID from rip.Usuarios where Usuario_User = 'gaby'), (select Rol_ID from rip.Roles where Rol_Nombre = 'Recepcionista'))
+=======
+--Clientes
+select distinct persona_ID,Cliente_Pasaporte_Nro,domicilio_ID,Cliente_Mail,1 from gd_esquema.Maestra
+join RIP.Persona on persona_nombre=Cliente_Nombre and persona_apellido=Cliente_Apellido and persona_fecha_nacimiento=Cliente_Fecha_Nac
+join rip.Calles on calles_descripcion=Cliente_Dom_Calle 
+join rip.Domicilio on calles_ID=domicilio_calle_ID and Cliente_Nro_Calle=domicilio_nro_calle and domicilio_depto=Cliente_Depto and domicilio_piso=Cliente_Piso
+>>>>>>> Stashed changes

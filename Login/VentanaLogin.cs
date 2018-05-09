@@ -16,8 +16,6 @@ namespace FrbaHotel.Login
         {
             InitializeComponent();
             lblErrorLogueo.Visible = false;
-            //lblErrorRol.Visible = false;
-            //MostrarRolSegun(false);
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -29,14 +27,13 @@ namespace FrbaHotel.Login
         {
             lblErrorLogueo.Visible = false;
 
-           if(!DB.CampoValidar(this, errorProvider1))
+           if(!CampoValidar(this, errorProvider1))
            {
                LogueoDTO logueo = DB.Autenticar(txbUser.Text, txbPass.Text);
 
                if (logueo.Exito)
                {
                    this.Hide();
-                   //cbxRoles.DataSource = logueo.Roles;
                    new VentanaSeleccionRol().Show();
                }
                else
@@ -44,11 +41,39 @@ namespace FrbaHotel.Login
                    txbUser.Text = "";
                    txbPass.Text = "";
                    lblErrorLogueo.Visible = true;
-                   //lblErrorLogueo.Text = logueo.MensajeError;
                }
 
            }
   
+        }
+
+        public static Boolean CampoValidar(Control objeto, ErrorProvider errorProvider)
+        {
+            Boolean flagError = false;
+
+            foreach (Control item in objeto.Controls)
+            {
+
+                if (item is ErrorTxtBox)
+                {
+                    ErrorTxtBox campo = (ErrorTxtBox)item;
+
+                    if (campo.Validar)
+                    {
+                        if (string.IsNullOrEmpty(campo.Text.Trim()))
+                        {
+                            errorProvider.SetError(campo, "El campo no puede estar vacio");
+                            flagError = true;
+                        }
+                        else
+                        {
+                            errorProvider.SetError(campo, "");
+                        }
+                    }
+                }
+
+            }
+            return flagError;
         }
 
         private void txbUser_TextChanged(object sender, EventArgs e)
