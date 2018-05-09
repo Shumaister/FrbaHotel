@@ -8,25 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrbaHotel.Login
+namespace FrbaHotel
 {
-    public partial class SeleccionRol : Form
+    public partial class VentanaBase : Form
     {
-        public SeleccionRol()
+        public VentanaBase()
         {
             InitializeComponent();
-            lblErrorRol.Visible = false; 
         }
 
-        private void SeleccionRol_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SeleccionRol_FormClosed(object sender, FormClosedEventArgs e)
+        private void VentanaBase_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }
-
     }
 }

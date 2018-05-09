@@ -76,6 +76,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="DB.cs" />
+    <Compile Include="ErrorTxtBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ErrorTxtBox.Designer.cs">
+      <DependentUpon>ErrorTxtBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="GenerarModificacionReserva\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,24 +94,30 @@
     <Compile Include="ListadoEstadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\Principal.cs">
+    <Compile Include="Login\VentanaInicio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\Principal.Designer.cs">
-      <DependentUpon>Principal.cs</DependentUpon>
+    <Compile Include="Login\VentanaInicio.Designer.cs">
+      <DependentUpon>VentanaInicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\Login.cs">
+    <Compile Include="Login\VentanaLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="Login\VentanaLogin.Designer.cs">
+      <DependentUpon>VentanaLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\LogueoDTO.cs" />
-    <Compile Include="Login\SeleccionRol.cs">
+    <Compile Include="Login\VentanaSeleccionAccion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\SeleccionRol.Designer.cs">
-      <DependentUpon>SeleccionRol.cs</DependentUpon>
+    <Compile Include="Login\VentanaSeleccionAccion.Designer.cs">
+      <DependentUpon>VentanaSeleccionAccion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\VentanaSeleccionRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\VentanaSeleccionRol.Designer.cs">
+      <DependentUpon>VentanaSeleccionRol.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,14 +133,23 @@
     <Compile Include="RegistrarEstadia\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Login\Principal.resx">
-      <DependentUpon>Principal.cs</DependentUpon>
+    <Compile Include="VentanaBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VentanaBase.Designer.cs">
+      <DependentUpon>VentanaBase.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Login\VentanaInicio.resx">
+      <DependentUpon>VentanaInicio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
+    <EmbeddedResource Include="Login\VentanaLogin.resx">
+      <DependentUpon>VentanaLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\SeleccionRol.resx">
-      <DependentUpon>SeleccionRol.cs</DependentUpon>
+    <EmbeddedResource Include="Login\VentanaSeleccionAccion.resx">
+      <DependentUpon>VentanaSeleccionAccion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\VentanaSeleccionRol.resx">
+      <DependentUpon>VentanaSeleccionRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -140,6 +161,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="VentanaBase.resx">
+      <DependentUpon>VentanaBase.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

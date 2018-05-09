@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.Login
 {
-    public partial class Login : Form
+    public partial class VentanaLogin : VentanaBase
     {
-        public Login()
+        public VentanaLogin()
         {
             InitializeComponent();
             lblErrorLogueo.Visible = false;
@@ -35,7 +35,7 @@ namespace FrbaHotel.Login
             {
                 this.Hide();
                 //cbxRoles.DataSource = logueo.Roles;
-                new SeleccionRol().Show();
+                new VentanaSeleccionRol().Show();
             }
             else
             {
@@ -45,11 +45,6 @@ namespace FrbaHotel.Login
                 //lblErrorLogueo.Text = logueo.MensajeError;
             }
 
-        }
-
-        private void Login_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
         }
 
         /*

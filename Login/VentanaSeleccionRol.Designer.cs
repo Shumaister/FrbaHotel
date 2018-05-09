@@ -1,6 +1,6 @@
 ﻿namespace FrbaHotel.Login
 {
-    partial class SeleccionRol
+    partial class VentanaSeleccionRol
     {
         /// <summary>
         /// Required designer variable.
@@ -32,9 +32,12 @@
             this.btnIngresar = new System.Windows.Forms.Button();
             this.cbxRoles = new System.Windows.Forms.ComboBox();
             this.lblRol = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.SuspendLayout();
+            // 
+            // logo
+            // 
+            this.logo.Location = new System.Drawing.Point(69, 12);
             // 
             // lblErrorRol
             // 
@@ -72,31 +75,25 @@
             this.lblRol.TabIndex = 10;
             this.lblRol.Text = "Por favor,  seleccione un rol.";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::FrbaHotel.Properties.Resources.Logo_TP;
-            this.pictureBox1.Location = new System.Drawing.Point(45, 24);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(210, 139);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 14;
-            this.pictureBox1.TabStop = false;
-            // 
             // SeleccionRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(300, 298);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblErrorRol);
             this.Controls.Add(this.btnIngresar);
             this.Controls.Add(this.cbxRoles);
             this.Controls.Add(this.lblRol);
             this.Name = "SeleccionRol";
             this.Text = "SeleccionRol";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SeleccionRol_FormClosed);
             this.Load += new System.EventHandler(this.SeleccionRol_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Controls.SetChildIndex(this.lblRol, 0);
+            this.Controls.SetChildIndex(this.cbxRoles, 0);
+            this.Controls.SetChildIndex(this.btnIngresar, 0);
+            this.Controls.SetChildIndex(this.lblErrorRol, 0);
+            this.Controls.SetChildIndex(this.logo, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -108,6 +105,5 @@
         private System.Windows.Forms.Button btnIngresar;
         private System.Windows.Forms.ComboBox cbxRoles;
         private System.Windows.Forms.Label lblRol;
-        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
