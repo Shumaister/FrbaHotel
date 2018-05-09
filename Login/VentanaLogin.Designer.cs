@@ -30,11 +30,12 @@
         {
             this.lblUsuario = new System.Windows.Forms.Label();
             this.lblContrasenia = new System.Windows.Forms.Label();
-            this.txbUser = new System.Windows.Forms.TextBox();
-            this.txbPass = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.lblErrorLogueo = new System.Windows.Forms.Label();
+            this.txbUser = new FrbaHotel.ErrorTxtBox();
+            this.txbPass = new FrbaHotel.ErrorTxtBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // logo
@@ -59,21 +60,6 @@
             this.lblContrasenia.TabIndex = 17;
             this.lblContrasenia.Text = "Contraseña";
             // 
-            // txbUser
-            // 
-            this.txbUser.Location = new System.Drawing.Point(78, 208);
-            this.txbUser.Name = "txbUser";
-            this.txbUser.Size = new System.Drawing.Size(126, 20);
-            this.txbUser.TabIndex = 18;
-            // 
-            // txbPass
-            // 
-            this.txbPass.Location = new System.Drawing.Point(78, 269);
-            this.txbPass.Name = "txbPass";
-            this.txbPass.Size = new System.Drawing.Size(126, 20);
-            this.txbPass.TabIndex = 19;
-            this.txbPass.UseSystemPasswordChar = true;
-            // 
             // btnLogin
             // 
             this.btnLogin.Location = new System.Drawing.Point(99, 306);
@@ -94,27 +80,47 @@
             this.lblErrorLogueo.TabIndex = 21;
             this.lblErrorLogueo.Text = "Usuario o contraseña incorrectos.";
             // 
+            // txbUser
+            // 
+            this.txbUser.Location = new System.Drawing.Point(78, 211);
+            this.txbUser.Name = "txbUser";
+            this.txbUser.Size = new System.Drawing.Size(126, 20);
+            this.txbUser.TabIndex = 22;
+            this.txbUser.Validar = true;
+            this.txbUser.TextChanged += new System.EventHandler(this.txbUser_TextChanged);
+            // 
+            // txbPass
+            // 
+            this.txbPass.Location = new System.Drawing.Point(78, 271);
+            this.txbPass.Name = "txbPass";
+            this.txbPass.Size = new System.Drawing.Size(126, 20);
+            this.txbPass.TabIndex = 23;
+            this.txbPass.UseSystemPasswordChar = true;
+            this.txbPass.Validar = true;
+            this.txbPass.TextChanged += new System.EventHandler(this.txbPass_TextChanged);
+            // 
             // VentanaLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(284, 347);
-            this.Controls.Add(this.lblErrorLogueo);
-            this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txbPass);
             this.Controls.Add(this.txbUser);
+            this.Controls.Add(this.lblErrorLogueo);
+            this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.lblContrasenia);
             this.Controls.Add(this.lblUsuario);
             this.Name = "VentanaLogin";
             this.Load += new System.EventHandler(this.Login_Load);
             this.Controls.SetChildIndex(this.lblUsuario, 0);
             this.Controls.SetChildIndex(this.lblContrasenia, 0);
-            this.Controls.SetChildIndex(this.txbUser, 0);
-            this.Controls.SetChildIndex(this.txbPass, 0);
             this.Controls.SetChildIndex(this.btnLogin, 0);
             this.Controls.SetChildIndex(this.lblErrorLogueo, 0);
             this.Controls.SetChildIndex(this.logo, 0);
+            this.Controls.SetChildIndex(this.txbUser, 0);
+            this.Controls.SetChildIndex(this.txbPass, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,10 +130,10 @@
 
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Label lblContrasenia;
-        private System.Windows.Forms.TextBox txbUser;
-        private System.Windows.Forms.TextBox txbPass;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label lblErrorLogueo;
+        private ErrorTxtBox txbUser;
+        private ErrorTxtBox txbPass;
 
     }
 }

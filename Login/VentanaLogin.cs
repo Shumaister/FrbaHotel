@@ -29,22 +29,36 @@ namespace FrbaHotel.Login
         {
             lblErrorLogueo.Visible = false;
 
-            LogueoDTO logueo = DB.Autenticar(txbUser.Text, txbPass.Text);
+           if(!DB.CampoValidar(this, errorProvider1))
+           {
+               LogueoDTO logueo = DB.Autenticar(txbUser.Text, txbPass.Text);
 
-            if (logueo.Exito)
-            {
-                this.Hide();
-                //cbxRoles.DataSource = logueo.Roles;
-                new VentanaSeleccionRol().Show();
-            }
-            else
-            {
-                txbUser.Text = "";
-                txbPass.Text = "";
-                lblErrorLogueo.Visible = true;
-                //lblErrorLogueo.Text = logueo.MensajeError;
-            }
+               if (logueo.Exito)
+               {
+                   this.Hide();
+                   //cbxRoles.DataSource = logueo.Roles;
+                   new VentanaSeleccionRol().Show();
+               }
+               else
+               {
+                   txbUser.Text = "";
+                   txbPass.Text = "";
+                   lblErrorLogueo.Visible = true;
+                   //lblErrorLogueo.Text = logueo.MensajeError;
+               }
 
+           }
+  
+        }
+
+        private void txbUser_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
+
+        private void txbPass_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
         }
 
         /*

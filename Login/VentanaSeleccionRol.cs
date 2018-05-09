@@ -20,7 +20,7 @@ namespace FrbaHotel.Login
 
         private void SeleccionRol_Load(object sender, EventArgs e)
         {
-
+            DB.ComboBoxLlenar(cbxRoles);
         }
 
     }

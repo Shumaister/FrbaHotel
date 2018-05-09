@@ -37,6 +37,7 @@
             // 
             // errorProvider1
             // 
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
             // logo
@@ -57,6 +58,7 @@
             this.ClientSize = new System.Drawing.Size(355, 339);
             this.Controls.Add(this.logo);
             this.Name = "VentanaBase";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VentanaBase";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.VentanaBase_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -67,7 +69,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ErrorProvider errorProvider1;
         public System.Windows.Forms.PictureBox logo;
+        public System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

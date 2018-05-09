@@ -7,9 +7,9 @@ using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Data.SqlTypes;
 using System.Data;
-//using PagoAgilFrba.Sucursal;
 using System.Configuration;
 using FrbaHotel.Login;
+using System.Windows.Forms;
 
 
 namespace FrbaHotel
@@ -118,7 +118,58 @@ namespace FrbaHotel
             query.ExecuteNonQuery();
 
             connection.Close();
-        }    
+        }
+
+        //Lo dejo aca por ahora
+
+        public static void ComboBoxLlenar(ComboBox combo) 
+        {
+            try
+            {
+                SqlConnection conexion = getConnection();
+                conexion.Open();
+                SqlCommand query = new SqlCommand("SELECT Rol_nombre FROM RIP.Roles", conexion);
+                SqlDataReader reader = query.ExecuteReader();
+                while (reader.Read())
+                {
+                    combo.Items.Add(reader["Rol_nombre"]);
+                }
+                reader.Close();
+            }
+            catch(Exception exception)
+            {
+                MessageBox.Show("Error en la base de datos" + exception.ToString());
+            }
+        }
+
+
+        public static Boolean CampoValidar(Control objeto, ErrorProvider errorProvider)
+        {
+            Boolean flagError = false;
+
+            foreach(Control item in objeto.Controls) {
+
+                if (item is ErrorTxtBox)
+                {
+                    ErrorTxtBox campo = (ErrorTxtBox)item;
+
+                    if (campo.Validar)
+                    {
+                        if (string.IsNullOrEmpty(campo.Text.Trim()))
+                        {
+                            errorProvider.SetError(campo, "El campo no puede estar vacio");
+                            flagError = true;
+                        }
+                        else
+                        {
+                            errorProvider.SetError(campo, "");
+                        }
+                    }
+                }
+
+            }
+            return flagError;
+        }
     
     }
 
