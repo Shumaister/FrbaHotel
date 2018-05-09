@@ -143,33 +143,7 @@ namespace FrbaHotel
         }
 
 
-        public static Boolean CampoValidar(Control objeto, ErrorProvider errorProvider)
-        {
-            Boolean flagError = false;
-
-            foreach(Control item in objeto.Controls) {
-
-                if (item is ErrorTxtBox)
-                {
-                    ErrorTxtBox campo = (ErrorTxtBox)item;
-
-                    if (campo.Validar)
-                    {
-                        if (string.IsNullOrEmpty(campo.Text.Trim()))
-                        {
-                            errorProvider.SetError(campo, "El campo no puede estar vacio");
-                            flagError = true;
-                        }
-                        else
-                        {
-                            errorProvider.SetError(campo, "");
-                        }
-                    }
-                }
-
-            }
-            return flagError;
-        }
+        
     
     }
 
