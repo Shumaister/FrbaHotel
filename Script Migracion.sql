@@ -30,7 +30,6 @@ BEGIN
 END
 GO
 
-
 IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'RIP')
 BEGIN
 	EXEC ('CREATE SCHEMA [RIP] AUTHORIZATION [gdHotel2018]')
@@ -50,13 +49,15 @@ IF NOT EXISTS (SELECT 1
             AND TABLE_NAME='Clientes' AND TABLE_SCHEMA='RIP') 
 BEGIN
 CREATE TABLE [RIP].[Clientes](
-	[cliente_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[cliente_Persona_ID][numeric](18,0),
+	[cliente_Tipo_Documento][nvarchar](255),
 	[cliente_Pasarporte_Nro] [numeric](18,0) not null,
 	[cliente_Domicilio_ID][numeric](18,0),
 	[cliente_Mail] [nvarchar] (255),
+	[cliente_Telefono][numeric](18,0),
 	[cliente_Nacionalidad_ID][numeric](18,0),
-	[cliente_DatoCorrupto] [bit]
+	[cliente_Habilitado][numeric](18,0) default 1,
+	[cliente_DatoCorrupto] [bit] default 0
 )
  PRINT '... tabla Clientes creada ... '
 END
@@ -158,8 +159,10 @@ CREATE TABLE [RIP].[Habitaciones](
 	[Habitaciones_ID][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[Habitaciones_hotel_ID][numeric](18,0),
 	[Habitaciones_Numero][numeric](18,0),
+	[Habitaciones_Piso][numeric](18,0),
 	[Habitaciones_frente][nvarchar](5),
-	[Habitaciones_tipo_codigo][numeric](18,0)
+	[Habitaciones_tipo_codigo][numeric](18,0),
+	[Habitaciones_Habilitada][bit] DEFAULT 1
 )
  PRINT '... tabla Habitaciones creada ... '
 END
@@ -185,9 +188,19 @@ IF NOT EXISTS (SELECT 1
 BEGIN
 CREATE TABLE [RIP].[Hoteles](
 	[Hoteles_ID][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	
+	[Hoteles_Nombre][nvarchar](255),
+	[Hoteles_Mail][nvarchar](255),
+	[Hoteles_Telefono][numeric](18,0),
 	[Hoteles_Domicilio_ID][numeric](18,0),
 	[Hoteles_Nro_Estrella][numeric](18,0),
 	[Hoteles_Recarga_Estrella][numeric](18,0),
+	[Hoteles_Fecha_Creacion][datetime],
+	[Hoteles_Fecha_Inicio_Mantemiento][datetime],
+	[Hoteles_Fecha_Final_Mantemiento][datetime],
+	[Hoteles_Habilitado][bit] default 1
+
+	-- meter regimen
 )
  PRINT '... tabla Hoteles creada ... '
 END
@@ -297,19 +310,6 @@ CREATE TABLE [RIP].[Consumible](
 END
 GO
 
-IF NOT EXISTS (SELECT 1 
-   FROM INFORMATION_SCHEMA.TABLES 
-            WHERE TABLE_TYPE='BASE TABLE' 
-            AND TABLE_NAME='Consumidos' AND TABLE_SCHEMA='RIP') 
-BEGIN
-CREATE TABLE [RIP].[Consumidos](
-	[Consumidos_Estadia_ID][numeric](18,0) NOT NULL,
-	[Consumidos_Consumible_ID][numeric](18,0) NOT NULL,
-	[Consumidos_Cantidad][numeric](18,0) NOT NULL
-)
- PRINT '... tabla Consumidos creada ... '
-END
-GO
 
 IF NOT EXISTS (SELECT 1 
    FROM INFORMATION_SCHEMA.TABLES 
@@ -397,8 +397,8 @@ select distinct calles_ID,Cliente_Nro_Calle,Cliente_Depto,Cliente_Piso from gd_e
 INSERT INTO RIP.Hoteles (hoteles_domicilio_ID,hoteles_nro_estrella,hoteles_recarga_estrella)
 select distinct domicilio_ID,Hotel_CantEstrella,Hotel_Recarga_Estrella from gd_esquema.Maestra join RIP.Domicilio on Hotel_Nro_Calle=domicilio_nro_calle and domicilio_ciudad_ID is not null
 ---Habitaciones
-INSERT INTO RIP.Habitaciones(habitaciones_hotel_ID,habitaciones_numero,habitaciones_frente,habitaciones_tipo_codigo)
-select distinct hoteles_ID,Habitacion_Numero,Habitacion_Frente,Habitacion_Tipo_Codigo from gd_esquema.Maestra
+INSERT INTO RIP.Habitaciones(habitaciones_hotel_ID,habitaciones_numero,habitaciones_piso,habitaciones_frente,habitaciones_tipo_codigo)
+select distinct hoteles_ID,Habitacion_Numero,Habitacion_Piso,Habitacion_Frente,Habitacion_Tipo_Codigo from gd_esquema.Maestra
 join rip.Domicilio on Hotel_Nro_Calle=domicilio_nro_calle and domicilio_ciudad_ID is not null join RIP.Hoteles on hoteles_domicilio_ID=domicilio_ID
  order by 1,2
 
@@ -409,6 +409,9 @@ join RIP.Persona on persona_nombre=Cliente_Nombre and persona_apellido=Cliente_A
 join rip.Calles on calles_descripcion=Cliente_Dom_Calle 
 join rip.Domicilio on calles_ID=domicilio_calle_ID and Cliente_Nro_Calle=domicilio_nro_calle and domicilio_depto=Cliente_Depto and domicilio_piso=Cliente_Piso
 
+update rip.Clientes set cliente_DatoCorrupto = 1
+where cliente_Pasarporte_Nro=27682640
+
 --Reserva
 INSERT INTO RIP.Reserva (Reserva_Codigo,Reserva_Fecha_Inicio,Reserva_Cantidad_Noches,Reserva_Cliente_ID,Reserva_Hotel_ID,Reserva_Habitacion_ID,Reserva_Regimen_ID)
 select distinct Reserva_Codigo,Reserva_Fecha_Inicio,Reserva_Cant_Noches,clientes.cliente_Pasarporte_Nro,Hoteles_ID,Habitaciones_ID,Regimen_ID from gd_esquema.Maestra 
@@ -417,6 +420,7 @@ join rip.Domicilio on Domicilio_Nro_calle=Hotel_Nro_Calle and Domicilio_Ciudad_I
 join rip.Hoteles on Hoteles_Domicilio_ID=Domicilio_ID and Hoteles_Nro_Estrella=Hotel_CantEstrella
 join rip.Habitaciones on Habitaciones_hotel_ID=Hoteles_ID and Habitaciones_Numero=Habitacion_Numero and habitaciones_frente=Habitacion_Frente and habitaciones_tipo_codigo=Habitacion_Tipo_Codigo
 join rip.Regimen on regimen.regimen_descripcion=gd_esquema.Maestra.Regimen_Descripcion
+where clientes.cliente_DatoCorrupto!=1
 
 --Estadia
 INSERT INTO RIP.Estadia(Estadia_Fecha_Inicio,Estadia_Cantidad_Noches,Estadia_Cliente_ID,Estadia_Hotel_ID,Estadia_Habitacion_ID,Estadia_Precio_Total_Consumible,Estadia_Regimen_ID)
@@ -426,9 +430,23 @@ join rip.Domicilio on Domicilio_Nro_calle=Hotel_Nro_Calle and Domicilio_Ciudad_I
 join rip.Hoteles on Hoteles_Domicilio_ID=Domicilio_ID and Hoteles_Nro_Estrella=Hotel_CantEstrella
 join rip.Habitaciones on Habitaciones_hotel_ID=Hoteles_ID and Habitaciones_Numero=Habitacion_Numero and habitaciones_frente=Habitacion_Frente and habitaciones_tipo_codigo=Habitacion_Tipo_Codigo
 join rip.Regimen on regimen.regimen_descripcion=gd_esquema.Maestra.Regimen_Descripcion
-where Estadia_Fecha_Inicio is not null
+where Estadia_Fecha_Inicio is not null and clientes.cliente_DatoCorrupto!=1
 group by Estadia_Fecha_Inicio,Estadia_Cant_Noches,clientes.cliente_Pasarporte_Nro,Hoteles_ID,Habitaciones_ID,Regimen_ID
 
+--Facturas
+
+INSERT INTO RIP.Facturas(Factura_Numero,Factura_Fecha,Factura_Total,Factura_Estadia_ID,Factura_Cliente_ID)
+select distinct b.Factura_Nro,b.Factura_Fecha,b.Factura_Total,a.Estadia_ID,a.Estadia_Cliente_ID from gd_esquema.Maestra b
+join rip.Estadia a on a.Estadia_Cantidad_Noches=b.Estadia_Cant_Noches and a.Estadia_Fecha_Inicio=b.Estadia_Fecha_Inicio
+join rip.Clientes on clientes.cliente_Pasarporte_Nro=b.Cliente_Pasaporte_Nro
+where Factura_Nro is not null and b.Cliente_Pasaporte_Nro=a.Estadia_Cliente_ID
+and clientes.cliente_DatoCorrupto!=1
+order by 1
+
+--- Item_Factura
+INSERT INTO RIP.Item_Factura(Item_Consumible_id,Item_Factura_ID,Item_Cantidad,Item_Factura_Monto)
+select Consumible_Codigo,Factura_Nro,Item_Factura_Cantidad,Item_Factura_Monto from gd_esquema.Maestra
+where Factura_Nro is not null
 
 --- Aniadimos constraints faltantes
 
@@ -458,7 +476,6 @@ INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasena) values('admin',HASHB
 INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasena) values('recep',HASHBYTES('SHA2_256', 'w23e'))
 INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasena) values('gaby',HASHBYTES('SHA2_256', 'w23e'))
 
-<<<<<<< Updated upstream
 INSERT INTO RIP.Funcionalidades(Funcionalidad_Funcionalidad)
 values ('AMB_USUARIO'),('ABM_ROL'),('ABM_CLIENTE'),('ABM_HOTEL'),('ABM_RESERVA'),('ABM_ESTADIA')
 
@@ -474,10 +491,3 @@ INSERT INTO RIP.Usuario_Rol(Usuario_Rol_Usuario_ID, Usuario_Rol_Rol_ID) values (
 -- Me asigno roles 
 INSERT INTO RIP.Usuario_Rol(Usuario_Rol_Usuario_ID, Usuario_Rol_Rol_ID) values ( (select Usuario_ID from rip.Usuarios where Usuario_User = 'gaby'), (select Rol_ID from rip.Roles where Rol_Nombre = 'Administrador'))
 INSERT INTO RIP.Usuario_Rol(Usuario_Rol_Usuario_ID, Usuario_Rol_Rol_ID) values ( (select Usuario_ID from rip.Usuarios where Usuario_User = 'gaby'), (select Rol_ID from rip.Roles where Rol_Nombre = 'Recepcionista'))
-=======
---Clientes
-select distinct persona_ID,Cliente_Pasaporte_Nro,domicilio_ID,Cliente_Mail,1 from gd_esquema.Maestra
-join RIP.Persona on persona_nombre=Cliente_Nombre and persona_apellido=Cliente_Apellido and persona_fecha_nacimiento=Cliente_Fecha_Nac
-join rip.Calles on calles_descripcion=Cliente_Dom_Calle 
-join rip.Domicilio on calles_ID=domicilio_calle_ID and Cliente_Nro_Calle=domicilio_nro_calle and domicilio_depto=Cliente_Depto and domicilio_piso=Cliente_Piso
->>>>>>> Stashed changes
