@@ -117,6 +117,19 @@ GO
 IF NOT EXISTS (SELECT 1 
    FROM INFORMATION_SCHEMA.TABLES 
             WHERE TABLE_TYPE='BASE TABLE' 
+            AND TABLE_NAME='Hotel_Usuario' AND TABLE_SCHEMA='RIP') 
+BEGIN
+CREATE TABLE [RIP].[Hotel_Usuario](
+	[Hotel_Usuario_IdHotel][numeric](18,0) NOT NULL,
+	[Hotel_Usuario_IdUsuario] [numeric](18,0) NOT NULL
+)
+ PRINT '... tabla Hotel_Usuario creada ... '
+END
+GO
+
+IF NOT EXISTS (SELECT 1 
+   FROM INFORMATION_SCHEMA.TABLES 
+            WHERE TABLE_TYPE='BASE TABLE' 
             AND TABLE_NAME='Roles' AND TABLE_SCHEMA='RIP') 
 BEGIN
 CREATE TABLE [RIP].[Roles](
@@ -226,11 +239,11 @@ IF NOT EXISTS (SELECT 1
             WHERE TABLE_TYPE='BASE TABLE' 
             AND TABLE_NAME='Hotel_Regimen' AND TABLE_SCHEMA='RIP') 
 BEGIN
-CREATE TABLE [RIP].Hotel_Regimen(
+CREATE TABLE [RIP].[Hotel_Regimen](
 	[Hotel_Regimen_IdHotel][numeric](18,0) NOT NULL,
 	[Hotel_Regimen_IdRegimen] [numeric](18,0) NOT NULL
 )
- PRINT '... tabla Rol_Funcionalidad creada ... '
+ PRINT '... tabla Hotel_Regimen creada ... '
 END
 GO
 
@@ -516,9 +529,15 @@ ALTER TABLE [RIP].[Usuario_Rol]
 GO
 
 ALTER TABLE [RIP].[Hotel_Regimen]
-	ADD CONSTRAINT PK_HOTEL_REGIMENL PRIMARY KEY ([Hotel_Regimen_IdHotel], [Hotel_Regimen_IdRegimen]),
+	ADD CONSTRAINT PK_HOTEL_REGIMEN PRIMARY KEY ([Hotel_Regimen_IdHotel], [Hotel_Regimen_IdRegimen]),
 	CONSTRAINT FK_HOTEL_REGIMEN_HOTEL FOREIGN KEY ([Hotel_Regimen_IdHotel]) REFERENCES [RIP].[Hoteles] ([Hoteles_ID]),
 	CONSTRAINT FK_HOTEL_REGIMEN_REGIMEN FOREIGN KEY ([Hotel_Regimen_IdRegimen]) REFERENCES [RIP].[Regimen] ([Regimen_ID])
+GO
+
+ALTER TABLE [RIP].[Hotel_Usuario]
+	ADD CONSTRAINT PK_HOTEL_USUARIO PRIMARY KEY ([Hotel_Usuario_IdHotel], [Hotel_Usuario_IdUsuario]),
+	CONSTRAINT FK_HOTEL_USUARIO_HOTEL FOREIGN KEY ([Hotel_Usuario_IdHotel]) REFERENCES [RIP].[Hoteles] ([Hoteles_ID]),
+	CONSTRAINT FK_HOTEL_USUARIO_USUARIO FOREIGN KEY ([Hotel_Usuario_IdUsuario]) REFERENCES [RIP].[Usuarios] ([Usuario_ID])
 GO
 
 ALTER TABLE [RIP].[Clientes]
@@ -545,12 +564,15 @@ values ('AMB_USUARIO'),('ABM_ROL'),('ABM_CLIENTE'),('ABM_HOTEL'),('ABM_RESERVA')
 INSERT INTO RIP.Rol_Funcionalidad(RolFunc_IdRol,RolFunc_IdFuncionalidad)
 values(1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(2,6),(3,5)
 
--- Asignamos rol al admin
+-- Asignamos rol al admin y recepcionista
 INSERT INTO RIP.Usuario_Rol(Usuario_Rol_Usuario_ID, Usuario_Rol_Rol_ID) values ( (select Usuario_ID from rip.Usuarios where Usuario_User = 'admin'), (select Rol_ID from rip.Roles where Rol_Nombre = 'Administrador'))
-
--- Asignamos rol al recepcionista
 INSERT INTO RIP.Usuario_Rol(Usuario_Rol_Usuario_ID, Usuario_Rol_Rol_ID) values ( (select Usuario_ID from rip.Usuarios where Usuario_User = 'recep'), (select Rol_ID from rip.Roles where Rol_Nombre = 'Recepcionista'))
 
 -- Me asigno roles 
 INSERT INTO RIP.Usuario_Rol(Usuario_Rol_Usuario_ID, Usuario_Rol_Rol_ID) values ( (select Usuario_ID from rip.Usuarios where Usuario_User = 'gaby'), (select Rol_ID from rip.Roles where Rol_Nombre = 'Administrador'))
 INSERT INTO RIP.Usuario_Rol(Usuario_Rol_Usuario_ID, Usuario_Rol_Rol_ID) values ( (select Usuario_ID from rip.Usuarios where Usuario_User = 'gaby'), (select Rol_ID from rip.Roles where Rol_Nombre = 'Recepcionista'))
+
+-- Asignamos hoteles a los usuarios iniciales
+INSERT INTO RIP.Hotel_Usuario(Hotel_Usuario_IdHotel,Hotel_Usuario_IdUsuario) select h.hoteles_id,(select Usuario_ID from rip.Usuarios where Usuario_User = 'admin') from rip.Hoteles h
+INSERT INTO RIP.Hotel_Usuario(Hotel_Usuario_IdHotel,Hotel_Usuario_IdUsuario) select h.hoteles_id,(select Usuario_ID from rip.Usuarios where Usuario_User = 'recep') from rip.Hoteles h
+INSERT INTO RIP.Hotel_Usuario(Hotel_Usuario_IdHotel,Hotel_Usuario_IdUsuario) select h.hoteles_id,(select Usuario_ID from rip.Usuarios where Usuario_User = 'gaby') from rip.Hoteles h

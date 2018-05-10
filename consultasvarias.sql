@@ -34,3 +34,9 @@ select r.regimen_descripcion from rip.Hoteles h
 inner join rip.Hotel_Regimen hr on hr.Hotel_Regimen_IdHotel = h.Hoteles_ID
 inner join rip.Regimen r on hr.Hotel_Regimen_IdRegimen = r.Regimen_ID
 where h.Hoteles_ID=5
+
+
+select h.hoteles_id from rip.Usuarios u
+join rip.Hotel_Usuario hu on hu.hotel_usuario_idusuario = u.Usuario_ID
+join rip.Hoteles h on hu.hotel_usuario_idhotel = h.Hoteles_ID
+where u.Usuario_User = 'gaby'
