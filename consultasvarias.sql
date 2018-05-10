@@ -20,3 +20,17 @@ WHERE r.Rol_Nombre = 'Administrador'
 Update rip.Usuarios set Usuario_CantidadDeIntentos = numerito where Usuario_User = user
 
 ---
+
+select h.Hoteles_ID, r.Regimen_ID from gd_esquema.Maestra a
+join rip.Calles c on c.Calles_Descripcion = a.Hotel_Calle
+join rip.Ciudades ci on ci.Ciudades_Descripcion = a.Hotel_Ciudad
+join rip.Domicilio d on d.Domicilio_Nro_calle = a.Hotel_Nro_Calle and d.Domicilio_Calle_ID=c.Calles_ID and d.Domicilio_Ciudad_ID=ci.Ciudades_ID
+join rip.Hoteles h on h.Hoteles_Domicilio_ID = d.Domicilio_ID
+join rip.Regimen r on r.Regimen_Descripcion=a.Regimen_Descripcion
+ group by  h.Hoteles_ID, r.Regimen_ID
+ order by 1
+
+select r.regimen_descripcion from rip.Hoteles h
+inner join rip.Hotel_Regimen hr on hr.Hotel_Regimen_IdHotel = h.Hoteles_ID
+inner join rip.Regimen r on hr.Hotel_Regimen_IdRegimen = r.Regimen_ID
+where h.Hoteles_ID=5
