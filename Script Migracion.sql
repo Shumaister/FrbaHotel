@@ -294,7 +294,8 @@ BEGIN
 CREATE TABLE [RIP].[Regimen](
 	[Regimen_ID][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[Regimen_Descripcion][nvarchar](255) CONSTRAINT UQ_DESC_REGIMEN unique NOT NULL,
-	[Regimen_Precio][numeric](18,2) NOT NULL
+	[Regimen_Precio][numeric](18,2) NOT NULL,
+	[Regimen_Habilitado][bit] DEFAULT 1
 )
  PRINT '... tabla Regimen creada ... '
 END
@@ -303,18 +304,35 @@ GO
 IF NOT EXISTS (SELECT 1 
    FROM INFORMATION_SCHEMA.TABLES 
             WHERE TABLE_TYPE='BASE TABLE' 
-            AND TABLE_NAME='Reserva' AND TABLE_SCHEMA='RIP') 
+            AND TABLE_NAME='Reservas' AND TABLE_SCHEMA='RIP') 
 BEGIN
-CREATE TABLE [RIP].[Reserva](
+CREATE TABLE [RIP].[Reservas](
 	[Reserva_Codigo][numeric](18,0) NOT NULL PRIMARY KEY,
+	[Reserva_Fecha_Creacion][datetime],
 	[Reserva_Fecha_Inicio][datetime],
+	[Reserva_Fecha_Fin][datetime],
 	[Reserva_Cantidad_Noches][numeric](18,0),
 	[Reserva_Cliente_ID][numeric](18,0),
+	[Reserva_Usuario][varchar](50),
 	[Reserva_Hotel_ID][numeric](18,0),
 	[Reserva_Habitacion_ID][numeric](18,0),
-	[Reserva_Regimen_ID][numeric](18,0)
+	[Reserva_Regimen_ID][numeric](3,0),
+	[Reserva_Estado][numeric](3,0)
 )
- PRINT '... tabla Reserva creada ... '
+ PRINT '... tabla Reservas creada ... '
+END
+GO
+select * from rip.Reservas
+IF NOT EXISTS (SELECT 1 
+   FROM INFORMATION_SCHEMA.TABLES 
+            WHERE TABLE_TYPE='BASE TABLE' 
+            AND TABLE_NAME='Reserva_Estado' AND TABLE_SCHEMA='RIP') 
+BEGIN
+CREATE TABLE [RIP].[Reserva_Estado](
+	[Reserva_Estado_ID][numeric](3,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Reserva_Estado_Descripcion][nvarchar](255) CONSTRAINT UQ_DESC_RESERVA_ESTADO unique NOT NULL
+)
+ PRINT '... tabla Reserva_Estado creada ... '
 END
 GO
 
@@ -375,6 +393,7 @@ IF NOT EXISTS (SELECT 1
 BEGIN
 CREATE TABLE [RIP].[Domicilio](
 	[Domicilio_ID] [numeric](18,0) NOT NULL IDENTITY(1,1),
+	[Domicilio_Pais_ID] [numeric](18,0),
 	[Domicilio_Ciudad_ID] [numeric](18,0),
 	[Domicilio_Calle_ID] [numeric](18,0),
 	[Domicilio_Nro_calle] [numeric](18,0),
@@ -382,6 +401,19 @@ CREATE TABLE [RIP].[Domicilio](
 	[Domicilio_Piso] [numeric](18,0),
 )
  PRINT '... tabla Domicilio creada ... '
+END
+GO
+
+IF NOT EXISTS (SELECT 1 
+   FROM INFORMATION_SCHEMA.TABLES 
+            WHERE TABLE_TYPE='BASE TABLE' 
+            AND TABLE_NAME='Paises' AND TABLE_SCHEMA='RIP') 
+BEGIN
+CREATE TABLE [RIP].[Paises](
+	[Pais_Id] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Pais_Nombre] [nvarchar](50),
+)
+ PRINT '... tabla Paises creada ... '
 END
 GO
 
@@ -412,6 +444,9 @@ INSERT INTO RIP.Calles (calles_descripcion)
 select distinct hotel_calle from gd_esquema.Maestra UNION
 select distinct cliente_dom_calle from gd_esquema.Maestra
 
+-- Paises
+INSERT INTO RIP.Paises (Pais_Nombre) VALUES ('Argentina')
+
 --Personas
 INSERT INTO RIP.Persona (persona_nombre,persona_apellido,persona_fecha_nacimiento)
 select distinct Cliente_Nombre,Cliente_Apellido,Cliente_Fecha_Nac from gd_esquema.Maestra
@@ -427,6 +462,9 @@ select distinct Hotel_Ciudad from gd_esquema.Maestra
 --Regimen 
 INSERT INTO RIP.Regimen (regimen_descripcion,regimen_precio)
 select distinct Regimen_Descripcion,Regimen_Precio from gd_esquema.Maestra
+
+-- Reserva_Estado
+INSERT INTO RIP.Reserva_Estado (Reserva_Estado_Descripcion) VALUES ('Reserva Correcta'),('Reserva modificada'),('Reserva cancelada por Recepción'),('Reserva cancelada por Cliente'),('Reserva cancelada por No-Show'),('Reserva con ingreso efectivo')
 
 --consumibles 
 INSERT INTO RIP.Consumible (consumible_codigo,consumible_descripcion,consumible_precio)
@@ -453,8 +491,7 @@ join rip.Domicilio on Hotel_Nro_Calle=domicilio_nro_calle and domicilio_ciudad_I
  order by 1,2
 
 --TipoDocumento
-INSERT INTO Rip.TipoDocumento(TipoDocumento_Descripcion) VALUES ('Pasaporte')
-INSERT INTO Rip.TipoDocumento(TipoDocumento_Descripcion) VALUES ('DNI')
+INSERT INTO Rip.TipoDocumento(TipoDocumento_Descripcion) VALUES ('Pasaporte'),('DNI')
 
 --Clientes
 INSERT INTO RIP.Clientes (cliente_persona_ID,cliente_Tipo_Documento,cliente_Documento_Nro,cliente_domicilio_ID,cliente_Mail,cliente_nacionalidad_ID)
@@ -466,8 +503,8 @@ join rip.Domicilio on calles_ID=domicilio_calle_ID and Cliente_Nro_Calle=domicil
 update rip.Clientes set cliente_DatoCorrupto = 1
 where cliente_Documento_Nro=27682640
 
---Reserva
-INSERT INTO RIP.Reserva (Reserva_Codigo,Reserva_Fecha_Inicio,Reserva_Cantidad_Noches,Reserva_Cliente_ID,Reserva_Hotel_ID,Reserva_Habitacion_ID,Reserva_Regimen_ID)
+--Reservas
+INSERT INTO RIP.Reservas (Reserva_Codigo,Reserva_Fecha_Inicio,Reserva_Cantidad_Noches,Reserva_Cliente_ID,Reserva_Hotel_ID,Reserva_Habitacion_ID,Reserva_Regimen_ID)
 select distinct Reserva_Codigo,Reserva_Fecha_Inicio,Reserva_Cant_Noches,clientes.cliente_Documento_Nro,Hoteles_ID,Habitaciones_ID,Regimen_ID from gd_esquema.Maestra 
 join rip.Clientes on clientes.cliente_Documento_Nro = gd_esquema.Maestra.Cliente_Pasaporte_Nro
 join rip.Domicilio on Domicilio_Nro_calle=Hotel_Nro_Calle and Domicilio_Ciudad_ID is not null
@@ -544,6 +581,13 @@ ALTER TABLE [RIP].[Clientes]
 	ADD CONSTRAINT FK_TIPODOCUMENTO FOREIGN KEY ([cliente_Tipo_Documento]) REFERENCES [RIP].[TipoDocumento] ([TipoDocumento_ID])
 GO
 
+ALTER TABLE [RIP].[Domicilio]
+	ADD CONSTRAINT PK_DOMICILIO PRIMARY KEY ([Domicilio_ID]),
+	CONSTRAINT FK_DOMICILIO_PAIS FOREIGN KEY ([Domicilio_Pais_ID]) REFERENCES [RIP].[Paises] ([Pais_Id]),
+	CONSTRAINT FK_DOMICILIO_CIUDAD FOREIGN KEY ([Domicilio_Ciudad_ID]) REFERENCES [RIP].[Ciudades] ([Ciudades_ID]),
+	CONSTRAINT FK_DOMICILIO_CALLE FOREIGN KEY ([Domicilio_Calle_ID]) REFERENCES [RIP].[Calles] ([Calles_ID])
+GO
+
 --Insertar roles
 INSERT INTO RIP.Roles (Rol_Nombre) values('Administrador')
 INSERT INTO RIP.Roles (Rol_Nombre) values('Recepcionista')
@@ -551,9 +595,6 @@ INSERT INTO RIP.Roles (Rol_Nombre) values('Guest')
 
 
 --- Creamos el usuario administrador y recepcionista genericos
-
- 
-
 INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasena) values('admin',HASHBYTES('SHA2_256', 'w23e'))
 INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasena) values('recep',HASHBYTES('SHA2_256', 'w23e'))
 INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasena) values('gaby',HASHBYTES('SHA2_256', 'w23e'))

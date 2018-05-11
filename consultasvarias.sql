@@ -40,3 +40,15 @@ select h.hoteles_id from rip.Usuarios u
 join rip.Hotel_Usuario hu on hu.hotel_usuario_idusuario = u.Usuario_ID
 join rip.Hoteles h on hu.hotel_usuario_idhotel = h.Hoteles_ID
 where u.Usuario_User = 'gaby'
+
+
+
+select Reserva_Codigo, Habitacion_Numero, Habitacion_Piso from gd_esquema.Maestra 
+group by Reserva_Codigo, Habitacion_Numero, Habitacion_Piso 
+order by 1,2,3
+
+select g.Reserva_Codigo from gd_esquema.Maestra g group by g.Reserva_Codigo order by 1
+
+
+select Reserva_Codigo, Habitacion_Numero, Habitacion_Piso from gd_esquema.Maestra where COUNT(select g.Reserva_Codigo from gd_esquema.Maestra g) > 1
+order by 1,2,3
