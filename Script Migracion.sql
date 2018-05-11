@@ -104,6 +104,7 @@ IF NOT EXISTS (SELECT 1
 BEGIN
 CREATE TABLE [RIP].[Usuarios](
 	[Usuario_ID][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Usuario_Persona_ID][numeric](18,0),
 	[Usuario_User] [nvarchar](50) NOT NULL,
 	[Usuario_Contrasena] [varbinary](100) NOT NULL,
 	[Usuario_CantidadDeIntentos] [int] default 0,
@@ -322,7 +323,7 @@ CREATE TABLE [RIP].[Reservas](
  PRINT '... tabla Reservas creada ... '
 END
 GO
-select * from rip.Reservas
+
 IF NOT EXISTS (SELECT 1 
    FROM INFORMATION_SCHEMA.TABLES 
             WHERE TABLE_TYPE='BASE TABLE' 
@@ -427,12 +428,18 @@ CREATE TABLE [RIP].[Persona](
 	[Persona_nombre][nvarchar](255),
 	[Persona_apellido][nvarchar](255),
 	[Persona_fecha_nacimiento][datetime],
-	[DatoCorrupto][bit] DEFAULT 0
+	[Persona_Tipo_Documento][nvarchar](15), 
+	[Persona_Identificacion_Nro] [numeric](18,0),
+	[Persona_Domicilio_ID][numeric](18,0), 
+	[Persona_Mail] [nvarchar] (255), 
+	[Persona_Telefono][nvarchar](50),
+	[Persona_Pais_Origen][numeric](3,0),
+	[Persona_Nacionalidad_ID][numeric](18,0),
+	[Persona_DatoCorrupto][bit] DEFAULT 0
 )
- PRINT '... tabla Persona creada ... '
+PRINT '... tabla Persona creada ... '
 END
 GO
-
 -----
 ----- Hacemos los inserts
 -----
@@ -593,11 +600,19 @@ INSERT INTO RIP.Roles (Rol_Nombre) values('Administrador')
 INSERT INTO RIP.Roles (Rol_Nombre) values('Recepcionista')
 INSERT INTO RIP.Roles (Rol_Nombre) values('Guest')
 
-
 --- Creamos el usuario administrador y recepcionista genericos
 INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasena) values('admin',HASHBYTES('SHA2_256', 'w23e'))
 INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasena) values('recep',HASHBYTES('SHA2_256', 'w23e'))
+
 INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasena) values('gaby',HASHBYTES('SHA2_256', 'w23e'))
+
+INSERT INTO RIP.Domicilio (Domicilio_Calle_ID,Domicilio_Nro_calle,Domicilio_Ciudad_ID,Domicilio_Pais_ID)
+VALUES (2,1816,2,1)
+
+INSERT INTO RIP.Persona (Persona_nombre, Persona_apellido, Persona_fecha_nacimiento, persona_tipo_documento, Persona_Identificacion_Nro,persona_domicilio_id, persona_mail, persona_telefono, persona_pais_origen, Persona_Nacionalidad_ID) 
+VALUES ('Gabriel', 'Maiori', '19960725 13:31:00.000', 2, 39769742, @@IDENTITY, 'gabrielmaiori@gmail.com', '1154249902', 1 , 1 )
+
+UPDATE RIP.Usuarios set Usuario_Persona_ID = @@IDENTITY where Usuario_User = 'gaby'
 
 INSERT INTO RIP.Funcionalidades(Funcionalidad_Funcionalidad)
 values ('AMB_USUARIO'),('ABM_ROL'),('ABM_CLIENTE'),('ABM_HOTEL'),('ABM_RESERVA'),('ABM_ESTADIA')
@@ -617,3 +632,4 @@ INSERT INTO RIP.Usuario_Rol(Usuario_Rol_Usuario_ID, Usuario_Rol_Rol_ID) values (
 INSERT INTO RIP.Hotel_Usuario(Hotel_Usuario_IdHotel,Hotel_Usuario_IdUsuario) select h.hoteles_id,(select Usuario_ID from rip.Usuarios where Usuario_User = 'admin') from rip.Hoteles h
 INSERT INTO RIP.Hotel_Usuario(Hotel_Usuario_IdHotel,Hotel_Usuario_IdUsuario) select h.hoteles_id,(select Usuario_ID from rip.Usuarios where Usuario_User = 'recep') from rip.Hoteles h
 INSERT INTO RIP.Hotel_Usuario(Hotel_Usuario_IdHotel,Hotel_Usuario_IdUsuario) select h.hoteles_id,(select Usuario_ID from rip.Usuarios where Usuario_User = 'gaby') from rip.Hoteles h
+
