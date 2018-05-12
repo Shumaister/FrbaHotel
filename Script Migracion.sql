@@ -52,8 +52,8 @@ IF NOT EXISTS (SELECT 1
             AND TABLE_NAME='Clientes' AND TABLE_SCHEMA='RIP') 
 BEGIN
 CREATE TABLE [RIP].[Clientes](
- [cliente_ID][numeric](18,0) IDENTITY (1,1) PRIMARY KEY,
- [cliente_Documento_Nro][numeric](18,0),
+ [cliente_ID][numeric](18,0) NOT NULL IDENTITY (1,1) PRIMARY KEY,
+ [cliente_Documento_Nro][numeric](18,0), -- TODO DROPREAR AL FINAL
  [cliente_Persona_ID][numeric](18,0),
  [cliente_Habilitado][numeric](18,0) default 1,
  [cliente_DatoCorrupto] [bit] default 0
@@ -83,8 +83,8 @@ IF NOT EXISTS (SELECT 1
 BEGIN
 CREATE TABLE [RIP].[Facturas](
 	[Factura_Numero] [numeric](18,0) PRIMARY KEY,
-	[Factura_Estadia_ID][numeric](18,2),
-	[Factura_Cliente_ID] [numeric](18,0),
+	[Factura_Estadia_ID][numeric](18,0) NOT NULL,
+	[Factura_Cliente_ID] [numeric](18,0) NOT NULL,
 	[Factura_Fecha] [datetime],
 	[Factura_Total] [numeric] (18,2),
 )
@@ -104,7 +104,6 @@ CREATE TABLE [RIP].[Usuarios](
 	[Usuario_Contrasena] [varbinary](100) NOT NULL,
 	[Usuario_CantidadDeIntentos] [int] default 0,
 	[Usuario_Estado][bit],
-	[Usuario_DatoCorrupto][bit]
 )
  PRINT '... tabla Usuarios creada ... '
 END
@@ -187,8 +186,8 @@ CREATE TABLE [RIP].[Habitaciones](
 	[Habitaciones_hotel_ID][numeric](18,0),
 	[Habitaciones_Numero][numeric](18,0),
 	[Habitaciones_Piso][numeric](18,0),
-	[Habitaciones_frente][nvarchar](5),
-	[Habitaciones_tipo_codigo][numeric](18,0),
+	[Habitaciones_Frente][nvarchar](5),
+	[Habitaciones_Tipo_Codigo][numeric](18,0),
 	[Habitaciones_Habilitada][bit] DEFAULT 1
 )
  PRINT '... tabla Habitaciones creada ... '
@@ -237,7 +236,7 @@ IF NOT EXISTS (SELECT 1
 BEGIN
 CREATE TABLE [RIP].[Hotel_Regimen](
 	[Hotel_Regimen_IdHotel][numeric](18,0) NOT NULL,
-	[Hotel_Regimen_IdRegimen] [numeric](18,0) NOT NULL
+	[Hotel_Regimen_IdRegimen] [numeric](3,0) NOT NULL
 )
  PRINT '... tabla Hotel_Regimen creada ... '
 END
@@ -288,7 +287,7 @@ IF NOT EXISTS (SELECT 1
             AND TABLE_NAME='Regimen' AND TABLE_SCHEMA='RIP') 
 BEGIN
 CREATE TABLE [RIP].[Regimen](
-	[Regimen_ID][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Regimen_ID][numeric](3,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[Regimen_Descripcion][nvarchar](255) CONSTRAINT UQ_DESC_REGIMEN unique NOT NULL,
 	[Regimen_Precio][numeric](18,2) NOT NULL,
 	[Regimen_Habilitado][bit] DEFAULT 1
@@ -337,17 +336,34 @@ IF NOT EXISTS (SELECT 1
             WHERE TABLE_TYPE='BASE TABLE' 
             AND TABLE_NAME='Estadia' AND TABLE_SCHEMA='RIP') 
 BEGIN
-CREATE TABLE [RIP].[Estadia](
+CREATE TABLE [RIP].[Estadia]( -- TODO ESTO REVISAR< PORQUE AL PEDO TENER TODOS ESOS DATOS SI YA LOS TENGO EN LA RESERVA PAPUUUUUUUUUUUU
 	[Estadia_ID][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[Estadia_Fecha_Inicio][datetime],
 	[Estadia_Cantidad_Noches][numeric](18,0),
-	[Estadia_Cliente_ID][numeric](18,0),
-	[Estadia_Hotel_ID][numeric](18,0),
-	[Estadia_Habitacion_ID][numeric](18,0),
+	[Estadia_Cliente_ID][numeric](18,0), -- TODO FK CLIENTE
+	[Estadia_Hotel_ID][numeric](18,0), --- TODO FK HOTEL
+	[Estadia_Habitacion_ID][numeric](18,0), -- TODO FK HABITACION
 	[Estadia_Precio_Total_Consumible][numeric](18,2),
-	[Estadia_Regimen_ID][numeric](18,0)
+	[Estadia_Regimen_ID][numeric](3,0) -- TODO FK REGIMEN
 )
  PRINT '... tabla Estadia creada ... '
+END
+GO
+
+IF NOT EXISTS (SELECT 1 
+   FROM INFORMATION_SCHEMA.TABLES 
+            WHERE TABLE_TYPE='BASE TABLE' 
+            AND TABLE_NAME='Hab_NoDisponibles' AND TABLE_SCHEMA='RIP') 
+BEGIN
+CREATE TABLE [RIP].[Hab_NoDisponibles](
+	[NoDisponible_ID][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[NoDisponible_Reserva_ID][numeric](18,0) NOT NULL, -- TODO ID RESERVA
+	[NoDisponible_Habitacion_ID][numeric](18,0) NOT NULL, -- TODO ID HABITACION
+	[NoDisponible_Fecha_Inicio][datetime] NOT NULL,
+	[NoDisponible_Fecha_Fin][datetime] NOT NULL,
+	[NoDisponible_Finalizado][bit] DEFAULT 1
+)
+ PRINT '... tabla Hab_NoDisponibles creada ... '
 END
 GO
 
@@ -425,10 +441,10 @@ CREATE TABLE [RIP].[Persona](
 	[Persona_fecha_nacimiento][datetime],
 	[Persona_Tipo_Documento][nvarchar](15), 
 	[Persona_Identificacion_Nro] [numeric](18,0),
-	[Persona_Domicilio_ID][numeric](18,0), 
+	[Persona_Domicilio_ID][numeric](18,0),
 	[Persona_Mail] [nvarchar] (255), 
 	[Persona_Telefono][nvarchar](50),
-	[Persona_Pais_Origen][numeric](3,0),
+	[Persona_Pais_Origen][numeric](18,0),
 	[Persona_Nacionalidad_ID][numeric](18,0),
 	[Persona_DatoCorrupto][bit] DEFAULT 0
 )
@@ -444,8 +460,8 @@ BEGIN
 CREATE TABLE [RIP].[Cierre_Mantenimiento](
 	[Cierre_ID][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[Cierre_Hotel_ID][numeric](18,0)NOT NULL,
-	[Cierre_fecha_inicio][datetime],
-	[Cierre_fecha_fin][datetime],
+	[Cierre_Fecha_Inicio][datetime],
+	[Cierre_Fecha_Fin][datetime],
 	[Cierre_Motivo][nvarchar](255),
 )
 PRINT '... tabla Cierre_Mantenimiento creada ... '
@@ -459,20 +475,18 @@ IF NOT EXISTS (SELECT 1
 BEGIN
 CREATE TABLE [RIP].[Cancelacion_Reserva](
 	[Cancelacion_ID][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[Cancelacion_Rerserva_ID][numeric](18,0)NOT NULL,--fk
-	[Cancelacion_Usuario_ID][numeric](18,0)NOT NULL,--fk
-	[Cancelacion_fecha_Cancelacion][datetime],
+	[Cancelacion_Rerserva_ID][numeric](18,0)NOT NULL,
+	[Cancelacion_Usuario_ID][numeric](18,0)NOT NULL,
+	[Cancelacion_Fecha_Cancelacion][datetime],
 	[Cancelacion_Motivo][nvarchar](255),
 )
 PRINT '... tabla Cancelacion_Reserva creada ... '
 END
 GO
-select * from rip.Cancelacion_Reserva
+
 -----
 ----- Hacemos los inserts
 -----
-
-
 
 -- CALLES
 INSERT INTO RIP.Calles (calles_descripcion)
@@ -588,9 +602,10 @@ join rip.Regimen r on r.Regimen_Descripcion=a.Regimen_Descripcion
  group by  h.Hoteles_ID, r.Regimen_ID
  order by 1
 
-
-
+GO
+---
 --- Aniadimos constraints faltantes
+---
 
 ALTER TABLE [RIP].[Rol_Funcionalidad]
 	ADD CONSTRAINT PK_ROL_FUNCIONALIDAD PRIMARY KEY ([RolFunc_IdRol], [RolFunc_IdFuncionalidad]),
@@ -616,16 +631,73 @@ ALTER TABLE [RIP].[Hotel_Usuario]
 	CONSTRAINT FK_HOTEL_USUARIO_USUARIO FOREIGN KEY ([Hotel_Usuario_IdUsuario]) REFERENCES [RIP].[Usuarios] ([Usuario_ID])
 GO
 
---ALTER TABLE [RIP].[Clientes]
---	ADD CONSTRAINT FK_TIPODOCUMENTO FOREIGN KEY ([cliente_Tipo_Documento]) REFERENCES [RIP].[TipoDocumento] ([TipoDocumento_ID])
---GO
-
 ALTER TABLE [RIP].[Domicilio]
 	ADD CONSTRAINT PK_DOMICILIO PRIMARY KEY ([Domicilio_ID]),
 	CONSTRAINT FK_DOMICILIO_PAIS FOREIGN KEY ([Domicilio_Pais_ID]) REFERENCES [RIP].[Paises] ([Pais_Id]),
 	CONSTRAINT FK_DOMICILIO_CIUDAD FOREIGN KEY ([Domicilio_Ciudad_ID]) REFERENCES [RIP].[Ciudades] ([Ciudades_ID]),
 	CONSTRAINT FK_DOMICILIO_CALLE FOREIGN KEY ([Domicilio_Calle_ID]) REFERENCES [RIP].[Calles] ([Calles_ID])
 GO
+
+ALTER TABLE [RIP].[Clientes]
+	ADD CONSTRAINT FK_CLIENTES_PERSONA FOREIGN KEY ([cliente_Persona_ID]) REFERENCES [RIP].[Persona] ([Persona_ID])
+GO
+
+ALTER TABLE [RIP].[Facturas]
+	ADD CONSTRAINT FK_FACTURAS_ESTADIA FOREIGN KEY ([Factura_Estadia_ID]) REFERENCES [RIP].[Estadia] ([Estadia_ID]),
+	CONSTRAINT FK_FACTURAS_CLIENTE FOREIGN KEY ([Factura_Cliente_ID]) REFERENCES [RIP].[Clientes] ([cliente_ID])
+GO
+
+ALTER TABLE [RIP].[Usuarios]
+	ADD CONSTRAINT FK_USUARIO_PERSONA FOREIGN KEY ([Usuario_Persona_ID]) REFERENCES [RIP].[Persona] ([Persona_ID])
+GO
+
+ALTER TABLE [RIP].[Habitaciones]
+	ADD CONSTRAINT FK_HABITACIONES_HOTEL FOREIGN KEY ([Habitaciones_hotel_ID]) REFERENCES [RIP].[Hoteles] ([Hoteles_ID]),
+	CONSTRAINT FK_HABITACIONES_TIPO FOREIGN KEY ([Habitaciones_Tipo_Codigo]) REFERENCES [RIP].[Habitaciones_Descripcion] ([Habitaciones_Descripcion_ID])
+GO
+
+ALTER TABLE [RIP].[Hoteles]
+	ADD CONSTRAINT FK_HOTELES_DOMICILIO FOREIGN KEY ([Hoteles_Domicilio_ID]) REFERENCES [RIP].[Domicilio] ([Domicilio_ID])
+GO
+
+ALTER TABLE [RIP].[Reservas]
+	ADD CONSTRAINT FK_RESERVAS_CLIENTE FOREIGN KEY ([Reserva_Cliente_ID]) REFERENCES [RIP].[Clientes] ([cliente_ID]),
+	CONSTRAINT FK_RESERVAS_HOTEL FOREIGN KEY ([Reserva_Hotel_ID]) REFERENCES [RIP].[Hoteles] ([Hoteles_ID]),
+	CONSTRAINT FK_RESERVAS_HABITACION FOREIGN KEY ([Reserva_Habitacion_ID]) REFERENCES [RIP].[Habitaciones] ([Habitaciones_ID]), -- ESTO MUERE
+	CONSTRAINT FK_RESERVAS_REGIMEN FOREIGN KEY ([Reserva_Regimen_ID])  REFERENCES [RIP].[Regimen] ([Regimen_ID])
+GO
+
+ALTER TABLE [RIP].[Persona]
+	ADD CONSTRAINT FK_PERSONA_DOMICILIO FOREIGN KEY ([Persona_Domicilio_ID]) REFERENCES [RIP].[Domicilio] ([Domicilio_ID]),
+    CONSTRAINT FK_PERSONA_PAIS_ORIGEN FOREIGN KEY ([Persona_Pais_Origen]) REFERENCES [RIP].[Paises] ([Pais_Id]),
+	CONSTRAINT FK_PERSONA_NACIONALIDAD FOREIGN KEY ([Persona_Nacionalidad_ID]) REFERENCES [RIP].[Nacionalidad] ([Nacionalidad_ID])
+GO
+
+
+ALTER TABLE [RIP].[Cierre_Mantenimiento]
+	ADD CONSTRAINT FK_CIERRE_MANTENIMIENTO_HOTEL FOREIGN KEY ([Cierre_Hotel_ID]) REFERENCES [RIP].[Hoteles] ([Hoteles_ID])
+GO
+
+ALTER TABLE [RIP].[Cancelacion_Reserva]
+	ADD CONSTRAINT FK_CANCELACION_RESERVA_RESERVA FOREIGN KEY ([Cancelacion_Rerserva_ID]) REFERENCES [RIP].[Reservas] ([Reserva_Codigo]),
+	CONSTRAINT FK_CANCELACION_RESERVA_USUARIO FOREIGN KEY ([Cancelacion_Usuario_ID]) REFERENCES [RIP].[Usuarios] ([Usuario_ID])
+GO
+
+ALTER TABLE [RIP].[Hab_NoDisponibles]
+	ADD CONSTRAINT FK_HAB_NODISPONIBLES_RESERVA FOREIGN KEY ([NoDisponible_Reserva_ID]) REFERENCES [RIP].[Reservas] ([Reserva_Codigo]),
+	CONSTRAINT FK_HAB_NODISPONIBLES_HABITACION FOREIGN KEY ([NoDisponible_Habitacion_ID])REFERENCES [RIP].[Habitaciones] ([Habitaciones_ID])
+GO
+
+ALTER TABLE [RIP].[Item_Factura]
+	ADD CONSTRAINT FK_ITEM_FACTURA_CONSUMIBLE FOREIGN KEY ([Item_Consumible_Id]) REFERENCES [RIP].[Consumible] ([Consumible_Codigo]),
+	CONSTRAINT FK_ITEM_FACTURA_FACTURA FOREIGN KEY ([Item_Factura_ID]) REFERENCES [RIP].[Facturas] ([Factura_Numero])
+GO
+
+
+
+---
+--- Hacemos insert iniciales necesarios
+--- 
 
 --Insertar roles
 INSERT INTO RIP.Roles (Rol_Nombre) values('Administrador')
@@ -665,4 +737,3 @@ INSERT INTO RIP.Hotel_Usuario(Hotel_Usuario_IdHotel,Hotel_Usuario_IdUsuario) sel
 INSERT INTO RIP.Hotel_Usuario(Hotel_Usuario_IdHotel,Hotel_Usuario_IdUsuario) select h.hoteles_id,(select Usuario_ID from rip.Usuarios where Usuario_User = 'recep') from rip.Hoteles h
 INSERT INTO RIP.Hotel_Usuario(Hotel_Usuario_IdHotel,Hotel_Usuario_IdUsuario) select h.hoteles_id,(select Usuario_ID from rip.Usuarios where Usuario_User = 'gaby') from rip.Hoteles h
 
-select * from rip.Hoteles
