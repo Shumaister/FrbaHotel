@@ -52,16 +52,11 @@ IF NOT EXISTS (SELECT 1
             AND TABLE_NAME='Clientes' AND TABLE_SCHEMA='RIP') 
 BEGIN
 CREATE TABLE [RIP].[Clientes](
-	[cliente_ID][numeric](18,0) IDENTITY (1,1) PRIMARY KEY,
-	[cliente_Persona_ID][numeric](18,0),
-	[cliente_Tipo_Documento][numeric](18,0),
-	[cliente_Documento_Nro] [numeric](18,0),
-	[cliente_Domicilio_ID][numeric](18,0),
-	[cliente_Mail] [nvarchar] (255),
-	[cliente_Telefono][numeric](18,0),
-	[cliente_Nacionalidad_ID][numeric](18,0),
-	[cliente_Habilitado][numeric](18,0) default 1,
-	[cliente_DatoCorrupto] [bit] default 0
+ [cliente_ID][numeric](18,0) IDENTITY (1,1) PRIMARY KEY,
+ [cliente_Documento_Nro][numeric](18,0),
+ [cliente_Persona_ID][numeric](18,0),
+ [cliente_Habilitado][numeric](18,0) default 1,
+ [cliente_DatoCorrupto] [bit] default 0
 )
  PRINT '... tabla Clientes creada ... '
 END
@@ -440,6 +435,39 @@ CREATE TABLE [RIP].[Persona](
 PRINT '... tabla Persona creada ... '
 END
 GO
+
+IF NOT EXISTS (SELECT 1 
+   FROM INFORMATION_SCHEMA.TABLES 
+            WHERE TABLE_TYPE='BASE TABLE' 
+            AND TABLE_NAME='Cierre_Mantenimiento' AND TABLE_SCHEMA='RIP') 
+BEGIN
+CREATE TABLE [RIP].[Cierre_Mantenimiento](
+	[Cierre_ID][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Cierre_Hotel_ID][numeric](18,0)NOT NULL,
+	[Cierre_fecha_inicio][datetime],
+	[Cierre_fecha_fin][datetime],
+	[Cierre_Motivo][nvarchar](255),
+)
+PRINT '... tabla Cierre_Mantenimiento creada ... '
+END
+GO
+
+IF NOT EXISTS (SELECT 1 
+   FROM INFORMATION_SCHEMA.TABLES 
+            WHERE TABLE_TYPE='BASE TABLE' 
+            AND TABLE_NAME='Cancelacion_Reserva' AND TABLE_SCHEMA='RIP') 
+BEGIN
+CREATE TABLE [RIP].[Cancelacion_Reserva](
+	[Cancelacion_ID][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Cancelacion_Rerserva_ID][numeric](18,0)NOT NULL,--fk
+	[Cancelacion_Usuario_ID][numeric](18,0)NOT NULL,--fk
+	[Cancelacion_fecha_Cancelacion][datetime],
+	[Cancelacion_Motivo][nvarchar](255),
+)
+PRINT '... tabla Cancelacion_Reserva creada ... '
+END
+GO
+select * from rip.Cancelacion_Reserva
 -----
 ----- Hacemos los inserts
 -----
@@ -454,9 +482,6 @@ select distinct cliente_dom_calle from gd_esquema.Maestra
 -- Paises
 INSERT INTO RIP.Paises (Pais_Nombre) VALUES ('Argentina')
 
---Personas
-INSERT INTO RIP.Persona (persona_nombre,persona_apellido,persona_fecha_nacimiento)
-select distinct Cliente_Nombre,Cliente_Apellido,Cliente_Fecha_Nac from gd_esquema.Maestra
 
 ---Nacionalidad
 INSERT INTO RIP.Nacionalidad (nacionalidad_descripcion)
@@ -500,12 +525,19 @@ join rip.Domicilio on Hotel_Nro_Calle=domicilio_nro_calle and domicilio_ciudad_I
 --TipoDocumento
 INSERT INTO Rip.TipoDocumento(TipoDocumento_Descripcion) VALUES ('Pasaporte'),('DNI')
 
---Clientes
-INSERT INTO RIP.Clientes (cliente_persona_ID,cliente_Tipo_Documento,cliente_Documento_Nro,cliente_domicilio_ID,cliente_Mail,cliente_nacionalidad_ID)
-select distinct persona_ID,1,Cliente_Pasaporte_Nro,domicilio_ID,Cliente_Mail,1 from gd_esquema.Maestra
-join RIP.Persona on persona_nombre=Cliente_Nombre and persona_apellido=Cliente_Apellido and persona_fecha_nacimiento=Cliente_Fecha_Nac
+
+--Personas
+INSERT INTO RIP.Persona (persona_nombre,persona_apellido,persona_fecha_nacimiento,persona_Tipo_Documento,Persona_Identificacion_Nro,Persona_Domicilio_ID,Persona_Mail,Persona_Nacionalidad_ID)
+select distinct Cliente_Nombre,Cliente_Apellido,Cliente_Fecha_Nac,1,Cliente_Pasaporte_Nro,Domicilio_ID,Cliente_Mail,1 from gd_esquema.Maestra
 join rip.Calles on calles_descripcion=Cliente_Dom_Calle 
 join rip.Domicilio on calles_ID=domicilio_calle_ID and Cliente_Nro_Calle=domicilio_nro_calle and domicilio_depto=Cliente_Depto and domicilio_piso=Cliente_Piso
+
+
+--Clientes
+INSERT INTO RIP.Clientes (cliente_persona_ID,cliente_Documento_Nro)
+select distinct persona_ID,Cliente_Pasaporte_Nro from gd_esquema.Maestra
+join RIP.Persona on persona_Identificacion_Nro=Cliente_Pasaporte_Nro
+
 
 update rip.Clientes set cliente_DatoCorrupto = 1
 where cliente_Documento_Nro=27682640
@@ -584,9 +616,9 @@ ALTER TABLE [RIP].[Hotel_Usuario]
 	CONSTRAINT FK_HOTEL_USUARIO_USUARIO FOREIGN KEY ([Hotel_Usuario_IdUsuario]) REFERENCES [RIP].[Usuarios] ([Usuario_ID])
 GO
 
-ALTER TABLE [RIP].[Clientes]
-	ADD CONSTRAINT FK_TIPODOCUMENTO FOREIGN KEY ([cliente_Tipo_Documento]) REFERENCES [RIP].[TipoDocumento] ([TipoDocumento_ID])
-GO
+--ALTER TABLE [RIP].[Clientes]
+--	ADD CONSTRAINT FK_TIPODOCUMENTO FOREIGN KEY ([cliente_Tipo_Documento]) REFERENCES [RIP].[TipoDocumento] ([TipoDocumento_ID])
+--GO
 
 ALTER TABLE [RIP].[Domicilio]
 	ADD CONSTRAINT PK_DOMICILIO PRIMARY KEY ([Domicilio_ID]),
@@ -633,3 +665,4 @@ INSERT INTO RIP.Hotel_Usuario(Hotel_Usuario_IdHotel,Hotel_Usuario_IdUsuario) sel
 INSERT INTO RIP.Hotel_Usuario(Hotel_Usuario_IdHotel,Hotel_Usuario_IdUsuario) select h.hoteles_id,(select Usuario_ID from rip.Usuarios where Usuario_User = 'recep') from rip.Hoteles h
 INSERT INTO RIP.Hotel_Usuario(Hotel_Usuario_IdHotel,Hotel_Usuario_IdUsuario) select h.hoteles_id,(select Usuario_ID from rip.Usuarios where Usuario_User = 'gaby') from rip.Hoteles h
 
+select * from rip.Hoteles
