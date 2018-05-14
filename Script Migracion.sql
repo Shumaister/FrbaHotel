@@ -88,8 +88,11 @@ CREATE TABLE [RIP].[Facturas](
 	[Factura_Numero] [numeric](18,0) PRIMARY KEY,
 	[Factura_Estadia_ID][numeric](18,0),
 	[Factura_Cliente_ID] [numeric](18,0),
+	[Factura_Dias_Efectivos] [numeric](18,0),
+	[Factura_Dias_No_Utilizados] [numeric](18,0),
 	[Factura_Fecha] [datetime],
 	[Factura_Total] [numeric] (18,2),
+	[Factura_Forma_De_Pago] [nvarchar](50),
 )
  PRINT '... tabla Facturas creada ... '
 END
@@ -224,8 +227,6 @@ CREATE TABLE [RIP].[Hoteles](
 	[Hoteles_Nro_Estrella][numeric](18,0),
 	[Hoteles_Recarga_Estrella][numeric](18,0),
 	[Hoteles_Fecha_Creacion][datetime],
-	[Hoteles_Fecha_Inicio_Mantemiento][datetime],
-	[Hoteles_Fecha_Final_Mantemiento][datetime],
 	[Hoteles_Habilitado][bit] default 1
 )
  PRINT '... tabla Hoteles creada ... '
@@ -309,6 +310,7 @@ CREATE TABLE [RIP].[Reservas](
 	[Reserva_Fecha_Creacion][datetime],
 	[Reserva_Fecha_Inicio][datetime],
 	[Reserva_Cantidad_Noches][numeric](18,0),
+	[Reserva_Cantidad_Huespedes][numeric](18,0),
 	[Reserva_Cliente_ID][numeric](18,0),
 	[Reserva_Usuario][varchar](50),
 	[Reserva_Hotel_ID][numeric](18,0),
@@ -342,6 +344,8 @@ CREATE TABLE [RIP].[Estadia](
 	[Estadia_Reserva_ID][numeric](18,0),
 	[Estadia_Fecha_Inicio][datetime],
 	[Estadia_Cantidad_Noches][numeric](18,0),
+	[Estadia_Usuario_CheckIn][nvarchar](50),
+	[estadia_Usuario_CheckOut][nvarchar](50),
 	[Estadia_Precio_Total_Consumible][numeric](18,2),
 )
  PRINT '... tabla Estadia creada ... '
@@ -403,7 +407,7 @@ IF NOT EXISTS (SELECT 1
 BEGIN
 CREATE TABLE [RIP].[Domicilio](
 	[Domicilio_ID] [numeric](18,0) NOT NULL IDENTITY(1,1),
-	[Domicilio_Pais_ID] [numeric](18,0),
+	[Domicilio_Pais] [nvarchar](50),
 	[Domicilio_Ciudad_ID] [numeric](18,0),
 	[Domicilio_Calle_ID] [numeric](18,0),
 	[Domicilio_Nro_calle] [numeric](18,0),
@@ -411,19 +415,6 @@ CREATE TABLE [RIP].[Domicilio](
 	[Domicilio_Piso] [numeric](18,0),
 )
  PRINT '... tabla Domicilio creada ... '
-END
-GO
-
-IF NOT EXISTS (SELECT 1 
-   FROM INFORMATION_SCHEMA.TABLES 
-            WHERE TABLE_TYPE='BASE TABLE' 
-            AND TABLE_NAME='Paises' AND TABLE_SCHEMA='RIP') 
-BEGIN
-CREATE TABLE [RIP].[Paises](
-	[Pais_Id] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[Pais_Nombre] [nvarchar](50),
-)
- PRINT '... tabla Paises creada ... '
 END
 GO
 
@@ -442,7 +433,7 @@ CREATE TABLE [RIP].[Persona](
 	[Persona_Domicilio_ID][numeric](18,0),
 	[Persona_Mail] [nvarchar] (255), 
 	[Persona_Telefono][nvarchar](50),
-	[Persona_Pais_Origen][numeric](18,0),
+	[Persona_Pais_Origen][nvarchar](50),
 	[Persona_Nacionalidad_ID][numeric](18,0),
 	[Persona_DatoCorrupto][bit] DEFAULT 0
 )
@@ -513,7 +504,6 @@ GO
 
 ALTER TABLE [RIP].[Domicilio]
 	ADD CONSTRAINT PK_DOMICILIO PRIMARY KEY ([Domicilio_ID]),
-	CONSTRAINT FK_DOMICILIO_PAIS FOREIGN KEY ([Domicilio_Pais_ID]) REFERENCES [RIP].[Paises] ([Pais_Id]),
 	CONSTRAINT FK_DOMICILIO_CIUDAD FOREIGN KEY ([Domicilio_Ciudad_ID]) REFERENCES [RIP].[Ciudades] ([Ciudades_ID]),
 	CONSTRAINT FK_DOMICILIO_CALLE FOREIGN KEY ([Domicilio_Calle_ID]) REFERENCES [RIP].[Calles] ([Calles_ID])
 GO
@@ -548,7 +538,6 @@ GO
 
 ALTER TABLE [RIP].[Persona]
 	ADD CONSTRAINT FK_PERSONA_DOMICILIO FOREIGN KEY ([Persona_Domicilio_ID]) REFERENCES [RIP].[Domicilio] ([Domicilio_ID]),
-    CONSTRAINT FK_PERSONA_PAIS_ORIGEN FOREIGN KEY ([Persona_Pais_Origen]) REFERENCES [RIP].[Paises] ([Pais_Id]),
 	CONSTRAINT FK_PERSONA_NACIONALIDAD FOREIGN KEY ([Persona_Nacionalidad_ID]) REFERENCES [RIP].[Nacionalidad] ([Nacionalidad_ID])
 GO
 
@@ -582,9 +571,6 @@ GO
 INSERT INTO RIP.Calles (calles_descripcion)
 select distinct hotel_calle from gd_esquema.Maestra UNION
 select distinct cliente_dom_calle from gd_esquema.Maestra
-
--- Paises
-INSERT INTO RIP.Paises (Pais_Nombre) VALUES ('Argentina')
 
 
 ---Nacionalidad
@@ -704,11 +690,11 @@ INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasena) values('recep',HASHB
 
 INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasena) values('gaby',HASHBYTES('SHA2_256', 'w23e'))
 
-INSERT INTO RIP.Domicilio (Domicilio_Calle_ID,Domicilio_Nro_calle,Domicilio_Ciudad_ID,Domicilio_Pais_ID)
-VALUES (2,1816,2,1)
+INSERT INTO RIP.Domicilio (Domicilio_Calle_ID,Domicilio_Nro_calle,Domicilio_Ciudad_ID,Domicilio_Pais)
+VALUES (2,1816,2,'Argentina')
 
 INSERT INTO RIP.Persona (Persona_nombre, Persona_apellido, Persona_fecha_nacimiento, persona_tipo_documento, Persona_Identificacion_Nro,persona_domicilio_id, persona_mail, persona_telefono, persona_pais_origen, Persona_Nacionalidad_ID) 
-VALUES ('Gabriel', 'Maiori', '19960725 13:31:00.000', 2, 39769742, @@IDENTITY, 'gabrielmaiori@gmail.com', '1154249902', 1 , 1 )
+VALUES ('Gabriel', 'Maiori', '19960725 13:31:00.000', 2, 39769742, @@IDENTITY, 'gabrielmaiori@gmail.com', '1154249902', 'Argentina' , 1 )
 
 UPDATE RIP.Usuarios set Usuario_Persona_ID = @@IDENTITY where Usuario_User = 'gaby'
 
