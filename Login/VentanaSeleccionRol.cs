@@ -12,21 +12,28 @@ namespace FrbaHotel.Login
 {
     public partial class VentanaSeleccionRol : VentanaBase
     {
-        public VentanaSeleccionRol()
+        Usuario Usuario { get; set; }
+
+        public VentanaSeleccionRol(Usuario usu)
         {
+            this.Usuario = usu;    
             InitializeComponent();
             lblErrorRol.Visible = false; 
         }
 
         private void SeleccionRol_Load(object sender, EventArgs e)
         {
-            DB.ComboBoxLlenar(cbxRoles);
+            foreach(string rol in Usuario.Roles)
+                cbxRoles.Items.Add(rol);
+
+            if (Usuario.Roles.Count == 0) { }
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
 
         }
+
 
     }
 }

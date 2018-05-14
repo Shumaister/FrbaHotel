@@ -99,12 +99,54 @@ namespace FrbaHotel
              else
              {
                 ActualizarIntentosLogueo(user, 0);
-                List<string> roles = new List<string>();
-                roles.Add("Hola");
+                List<string> roles = Roles(usuario);
                 return new LogueoDTO(true,"Exito!",usuario,roles);
              }
         }
 
+        internal static List<string> FuncionalidadesDeRol(string rol)
+        {
+            List<string> listaFuncionalidades = new List<string>();
+            SqlConnection connection = getConnection();
+
+            SqlCommand loginCommand = new SqlCommand("SELECT f.Funcionalidad_Funcionalidad FROM rip.Funcionalidades f INNER JOIN RIP.Rol_Funcionalidad rf ON f.Funcionalidad_Id = rf.RolFunc_IdFuncionalidad INNER JOIN RIP.Roles r ON rf.RolFunc_IdRol = r.Rol_ID WHERE r.Rol_Nombre = @rol");
+            loginCommand.Parameters.AddWithValue("rol", rol);
+            loginCommand.Connection = connection;
+            connection.Open();
+
+            SqlDataReader reader = loginCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                listaFuncionalidades.Add(reader[0].ToString());
+            }
+
+            reader.Close();
+            connection.Close();
+            return listaFuncionalidades;
+            
+        }
+
+        public static List<string> Roles(string user)
+        {
+            List<String> listaRoles = new List<string>();
+            List<String> listaEstados = new List<string>();
+            SqlConnection connection = getConnection();
+            SqlCommand loginCommand = new SqlCommand("SELECT r.Rol_Nombre FROM rip.Roles r INNER JOIN RIP.Usuario_Rol ur on r.Rol_ID = ur.Usuario_Rol_Rol_ID INNER JOIN RIP.Usuarios u on ur.Usuario_Rol_Usuario_ID = u.Usuario_ID where u.Usuario_User = @user and r.Rol_Estado = 1");
+            loginCommand.Parameters.AddWithValue("user", user);
+            loginCommand.Connection = connection;
+            connection.Open();
+
+            SqlDataReader reader = loginCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                listaRoles.Add(reader[0].ToString());
+            }
+            reader.Close();
+            connection.Close();
+            return listaRoles;
+        }
 
         public static void ActualizarIntentosLogueo(string user, int cant)
         {
@@ -121,7 +163,7 @@ namespace FrbaHotel
         }
 
         //Lo dejo aca por ahora
-
+        // no se que es esta funcion
         public static void ComboBoxLlenar(ComboBox combo) 
         {
             try

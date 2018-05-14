@@ -41,7 +41,13 @@
             this.button11 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // logo
+            // 
+            this.logo.Click += new System.EventHandler(this.logo_Click);
             // 
             // button1
             // 
@@ -160,7 +166,7 @@
             this.label2.TabIndex = 12;
             this.label2.Text = "Usuario";
             // 
-            // SeleccionAccion
+            // VentanaSeleccionAccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -178,8 +184,24 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Name = "SeleccionAccion";
+            this.Name = "VentanaSeleccionAccion";
             this.Text = "SeleccionAccion";
+            this.Controls.SetChildIndex(this.button1, 0);
+            this.Controls.SetChildIndex(this.button2, 0);
+            this.Controls.SetChildIndex(this.button3, 0);
+            this.Controls.SetChildIndex(this.button4, 0);
+            this.Controls.SetChildIndex(this.button5, 0);
+            this.Controls.SetChildIndex(this.button6, 0);
+            this.Controls.SetChildIndex(this.button7, 0);
+            this.Controls.SetChildIndex(this.button8, 0);
+            this.Controls.SetChildIndex(this.button9, 0);
+            this.Controls.SetChildIndex(this.button10, 0);
+            this.Controls.SetChildIndex(this.button11, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.logo, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

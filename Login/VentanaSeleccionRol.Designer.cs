@@ -52,7 +52,7 @@
             // 
             // btnIngresar
             // 
-            this.btnIngresar.Location = new System.Drawing.Point(112, 248);
+            this.btnIngresar.Location = new System.Drawing.Point(113, 343);
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(75, 23);
             this.btnIngresar.TabIndex = 12;
@@ -82,7 +82,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(300, 298);
+            this.ClientSize = new System.Drawing.Size(300, 378);
             this.Controls.Add(this.lblErrorRol);
             this.Controls.Add(this.btnIngresar);
             this.Controls.Add(this.cbxRoles);

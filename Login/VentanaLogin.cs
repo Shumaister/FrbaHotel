@@ -34,13 +34,14 @@ namespace FrbaHotel.Login
                if (logueo.Exito)
                {
                    this.Hide();
-                   new VentanaSeleccionRol().Show();
+                   new VentanaSeleccionRol(new Usuario(logueo)).Show();
                }
                else
                {
                    txbUser.Text = "";
                    txbPass.Text = "";
                    lblErrorLogueo.Visible = true;
+                   lblErrorLogueo.Text = logueo.MensajeError;
                }
 
            }
@@ -85,42 +86,6 @@ namespace FrbaHotel.Login
         {
             errorProvider1.Clear();
         }
-
-        /*
-        
-        private void MostrarRolSegun(bool buleano)
-        {
-            lblRol.Visible = buleano;
-            cbxRoles.Visible = buleano;
-            btnIngresar.Visible = buleano;
-        }
-
-         
-        private void btnIngresoUsuario_Click(object sender, EventArgs e)
-        {
-            lblErrorLogueo.Visible = false;
-            
-            LogueoDTO logueo = DB.Autenticar(txbUser.Text, txbPass.Text);
-
-            if (logueo.Exito)
-            {
-                txbUser.Enabled = false;
-                txbPass.Enabled = false;
-                btnIngresoUsuario.Enabled = false;
-                MostrarRolSegun(true);
-                cbxRoles.DataSource = logueo.Roles;
-            }
-            else
-            {
-                txbUser.Text = "";
-                txbPass.Text = "";
-                lblErrorLogueo.Visible = true;
-                lblErrorLogueo.Text = logueo.MensajeError;
-            }
-        }
-
-         */
-
 
     }
 }

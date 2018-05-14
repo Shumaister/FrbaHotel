@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FrbaHotel.Login
 {
-    class LogueoDTO
+    public class LogueoDTO
     {
         public bool Exito { get; set; }
         public string MensajeError { get; set; }

@@ -16,5 +16,10 @@ namespace FrbaHotel.Login
         {
             InitializeComponent();
         }
+
+        private void logo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
