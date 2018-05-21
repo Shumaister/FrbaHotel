@@ -11,6 +11,7 @@ namespace FrbaHotel
     {
         public string NombreUsuario { get; set; }
         public List<string> Roles { get; set; }
+        public string RolLogueado { get; set; }
         public List<string> Funcionalidades { get; set; }
         public string Hotel { get ;set; }
 
@@ -18,16 +19,11 @@ namespace FrbaHotel
         {
             this.NombreUsuario = logueo.User;
             this.Roles = logueo.Roles;
-            this.Funcionalidades = TraerFuncionalidadesDeRol(Roles);
         }
 
-        private List<string> TraerFuncionalidadesDeRol(List<string> Roles)
+        private List<string> FuncionalidadesDeRol(string rol)
         {
-            List<string> funcionalidades = new List<string>();
-            foreach (string rol in Roles)
-                funcionalidades = funcionalidades.Concat(DB.FuncionalidadesDeRol(rol)).ToList();
-            
-            return funcionalidades;
+            return DB.FuncionalidadesDeRol(rol);
         }
     }
 }

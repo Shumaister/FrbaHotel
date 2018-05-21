@@ -41,12 +41,26 @@
             this.button11 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.administracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.funcionalidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hoteleriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hotelesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.habitacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.regimenesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.estadiasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nuevaEstadiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // logo
             // 
+            this.logo.Location = new System.Drawing.Point(319, 106);
             this.logo.Click += new System.EventHandler(this.logo_Click);
             // 
             // button1
@@ -111,6 +125,7 @@
             this.button7.TabIndex = 6;
             this.button7.Text = "Administrar reservas";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button8
             // 
@@ -151,7 +166,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(89, 165);
+            this.label1.Location = new System.Drawing.Point(380, 267);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 11;
@@ -160,17 +175,106 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(89, 193);
+            this.label2.Location = new System.Drawing.Point(380, 295);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 13);
             this.label2.TabIndex = 12;
             this.label2.Text = "Usuario";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.administracionToolStripMenuItem,
+            this.hoteleriaToolStripMenuItem,
+            this.estadiasToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(752, 24);
+            this.menuStrip1.TabIndex = 13;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // administracionToolStripMenuItem
+            // 
+            this.administracionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rolesToolStripMenuItem,
+            this.usuariosToolStripMenuItem,
+            this.funcionalidadesToolStripMenuItem});
+            this.administracionToolStripMenuItem.Name = "administracionToolStripMenuItem";
+            this.administracionToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
+            this.administracionToolStripMenuItem.Text = "Administracion";
+            // 
+            // rolesToolStripMenuItem
+            // 
+            this.rolesToolStripMenuItem.Name = "rolesToolStripMenuItem";
+            this.rolesToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.rolesToolStripMenuItem.Text = "Roles";
+            // 
+            // usuariosToolStripMenuItem
+            // 
+            this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.usuariosToolStripMenuItem.Text = "Usuarios";
+            // 
+            // funcionalidadesToolStripMenuItem
+            // 
+            this.funcionalidadesToolStripMenuItem.Name = "funcionalidadesToolStripMenuItem";
+            this.funcionalidadesToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.funcionalidadesToolStripMenuItem.Text = "Funcionalidades";
+            // 
+            // hoteleriaToolStripMenuItem
+            // 
+            this.hoteleriaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hotelesToolStripMenuItem,
+            this.habitacionesToolStripMenuItem,
+            this.regimenesToolStripMenuItem});
+            this.hoteleriaToolStripMenuItem.Name = "hoteleriaToolStripMenuItem";
+            this.hoteleriaToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.hoteleriaToolStripMenuItem.Text = "Hoteleria";
+            // 
+            // hotelesToolStripMenuItem
+            // 
+            this.hotelesToolStripMenuItem.Name = "hotelesToolStripMenuItem";
+            this.hotelesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hotelesToolStripMenuItem.Text = "Hoteles";
+            // 
+            // habitacionesToolStripMenuItem
+            // 
+            this.habitacionesToolStripMenuItem.Name = "habitacionesToolStripMenuItem";
+            this.habitacionesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.habitacionesToolStripMenuItem.Text = "Habitaciones";
+            // 
+            // regimenesToolStripMenuItem
+            // 
+            this.regimenesToolStripMenuItem.Name = "regimenesToolStripMenuItem";
+            this.regimenesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.regimenesToolStripMenuItem.Text = "Regimenes";
+            // 
+            // estadiasToolStripMenuItem
+            // 
+            this.estadiasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nuevaEstadiaToolStripMenuItem,
+            this.modificarToolStripMenuItem});
+            this.estadiasToolStripMenuItem.Name = "estadiasToolStripMenuItem";
+            this.estadiasToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.estadiasToolStripMenuItem.Text = "Estadias";
+            // 
+            // nuevaEstadiaToolStripMenuItem
+            // 
+            this.nuevaEstadiaToolStripMenuItem.Name = "nuevaEstadiaToolStripMenuItem";
+            this.nuevaEstadiaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nuevaEstadiaToolStripMenuItem.Text = "Nueva estadia";
+            // 
+            // modificarToolStripMenuItem
+            // 
+            this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.modificarToolStripMenuItem.Text = "Modificar";
+            // 
             // VentanaSeleccionAccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 576);
+            this.ClientSize = new System.Drawing.Size(752, 576);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button11);
@@ -184,8 +288,11 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "VentanaSeleccionAccion";
             this.Text = "SeleccionAccion";
+            this.Controls.SetChildIndex(this.menuStrip1, 0);
             this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.button2, 0);
             this.Controls.SetChildIndex(this.button3, 0);
@@ -202,6 +309,8 @@
             this.Controls.SetChildIndex(this.logo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -222,5 +331,17 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem administracionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rolesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem funcionalidadesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hoteleriaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hotelesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem habitacionesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem regimenesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem estadiasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nuevaEstadiaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modificarToolStripMenuItem;
     }
 }

@@ -35,3 +35,4 @@ C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaLo
 C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaSeleccionAccion.resources
 C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaSeleccionRol.resources
 C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.VentanaBase.resources
+C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.Menus.MenuPrincipalUsuarios.resources

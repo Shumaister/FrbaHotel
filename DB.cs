@@ -33,29 +33,6 @@ namespace FrbaHotel
             }
         }
 
-        public static String AlgodelaDB()
-        {
-            SqlConnection connection = getConnection();
-
-            SqlCommand loginCommand = new SqlCommand("SELECT Hotel_Ciudad FROM gd_esquema.Maestra WHERE Cliente_Apellido=@ape AND Cliente_Nombre=@nom");
-           
-            loginCommand.Parameters.AddWithValue("ape", "Gómez");
-            loginCommand.Parameters.AddWithValue("nom", "KAWA");
-            loginCommand.Connection = connection;
-            connection.Open();
-
-            SqlDataReader reader = loginCommand.ExecuteReader();
-            string cantidadDeVeces = "0";
-            while (reader.Read())
-            {
-                cantidadDeVeces = reader["Hotel_Ciudad"].ToString();
-            }
-            reader.Close();
-            connection.Close();
-
-            return cantidadDeVeces;
-        }
-
         internal static LogueoDTO Autenticar(string user, string pas)
         {
             SqlConnection connection = getConnection();
@@ -185,8 +162,34 @@ namespace FrbaHotel
         }
 
 
-        
-    
+
+
+
+        internal static List<string> HoltesDeUnUsuario(Usuario Usuario)
+        {
+            SqlConnection connection = getConnection();
+
+            SqlCommand hotelesquery = new SqlCommand("SELECT ci.Ciudades_Descripcion, c.Calles_Descripcion, d.Domicilio_Nro_calle FROM rip.Hoteles h JOIN RIP.Hotel_Usuario hu on hu.Hotel_Usuario_IdHotel = h.Hoteles_ID JOIN RIP.Usuarios u on u.Usuario_ID = hu.Hotel_Usuario_IdUsuario JOIN RIP.Domicilio d on d.Domicilio_ID = h.Hoteles_Domicilio_ID JOIN RIP.Calles c on c.Calles_ID = d.Domicilio_Calle_ID JOIN RIP.Ciudades ci on ci.Ciudades_ID = d.Domicilio_Ciudad_ID where u.Usuario_User = @username");
+            hotelesquery.Parameters.AddWithValue("username", Usuario.NombreUsuario);
+            hotelesquery.Connection = connection;
+            connection.Open();
+            SqlDataReader reader = hotelesquery.ExecuteReader();
+
+            List<string> hoteles = new List<string>();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    hoteles.Add(reader[0].ToString().TrimEnd() + " " + reader[1].ToString() + " " + reader[2].ToString());
+                }
+            }
+            
+            reader.Close();
+            connection.Close();
+
+            return hoteles;
+        }
     }
 
 }

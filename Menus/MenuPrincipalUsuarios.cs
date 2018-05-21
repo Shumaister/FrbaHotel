@@ -8,16 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrbaHotel.Login
+namespace FrbaHotel.Menus
 {
-    public partial class VentanaSeleccionAccion : VentanaBase
+    public partial class MenuPrincipalUsuarios : Form
     {
-        public VentanaSeleccionAccion()
+        Usuario Usuario { get; set; }
+        public MenuPrincipalUsuarios(Usuario usu)
         {
+            this.Usuario = usu; 
             InitializeComponent();
         }
 
-        private void logo_Click(object sender, EventArgs e)
+        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
