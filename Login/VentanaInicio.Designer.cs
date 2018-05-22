@@ -96,6 +96,7 @@
             this.Controls.Add(this.label1);
             this.Name = "VentanaInicio";
             this.Text = "Inicio - FRBA Hotel ©";
+            this.Load += new System.EventHandler(this.VentanaInicio_Load);
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);

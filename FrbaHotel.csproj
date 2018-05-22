@@ -75,7 +75,7 @@
     <Compile Include="CancelarReserva\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="DB.cs" />
+    <Compile Include="Database.cs" />
     <Compile Include="ErrorTxtBox.cs">
       <SubType>Component</SubType>
     </Compile>

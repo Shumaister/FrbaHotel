@@ -22,5 +22,10 @@ namespace FrbaHotel.Login
             this.Hide();
             new VentanaLogin().Show();
         }
+
+        private void VentanaInicio_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -57,7 +57,7 @@ namespace FrbaHotel.Login
             lblHotel.Enabled = true;
             btnIngresarHotel.Enabled = true;
 
-            List<string> hoteles = DB.HoltesDeUnUsuario(Usuario);
+            List<string> hoteles = Database.HoltesDeUnUsuario(Usuario);
 
             if (hoteles == null)
             {

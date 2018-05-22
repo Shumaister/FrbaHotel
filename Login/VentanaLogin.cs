@@ -29,7 +29,7 @@ namespace FrbaHotel.Login
 
            if(!CampoValidar(this, errorProvider1))
            {
-               LogueoDTO logueo = DB.Autenticar(txbUser.Text, txbPass.Text);
+               LogueoDTO logueo = Database.Autenticar(txbUser.Text, txbPass.Text);
 
                if (logueo.Exito)
                {
