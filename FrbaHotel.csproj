@@ -107,23 +107,17 @@
       <DependentUpon>VentanaLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\LogueoDTO.cs" />
-    <Compile Include="Menus\MenuP.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Menus\MenuP.Designer.cs">
-      <DependentUpon>MenuP.cs</DependentUpon>
-    </Compile>
     <Compile Include="Login\VentanaSeleccionRol.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login\VentanaSeleccionRol.Designer.cs">
       <DependentUpon>VentanaSeleccionRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Menus\MenuPrincipalUsuarios.cs">
+    <Compile Include="Menus\VentanaMenuPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menus\MenuPrincipalUsuarios.Designer.cs">
-      <DependentUpon>MenuPrincipalUsuarios.cs</DependentUpon>
+    <Compile Include="Menus\VentanaMenuPrincipal.Designer.cs">
+      <DependentUpon>VentanaMenuPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -152,14 +146,11 @@
     <EmbeddedResource Include="Login\VentanaLogin.resx">
       <DependentUpon>VentanaLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menus\MenuP.resx">
-      <DependentUpon>MenuP.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Login\VentanaSeleccionRol.resx">
       <DependentUpon>VentanaSeleccionRol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menus\MenuPrincipalUsuarios.resx">
-      <DependentUpon>MenuPrincipalUsuarios.cs</DependentUpon>
+    <EmbeddedResource Include="Menus\VentanaMenuPrincipal.resx">
+      <DependentUpon>VentanaMenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

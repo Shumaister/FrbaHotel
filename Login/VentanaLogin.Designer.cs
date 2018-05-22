@@ -111,6 +111,7 @@
             this.Controls.Add(this.lblContrasenia);
             this.Controls.Add(this.lblUsuario);
             this.Name = "VentanaLogin";
+            this.Text = "Login - FRBA Hotel ©";
             this.Load += new System.EventHandler(this.Login_Load);
             this.Controls.SetChildIndex(this.lblUsuario, 0);
             this.Controls.SetChildIndex(this.lblContrasenia, 0);

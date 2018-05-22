@@ -121,7 +121,7 @@
             this.Controls.Add(this.cbxRoles);
             this.Controls.Add(this.lblRol);
             this.Name = "VentanaSeleccionRol";
-            this.Text = "SeleccionRol";
+            this.Text = "Seleccion - FRBA Hotel ©";
             this.Load += new System.EventHandler(this.SeleccionRol_Load);
             this.Controls.SetChildIndex(this.lblRol, 0);
             this.Controls.SetChildIndex(this.cbxRoles, 0);

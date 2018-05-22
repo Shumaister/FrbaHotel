@@ -10,16 +10,26 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.Menus
 {
-    public partial class MenuPrincipalUsuarios : Form
+    public partial class VentanaMenuPrincipal : VentanaBase
     {
         Usuario Usuario { get; set; }
-        public MenuPrincipalUsuarios(Usuario usu)
+        public VentanaMenuPrincipal(Usuario usu)
         {
             this.Usuario = usu; 
             InitializeComponent();
         }
 
         private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void funcionalidadesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MenuPrincipalUsuarios_Load(object sender, EventArgs e)
         {
 
         }
