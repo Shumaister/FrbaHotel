@@ -63,11 +63,11 @@
     <Compile Include="AbmRegimen\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmRol\Form1.cs">
+    <Compile Include="AbmRol\VentanaRoles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmRol\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmRol\VentanaRoles.Designer.cs">
+      <DependentUpon>VentanaRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="CancelarReserva\Form1.cs">
       <SubType>Form</SubType>
@@ -140,6 +140,9 @@
     <Compile Include="VentanaBase.Designer.cs">
       <DependentUpon>VentanaBase.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AbmRol\VentanaRoles.resx">
+      <DependentUpon>VentanaRoles.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\VentanaInicio.resx">
       <DependentUpon>VentanaInicio.cs</DependentUpon>
     </EmbeddedResource>

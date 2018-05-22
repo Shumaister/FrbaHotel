@@ -55,7 +55,7 @@
             // 
             // btnIngresarRol
             // 
-            this.btnIngresarRol.Location = new System.Drawing.Point(215, 213);
+            this.btnIngresarRol.Location = new System.Drawing.Point(241, 279);
             this.btnIngresarRol.Name = "btnIngresarRol";
             this.btnIngresarRol.Size = new System.Drawing.Size(40, 23);
             this.btnIngresarRol.TabIndex = 12;
@@ -66,7 +66,7 @@
             // cbxRoles
             // 
             this.cbxRoles.FormattingEnabled = true;
-            this.cbxRoles.Location = new System.Drawing.Point(25, 215);
+            this.cbxRoles.Location = new System.Drawing.Point(45, 279);
             this.cbxRoles.Name = "cbxRoles";
             this.cbxRoles.Size = new System.Drawing.Size(184, 21);
             this.cbxRoles.TabIndex = 11;
@@ -74,7 +74,7 @@
             // lblRol
             // 
             this.lblRol.AutoSize = true;
-            this.lblRol.Location = new System.Drawing.Point(22, 189);
+            this.lblRol.Location = new System.Drawing.Point(42, 251);
             this.lblRol.Name = "lblRol";
             this.lblRol.Size = new System.Drawing.Size(142, 13);
             this.lblRol.TabIndex = 10;
@@ -83,7 +83,7 @@
             // cbxHoteles
             // 
             this.cbxHoteles.FormattingEnabled = true;
-            this.cbxHoteles.Location = new System.Drawing.Point(25, 282);
+            this.cbxHoteles.Location = new System.Drawing.Point(45, 215);
             this.cbxHoteles.Name = "cbxHoteles";
             this.cbxHoteles.Size = new System.Drawing.Size(184, 21);
             this.cbxHoteles.TabIndex = 15;
@@ -91,7 +91,7 @@
             // lblHotel
             // 
             this.lblHotel.AutoSize = true;
-            this.lblHotel.Location = new System.Drawing.Point(22, 256);
+            this.lblHotel.Location = new System.Drawing.Point(42, 193);
             this.lblHotel.Name = "lblHotel";
             this.lblHotel.Size = new System.Drawing.Size(151, 13);
             this.lblHotel.TabIndex = 14;
@@ -99,7 +99,7 @@
             // 
             // btnIngresarHotel
             // 
-            this.btnIngresarHotel.Location = new System.Drawing.Point(215, 282);
+            this.btnIngresarHotel.Location = new System.Drawing.Point(241, 213);
             this.btnIngresarHotel.Name = "btnIngresarHotel";
             this.btnIngresarHotel.Size = new System.Drawing.Size(40, 23);
             this.btnIngresarHotel.TabIndex = 16;
