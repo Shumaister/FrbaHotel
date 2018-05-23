@@ -28,14 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button10 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.administracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuRoles = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.funcionalidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.habitacionesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,52 +51,8 @@
             // 
             // logo
             // 
-            this.logo.Location = new System.Drawing.Point(267, 112);
-            // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(92, 538);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(169, 23);
-            this.button10.TabIndex = 23;
-            this.button10.Text = "Ver estadisticas";
-            this.button10.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(92, 509);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(169, 23);
-            this.button6.TabIndex = 19;
-            this.button6.Text = "Administrar regimen de estadia";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(92, 480);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(169, 23);
-            this.button5.TabIndex = 18;
-            this.button5.Text = "Administrar hoteles";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(92, 451);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(169, 23);
-            this.button4.TabIndex = 17;
-            this.button4.Text = "Administrar usuarios";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(92, 422);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(169, 23);
-            this.button3.TabIndex = 16;
-            this.button3.Text = "Administrar roles";
-            this.button3.UseVisualStyleBackColor = true;
+            this.logo.Location = new System.Drawing.Point(56, 65);
+            this.logo.Size = new System.Drawing.Size(245, 196);
             // 
             // menuStrip1
             // 
@@ -111,7 +62,7 @@
             this.configuracionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(706, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(366, 24);
             this.menuStrip1.TabIndex = 27;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -119,7 +70,7 @@
             // administracionToolStripMenuItem
             // 
             this.administracionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rolesToolStripMenuItem,
+            this.menuRoles,
             this.usuariosToolStripMenuItem,
             this.funcionalidadesToolStripMenuItem,
             this.habitacionesToolStripMenuItem1,
@@ -128,11 +79,12 @@
             this.administracionToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
             this.administracionToolStripMenuItem.Text = "Administracion";
             // 
-            // rolesToolStripMenuItem
+            // menuRoles
             // 
-            this.rolesToolStripMenuItem.Name = "rolesToolStripMenuItem";
-            this.rolesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.rolesToolStripMenuItem.Text = "Roles";
+            this.menuRoles.Name = "menuRoles";
+            this.menuRoles.Size = new System.Drawing.Size(152, 22);
+            this.menuRoles.Text = "Roles";
+            this.menuRoles.Click += new System.EventHandler(this.menuRoles_Click);
             // 
             // usuariosToolStripMenuItem
             // 
@@ -227,22 +179,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 580);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.ClientSize = new System.Drawing.Size(366, 326);
             this.Controls.Add(this.menuStrip1);
             this.Name = "VentanaMenuPrincipal";
             this.Text = "Menu Principal - FRBA Hotel ©";
             this.Load += new System.EventHandler(this.MenuPrincipalUsuarios_Load);
             this.Controls.SetChildIndex(this.menuStrip1, 0);
-            this.Controls.SetChildIndex(this.button3, 0);
-            this.Controls.SetChildIndex(this.button4, 0);
-            this.Controls.SetChildIndex(this.button5, 0);
-            this.Controls.SetChildIndex(this.button6, 0);
-            this.Controls.SetChildIndex(this.button10, 0);
             this.Controls.SetChildIndex(this.logo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -255,14 +197,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem administracionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rolesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuRoles;
         private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem funcionalidadesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hoteleriaToolStripMenuItem;

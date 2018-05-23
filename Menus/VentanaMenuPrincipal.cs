@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FrbaHotel.AbmRol;
 
 namespace FrbaHotel.Menus
 {
@@ -37,6 +38,11 @@ namespace FrbaHotel.Menus
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void menuRoles_Click(object sender, EventArgs e)
+        {
+            new VentanaRoles().Show();
         }
     }
 }

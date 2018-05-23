@@ -17,24 +17,11 @@ namespace FrbaHotel.AbmRol
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void VentanaRoles_Load(object sender, EventArgs e)
         {
-            Database.llenarComboBox(cbxFuncionalidades, "SELECT Funcionalidad_Funcionalidad FROM RIP.Funcionalidades", "Funcionalidad_Funcionalidad"); 
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
+            Database.completarComboBox(cbxFuncionalidades, "SELECT Funcionalidad_Funcionalidad FROM RIP.Funcionalidades", "Funcionalidad_Funcionalidad");
+            Database.completarComboBox(cbxModificar, "SELECT Rol_Nombre FROM RIP.Roles", "Rol_Nombre");
+            Database.completarComboBox(cbxEliminar, "SELECT Rol_Nombre FROM RIP.Roles", "Rol_Nombre");
         }
     }
 }

@@ -219,7 +219,7 @@ namespace FrbaHotel
 
         //-------------------------------------- Metodos para Ventanas -------------------------------------
 
-        public static void llenarComboBox(ComboBox comboBox, string consulta, string nombreColumna)
+        public static void completarComboBox(ComboBox comboBox, string consulta, string nombreColumna)
         {
             Database.conectar();
             try
@@ -229,6 +229,43 @@ namespace FrbaHotel
                 while (reader.Read())
                     comboBox.Items.Add(reader[nombreColumna]);
                 reader.Close();
+            }
+            catch (Exception excepcion)
+            {
+                Database.informarError(excepcion);
+            }
+            Database.desconectar();
+        }
+
+        public static void completarDataGridView(DataGridView dataGridView, string consulta, string parametro)
+        {
+            Database.conectar();
+            try
+            {
+                DataTable dataTable = new DataTable();
+                SqlCommand comando = new SqlCommand(consulta + parametro, Database.obtenerConexion());
+                SqlDataReader reader = comando.ExecuteReader();
+                dataTable.Load(reader);
+                dataGridView.DataSource = dataTable;
+            }
+            catch (Exception excepcion)
+            {
+                Database.informarError(excepcion);
+            }
+            Database.desconectar();
+        }
+
+
+        public static void filtrarDataGridViewParaModificarRol(DataGridView dataGridView, string nombre, string estado)
+        {
+            Database.conectar();
+            try
+            {
+                DataTable dataTable = new DataTable();
+                SqlCommand comando = new SqlCommand("SELECT * FROM RIP.Roles WHERE Rol_Nombre LIKE %" + nombre + "% AND Rol_Estado = " + estado, Database.obtenerConexion());
+                SqlDataReader reader = comando.ExecuteReader();
+                dataTable.Load(reader);
+                dataGridView.DataSource = dataTable;
             }
             catch (Exception excepcion)
             {
