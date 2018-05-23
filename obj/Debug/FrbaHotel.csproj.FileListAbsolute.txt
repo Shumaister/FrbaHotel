@@ -23,3 +23,17 @@ C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaSe
 C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaSeleccionRol.resources
 C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.VentanaBase.resources
 C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.Menus.MenuPrincipalUsuarios.resources
+D:\Dario\FrbaHotel\bin\Debug\FrbaHotel.exe.config
+D:\Dario\FrbaHotel\bin\Debug\FrbaHotel.exe
+D:\Dario\FrbaHotel\bin\Debug\FrbaHotel.pdb
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.VentanaRoles.resources
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaInicio.resources
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaLogin.resources
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaSeleccionRol.resources
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Menus.VentanaMenuPrincipal.resources
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Properties.Resources.resources
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.VentanaBase.resources
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.exe
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.pdb
