@@ -22,6 +22,14 @@ namespace FrbaHotel.AbmRol
             Database.completarComboBox(cbxFuncionalidades, "SELECT Funcionalidad_Funcionalidad FROM RIP.Funcionalidades", "Funcionalidad_Funcionalidad");
             Database.completarComboBox(cbxModificar, "SELECT Rol_Nombre FROM RIP.Roles", "Rol_Nombre");
             Database.completarComboBox(cbxEliminar, "SELECT Rol_Nombre FROM RIP.Roles", "Rol_Nombre");
+            cbxFuncionalidades.SelectedIndex = 0;
+        }
+
+        private void btnAgregarFuncionalidad_Click(object sender, EventArgs e)
+        {
+            lbxFuncionalidades.Items.Add(cbxFuncionalidades.SelectedItem);
+            cbxFuncionalidades.Items.Remove(cbxFuncionalidades.SelectedItem);
+            cbxFuncionalidades.SelectedIndex = 0;
         }
     }
 }

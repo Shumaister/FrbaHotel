@@ -47,6 +47,8 @@
             this.cbxEliminar = new System.Windows.Forms.ComboBox();
             this.lblSeleccionarRol2 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
+            this.lbxFuncionalidades = new System.Windows.Forms.ListBox();
+            this.btnAgregarFuncionalidad = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -70,11 +72,13 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(316, 344);
+            this.tabControl1.Size = new System.Drawing.Size(279, 419);
             this.tabControl1.TabIndex = 1;
             // 
             // tabAgregar
             // 
+            this.tabAgregar.Controls.Add(this.btnAgregarFuncionalidad);
+            this.tabAgregar.Controls.Add(this.lbxFuncionalidades);
             this.tabAgregar.Controls.Add(this.button4);
             this.tabAgregar.Controls.Add(this.button3);
             this.tabAgregar.Controls.Add(this.label3);
@@ -87,14 +91,14 @@
             this.tabAgregar.Location = new System.Drawing.Point(4, 22);
             this.tabAgregar.Name = "tabAgregar";
             this.tabAgregar.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAgregar.Size = new System.Drawing.Size(308, 318);
+            this.tabAgregar.Size = new System.Drawing.Size(271, 393);
             this.tabAgregar.TabIndex = 0;
             this.tabAgregar.Text = "Agregar";
             this.tabAgregar.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(158, 269);
+            this.button4.Location = new System.Drawing.Point(160, 345);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 8;
@@ -103,7 +107,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(33, 269);
+            this.button3.Location = new System.Drawing.Point(33, 345);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 7;
@@ -113,7 +117,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 174);
+            this.label3.Location = new System.Drawing.Point(30, 271);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 6;
@@ -122,7 +126,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(30, 89);
+            this.label2.Location = new System.Drawing.Point(30, 83);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 13);
             this.label2.TabIndex = 5;
@@ -131,7 +135,7 @@
             // cbxFuncionalidades
             // 
             this.cbxFuncionalidades.FormattingEnabled = true;
-            this.cbxFuncionalidades.Location = new System.Drawing.Point(33, 125);
+            this.cbxFuncionalidades.Location = new System.Drawing.Point(33, 109);
             this.cbxFuncionalidades.Name = "cbxFuncionalidades";
             this.cbxFuncionalidades.Size = new System.Drawing.Size(121, 21);
             this.cbxFuncionalidades.TabIndex = 4;
@@ -139,7 +143,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(131, 215);
+            this.radioButton2.Location = new System.Drawing.Point(141, 301);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(85, 17);
             this.radioButton2.TabIndex = 3;
@@ -150,7 +154,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(33, 215);
+            this.radioButton1.Location = new System.Drawing.Point(33, 301);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(67, 17);
             this.radioButton1.TabIndex = 2;
@@ -183,7 +187,7 @@
             this.tabModificar.Location = new System.Drawing.Point(4, 22);
             this.tabModificar.Name = "tabModificar";
             this.tabModificar.Padding = new System.Windows.Forms.Padding(3);
-            this.tabModificar.Size = new System.Drawing.Size(308, 318);
+            this.tabModificar.Size = new System.Drawing.Size(271, 393);
             this.tabModificar.TabIndex = 1;
             this.tabModificar.Text = "Modificar";
             this.tabModificar.UseVisualStyleBackColor = true;
@@ -222,7 +226,7 @@
             this.tabEliminar.Location = new System.Drawing.Point(4, 22);
             this.tabEliminar.Name = "tabEliminar";
             this.tabEliminar.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEliminar.Size = new System.Drawing.Size(308, 318);
+            this.tabEliminar.Size = new System.Drawing.Size(271, 393);
             this.tabEliminar.TabIndex = 2;
             this.tabEliminar.Text = "Eliminar";
             this.tabEliminar.UseVisualStyleBackColor = true;
@@ -253,11 +257,29 @@
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
             // 
+            // lbxFuncionalidades
+            // 
+            this.lbxFuncionalidades.FormattingEnabled = true;
+            this.lbxFuncionalidades.Location = new System.Drawing.Point(33, 155);
+            this.lbxFuncionalidades.Name = "lbxFuncionalidades";
+            this.lbxFuncionalidades.Size = new System.Drawing.Size(120, 95);
+            this.lbxFuncionalidades.TabIndex = 9;
+            // 
+            // btnAgregarFuncionalidad
+            // 
+            this.btnAgregarFuncionalidad.Location = new System.Drawing.Point(176, 107);
+            this.btnAgregarFuncionalidad.Name = "btnAgregarFuncionalidad";
+            this.btnAgregarFuncionalidad.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregarFuncionalidad.TabIndex = 10;
+            this.btnAgregarFuncionalidad.Text = "Agregar";
+            this.btnAgregarFuncionalidad.UseVisualStyleBackColor = true;
+            this.btnAgregarFuncionalidad.Click += new System.EventHandler(this.btnAgregarFuncionalidad_Click);
+            // 
             // VentanaRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(342, 366);
+            this.ClientSize = new System.Drawing.Size(303, 447);
             this.Controls.Add(this.tabControl1);
             this.Name = "VentanaRoles";
             this.Text = "Roles - FRBA Hotel ©";
@@ -298,5 +320,7 @@
         private System.Windows.Forms.ComboBox cbxEliminar;
         private System.Windows.Forms.Label lblSeleccionarRol2;
         private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnAgregarFuncionalidad;
+        private System.Windows.Forms.ListBox lbxFuncionalidades;
     }
 }
