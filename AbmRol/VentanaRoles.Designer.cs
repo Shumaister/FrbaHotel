@@ -39,7 +39,6 @@
             this.cbxFuncionalidades = new System.Windows.Forms.ComboBox();
             this.rbtRolDesactivado = new System.Windows.Forms.RadioButton();
             this.rbtRolActivado = new System.Windows.Forms.RadioButton();
-            this.tbxNombreRol = new FrbaHotel.ErrorTxtBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabModificar = new System.Windows.Forms.TabPage();
             this.cbxModificar = new System.Windows.Forms.ComboBox();
@@ -49,6 +48,7 @@
             this.cbxEliminar = new System.Windows.Forms.ComboBox();
             this.lblSeleccionarRol2 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
+            this.tbxNombreRol = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -77,6 +77,7 @@
             // 
             // tabAgregar
             // 
+            this.tabAgregar.Controls.Add(this.tbxNombreRol);
             this.tabAgregar.Controls.Add(this.btnAgregarFuncionalidad);
             this.tabAgregar.Controls.Add(this.lbxFuncionalidades);
             this.tabAgregar.Controls.Add(this.btnGuardarRol);
@@ -86,7 +87,6 @@
             this.tabAgregar.Controls.Add(this.cbxFuncionalidades);
             this.tabAgregar.Controls.Add(this.rbtRolDesactivado);
             this.tabAgregar.Controls.Add(this.rbtRolActivado);
-            this.tabAgregar.Controls.Add(this.tbxNombreRol);
             this.tabAgregar.Controls.Add(this.label1);
             this.tabAgregar.Location = new System.Drawing.Point(4, 22);
             this.tabAgregar.Name = "tabAgregar";
@@ -183,15 +183,6 @@
             this.rbtRolActivado.Text = "Activado";
             this.rbtRolActivado.UseVisualStyleBackColor = true;
             // 
-            // tbxNombreRol
-            // 
-            this.tbxNombreRol.Location = new System.Drawing.Point(33, 47);
-            this.tbxNombreRol.Name = "tbxNombreRol";
-            this.tbxNombreRol.Size = new System.Drawing.Size(100, 20);
-            this.tbxNombreRol.TabIndex = 1;
-            this.tbxNombreRol.Validar = false;
-            this.tbxNombreRol.TextChanged += new System.EventHandler(this.tbxNombreRol_TextChanged);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -280,6 +271,13 @@
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
             // 
+            // tbxNombreRol
+            // 
+            this.tbxNombreRol.Location = new System.Drawing.Point(33, 49);
+            this.tbxNombreRol.Name = "tbxNombreRol";
+            this.tbxNombreRol.Size = new System.Drawing.Size(100, 20);
+            this.tbxNombreRol.TabIndex = 11;
+            // 
             // VentanaRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -313,7 +311,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RadioButton rbtRolDesactivado;
         private System.Windows.Forms.RadioButton rbtRolActivado;
-        private ErrorTxtBox tbxNombreRol;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabEliminar;
         private System.Windows.Forms.Label lblSeleccionarRol1;
@@ -327,5 +324,6 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnAgregarFuncionalidad;
         private System.Windows.Forms.ListBox lbxFuncionalidades;
+        private System.Windows.Forms.TextBox tbxNombreRol;
     }
 }

@@ -26,75 +26,22 @@ namespace FrbaHotel.Login
         private void btnLogin_Click(object sender, EventArgs e)
         {
             lblErrorLogueo.Visible = false;
-
-           if(!CampoValidar(this, errorProvider1))
-           {
-               LogueoDTO logueo = Database.Autenticar(txbUser.Text, txbPass.Text);
-
-               if (logueo.Exito)
-               {
-                   this.Hide();
-                   new VentanaSeleccionRol(new Usuario(logueo)).Show();
-               }
-               else
-               {
-                   txbUser.Text = "";
-                   txbPass.Text = "";
-                   lblErrorLogueo.Visible = true;
-                   lblErrorLogueo.Text = logueo.MensajeError;
-               }
-
-           }
-  
-        }
-
-        public static Boolean CampoValidar(Control objeto, ErrorProvider errorProvider)
-        {
-            Boolean flagError = false;
-
-            foreach (Control item in objeto.Controls)
+            if (camposEstanCompletos(this, errorProvider1)) 
             {
-
-                if (item is ErrorTxtBox)
+                LogueoDTO logueo = Database.Autenticar(txbUser.Text, txbPass.Text);
+                if (logueo.Exito)
                 {
-                    ErrorTxtBox campo = (ErrorTxtBox)item;
-
-                    if (campo.Validar)
-                    {
-                        if (string.IsNullOrEmpty(campo.Text.Trim()))
-                        {
-                            errorProvider.SetError(campo, "El campo no puede estar vacio");
-                            flagError = true;
-                        }
-                        else
-                        {
-                            errorProvider.SetError(campo, "");
-                        }
-                    }
+                    this.Hide();
+                    new VentanaSeleccionRol(new Usuario(logueo)).Show();
                 }
-
-            }
-            return flagError;
-        }
-
-        public static bool camposEstanCompletos(Control ventana, ErrorProvider errorProvider)
-        {
-            bool flagError = false;
-            foreach (Control objeto in ventana.Controls)
-            {
-                if (objeto is TextBox)
+                else
                 {
-                    TextBox textBox = (TextBox)objeto;                  
-                    if (string.IsNullOrEmpty(textBox.Text.Trim()))
-                    {
-                        flagError = true;
-                        errorProvider.SetError(textBox, "El campo no puede estar vacio");
-                    }
-                    else
-                        errorProvider.SetError(textBox, "");
+                    txbUser.Clear();
+                    txbPass.Clear();
+                    lblErrorLogueo.Visible = true;
+                    lblErrorLogueo.Text = logueo.MensajeError;
                 }
             }
-            return flagError;
         }
 
         private void txbUser_TextChanged(object sender, EventArgs e)

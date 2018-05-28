@@ -32,8 +32,8 @@
             this.lblContrasenia = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
             this.lblErrorLogueo = new System.Windows.Forms.Label();
-            this.txbUser = new FrbaHotel.ErrorTxtBox();
-            this.txbPass = new FrbaHotel.ErrorTxtBox();
+            this.txbUser = new System.Windows.Forms.TextBox();
+            this.txbPass = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -82,22 +82,17 @@
             // 
             // txbUser
             // 
-            this.txbUser.Location = new System.Drawing.Point(78, 211);
+            this.txbUser.Location = new System.Drawing.Point(78, 210);
             this.txbUser.Name = "txbUser";
-            this.txbUser.Size = new System.Drawing.Size(126, 20);
+            this.txbUser.Size = new System.Drawing.Size(100, 20);
             this.txbUser.TabIndex = 22;
-            this.txbUser.Validar = true;
-            this.txbUser.TextChanged += new System.EventHandler(this.txbUser_TextChanged);
             // 
             // txbPass
             // 
             this.txbPass.Location = new System.Drawing.Point(78, 271);
             this.txbPass.Name = "txbPass";
-            this.txbPass.Size = new System.Drawing.Size(126, 20);
+            this.txbPass.Size = new System.Drawing.Size(100, 20);
             this.txbPass.TabIndex = 23;
-            this.txbPass.UseSystemPasswordChar = true;
-            this.txbPass.Validar = true;
-            this.txbPass.TextChanged += new System.EventHandler(this.txbPass_TextChanged);
             // 
             // VentanaLogin
             // 
@@ -133,8 +128,7 @@
         private System.Windows.Forms.Label lblContrasenia;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label lblErrorLogueo;
-        private ErrorTxtBox txbUser;
-        private ErrorTxtBox txbPass;
-
+        private System.Windows.Forms.TextBox txbUser;
+        private System.Windows.Forms.TextBox txbPass;
     }
 }

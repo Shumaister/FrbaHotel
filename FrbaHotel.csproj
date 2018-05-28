@@ -76,12 +76,6 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Database.cs" />
-    <Compile Include="ErrorTxtBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ErrorTxtBox.Designer.cs">
-      <DependentUpon>ErrorTxtBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="GenerarModificacionReserva\Form1.cs">
       <SubType>Form</SubType>
     </Compile>

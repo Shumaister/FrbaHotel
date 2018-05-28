@@ -40,7 +40,6 @@ D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.pdb
 D:\Familia\Dario\FrbaHotel\bin\Debug\FrbaHotel.exe.config
 D:\Familia\Dario\FrbaHotel\bin\Debug\FrbaHotel.exe
 D:\Familia\Dario\FrbaHotel\bin\Debug\FrbaHotel.pdb
-D:\Familia\Dario\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
 D:\Familia\Dario\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.VentanaRoles.resources
 D:\Familia\Dario\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaInicio.resources
 D:\Familia\Dario\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaLogin.resources
