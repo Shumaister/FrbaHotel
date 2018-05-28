@@ -122,6 +122,7 @@
             this.btnGuardarRol.TabIndex = 8;
             this.btnGuardarRol.Text = "Guardar";
             this.btnGuardarRol.UseVisualStyleBackColor = true;
+            this.btnGuardarRol.Click += new System.EventHandler(this.btnGuardarRol_Click);
             // 
             // btnLimpiarRol
             // 

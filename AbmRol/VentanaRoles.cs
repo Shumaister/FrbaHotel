@@ -48,5 +48,18 @@ namespace FrbaHotel.AbmRol
             Database.completarComboBox(cbxFuncionalidades, "SELECT Funcionalidad_Funcionalidad FROM RIP.Funcionalidades", "Funcionalidad_Funcionalidad");
 
         }
+
+        private void btnGuardarRol_Click(object sender, EventArgs e)
+        {
+            string nombreRol = tbxNombreRol.Text;
+            if (rbtRolActivado.Checked)
+                Database.agregarRol(nombreRol, "1");
+            else
+                Database.agregarRol(nombreRol, "0");
+            string idRol = Database.buscarIdRol(nombreRol);
+            foreach (string nombreFuncionalidad in lbxFuncionalidades.Items) {
+                Database.agregarFuncionalidad(idRol, nombreFuncionalidad);            
+            }
+        }
     }
 }

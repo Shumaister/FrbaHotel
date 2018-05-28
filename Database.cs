@@ -55,14 +55,59 @@ namespace FrbaHotel
             return estado;
         }
 
-        public static void informarError(Exception excepcion)
+        public static SqlCommand crearConsulta(string consulta) 
         {
-            MessageBox.Show("Error en la base de datos" + excepcion.ToString());
+            return new SqlCommand(consulta, Database.obtenerConexion());
         }
 
-        public static int agregarRegistro(string tabla, string consulta)
+        public static int ejecutarConsulta2(SqlCommand comando)
         {
-            return ejecutarConsulta("INSERT into RIP." + tabla + " " + consulta);
+            Database.conectar();
+            int estado = 0;
+            try
+            {
+                estado = comando.ExecuteNonQuery();
+            }
+            catch (Exception excepcion)
+            {
+                Database.informarError(excepcion);
+            }
+            Database.desconectar();
+            return estado;
+        }
+
+        public static List<string> buscarValoresDeUnCampo(SqlCommand consulta) 
+        {
+            Database.conectar();
+            List<string> listaValores = new List<string>(); 
+            try
+            {
+                SqlDataReader reader = consulta.ExecuteReader();
+                while (reader.Read())
+                    listaValores.Add(reader[0].ToString());
+                reader.Close();
+            }
+            catch (Exception excepcion)
+            {
+                Database.informarError(excepcion);
+            }
+            Database.desconectar();
+            return listaValores;
+        }
+
+        public static string buscarValorDeUnCampo(SqlCommand consulta)
+        {
+            return Database.buscarValoresDeUnCampo(consulta)[0];
+        }
+
+        public static void informarError(Exception excepcion)
+        {
+            MessageBox.Show("ERROR EN LA BASE DE DATOS:\n" + excepcion.ToString());
+        }
+
+        public static int agregarRegistro(string tabla, string valores)
+        {
+            return ejecutarConsulta("INSERT into RIP." + tabla + " VALUES " + valores);
         }
 
         public static int modificarRegistro(string tabla, string consulta)
@@ -143,7 +188,7 @@ namespace FrbaHotel
             connection.Close();
         }
 
-        //-------------------------------------- Metodos para Roles -------------------------------------
+        //-------------------------------------- Metodos para Funcionalidades -------------------------------------
 
         internal static List<string> FuncionalidadesDeRol(string rol)
         {
@@ -165,8 +210,25 @@ namespace FrbaHotel
             reader.Close();
             connection.Close();
             return listaFuncionalidades;
-
         }
+
+        public static string buscarIdFuncionalidad(string nombreFuncionalidad)
+        {
+            SqlCommand consulta = crearConsulta("SELECT Funcionalidad_Id FROM RIP.Funcionalidades WHERE Funcionalidad_Funcionalidad = @nombreFuncionalidad");
+            consulta.Parameters.AddWithValue("@nombreFuncionalidad", nombreFuncionalidad);
+            return Database.buscarValorDeUnCampo(consulta);
+        }
+
+        public static void agregarFuncionalidad(string idRol, string nombreFuncionalidad)
+        {
+            string idFuncionalidad = buscarIdFuncionalidad(nombreFuncionalidad);
+            SqlCommand consulta = crearConsulta("INSERT INTO RIP.Rol_Funcionalidad (RolFunc_IdRol, RolFunc_IdFuncionalidad) VALUES (@idRol, @idFuncionalidad)");
+            consulta.Parameters.AddWithValue("@idRol", idRol);
+            consulta.Parameters.AddWithValue("@idFuncionalidad", idFuncionalidad);
+            ejecutarConsulta2(consulta);
+        }
+
+        //-------------------------------------- Metodos para Roles -------------------------------------
 
         public static List<string> Roles(string user)
         {
@@ -187,6 +249,20 @@ namespace FrbaHotel
             reader.Close();
             connection.Close();
             return listaRoles;
+        }
+
+        public static void agregarRol(string nombreRol, string estado) {
+            SqlCommand comando = crearConsulta("INSERT INTO RIP.Roles (Rol_Nombre, Rol_Estado) VALUES (@nombreRol, @estado)");
+            comando.Parameters.AddWithValue("@nombreRol", nombreRol);
+            comando.Parameters.AddWithValue("@estado", estado);
+            ejecutarConsulta2(comando);
+        }
+
+        public static string buscarIdRol(string nombreRol)
+        {
+            SqlCommand consulta = crearConsulta("SELECT Rol_ID FROM RIP.Roles WHERE Rol_Nombre = @nombreRol");
+            consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
+            return Database.buscarValorDeUnCampo(consulta);
         }
 
         //-------------------------------------- Metodos para Hoteles -------------------------------------
@@ -274,25 +350,23 @@ namespace FrbaHotel
             Database.desconectar();
         }
 
-        //BORRAR
-        public static void ComboBoxLlenar(ComboBox combo)
+        public static DataTable obtenerTabla(string consulta)
         {
+            Database.conectar();
+            DataTable dataTable = new DataTable();
             try
             {
-                SqlConnection conexion = obtenerConexion();
-                conexion.Open();
-                SqlCommand query = new SqlCommand("SELECT Rol_nombre FROM RIP.Roles", conexion);
-                SqlDataReader reader = query.ExecuteReader();
-                while (reader.Read())
-                {
-                    combo.Items.Add(reader["Rol_nombre"]);
-                }
-                reader.Close();
+                SqlCommand comando = new SqlCommand(consulta, Database.obtenerConexion());
+                SqlDataReader reader = comando.ExecuteReader();
+                dataTable.Load(reader);
             }
-            catch (Exception exception)
+            catch (Exception excepcion)
             {
-                MessageBox.Show("Error en la base de datos" + exception.ToString());
+                Database.informarError(excepcion);
             }
+            Database.desconectar();
+            return dataTable;
         }
+
     }
 }
