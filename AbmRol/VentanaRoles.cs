@@ -19,9 +19,10 @@ namespace FrbaHotel.AbmRol
 
         private void VentanaRoles_Load(object sender, EventArgs e)
         {
-            Database.completarComboBox(cbxFuncionalidades, "SELECT Funcionalidad_Funcionalidad FROM RIP.Funcionalidades", "Funcionalidad_Funcionalidad");
-            Database.completarComboBox(cbxModificar, "SELECT Rol_Nombre FROM RIP.Roles", "Rol_Nombre");
-            Database.completarComboBox(cbxEliminar, "SELECT Rol_Nombre FROM RIP.Roles", "Rol_Nombre");
+            Database.obtenerFuncionalidades(cbxFuncionalidades);
+            Database.obtenerRolesTotales(cbxModificar);
+            //En eliminar mostrar solo los habilitados o todos?
+            Database.obtenerRolesHabilitados(cbxEliminar);
             cbxFuncionalidades.SelectedIndex = 0;
             rbtRolActivado.Select();
         }
@@ -45,7 +46,7 @@ namespace FrbaHotel.AbmRol
             lbxFuncionalidades.Items.Clear();
             cbxFuncionalidades.Items.Clear();
             controladorError.Clear();
-            Database.completarComboBox(cbxFuncionalidades, "SELECT Funcionalidad_Funcionalidad FROM RIP.Funcionalidades", "Funcionalidad_Funcionalidad");
+            Database.obtenerFuncionalidades(cbxFuncionalidades);
             cbxFuncionalidades.SelectedIndex = 0;
         }
 
@@ -61,6 +62,7 @@ namespace FrbaHotel.AbmRol
                 string idRol = Database.buscarIdRol(nombreRol);
                 foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
                     Database.agregarFuncionalidad(idRol, nombreFuncionalidad);
+                VentanaBase.notificarExito();
             }    
         }
 
@@ -72,6 +74,18 @@ namespace FrbaHotel.AbmRol
         private void lbxFuncionalidades_DataSourceChanged(object sender, EventArgs e)
         {
             controladorError.Clear();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            Database.eliminarRol(cbxEliminar.SelectedItem.ToString());
+            Database.obtenerRolesHabilitados(cbxEliminar);
+            VentanaBase.notificarExito();
+        }
+
+        private void bntModificar_Click(object sender, EventArgs e)
+        {
+            
         }
 
 

@@ -38,29 +38,12 @@ namespace FrbaHotel
             conexion.Close();
         }
 
-        public static int ejecutarConsulta(string consulta)
-        {
-            Database.conectar();
-            SqlCommand comando = new SqlCommand(consulta, Database.obtenerConexion());
-            int estado = 0;
-            try
-            {
-                estado = comando.ExecuteNonQuery();
-            }
-            catch (Exception excepcion)
-            {
-                Database.informarError(excepcion);
-            }
-            Database.desconectar();
-            return estado;
-        }
-
         public static SqlCommand crearConsulta(string consulta) 
         {
             return new SqlCommand(consulta, Database.obtenerConexion());
         }
 
-        public static int ejecutarConsulta2(SqlCommand comando)
+        public static int ejecutarConsulta(SqlCommand comando)
         {
             Database.conectar();
             int estado = 0;
@@ -103,16 +86,6 @@ namespace FrbaHotel
         public static void informarError(Exception excepcion)
         {
             MessageBox.Show("ERROR EN LA BASE DE DATOS:\n" + excepcion.ToString());
-        }
-
-        public static int agregarRegistro(string tabla, string valores)
-        {
-            return ejecutarConsulta("INSERT into RIP." + tabla + " VALUES " + valores);
-        }
-
-        public static int modificarRegistro(string tabla, string consulta)
-        {
-            return ejecutarConsulta("UPDATE RIP." + tabla + " SET " + consulta);
         }
 
         //-------------------------------------- Metodos para Login -------------------------------------
@@ -225,9 +198,22 @@ namespace FrbaHotel
             SqlCommand consulta = crearConsulta("INSERT INTO RIP.Rol_Funcionalidad (RolFunc_IdRol, RolFunc_IdFuncionalidad) VALUES (@idRol, @idFuncionalidad)");
             consulta.Parameters.AddWithValue("@idRol", idRol);
             consulta.Parameters.AddWithValue("@idFuncionalidad", idFuncionalidad);
-            ejecutarConsulta2(consulta);
+            ejecutarConsulta(consulta);
         }
 
+        public static void eliminarFuncionalidadesDeUnRol(string nombreRol) 
+        {
+            string idRol = buscarIdRol(nombreRol);
+            SqlCommand consulta = crearConsulta("DELETE FROM RIP.Rol_Funcionalidad WHERE RolFunc_IdRol = @idRol");
+            consulta.Parameters.AddWithValue("@idRol", idRol);
+            ejecutarConsulta(consulta);
+        }
+
+        public static void obtenerFuncionalidades(ComboBox comboBox)
+        {
+            Database.completarComboBox(comboBox, "SELECT Funcionalidad_Funcionalidad FROM RIP.Funcionalidades", "Funcionalidad_Funcionalidad");
+        }
+       
         //-------------------------------------- Metodos para Roles -------------------------------------
 
         public static List<string> Roles(string user)
@@ -252,10 +238,27 @@ namespace FrbaHotel
         }
 
         public static void agregarRol(string nombreRol, string estado) {
-            SqlCommand comando = crearConsulta("INSERT INTO RIP.Roles (Rol_Nombre, Rol_Estado) VALUES (@nombreRol, @estado)");
-            comando.Parameters.AddWithValue("@nombreRol", nombreRol);
-            comando.Parameters.AddWithValue("@estado", estado);
-            ejecutarConsulta2(comando);
+            SqlCommand consulta = crearConsulta("INSERT INTO RIP.Roles (Rol_Nombre, Rol_Estado) VALUES (@nombreRol, @estado)");
+            consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
+            consulta.Parameters.AddWithValue("@estado", estado);
+            ejecutarConsulta(consulta);
+        }
+
+        public static void modificarRol(string nombreRolActual, string nombreRolNuevo, string estado)
+        {
+            SqlCommand consulta = crearConsulta("UPDATE RIP.Roles SET Rol_Nombre = @nuevoNombreRol Rol_Estado = @estado WHERE Rol_Nombre = @nombreRol");
+            consulta.Parameters.AddWithValue("@nombreRol", nombreRolActual);
+            consulta.Parameters.AddWithValue("@nuevoNombreRol", nombreRolNuevo);
+            consulta.Parameters.AddWithValue("@estado", estado);
+            Database.eliminarFuncionalidadesDeUnRol(nombreRolActual);
+            ejecutarConsulta(consulta);
+        }
+        
+        public static void eliminarRol(string nombreRol)
+        {
+            SqlCommand consulta = crearConsulta("UPDATE RIP.Roles SET Rol_Estado = 0 WHERE Rol_Nombre = @nombreRol");
+            consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
+            ejecutarConsulta(consulta);
         }
 
         public static string buscarIdRol(string nombreRol)
@@ -265,9 +268,20 @@ namespace FrbaHotel
             return Database.buscarValorDeUnCampo(consulta);
         }
 
+        public static void obtenerRolesTotales(ComboBox comboBox) 
+        {
+            Database.completarComboBox(comboBox, "SELECT Rol_Nombre FROM RIP.Roles", "Rol_Nombre");
+        }
+
+        public static void obtenerRolesHabilitados(ComboBox comboBox) 
+        {
+            Database.completarComboBox(comboBox, "SELECT Rol_Nombre FROM RIP.Roles WHERE Rol_Estado = 1", "Rol_Nombre");
+        }
+
+
         //-------------------------------------- Metodos para Hoteles -------------------------------------
 
-        internal static List<string> HoltesDeUnUsuario(Usuario Usuario)
+        internal static List<string> HotelesDeUnUsuario(Usuario Usuario)
         {
             SqlConnection connection = obtenerConexion();
 

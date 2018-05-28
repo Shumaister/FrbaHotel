@@ -239,6 +239,7 @@
             this.bntModificar.TabIndex = 1;
             this.bntModificar.Text = "Modificar";
             this.bntModificar.UseVisualStyleBackColor = true;
+            this.bntModificar.Click += new System.EventHandler(this.bntModificar_Click);
             // 
             // tabEliminar
             // 
@@ -278,6 +279,7 @@
             this.btnEliminar.TabIndex = 7;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // VentanaRoles
             // 
