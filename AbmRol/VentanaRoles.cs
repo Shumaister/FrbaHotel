@@ -45,21 +45,36 @@ namespace FrbaHotel.AbmRol
             rbtRolActivado.Select();
             lbxFuncionalidades.Items.Clear();
             cbxFuncionalidades.Items.Clear();
+            errorProvider1.Clear();
             Database.completarComboBox(cbxFuncionalidades, "SELECT Funcionalidad_Funcionalidad FROM RIP.Funcionalidades", "Funcionalidad_Funcionalidad");
 
         }
 
         private void btnGuardarRol_Click(object sender, EventArgs e)
         {
-            string nombreRol = tbxNombreRol.Text;
-            if (rbtRolActivado.Checked)
-                Database.agregarRol(nombreRol, "1");
-            else
-                Database.agregarRol(nombreRol, "0");
-            string idRol = Database.buscarIdRol(nombreRol);
-            foreach (string nombreFuncionalidad in lbxFuncionalidades.Items) {
-                Database.agregarFuncionalidad(idRol, nombreFuncionalidad);            
-            }
+            if (VentanaBase.camposEstanCompletos(tabAgregar, errorProvider1))
+            {
+                string nombreRol = tbxNombreRol.Text;
+                if (rbtRolActivado.Checked)
+                    Database.agregarRol(nombreRol, "1");
+                else
+                    Database.agregarRol(nombreRol, "0");
+                string idRol = Database.buscarIdRol(nombreRol);
+                foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
+                    Database.agregarFuncionalidad(idRol, nombreFuncionalidad);
+            }    
         }
+
+        private void tbxNombreRol_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
+
+        private void lbxFuncionalidades_DataSourceChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
+
+
     }
 }

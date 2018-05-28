@@ -75,6 +75,7 @@ namespace FrbaHotel.Login
         private void btnIngresarHotel_Click(object sender, EventArgs e)
         {
             Usuario.Hotel = cbxHoteles.SelectedItem.ToString();
+            this.Hide();
             VentanaMenuPrincipal mpu = new VentanaMenuPrincipal(Usuario);
             mpu.Show();
         }

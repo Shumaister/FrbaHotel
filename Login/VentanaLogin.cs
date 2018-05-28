@@ -77,6 +77,26 @@ namespace FrbaHotel.Login
             return flagError;
         }
 
+        public static bool camposEstanCompletos(Control ventana, ErrorProvider errorProvider)
+        {
+            bool flagError = false;
+            foreach (Control objeto in ventana.Controls)
+            {
+                if (objeto is TextBox)
+                {
+                    TextBox textBox = (TextBox)objeto;                  
+                    if (string.IsNullOrEmpty(textBox.Text.Trim()))
+                    {
+                        flagError = true;
+                        errorProvider.SetError(textBox, "El campo no puede estar vacio");
+                    }
+                    else
+                        errorProvider.SetError(textBox, "");
+                }
+            }
+            return flagError;
+        }
+
         private void txbUser_TextChanged(object sender, EventArgs e)
         {
             errorProvider1.Clear();
@@ -86,6 +106,5 @@ namespace FrbaHotel.Login
         {
             errorProvider1.Clear();
         }
-
     }
 }

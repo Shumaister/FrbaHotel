@@ -42,7 +42,9 @@ namespace FrbaHotel.Menus
 
         private void menuRoles_Click(object sender, EventArgs e)
         {
-            new VentanaRoles().Show();
+            VentanaRoles ventanaRoles = new VentanaRoles();
+            ventanaRoles.MainMenuStrip = this.menuStrip1;
+            ventanaRoles.Show();
         }
     }
 }

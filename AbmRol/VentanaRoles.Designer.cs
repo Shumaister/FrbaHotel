@@ -113,6 +113,7 @@
             this.lbxFuncionalidades.Name = "lbxFuncionalidades";
             this.lbxFuncionalidades.Size = new System.Drawing.Size(120, 95);
             this.lbxFuncionalidades.TabIndex = 9;
+            this.lbxFuncionalidades.DataSourceChanged += new System.EventHandler(this.lbxFuncionalidades_DataSourceChanged);
             // 
             // btnGuardarRol
             // 
@@ -189,6 +190,7 @@
             this.tbxNombreRol.Size = new System.Drawing.Size(100, 20);
             this.tbxNombreRol.TabIndex = 1;
             this.tbxNombreRol.Validar = false;
+            this.tbxNombreRol.TextChanged += new System.EventHandler(this.tbxNombreRol_TextChanged);
             // 
             // label1
             // 
