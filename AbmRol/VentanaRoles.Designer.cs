@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabAgregar = new System.Windows.Forms.TabPage();
+            this.tbxNombreRol = new System.Windows.Forms.TextBox();
             this.btnAgregarFuncionalidad = new System.Windows.Forms.Button();
             this.lbxFuncionalidades = new System.Windows.Forms.ListBox();
             this.btnGuardarRol = new System.Windows.Forms.Button();
@@ -48,9 +49,8 @@
             this.cbxEliminar = new System.Windows.Forms.ComboBox();
             this.lblSeleccionarRol2 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
-            this.tbxNombreRol = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabAgregar.SuspendLayout();
             this.tabModificar.SuspendLayout();
@@ -95,6 +95,14 @@
             this.tabAgregar.TabIndex = 0;
             this.tabAgregar.Text = " Agregar";
             this.tabAgregar.UseVisualStyleBackColor = true;
+            // 
+            // tbxNombreRol
+            // 
+            this.tbxNombreRol.Location = new System.Drawing.Point(33, 49);
+            this.tbxNombreRol.Name = "tbxNombreRol";
+            this.tbxNombreRol.Size = new System.Drawing.Size(100, 20);
+            this.tbxNombreRol.TabIndex = 11;
+            this.tbxNombreRol.TextChanged += new System.EventHandler(this.tbxNombreRol_TextChanged);
             // 
             // btnAgregarFuncionalidad
             // 
@@ -271,13 +279,6 @@
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
             // 
-            // tbxNombreRol
-            // 
-            this.tbxNombreRol.Location = new System.Drawing.Point(33, 49);
-            this.tbxNombreRol.Name = "tbxNombreRol";
-            this.tbxNombreRol.Size = new System.Drawing.Size(100, 20);
-            this.tbxNombreRol.TabIndex = 11;
-            // 
             // VentanaRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -290,7 +291,7 @@
             this.Controls.SetChildIndex(this.tabControl1, 0);
             this.Controls.SetChildIndex(this.logo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabAgregar.ResumeLayout(false);
             this.tabAgregar.PerformLayout();

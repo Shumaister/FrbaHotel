@@ -34,7 +34,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -96,7 +96,7 @@
             this.Controls.Add(this.label1);
             this.Name = "VentanaInicio";
             this.Text = "Inicio - FRBA Hotel ©";
-            this.Load += new System.EventHandler(this.VentanaInicio_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.VentanaInicio_FormClosed);
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
@@ -104,7 +104,7 @@
             this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.button2, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

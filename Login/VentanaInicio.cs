@@ -23,9 +23,9 @@ namespace FrbaHotel.Login
             new VentanaLogin().Show();
         }
 
-        private void VentanaInicio_Load(object sender, EventArgs e)
+        private void VentanaInicio_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            Application.Exit();
         }
     }
 }

@@ -30,16 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VentanaBase));
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.controladorError = new System.Windows.Forms.ErrorProvider(this.components);
             this.logo = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.SuspendLayout();
             // 
-            // errorProvider1
+            // controladorError
             // 
-            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.errorProvider1.ContainerControl = this;
+            this.controladorError.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.controladorError.ContainerControl = this;
             // 
             // logo
             // 
@@ -62,8 +62,7 @@
             this.Name = "VentanaBase";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VentanaBase";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.VentanaBase_FormClosed);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.ResumeLayout(false);
 
@@ -72,6 +71,6 @@
         #endregion
 
         public System.Windows.Forms.PictureBox logo;
-        public System.Windows.Forms.ErrorProvider errorProvider1;
+        public System.Windows.Forms.ErrorProvider controladorError;
     }
 }

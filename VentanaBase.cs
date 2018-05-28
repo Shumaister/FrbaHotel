@@ -21,11 +21,6 @@ namespace FrbaHotel
             ProgramTitle = "Frba Hotel";
         }
 
-        private void VentanaBase_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
-
         public static bool camposEstanCompletos(Control ventana, ErrorProvider errorProvider)
         {
             bool flagControl = true;
@@ -56,11 +51,5 @@ namespace FrbaHotel
             }
             return flagControl;
         }
-
-        public static void informarCamposIncompletos()
-        {
-            MessageBox.Show("Todos los campos deben estar completos");
-        }
-
     }
 }

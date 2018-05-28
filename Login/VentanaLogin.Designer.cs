@@ -35,7 +35,7 @@
             this.txbUser = new System.Windows.Forms.TextBox();
             this.txbPass = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.SuspendLayout();
             // 
             // logo
@@ -86,6 +86,7 @@
             this.txbUser.Name = "txbUser";
             this.txbUser.Size = new System.Drawing.Size(100, 20);
             this.txbUser.TabIndex = 22;
+            this.txbUser.TextChanged += new System.EventHandler(this.txbUser_TextChanged);
             // 
             // txbPass
             // 
@@ -93,6 +94,8 @@
             this.txbPass.Name = "txbPass";
             this.txbPass.Size = new System.Drawing.Size(100, 20);
             this.txbPass.TabIndex = 23;
+            this.txbPass.UseSystemPasswordChar = true;
+            this.txbPass.TextChanged += new System.EventHandler(this.txbPass_TextChanged);
             // 
             // VentanaLogin
             // 
@@ -107,7 +110,7 @@
             this.Controls.Add(this.lblUsuario);
             this.Name = "VentanaLogin";
             this.Text = "Login - FRBA Hotel ©";
-            this.Load += new System.EventHandler(this.Login_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.VentanaLogin_FormClosed);
             this.Controls.SetChildIndex(this.lblUsuario, 0);
             this.Controls.SetChildIndex(this.lblContrasenia, 0);
             this.Controls.SetChildIndex(this.btnLogin, 0);
@@ -116,7 +119,7 @@
             this.Controls.SetChildIndex(this.txbUser, 0);
             this.Controls.SetChildIndex(this.txbPass, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

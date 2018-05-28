@@ -16,17 +16,13 @@ namespace FrbaHotel.Login
         {
             InitializeComponent();
             lblErrorLogueo.Visible = false;
-        }
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-
+            this.AcceptButton = btnLogin;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
             lblErrorLogueo.Visible = false;
-            if (camposEstanCompletos(this, errorProvider1)) 
+            if (camposEstanCompletos(this, controladorError)) 
             {
                 LogueoDTO logueo = Database.Autenticar(txbUser.Text, txbPass.Text);
                 if (logueo.Exito)
@@ -46,12 +42,17 @@ namespace FrbaHotel.Login
 
         private void txbUser_TextChanged(object sender, EventArgs e)
         {
-            errorProvider1.Clear();
+            controladorError.Clear();
         }
 
         private void txbPass_TextChanged(object sender, EventArgs e)
         {
-            errorProvider1.Clear();
+            controladorError.Clear();
+        }
+
+        private void VentanaLogin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

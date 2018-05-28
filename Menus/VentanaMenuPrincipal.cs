@@ -46,5 +46,10 @@ namespace FrbaHotel.Menus
             ventanaRoles.MdiParent = this;
             ventanaRoles.Show();
         }
+
+        private void VentanaMenuPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

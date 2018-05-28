@@ -80,5 +80,10 @@ namespace FrbaHotel.Login
             mpu.Show();
         }
 
+        private void VentanaSeleccionRol_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
     }
 }

@@ -36,7 +36,7 @@
             this.lblHotel = new System.Windows.Forms.Label();
             this.btnIngresarHotel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.SuspendLayout();
             // 
             // logo
@@ -122,6 +122,7 @@
             this.Controls.Add(this.lblRol);
             this.Name = "VentanaSeleccionRol";
             this.Text = "Seleccion - FRBA Hotel ©";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.VentanaSeleccionRol_FormClosed);
             this.Load += new System.EventHandler(this.SeleccionRol_Load);
             this.Controls.SetChildIndex(this.lblRol, 0);
             this.Controls.SetChildIndex(this.cbxRoles, 0);
@@ -132,7 +133,7 @@
             this.Controls.SetChildIndex(this.cbxHoteles, 0);
             this.Controls.SetChildIndex(this.btnIngresarHotel, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
