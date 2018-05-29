@@ -52,9 +52,14 @@ namespace FrbaHotel
             return flagControl;
         }
 
-        public static void notificarExito() 
+        public static void informarExito() 
         {
-            MessageBox.Show("La operacion realizo con exito", "Notificacion");
+            MessageBox.Show("La operacion se ha realizado con exito", "Aviso");
+        }
+
+        public static void informarError(string mensaje)
+        {
+            MessageBox.Show("ERROR: " + mensaje, "Aviso");
         }
     }
 }

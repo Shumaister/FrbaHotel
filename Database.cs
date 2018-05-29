@@ -278,6 +278,13 @@ namespace FrbaHotel
             Database.completarComboBox(comboBox, "SELECT Rol_Nombre FROM RIP.Roles WHERE Rol_Estado = 1", "Rol_Nombre");
         }
 
+        public static bool rolNombreYaExiste(string nombreRol)
+        {
+            SqlCommand consulta = crearConsulta("SELECT count(Rol_Nombre) FROM RIP.Roles WHERE Rol_Nombre = @nombreRol");
+            consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
+            int resultado = Convert.ToInt32(Database.buscarValorDeUnCampo(consulta));
+            return resultado > 0;
+        }
 
         //-------------------------------------- Metodos para Hoteles -------------------------------------
 

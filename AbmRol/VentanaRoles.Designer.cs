@@ -49,6 +49,7 @@
             this.cbxEliminar = new System.Windows.Forms.ComboBox();
             this.lblSeleccionarRol2 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnQuitarRol = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -77,6 +78,7 @@
             // 
             // tabAgregar
             // 
+            this.tabAgregar.Controls.Add(this.btnQuitarRol);
             this.tabAgregar.Controls.Add(this.tbxNombreRol);
             this.tabAgregar.Controls.Add(this.btnAgregarFuncionalidad);
             this.tabAgregar.Controls.Add(this.lbxFuncionalidades);
@@ -281,6 +283,16 @@
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
+            // btnQuitarRol
+            // 
+            this.btnQuitarRol.Location = new System.Drawing.Point(176, 136);
+            this.btnQuitarRol.Name = "btnQuitarRol";
+            this.btnQuitarRol.Size = new System.Drawing.Size(75, 23);
+            this.btnQuitarRol.TabIndex = 12;
+            this.btnQuitarRol.Text = "Quitar";
+            this.btnQuitarRol.UseVisualStyleBackColor = true;
+            this.btnQuitarRol.Click += new System.EventHandler(this.btnQuitarRol_Click);
+            // 
             // VentanaRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -328,5 +340,6 @@
         private System.Windows.Forms.Button btnAgregarFuncionalidad;
         private System.Windows.Forms.ListBox lbxFuncionalidades;
         private System.Windows.Forms.TextBox tbxNombreRol;
+        private System.Windows.Forms.Button btnQuitarRol;
     }
 }

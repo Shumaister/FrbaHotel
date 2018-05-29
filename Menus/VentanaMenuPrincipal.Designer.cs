@@ -80,40 +80,40 @@
             this.habitacionesToolStripMenuItem1,
             this.regimenesEstadiaToolStripMenuItem});
             this.administracionToolStripMenuItem.Name = "administracionToolStripMenuItem";
-            this.administracionToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
+            this.administracionToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
             this.administracionToolStripMenuItem.Text = "Administracion";
             // 
             // menuRoles
             // 
             this.menuRoles.Name = "menuRoles";
-            this.menuRoles.Size = new System.Drawing.Size(135, 22);
+            this.menuRoles.Size = new System.Drawing.Size(143, 22);
             this.menuRoles.Text = "Roles";
             this.menuRoles.Click += new System.EventHandler(this.menuRoles_Click);
             // 
             // usuariosToolStripMenuItem
             // 
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.usuariosToolStripMenuItem.Text = "Usuarios";
             this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
             // 
             // funcionalidadesToolStripMenuItem
             // 
             this.funcionalidadesToolStripMenuItem.Name = "funcionalidadesToolStripMenuItem";
-            this.funcionalidadesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.funcionalidadesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.funcionalidadesToolStripMenuItem.Text = "Hoteles";
             this.funcionalidadesToolStripMenuItem.Click += new System.EventHandler(this.funcionalidadesToolStripMenuItem_Click);
             // 
             // habitacionesToolStripMenuItem1
             // 
             this.habitacionesToolStripMenuItem1.Name = "habitacionesToolStripMenuItem1";
-            this.habitacionesToolStripMenuItem1.Size = new System.Drawing.Size(135, 22);
+            this.habitacionesToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
             this.habitacionesToolStripMenuItem1.Text = "Habitaciones";
             // 
             // regimenesEstadiaToolStripMenuItem
             // 
             this.regimenesEstadiaToolStripMenuItem.Name = "regimenesEstadiaToolStripMenuItem";
-            this.regimenesEstadiaToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.regimenesEstadiaToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.regimenesEstadiaToolStripMenuItem.Text = "Regimenes";
             // 
             // hoteleriaToolStripMenuItem
@@ -126,43 +126,43 @@
             this.facturasToolStripMenuItem,
             this.estadisticasToolStripMenuItem});
             this.hoteleriaToolStripMenuItem.Name = "hoteleriaToolStripMenuItem";
-            this.hoteleriaToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.hoteleriaToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
             this.hoteleriaToolStripMenuItem.Text = "Recepcion";
             // 
             // hotelesToolStripMenuItem
             // 
             this.hotelesToolStripMenuItem.Name = "hotelesToolStripMenuItem";
-            this.hotelesToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.hotelesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.hotelesToolStripMenuItem.Text = "Clientes";
             // 
             // habitacionesToolStripMenuItem
             // 
             this.habitacionesToolStripMenuItem.Name = "habitacionesToolStripMenuItem";
-            this.habitacionesToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.habitacionesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.habitacionesToolStripMenuItem.Text = "Reservas";
             // 
             // regimenesToolStripMenuItem
             // 
             this.regimenesToolStripMenuItem.Name = "regimenesToolStripMenuItem";
-            this.regimenesToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.regimenesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.regimenesToolStripMenuItem.Text = "Estadias";
             // 
             // estadiasToolStripMenuItem1
             // 
             this.estadiasToolStripMenuItem1.Name = "estadiasToolStripMenuItem1";
-            this.estadiasToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
+            this.estadiasToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
             this.estadiasToolStripMenuItem1.Text = "Consumibles";
             // 
             // facturasToolStripMenuItem
             // 
             this.facturasToolStripMenuItem.Name = "facturasToolStripMenuItem";
-            this.facturasToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.facturasToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.facturasToolStripMenuItem.Text = "Facturas";
             // 
             // estadisticasToolStripMenuItem
             // 
             this.estadisticasToolStripMenuItem.Name = "estadisticasToolStripMenuItem";
-            this.estadisticasToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.estadisticasToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.estadisticasToolStripMenuItem.Text = "Estadisticas";
             // 
             // configuracionToolStripMenuItem
@@ -170,13 +170,13 @@
             this.configuracionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cambiarContraseñaToolStripMenuItem});
             this.configuracionToolStripMenuItem.Name = "configuracionToolStripMenuItem";
-            this.configuracionToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
+            this.configuracionToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
             this.configuracionToolStripMenuItem.Text = "Configuracion";
             // 
             // cambiarContraseñaToolStripMenuItem
             // 
             this.cambiarContraseñaToolStripMenuItem.Name = "cambiarContraseñaToolStripMenuItem";
-            this.cambiarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.cambiarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cambiarContraseñaToolStripMenuItem.Text = "Cambiar contraseña";
             // 
             // VentanaMenuPrincipal
@@ -185,7 +185,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::FrbaHotel.Properties.Resources.Logo_TP;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(366, 326);
+            this.ClientSize = new System.Drawing.Size(366, 558);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.IsMdiContainer = true;
