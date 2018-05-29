@@ -13,18 +13,24 @@ namespace FrbaHotel.AbmRol
     public partial class VentanaModificarRol : VentanaBase
     {
         VentanaRoles ventanaRoles;
+        string nombreRolViejo;
 
-        public VentanaModificarRol(VentanaRoles ventana)
+        public VentanaModificarRol(VentanaRoles ventana, string nombre)
         {
             InitializeComponent();
             ventanaRoles = ventana;
+            nombreRolViejo = nombre;
         }
 
         private void VentanaModificarRol_Load(object sender, EventArgs e)
         {
-            Database.obtenerFuncionalidades(cbxFuncionalidades);
+            tbxNombreRol.Text = nombreRolViejo;
+            Database.rolObtenerFuncionalidades(cbxFuncionalidades);
             cbxFuncionalidades.SelectedIndex = 0;
-            rbtRolActivado.Select();
+            if(Database.rolEstaHabilitado(nombreRolViejo))
+                rbtRolActivado.Select();
+            else
+                rbtRolDesactivado.Select();
         }
 
         private void btnAgregarFuncionalidad_Click(object sender, EventArgs e)
@@ -50,14 +56,15 @@ namespace FrbaHotel.AbmRol
             lbxFuncionalidades.Items.Clear();
             cbxFuncionalidades.Items.Clear();
             controladorError.Clear();
-            Database.obtenerFuncionalidades(cbxFuncionalidades);
+            Database.funcionalidadObtenerTodas(cbxFuncionalidades);
             cbxFuncionalidades.SelectedIndex = 0;
         }
 
         private void btnGuardarRol_Click(object sender, EventArgs e)
         {
-            string nombreRol = tbxNombreRol.Text;
-            if (Database.rolNombreYaExiste(nombreRol))
+            string nombreRolNuevo = tbxNombreRol.Text;
+            string idRol = Database.buscarIdRol(nombreRolNuevo);
+            if (Database.rolNombreYaExiste(nombreRolNuevo) && nombreRolNuevo != nombreRolViejo)
             {
                 VentanaBase.informarError("Un rol ya posee el mismo nombre");
                 return;
@@ -65,12 +72,13 @@ namespace FrbaHotel.AbmRol
             if (VentanaBase.camposEstanCompletos(this, controladorError))
             {
                 if (rbtRolActivado.Checked)
-                    Database.agregarRol(nombreRol, "1");
+                    Database.modificarRol(nombreRolNuevo, nombreRolViejo, "1");
                 else
-                    Database.agregarRol(nombreRol, "0");
-                string idRol = Database.buscarIdRol(nombreRol);
+                    Database.modificarRol(nombreRolNuevo, nombreRolViejo, "0");
+                
                 foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
-                    Database.agregarFuncionalidad(idRol, nombreFuncionalidad);
+                    if (Database.rolNoTieneEsaFuncionalidad(nombreRolNuevo, nombreFuncionalidad))
+                        Database.rolAgregarFuncionalidad(idRol, nombreFuncionalidad);
                 this.Close();
                 ventanaRoles.VentanaRoles_Load(sender, null);
                 VentanaBase.informarExito();

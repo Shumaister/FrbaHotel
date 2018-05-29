@@ -61,5 +61,11 @@ namespace FrbaHotel
         {
             MessageBox.Show("ERROR: " + mensaje, "Aviso");
         }
+
+        public static void cargarComboBox(ComboBox comboBox, List<string> listaValores)
+        {
+            foreach (string valor in listaValores)
+                comboBox.Items.Add(valor);
+        }
     }
 }

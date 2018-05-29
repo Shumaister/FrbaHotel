@@ -23,7 +23,7 @@ namespace FrbaHotel
 
         private List<string> FuncionalidadesDeRol(string rol)
         {
-            return Database.FuncionalidadesDeRol(rol);
+            return Database.rolObtenerFuncionalidades(rol);
         }
     }
 }

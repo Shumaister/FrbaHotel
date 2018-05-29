@@ -19,7 +19,7 @@ namespace FrbaHotel.AbmRol
 
         public void VentanaRoles_Load(object sender, EventArgs e)
         {
-            Database.obtenerFuncionalidades(cbxFuncionalidades);
+            Database.funcionalidadObtenerTodas(cbxFuncionalidades);
             Database.obtenerRolesTotales(cbxModificar);
 #warning En eliminar mostrar solo roles habilitados o todos?
             Database.obtenerRolesHabilitados(cbxEliminar);
@@ -61,7 +61,7 @@ namespace FrbaHotel.AbmRol
             lbxFuncionalidades.Items.Clear();
             cbxFuncionalidades.Items.Clear();
             controladorError.Clear();
-            Database.obtenerFuncionalidades(cbxFuncionalidades);
+            Database.funcionalidadObtenerTodas(cbxFuncionalidades);
             cbxFuncionalidades.SelectedIndex = 0;
         }
 
@@ -77,11 +77,11 @@ namespace FrbaHotel.AbmRol
             { 
                 if (rbtRolActivado.Checked)
                     Database.agregarRol(nombreRol, "1");
-                else
+                else 
                     Database.agregarRol(nombreRol, "0");
                 string idRol = Database.buscarIdRol(nombreRol);
                 foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
-                    Database.agregarFuncionalidad(idRol, nombreFuncionalidad);
+                    Database.rolAgregarFuncionalidad(idRol, nombreFuncionalidad);
                 btnLimpiarRol_Click(sender, null);
                 actualizarVentana();
                 VentanaBase.informarExito();
@@ -103,7 +103,7 @@ namespace FrbaHotel.AbmRol
 
         private void bntModificar_Click(object sender, EventArgs e)
         {
-            new VentanaModificarRol(this).Show();
+            new VentanaModificarRol(this, cbxModificar.SelectedItem.ToString()).Show();
         }
 
         //-------------------------------------- Metodos para Eliminar -------------------------------------
