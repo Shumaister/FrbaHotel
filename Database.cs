@@ -21,7 +21,7 @@ namespace FrbaHotel
         private static String configuracionConexion = ConfigurationManager.AppSettings["conexionSQL"];
         private static SqlConnection conexion = new SqlConnection(configuracionConexion);
 
-        //-------------------------------------- Metodos para Base de datos -------------------------------------
+        //-------------------------------------- Metodos generales -------------------------------------
 
         public static SqlConnection obtenerConexion()
         {
@@ -182,6 +182,10 @@ namespace FrbaHotel
 
         public static List<string> Roles(string user)
         {
+            SqlCommand loginCommand = consultaCrear("SELECT r.Rol_Nombre FROM rip.Roles r INNER JOIN RIP.Usuario_Rol ur on r.Rol_ID = ur.Usuario_Rol_Rol_ID INNER JOIN RIP.Usuarios u on ur.Usuario_Rol_Usuario_ID = u.Usuario_ID where u.Usuario_User = @user and r.Rol_Estado = 1");
+            loginCommand.Parameters.AddWithValue("user", user);
+            return Database.consultaObtenerValores(loginCommand);
+            /*
             List<String> listaRoles = new List<string>();
             List<String> listaEstados = new List<string>();
             SqlConnection connection = obtenerConexion();
@@ -199,9 +203,10 @@ namespace FrbaHotel
             reader.Close();
             connection.Close();
             return listaRoles;
+            */
         }
 
-        public static void agregarRol(string nombreRol, string estado)
+        public static void rolAgregar(string nombreRol, string estado)
         {
             SqlCommand consulta = consultaCrear("INSERT INTO RIP.Roles (Rol_Nombre, Rol_Estado) VALUES (@nombreRol, @estado)");
             consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
@@ -220,46 +225,46 @@ namespace FrbaHotel
 
         public static void rolEliminarFuncionalidades(string nombreRol)
         {
-            string idRol = buscarIdRol(nombreRol);
+            string idRol = rolObtenerId(nombreRol);
             SqlCommand consulta = consultaCrear("DELETE FROM RIP.Rol_Funcionalidad WHERE RolFunc_IdRol = @idRol");
             consulta.Parameters.AddWithValue("@idRol", idRol);
             consultaEjecutar(consulta);
         }
 
-        public static void modificarRol(string nombreRolActual, string nombreRolNuevo, string estado)
+        public static void rolModificar(string nombreRolActual, string nombreRolNuevo, string estado)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Nombre = @nuevoNombreRol Rol_Estado = @estado WHERE Rol_Nombre = @nombreRol");
-            consulta.Parameters.AddWithValue("@nombreRol", nombreRolActual);
-            consulta.Parameters.AddWithValue("@nuevoNombreRol", nombreRolNuevo);
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Nombre = @nombreRolNuevo Rol_Estado = @estado WHERE Rol_Nombre = @nombreRolActual");
+            consulta.Parameters.AddWithValue("@nombreRolActual", nombreRolActual);
+            consulta.Parameters.AddWithValue("@nombreRolNuevo", nombreRolNuevo);
             consulta.Parameters.AddWithValue("@estado", estado);
-            Database.rolEliminarFuncionalidades(nombreRolActual);
             consultaEjecutar(consulta);
+            Database.rolEliminarFuncionalidades(nombreRolActual);
         }
 
-        public static void eliminarRol(string nombreRol)
+        public static void rolEliminar(string nombreRol)
         {
             SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Estado = 0 WHERE Rol_Nombre = @nombreRol");
             consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
             consultaEjecutar(consulta);
         }
 
-        public static string buscarIdRol(string nombreRol)
+        public static string rolObtenerId(string nombreRol)
         {
             SqlCommand consulta = consultaCrear("SELECT Rol_ID FROM RIP.Roles WHERE Rol_Nombre = @nombreRol");
             consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
             return Database.consultaObtenerValor(consulta);
         }
 
-        public static void obtenerRolesTotales(ComboBox comboBox)
+        public static List<string> rolObtenerTodos()
         {
             SqlCommand consulta = consultaCrear("SELECT Rol_Nombre FROM RIP.Roles");
-            Database.cargarComboBox(comboBox, consulta);
+            return Database.consultaObtenerValores(consulta);
         }
 
-        public static void obtenerRolesHabilitados(ComboBox comboBox)
+        public static List<string> rolObtenerHabilitados()
         {
             SqlCommand consulta = consultaCrear("SELECT Rol_Nombre FROM RIP.Roles WHERE Rol_Estado = 1");
-            Database.cargarComboBox(comboBox, consulta);
+            return Database.consultaObtenerValores(consulta);
         }
 
         public static bool rolNombreYaExiste(string nombreRol)
@@ -280,7 +285,7 @@ namespace FrbaHotel
 
         public static bool rolNoTieneEsaFuncionalidad(string nombreRol, string nombreFuncionalidad)
         {
-            string idRol = Database.buscarIdRol(nombreRol);
+            string idRol = Database.rolObtenerId(nombreRol);
             string idFuncionalidad = Database.funcionalidadObtenerId(nombreFuncionalidad);
             SqlCommand consulta = consultaCrear("SELECT count(*) FROM RIP.Rol_Funcionalidad WHERE RolFunc_IdRol = @idRol AND RolFunc_IdFuncionalidad = @idFuncionalidad");
             consulta.Parameters.AddWithValue("@idRol", idRol);
@@ -289,31 +294,19 @@ namespace FrbaHotel
             return resultado == 0;
         }
 
-        internal static List<string> rolObtenerFuncionalidades(string rol)
+        public static List<string> rolObtenerFuncionalidades(string nombreRol)
         {
-            SqlCommand consulta = Database.consultaCrear("SELECT f.Funcionalidad_Funcionalidad FROM rip.Funcionalidades f INNER JOIN RIP.Rol_Funcionalidad rf ON f.Funcionalidad_Id = rf.RolFunc_IdFuncionalidad INNER JOIN RIP.Roles r ON rf.RolFunc_IdRol = r.Rol_ID WHERE r.Rol_Nombre = @rol");
+            SqlCommand consulta = Database.consultaCrear("SELECT f.Funcionalidad_Funcionalidad FROM rip.Funcionalidades f INNER JOIN RIP.Rol_Funcionalidad rf ON f.Funcionalidad_Id = rf.RolFunc_IdFuncionalidad INNER JOIN RIP.Roles r ON rf.RolFunc_IdRol = r.Rol_ID WHERE r.Rol_Nombre = @nombreRol");
+            consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
             return Database.consultaObtenerValores(consulta);
+        }
 
-            /*
-            List<string> listaFuncionalidades = new List<string>();
-            SqlConnection connection = obtenerConexion();
-
-            SqlCommand loginCommand = new SqlCommand("SELECT f.Funcionalidad_Funcionalidad FROM rip.Funcionalidades f INNER JOIN RIP.Rol_Funcionalidad rf ON f.Funcionalidad_Id = rf.RolFunc_IdFuncionalidad INNER JOIN RIP.Roles r ON rf.RolFunc_IdRol = r.Rol_ID WHERE r.Rol_Nombre = @rol");
-            loginCommand.Parameters.AddWithValue("rol", rol);
-            loginCommand.Connection = connection;
-            connection.Open();
-
-            SqlDataReader reader = loginCommand.ExecuteReader();
-
-            while (reader.Read())
-            {
-                listaFuncionalidades.Add(reader[0].ToString());
-            }
-
-            reader.Close();
-            connection.Close();
-            return listaFuncionalidades;
-            */
+        public static List<string> rolObtenerFuncionalidadesFaltantes(string nombreRol)
+        {
+#warning Use un subselect para obtener las funcionalidades faltantes de un rol
+            SqlCommand consulta = Database.consultaCrear("SELECT Funcionalidad_Funcionalidad FROM RIP.Funcionalidades WHERE Funcionalidad_Id NOT IN (SELECT RolFunc_IdFuncionalidad FROM RIP.Rol_Funcionalidad INNER JOIN RIP.Roles ON RolFunc_IdRol = Rol_ID WHERE Rol_Nombre = @nombreRol)");
+            consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
+            return Database.consultaObtenerValores(consulta);
         }
 
         //-------------------------------------- Metodos para Hoteles -------------------------------------

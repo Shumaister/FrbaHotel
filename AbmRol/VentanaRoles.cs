@@ -19,21 +19,21 @@ namespace FrbaHotel.AbmRol
 
         public void VentanaRoles_Load(object sender, EventArgs e)
         {
-            Database.funcionalidadObtenerTodas(cbxFuncionalidades);
-            Database.obtenerRolesTotales(cbxModificar);
-#warning En eliminar mostrar solo roles habilitados o todos?
-            Database.obtenerRolesHabilitados(cbxEliminar);
+            VentanaBase.comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
             cbxFuncionalidades.SelectedIndex = 0;
-            rbtRolActivado.Select();
+            actualizarVentana();
         }
 
         private void actualizarVentana()
         {
             cbxModificar.Items.Clear();
             cbxEliminar.Items.Clear(); ;
-            Database.obtenerRolesTotales(cbxModificar);
+            VentanaBase.comboBoxCargar(cbxModificar, Database.rolObtenerTodos());
 #warning En eliminar mostrar solo roles habilitados o todos?
-            Database.obtenerRolesHabilitados(cbxEliminar);
+            VentanaBase.comboBoxCargar(cbxEliminar, Database.rolObtenerHabilitados());
+            cbxModificar.SelectedIndex = 0;
+            cbxEliminar.SelectedIndex = 0;
+            rbtRolActivado.Select();
         }
 
         //-------------------------------------- Metodos para Agregar -------------------------------------
@@ -50,6 +50,7 @@ namespace FrbaHotel.AbmRol
             if (lbxFuncionalidades.SelectedItem != null)
             {
                 cbxFuncionalidades.Items.Add(lbxFuncionalidades.SelectedItem);
+                //cbxFuncionalidades.Sorted = true;
                 lbxFuncionalidades.Items.Remove(lbxFuncionalidades.SelectedItem);
             }
         }
@@ -57,11 +58,12 @@ namespace FrbaHotel.AbmRol
         private void btnLimpiarRol_Click(object sender, EventArgs e)
         {
             tbxNombreRol.Clear();
-            rbtRolActivado.Select();
             lbxFuncionalidades.Items.Clear();
             cbxFuncionalidades.Items.Clear();
             controladorError.Clear();
-            Database.funcionalidadObtenerTodas(cbxFuncionalidades);
+            rbtRolActivado.Select();
+            //VER SI hACE FALTA
+            VentanaBase.comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
             cbxFuncionalidades.SelectedIndex = 0;
         }
 
@@ -70,21 +72,21 @@ namespace FrbaHotel.AbmRol
             string nombreRol = tbxNombreRol.Text;
             if (Database.rolNombreYaExiste(nombreRol))
             {
-                VentanaBase.informarError("Un rol ya posee el mismo nombre");
+                VentanaBase.ventanaInformarError("Un rol ya posee el mismo nombre");
                 return;
             }
-            if (VentanaBase.camposEstanCompletos(tabAgregar, controladorError))
+            if (VentanaBase.ventanaCamposTodosCompletos(tabAgregar, controladorError))
             { 
                 if (rbtRolActivado.Checked)
-                    Database.agregarRol(nombreRol, "1");
+                    Database.rolAgregar(nombreRol, "1");
                 else 
-                    Database.agregarRol(nombreRol, "0");
-                string idRol = Database.buscarIdRol(nombreRol);
+                    Database.rolAgregar(nombreRol, "0");
+                string idRol = Database.rolObtenerId(nombreRol);
                 foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
                     Database.rolAgregarFuncionalidad(idRol, nombreFuncionalidad);
                 btnLimpiarRol_Click(sender, null);
                 actualizarVentana();
-                VentanaBase.informarExito();
+                VentanaBase.ventanaInformarExito();
             }    
         }
 
@@ -110,10 +112,11 @@ namespace FrbaHotel.AbmRol
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            Database.eliminarRol(cbxEliminar.SelectedItem.ToString());
+            Database.rolEliminar(cbxEliminar.SelectedItem.ToString());
 #warning En eliminar mostrar solo roles habilitados o todos?
-            Database.obtenerRolesHabilitados(cbxEliminar);
-            VentanaBase.informarExito();
+            VentanaBase.comboBoxCargar(cbxEliminar, Database.rolObtenerHabilitados());
+            cbxEliminar.SelectedIndex = 0;
+            VentanaBase.ventanaInformarExito();
         }
     }
 }

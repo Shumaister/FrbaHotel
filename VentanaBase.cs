@@ -21,7 +21,9 @@ namespace FrbaHotel
             ProgramTitle = "Frba Hotel";
         }
 
-        public static bool camposEstanCompletos(Control ventana, ErrorProvider errorProvider)
+        //-------------------------------------- Metodos para ventanas -------------------------------------
+
+        public static bool ventanaCamposTodosCompletos(Control ventana, ErrorProvider errorProvider)
         {
             bool flagControl = true;
             foreach (Control objeto in ventana.Controls)
@@ -52,20 +54,28 @@ namespace FrbaHotel
             return flagControl;
         }
 
-        public static void informarExito() 
+        public static void ventanaInformarExito()
         {
             MessageBox.Show("La operacion se ha realizado con exito", "Aviso");
         }
 
-        public static void informarError(string mensaje)
+        public static void ventanaInformarError(string mensaje)
         {
             MessageBox.Show("ERROR: " + mensaje, "Aviso");
         }
 
-        public static void cargarComboBox(ComboBox comboBox, List<string> listaValores)
+        //-------------------------------------- Metodos para Combo Box -------------------------------------
+
+        public static void comboBoxCargar(ComboBox comboBox, List<string> listaValores)
         {
             foreach (string valor in listaValores)
                 comboBox.Items.Add(valor);
+        }
+
+        public static void listBoxCargar(ListBox listBox, List<string> listaValores)
+        {
+            foreach (string valor in listaValores)
+                listBox.Items.Add(valor);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace FrbaHotel.Login
         private void btnLogin_Click(object sender, EventArgs e)
         {
             lblErrorLogueo.Visible = false;
-            if (camposEstanCompletos(this, controladorError)) 
+            if (ventanaCamposTodosCompletos(this, controladorError)) 
             {
                 LogueoDTO logueo = Database.Autenticar(txbUser.Text, txbPass.Text);
                 if (logueo.Exito)
