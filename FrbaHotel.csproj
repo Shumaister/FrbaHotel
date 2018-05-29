@@ -63,6 +63,12 @@
     <Compile Include="AbmRegimen\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmRol\VentanaModificarRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\VentanaModificarRol.Designer.cs">
+      <DependentUpon>VentanaModificarRol.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmRol\VentanaRoles.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     <Compile Include="VentanaBase.Designer.cs">
       <DependentUpon>VentanaBase.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AbmRol\VentanaModificarRol.resx">
+      <DependentUpon>VentanaModificarRol.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\VentanaRoles.resx">
       <DependentUpon>VentanaRoles.cs</DependentUpon>
     </EmbeddedResource>

@@ -43,13 +43,14 @@ namespace FrbaHotel
             return new SqlCommand(consulta, Database.obtenerConexion());
         }
 
-        public static int ejecutarConsulta(SqlCommand comando)
+        public static int ejecutarConsulta(SqlCommand consulta)
         {
             Database.conectar();
             int estado = 0;
             try
             {
-                estado = comando.ExecuteNonQuery();
+                //ExecuteNonQuery devuelve el numero de filas afectadas
+                estado = consulta.ExecuteNonQuery();
             }
             catch (Exception excepcion)
             {

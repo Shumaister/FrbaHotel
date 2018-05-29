@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabAgregar = new System.Windows.Forms.TabPage();
+            this.btnQuitarRol = new System.Windows.Forms.Button();
             this.tbxNombreRol = new System.Windows.Forms.TextBox();
             this.btnAgregarFuncionalidad = new System.Windows.Forms.Button();
             this.lbxFuncionalidades = new System.Windows.Forms.ListBox();
@@ -49,7 +50,9 @@
             this.cbxEliminar = new System.Windows.Forms.ComboBox();
             this.lblSeleccionarRol2 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnQuitarRol = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -78,6 +81,9 @@
             // 
             // tabAgregar
             // 
+            this.tabAgregar.Controls.Add(this.label6);
+            this.tabAgregar.Controls.Add(this.label5);
+            this.tabAgregar.Controls.Add(this.label4);
             this.tabAgregar.Controls.Add(this.btnQuitarRol);
             this.tabAgregar.Controls.Add(this.tbxNombreRol);
             this.tabAgregar.Controls.Add(this.btnAgregarFuncionalidad);
@@ -97,6 +103,16 @@
             this.tabAgregar.TabIndex = 0;
             this.tabAgregar.Text = " Agregar";
             this.tabAgregar.UseVisualStyleBackColor = true;
+            // 
+            // btnQuitarRol
+            // 
+            this.btnQuitarRol.Location = new System.Drawing.Point(176, 136);
+            this.btnQuitarRol.Name = "btnQuitarRol";
+            this.btnQuitarRol.Size = new System.Drawing.Size(75, 23);
+            this.btnQuitarRol.TabIndex = 12;
+            this.btnQuitarRol.Text = "Quitar";
+            this.btnQuitarRol.UseVisualStyleBackColor = true;
+            this.btnQuitarRol.Click += new System.EventHandler(this.btnQuitarRol_Click);
             // 
             // tbxNombreRol
             // 
@@ -214,12 +230,11 @@
             this.tabModificar.TabIndex = 1;
             this.tabModificar.Text = "Modificar";
             this.tabModificar.UseVisualStyleBackColor = true;
-            this.tabModificar.Click += new System.EventHandler(this.tabModificar_Click);
             // 
             // cbxModificar
             // 
             this.cbxModificar.FormattingEnabled = true;
-            this.cbxModificar.Location = new System.Drawing.Point(30, 60);
+            this.cbxModificar.Location = new System.Drawing.Point(31, 63);
             this.cbxModificar.Name = "cbxModificar";
             this.cbxModificar.Size = new System.Drawing.Size(121, 21);
             this.cbxModificar.TabIndex = 6;
@@ -227,7 +242,7 @@
             // lblSeleccionarRol1
             // 
             this.lblSeleccionarRol1.AutoSize = true;
-            this.lblSeleccionarRol1.Location = new System.Drawing.Point(27, 22);
+            this.lblSeleccionarRol1.Location = new System.Drawing.Point(28, 25);
             this.lblSeleccionarRol1.Name = "lblSeleccionarRol1";
             this.lblSeleccionarRol1.Size = new System.Drawing.Size(89, 13);
             this.lblSeleccionarRol1.TabIndex = 2;
@@ -235,7 +250,7 @@
             // 
             // bntModificar
             // 
-            this.bntModificar.Location = new System.Drawing.Point(30, 116);
+            this.bntModificar.Location = new System.Drawing.Point(31, 114);
             this.bntModificar.Name = "bntModificar";
             this.bntModificar.Size = new System.Drawing.Size(75, 23);
             this.bntModificar.TabIndex = 1;
@@ -283,15 +298,38 @@
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // btnQuitarRol
+            // label4
             // 
-            this.btnQuitarRol.Location = new System.Drawing.Point(176, 136);
-            this.btnQuitarRol.Name = "btnQuitarRol";
-            this.btnQuitarRol.Size = new System.Drawing.Size(75, 23);
-            this.btnQuitarRol.TabIndex = 12;
-            this.btnQuitarRol.Text = "Quitar";
-            this.btnQuitarRol.UseVisualStyleBackColor = true;
-            this.btnQuitarRol.Click += new System.EventHandler(this.btnQuitarRol_Click);
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(72, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(17, 22);
+            this.label4.TabIndex = 26;
+            this.label4.Text = "*";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(113, 83);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 22);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "*";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(68, 271);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(17, 22);
+            this.label6.TabIndex = 28;
+            this.label6.Text = "*";
             // 
             // VentanaRoles
             // 
@@ -341,5 +379,8 @@
         private System.Windows.Forms.ListBox lbxFuncionalidades;
         private System.Windows.Forms.TextBox tbxNombreRol;
         private System.Windows.Forms.Button btnQuitarRol;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label6;
     }
 }

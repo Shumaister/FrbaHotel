@@ -10,33 +10,22 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.AbmRol
 {
-    public partial class VentanaRoles : VentanaBase
+    public partial class VentanaModificarRol : VentanaBase
     {
-        public VentanaRoles()
+        VentanaRoles ventanaRoles;
+
+        public VentanaModificarRol(VentanaRoles ventana)
         {
             InitializeComponent();
+            ventanaRoles = ventana;
         }
 
-        public void VentanaRoles_Load(object sender, EventArgs e)
+        private void VentanaModificarRol_Load(object sender, EventArgs e)
         {
             Database.obtenerFuncionalidades(cbxFuncionalidades);
-            Database.obtenerRolesTotales(cbxModificar);
-#warning En eliminar mostrar solo roles habilitados o todos?
-            Database.obtenerRolesHabilitados(cbxEliminar);
             cbxFuncionalidades.SelectedIndex = 0;
             rbtRolActivado.Select();
         }
-
-        private void actualizarVentana()
-        {
-            cbxModificar.Items.Clear();
-            cbxEliminar.Items.Clear(); ;
-            Database.obtenerRolesTotales(cbxModificar);
-#warning En eliminar mostrar solo roles habilitados o todos?
-            Database.obtenerRolesHabilitados(cbxEliminar);
-        }
-
-        //-------------------------------------- Metodos para Agregar -------------------------------------
 
         private void btnAgregarFuncionalidad_Click(object sender, EventArgs e)
         {
@@ -73,8 +62,8 @@ namespace FrbaHotel.AbmRol
                 VentanaBase.informarError("Un rol ya posee el mismo nombre");
                 return;
             }
-            if (VentanaBase.camposEstanCompletos(tabAgregar, controladorError))
-            { 
+            if (VentanaBase.camposEstanCompletos(this, controladorError))
+            {
                 if (rbtRolActivado.Checked)
                     Database.agregarRol(nombreRol, "1");
                 else
@@ -82,10 +71,10 @@ namespace FrbaHotel.AbmRol
                 string idRol = Database.buscarIdRol(nombreRol);
                 foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
                     Database.agregarFuncionalidad(idRol, nombreFuncionalidad);
-                btnLimpiarRol_Click(sender, null);
-                actualizarVentana();
+                this.Close();
+                ventanaRoles.VentanaRoles_Load(sender, null);
                 VentanaBase.informarExito();
-            }    
+            }
         }
 
         private void tbxNombreRol_TextChanged(object sender, EventArgs e)
@@ -99,21 +88,5 @@ namespace FrbaHotel.AbmRol
             controladorError.Clear();
         }
 
-        //-------------------------------------- Metodos para Modificar -------------------------------------
-
-        private void bntModificar_Click(object sender, EventArgs e)
-        {
-            new VentanaModificarRol(this).Show();
-        }
-
-        //-------------------------------------- Metodos para Eliminar -------------------------------------
-
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            Database.eliminarRol(cbxEliminar.SelectedItem.ToString());
-#warning En eliminar mostrar solo roles habilitados o todos?
-            Database.obtenerRolesHabilitados(cbxEliminar);
-            VentanaBase.informarExito();
-        }
     }
 }
