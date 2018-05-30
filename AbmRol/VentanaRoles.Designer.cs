@@ -30,6 +30,9 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabAgregar = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnQuitarRol = new System.Windows.Forms.Button();
             this.tbxNombreRol = new System.Windows.Forms.TextBox();
             this.btnAgregarFuncionalidad = new System.Windows.Forms.Button();
@@ -50,9 +53,6 @@
             this.cbxEliminar = new System.Windows.Forms.ComboBox();
             this.lblSeleccionarRol2 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -104,6 +104,39 @@
             this.tabAgregar.Text = " Agregar";
             this.tabAgregar.UseVisualStyleBackColor = true;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(68, 271);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(17, 22);
+            this.label6.TabIndex = 28;
+            this.label6.Text = "*";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(113, 83);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 22);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "*";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(72, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(17, 22);
+            this.label4.TabIndex = 26;
+            this.label4.Text = "*";
+            // 
             // btnQuitarRol
             // 
             this.btnQuitarRol.Location = new System.Drawing.Point(176, 136);
@@ -139,7 +172,8 @@
             this.lbxFuncionalidades.Name = "lbxFuncionalidades";
             this.lbxFuncionalidades.Size = new System.Drawing.Size(120, 95);
             this.lbxFuncionalidades.TabIndex = 9;
-            this.lbxFuncionalidades.DataSourceChanged += new System.EventHandler(this.lbxFuncionalidades_DataSourceChanged);
+            this.lbxFuncionalidades.SelectedIndexChanged += new System.EventHandler(this.lbxFuncionalidades_SelectedIndexChanged);
+            this.lbxFuncionalidades.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.lbxFuncionalidades_ControlAdded);
             // 
             // btnGuardarRol
             // 
@@ -297,39 +331,6 @@
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(72, 19);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 22);
-            this.label4.TabIndex = 26;
-            this.label4.Text = "*";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(113, 83);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(17, 22);
-            this.label5.TabIndex = 27;
-            this.label5.Text = "*";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(68, 271);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(17, 22);
-            this.label6.TabIndex = 28;
-            this.label6.Text = "*";
             // 
             // VentanaRoles
             // 

@@ -29,6 +29,8 @@ namespace FrbaHotel.AbmRol
             VentanaBase.comboBoxCargar(cbxFuncionalidades, Database.rolObtenerFuncionalidadesFaltantes(nombreRolActual));
             if (cbxFuncionalidades.Items.Count > 0)
                 cbxFuncionalidades.SelectedIndex = 0;
+            if (lbxFuncionalidades.Items.Count > 0)
+                lbxFuncionalidades.SelectedIndex = 0;
             if (Database.rolEstaHabilitado(nombreRolActual))
                 rbtRolActivado.Select();
             else
@@ -40,11 +42,13 @@ namespace FrbaHotel.AbmRol
             if (cbxFuncionalidades.SelectedItem != null)
             {
                 lbxFuncionalidades.Items.Add(cbxFuncionalidades.SelectedItem);
+                lbxFuncionalidades.SelectedIndex = 0;
                 cbxFuncionalidades.Items.Remove(cbxFuncionalidades.SelectedItem);
                 if (cbxFuncionalidades.Items.Count > 0)
                     cbxFuncionalidades.SelectedIndex = 0;
                 else
                     cbxFuncionalidades.ResetText();
+
             }
         }
 
@@ -56,6 +60,8 @@ namespace FrbaHotel.AbmRol
                 cbxFuncionalidades.Sorted = true;
                 lbxFuncionalidades.Items.Remove(lbxFuncionalidades.SelectedItem);
                 cbxFuncionalidades.SelectedIndex = 0;
+                if (lbxFuncionalidades.Items.Count > 0)
+                    lbxFuncionalidades.SelectedIndex = 0;
             }
         }
 
@@ -98,11 +104,9 @@ namespace FrbaHotel.AbmRol
             controladorError.Clear();
         }
 
-        private void lbxFuncionalidades_DataSourceChanged(object sender, EventArgs e)
+        private void lbxFuncionalidades_SelectedIndexChanged(object sender, EventArgs e)
         {
-#warning El list box no borra el aviso de error provider cuando se lo modifica
             controladorError.Clear();
         }
-
     }
 }

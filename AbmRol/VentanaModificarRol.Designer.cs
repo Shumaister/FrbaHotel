@@ -88,6 +88,7 @@
             this.lbxFuncionalidades.Name = "lbxFuncionalidades";
             this.lbxFuncionalidades.Size = new System.Drawing.Size(120, 95);
             this.lbxFuncionalidades.TabIndex = 21;
+            this.lbxFuncionalidades.SelectedIndexChanged += new System.EventHandler(this.lbxFuncionalidades_SelectedIndexChanged);
             // 
             // btnGuardarRol
             // 
