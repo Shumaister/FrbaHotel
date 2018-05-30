@@ -8,36 +8,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FrbaHotel.AbmRol;
+using FrbaHotel.AbmUsuario;
 
 namespace FrbaHotel.Menus
 {
     public partial class VentanaMenuPrincipal : VentanaBase
     {
+        //-------------------------------------- Atributos -------------------------------------
+        
         Usuario Usuario { get; set; }
-        public VentanaMenuPrincipal(Usuario usu)
+
+        //-------------------------------------- Constructores -------------------------------------
+
+        public VentanaMenuPrincipal(Usuario usuario)
         {
-            this.Usuario = usu; 
+            this.Usuario = usuario; 
             InitializeComponent();
         }
 
-        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        //-------------------------------------- Metodos para Eventos -------------------------------------
+
+        private void VentanaMenuPrincipal_FormClosed(object sender, FormClosedEventArgs e)
         {
-
-        }
-
-        private void funcionalidadesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MenuPrincipalUsuarios_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
+            Application.Exit();
         }
 
         private void menuRoles_Click(object sender, EventArgs e)
@@ -47,9 +40,11 @@ namespace FrbaHotel.Menus
             ventanaRoles.Show();
         }
 
-        private void VentanaMenuPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        private void menuUsuarios_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            VentanaUsuarios ventanaUsuarios = new VentanaUsuarios();
+            ventanaUsuarios.MdiParent = this;
+            ventanaUsuarios.Show();
         }
     }
 }

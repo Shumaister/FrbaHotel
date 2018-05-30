@@ -13,11 +13,30 @@ namespace FrbaHotel.Login
 {
     public partial class VentanaLogin : VentanaBase
     {
+       //-------------------------------------- Constructores -------------------------------------
+
         public VentanaLogin()
         {
             InitializeComponent();
             lblErrorLogueo.Visible = false;
             this.AcceptButton = btnLogin;
+        }
+
+        //-------------------------------------- Metodos para Eventos -------------------------------------
+
+        private void txbUser_TextChanged(object sender, EventArgs e)
+        {
+            controladorError.Clear();
+        }
+
+        private void txbPass_TextChanged(object sender, EventArgs e)
+        {
+            controladorError.Clear();
+        }
+
+        private void VentanaLogin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -53,22 +72,22 @@ namespace FrbaHotel.Login
 
         private void abrirVentanaSeleccionDeRol(Usuario usuario)
         {
-            VentanaSeleccionHotelRol ventanaSeleccionRol = new VentanaSeleccionHotelRol(usuario);
+            VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(usuario);
             ventanaSeleccionRol.configurarParaRol();
             ventanaSeleccionRol.Show();
         }
 
         private void abrirVentanaSeleccionDeHotel(Usuario usuario)
         {
-            VentanaSeleccionHotelRol ventanaSeleccionRol = new VentanaSeleccionHotelRol(usuario);
+            VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(usuario);
             ventanaSeleccionRol.configurarParaHotel();
             ventanaSeleccionRol.Show();
         }
 
         private void abrirVentanaSeleccionDeHotelYRol(Usuario usuario)
         {
-            VentanaSeleccionHotelRol ventanaSeleccionRol = new VentanaSeleccionHotelRol(usuario);
-            ventanaSeleccionRol.configurarParaHotelYRol();
+            VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(usuario);
+            ventanaSeleccionRol.configurarParaRolYHotel();
             ventanaSeleccionRol.Show();
         }
 
@@ -78,21 +97,6 @@ namespace FrbaHotel.Login
             txbPass.Clear();
             lblErrorLogueo.Visible = true;
             lblErrorLogueo.Text = logueo.mensajeError;
-        }
-
-        private void txbUser_TextChanged(object sender, EventArgs e)
-        {
-            controladorError.Clear();
-        }
-
-        private void txbPass_TextChanged(object sender, EventArgs e)
-        {
-            controladorError.Clear();
-        }
-
-        private void VentanaLogin_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
         }
     }
 }

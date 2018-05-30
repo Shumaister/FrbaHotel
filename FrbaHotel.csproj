@@ -75,6 +75,12 @@
     <Compile Include="AbmRol\VentanaRoles.Designer.cs">
       <DependentUpon>VentanaRoles.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmUsuario\VentanaUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmUsuario\VentanaUsuarios.Designer.cs">
+      <DependentUpon>VentanaUsuarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="CancelarReserva\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,11 +113,11 @@
       <DependentUpon>VentanaLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\LogueoDTO.cs" />
-    <Compile Include="Login\VentanaSeleccionHotelRol.cs">
+    <Compile Include="Login\VentanaSeleccionRolHotel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\VentanaSeleccionHotelRol.Designer.cs">
-      <DependentUpon>VentanaSeleccionHotelRol.cs</DependentUpon>
+    <Compile Include="Login\VentanaSeleccionRolHotel.Designer.cs">
+      <DependentUpon>VentanaSeleccionRolHotel.cs</DependentUpon>
     </Compile>
     <Compile Include="Menus\VentanaMenuPrincipal.cs">
       <SubType>Form</SubType>
@@ -146,14 +152,17 @@
     <EmbeddedResource Include="AbmRol\VentanaRoles.resx">
       <DependentUpon>VentanaRoles.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AbmUsuario\VentanaUsuarios.resx">
+      <DependentUpon>VentanaUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\VentanaInicio.resx">
       <DependentUpon>VentanaInicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\VentanaLogin.resx">
       <DependentUpon>VentanaLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\VentanaSeleccionHotelRol.resx">
-      <DependentUpon>VentanaSeleccionHotelRol.cs</DependentUpon>
+    <EmbeddedResource Include="Login\VentanaSeleccionRolHotel.resx">
+      <DependentUpon>VentanaSeleccionRolHotel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menus\VentanaMenuPrincipal.resx">
       <DependentUpon>VentanaMenuPrincipal.cs</DependentUpon>

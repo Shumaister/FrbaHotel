@@ -21,7 +21,7 @@ namespace FrbaHotel
         private static String configuracionConexion = ConfigurationManager.AppSettings["conexionSQL"];
         private static SqlConnection conexion = new SqlConnection(configuracionConexion);
 
-        //-------------------------------------- Metodos generales -------------------------------------
+        //-------------------------------------- Metodos para Conexion -------------------------------------
 
         public static SqlConnection obtenerConexion()
         {
@@ -38,7 +38,7 @@ namespace FrbaHotel
             conexion.Close();
         }
 
-        //-------------------------------------- Metodos para consultas -------------------------------------
+        //-------------------------------------- Metodos para Consultas -------------------------------------
 
         public static SqlCommand consultaCrear(string consulta)
         {
@@ -61,15 +61,20 @@ namespace FrbaHotel
             return estado;
         }
 
-        public static List<string> consultaObtenerValores(SqlCommand consulta)
+        public static string consultaObtenerDato(SqlCommand consulta)
+        {
+            return Database.consultaObtenerListaDatos(consulta)[0];
+        }
+
+        public static List<string> consultaObtenerListaDatos(SqlCommand consulta)
         {
             Database.conectar();
-            List<string> listaValores = new List<string>();
+            List<string> listaDatos = new List<string>();
             try
             {
                 SqlDataReader reader = consulta.ExecuteReader();
                 while (reader.Read())
-                    listaValores.Add(reader[0].ToString());
+                    listaDatos.Add(reader[0].ToString());
                 reader.Close();
             }
             catch (Exception excepcion)
@@ -77,12 +82,24 @@ namespace FrbaHotel
                 Database.consultaInformarError(excepcion);
             }
             Database.desconectar();
-            return listaValores;
+            return listaDatos;
         }
 
-        public static string consultaObtenerValor(SqlCommand consulta)
+        public static DataTable consultaObtenerTablaDatos(SqlCommand consulta)
         {
-            return Database.consultaObtenerValores(consulta)[0];
+            Database.conectar();
+            DataTable tablaDatos = new DataTable();
+            try
+            {
+                SqlDataReader reader = consulta.ExecuteReader();
+                tablaDatos.Load(reader);
+            }
+            catch (Exception excepcion)
+            {
+                Database.consultaInformarError(excepcion);
+            }
+            Database.desconectar();
+            return tablaDatos;
         }
 
         public static void consultaInformarError(Exception excepcion)
@@ -163,14 +180,14 @@ namespace FrbaHotel
         public static List<string> funcionalidadObtenerTodas()
         {
             SqlCommand consulta = consultaCrear("SELECT Funcionalidad_Funcionalidad FROM RIP.Funcionalidades");
-            return Database.consultaObtenerValores(consulta);
+            return Database.consultaObtenerListaDatos(consulta);
         }
         
         public static string funcionalidadObtenerId(string nombreFuncionalidad)
         {
             SqlCommand consulta = consultaCrear("SELECT Funcionalidad_Id FROM RIP.Funcionalidades WHERE Funcionalidad_Funcionalidad = @nombreFuncionalidad");
             consulta.Parameters.AddWithValue("@nombreFuncionalidad", nombreFuncionalidad);
-            return Database.consultaObtenerValor(consulta);
+            return Database.consultaObtenerDato(consulta);
         }
 
         //-------------------------------------- Metodos para Roles -------------------------------------
@@ -221,26 +238,26 @@ namespace FrbaHotel
         {
             SqlCommand consulta = consultaCrear("SELECT Rol_ID FROM RIP.Roles WHERE Rol_Nombre = @nombreRol");
             consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
-            return Database.consultaObtenerValor(consulta);
+            return Database.consultaObtenerDato(consulta);
         }
 
         public static List<string> rolObtenerTodos()
         {
             SqlCommand consulta = consultaCrear("SELECT Rol_Nombre FROM RIP.Roles");
-            return Database.consultaObtenerValores(consulta);
+            return Database.consultaObtenerListaDatos(consulta);
         }
 
         public static List<string> rolObtenerHabilitados()
         {
             SqlCommand consulta = consultaCrear("SELECT Rol_Nombre FROM RIP.Roles WHERE Rol_Estado = 1");
-            return Database.consultaObtenerValores(consulta);
+            return Database.consultaObtenerListaDatos(consulta);
         }
 
         public static bool rolNombreYaExiste(string nombreRol)
         {
             SqlCommand consulta = consultaCrear("SELECT count(Rol_Nombre) FROM RIP.Roles WHERE Rol_Nombre = @nombreRol");
             consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
-            int resultado = Convert.ToInt32(Database.consultaObtenerValor(consulta));
+            int resultado = Convert.ToInt32(Database.consultaObtenerDato(consulta));
             return resultado > 0;
         }
 
@@ -248,7 +265,7 @@ namespace FrbaHotel
         {
             SqlCommand consulta = consultaCrear("SELECT Rol_Estado FROM RIP.Roles WHERE Rol_Nombre = @nombreRol");
             consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
-            return bool.Parse(Database.consultaObtenerValor(consulta));
+            return bool.Parse(Database.consultaObtenerDato(consulta));
         }
 
         public static bool rolNoTieneEsaFuncionalidad(string nombreRol, string nombreFuncionalidad)
@@ -258,7 +275,7 @@ namespace FrbaHotel
             SqlCommand consulta = consultaCrear("SELECT count(*) FROM RIP.Rol_Funcionalidad WHERE RolFunc_IdRol = @idRol AND RolFunc_IdFuncionalidad = @idFuncionalidad");
             consulta.Parameters.AddWithValue("@idRol", idRol);
             consulta.Parameters.AddWithValue("@idFuncionalidad", idFuncionalidad);
-            int resultado = Convert.ToInt32(Database.consultaObtenerValor(consulta));
+            int resultado = Convert.ToInt32(Database.consultaObtenerDato(consulta));
             return resultado == 0;
         }
 
@@ -266,15 +283,14 @@ namespace FrbaHotel
         {
             SqlCommand consulta = Database.consultaCrear("SELECT f.Funcionalidad_Funcionalidad FROM rip.Funcionalidades f INNER JOIN RIP.Rol_Funcionalidad rf ON f.Funcionalidad_Id = rf.RolFunc_IdFuncionalidad INNER JOIN RIP.Roles r ON rf.RolFunc_IdRol = r.Rol_ID WHERE r.Rol_Nombre = @nombreRol");
             consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
-            return Database.consultaObtenerValores(consulta);
+            return Database.consultaObtenerListaDatos(consulta);
         }
 
         public static List<string> rolObtenerFuncionalidadesFaltantes(string nombreRol)
         {
-#warning Use un subselect para obtener las funcionalidades faltantes de un rol
             SqlCommand consulta = Database.consultaCrear("SELECT Funcionalidad_Funcionalidad FROM RIP.Funcionalidades WHERE Funcionalidad_Id NOT IN (SELECT RolFunc_IdFuncionalidad FROM RIP.Rol_Funcionalidad INNER JOIN RIP.Roles ON RolFunc_IdRol = Rol_ID WHERE Rol_Nombre = @nombreRol)");
             consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
-            return Database.consultaObtenerValores(consulta);
+            return Database.consultaObtenerListaDatos(consulta);
         }
 
         //-------------------------------------- Metodos para Usuarios -------------------------------------
@@ -309,7 +325,7 @@ namespace FrbaHotel
         {
             SqlCommand consulta = Database.consultaCrear("SELECT count(Hotel_Usuario_IdHotel) FROM RIP.Hotel_Usuario JOIN RIP.Usuarios ON Hotel_Usuario_IdUsuario = Usuario_ID WHERE Usuario_User = @nombreUsuario");
             consulta.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
-            int cantidadHoteles = Convert.ToInt32(Database.consultaObtenerValor(consulta));
+            int cantidadHoteles = Convert.ToInt32(Database.consultaObtenerDato(consulta));
             return cantidadHoteles == 1;
         }
 
@@ -322,27 +338,33 @@ namespace FrbaHotel
         {
             SqlCommand consulta = Database.consultaCrear("SELECT count(Rol_Nombre) FROM rip.Roles r INNER JOIN RIP.Usuario_Rol ur on r.Rol_ID = ur.Usuario_Rol_Rol_ID INNER JOIN RIP.Usuarios u on ur.Usuario_Rol_Usuario_ID = u.Usuario_ID where u.Usuario_User = @nombreUsuario");
             consulta.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
-            int cantidadRoles = Convert.ToInt32(Database.consultaObtenerValor(consulta));
+            int cantidadRoles = Convert.ToInt32(Database.consultaObtenerDato(consulta));
             return cantidadRoles == 1;
-        }
-
-        public static List<string> usuarioObtenerRoles(string nombreUsuario)
-        {
-            SqlCommand loginCommand = consultaCrear("SELECT r.Rol_Nombre FROM rip.Roles r INNER JOIN RIP.Usuario_Rol ur on r.Rol_ID = ur.Usuario_Rol_Rol_ID INNER JOIN RIP.Usuarios u on ur.Usuario_Rol_Usuario_ID = u.Usuario_ID where u.Usuario_User = @nombreUsuario");
-            loginCommand.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
-            return Database.consultaObtenerValores(loginCommand);
-        }
-
-        public static List<string> usuarioObtenerRolesHabilitados(string nombreUsuario)
-        {
-            SqlCommand loginCommand = consultaCrear("SELECT r.Rol_Nombre FROM rip.Roles r INNER JOIN RIP.Usuario_Rol ur on r.Rol_ID = ur.Usuario_Rol_Rol_ID INNER JOIN RIP.Usuarios u on ur.Usuario_Rol_Usuario_ID = u.Usuario_ID where u.Usuario_User = @user and r.Rol_Estado = 1");
-            loginCommand.Parameters.AddWithValue("user", nombreUsuario);
-            return Database.consultaObtenerValores(loginCommand);
         }
 
         public static bool usuarioTieneVariosRoles(string nombreUsuario)
         {
             return !Database.usuarioTieneUnSoloRol(nombreUsuario);
-        }    
+        }
+
+        public static List<string> usuarioObtenerRoles(string nombreUsuario)
+        {
+            SqlCommand consulta = consultaCrear("SELECT r.Rol_Nombre FROM rip.Roles r INNER JOIN RIP.Usuario_Rol ur on r.Rol_ID = ur.Usuario_Rol_Rol_ID INNER JOIN RIP.Usuarios u on ur.Usuario_Rol_Usuario_ID = u.Usuario_ID where u.Usuario_User = @nombreUsuario");
+            consulta.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+            return Database.consultaObtenerListaDatos(consulta);
+        }
+
+        public static List<string> usuarioObtenerRolesHabilitados(string nombreUsuario)
+        {
+            SqlCommand consulta = consultaCrear("SELECT r.Rol_Nombre FROM rip.Roles r INNER JOIN RIP.Usuario_Rol ur on r.Rol_ID = ur.Usuario_Rol_Rol_ID INNER JOIN RIP.Usuarios u on ur.Usuario_Rol_Usuario_ID = u.Usuario_ID where u.Usuario_User = @nombreUsuario and r.Rol_Estado = 1");
+            consulta.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+            return Database.consultaObtenerListaDatos(consulta);
+        }
+
+        public static DataTable usuarioObtenerTodos()
+        {
+            SqlCommand consulta = consultaCrear("SELECT Usuario_User, Persona_Nombre, Persona_Apellido, Persona_Tipo_Documento, Persona_Identificacion_Nro, Persona_Fecha_Nacimiento, Persona_Telefono, Persona_Mail, Ciudades_Descripcion, Calles_Descripcion, Domicilio_Nro_calle FROM RIP.Usuarios JOIN RIP.Persona ON Usuario_Persona_ID = Persona_ID JOIN RIP.Domicilio ON Persona_Domicilio_ID = Domicilio_ID JOIN RIP.Calles ON Domicilio_Calle_ID = Calles_ID JOIN RIP.Ciudades ON Domicilio_Ciudad_ID = Ciudades_ID");
+            return Database.consultaObtenerTablaDatos(consulta);
+        }
     }
 }

@@ -12,8 +12,12 @@ namespace FrbaHotel.AbmRol
 {
     public partial class VentanaModificarRol : VentanaBase
     {
+        //-------------------------------------- Atributos -----------------------------------
+
         VentanaRoles ventanaRoles;
         string nombreRolActual;
+
+        //-------------------------------------- Constructores -----------------------------------
 
         public VentanaModificarRol(VentanaRoles ventana, string nombre)
         {
@@ -21,6 +25,8 @@ namespace FrbaHotel.AbmRol
             ventanaRoles = ventana;
             nombreRolActual = nombre;
         }
+
+        //-------------------------------------- Metodos para Eventos -----------------------------------
 
         private void VentanaModificarRol_Load(object sender, EventArgs e)
         {
@@ -37,6 +43,16 @@ namespace FrbaHotel.AbmRol
                 rbtRolDesactivado.Select();
         }
 
+        private void tbxNombreRol_TextChanged(object sender, EventArgs e)
+        {
+            controladorError.Clear();
+        }
+
+        private void lbxFuncionalidades_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            controladorError.Clear();
+        }
+
         private void btnAgregarFuncionalidad_Click(object sender, EventArgs e)
         {
             if (cbxFuncionalidades.SelectedItem != null)
@@ -48,7 +64,6 @@ namespace FrbaHotel.AbmRol
                     cbxFuncionalidades.SelectedIndex = 0;
                 else
                     cbxFuncionalidades.ResetText();
-
             }
         }
 
@@ -97,16 +112,6 @@ namespace FrbaHotel.AbmRol
                 nombreRolActual = nombreRolNuevo;
                 VentanaBase.ventanaInformarExito();
             }
-        }
-
-        private void tbxNombreRol_TextChanged(object sender, EventArgs e)
-        {
-            controladorError.Clear();
-        }
-
-        private void lbxFuncionalidades_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            controladorError.Clear();
         }
     }
 }

@@ -8,11 +8,15 @@ namespace FrbaHotel.Login
 {
     public class LogueoDTO
     {
+        //-------------------------------------- Atributos -------------------------------------
+
         public bool exito { get; set; }
         public string mensajeError { get; set; }
         public string nombreUsuario { get; set; }
         public List<string> rolesUsuario { get; set; }
         public List<string> hotelesUsuario { get; set; }
+
+        //-------------------------------------- Constructores -------------------------------------
 
         public LogueoDTO(bool exito, string mensaje, string usuario, List<string> roles, List<string> hoteles)
         {

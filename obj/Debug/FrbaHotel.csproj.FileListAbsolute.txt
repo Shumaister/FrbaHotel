@@ -51,4 +51,5 @@ D:\Familia\Dario\FrbaHotel\obj\Debug\FrbaHotel.pdb
 D:\Familia\Dario\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.VentanaModificarRol.resources
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
-D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaSeleccionHotelRol.resources
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.AbmUsuario.VentanaUsuarios.resources
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaSeleccionRolHotel.resources

@@ -9,6 +9,8 @@ namespace FrbaHotel
 {
     public class Usuario
     {
+        //-------------------------------------- Atributos -------------------------------------
+
         public string nombreUsuario { get; set; }
         public string rolLogueado { get; set; }
         public string hotelLogueado { get; set; }
@@ -16,12 +18,16 @@ namespace FrbaHotel
         public List<string> funcionalidades { get; set; }
         public List<string> hoteles { get; set; }
 
+        //-------------------------------------- Constructores -------------------------------------
+
         public Usuario(LogueoDTO logueo)
         {
             this.nombreUsuario = logueo.nombreUsuario;
             this.roles = logueo.rolesUsuario;
             this.hoteles = logueo.hotelesUsuario;
         }
+
+        //-------------------------------------- Metodos para Usuarios -------------------------------------
 
         private List<string> FuncionalidadesDeRol(string rol)
         {

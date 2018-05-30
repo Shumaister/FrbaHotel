@@ -173,7 +173,6 @@
             this.lbxFuncionalidades.Size = new System.Drawing.Size(120, 95);
             this.lbxFuncionalidades.TabIndex = 9;
             this.lbxFuncionalidades.SelectedIndexChanged += new System.EventHandler(this.lbxFuncionalidades_SelectedIndexChanged);
-            this.lbxFuncionalidades.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.lbxFuncionalidades_ControlAdded);
             // 
             // btnGuardarRol
             // 

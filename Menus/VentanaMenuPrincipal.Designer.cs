@@ -31,7 +31,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.administracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuRoles = new System.Windows.Forms.ToolStripMenuItem();
-            this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.funcionalidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.habitacionesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.regimenesEstadiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,13 +69,12 @@
             this.menuStrip1.Size = new System.Drawing.Size(366, 24);
             this.menuStrip1.TabIndex = 27;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // administracionToolStripMenuItem
             // 
             this.administracionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuRoles,
-            this.usuariosToolStripMenuItem,
+            this.menuUsuarios,
             this.funcionalidadesToolStripMenuItem,
             this.habitacionesToolStripMenuItem1,
             this.regimenesEstadiaToolStripMenuItem});
@@ -86,34 +85,33 @@
             // menuRoles
             // 
             this.menuRoles.Name = "menuRoles";
-            this.menuRoles.Size = new System.Drawing.Size(143, 22);
+            this.menuRoles.Size = new System.Drawing.Size(152, 22);
             this.menuRoles.Text = "Roles";
             this.menuRoles.Click += new System.EventHandler(this.menuRoles_Click);
             // 
-            // usuariosToolStripMenuItem
+            // menuUsuarios
             // 
-            this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.usuariosToolStripMenuItem.Text = "Usuarios";
-            this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
+            this.menuUsuarios.Name = "menuUsuarios";
+            this.menuUsuarios.Size = new System.Drawing.Size(152, 22);
+            this.menuUsuarios.Text = "Usuarios";
+            this.menuUsuarios.Click += new System.EventHandler(this.menuUsuarios_Click);
             // 
             // funcionalidadesToolStripMenuItem
             // 
             this.funcionalidadesToolStripMenuItem.Name = "funcionalidadesToolStripMenuItem";
-            this.funcionalidadesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.funcionalidadesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.funcionalidadesToolStripMenuItem.Text = "Hoteles";
-            this.funcionalidadesToolStripMenuItem.Click += new System.EventHandler(this.funcionalidadesToolStripMenuItem_Click);
             // 
             // habitacionesToolStripMenuItem1
             // 
             this.habitacionesToolStripMenuItem1.Name = "habitacionesToolStripMenuItem1";
-            this.habitacionesToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
+            this.habitacionesToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.habitacionesToolStripMenuItem1.Text = "Habitaciones";
             // 
             // regimenesEstadiaToolStripMenuItem
             // 
             this.regimenesEstadiaToolStripMenuItem.Name = "regimenesEstadiaToolStripMenuItem";
-            this.regimenesEstadiaToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.regimenesEstadiaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.regimenesEstadiaToolStripMenuItem.Text = "Regimenes";
             // 
             // hoteleriaToolStripMenuItem
@@ -192,7 +190,6 @@
             this.Name = "VentanaMenuPrincipal";
             this.Text = "Menu Principal - FRBA Hotel ©";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.VentanaMenuPrincipal_FormClosed);
-            this.Load += new System.EventHandler(this.MenuPrincipalUsuarios_Load);
             this.Controls.SetChildIndex(this.menuStrip1, 0);
             this.Controls.SetChildIndex(this.logo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
@@ -209,7 +206,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem administracionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuRoles;
-        private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuUsuarios;
         private System.Windows.Forms.ToolStripMenuItem funcionalidadesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hoteleriaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hotelesToolStripMenuItem;

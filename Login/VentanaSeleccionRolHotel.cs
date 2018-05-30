@@ -11,17 +11,28 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.Login
 {
-    public partial class VentanaSeleccionHotelRol : VentanaBase
+    public partial class VentanaSeleccionRolHotel : VentanaBase
     {
+        //-------------------------------------- Atributos -------------------------------------
+
         Usuario usuario { get; set; }
 
-        public VentanaSeleccionHotelRol(Usuario usuario)
+        //-------------------------------------- Constructores -------------------------------------
+
+        public VentanaSeleccionRolHotel(Usuario usuario)
         {
             this.usuario = usuario;    
             InitializeComponent();
             lblErrorRol.Hide();
         }
 
+        //-------------------------------------- Metodos para Eventos -------------------------------------
+
+        private void VentanaSeleccionRol_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+       
         public void configurarParaRol()
         {
             lblHotel.Hide();
@@ -36,7 +47,7 @@ namespace FrbaHotel.Login
             VentanaBase.comboBoxCargar(cbxHoteles, usuario.hoteles);
         }
 
-        public void configurarParaHotelYRol()
+        public void configurarParaRolYHotel()
         {
             VentanaBase.comboBoxCargar(cbxHoteles, usuario.hoteles);
             VentanaBase.comboBoxCargar(cbxRoles, usuario.roles); ;
@@ -47,11 +58,5 @@ namespace FrbaHotel.Login
             VentanaMenuPrincipal ventanaMenuPrincipal = new VentanaMenuPrincipal(usuario);
             ventanaMenuPrincipal.Show();
         }
-
-        private void VentanaSeleccionRol_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit(); 
-        }
-
     }
 }

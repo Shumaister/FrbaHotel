@@ -12,8 +12,11 @@ namespace FrbaHotel
 {
     public partial class VentanaBase : Form
     {
+        //-------------------------------------- Atributos -------------------------------------
 
         protected string ProgramTitle { get; set; }
+
+        //-------------------------------------- Constructores -------------------------------------
 
         public VentanaBase()
         {
@@ -21,7 +24,7 @@ namespace FrbaHotel
             ProgramTitle = "Frba Hotel";
         }
 
-        //-------------------------------------- Metodos para ventanas -------------------------------------
+        //-------------------------------------- Metodos para Ventanas -------------------------------------
 
         public static bool ventanaCamposTodosCompletos(Control ventana, ErrorProvider errorProvider)
         {
@@ -64,7 +67,7 @@ namespace FrbaHotel
             MessageBox.Show("ERROR: " + mensaje, "Aviso");
         }
 
-        //-------------------------------------- Metodos para Combo Box -------------------------------------
+        //-------------------------------------- Metodos para Elementos -------------------------------------
 
         public static void comboBoxCargar(ComboBox comboBox, List<string> listaValores)
         {
@@ -76,6 +79,11 @@ namespace FrbaHotel
         {
             foreach (string valor in listaValores)
                 listBox.Items.Add(valor);
+        }
+
+        public static void dataGridViewCargar(DataGridView dataGridView, DataTable tablaValores)
+        {
+            dataGridView.DataSource = tablaValores;
         }
     }
 }
