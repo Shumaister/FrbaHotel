@@ -28,16 +28,26 @@ namespace FrbaHotel.Login
                 if (logueo.Exito)
                 {
                     this.Hide();
-                    new VentanaSeleccionRol(new Usuario(logueo)).Show();
+                    if (Usuario.trabajaEnUnSoloHotel() && Usuario.tieneUnSoloRol())
+                        abrirMenuPrincipal();
+                    else if (Usuario.trabajaEnUnSoloHotel && Usuario.tieneVariosRoles())
+                        abrirSeleccionDeRol();
+                    else if (Usuario.trabajaEnVariosHoteles && Usuario.tieneUnSoloRol())
+                        abrirSeleccionDeHotel();
+                    else
+                        abrirSeleccionDeHotelYRol();
                 }
                 else
-                {
-                    txbUser.Clear();
-                    txbPass.Clear();
-                    lblErrorLogueo.Visible = true;
-                    lblErrorLogueo.Text = logueo.MensajeError;
-                }
+                    errorLogueo(logueo);
             }
+        }
+
+        private void errorLogueo(LogueoDTO logueo)
+        {
+            txbUser.Clear();
+            txbPass.Clear();
+            lblErrorLogueo.Visible = true;
+            lblErrorLogueo.Text = logueo.MensajeError;
         }
 
         private void txbUser_TextChanged(object sender, EventArgs e)

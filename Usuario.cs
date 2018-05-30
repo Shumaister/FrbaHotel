@@ -25,5 +25,25 @@ namespace FrbaHotel
         {
             return Database.rolObtenerFuncionalidades(rol);
         }
+
+        private bool trabajaEnUnSoloHotel()
+        {
+            return Database.usuarioTrabajaEnUnSoloHotel(this);
+        }
+
+        private bool trabajaEnVariosHoteles()
+        {
+            return Database.usuarioTrabajaEnVariosHoteles(this);
+        }
+
+        private bool tieneUnSoloRol()
+        {
+            return Database.usuarioTieneUnSoloRol(this);
+        }
+
+        private bool tieneVariosRoles()
+        {
+            return Database.usuarioTieneVariosRoles(this);
+        }
     }
 }

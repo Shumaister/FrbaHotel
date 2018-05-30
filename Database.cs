@@ -144,7 +144,7 @@ namespace FrbaHotel
             else
             {
                 ActualizarIntentosLogueo(user, 0);
-                List<string> roles = Roles(usuario);
+                List<string> roles = usuarioObtenerRolesHabilitados(usuario);
                 return new LogueoDTO(true, "Exito!", usuario, roles);
             }
         }
@@ -179,13 +179,6 @@ namespace FrbaHotel
         }
 
         //-------------------------------------- Metodos para Roles -------------------------------------
-
-        public static List<string> Roles(string user)
-        {
-            SqlCommand loginCommand = consultaCrear("SELECT r.Rol_Nombre FROM rip.Roles r INNER JOIN RIP.Usuario_Rol ur on r.Rol_ID = ur.Usuario_Rol_Rol_ID INNER JOIN RIP.Usuarios u on ur.Usuario_Rol_Usuario_ID = u.Usuario_ID where u.Usuario_User = @user and r.Rol_Estado = 1");
-            loginCommand.Parameters.AddWithValue("user", user);
-            return Database.consultaObtenerValores(loginCommand);
-        }
 
         public static void rolAgregar(string nombreRol, string estado)
         {
@@ -291,12 +284,12 @@ namespace FrbaHotel
 
         //-------------------------------------- Metodos para Hoteles -------------------------------------
 
-        internal static List<string> HotelesDeUnUsuario(Usuario Usuario)
+        public static List<string> usuarioObtenerHoteles(string nombreUsuario)
         {
             SqlConnection connection = obtenerConexion();
 
             SqlCommand hotelesquery = new SqlCommand("SELECT ci.Ciudades_Descripcion, c.Calles_Descripcion, d.Domicilio_Nro_calle FROM rip.Hoteles h JOIN RIP.Hotel_Usuario hu on hu.Hotel_Usuario_IdHotel = h.Hoteles_ID JOIN RIP.Usuarios u on u.Usuario_ID = hu.Hotel_Usuario_IdUsuario JOIN RIP.Domicilio d on d.Domicilio_ID = h.Hoteles_Domicilio_ID JOIN RIP.Calles c on c.Calles_ID = d.Domicilio_Calle_ID JOIN RIP.Ciudades ci on ci.Ciudades_ID = d.Domicilio_Ciudad_ID where u.Usuario_User = @username");
-            hotelesquery.Parameters.AddWithValue("username", Usuario.NombreUsuario);
+            hotelesquery.Parameters.AddWithValue("username", nombreUsuario);
             hotelesquery.Connection = connection;
             connection.Open();
             SqlDataReader reader = hotelesquery.ExecuteReader();
@@ -316,5 +309,45 @@ namespace FrbaHotel
 
             return hoteles;
         }
+        
+        public static bool usuarioTrabajaEnUnSoloHotel(string nombreUsuario)
+        {
+            SqlCommand consulta = Database.consultaCrear("SELECT count(Hotel_Usuario_IdHotel) FROM RIP.Hotel_Usuario JOIN RIP.Usuarios ON Hotel_Usuario_IdUsuario = Usuario_ID WHERE Usuario_User = @nombreUsuario");
+            consulta.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+            int cantidadHoteles = Convert.ToInt32(Database.consultaObtenerValor(consulta));
+            return cantidadHoteles == 1;
+        }
+
+        public static bool usuarioTrabajaEnVariosHoteles(string nombreUsuario)
+        {
+            return !Database.usuarioTrabajaEnUnSoloHotel(nombreUsuario);
+        }
+#warning Es mejor usar count en la BD o me traigo la lista de ahi comparo por el atributo count?
+        public static bool usuarioTieneUnSoloRol(string nombreUsuario)
+        {
+            SqlCommand consulta = Database.consultaCrear("SELECT count(Rol_Nombre) FROM rip.Roles r INNER JOIN RIP.Usuario_Rol ur on r.Rol_ID = ur.Usuario_Rol_Rol_ID INNER JOIN RIP.Usuarios u on ur.Usuario_Rol_Usuario_ID = u.Usuario_ID where u.Usuario_User = @nombreUsuario");
+            consulta.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+            int cantidadRoles = Convert.ToInt32(Database.consultaObtenerValor(consulta));
+            return cantidadRoles == 1;
+        }
+
+        public static List<string> usuarioObtenerRoles(string nombreUsuario)
+        {
+            SqlCommand loginCommand = consultaCrear("SELECT r.Rol_Nombre FROM rip.Roles r INNER JOIN RIP.Usuario_Rol ur on r.Rol_ID = ur.Usuario_Rol_Rol_ID INNER JOIN RIP.Usuarios u on ur.Usuario_Rol_Usuario_ID = u.Usuario_ID where u.Usuario_User = @nombreUsuario");
+            loginCommand.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+            return Database.consultaObtenerValores(loginCommand);
+        }
+
+        public static List<string> usuarioObtenerRolesHabilitados(string user)
+        {
+            SqlCommand loginCommand = consultaCrear("SELECT r.Rol_Nombre FROM rip.Roles r INNER JOIN RIP.Usuario_Rol ur on r.Rol_ID = ur.Usuario_Rol_Rol_ID INNER JOIN RIP.Usuarios u on ur.Usuario_Rol_Usuario_ID = u.Usuario_ID where u.Usuario_User = @user and r.Rol_Estado = 1");
+            loginCommand.Parameters.AddWithValue("user", user);
+            return Database.consultaObtenerValores(loginCommand);
+        }
+
+        public static bool usuarioTieneVariosRoles(string nombreUsuario)
+        {
+            return !Database.usuarioTieneUnSoloRol(nombreUsuario);
+        }    
     }
 }
