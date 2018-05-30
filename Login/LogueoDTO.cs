@@ -8,21 +8,24 @@ namespace FrbaHotel.Login
 {
     public class LogueoDTO
     {
-        public bool Exito { get; set; }
-        public string MensajeError { get; set; }
-        public string User { get; set; }
-        public List<string> Roles { get; set; } 
+        public bool exito { get; set; }
+        public string mensajeError { get; set; }
+        public string nombreUsuario { get; set; }
+        public List<string> rolesUsuario { get; set; }
+        public List<string> hotelesUsuario { get; set; }
 
-        public LogueoDTO(bool e, string m, string u, List<string> r){
-            this.Exito = e;
-            this.MensajeError = m;
-            this.User = u;
-            this.Roles = r;
-        }
-        public LogueoDTO(bool e, string m)
+        public LogueoDTO(bool exito, string mensaje, string usuario, List<string> roles, List<string> hoteles)
         {
-            this.Exito = e;
-            this.MensajeError = m;
+            this.exito = exito;
+            this.mensajeError = mensaje;
+            this.nombreUsuario = usuario;
+            this.rolesUsuario = roles;
+            this.hotelesUsuario = hoteles;
+        }
+        public LogueoDTO(bool exito, string mensaje)
+        {
+            this.exito = exito;
+            this.mensajeError = mensaje;
         }
     }
 }

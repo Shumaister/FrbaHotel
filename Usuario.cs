@@ -9,16 +9,18 @@ namespace FrbaHotel
 {
     public class Usuario
     {
-        public string NombreUsuario { get; set; }
-        public List<string> Roles { get; set; }
-        public string RolLogueado { get; set; }
-        public List<string> Funcionalidades { get; set; }
-        public string Hotel { get ;set; }
+        public string nombreUsuario { get; set; }
+        public string rolLogueado { get; set; }
+        public string hotelLogueado { get; set; }
+        public List<string> roles { get; set; }
+        public List<string> funcionalidades { get; set; }
+        public List<string> hoteles { get; set; }
 
         public Usuario(LogueoDTO logueo)
         {
-            this.NombreUsuario = logueo.User;
-            this.Roles = logueo.Roles;
+            this.nombreUsuario = logueo.nombreUsuario;
+            this.roles = logueo.rolesUsuario;
+            this.hoteles = logueo.hotelesUsuario;
         }
 
         private List<string> FuncionalidadesDeRol(string rol)
@@ -28,22 +30,22 @@ namespace FrbaHotel
 
         private bool trabajaEnUnSoloHotel()
         {
-            return Database.usuarioTrabajaEnUnSoloHotel(this);
+            return Database.usuarioTrabajaEnUnSoloHotel(this.nombreUsuario);
         }
 
         private bool trabajaEnVariosHoteles()
         {
-            return Database.usuarioTrabajaEnVariosHoteles(this);
+            return Database.usuarioTrabajaEnVariosHoteles(this.nombreUsuario);
         }
 
         private bool tieneUnSoloRol()
         {
-            return Database.usuarioTieneUnSoloRol(this);
+            return Database.usuarioTieneUnSoloRol(this.nombreUsuario);
         }
 
         private bool tieneVariosRoles()
         {
-            return Database.usuarioTieneVariosRoles(this);
+            return Database.usuarioTieneVariosRoles(this.nombreUsuario);
         }
     }
 }

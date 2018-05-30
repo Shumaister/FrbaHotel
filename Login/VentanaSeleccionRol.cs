@@ -13,71 +13,39 @@ namespace FrbaHotel.Login
 {
     public partial class VentanaSeleccionRol : VentanaBase
     {
-        Usuario Usuario { get; set; }
+        Usuario usuario { get; set; }
 
-        public VentanaSeleccionRol(Usuario usu)
+        public VentanaSeleccionRol(Usuario usuario)
         {
-            this.Usuario = usu;    
+            this.usuario = usuario;    
             InitializeComponent();
-            lblErrorRol.Visible = false;
-            TrabarSeleccionHotel();
+            lblErrorRol.Hide();
         }
 
-        private void TrabarSeleccionHotel()
+        public void abrirParaRol()
         {
-            cbxHoteles.Enabled = false;
-            lblHotel.Enabled = false;
-            btnIngresarHotel.Enabled = false;
+            lblHotel.Hide();
+            cbxHoteles.Hide();
+            VentanaBase.comboBoxCargar(cbxRoles, usuario.roles);
         }
 
-        private void SeleccionRol_Load(object sender, EventArgs e)
+        public void abrirParaHotel()
         {
-            foreach(string rol in Usuario.Roles)
-                cbxRoles.Items.Add(rol);
+            cbxRoles.Hide();
+            lblRol.Hide();
+            VentanaBase.comboBoxCargar(cbxHoteles, usuario.hoteles);
+        }
 
-            if (Usuario.Roles.Count == 1) {
-                // Usuario.RolLogueado = Usuario.Roles[0];
-                // cbxRoles.Enabled = false;
-                // no googles como hacerlo, pero la idea es que te auto-seleccione el unico rol existente  cbxRoles.Select[0];
-                // btnIngresarRol_Click(sender, e);
-            }
-
+        public void abrirParaHotelYRol()
+        {
+            VentanaBase.comboBoxCargar(cbxHoteles, usuario.hoteles);
+            VentanaBase.comboBoxCargar(cbxRoles, usuario.roles); ;
         }
 
         private void btnIngresarRol_Click(object sender, EventArgs e)
         {
-            lblErrorRol.Visible = false;
-            Usuario.RolLogueado = cbxRoles.SelectedItem.ToString();
-            CargarRolesParaHotel();
-        }
-
-        private void CargarRolesParaHotel()
-        {
-            cbxHoteles.Enabled = true;
-            lblHotel.Enabled = true;
-            btnIngresarHotel.Enabled = true;
-
-            List<string> hoteles = Database.HotelesDeUnUsuario(Usuario);
-
-            if (hoteles == null)
-            {
-                lblErrorRol.Visible = true;
-                lblErrorRol.Text = "Usted no tiene hoteles para el rol que selecciono";
-                TrabarSeleccionHotel();
-            }
-            else
-            {
-                foreach (string hotel in hoteles)
-                    cbxHoteles.Items.Add(hotel);
-            }
-        }
-
-        private void btnIngresarHotel_Click(object sender, EventArgs e)
-        {
-            Usuario.Hotel = cbxHoteles.SelectedItem.ToString();
-            this.Hide();
-            VentanaMenuPrincipal mpu = new VentanaMenuPrincipal(Usuario);
-            mpu.Show();
+            VentanaMenuPrincipal ventanaMenuPrincipal = new VentanaMenuPrincipal(usuario);
+            ventanaMenuPrincipal.Show();
         }
 
         private void VentanaSeleccionRol_FormClosed(object sender, FormClosedEventArgs e)

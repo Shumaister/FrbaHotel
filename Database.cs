@@ -145,7 +145,8 @@ namespace FrbaHotel
             {
                 ActualizarIntentosLogueo(user, 0);
                 List<string> roles = usuarioObtenerRolesHabilitados(usuario);
-                return new LogueoDTO(true, "Exito!", usuario, roles);
+                List<string> hoteles = usuarioObtenerHoteles(usuario);
+                return new LogueoDTO(true, "Exito!", usuario, roles, hoteles);
             }
         }
 

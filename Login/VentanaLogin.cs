@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FrbaHotel.Menus;
 
 namespace FrbaHotel.Login
 {
@@ -25,21 +26,50 @@ namespace FrbaHotel.Login
             if (ventanaCamposTodosCompletos(this, controladorError)) 
             {
                 LogueoDTO logueo = Database.Autenticar(txbUser.Text, txbPass.Text);
-                if (logueo.Exito)
+                if (logueo.exito)
                 {
                     this.Hide();
-                    if (Usuario.trabajaEnUnSoloHotel() && Usuario.tieneUnSoloRol())
-                        abrirMenuPrincipal();
-                    else if (Usuario.trabajaEnUnSoloHotel && Usuario.tieneVariosRoles())
-                        abrirSeleccionDeRol();
-                    else if (Usuario.trabajaEnVariosHoteles && Usuario.tieneUnSoloRol())
-                        abrirSeleccionDeHotel();
+                    string nombreUsuario = logueo.nombreUsuario;
+                    Usuario usuario = new Usuario(logueo);
+                    if (Database.usuarioTrabajaEnUnSoloHotel(nombreUsuario) && Database.usuarioTieneUnSoloRol(nombreUsuario))
+                        abrirMenuPrincipal(usuario);
+                    else if (Database.usuarioTrabajaEnUnSoloHotel(nombreUsuario) && Database.usuarioTieneVariosRoles(nombreUsuario))
+                        abrirSeleccionDeRol(usuario);
+                    else if (Database.usuarioTrabajaEnVariosHoteles(nombreUsuario) && Database.usuarioTieneUnSoloRol(nombreUsuario))
+                        abrirSeleccionDeHotel(usuario);
                     else
-                        abrirSeleccionDeHotelYRol();
+                        abrirSeleccionDeHotelYRol(usuario);
                 }
                 else
                     errorLogueo(logueo);
             }
+        }
+
+        private void abrirMenuPrincipal(Usuario usuario)
+        {
+            VentanaMenuPrincipal ventanaMenuPrincipal = new VentanaMenuPrincipal(usuario);
+            ventanaMenuPrincipal.Show();
+        }
+
+        private void abrirSeleccionDeRol(Usuario usuario)
+        {
+            VentanaSeleccionRol ventanaSeleccionRol = new VentanaSeleccionRol(usuario);
+            ventanaSeleccionRol.abrirParaRol();
+            ventanaSeleccionRol.Show();
+        }
+
+        private void abrirSeleccionDeHotel(Usuario usuario)
+        {
+            VentanaSeleccionRol ventanaSeleccionRol = new VentanaSeleccionRol(usuario);
+            ventanaSeleccionRol.abrirParaHotel();
+            ventanaSeleccionRol.Show();
+        }
+
+        private void abrirSeleccionDeHotelYRol(Usuario usuario)
+        {
+            VentanaSeleccionRol ventanaSeleccionRol = new VentanaSeleccionRol(usuario);
+            ventanaSeleccionRol.abrirParaHotelYRol();
+            ventanaSeleccionRol.Show();
         }
 
         private void errorLogueo(LogueoDTO logueo)
@@ -47,7 +77,7 @@ namespace FrbaHotel.Login
             txbUser.Clear();
             txbPass.Clear();
             lblErrorLogueo.Visible = true;
-            lblErrorLogueo.Text = logueo.MensajeError;
+            lblErrorLogueo.Text = logueo.mensajeError;
         }
 
         private void txbUser_TextChanged(object sender, EventArgs e)
