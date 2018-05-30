@@ -29,7 +29,6 @@ D:\Dario\FrbaHotel\bin\Debug\FrbaHotel.pdb
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.VentanaRoles.resources
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaInicio.resources
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaLogin.resources
-D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaSeleccionRol.resources
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Menus.VentanaMenuPrincipal.resources
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Properties.Resources.resources
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.VentanaBase.resources
@@ -52,3 +51,4 @@ D:\Familia\Dario\FrbaHotel\obj\Debug\FrbaHotel.pdb
 D:\Familia\Dario\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.VentanaModificarRol.resources
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaSeleccionHotelRol.resources

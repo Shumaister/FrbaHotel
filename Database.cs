@@ -134,7 +134,7 @@ namespace FrbaHotel
             if (!Sha256_hash(pas).SequenceEqual(contrasenia))
             {
                 intentosFallidos++;
-                ActualizarIntentosLogueo(user, intentosFallidos);
+                LoginActualizarIntentos(user, intentosFallidos);
 
                 if (intentosFallidos >= 3)
                     return new LogueoDTO(false, "El usuario se ha bloqueado por cantidad de intentos fallidos de contranenia.\nContactese con un administrador.");
@@ -143,25 +143,19 @@ namespace FrbaHotel
             }
             else
             {
-                ActualizarIntentosLogueo(user, 0);
+                LoginActualizarIntentos(user, 0);
                 List<string> roles = usuarioObtenerRolesHabilitados(usuario);
                 List<string> hoteles = usuarioObtenerHoteles(usuario);
                 return new LogueoDTO(true, "Exito!", usuario, roles, hoteles);
             }
         }
 
-        public static void ActualizarIntentosLogueo(string user, int cant)
+        public static void LoginActualizarIntentos(string username, int cantidad)
         {
-            SqlConnection connection = obtenerConexion();
-            connection.Open();
-
-            SqlCommand query = new SqlCommand("UPDATE RIP.Usuarios SET Usuario_CantidadDeIntentos = @cant WHERE Usuario_User = @user");
-            query.Parameters.AddWithValue("user", user);
-            query.Parameters.AddWithValue("cant", cant);
-            query.Connection = connection;
-            query.ExecuteNonQuery();
-
-            connection.Close();
+            SqlCommand query = consultaCrear("UPDATE RIP.Usuarios SET Usuario_CantidadDeIntentos = @cantidad WHERE Usuario_User = @username");
+            query.Parameters.AddWithValue("username", username);
+            query.Parameters.AddWithValue("cantidad", cantidad);
+            Database.consultaEjecutar(query);
         }
 
         //-------------------------------------- Metodos para Funcionalidades -------------------------------------
@@ -283,7 +277,7 @@ namespace FrbaHotel
             return Database.consultaObtenerValores(consulta);
         }
 
-        //-------------------------------------- Metodos para Hoteles -------------------------------------
+        //-------------------------------------- Metodos para Usuarios -------------------------------------
 
         public static List<string> usuarioObtenerHoteles(string nombreUsuario)
         {
@@ -323,7 +317,7 @@ namespace FrbaHotel
         {
             return !Database.usuarioTrabajaEnUnSoloHotel(nombreUsuario);
         }
-#warning Es mejor usar count en la BD o me traigo la lista de ahi comparo por el atributo count?
+
         public static bool usuarioTieneUnSoloRol(string nombreUsuario)
         {
             SqlCommand consulta = Database.consultaCrear("SELECT count(Rol_Nombre) FROM rip.Roles r INNER JOIN RIP.Usuario_Rol ur on r.Rol_ID = ur.Usuario_Rol_Rol_ID INNER JOIN RIP.Usuarios u on ur.Usuario_Rol_Usuario_ID = u.Usuario_ID where u.Usuario_User = @nombreUsuario");
@@ -339,10 +333,10 @@ namespace FrbaHotel
             return Database.consultaObtenerValores(loginCommand);
         }
 
-        public static List<string> usuarioObtenerRolesHabilitados(string user)
+        public static List<string> usuarioObtenerRolesHabilitados(string nombreUsuario)
         {
             SqlCommand loginCommand = consultaCrear("SELECT r.Rol_Nombre FROM rip.Roles r INNER JOIN RIP.Usuario_Rol ur on r.Rol_ID = ur.Usuario_Rol_Rol_ID INNER JOIN RIP.Usuarios u on ur.Usuario_Rol_Usuario_ID = u.Usuario_ID where u.Usuario_User = @user and r.Rol_Estado = 1");
-            loginCommand.Parameters.AddWithValue("user", user);
+            loginCommand.Parameters.AddWithValue("user", nombreUsuario);
             return Database.consultaObtenerValores(loginCommand);
         }
 

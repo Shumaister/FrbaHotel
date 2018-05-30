@@ -11,32 +11,32 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.Login
 {
-    public partial class VentanaSeleccionRol : VentanaBase
+    public partial class VentanaSeleccionHotelRol : VentanaBase
     {
         Usuario usuario { get; set; }
 
-        public VentanaSeleccionRol(Usuario usuario)
+        public VentanaSeleccionHotelRol(Usuario usuario)
         {
             this.usuario = usuario;    
             InitializeComponent();
             lblErrorRol.Hide();
         }
 
-        public void abrirParaRol()
+        public void configurarParaRol()
         {
             lblHotel.Hide();
             cbxHoteles.Hide();
             VentanaBase.comboBoxCargar(cbxRoles, usuario.roles);
         }
 
-        public void abrirParaHotel()
+        public void configurarParaHotel()
         {
             cbxRoles.Hide();
             lblRol.Hide();
             VentanaBase.comboBoxCargar(cbxHoteles, usuario.hoteles);
         }
 
-        public void abrirParaHotelYRol()
+        public void configurarParaHotelYRol()
         {
             VentanaBase.comboBoxCargar(cbxHoteles, usuario.hoteles);
             VentanaBase.comboBoxCargar(cbxRoles, usuario.roles); ;
