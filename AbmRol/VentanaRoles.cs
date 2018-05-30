@@ -34,7 +34,7 @@ namespace FrbaHotel.AbmRol
             cbxModificar.Items.Clear();
             cbxEliminar.Items.Clear(); ;
             VentanaBase.comboBoxCargar(cbxModificar, Database.rolObtenerTodos());
-#warning En eliminar mostrar solo roles habilitados o todos?
+#warning En eliminar mostrar solo los roles habilitados o todos?
             VentanaBase.comboBoxCargar(cbxEliminar, Database.rolObtenerHabilitados());
             cbxModificar.SelectedIndex = 0;
             cbxEliminar.SelectedIndex = 0;

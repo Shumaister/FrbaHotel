@@ -82,7 +82,7 @@ namespace FrbaHotel.Login
 
         private void VentanaSeleccionRol_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            Application.Exit(); 
         }
 
     }
