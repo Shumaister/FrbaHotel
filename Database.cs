@@ -185,25 +185,6 @@ namespace FrbaHotel
             SqlCommand loginCommand = consultaCrear("SELECT r.Rol_Nombre FROM rip.Roles r INNER JOIN RIP.Usuario_Rol ur on r.Rol_ID = ur.Usuario_Rol_Rol_ID INNER JOIN RIP.Usuarios u on ur.Usuario_Rol_Usuario_ID = u.Usuario_ID where u.Usuario_User = @user and r.Rol_Estado = 1");
             loginCommand.Parameters.AddWithValue("user", user);
             return Database.consultaObtenerValores(loginCommand);
-            /*
-            List<String> listaRoles = new List<string>();
-            List<String> listaEstados = new List<string>();
-            SqlConnection connection = obtenerConexion();
-            SqlCommand loginCommand = new SqlCommand("SELECT r.Rol_Nombre FROM rip.Roles r INNER JOIN RIP.Usuario_Rol ur on r.Rol_ID = ur.Usuario_Rol_Rol_ID INNER JOIN RIP.Usuarios u on ur.Usuario_Rol_Usuario_ID = u.Usuario_ID where u.Usuario_User = @user and r.Rol_Estado = 1");
-            loginCommand.Parameters.AddWithValue("user", user);
-            loginCommand.Connection = connection;
-            connection.Open();
-
-            SqlDataReader reader = loginCommand.ExecuteReader();
-
-            while (reader.Read())
-            {
-                listaRoles.Add(reader[0].ToString());
-            }
-            reader.Close();
-            connection.Close();
-            return listaRoles;
-            */
         }
 
         public static void rolAgregar(string nombreRol, string estado)
@@ -233,12 +214,12 @@ namespace FrbaHotel
 
         public static void rolModificar(string nombreRolActual, string nombreRolNuevo, string estado)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Nombre = @nombreRolNuevo Rol_Estado = @estado WHERE Rol_Nombre = @nombreRolActual");
+            Database.rolEliminarFuncionalidades(nombreRolActual);
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Nombre = @nombreRolNuevo, Rol_Estado = @estado WHERE Rol_Nombre = @nombreRolActual");
             consulta.Parameters.AddWithValue("@nombreRolActual", nombreRolActual);
             consulta.Parameters.AddWithValue("@nombreRolNuevo", nombreRolNuevo);
             consulta.Parameters.AddWithValue("@estado", estado);
             consultaEjecutar(consulta);
-            Database.rolEliminarFuncionalidades(nombreRolActual);
         }
 
         public static void rolEliminar(string nombreRol)
@@ -279,8 +260,7 @@ namespace FrbaHotel
         {
             SqlCommand consulta = consultaCrear("SELECT Rol_Estado FROM RIP.Roles WHERE Rol_Nombre = @nombreRol");
             consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
-            int resultado = Convert.ToInt32(Database.consultaObtenerValor(consulta));
-            return resultado == 1;
+            return bool.Parse(Database.consultaObtenerValor(consulta));
         }
 
         public static bool rolNoTieneEsaFuncionalidad(string nombreRol, string nombreFuncionalidad)

@@ -7,24 +7,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FrbaHotel.Menus;
 
 namespace FrbaHotel.AbmRol
 {
     public partial class VentanaRoles : VentanaBase
     {
-        public VentanaRoles()
+        VentanaMenuPrincipal ventanaMenu;
+
+        public VentanaRoles(VentanaMenuPrincipal ventana)
         {
             InitializeComponent();
+            ventanaMenu = ventana;
         }
 
-        public void VentanaRoles_Load(object sender, EventArgs e)
+        private void VentanaRoles_Load(object sender, EventArgs e)
         {
             VentanaBase.comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
+            cbxFuncionalidades.Sorted = true;
             cbxFuncionalidades.SelectedIndex = 0;
             actualizarVentana();
         }
 
-        private void actualizarVentana()
+        public void actualizarVentana()
         {
             cbxModificar.Items.Clear();
             cbxEliminar.Items.Clear(); ;
@@ -40,9 +45,15 @@ namespace FrbaHotel.AbmRol
 
         private void btnAgregarFuncionalidad_Click(object sender, EventArgs e)
         {
-            lbxFuncionalidades.Items.Add(cbxFuncionalidades.SelectedItem);
-            cbxFuncionalidades.Items.Remove(cbxFuncionalidades.SelectedItem);
-            cbxFuncionalidades.SelectedIndex = 0;
+            if (cbxFuncionalidades.SelectedItem != null)
+            {
+                lbxFuncionalidades.Items.Add(cbxFuncionalidades.SelectedItem);
+                cbxFuncionalidades.Items.Remove(cbxFuncionalidades.SelectedItem);
+                if (cbxFuncionalidades.Items.Count > 0)
+                    cbxFuncionalidades.SelectedIndex = 0;
+                else
+                    cbxFuncionalidades.ResetText();
+            }
         }
 
         private void btnQuitarRol_Click(object sender, EventArgs e)
@@ -50,8 +61,9 @@ namespace FrbaHotel.AbmRol
             if (lbxFuncionalidades.SelectedItem != null)
             {
                 cbxFuncionalidades.Items.Add(lbxFuncionalidades.SelectedItem);
-                //cbxFuncionalidades.Sorted = true;
+                cbxFuncionalidades.Sorted = true;
                 lbxFuncionalidades.Items.Remove(lbxFuncionalidades.SelectedItem);
+                cbxFuncionalidades.SelectedIndex = 0;
             }
         }
 
@@ -69,14 +81,14 @@ namespace FrbaHotel.AbmRol
 
         private void btnGuardarRol_Click(object sender, EventArgs e)
         {
-            string nombreRol = tbxNombreRol.Text;
-            if (Database.rolNombreYaExiste(nombreRol))
-            {
-                VentanaBase.ventanaInformarError("Un rol ya posee el mismo nombre");
-                return;
-            }
             if (VentanaBase.ventanaCamposTodosCompletos(tabAgregar, controladorError))
-            { 
+            {
+                string nombreRol = tbxNombreRol.Text;
+                if (Database.rolNombreYaExiste(nombreRol))
+                {
+                    VentanaBase.ventanaInformarError("Un rol ya posee el mismo nombre");
+                    return;
+                }
                 if (rbtRolActivado.Checked)
                     Database.rolAgregar(nombreRol, "1");
                 else 
@@ -105,7 +117,10 @@ namespace FrbaHotel.AbmRol
 
         private void bntModificar_Click(object sender, EventArgs e)
         {
-            new VentanaModificarRol(this, cbxModificar.SelectedItem.ToString()).Show();
+            VentanaModificarRol ventanaModificarRol = new VentanaModificarRol(this, cbxModificar.SelectedItem.ToString());
+            ventanaModificarRol.MdiParent = ventanaMenu;
+            ventanaModificarRol.Show();
+
         }
 
         //-------------------------------------- Metodos para Eliminar -------------------------------------

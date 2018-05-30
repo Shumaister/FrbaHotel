@@ -62,6 +62,7 @@
             this.btnQuitarRol.TabIndex = 24;
             this.btnQuitarRol.Text = "Quitar";
             this.btnQuitarRol.UseVisualStyleBackColor = true;
+            this.btnQuitarRol.Click += new System.EventHandler(this.btnQuitarRol_Click);
             // 
             // tbxNombreRol
             // 
@@ -78,6 +79,7 @@
             this.btnAgregarFuncionalidad.TabIndex = 22;
             this.btnAgregarFuncionalidad.Text = "Agregar";
             this.btnAgregarFuncionalidad.UseVisualStyleBackColor = true;
+            this.btnAgregarFuncionalidad.Click += new System.EventHandler(this.btnAgregarFuncionalidad_Click);
             // 
             // lbxFuncionalidades
             // 
@@ -95,6 +97,7 @@
             this.btnGuardarRol.TabIndex = 20;
             this.btnGuardarRol.Text = "Guardar";
             this.btnGuardarRol.UseVisualStyleBackColor = true;
+            this.btnGuardarRol.Click += new System.EventHandler(this.btnGuardarRol_Click);
             // 
             // btnLimpiarRol
             // 
@@ -104,6 +107,7 @@
             this.btnLimpiarRol.TabIndex = 19;
             this.btnLimpiarRol.Text = "Limpiar";
             this.btnLimpiarRol.UseVisualStyleBackColor = true;
+            this.btnLimpiarRol.Click += new System.EventHandler(this.btnLimpiarRol_Click);
             // 
             // label3
             // 

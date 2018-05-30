@@ -27,8 +27,9 @@ namespace FrbaHotel.AbmRol
             tbxNombreRol.Text = nombreRolActual;
             VentanaBase.listBoxCargar(lbxFuncionalidades, Database.rolObtenerFuncionalidades(nombreRolActual));
             VentanaBase.comboBoxCargar(cbxFuncionalidades, Database.rolObtenerFuncionalidadesFaltantes(nombreRolActual));
-            cbxFuncionalidades.SelectedIndex = 0;
-            if(Database.rolEstaHabilitado(nombreRolActual))
+            if (cbxFuncionalidades.Items.Count > 0)
+                cbxFuncionalidades.SelectedIndex = 0;
+            if (Database.rolEstaHabilitado(nombreRolActual))
                 rbtRolActivado.Select();
             else
                 rbtRolDesactivado.Select();
@@ -36,9 +37,15 @@ namespace FrbaHotel.AbmRol
 
         private void btnAgregarFuncionalidad_Click(object sender, EventArgs e)
         {
-            lbxFuncionalidades.Items.Add(cbxFuncionalidades.SelectedItem);
-            cbxFuncionalidades.Items.Remove(cbxFuncionalidades.SelectedItem);
-            cbxFuncionalidades.SelectedIndex = 0;
+            if (cbxFuncionalidades.SelectedItem != null)
+            {
+                lbxFuncionalidades.Items.Add(cbxFuncionalidades.SelectedItem);
+                cbxFuncionalidades.Items.Remove(cbxFuncionalidades.SelectedItem);
+                if (cbxFuncionalidades.Items.Count > 0)
+                    cbxFuncionalidades.SelectedIndex = 0;
+                else
+                    cbxFuncionalidades.ResetText();
+            }
         }
 
         private void btnQuitarRol_Click(object sender, EventArgs e)
@@ -46,7 +53,9 @@ namespace FrbaHotel.AbmRol
             if (lbxFuncionalidades.SelectedItem != null)
             {
                 cbxFuncionalidades.Items.Add(lbxFuncionalidades.SelectedItem);
+                cbxFuncionalidades.Sorted = true;
                 lbxFuncionalidades.Items.Remove(lbxFuncionalidades.SelectedItem);
+                cbxFuncionalidades.SelectedIndex = 0;
             }
         }
 
@@ -63,23 +72,23 @@ namespace FrbaHotel.AbmRol
 
         private void btnGuardarRol_Click(object sender, EventArgs e)
         {
-            string nombreRolNuevo = tbxNombreRol.Text;
-            string idRol = Database.rolObtenerId(nombreRolNuevo);
-            if (Database.rolNombreYaExiste(nombreRolNuevo) && nombreRolNuevo != nombreRolActual)
-            {
-                VentanaBase.ventanaInformarError("Un rol ya posee el mismo nombre");
-                return;
-            }
             if (VentanaBase.ventanaCamposTodosCompletos(this, controladorError))
             {
+                string nombreRolNuevo = tbxNombreRol.Text;
+                if (Database.rolNombreYaExiste(nombreRolNuevo) && nombreRolNuevo != nombreRolActual)
+                {
+                    VentanaBase.ventanaInformarError("Un rol ya posee el mismo nombre");
+                    return;
+                }
                 if (rbtRolActivado.Checked)
                     Database.rolModificar(nombreRolActual, nombreRolNuevo, "1");
                 else
                     Database.rolModificar(nombreRolActual, nombreRolNuevo, "0");
+                string idRol = Database.rolObtenerId(nombreRolNuevo);
                 foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
                         Database.rolAgregarFuncionalidad(idRol, nombreFuncionalidad);
-                this.Close();
-                ventanaRoles.VentanaRoles_Load(sender, null);
+                ventanaRoles.actualizarVentana();
+                nombreRolActual = nombreRolNuevo;
                 VentanaBase.ventanaInformarExito();
             }
         }

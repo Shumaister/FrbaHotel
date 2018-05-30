@@ -26,7 +26,6 @@ C:\Users\Factotum\Documents\GitHub\FrbaHotel\obj\Debug\FrbaHotel.Menus.MenuPrinc
 D:\Dario\FrbaHotel\bin\Debug\FrbaHotel.exe.config
 D:\Dario\FrbaHotel\bin\Debug\FrbaHotel.exe
 D:\Dario\FrbaHotel\bin\Debug\FrbaHotel.pdb
-D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.VentanaRoles.resources
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaInicio.resources
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.Login.VentanaLogin.resources
@@ -52,3 +51,4 @@ D:\Familia\Dario\FrbaHotel\obj\Debug\FrbaHotel.exe
 D:\Familia\Dario\FrbaHotel\obj\Debug\FrbaHotel.pdb
 D:\Familia\Dario\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.VentanaModificarRol.resources
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
