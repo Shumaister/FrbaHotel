@@ -80,9 +80,9 @@ namespace FrbaHotel.AbmRol
                     return;
                 }
                 if (rbtRolActivado.Checked)
-                    Database.rolAgregar(nombreRol, "1");
+                    Database.rolHabilitadoAgregar(nombreRol);
                 else 
-                    Database.rolAgregar(nombreRol, "0");
+                    Database.rolDeshabilitadoAgregar(nombreRol);
                 string idRol = Database.rolObtenerId(nombreRol);
                 foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
                     Database.rolAgregarFuncionalidad(idRol, nombreFuncionalidad);
@@ -102,8 +102,7 @@ namespace FrbaHotel.AbmRol
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             Database.rolEliminar(cbxEliminar.SelectedItem.ToString());
-            VentanaBase.comboBoxCargar(cbxEliminar, Database.rolObtenerHabilitados());
-            cbxEliminar.SelectedIndex = 0;
+            VentanaBase.comboBoxReiniciar(cbxEliminar, Database.rolObtenerHabilitados());
             VentanaBase.ventanaInformarExito();
         }
     }

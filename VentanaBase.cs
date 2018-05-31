@@ -75,7 +75,6 @@ namespace FrbaHotel
                 comboBox.Items.Add(dato);
             if(comboBox.Items.Count > 0)
                 comboBox.SelectedIndex = 0;
-            comboBox.Sorted = true;
         }
 
         public static void comboBoxReiniciar(ComboBox comboBox, List<string> listaDatos)
@@ -88,6 +87,8 @@ namespace FrbaHotel
         {
             foreach (string dato in listaDatos)
                 listBox.Items.Add(dato);
+            if (listBox.Items.Count > 0)
+                listBox.SelectedIndex = 0;
         }
 
         public static void listBoxLimpiar(ListBox listBox)

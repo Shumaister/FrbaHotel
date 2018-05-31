@@ -23,6 +23,7 @@ namespace FrbaHotel.Login
         {
             this.usuario = usuario;    
             InitializeComponent();
+            this.AcceptButton = btnIngresarRol;
             lblErrorRol.Hide();
         }
 

@@ -33,10 +33,6 @@ namespace FrbaHotel.AbmRol
             tbxNombreRol.Text = nombreRolActual;
             VentanaBase.listBoxCargar(lbxFuncionalidades, Database.rolObtenerFuncionalidades(nombreRolActual));
             VentanaBase.comboBoxCargar(cbxFuncionalidades, Database.rolObtenerFuncionalidadesFaltantes(nombreRolActual));
-            if (cbxFuncionalidades.Items.Count > 0)
-                cbxFuncionalidades.SelectedIndex = 0;
-            if (lbxFuncionalidades.Items.Count > 0)
-                lbxFuncionalidades.SelectedIndex = 0;
             if (Database.rolEstaHabilitado(nombreRolActual))
                 rbtRolActivado.Select();
             else
@@ -55,40 +51,21 @@ namespace FrbaHotel.AbmRol
 
         private void btnAgregarFuncionalidad_Click(object sender, EventArgs e)
         {
-            if (cbxFuncionalidades.SelectedItem != null)
-            {
-                lbxFuncionalidades.Items.Add(cbxFuncionalidades.SelectedItem);
-                lbxFuncionalidades.SelectedIndex = 0;
-                cbxFuncionalidades.Items.Remove(cbxFuncionalidades.SelectedItem);
-                if (cbxFuncionalidades.Items.Count > 0)
-                    cbxFuncionalidades.SelectedIndex = 0;
-                else
-                    cbxFuncionalidades.ResetText();
-            }
+            VentanaBase.botonAgregarComboBoxListBox(cbxFuncionalidades, lbxFuncionalidades);
         }
 
         private void btnQuitarFuncionalidad_Click(object sender, EventArgs e)
         {
-            if (lbxFuncionalidades.SelectedItem != null)
-            {
-                cbxFuncionalidades.Items.Add(lbxFuncionalidades.SelectedItem);
-                cbxFuncionalidades.Sorted = true;
-                lbxFuncionalidades.Items.Remove(lbxFuncionalidades.SelectedItem);
-                cbxFuncionalidades.SelectedIndex = 0;
-                if (lbxFuncionalidades.Items.Count > 0)
-                    lbxFuncionalidades.SelectedIndex = 0;
-            }
+            VentanaBase.botonQuitarComboBoxListBox(cbxFuncionalidades, lbxFuncionalidades);
         }
 
         private void btnLimpiarRol_Click(object sender, EventArgs e)
         {
+            VentanaBase.listBoxLimpiar(lbxFuncionalidades);
+            VentanaBase.comboBoxReiniciar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
             tbxNombreRol.Clear();
             rbtRolActivado.Select();
-            lbxFuncionalidades.Items.Clear();
-            cbxFuncionalidades.Items.Clear();
             controladorError.Clear();
-            VentanaBase.comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
-            cbxFuncionalidades.SelectedIndex = 0;
         }
 
         private void btnGuardarRol_Click(object sender, EventArgs e)
@@ -102,9 +79,9 @@ namespace FrbaHotel.AbmRol
                     return;
                 }
                 if (rbtRolActivado.Checked)
-                    Database.rolModificar(nombreRolActual, nombreRolNuevo, "1");
+                    Database.rolHabilitadoModificar(nombreRolActual, nombreRolNuevo);
                 else
-                    Database.rolModificar(nombreRolActual, nombreRolNuevo, "0");
+                    Database.rolDeshabilitadoModificar(nombreRolActual, nombreRolNuevo);
                 string idRol = Database.rolObtenerId(nombreRolNuevo);
                 foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
                         Database.rolAgregarFuncionalidad(idRol, nombreFuncionalidad);

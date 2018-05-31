@@ -200,6 +200,16 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
+        public static void rolHabilitadoAgregar(string nombreRol)
+        {
+            Database.rolAgregar(nombreRol, "1");
+        }
+
+        public static void rolDeshabilitadoAgregar(string nombreRol)
+        {
+            Database.rolAgregar(nombreRol, "0");
+        }
+
         public static void rolAgregarFuncionalidad(string idRol, string nombreFuncionalidad)
         {
             string idFuncionalidad = funcionalidadObtenerId(nombreFuncionalidad);
@@ -225,6 +235,16 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@nombreRolNuevo", nombreRolNuevo);
             consulta.Parameters.AddWithValue("@estado", estado);
             consultaEjecutar(consulta);
+        }
+
+        public static void rolHabilitadoModificar(string nombreRolActual, string nombreRolNuevo)
+        {
+            Database.rolModificar(nombreRolActual, nombreRolNuevo, "1");
+        }
+
+        public static void rolDeshabilitadoModificar(string nombreRolActual, string nombreRolNuevo)
+        {
+            Database.rolModificar(nombreRolActual, nombreRolNuevo, "0");
         }
 
         public static void rolEliminar(string nombreRol)

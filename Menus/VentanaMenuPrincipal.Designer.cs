@@ -66,7 +66,7 @@
             this.configuracionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(366, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(816, 24);
             this.menuStrip1.TabIndex = 27;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -85,33 +85,33 @@
             // menuRoles
             // 
             this.menuRoles.Name = "menuRoles";
-            this.menuRoles.Size = new System.Drawing.Size(152, 22);
+            this.menuRoles.Size = new System.Drawing.Size(143, 22);
             this.menuRoles.Text = "Roles";
             this.menuRoles.Click += new System.EventHandler(this.menuRoles_Click);
             // 
             // menuUsuarios
             // 
             this.menuUsuarios.Name = "menuUsuarios";
-            this.menuUsuarios.Size = new System.Drawing.Size(152, 22);
+            this.menuUsuarios.Size = new System.Drawing.Size(143, 22);
             this.menuUsuarios.Text = "Usuarios";
             this.menuUsuarios.Click += new System.EventHandler(this.menuUsuarios_Click);
             // 
             // funcionalidadesToolStripMenuItem
             // 
             this.funcionalidadesToolStripMenuItem.Name = "funcionalidadesToolStripMenuItem";
-            this.funcionalidadesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.funcionalidadesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.funcionalidadesToolStripMenuItem.Text = "Hoteles";
             // 
             // habitacionesToolStripMenuItem1
             // 
             this.habitacionesToolStripMenuItem1.Name = "habitacionesToolStripMenuItem1";
-            this.habitacionesToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.habitacionesToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
             this.habitacionesToolStripMenuItem1.Text = "Habitaciones";
             // 
             // regimenesEstadiaToolStripMenuItem
             // 
             this.regimenesEstadiaToolStripMenuItem.Name = "regimenesEstadiaToolStripMenuItem";
-            this.regimenesEstadiaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.regimenesEstadiaToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.regimenesEstadiaToolStripMenuItem.Text = "Regimenes";
             // 
             // hoteleriaToolStripMenuItem
@@ -183,7 +183,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::FrbaHotel.Properties.Resources.Logo_TP;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(366, 558);
+            this.ClientSize = new System.Drawing.Size(816, 672);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.IsMdiContainer = true;

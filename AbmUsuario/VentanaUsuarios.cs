@@ -36,7 +36,7 @@ namespace FrbaHotel.AbmUsuario
             var senderGrid = (DataGridView)sender;
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                MessageBox.Show("GG");
+                new VentanaModificarUsuario().Show();
             }
         }
 
@@ -58,6 +58,12 @@ namespace FrbaHotel.AbmUsuario
         private void btnQuitarHotel_Click(object sender, EventArgs e)
         {
             VentanaBase.botonQuitarComboBoxListBox(cbxHoteles, lbxHoteles);
+        }
+
+        private void btnGuardarUsuario_Click(object sender, EventArgs e)
+        {
+            if (VentanaBase.ventanaCamposTodosCompletos(pagAgregar, controladorError))
+                MessageBox.Show("IZI");
         }
     }
 }
