@@ -30,8 +30,6 @@ namespace FrbaHotel.AbmRol
         private void VentanaRoles_Load(object sender, EventArgs e)
         {
             VentanaBase.comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
-            cbxFuncionalidades.Sorted = true;
-            cbxFuncionalidades.SelectedIndex = 0;
             actualizarVentana();
         }
 
@@ -47,51 +45,28 @@ namespace FrbaHotel.AbmRol
 
         public void actualizarVentana()
         {
-            cbxModificar.Items.Clear();
-            cbxEliminar.Items.Clear(); ;
-            VentanaBase.comboBoxCargar(cbxModificar, Database.rolObtenerTodos());
-            VentanaBase.comboBoxCargar(cbxEliminar, Database.rolObtenerHabilitados());
-            cbxModificar.SelectedIndex = 0;
-            cbxEliminar.SelectedIndex = 0;
+            VentanaBase.comboBoxReiniciar(cbxModificar, Database.rolObtenerTodos());
+            VentanaBase.comboBoxReiniciar(cbxEliminar, Database.rolObtenerHabilitados());
             rbtRolActivado.Select();
         }
         
         private void btnAgregarFuncionalidad_Click(object sender, EventArgs e)
         {
-            if (cbxFuncionalidades.SelectedItem != null)
-            {
-                lbxFuncionalidades.Items.Add(cbxFuncionalidades.SelectedItem);
-                lbxFuncionalidades.SelectedIndex = 0;
-                cbxFuncionalidades.Items.Remove(cbxFuncionalidades.SelectedItem);
-                if (cbxFuncionalidades.Items.Count > 0)
-                    cbxFuncionalidades.SelectedIndex = 0;
-                else
-                    cbxFuncionalidades.ResetText();     
-            }
+            VentanaBase.botonAgregarComboBoxListBox(cbxFuncionalidades, lbxFuncionalidades);
         }
 
         private void btnQuitarFuncionalidad_Click(object sender, EventArgs e)
         {
-            if (lbxFuncionalidades.SelectedItem != null)
-            {
-                cbxFuncionalidades.Items.Add(lbxFuncionalidades.SelectedItem);
-                cbxFuncionalidades.Sorted = true;
-                lbxFuncionalidades.Items.Remove(lbxFuncionalidades.SelectedItem);
-                cbxFuncionalidades.SelectedIndex = 0;
-                if (lbxFuncionalidades.Items.Count > 0)
-                    lbxFuncionalidades.SelectedIndex = 0;
-            }
+            VentanaBase.botonQuitarComboBoxListBox(cbxFuncionalidades, lbxFuncionalidades);
         }
 
         private void btnLimpiarRol_Click(object sender, EventArgs e)
         {
+            VentanaBase.listBoxLimpiar(lbxFuncionalidades);
+            VentanaBase.comboBoxReiniciar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
             tbxNombreRol.Clear();
-            lbxFuncionalidades.Items.Clear();
-            cbxFuncionalidades.Items.Clear();
             controladorError.Clear();
-            rbtRolActivado.Select();
-            VentanaBase.comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
-            cbxFuncionalidades.SelectedIndex = 0;
+            rbtRolActivado.Select();           
         }
 
         private void btnGuardarRol_Click(object sender, EventArgs e)

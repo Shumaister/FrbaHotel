@@ -366,5 +366,40 @@ namespace FrbaHotel
             SqlCommand consulta = consultaCrear("SELECT Usuario_User, Persona_Nombre, Persona_Apellido, Persona_Tipo_Documento, Persona_Identificacion_Nro, Persona_Fecha_Nacimiento, Persona_Telefono, Persona_Mail, Ciudades_Descripcion, Calles_Descripcion, Domicilio_Nro_calle FROM RIP.Usuarios JOIN RIP.Persona ON Usuario_Persona_ID = Persona_ID JOIN RIP.Domicilio ON Persona_Domicilio_ID = Domicilio_ID JOIN RIP.Calles ON Domicilio_Calle_ID = Calles_ID JOIN RIP.Ciudades ON Domicilio_Ciudad_ID = Ciudades_ID");
             return Database.consultaObtenerTablaDatos(consulta);
         }
+
+        //-------------------------------------- Metodos para Usuarios -------------------------------------
+
+        public static List<string> documentoObtenerTipos()
+        {
+            SqlCommand consulta = consultaCrear("SELECT TipoDocumento_Descripcion FROM RIP.TipoDocumento");
+            return Database.consultaObtenerListaDatos(consulta);
+        }
+
+        //-------------------------------------- Metodos para Hoteles -------------------------------------
+
+        public static List<string> hotelObtenerTodos()
+        {
+            SqlConnection connection = obtenerConexion();
+
+            SqlCommand hotelesquery = new SqlCommand("SELECT ci.Ciudades_Descripcion, c.Calles_Descripcion, d.Domicilio_Nro_calle FROM rip.Hoteles h JOIN RIP.Hotel_Usuario hu on hu.Hotel_Usuario_IdHotel = h.Hoteles_ID JOIN RIP.Usuarios u on u.Usuario_ID = hu.Hotel_Usuario_IdUsuario JOIN RIP.Domicilio d on d.Domicilio_ID = h.Hoteles_Domicilio_ID JOIN RIP.Calles c on c.Calles_ID = d.Domicilio_Calle_ID JOIN RIP.Ciudades ci on ci.Ciudades_ID = d.Domicilio_Ciudad_ID");
+            hotelesquery.Connection = connection;
+            connection.Open();
+            SqlDataReader reader = hotelesquery.ExecuteReader();
+
+            List<string> hoteles = new List<string>();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    hoteles.Add(reader[0].ToString().TrimEnd() + " " + reader[1].ToString() + " " + reader[2].ToString());
+                }
+            }
+
+            reader.Close();
+            connection.Close();
+
+            return hoteles;
+        }
     }
 }

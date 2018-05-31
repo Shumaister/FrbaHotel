@@ -24,11 +24,11 @@ namespace FrbaHotel.AbmUsuario
         private void VentanaUsuarios_Load(object sender, EventArgs e)
         {
             VentanaBase.dataGridViewCargar(dgvModificarUsuarios, Database.usuarioObtenerTodos());
-            DataGridViewButtonColumn botonModificar = new DataGridViewButtonColumn();
-            botonModificar.HeaderText = "Seleccionar";
-            botonModificar.Text = "Modificar";
-            botonModificar.UseColumnTextForButtonValue = true;
-            dgvModificarUsuarios.Columns.Add(botonModificar);
+            VentanaBase.dataGridViewAgregarBotonModificar(dgvModificarUsuarios);
+            VentanaBase.dataGridViewAgregarBotonEliminar(dgvEliminarUsuarios);
+            VentanaBase.comboBoxCargar(cbxRoles, Database.rolObtenerTodos());
+            VentanaBase.comboBoxCargar(cbxHoteles, Database.hotelObtenerTodos());
+            VentanaBase.comboBoxCargar(cbxTipoDocumento, Database.documentoObtenerTipos());
         }
 
         private void dgvModificarUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)

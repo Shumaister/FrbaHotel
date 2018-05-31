@@ -73,13 +73,15 @@ namespace FrbaHotel
         {
             foreach (string dato in listaDatos)
                 comboBox.Items.Add(dato);
+            if(comboBox.Items.Count > 0)
+                comboBox.SelectedIndex = 0;
+            comboBox.Sorted = true;
         }
 
-        public static void comboBoxLimpiar(ComboBox comboBox, List<string> listaDatos)
+        public static void comboBoxReiniciar(ComboBox comboBox, List<string> listaDatos)
         {
             comboBox.Items.Clear();
             VentanaBase.comboBoxCargar(comboBox, listaDatos);
-            comboBox.SelectedIndex = 0;
         }
 
         public static void listBoxCargar(ListBox listBox, List<string> listaDatos)
@@ -96,6 +98,25 @@ namespace FrbaHotel
         public static void dataGridViewCargar(DataGridView dataGridView, DataTable tablaDatos)
         {
             dataGridView.DataSource = tablaDatos;
+        }
+
+        public static void dataGridViewAgregarBoton(DataGridView dataGridView, string textoBoton)
+        {
+            DataGridViewButtonColumn botonModificar = new DataGridViewButtonColumn();
+            botonModificar.HeaderText = "Seleccionar";
+            botonModificar.Text = textoBoton;
+            botonModificar.UseColumnTextForButtonValue = true;
+            dataGridView.Columns.Add(botonModificar);
+        }
+
+        public static void dataGridViewAgregarBotonModificar(DataGridView dataGridView)
+        {
+            VentanaBase.dataGridViewAgregarBoton(dataGridView, "Modificar");
+        }
+
+        public static void dataGridViewAgregarBotonEliminar(DataGridView dataGridView)
+        {
+            VentanaBase.dataGridViewAgregarBoton(dataGridView, "Eliminar");
         }
 
         public static void botonAgregarComboBoxListBox(ComboBox comboBox, ListBox listBox)
