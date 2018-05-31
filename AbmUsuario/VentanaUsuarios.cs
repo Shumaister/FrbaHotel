@@ -27,37 +27,37 @@ namespace FrbaHotel.AbmUsuario
             DataGridViewButtonColumn botonModificar = new DataGridViewButtonColumn();
             botonModificar.HeaderText = "Seleccionar";
             botonModificar.Text = "Modificar";
+            botonModificar.UseColumnTextForButtonValue = true;
             dgvModificarUsuarios.Columns.Add(botonModificar);
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
+        private void dgvModificarUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            var senderGrid = (DataGridView)sender;
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                MessageBox.Show("GG");
+            }
         }
 
-        private void groupBox2_Enter(object sender, EventArgs e)
+        private void btnAgregarRol_Click(object sender, EventArgs e)
         {
-
+            VentanaBase.botonAgregarComboBoxListBox(cbxRoles, lbxRoles);
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void btnQuitarRol_Click(object sender, EventArgs e)
         {
-
+            VentanaBase.botonQuitarComboBoxListBox(cbxRoles, lbxRoles);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnAgregarHotel_Click(object sender, EventArgs e)
         {
-            
+            VentanaBase.botonAgregarComboBoxListBox(cbxHoteles, lbxHoteles);
         }
 
-        private void label23_Click(object sender, EventArgs e)
+        private void btnQuitarHotel_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void pagModificar_Click(object sender, EventArgs e)
-        {
-
+            VentanaBase.botonQuitarComboBoxListBox(cbxHoteles, lbxHoteles);
         }
     }
 }

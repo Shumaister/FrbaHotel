@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnQuitarRol = new System.Windows.Forms.Button();
+            this.btnQuitarFuncionalidad = new System.Windows.Forms.Button();
             this.tbxNombreRol = new System.Windows.Forms.TextBox();
             this.btnAgregarFuncionalidad = new System.Windows.Forms.Button();
             this.lbxFuncionalidades = new System.Windows.Forms.ListBox();
@@ -54,15 +54,15 @@
             this.logo.Size = new System.Drawing.Size(27, 21);
             this.logo.Visible = false;
             // 
-            // btnQuitarRol
+            // btnQuitarFuncionalidad
             // 
-            this.btnQuitarRol.Location = new System.Drawing.Point(173, 138);
-            this.btnQuitarRol.Name = "btnQuitarRol";
-            this.btnQuitarRol.Size = new System.Drawing.Size(75, 23);
-            this.btnQuitarRol.TabIndex = 24;
-            this.btnQuitarRol.Text = "Quitar";
-            this.btnQuitarRol.UseVisualStyleBackColor = true;
-            this.btnQuitarRol.Click += new System.EventHandler(this.btnQuitarRol_Click);
+            this.btnQuitarFuncionalidad.Location = new System.Drawing.Point(173, 138);
+            this.btnQuitarFuncionalidad.Name = "btnQuitarFuncionalidad";
+            this.btnQuitarFuncionalidad.Size = new System.Drawing.Size(75, 23);
+            this.btnQuitarFuncionalidad.TabIndex = 24;
+            this.btnQuitarFuncionalidad.Text = "Quitar";
+            this.btnQuitarFuncionalidad.UseVisualStyleBackColor = true;
+            this.btnQuitarFuncionalidad.Click += new System.EventHandler(this.btnQuitarFuncionalidad_Click);
             // 
             // tbxNombreRol
             // 
@@ -208,7 +208,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.btnQuitarRol);
+            this.Controls.Add(this.btnQuitarFuncionalidad);
             this.Controls.Add(this.tbxNombreRol);
             this.Controls.Add(this.btnAgregarFuncionalidad);
             this.Controls.Add(this.lbxFuncionalidades);
@@ -234,7 +234,7 @@
             this.Controls.SetChildIndex(this.lbxFuncionalidades, 0);
             this.Controls.SetChildIndex(this.btnAgregarFuncionalidad, 0);
             this.Controls.SetChildIndex(this.tbxNombreRol, 0);
-            this.Controls.SetChildIndex(this.btnQuitarRol, 0);
+            this.Controls.SetChildIndex(this.btnQuitarFuncionalidad, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.label6, 0);
@@ -248,7 +248,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnQuitarRol;
+        private System.Windows.Forms.Button btnQuitarFuncionalidad;
         private System.Windows.Forms.TextBox tbxNombreRol;
         private System.Windows.Forms.Button btnAgregarFuncionalidad;
         private System.Windows.Forms.ListBox lbxFuncionalidades;

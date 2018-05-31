@@ -70,7 +70,7 @@ namespace FrbaHotel.AbmRol
             }
         }
 
-        private void btnQuitarRol_Click(object sender, EventArgs e)
+        private void btnQuitarFuncionalidad_Click(object sender, EventArgs e)
         {
             if (lbxFuncionalidades.SelectedItem != null)
             {

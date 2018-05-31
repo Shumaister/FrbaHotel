@@ -1,6 +1,6 @@
 ﻿namespace FrbaHotel.AbmUsuario
 {
-    partial class VentanaUsuarios
+    partial class VentanaModificarUsuario
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.pagAgregar = new System.Windows.Forms.TabPage();
             this.btnGuardarUsuario = new System.Windows.Forms.Button();
             this.btnLimpiarUsuario = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -81,73 +75,34 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tbxUsuario = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.pagModificar = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.dgvModificarUsuarios = new System.Windows.Forms.DataGridView();
-            this.pagEliminar = new System.Windows.Forms.TabPage();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.dgvEliminarUsuarios = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
-            this.tabControl.SuspendLayout();
-            this.pagAgregar.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.pagModificar.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvModificarUsuarios)).BeginInit();
-            this.pagEliminar.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEliminarUsuarios)).BeginInit();
             this.SuspendLayout();
             // 
             // logo
             // 
             this.logo.Image = null;
-            this.logo.Location = new System.Drawing.Point(645, 531);
-            this.logo.Size = new System.Drawing.Size(16, 19);
+            this.logo.Location = new System.Drawing.Point(645, 526);
+            this.logo.Size = new System.Drawing.Size(18, 25);
             this.logo.Visible = false;
-            // 
-            // tabControl
-            // 
-            this.tabControl.Controls.Add(this.pagAgregar);
-            this.tabControl.Controls.Add(this.pagModificar);
-            this.tabControl.Controls.Add(this.pagEliminar);
-            this.tabControl.Location = new System.Drawing.Point(25, 12);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(614, 579);
-            this.tabControl.TabIndex = 1;
-            // 
-            // pagAgregar
-            // 
-            this.pagAgregar.Controls.Add(this.btnGuardarUsuario);
-            this.pagAgregar.Controls.Add(this.btnLimpiarUsuario);
-            this.pagAgregar.Controls.Add(this.groupBox2);
-            this.pagAgregar.Controls.Add(this.groupBox1);
-            this.pagAgregar.Location = new System.Drawing.Point(4, 22);
-            this.pagAgregar.Name = "pagAgregar";
-            this.pagAgregar.Padding = new System.Windows.Forms.Padding(3);
-            this.pagAgregar.Size = new System.Drawing.Size(606, 553);
-            this.pagAgregar.TabIndex = 0;
-            this.pagAgregar.Text = "Agregar";
-            this.pagAgregar.UseVisualStyleBackColor = true;
             // 
             // btnGuardarUsuario
             // 
-            this.btnGuardarUsuario.Location = new System.Drawing.Point(362, 506);
+            this.btnGuardarUsuario.Location = new System.Drawing.Point(358, 518);
             this.btnGuardarUsuario.Name = "btnGuardarUsuario";
             this.btnGuardarUsuario.Size = new System.Drawing.Size(75, 23);
-            this.btnGuardarUsuario.TabIndex = 49;
+            this.btnGuardarUsuario.TabIndex = 53;
             this.btnGuardarUsuario.Text = "Guardar";
             this.btnGuardarUsuario.UseVisualStyleBackColor = true;
             // 
             // btnLimpiarUsuario
             // 
-            this.btnLimpiarUsuario.Location = new System.Drawing.Point(243, 506);
+            this.btnLimpiarUsuario.Location = new System.Drawing.Point(239, 518);
             this.btnLimpiarUsuario.Name = "btnLimpiarUsuario";
             this.btnLimpiarUsuario.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiarUsuario.TabIndex = 48;
+            this.btnLimpiarUsuario.TabIndex = 52;
             this.btnLimpiarUsuario.Text = "Limpiar";
             this.btnLimpiarUsuario.UseVisualStyleBackColor = true;
             // 
@@ -178,10 +133,10 @@
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.tbxEmail);
-            this.groupBox2.Location = new System.Drawing.Point(308, 9);
+            this.groupBox2.Location = new System.Drawing.Point(304, 21);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(270, 276);
-            this.groupBox2.TabIndex = 46;
+            this.groupBox2.TabIndex = 51;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos personales";
             // 
@@ -431,10 +386,10 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.tbxUsuario);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(30, 9);
+            this.groupBox1.Location = new System.Drawing.Point(26, 21);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(263, 472);
-            this.groupBox1.TabIndex = 45;
+            this.groupBox1.TabIndex = 50;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos del usuario";
             // 
@@ -446,7 +401,6 @@
             this.btnQuitarHotel.TabIndex = 77;
             this.btnQuitarHotel.Text = "Quitar";
             this.btnQuitarHotel.UseVisualStyleBackColor = true;
-            this.btnQuitarHotel.Click += new System.EventHandler(this.btnQuitarHotel_Click);
             // 
             // btnAgregarHotel
             // 
@@ -490,7 +444,6 @@
             this.btnQuitarRol.TabIndex = 53;
             this.btnQuitarRol.Text = "Quitar";
             this.btnQuitarRol.UseVisualStyleBackColor = true;
-            this.btnQuitarRol.Click += new System.EventHandler(this.btnQuitarRol_Click);
             // 
             // label5
             // 
@@ -511,7 +464,6 @@
             this.btnAgregarRol.TabIndex = 52;
             this.btnAgregarRol.Text = "Agregar";
             this.btnAgregarRol.UseVisualStyleBackColor = true;
-            this.btnAgregarRol.Click += new System.EventHandler(this.btnAgregarRol_Click);
             // 
             // cbxHoteles
             // 
@@ -604,141 +556,45 @@
             this.label1.TabIndex = 36;
             this.label1.Text = "Usuario";
             // 
-            // pagModificar
-            // 
-            this.pagModificar.Controls.Add(this.groupBox3);
-            this.pagModificar.Location = new System.Drawing.Point(4, 22);
-            this.pagModificar.Name = "pagModificar";
-            this.pagModificar.Padding = new System.Windows.Forms.Padding(3);
-            this.pagModificar.Size = new System.Drawing.Size(606, 553);
-            this.pagModificar.TabIndex = 1;
-            this.pagModificar.Text = "Modificar";
-            this.pagModificar.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.dgvModificarUsuarios);
-            this.groupBox3.Location = new System.Drawing.Point(11, 16);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(584, 519);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Usuarios";
-            // 
-            // dgvModificarUsuarios
-            // 
-            this.dgvModificarUsuarios.AllowUserToAddRows = false;
-            this.dgvModificarUsuarios.AllowUserToDeleteRows = false;
-            this.dgvModificarUsuarios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvModificarUsuarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvModificarUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvModificarUsuarios.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvModificarUsuarios.Location = new System.Drawing.Point(9, 28);
-            this.dgvModificarUsuarios.Name = "dgvModificarUsuarios";
-            this.dgvModificarUsuarios.RowHeadersVisible = false;
-            this.dgvModificarUsuarios.Size = new System.Drawing.Size(565, 471);
-            this.dgvModificarUsuarios.TabIndex = 0;
-            this.dgvModificarUsuarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvModificarUsuarios_CellContentClick);
-            // 
-            // pagEliminar
-            // 
-            this.pagEliminar.Controls.Add(this.groupBox4);
-            this.pagEliminar.Location = new System.Drawing.Point(4, 22);
-            this.pagEliminar.Name = "pagEliminar";
-            this.pagEliminar.Padding = new System.Windows.Forms.Padding(3);
-            this.pagEliminar.Size = new System.Drawing.Size(606, 553);
-            this.pagEliminar.TabIndex = 2;
-            this.pagEliminar.Text = "Eliminar";
-            this.pagEliminar.UseVisualStyleBackColor = true;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.dgvEliminarUsuarios);
-            this.groupBox4.Location = new System.Drawing.Point(11, 16);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(584, 519);
-            this.groupBox4.TabIndex = 3;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Usuarios";
-            // 
-            // dgvEliminarUsuarios
-            // 
-            this.dgvEliminarUsuarios.AllowUserToAddRows = false;
-            this.dgvEliminarUsuarios.AllowUserToDeleteRows = false;
-            this.dgvEliminarUsuarios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEliminarUsuarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.dgvEliminarUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEliminarUsuarios.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dgvEliminarUsuarios.Location = new System.Drawing.Point(9, 28);
-            this.dgvEliminarUsuarios.Name = "dgvEliminarUsuarios";
-            this.dgvEliminarUsuarios.RowHeadersVisible = false;
-            this.dgvEliminarUsuarios.Size = new System.Drawing.Size(565, 471);
-            this.dgvEliminarUsuarios.TabIndex = 1;
-            // 
-            // VentanaUsuarios
+            // VentanaModificarUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(673, 638);
-            this.Controls.Add(this.tabControl);
-            this.Name = "VentanaUsuarios";
-            this.Text = "Usuarios - FRBA Hotel ©";
-            this.Load += new System.EventHandler(this.VentanaUsuarios_Load);
-            this.Controls.SetChildIndex(this.tabControl, 0);
+            this.ClientSize = new System.Drawing.Size(610, 555);
+            this.Controls.Add(this.btnGuardarUsuario);
+            this.Controls.Add(this.btnLimpiarUsuario);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
+            this.Name = "VentanaModificarUsuario";
+            this.Text = "VentanaModificarUsuario";
             this.Controls.SetChildIndex(this.logo, 0);
+            this.Controls.SetChildIndex(this.groupBox1, 0);
+            this.Controls.SetChildIndex(this.groupBox2, 0);
+            this.Controls.SetChildIndex(this.btnLimpiarUsuario, 0);
+            this.Controls.SetChildIndex(this.btnGuardarUsuario, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
-            this.tabControl.ResumeLayout(false);
-            this.pagAgregar.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.pagModificar.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvModificarUsuarios)).EndInit();
-            this.pagEliminar.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEliminarUsuarios)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage pagAgregar;
-        private System.Windows.Forms.TabPage pagModificar;
-        private System.Windows.Forms.TabPage pagEliminar;
+        private System.Windows.Forms.Button btnGuardarUsuario;
+        private System.Windows.Forms.Button btnLimpiarUsuario;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btnSeleccionarFecha;
+        private System.Windows.Forms.ComboBox cbxTipoDocumento;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox tbxFechaNacimiento;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox tbxDireccion;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox tbxTelefono;
         private System.Windows.Forms.Label label16;
@@ -757,37 +613,24 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox tbxEmail;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnQuitarHotel;
+        private System.Windows.Forms.Button btnAgregarHotel;
+        private System.Windows.Forms.ListBox lbxHoteles;
+        private System.Windows.Forms.ListBox lbxRoles;
         private System.Windows.Forms.ComboBox cbxRoles;
+        private System.Windows.Forms.Button btnQuitarRol;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnAgregarRol;
+        private System.Windows.Forms.ComboBox cbxHoteles;
+        private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbxContrasena;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbxUsuario;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cbxHoteles;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox tbxFechaNacimiento;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.TextBox tbxDireccion;
-        private System.Windows.Forms.Button btnGuardarUsuario;
-        private System.Windows.Forms.Button btnLimpiarUsuario;
-        private System.Windows.Forms.ComboBox cbxTipoDocumento;
-        private System.Windows.Forms.Button btnSeleccionarFecha;
-        private System.Windows.Forms.Button btnQuitarHotel;
-        private System.Windows.Forms.Button btnAgregarHotel;
-        private System.Windows.Forms.ListBox lbxHoteles;
-        private System.Windows.Forms.ListBox lbxRoles;
-        private System.Windows.Forms.Button btnQuitarRol;
-        private System.Windows.Forms.Button btnAgregarRol;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.DataGridView dgvModificarUsuarios;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.DataGridView dgvEliminarUsuarios;
+
     }
 }

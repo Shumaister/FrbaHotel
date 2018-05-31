@@ -69,21 +69,60 @@ namespace FrbaHotel
 
         //-------------------------------------- Metodos para Elementos -------------------------------------
 
-        public static void comboBoxCargar(ComboBox comboBox, List<string> listaValores)
+        public static void comboBoxCargar(ComboBox comboBox, List<string> listaDatos)
         {
-            foreach (string valor in listaValores)
-                comboBox.Items.Add(valor);
+            foreach (string dato in listaDatos)
+                comboBox.Items.Add(dato);
         }
 
-        public static void listBoxCargar(ListBox listBox, List<string> listaValores)
+        public static void comboBoxLimpiar(ComboBox comboBox, List<string> listaDatos)
         {
-            foreach (string valor in listaValores)
-                listBox.Items.Add(valor);
+            comboBox.Items.Clear();
+            VentanaBase.comboBoxCargar(comboBox, listaDatos);
+            comboBox.SelectedIndex = 0;
         }
 
-        public static void dataGridViewCargar(DataGridView dataGridView, DataTable tablaValores)
+        public static void listBoxCargar(ListBox listBox, List<string> listaDatos)
         {
-            dataGridView.DataSource = tablaValores;
+            foreach (string dato in listaDatos)
+                listBox.Items.Add(dato);
+        }
+
+        public static void listBoxLimpiar(ListBox listBox)
+        {
+            listBox.Items.Clear();
+        }
+
+        public static void dataGridViewCargar(DataGridView dataGridView, DataTable tablaDatos)
+        {
+            dataGridView.DataSource = tablaDatos;
+        }
+
+        public static void botonAgregarComboBoxListBox(ComboBox comboBox, ListBox listBox)
+        {
+            if (comboBox.SelectedItem != null)
+            {
+                listBox.Items.Add(comboBox.SelectedItem);
+                listBox.SelectedIndex = 0;
+                comboBox.Items.Remove(comboBox.SelectedItem);
+                if (comboBox.Items.Count > 0)
+                    comboBox.SelectedIndex = 0;
+                else
+                    comboBox.ResetText();
+            }
+        }
+
+        public static void botonQuitarComboBoxListBox(ComboBox comboBox, ListBox listBox)
+        {
+            if (listBox.SelectedItem != null)
+            {
+                comboBox.Items.Add(listBox.SelectedItem);
+                comboBox.Sorted = true;
+                listBox.Items.Remove(listBox.SelectedItem);
+                comboBox.SelectedIndex = 0;
+                if (listBox.Items.Count > 0)
+                    listBox.SelectedIndex = 0;
+            }
         }
     }
 }

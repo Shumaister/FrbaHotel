@@ -33,7 +33,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnQuitarRol = new System.Windows.Forms.Button();
+            this.btnQuitarFuncionalidad = new System.Windows.Forms.Button();
             this.tbxNombreRol = new System.Windows.Forms.TextBox();
             this.btnAgregarFuncionalidad = new System.Windows.Forms.Button();
             this.lbxFuncionalidades = new System.Windows.Forms.ListBox();
@@ -84,7 +84,7 @@
             this.tabAgregar.Controls.Add(this.label6);
             this.tabAgregar.Controls.Add(this.label5);
             this.tabAgregar.Controls.Add(this.label4);
-            this.tabAgregar.Controls.Add(this.btnQuitarRol);
+            this.tabAgregar.Controls.Add(this.btnQuitarFuncionalidad);
             this.tabAgregar.Controls.Add(this.tbxNombreRol);
             this.tabAgregar.Controls.Add(this.btnAgregarFuncionalidad);
             this.tabAgregar.Controls.Add(this.lbxFuncionalidades);
@@ -137,15 +137,15 @@
             this.label4.TabIndex = 26;
             this.label4.Text = "*";
             // 
-            // btnQuitarRol
+            // btnQuitarFuncionalidad
             // 
-            this.btnQuitarRol.Location = new System.Drawing.Point(176, 136);
-            this.btnQuitarRol.Name = "btnQuitarRol";
-            this.btnQuitarRol.Size = new System.Drawing.Size(75, 23);
-            this.btnQuitarRol.TabIndex = 12;
-            this.btnQuitarRol.Text = "Quitar";
-            this.btnQuitarRol.UseVisualStyleBackColor = true;
-            this.btnQuitarRol.Click += new System.EventHandler(this.btnQuitarRol_Click);
+            this.btnQuitarFuncionalidad.Location = new System.Drawing.Point(176, 136);
+            this.btnQuitarFuncionalidad.Name = "btnQuitarFuncionalidad";
+            this.btnQuitarFuncionalidad.Size = new System.Drawing.Size(75, 23);
+            this.btnQuitarFuncionalidad.TabIndex = 12;
+            this.btnQuitarFuncionalidad.Text = "Quitar";
+            this.btnQuitarFuncionalidad.UseVisualStyleBackColor = true;
+            this.btnQuitarFuncionalidad.Click += new System.EventHandler(this.btnQuitarFuncionalidad_Click);
             // 
             // tbxNombreRol
             // 
@@ -378,7 +378,7 @@
         private System.Windows.Forms.Button btnAgregarFuncionalidad;
         private System.Windows.Forms.ListBox lbxFuncionalidades;
         private System.Windows.Forms.TextBox tbxNombreRol;
-        private System.Windows.Forms.Button btnQuitarRol;
+        private System.Windows.Forms.Button btnQuitarFuncionalidad;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
