@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrbaHotel.Login
+namespace FrbaHotel.Login 
 {
     public partial class VentanaSeleccionRolHotel : VentanaBase
     {
