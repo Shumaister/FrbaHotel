@@ -16,13 +16,13 @@ namespace FrbaHotel.Menus
     {
         //-------------------------------------- Atributos -------------------------------------
         
-        Usuario Usuario { get; set; }
+        Usuario usuario { get; set; }
 
         //-------------------------------------- Constructores -------------------------------------
 
         public VentanaMenuPrincipal(Usuario usuario)
         {
-            this.Usuario = usuario; 
+            this.usuario = usuario; 
             InitializeComponent();
         }
 
@@ -45,6 +45,13 @@ namespace FrbaHotel.Menus
             VentanaUsuarios ventanaUsuarios = new VentanaUsuarios();
             ventanaUsuarios.MdiParent = this;
             ventanaUsuarios.Show();
+        }
+
+        private void menuCambiarContrasenia_Click(object sender, EventArgs e)
+        {
+            VentanaAjustesDeCuenta ventanaAjustesDeCuenta = new VentanaAjustesDeCuenta(usuario.nombre);
+            ventanaAjustesDeCuenta.MdiParent = this;
+            ventanaAjustesDeCuenta.Show();
         }
     }
 }
