@@ -29,7 +29,8 @@ namespace FrbaHotel.Login
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new VentanaLogin().Show();
+            VentanaLogin ventanaLogin = new VentanaLogin();
+            ventanaLogin.Show();
         }
     }
 }

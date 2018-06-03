@@ -29,7 +29,7 @@ namespace FrbaHotel.AbmRol
 
         private void VentanaRoles_Load(object sender, EventArgs e)
         {
-            VentanaBase.comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
+            comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
             actualizarVentana();
         }
 
@@ -45,25 +45,25 @@ namespace FrbaHotel.AbmRol
 
         public void actualizarVentana()
         {
-            VentanaBase.comboBoxReiniciar(cbxModificar, Database.rolObtenerTodos());
-            VentanaBase.comboBoxReiniciar(cbxEliminar, Database.rolObtenerHabilitados());
+            comboBoxCargar(cbxModificar, Database.rolObtenerTodos());
+            comboBoxCargar(cbxEliminar, Database.rolObtenerHabilitados());
             rbtRolActivado.Select();
         }
         
         private void btnAgregarFuncionalidad_Click(object sender, EventArgs e)
         {
-            VentanaBase.botonAgregarComboBoxListBox(cbxFuncionalidades, lbxFuncionalidades);
+            botonAgregarComboBoxListBox(cbxFuncionalidades, lbxFuncionalidades);
         }
 
         private void btnQuitarFuncionalidad_Click(object sender, EventArgs e)
         {
-            VentanaBase.botonQuitarComboBoxListBox(cbxFuncionalidades, lbxFuncionalidades);
+            botonQuitarComboBoxListBox(cbxFuncionalidades, lbxFuncionalidades);
         }
 
         private void btnLimpiarRol_Click(object sender, EventArgs e)
         {
-            VentanaBase.listBoxLimpiar(lbxFuncionalidades);
-            VentanaBase.comboBoxReiniciar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
+            listBoxLimpiar(lbxFuncionalidades);
+            comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
             tbxNombreRol.Clear();
             controladorError.Clear();
             rbtRolActivado.Select();           
@@ -71,12 +71,12 @@ namespace FrbaHotel.AbmRol
 
         private void btnGuardarRol_Click(object sender, EventArgs e)
         {
-            if (VentanaBase.ventanaCamposTodosCompletos(tabAgregar, controladorError))
+            if (ventanaCamposTodosCompletos(tabAgregar, controladorError))
             {
                 string nombreRol = tbxNombreRol.Text;
                 if (Database.rolNombreYaExiste(nombreRol))
                 {
-                    VentanaBase.ventanaInformarError("Un rol ya posee el mismo nombre");
+                    ventanaInformarError("Un rol ya posee el mismo nombre");
                     return;
                 }
                 if (rbtRolActivado.Checked)
@@ -88,7 +88,7 @@ namespace FrbaHotel.AbmRol
                     Database.rolAgregarFuncionalidad(idRol, nombreFuncionalidad);
                 btnLimpiarRol_Click(sender, null);
                 actualizarVentana();
-                VentanaBase.ventanaInformarExito();
+                ventanaInformarExito();
             }    
         }
 
@@ -102,7 +102,7 @@ namespace FrbaHotel.AbmRol
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             Database.rolEliminar(cbxEliminar.SelectedItem.ToString());
-            VentanaBase.comboBoxReiniciar(cbxEliminar, Database.rolObtenerHabilitados());
+            VentanaBase.comboBoxCargar(cbxEliminar, Database.rolObtenerHabilitados());
             VentanaBase.ventanaInformarExito();
         }
     }

@@ -23,27 +23,27 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnAgregarRol_Click(object sender, EventArgs e)
         {
-            VentanaBase.botonAgregarComboBoxListBox(cbxRoles, lbxRoles);
+            botonAgregarComboBoxListBox(cbxRoles, lbxRoles);
         }
 
         private void btnQuitarRol_Click(object sender, EventArgs e)
         {
-            VentanaBase.botonQuitarComboBoxListBox(cbxRoles, lbxRoles);
+            botonQuitarComboBoxListBox(cbxRoles, lbxRoles);
         }
 
         private void btnAgregarHotel_Click(object sender, EventArgs e)
         {
-            VentanaBase.botonAgregarComboBoxListBox(cbxHoteles, lbxHoteles);
+            botonAgregarComboBoxListBox(cbxHoteles, lbxHoteles);
         }
 
         private void btnQuitarHotel_Click(object sender, EventArgs e)
         {
-            VentanaBase.botonQuitarComboBoxListBox(cbxHoteles, lbxHoteles);
+            botonQuitarComboBoxListBox(cbxHoteles, lbxHoteles);
         }
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
-            if (VentanaBase.ventanaCamposTodosCompletos(this, controladorError))
+            if (ventanaCamposTodosCompletos(this, controladorError))
                 MessageBox.Show("IZI");
         }
     }

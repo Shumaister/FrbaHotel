@@ -23,46 +23,44 @@ namespace FrbaHotel.AbmUsuario
 
         private void VentanaUsuarios_Load(object sender, EventArgs e)
         {
-            VentanaBase.dataGridViewCargar(dgvModificarUsuarios, Database.usuarioObtenerTodos());
-            VentanaBase.dataGridViewAgregarBotonModificar(dgvModificarUsuarios);
-            VentanaBase.dataGridViewAgregarBotonEliminar(dgvEliminarUsuarios);
-            VentanaBase.comboBoxCargar(cbxRoles, Database.rolObtenerTodos());
-            VentanaBase.comboBoxCargar(cbxHoteles, Database.hotelObtenerTodos());
-            VentanaBase.comboBoxCargar(cbxTipoDocumento, Database.documentoObtenerTipos());
+            dataGridViewCargar(dgvModificarUsuarios, Database.usuarioObtenerTodos());
+            dataGridViewAgregarBotonModificar(dgvModificarUsuarios);
+            dataGridViewAgregarBotonEliminar(dgvEliminarUsuarios);
+            comboBoxCargar(cbxRoles, Database.rolObtenerTodos());
+            comboBoxCargar(cbxHoteles, Database.hotelObtenerTodos());
+            comboBoxCargar(cbxTipoDocumento, Database.documentoObtenerTipos());
         }
 
         private void dgvModificarUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var senderGrid = (DataGridView)sender;
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
-            {
                 new VentanaModificarUsuario().Show();
-            }
         }
 
         private void btnAgregarRol_Click(object sender, EventArgs e)
         {
-            VentanaBase.botonAgregarComboBoxListBox(cbxRoles, lbxRoles);
+            botonAgregarComboBoxListBox(cbxRoles, lbxRoles);
         }
 
         private void btnQuitarRol_Click(object sender, EventArgs e)
         {
-            VentanaBase.botonQuitarComboBoxListBox(cbxRoles, lbxRoles);
+            botonQuitarComboBoxListBox(cbxRoles, lbxRoles);
         }
 
         private void btnAgregarHotel_Click(object sender, EventArgs e)
         {
-            VentanaBase.botonAgregarComboBoxListBox(cbxHoteles, lbxHoteles);
+            botonAgregarComboBoxListBox(cbxHoteles, lbxHoteles);
         }
 
         private void btnQuitarHotel_Click(object sender, EventArgs e)
         {
-            VentanaBase.botonQuitarComboBoxListBox(cbxHoteles, lbxHoteles);
+            botonQuitarComboBoxListBox(cbxHoteles, lbxHoteles);
         }
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
-            if (VentanaBase.ventanaCamposTodosCompletos(pagAgregar, controladorError))
+            if (ventanaCamposTodosCompletos(pagAgregar, controladorError))
                 MessageBox.Show("IZI");
         }
     }

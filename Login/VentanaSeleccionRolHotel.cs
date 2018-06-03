@@ -38,24 +38,25 @@ namespace FrbaHotel.Login
         {
             lblHotel.Hide();
             cbxHoteles.Hide();
-            VentanaBase.comboBoxCargar(cbxRoles, usuario.roles);
+            comboBoxCargar(cbxRoles, usuario.roles);
         }
 
         public void configurarParaHotel()
         {
             cbxRoles.Hide();
             lblRol.Hide();
-            VentanaBase.comboBoxCargar(cbxHoteles, usuario.hoteles);
+            comboBoxCargar(cbxHoteles, usuario.hoteles);
         }
 
         public void configurarParaRolYHotel()
         {
-            VentanaBase.comboBoxCargar(cbxHoteles, usuario.hoteles);
-            VentanaBase.comboBoxCargar(cbxRoles, usuario.roles); ;
+            comboBoxCargar(cbxHoteles, usuario.hoteles);
+            comboBoxCargar(cbxRoles, usuario.roles); ;
         }
 
         private void btnIngresarRol_Click(object sender, EventArgs e)
         {
+            this.Hide();
             VentanaMenuPrincipal ventanaMenuPrincipal = new VentanaMenuPrincipal(usuario);
             ventanaMenuPrincipal.Show();
         }

@@ -71,16 +71,11 @@ namespace FrbaHotel
 
         public static void comboBoxCargar(ComboBox comboBox, List<string> listaDatos)
         {
+            comboBox.Items.Clear();
             foreach (string dato in listaDatos)
                 comboBox.Items.Add(dato);
             if(comboBox.Items.Count > 0)
                 comboBox.SelectedIndex = 0;
-        }
-
-        public static void comboBoxReiniciar(ComboBox comboBox, List<string> listaDatos)
-        {
-            comboBox.Items.Clear();
-            VentanaBase.comboBoxCargar(comboBox, listaDatos);
         }
 
         public static void listBoxCargar(ListBox listBox, List<string> listaDatos)

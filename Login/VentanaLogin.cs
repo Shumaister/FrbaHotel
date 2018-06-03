@@ -22,6 +22,63 @@ namespace FrbaHotel.Login
             this.AcceptButton = btnLogin;
         }
 
+        //-------------------------------------- Metodos para Ventana -------------------------------------
+
+        private void ventanaLogueoExitoso(LogueoDTO logueo)
+        {
+            this.Hide();
+            Usuario usuario = new Usuario(logueo);
+            ventanaAbrirSegunUsuario(usuario);
+        }
+
+        private void ventanaLogueoFallido(LogueoDTO logueo)
+        {
+            txbUser.Clear();
+            txbPass.Clear();
+            lblErrorLogueo.Visible = true;
+            lblErrorLogueo.Text = logueo.mensajeError;
+        }
+
+        private void ventanaAbrirSegunUsuario(Usuario usuario)
+        {
+            string nombreUsuario = usuario.nombre;
+            if (Database.usuarioTrabajaEnUnSoloHotel(nombreUsuario) && Database.usuarioTieneUnSoloRol(nombreUsuario))
+                ventanaMenuPrincipalAbrir(usuario);
+            else if (Database.usuarioTrabajaEnUnSoloHotel(nombreUsuario) && Database.usuarioTieneVariosRoles(nombreUsuario))
+                ventanaSeleccionDeRolAbrir(usuario);
+            else if (Database.usuarioTrabajaEnVariosHoteles(nombreUsuario) && Database.usuarioTieneUnSoloRol(nombreUsuario))
+                ventanaSeleccionDeHotelAbrir(usuario);
+            else
+                ventanaSeleccionDeRolYHotelAbrir(usuario);
+        }
+
+        private void ventanaMenuPrincipalAbrir(Usuario usuario)
+        {
+            VentanaMenuPrincipal ventanaMenuPrincipal = new VentanaMenuPrincipal(usuario);
+            ventanaMenuPrincipal.Show();
+        }
+
+        private void ventanaSeleccionDeRolAbrir(Usuario usuario)
+        {
+            VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(usuario);
+            ventanaSeleccionRol.configurarParaRol();
+            ventanaSeleccionRol.Show();
+        }
+
+        private void ventanaSeleccionDeHotelAbrir(Usuario usuario)
+        {
+            VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(usuario);
+            ventanaSeleccionRol.configurarParaHotel();
+            ventanaSeleccionRol.Show();
+        }
+
+        private void ventanaSeleccionDeRolYHotelAbrir(Usuario usuario)
+        {
+            VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(usuario);
+            ventanaSeleccionRol.configurarParaRolYHotel();
+            ventanaSeleccionRol.Show();
+        }
+
         //-------------------------------------- Metodos para Eventos -------------------------------------
 
         private void txbUser_TextChanged(object sender, EventArgs e)
@@ -46,57 +103,10 @@ namespace FrbaHotel.Login
             {
                 LogueoDTO logueo = Database.loginAutenticar(txbUser.Text, txbPass.Text); 
                 if (logueo.exito)
-                {
-                    this.Hide();
-                    string nombreUsuario = logueo.nombreUsuario;
-                    Usuario usuario = new Usuario(logueo);
-                    if (Database.usuarioTrabajaEnUnSoloHotel(nombreUsuario) && Database.usuarioTieneUnSoloRol(nombreUsuario))
-                        abrirVentanaMenuPrincipal(usuario);
-                    else if (Database.usuarioTrabajaEnUnSoloHotel(nombreUsuario) && Database.usuarioTieneVariosRoles(nombreUsuario))
-                        abrirVentanaSeleccionDeRol(usuario);
-                    else if (Database.usuarioTrabajaEnVariosHoteles(nombreUsuario) && Database.usuarioTieneUnSoloRol(nombreUsuario))
-                        abrirVentanaSeleccionDeHotel(usuario);
-                    else
-                        abrirVentanaSeleccionDeHotelYRol(usuario);
-                }
+                    ventanaLogueoExitoso(logueo);
                 else
-                    errorLogueo(logueo);
+                    ventanaLogueoFallido(logueo);
             }
-        }
-
-        private void abrirVentanaMenuPrincipal(Usuario usuario)
-        {
-            VentanaMenuPrincipal ventanaMenuPrincipal = new VentanaMenuPrincipal(usuario);
-            ventanaMenuPrincipal.Show();
-        }
-
-        private void abrirVentanaSeleccionDeRol(Usuario usuario)
-        {
-            VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(usuario);
-            ventanaSeleccionRol.configurarParaRol();
-            ventanaSeleccionRol.Show();
-        }
-
-        private void abrirVentanaSeleccionDeHotel(Usuario usuario)
-        {
-            VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(usuario);
-            ventanaSeleccionRol.configurarParaHotel();
-            ventanaSeleccionRol.Show();
-        }
-
-        private void abrirVentanaSeleccionDeHotelYRol(Usuario usuario)
-        {
-            VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(usuario);
-            ventanaSeleccionRol.configurarParaRolYHotel();
-            ventanaSeleccionRol.Show();
-        }
-
-        private void errorLogueo(LogueoDTO logueo)
-        {
-            txbUser.Clear();
-            txbPass.Clear();
-            lblErrorLogueo.Visible = true;
-            lblErrorLogueo.Text = logueo.mensajeError;
         }
     }
 }
