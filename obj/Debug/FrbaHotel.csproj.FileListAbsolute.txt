@@ -53,3 +53,4 @@ D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.VentanaBase.resources
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.exe
 D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.pdb
+D:\Dario\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache

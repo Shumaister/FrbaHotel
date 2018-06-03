@@ -24,8 +24,9 @@ namespace FrbaHotel.AbmUsuario
         private void VentanaUsuarios_Load(object sender, EventArgs e)
         {
             dataGridViewCargar(dgvModificarUsuarios, Database.usuarioObtenerTodos());
+            dataGridViewCargar(dgvEliminarUsuarios, Database.usuarioObtenerTodos());
             dataGridViewAgregarBotonModificar(dgvModificarUsuarios);
-            //dataGridViewAgregarBotonEliminar(dgvEliminarUsuarios);
+            dataGridViewAgregarBotonEliminar(dgvEliminarUsuarios);
             comboBoxCargar(cbxRoles, Database.rolObtenerTodos());
             comboBoxCargar(cbxHoteles, Database.hotelObtenerTodos());
             comboBoxCargar(cbxTipoDocumento, Database.documentoObtenerTipos());
@@ -66,27 +67,85 @@ namespace FrbaHotel.AbmUsuario
 
         private void tbxUsuario_KeyPress(object sender, KeyPressEventArgs e)
         {
-            textBoxConfigurarParaEmail(e);
+            textBoxConfigurarParaCuenta(e);
         }
 
         private void tbxNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            textBoxConfigurarParaLetras(e);
         }
 
         private void tbxApellido_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            textBoxConfigurarParaLetras(e);
         }
 
         private void tbxDocumento_KeyPress(object sender, KeyPressEventArgs e)
         {
+            textBoxConfigurarParaNumeros(e);
+        }
 
+        private void tbxEmail_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaCuenta(e);
         }
 
         private void tbxTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            textBoxConfigurarParaNumeros(e);
         }
+
+        private void tbxPais_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaLetras(e);
+        }
+
+        private void tbxCiudad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaLetras(e);
+        }
+
+        private void tbxCalle_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaLetras(e);
+        }
+
+        private void tbxNumeroCalle_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaNumeros(e);
+        }
+
+        private void tbxPiso_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaNumeros(e);
+        }
+
+        private void tbxDepartamento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaLetras(e);
+        }
+
+        private void btnLimpiarUsuario_Click(object sender, EventArgs e)
+        {
+            tbxUsuario.Clear();
+            tbxContrasena.Clear();
+            comboBoxCargar(cbxRoles, Database.rolObtenerTodos());          
+            listBoxLimpiar(lbxRoles);
+            comboBoxCargar(cbxHoteles, Database.hotelObtenerTodos());
+            listBoxLimpiar(lbxHoteles);
+            tbxNombre.Clear();
+            tbxApellido.Clear();
+            tbxDocumento.Clear();
+            tbxFechaNacimiento.Clear();
+            tbxPais.Clear();
+            tbxCiudad.Clear();
+            tbxCalle.Clear();
+            tbxNumeroCalle.Clear();
+            tbxPiso.Clear();
+            tbxDepartamento.Clear();
+            tbxEmail.Clear();
+            tbxTelefono.Clear();
+        }
+
     }
 }

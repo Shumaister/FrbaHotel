@@ -66,7 +66,7 @@
             this.configuracionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(816, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1038, 24);
             this.menuStrip1.TabIndex = 27;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -183,7 +183,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::FrbaHotel.Properties.Resources.Logo_TP;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(816, 672);
+            this.ClientSize = new System.Drawing.Size(1038, 796);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.IsMdiContainer = true;

@@ -103,12 +103,12 @@ namespace FrbaHotel
 
         public static void dataGridViewAgregarBotonModificar(DataGridView dataGridView)
         {
-            VentanaBase.dataGridViewAgregarBoton(dataGridView, "Modificar");
+            VentanaBase.dataGridViewAgregarBoton(dataGridView, "            Modificar          ");
         }
 
         public static void dataGridViewAgregarBotonEliminar(DataGridView dataGridView)
         {
-            VentanaBase.dataGridViewAgregarBoton(dataGridView, "Eliminar");
+            VentanaBase.dataGridViewAgregarBoton(dataGridView, "            Eliminar            ");
         }
 
         public static void botonAgregarComboBoxListBox(ComboBox comboBox, ListBox listBox)
@@ -154,7 +154,7 @@ namespace FrbaHotel
                 evento.Handled = true;   
         }
 
-        public static void textBoxConfigurarParaEmail(KeyPressEventArgs evento)
+        public static void textBoxConfigurarParaCuenta(KeyPressEventArgs evento)
         {
             if (textBoxEmailCaracterValido(evento.KeyChar))
                 evento.Handled = false;
@@ -169,7 +169,7 @@ namespace FrbaHotel
 
         public static bool textBoxLetrasCaracterValido(char caracter)
         {
-            return Char.IsLetter(caracter) || Char.IsControl(caracter);
+            return Char.IsLetter(caracter) || Char.IsControl(caracter) || Char.IsSeparator(caracter);
         }
 
         public static bool textBoxEmailCaracterValido(char caracter)
