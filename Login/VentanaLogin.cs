@@ -44,7 +44,7 @@ namespace FrbaHotel.Login
             lblErrorLogueo.Visible = false;
             if (ventanaCamposTodosCompletos(this, controladorError)) 
             {
-                LogueoDTO logueo = Database.Autenticar(txbUser.Text, txbPass.Text); 
+                LogueoDTO logueo = Database.loginAutenticar(txbUser.Text, txbPass.Text); 
                 if (logueo.exito)
                 {
                     this.Hide();
