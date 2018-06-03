@@ -71,7 +71,7 @@ namespace FrbaHotel.AbmRol
 
         private void btnGuardarRol_Click(object sender, EventArgs e)
         {
-            if (ventanaCamposTodosCompletos(tabAgregar, controladorError))
+            if (ventanaCamposEstanCompletos(tabAgregar, controladorError))
             {
                 string nombreRol = tbxNombreRol.Text;
                 if (Database.rolNombreYaExiste(nombreRol))

@@ -70,7 +70,7 @@ namespace FrbaHotel.AbmRol
 
         private void btnGuardarRol_Click(object sender, EventArgs e)
         {
-            if (ventanaCamposTodosCompletos(this, controladorError))
+            if (ventanaCamposEstanCompletos(this, controladorError))
             {
                 string nombreRolNuevo = tbxNombreRol.Text;
                 if (Database.rolNombreYaExiste(nombreRolNuevo) && nombreRolNuevo != nombreRolActual)

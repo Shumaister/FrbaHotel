@@ -43,7 +43,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
-            if (ventanaCamposTodosCompletos(this, controladorError))
+            if (ventanaCamposEstanCompletos(this, controladorError))
                 MessageBox.Show("IZI");
         }
     }

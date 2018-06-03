@@ -60,8 +60,33 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
-            if (ventanaCamposTodosCompletos(pagAgregar, controladorError))
+            if (ventanaCamposEstanCompletos(pagAgregar, controladorError))
                 MessageBox.Show("IZI");
+        }
+
+        private void tbxUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaEmail(e);
+        }
+
+        private void tbxNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void tbxApellido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void tbxDocumento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void tbxTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
         }
     }
 }

@@ -99,7 +99,7 @@ namespace FrbaHotel.Login
         private void btnLogin_Click(object sender, EventArgs e)
         {
             lblErrorLogueo.Visible = false;
-            if (ventanaCamposTodosCompletos(this, controladorError)) 
+            if (ventanaCamposEstanCompletos(this, controladorError)) 
             {
                 LogueoDTO logueo = Database.loginAutenticar(txbUser.Text, txbPass.Text); 
                 if (logueo.exito)

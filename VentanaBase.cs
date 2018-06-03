@@ -26,7 +26,7 @@ namespace FrbaHotel
 
         //-------------------------------------- Metodos para Ventanas -------------------------------------
 
-        public static bool ventanaCamposTodosCompletos(Control ventana, ErrorProvider errorProvider)
+        public static bool ventanaCamposEstanCompletos(Control ventana, ErrorProvider errorProvider)
         {
             bool flagControl = true;
             foreach (Control objeto in ventana.Controls)
@@ -39,8 +39,6 @@ namespace FrbaHotel
                         flagControl = false;
                         errorProvider.SetError(textBox, "El campo no puede estar vacio");
                     }
-                    else
-                        errorProvider.SetError(textBox, "");
                 }
                 if(objeto is ListBox)
                 {
@@ -50,8 +48,6 @@ namespace FrbaHotel
                         flagControl = false;
                         errorProvider.SetError(listBox, "Debe seleccionar al menos una opcion");
                     }
-                    else
-                        errorProvider.SetError(listBox, "");
                 }
             }
             return flagControl;
@@ -140,6 +136,45 @@ namespace FrbaHotel
                 if (listBox.Items.Count > 0)
                     listBox.SelectedIndex = 0;
             }
+        }
+
+        public static void textBoxConfigurarParaNumeros(KeyPressEventArgs evento) 
+        {
+            if (textBoxNumerosCaracterValido(evento.KeyChar))
+                evento.Handled = false;
+            else
+                evento.Handled = true;   
+        }
+
+        public static void textBoxConfigurarParaLetras(KeyPressEventArgs evento)
+        {
+            if (textBoxLetrasCaracterValido(evento.KeyChar))
+                evento.Handled = false;
+            else
+                evento.Handled = true;   
+        }
+
+        public static void textBoxConfigurarParaEmail(KeyPressEventArgs evento)
+        {
+            if (textBoxEmailCaracterValido(evento.KeyChar))
+                evento.Handled = false;
+            else
+                evento.Handled = true;   
+        }
+
+        public static bool textBoxNumerosCaracterValido(char caracter)
+        {
+            return Char.IsDigit(caracter) || Char.IsControl(caracter);
+        }
+
+        public static bool textBoxLetrasCaracterValido(char caracter)
+        {
+            return Char.IsLetter(caracter) || Char.IsControl(caracter);
+        }
+
+        public static bool textBoxEmailCaracterValido(char caracter)
+        {
+            return Char.IsLetter(caracter) || Char.IsDigit(caracter) || Char.IsControl(caracter) || caracter == '-' || caracter == '_' || caracter == '.';
         }
     }
 }
