@@ -40,13 +40,13 @@
             // 
             // logo
             // 
-            this.logo.Location = new System.Drawing.Point(69, 12);
+            this.logo.Location = new System.Drawing.Point(85, 12);
             // 
             // lblErrorRol
             // 
             this.lblErrorRol.AutoSize = true;
             this.lblErrorRol.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorRol.Location = new System.Drawing.Point(31, 170);
+            this.lblErrorRol.Location = new System.Drawing.Point(48, 169);
             this.lblErrorRol.Name = "lblErrorRol";
             this.lblErrorRol.Size = new System.Drawing.Size(248, 13);
             this.lblErrorRol.TabIndex = 13;
@@ -54,7 +54,7 @@
             // 
             // btnIngresarRol
             // 
-            this.btnIngresarRol.Location = new System.Drawing.Point(105, 330);
+            this.btnIngresarRol.Location = new System.Drawing.Point(126, 334);
             this.btnIngresarRol.Name = "btnIngresarRol";
             this.btnIngresarRol.Size = new System.Drawing.Size(91, 23);
             this.btnIngresarRol.TabIndex = 12;
@@ -65,15 +65,15 @@
             // cbxRoles
             // 
             this.cbxRoles.FormattingEnabled = true;
-            this.cbxRoles.Location = new System.Drawing.Point(57, 224);
+            this.cbxRoles.Location = new System.Drawing.Point(34, 223);
             this.cbxRoles.Name = "cbxRoles";
-            this.cbxRoles.Size = new System.Drawing.Size(184, 21);
+            this.cbxRoles.Size = new System.Drawing.Size(265, 21);
             this.cbxRoles.TabIndex = 11;
             // 
             // lblRol
             // 
             this.lblRol.AutoSize = true;
-            this.lblRol.Location = new System.Drawing.Point(54, 193);
+            this.lblRol.Location = new System.Drawing.Point(31, 192);
             this.lblRol.Name = "lblRol";
             this.lblRol.Size = new System.Drawing.Size(142, 13);
             this.lblRol.TabIndex = 10;
@@ -82,35 +82,36 @@
             // cbxHoteles
             // 
             this.cbxHoteles.FormattingEnabled = true;
-            this.cbxHoteles.Location = new System.Drawing.Point(57, 293);
+            this.cbxHoteles.Location = new System.Drawing.Point(34, 292);
             this.cbxHoteles.Name = "cbxHoteles";
-            this.cbxHoteles.Size = new System.Drawing.Size(184, 21);
+            this.cbxHoteles.Size = new System.Drawing.Size(265, 21);
             this.cbxHoteles.TabIndex = 15;
             // 
             // lblHotel
             // 
             this.lblHotel.AutoSize = true;
-            this.lblHotel.Location = new System.Drawing.Point(54, 262);
+            this.lblHotel.Location = new System.Drawing.Point(31, 261);
             this.lblHotel.Name = "lblHotel";
             this.lblHotel.Size = new System.Drawing.Size(154, 13);
             this.lblHotel.TabIndex = 14;
             this.lblHotel.Text = "Por favor,  seleccione un hotel.";
             // 
-            // VentanaSeleccionRol
+            // VentanaSeleccionRolHotel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(300, 378);
+            this.ClientSize = new System.Drawing.Size(337, 378);
             this.Controls.Add(this.cbxHoteles);
             this.Controls.Add(this.lblHotel);
             this.Controls.Add(this.lblErrorRol);
             this.Controls.Add(this.btnIngresarRol);
             this.Controls.Add(this.cbxRoles);
             this.Controls.Add(this.lblRol);
-            this.Name = "VentanaSeleccionRol";
+            this.Name = "VentanaSeleccionRolHotel";
             this.Text = "Seleccion - FRBA Hotel ©";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.VentanaSeleccionRol_FormClosed);
+            this.Load += new System.EventHandler(this.VentanaSeleccionRolHotel_Load);
             this.Controls.SetChildIndex(this.lblRol, 0);
             this.Controls.SetChildIndex(this.cbxRoles, 0);
             this.Controls.SetChildIndex(this.btnIngresarRol, 0);

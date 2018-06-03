@@ -34,7 +34,7 @@ namespace FrbaHotel
                 if(objeto is TextBox)
                 {
                     TextBox textBox = (TextBox)objeto;
-                    if (string.IsNullOrEmpty(textBox.Text.Trim()))
+                    if (textBox.ShortcutsEnabled && string.IsNullOrEmpty(textBox.Text.Trim()))
                     {
                         flagControl = false;
                         errorProvider.SetError(textBox, "El campo no puede estar vacio");

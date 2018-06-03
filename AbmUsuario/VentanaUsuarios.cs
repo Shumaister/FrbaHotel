@@ -25,7 +25,7 @@ namespace FrbaHotel.AbmUsuario
         {
             dataGridViewCargar(dgvModificarUsuarios, Database.usuarioObtenerTodos());
             dataGridViewAgregarBotonModificar(dgvModificarUsuarios);
-            dataGridViewAgregarBotonEliminar(dgvEliminarUsuarios);
+            //dataGridViewAgregarBotonEliminar(dgvEliminarUsuarios);
             comboBoxCargar(cbxRoles, Database.rolObtenerTodos());
             comboBoxCargar(cbxHoteles, Database.hotelObtenerTodos());
             comboBoxCargar(cbxTipoDocumento, Database.documentoObtenerTipos());

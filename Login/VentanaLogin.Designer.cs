@@ -84,7 +84,7 @@
             // 
             this.txbUser.Location = new System.Drawing.Point(78, 210);
             this.txbUser.Name = "txbUser";
-            this.txbUser.Size = new System.Drawing.Size(100, 20);
+            this.txbUser.Size = new System.Drawing.Size(131, 20);
             this.txbUser.TabIndex = 22;
             this.txbUser.TextChanged += new System.EventHandler(this.txbUser_TextChanged);
             // 
@@ -92,7 +92,7 @@
             // 
             this.txbPass.Location = new System.Drawing.Point(78, 271);
             this.txbPass.Name = "txbPass";
-            this.txbPass.Size = new System.Drawing.Size(100, 20);
+            this.txbPass.Size = new System.Drawing.Size(131, 20);
             this.txbPass.TabIndex = 23;
             this.txbPass.UseSystemPasswordChar = true;
             this.txbPass.TextChanged += new System.EventHandler(this.txbPass_TextChanged);
