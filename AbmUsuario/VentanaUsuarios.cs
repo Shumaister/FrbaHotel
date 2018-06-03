@@ -68,61 +68,73 @@ namespace FrbaHotel.AbmUsuario
         private void tbxUsuario_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaCuenta(e);
+            controladorError.Clear();
         }
 
         private void tbxNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaLetras(e);
+            controladorError.Clear();
         }
 
         private void tbxApellido_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaLetras(e);
+            controladorError.Clear();
         }
 
         private void tbxDocumento_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaNumeros(e);
+            controladorError.Clear();
         }
 
         private void tbxEmail_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaCuenta(e);
+            controladorError.Clear();
         }
 
         private void tbxTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaNumeros(e);
+            controladorError.Clear();
         }
 
         private void tbxPais_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaLetras(e);
+            controladorError.Clear();
         }
 
         private void tbxCiudad_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaLetras(e);
+            controladorError.Clear();
         }
 
         private void tbxCalle_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaLetras(e);
+            controladorError.Clear();
         }
 
         private void tbxNumeroCalle_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaNumeros(e);
+            controladorError.Clear();
         }
 
         private void tbxPiso_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaNumeros(e);
+            controladorError.Clear();
         }
 
         private void tbxDepartamento_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaLetras(e);
+            controladorError.Clear();
         }
 
         private void btnLimpiarUsuario_Click(object sender, EventArgs e)
@@ -145,6 +157,36 @@ namespace FrbaHotel.AbmUsuario
             tbxDepartamento.Clear();
             tbxEmail.Clear();
             tbxTelefono.Clear();
+            controladorError.Clear();
+        }
+
+        private void btnSeleccionarFecha_Click(object sender, EventArgs e)
+        {
+            calendario.Show();
+            btnGuardarFecha.Show();
+            controladorError.Clear();
+        }
+
+        private void btnGuardarFecha_Click(object sender, EventArgs e)
+        {
+            tbxFechaNacimiento.Text = calendario.SelectionStart.ToShortDateString();
+            calendario.Hide();
+            btnGuardarFecha.Hide();
+        }
+
+        private void lbxRoles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            controladorError.Clear();
+        }
+
+        private void lbxHoteles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            controladorError.Clear();
+        }
+
+        private void tbxContrasena_TextChanged(object sender, EventArgs e)
+        {
+            controladorError.Clear();
         }
 
     }
