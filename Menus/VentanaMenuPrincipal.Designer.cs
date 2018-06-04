@@ -32,18 +32,19 @@
             this.administracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuRoles = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUsuarios = new System.Windows.Forms.ToolStripMenuItem();
-            this.funcionalidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.habitacionesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.regimenesEstadiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuHoteles = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuHabitaciones = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuRegimenes = new System.Windows.Forms.ToolStripMenuItem();
             this.hoteleriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hotelesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.habitacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.regimenesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.estadiasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.facturasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.configuracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuClientes = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuReservas = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuEstadias = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuConsumibles = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuFacturas = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuEstadisticas = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuCuenta = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCambiarContrasenia = new System.Windows.Forms.ToolStripMenuItem();
+            this.nenuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -63,7 +64,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.administracionToolStripMenuItem,
             this.hoteleriaToolStripMenuItem,
-            this.configuracionToolStripMenuItem});
+            this.menuCuenta});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1038, 24);
@@ -73,11 +74,11 @@
             // administracionToolStripMenuItem
             // 
             this.administracionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuRoles,
             this.menuUsuarios,
-            this.funcionalidadesToolStripMenuItem,
-            this.habitacionesToolStripMenuItem1,
-            this.regimenesEstadiaToolStripMenuItem});
+            this.menuHoteles,
+            this.menuHabitaciones,
+            this.menuRoles,
+            this.menuRegimenes});
             this.administracionToolStripMenuItem.Name = "administracionToolStripMenuItem";
             this.administracionToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
             this.administracionToolStripMenuItem.Text = "Administracion";
@@ -85,98 +86,116 @@
             // menuRoles
             // 
             this.menuRoles.Name = "menuRoles";
-            this.menuRoles.Size = new System.Drawing.Size(143, 22);
+            this.menuRoles.Size = new System.Drawing.Size(152, 22);
             this.menuRoles.Text = "Roles";
+            this.menuRoles.Visible = false;
             this.menuRoles.Click += new System.EventHandler(this.menuRoles_Click);
             // 
             // menuUsuarios
             // 
             this.menuUsuarios.Name = "menuUsuarios";
-            this.menuUsuarios.Size = new System.Drawing.Size(143, 22);
+            this.menuUsuarios.Size = new System.Drawing.Size(152, 22);
             this.menuUsuarios.Text = "Usuarios";
+            this.menuUsuarios.Visible = false;
             this.menuUsuarios.Click += new System.EventHandler(this.menuUsuarios_Click);
             // 
-            // funcionalidadesToolStripMenuItem
+            // menuHoteles
             // 
-            this.funcionalidadesToolStripMenuItem.Name = "funcionalidadesToolStripMenuItem";
-            this.funcionalidadesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.funcionalidadesToolStripMenuItem.Text = "Hoteles";
+            this.menuHoteles.Name = "menuHoteles";
+            this.menuHoteles.Size = new System.Drawing.Size(152, 22);
+            this.menuHoteles.Text = "Hoteles";
+            this.menuHoteles.Visible = false;
             // 
-            // habitacionesToolStripMenuItem1
+            // menuHabitaciones
             // 
-            this.habitacionesToolStripMenuItem1.Name = "habitacionesToolStripMenuItem1";
-            this.habitacionesToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
-            this.habitacionesToolStripMenuItem1.Text = "Habitaciones";
+            this.menuHabitaciones.Name = "menuHabitaciones";
+            this.menuHabitaciones.Size = new System.Drawing.Size(152, 22);
+            this.menuHabitaciones.Text = "Habitaciones";
+            this.menuHabitaciones.Visible = false;
             // 
-            // regimenesEstadiaToolStripMenuItem
+            // menuRegimenes
             // 
-            this.regimenesEstadiaToolStripMenuItem.Name = "regimenesEstadiaToolStripMenuItem";
-            this.regimenesEstadiaToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.regimenesEstadiaToolStripMenuItem.Text = "Regimenes";
+            this.menuRegimenes.Name = "menuRegimenes";
+            this.menuRegimenes.Size = new System.Drawing.Size(152, 22);
+            this.menuRegimenes.Text = "Regimenes";
+            this.menuRegimenes.Visible = false;
             // 
             // hoteleriaToolStripMenuItem
             // 
             this.hoteleriaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.hotelesToolStripMenuItem,
-            this.habitacionesToolStripMenuItem,
-            this.regimenesToolStripMenuItem,
-            this.estadiasToolStripMenuItem1,
-            this.facturasToolStripMenuItem,
-            this.estadisticasToolStripMenuItem});
+            this.menuReservas,
+            this.menuFacturas,
+            this.menuClientes,
+            this.menuConsumibles,
+            this.menuEstadias,
+            this.menuEstadisticas});
             this.hoteleriaToolStripMenuItem.Name = "hoteleriaToolStripMenuItem";
             this.hoteleriaToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
             this.hoteleriaToolStripMenuItem.Text = "Recepcion";
             // 
-            // hotelesToolStripMenuItem
+            // menuClientes
             // 
-            this.hotelesToolStripMenuItem.Name = "hotelesToolStripMenuItem";
-            this.hotelesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.hotelesToolStripMenuItem.Text = "Clientes";
+            this.menuClientes.Name = "menuClientes";
+            this.menuClientes.Size = new System.Drawing.Size(152, 22);
+            this.menuClientes.Text = "Clientes";
+            this.menuClientes.Visible = false;
             // 
-            // habitacionesToolStripMenuItem
+            // menuReservas
             // 
-            this.habitacionesToolStripMenuItem.Name = "habitacionesToolStripMenuItem";
-            this.habitacionesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.habitacionesToolStripMenuItem.Text = "Reservas";
+            this.menuReservas.Name = "menuReservas";
+            this.menuReservas.Size = new System.Drawing.Size(152, 22);
+            this.menuReservas.Text = "Reservas";
+            this.menuReservas.Visible = false;
             // 
-            // regimenesToolStripMenuItem
+            // menuEstadias
             // 
-            this.regimenesToolStripMenuItem.Name = "regimenesToolStripMenuItem";
-            this.regimenesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.regimenesToolStripMenuItem.Text = "Estadias";
+            this.menuEstadias.Name = "menuEstadias";
+            this.menuEstadias.Size = new System.Drawing.Size(152, 22);
+            this.menuEstadias.Text = "Estadias";
+            this.menuEstadias.Visible = false;
             // 
-            // estadiasToolStripMenuItem1
+            // menuConsumibles
             // 
-            this.estadiasToolStripMenuItem1.Name = "estadiasToolStripMenuItem1";
-            this.estadiasToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
-            this.estadiasToolStripMenuItem1.Text = "Consumibles";
+            this.menuConsumibles.Name = "menuConsumibles";
+            this.menuConsumibles.Size = new System.Drawing.Size(152, 22);
+            this.menuConsumibles.Text = "Consumibles";
+            this.menuConsumibles.Visible = false;
             // 
-            // facturasToolStripMenuItem
+            // menuFacturas
             // 
-            this.facturasToolStripMenuItem.Name = "facturasToolStripMenuItem";
-            this.facturasToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.facturasToolStripMenuItem.Text = "Facturas";
+            this.menuFacturas.Name = "menuFacturas";
+            this.menuFacturas.Size = new System.Drawing.Size(152, 22);
+            this.menuFacturas.Text = "Facturas";
+            this.menuFacturas.Visible = false;
             // 
-            // estadisticasToolStripMenuItem
+            // menuEstadisticas
             // 
-            this.estadisticasToolStripMenuItem.Name = "estadisticasToolStripMenuItem";
-            this.estadisticasToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.estadisticasToolStripMenuItem.Text = "Estadisticas";
+            this.menuEstadisticas.Name = "menuEstadisticas";
+            this.menuEstadisticas.Size = new System.Drawing.Size(152, 22);
+            this.menuEstadisticas.Text = "Estadisticas";
+            this.menuEstadisticas.Visible = false;
             // 
-            // configuracionToolStripMenuItem
+            // menuCuenta
             // 
-            this.configuracionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuCambiarContrasenia});
-            this.configuracionToolStripMenuItem.Name = "configuracionToolStripMenuItem";
-            this.configuracionToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
-            this.configuracionToolStripMenuItem.Text = "Configuracion";
+            this.menuCuenta.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuCambiarContrasenia,
+            this.nenuCerrarSesion});
+            this.menuCuenta.Name = "menuCuenta";
+            this.menuCuenta.Size = new System.Drawing.Size(57, 20);
+            this.menuCuenta.Text = "Cuenta";
             // 
             // menuCambiarContrasenia
             // 
             this.menuCambiarContrasenia.Name = "menuCambiarContrasenia";
-            this.menuCambiarContrasenia.Size = new System.Drawing.Size(167, 22);
-            this.menuCambiarContrasenia.Text = "Ajustes de cuenta";
+            this.menuCambiarContrasenia.Size = new System.Drawing.Size(180, 22);
+            this.menuCambiarContrasenia.Text = "Cambiar contraseña";
             this.menuCambiarContrasenia.Click += new System.EventHandler(this.menuCambiarContrasenia_Click);
+            // 
+            // nenuCerrarSesion
+            // 
+            this.nenuCerrarSesion.Name = "nenuCerrarSesion";
+            this.nenuCerrarSesion.Size = new System.Drawing.Size(180, 22);
+            this.nenuCerrarSesion.Text = "Cerrar sesion";
             // 
             // VentanaMenuPrincipal
             // 
@@ -191,6 +210,7 @@
             this.Name = "VentanaMenuPrincipal";
             this.Text = "Menu Principal - FRBA Hotel ©";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.VentanaMenuPrincipal_FormClosed);
+            this.Load += new System.EventHandler(this.VentanaMenuPrincipal_Load);
             this.Controls.SetChildIndex(this.menuStrip1, 0);
             this.Controls.SetChildIndex(this.logo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
@@ -208,17 +228,18 @@
         private System.Windows.Forms.ToolStripMenuItem administracionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuRoles;
         private System.Windows.Forms.ToolStripMenuItem menuUsuarios;
-        private System.Windows.Forms.ToolStripMenuItem funcionalidadesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuHoteles;
         private System.Windows.Forms.ToolStripMenuItem hoteleriaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hotelesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem habitacionesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem regimenesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem habitacionesToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem regimenesEstadiaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem estadiasToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem facturasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem estadisticasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem configuracionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuClientes;
+        private System.Windows.Forms.ToolStripMenuItem menuReservas;
+        private System.Windows.Forms.ToolStripMenuItem menuEstadias;
+        private System.Windows.Forms.ToolStripMenuItem menuHabitaciones;
+        private System.Windows.Forms.ToolStripMenuItem menuRegimenes;
+        private System.Windows.Forms.ToolStripMenuItem menuConsumibles;
+        private System.Windows.Forms.ToolStripMenuItem menuFacturas;
+        private System.Windows.Forms.ToolStripMenuItem menuEstadisticas;
+        private System.Windows.Forms.ToolStripMenuItem menuCuenta;
         private System.Windows.Forms.ToolStripMenuItem menuCambiarContrasenia;
+        private System.Windows.Forms.ToolStripMenuItem nenuCerrarSesion;
     }
 }

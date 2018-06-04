@@ -61,21 +61,21 @@ namespace FrbaHotel.Login
         private void ventanaSeleccionDeRolAbrir(Usuario usuario)
         {
             VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(usuario);
-            ventanaSeleccionRol.configurarParaRol();
+            ventanaSeleccionRol.ventanaConfigurarParaRol();
             ventanaSeleccionRol.Show();
         }
 
         private void ventanaSeleccionDeHotelAbrir(Usuario usuario)
         {
             VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(usuario);
-            ventanaSeleccionRol.configurarParaHotel();
+            ventanaSeleccionRol.ventanaConfigurarParaHotel();
             ventanaSeleccionRol.Show();
         }
 
         private void ventanaSeleccionDeRolYHotelAbrir(Usuario usuario)
         {
             VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(usuario);
-            ventanaSeleccionRol.configurarParaRolYHotel();
+            ventanaSeleccionRol.ventanaConfigurarParaRolYHotel();
             ventanaSeleccionRol.Show();
         }
 

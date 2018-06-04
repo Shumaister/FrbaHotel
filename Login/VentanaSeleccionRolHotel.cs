@@ -34,21 +34,21 @@ namespace FrbaHotel.Login
             Application.Exit();
         }
        
-        public void configurarParaRol()
+        public void ventanaConfigurarParaRol()
         {
             lblHotel.Hide();
             cbxHoteles.Hide();
             comboBoxCargar(cbxRoles, usuario.roles);
         }
 
-        public void configurarParaHotel()
+        public void ventanaConfigurarParaHotel()
         {
             cbxRoles.Hide();
             lblRol.Hide();
             comboBoxCargar(cbxHoteles, usuario.hoteles);
         }
 
-        public void configurarParaRolYHotel()
+        public void ventanaConfigurarParaRolYHotel()
         {
             comboBoxCargar(cbxHoteles, usuario.hoteles);
             comboBoxCargar(cbxRoles, usuario.roles); ;

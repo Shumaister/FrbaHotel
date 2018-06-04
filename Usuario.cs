@@ -25,6 +25,7 @@ namespace FrbaHotel
             this.nombre = logueo.nombreUsuario;
             this.roles = logueo.rolesUsuario;
             this.hoteles = logueo.hotelesUsuario;
+
         }
 
         //-------------------------------------- Metodos para Usuarios -------------------------------------

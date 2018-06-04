@@ -53,5 +53,33 @@ namespace FrbaHotel.Menus
             ventanaAjustesDeCuenta.MdiParent = this;
             ventanaAjustesDeCuenta.Show();
         }
+
+        private void VentanaMenuPrincipal_Load(object sender, EventArgs e)
+        {
+            usuario.rolLogueado = "Recepcionista";
+            usuario.funcionalidades = Database.rolObtenerFuncionalidades(usuario.rolLogueado);
+            if (usuario.funcionalidades.Contains("Usuarios"))
+                menuUsuarios.Visible = true;
+            if (usuario.funcionalidades.Contains("Hoteles"))
+                menuHoteles.Visible = true;
+            if (usuario.funcionalidades.Contains("Habitaciones"))
+                menuHabitaciones.Visible = true;
+            if (usuario.funcionalidades.Contains("Roles"))
+                menuRoles.Visible = true;
+            if (usuario.funcionalidades.Contains("Regimenes"))
+                menuRegimenes.Visible = true;
+            if (usuario.funcionalidades.Contains("Reservas"))
+                menuReservas.Visible = true;
+            if (usuario.funcionalidades.Contains("Facturas"))
+                menuFacturas.Visible = true;
+            if (usuario.funcionalidades.Contains("Clientes"))
+                menuClientes.Visible = true;
+            if (usuario.funcionalidades.Contains("Consumibles"))
+                menuConsumibles.Visible = true;
+            if (usuario.funcionalidades.Contains("Estadias"))
+                menuEstadias.Visible = true;
+            if (usuario.funcionalidades.Contains("Estadisticas"))
+                menuEstadisticas.Visible = true;
+        }
     }
 }

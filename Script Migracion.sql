@@ -703,10 +703,10 @@ VALUES ('Gabriel', 'Maiori', '19960725 13:31:00.000', 2, 39769742, @@IDENTITY, '
 UPDATE RIP.Usuarios set Usuario_Persona_ID = @@IDENTITY where Usuario_User = 'gaby'
 
 INSERT INTO RIP.Funcionalidades(Funcionalidad_Funcionalidad)
-values ('ABM_USUARIO'),('ABM_ROL'),('ABM_CLIENTE'),('ABM_HOTEL'),('ABM_RESERVA'),('ABM_ESTADIA')
+values ('Usuarios'),('Hoteles'),('Habitaciones'),('Roles'),('Regimenes'),('Reservas'),('Facturas'),('Clientes'),('Consumibles'),('Estadias'),('Estadisticas')
 
 INSERT INTO RIP.Rol_Funcionalidad(RolFunc_IdRol,RolFunc_IdFuncionalidad)
-values(1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(2,6),(3,5)
+values(1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(2,6),(2,7),(2,8),(2,9),(2,10),(2,11),(3,6)
 
 -- Asignamos rol al admin y recepcionista
 INSERT INTO RIP.Usuario_Rol(Usuario_Rol_Usuario_ID, Usuario_Rol_Rol_ID) values ( (select Usuario_ID from rip.Usuarios where Usuario_User = 'admin'), (select Rol_ID from rip.Roles where Rol_Nombre = 'Administrador'))
