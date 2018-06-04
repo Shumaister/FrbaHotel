@@ -115,6 +115,7 @@ namespace FrbaHotel.AbmRol
                 string nombreRol = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Nombre"].Value.ToString();
                 Database.rolEliminar(nombreRol);
                 ventanaActualizar();
+                Database.usuarioActualizarDatos(usuario);
                 VentanaBase.ventanaInformarExito();
             }
         }

@@ -89,6 +89,7 @@ namespace FrbaHotel.AbmRol
                         Database.rolAgregarFuncionalidad(idRol, nombreFuncionalidad);
                 ventanaRoles.ventanaActualizar();
                 nombreRolActual = nombreRolNuevo;
+                Database.usuarioActualizarDatos(usuario);
                 ventanaInformarExito();
             }
         }

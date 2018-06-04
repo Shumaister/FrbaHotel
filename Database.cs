@@ -447,6 +447,13 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
+        public static void usuarioActualizarDatos(Usuario usuario)
+        {
+            usuario.roles = usuarioObtenerRoles(usuario.nombre);
+            usuario.hoteles = usuarioObtenerHoteles(usuario.nombre);
+            usuario.funcionalidades = rolObtenerFuncionalidades(usuario.rolLogueado);
+        }
+
         //-------------------------------------- Metodos para Usuarios -------------------------------------
 
         public static List<string> documentoObtenerTipos()

@@ -82,7 +82,7 @@ namespace FrbaHotel.Login
             string rolLogueado = cbxRoles.SelectedItem.ToString();
             string hotelLogueado = cbxHoteles.SelectedItem.ToString();
             List<string> funcionalidades = Database.rolObtenerFuncionalidades(rolLogueado);
-            usuario.configurar(rolLogueado, hotelLogueado, funcionalidades); 
+            usuario.configurarDatos(rolLogueado, hotelLogueado, funcionalidades); 
         }
 
         private void btnIngresarRol_Click(object sender, EventArgs e)

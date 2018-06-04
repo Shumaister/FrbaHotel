@@ -54,8 +54,8 @@
             this.dgvModificarRoles = new System.Windows.Forms.DataGridView();
             this.lblSeleccionarRol1 = new System.Windows.Forms.Label();
             this.tabEliminar = new System.Windows.Forms.TabPage();
-            this.label7 = new System.Windows.Forms.Label();
             this.dgvEliminarRoles = new System.Windows.Forms.DataGridView();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.tabRoles.SuspendLayout();
@@ -81,7 +81,7 @@
             this.tabRoles.Location = new System.Drawing.Point(12, 12);
             this.tabRoles.Name = "tabRoles";
             this.tabRoles.SelectedIndex = 0;
-            this.tabRoles.Size = new System.Drawing.Size(317, 403);
+            this.tabRoles.Size = new System.Drawing.Size(374, 403);
             this.tabRoles.TabIndex = 1;
             // 
             // tabAgregar
@@ -105,7 +105,7 @@
             this.tabAgregar.Location = new System.Drawing.Point(4, 22);
             this.tabAgregar.Name = "tabAgregar";
             this.tabAgregar.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAgregar.Size = new System.Drawing.Size(309, 377);
+            this.tabAgregar.Size = new System.Drawing.Size(366, 377);
             this.tabAgregar.TabIndex = 0;
             this.tabAgregar.Text = " Agregar";
             this.tabAgregar.UseVisualStyleBackColor = true;
@@ -115,7 +115,7 @@
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label32.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label32.Location = new System.Drawing.Point(51, 7);
+            this.label32.Location = new System.Drawing.Point(84, 6);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(90, 16);
             this.label32.TabIndex = 263;
@@ -126,7 +126,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(89, 285);
+            this.label6.Location = new System.Drawing.Point(122, 283);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(17, 22);
             this.label6.TabIndex = 28;
@@ -137,7 +137,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(134, 97);
+            this.label5.Location = new System.Drawing.Point(167, 95);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(17, 22);
             this.label5.TabIndex = 27;
@@ -148,7 +148,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(93, 33);
+            this.label4.Location = new System.Drawing.Point(126, 31);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(17, 22);
             this.label4.TabIndex = 26;
@@ -156,7 +156,7 @@
             // 
             // btnQuitarFuncionalidad
             // 
-            this.btnQuitarFuncionalidad.Location = new System.Drawing.Point(197, 150);
+            this.btnQuitarFuncionalidad.Location = new System.Drawing.Point(230, 148);
             this.btnQuitarFuncionalidad.Name = "btnQuitarFuncionalidad";
             this.btnQuitarFuncionalidad.Size = new System.Drawing.Size(75, 23);
             this.btnQuitarFuncionalidad.TabIndex = 12;
@@ -166,7 +166,7 @@
             // 
             // tbxNombreRol
             // 
-            this.tbxNombreRol.Location = new System.Drawing.Point(54, 63);
+            this.tbxNombreRol.Location = new System.Drawing.Point(87, 61);
             this.tbxNombreRol.Name = "tbxNombreRol";
             this.tbxNombreRol.Size = new System.Drawing.Size(100, 20);
             this.tbxNombreRol.TabIndex = 11;
@@ -174,7 +174,7 @@
             // 
             // btnAgregarFuncionalidad
             // 
-            this.btnAgregarFuncionalidad.Location = new System.Drawing.Point(197, 121);
+            this.btnAgregarFuncionalidad.Location = new System.Drawing.Point(230, 119);
             this.btnAgregarFuncionalidad.Name = "btnAgregarFuncionalidad";
             this.btnAgregarFuncionalidad.Size = new System.Drawing.Size(75, 23);
             this.btnAgregarFuncionalidad.TabIndex = 10;
@@ -185,7 +185,7 @@
             // lbxFuncionalidades
             // 
             this.lbxFuncionalidades.FormattingEnabled = true;
-            this.lbxFuncionalidades.Location = new System.Drawing.Point(54, 169);
+            this.lbxFuncionalidades.Location = new System.Drawing.Point(87, 167);
             this.lbxFuncionalidades.Name = "lbxFuncionalidades";
             this.lbxFuncionalidades.Size = new System.Drawing.Size(120, 95);
             this.lbxFuncionalidades.TabIndex = 9;
@@ -193,7 +193,7 @@
             // 
             // btnGuardarRol
             // 
-            this.btnGuardarRol.Location = new System.Drawing.Point(178, 343);
+            this.btnGuardarRol.Location = new System.Drawing.Point(211, 341);
             this.btnGuardarRol.Name = "btnGuardarRol";
             this.btnGuardarRol.Size = new System.Drawing.Size(75, 23);
             this.btnGuardarRol.TabIndex = 8;
@@ -203,7 +203,7 @@
             // 
             // btnLimpiarRol
             // 
-            this.btnLimpiarRol.Location = new System.Drawing.Point(54, 343);
+            this.btnLimpiarRol.Location = new System.Drawing.Point(87, 341);
             this.btnLimpiarRol.Name = "btnLimpiarRol";
             this.btnLimpiarRol.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiarRol.TabIndex = 7;
@@ -214,7 +214,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(51, 285);
+            this.label3.Location = new System.Drawing.Point(84, 283);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 6;
@@ -223,7 +223,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(51, 97);
+            this.label2.Location = new System.Drawing.Point(84, 95);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 13);
             this.label2.TabIndex = 5;
@@ -232,7 +232,7 @@
             // cbxFuncionalidades
             // 
             this.cbxFuncionalidades.FormattingEnabled = true;
-            this.cbxFuncionalidades.Location = new System.Drawing.Point(54, 123);
+            this.cbxFuncionalidades.Location = new System.Drawing.Point(87, 121);
             this.cbxFuncionalidades.Name = "cbxFuncionalidades";
             this.cbxFuncionalidades.Size = new System.Drawing.Size(121, 21);
             this.cbxFuncionalidades.TabIndex = 4;
@@ -240,7 +240,7 @@
             // rbtRolDesactivado
             // 
             this.rbtRolDesactivado.AutoSize = true;
-            this.rbtRolDesactivado.Location = new System.Drawing.Point(162, 308);
+            this.rbtRolDesactivado.Location = new System.Drawing.Point(195, 306);
             this.rbtRolDesactivado.Name = "rbtRolDesactivado";
             this.rbtRolDesactivado.Size = new System.Drawing.Size(85, 17);
             this.rbtRolDesactivado.TabIndex = 3;
@@ -251,7 +251,7 @@
             // rbtRolActivado
             // 
             this.rbtRolActivado.AutoSize = true;
-            this.rbtRolActivado.Location = new System.Drawing.Point(54, 308);
+            this.rbtRolActivado.Location = new System.Drawing.Point(87, 306);
             this.rbtRolActivado.Name = "rbtRolActivado";
             this.rbtRolActivado.Size = new System.Drawing.Size(67, 17);
             this.rbtRolActivado.TabIndex = 2;
@@ -262,7 +262,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(51, 33);
+            this.label1.Location = new System.Drawing.Point(84, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 0;
@@ -275,7 +275,7 @@
             this.tabModificar.Location = new System.Drawing.Point(4, 22);
             this.tabModificar.Name = "tabModificar";
             this.tabModificar.Padding = new System.Windows.Forms.Padding(3);
-            this.tabModificar.Size = new System.Drawing.Size(309, 377);
+            this.tabModificar.Size = new System.Drawing.Size(366, 377);
             this.tabModificar.TabIndex = 1;
             this.tabModificar.Text = "Modificar";
             this.tabModificar.UseVisualStyleBackColor = true;
@@ -305,7 +305,7 @@
             this.dgvModificarRoles.Location = new System.Drawing.Point(19, 31);
             this.dgvModificarRoles.Name = "dgvModificarRoles";
             this.dgvModificarRoles.RowHeadersVisible = false;
-            this.dgvModificarRoles.Size = new System.Drawing.Size(271, 308);
+            this.dgvModificarRoles.Size = new System.Drawing.Size(329, 308);
             this.dgvModificarRoles.TabIndex = 10;
             this.dgvModificarRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvModificarRoles_CellContentClick);
             // 
@@ -325,19 +325,10 @@
             this.tabEliminar.Location = new System.Drawing.Point(4, 22);
             this.tabEliminar.Name = "tabEliminar";
             this.tabEliminar.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEliminar.Size = new System.Drawing.Size(309, 377);
+            this.tabEliminar.Size = new System.Drawing.Size(366, 377);
             this.tabEliminar.TabIndex = 2;
             this.tabEliminar.Text = "Eliminar";
             this.tabEliminar.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(17, 11);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(34, 13);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "Roles";
             // 
             // dgvEliminarRoles
             // 
@@ -364,15 +355,24 @@
             this.dgvEliminarRoles.Location = new System.Drawing.Point(19, 31);
             this.dgvEliminarRoles.Name = "dgvEliminarRoles";
             this.dgvEliminarRoles.RowHeadersVisible = false;
-            this.dgvEliminarRoles.Size = new System.Drawing.Size(271, 308);
+            this.dgvEliminarRoles.Size = new System.Drawing.Size(329, 308);
             this.dgvEliminarRoles.TabIndex = 11;
             this.dgvEliminarRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEliminarRoles_CellContentClick);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(17, 11);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(34, 13);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Roles";
             // 
             // VentanaRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(358, 429);
+            this.ClientSize = new System.Drawing.Size(398, 429);
             this.Controls.Add(this.tabRoles);
             this.Name = "VentanaRoles";
             this.Text = "Roles - FRBA Hotel ©";

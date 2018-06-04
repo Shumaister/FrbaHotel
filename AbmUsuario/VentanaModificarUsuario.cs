@@ -12,11 +12,16 @@ namespace FrbaHotel.AbmUsuario
 {
     public partial class VentanaModificarUsuario : VentanaBase
     {
+        //-------------------------------------- Atributos -------------------------------------
+
+        Usuario usuario { get; set; }
+        
         //-------------------------------------- Constructores -------------------------------------
 
-        public VentanaModificarUsuario()
+        public VentanaModificarUsuario(Usuario usuario)
         {
             InitializeComponent();
+            this.usuario = usuario;
         }
 
         //-------------------------------------- Metodos para Eventos -------------------------------------

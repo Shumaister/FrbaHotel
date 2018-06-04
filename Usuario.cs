@@ -49,7 +49,7 @@ namespace FrbaHotel
             return roles.Count > 1;
         }
 
-        public void configurar(string rol, string hotel, List<string> listaFuncionalidades)
+        public void configurarDatos(string rol, string hotel, List<string> listaFuncionalidades)
         {
             rolLogueado = rol;
             hotelLogueado = hotel;
