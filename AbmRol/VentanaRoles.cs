@@ -25,12 +25,23 @@ namespace FrbaHotel.AbmRol
             this.usuario = usuario;
         }
 
+        //-------------------------------------- Metodos para Ventana ----------------------------
+
+        public void ventanaActualizar()
+        {
+            dataGridViewCargar(dgvModificarRoles, Database.rolObtenerTodos());
+            dataGridViewCargar(dgvEliminarRoles, Database.rolObtenerHabilitados());
+            dataGridViewAgregarBotonModificar(dgvModificarRoles);
+            dataGridViewAgregarBotonEliminar(dgvEliminarRoles);
+        }
+
         //-------------------------------------- Metodos para Eventos ----------------------------
 
         private void VentanaRoles_Load(object sender, EventArgs e)
         {
             comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
-            actualizarVentana();
+            rbtRolActivado.Select();
+            ventanaActualizar();
         }
 
         private void tbxNombreRol_TextChanged(object sender, EventArgs e)
@@ -41,13 +52,6 @@ namespace FrbaHotel.AbmRol
         private void lbxFuncionalidades_SelectedIndexChanged(object sender, EventArgs e)
         {
             controladorError.Clear();
-        }
-
-        public void actualizarVentana()
-        {
-            comboBoxCargar(cbxModificar, Database.rolObtenerTodos());
-            comboBoxCargar(cbxEliminar, Database.rolObtenerHabilitados());
-            rbtRolActivado.Select();
         }
         
         private void btnAgregarFuncionalidad_Click(object sender, EventArgs e)
@@ -87,22 +91,32 @@ namespace FrbaHotel.AbmRol
                 foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
                     Database.rolAgregarFuncionalidad(idRol, nombreFuncionalidad);
                 btnLimpiarRol_Click(sender, null);
-                actualizarVentana();
+                ventanaActualizar();
                 ventanaInformarExito();
             }    
         }
 
-        private void bntModificar_Click(object sender, EventArgs e)
+        private void dgvModificarRoles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            VentanaModificarRol ventanaModificarRol = new VentanaModificarRol(this, cbxModificar.SelectedItem.ToString());
-            ventanaModificarRol.ShowDialog();
+            var senderGrid = (DataGridView)sender;
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                string nombreRol = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Nombre"].Value.ToString();
+                VentanaModificarRol ventanaModificarRol = new VentanaModificarRol(this, nombreRol, usuario);
+                ventanaModificarRol.ShowDialog();
+            }          
         }
 
-        private void btnEliminar_Click(object sender, EventArgs e)
+        private void dgvEliminarRoles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Database.rolEliminar(cbxEliminar.SelectedItem.ToString());
-            VentanaBase.comboBoxCargar(cbxEliminar, Database.rolObtenerHabilitados());
-            VentanaBase.ventanaInformarExito();
+            var senderGrid = (DataGridView)sender;
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                string nombreRol = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Nombre"].Value.ToString();
+                Database.rolEliminar(nombreRol);
+                ventanaActualizar();
+                VentanaBase.ventanaInformarExito();
+            }
         }
     }
 }

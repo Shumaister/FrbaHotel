@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace FrbaHotel
 {
@@ -28,7 +29,7 @@ namespace FrbaHotel
 
         public static bool ventanaCamposEstanCompletos(Control ventana, ErrorProvider errorProvider)
         {
-            bool flagControl = true;
+            bool camposTodosCompletos = true;
             foreach (Control objeto in ventana.Controls)
             {
                 if(objeto is TextBox)
@@ -36,7 +37,7 @@ namespace FrbaHotel
                     TextBox textBox = (TextBox)objeto;
                     if (textBox.ShortcutsEnabled && string.IsNullOrEmpty(textBox.Text.Trim()))
                     {
-                        flagControl = false;
+                        camposTodosCompletos = false;
                         errorProvider.SetError(textBox, "El campo no puede estar vacio");
                     }
                 }
@@ -45,21 +46,25 @@ namespace FrbaHotel
                     ListBox listBox = (ListBox)objeto;
                     if (listBox.Items.Count == 0)
                     {
-                        flagControl = false;
+                        camposTodosCompletos = false;
                         errorProvider.SetError(listBox, "Debe seleccionar al menos una opcion");
                     }
                 }
             }
-            return flagControl;
+            if(!camposTodosCompletos)
+                SystemSounds.Beep.Play();
+            return camposTodosCompletos;
         }
 
         public static void ventanaInformarExito()
         {
+            SystemSounds.Exclamation.Play();
             MessageBox.Show("La operacion se ha realizado con exito", "Aviso");
         }
 
         public static void ventanaInformarError(string mensaje)
         {
+            SystemSounds.Hand.Play();
             MessageBox.Show("ERROR: " + mensaje, "Aviso");
         }
 

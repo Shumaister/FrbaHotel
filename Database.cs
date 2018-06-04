@@ -316,16 +316,22 @@ namespace FrbaHotel
             return consultaObtenerValor(consulta);
         }
 
-        public static List<string> rolObtenerTodos()
+        public static DataTable rolObtenerTodos()
+        {
+            SqlCommand consulta = consultaCrear("SELECT Rol_ID, Rol_Nombre FROM RIP.Roles ORDER BY Rol_ID");
+            return consultaObtenerTabla(consulta);
+        }
+
+        public static List<string> rolObtenerTodosLista()
         {
             SqlCommand consulta = consultaCrear("SELECT Rol_Nombre FROM RIP.Roles");
             return consultaObtenerColumna(consulta);
         }
 
-        public static List<string> rolObtenerHabilitados()
+        public static DataTable rolObtenerHabilitados()
         {
-            SqlCommand consulta = consultaCrear("SELECT Rol_Nombre FROM RIP.Roles WHERE Rol_Estado = 1");
-            return consultaObtenerColumna(consulta);
+            SqlCommand consulta = consultaCrear("SELECT Rol_ID, Rol_Nombre FROM RIP.Roles WHERE Rol_Estado = 1 ORDER BY Rol_ID");
+            return consultaObtenerTabla(consulta);
         }
 
         public static bool rolNombreYaExiste(string nombreRol)

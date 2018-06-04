@@ -43,6 +43,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.SuspendLayout();
@@ -50,13 +51,13 @@
             // logo
             // 
             this.logo.Image = null;
-            this.logo.Location = new System.Drawing.Point(245, 21);
+            this.logo.Location = new System.Drawing.Point(245, 32);
             this.logo.Size = new System.Drawing.Size(27, 21);
             this.logo.Visible = false;
             // 
             // btnQuitarFuncionalidad
             // 
-            this.btnQuitarFuncionalidad.Location = new System.Drawing.Point(173, 138);
+            this.btnQuitarFuncionalidad.Location = new System.Drawing.Point(173, 149);
             this.btnQuitarFuncionalidad.Name = "btnQuitarFuncionalidad";
             this.btnQuitarFuncionalidad.Size = new System.Drawing.Size(75, 23);
             this.btnQuitarFuncionalidad.TabIndex = 24;
@@ -66,14 +67,14 @@
             // 
             // tbxNombreRol
             // 
-            this.tbxNombreRol.Location = new System.Drawing.Point(30, 51);
+            this.tbxNombreRol.Location = new System.Drawing.Point(30, 62);
             this.tbxNombreRol.Name = "tbxNombreRol";
             this.tbxNombreRol.Size = new System.Drawing.Size(100, 20);
             this.tbxNombreRol.TabIndex = 23;
             // 
             // btnAgregarFuncionalidad
             // 
-            this.btnAgregarFuncionalidad.Location = new System.Drawing.Point(173, 109);
+            this.btnAgregarFuncionalidad.Location = new System.Drawing.Point(173, 120);
             this.btnAgregarFuncionalidad.Name = "btnAgregarFuncionalidad";
             this.btnAgregarFuncionalidad.Size = new System.Drawing.Size(75, 23);
             this.btnAgregarFuncionalidad.TabIndex = 22;
@@ -84,7 +85,7 @@
             // lbxFuncionalidades
             // 
             this.lbxFuncionalidades.FormattingEnabled = true;
-            this.lbxFuncionalidades.Location = new System.Drawing.Point(30, 157);
+            this.lbxFuncionalidades.Location = new System.Drawing.Point(30, 168);
             this.lbxFuncionalidades.Name = "lbxFuncionalidades";
             this.lbxFuncionalidades.Size = new System.Drawing.Size(120, 95);
             this.lbxFuncionalidades.TabIndex = 21;
@@ -113,7 +114,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 273);
+            this.label3.Location = new System.Drawing.Point(27, 280);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 18;
@@ -122,7 +123,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 85);
+            this.label2.Location = new System.Drawing.Point(27, 96);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 13);
             this.label2.TabIndex = 17;
@@ -131,7 +132,7 @@
             // cbxFuncionalidades
             // 
             this.cbxFuncionalidades.FormattingEnabled = true;
-            this.cbxFuncionalidades.Location = new System.Drawing.Point(30, 111);
+            this.cbxFuncionalidades.Location = new System.Drawing.Point(30, 122);
             this.cbxFuncionalidades.Name = "cbxFuncionalidades";
             this.cbxFuncionalidades.Size = new System.Drawing.Size(121, 21);
             this.cbxFuncionalidades.TabIndex = 16;
@@ -161,7 +162,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 21);
+            this.label1.Location = new System.Drawing.Point(27, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 13;
@@ -172,7 +173,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(68, 21);
+            this.label4.Location = new System.Drawing.Point(68, 32);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(17, 22);
             this.label4.TabIndex = 25;
@@ -183,7 +184,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(110, 84);
+            this.label5.Location = new System.Drawing.Point(110, 95);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(17, 22);
             this.label5.TabIndex = 26;
@@ -194,17 +195,29 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(65, 272);
+            this.label6.Location = new System.Drawing.Point(65, 279);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(17, 22);
             this.label6.TabIndex = 27;
             this.label6.Text = "*";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.ForeColor = System.Drawing.Color.DarkBlue;
+            this.label32.Location = new System.Drawing.Point(27, 8);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(90, 16);
+            this.label32.TabIndex = 264;
+            this.label32.Text = "Datos del Rol";
             // 
             // VentanaModificarRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 399);
+            this.Controls.Add(this.label32);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -239,6 +252,7 @@
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.logo, 0);
+            this.Controls.SetChildIndex(this.label32, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.ResumeLayout(false);
@@ -263,5 +277,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label32;
     }
 }

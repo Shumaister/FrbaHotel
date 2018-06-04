@@ -14,16 +14,18 @@ namespace FrbaHotel.AbmRol
     {
         //-------------------------------------- Atributos -----------------------------------
 
-        VentanaRoles ventanaRoles;
-        string nombreRolActual;
+        VentanaRoles ventanaRoles {get; set;}
+        string nombreRolActual {get; set;}
+        Usuario usuario { get; set; }
 
         //-------------------------------------- Constructores -----------------------------------
 
-        public VentanaModificarRol(VentanaRoles ventana, string nombre)
+        public VentanaModificarRol(VentanaRoles ventana, string nombre, Usuario usuario)
         {
             InitializeComponent();
             ventanaRoles = ventana;
             nombreRolActual = nombre;
+            this.usuario = usuario;
         }
 
         //-------------------------------------- Metodos para Eventos -----------------------------------
@@ -85,7 +87,7 @@ namespace FrbaHotel.AbmRol
                 string idRol = Database.rolObtenerId(nombreRolNuevo);
                 foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
                         Database.rolAgregarFuncionalidad(idRol, nombreFuncionalidad);
-                ventanaRoles.actualizarVentana();
+                ventanaRoles.ventanaActualizar();
                 nombreRolActual = nombreRolNuevo;
                 ventanaInformarExito();
             }

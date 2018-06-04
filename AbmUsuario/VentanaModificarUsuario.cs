@@ -123,7 +123,7 @@ namespace FrbaHotel.AbmUsuario
         {
             tbxUsuario.Clear();
             tbxContrasena.Clear();
-            comboBoxCargar(cbxRoles, Database.rolObtenerTodos());
+            comboBoxCargar(cbxRoles, Database.rolObtenerTodosLista());
             listBoxLimpiar(lbxRoles);
             comboBoxCargar(cbxHoteles, Database.hotelObtenerTodos());
             listBoxLimpiar(lbxHoteles);
