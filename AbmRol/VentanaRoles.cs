@@ -15,14 +15,14 @@ namespace FrbaHotel.AbmRol
     {
         //-------------------------------------- Atributos -------------------------------------
 
-        VentanaMenuPrincipal ventanaMenu;
+        Usuario usuario { get; set; }
 
         //-------------------------------------- Constructores ---------------------------------
 
-        public VentanaRoles(VentanaMenuPrincipal ventana)
+        public VentanaRoles(Usuario usuario)
         {
             InitializeComponent();
-            ventanaMenu = ventana;
+            this.usuario = usuario;
         }
 
         //-------------------------------------- Metodos para Eventos ----------------------------
@@ -95,8 +95,7 @@ namespace FrbaHotel.AbmRol
         private void bntModificar_Click(object sender, EventArgs e)
         {
             VentanaModificarRol ventanaModificarRol = new VentanaModificarRol(this, cbxModificar.SelectedItem.ToString());
-            ventanaModificarRol.MdiParent = ventanaMenu;
-            ventanaModificarRol.Show();
+            ventanaModificarRol.ShowDialog();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)

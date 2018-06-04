@@ -14,9 +14,14 @@ namespace FrbaHotel.AbmUsuario
     {
         //-------------------------------------- Constructores -------------------------------------
 
-        public VentanaUsuarios()
+        Usuario usuario {get; set;}
+
+        //-------------------------------------- Constructores -------------------------------------
+
+        public VentanaUsuarios(Usuario usuario)
         {
             InitializeComponent();
+            this.usuario = usuario;
         }
 
         //-------------------------------------- Metodos para Eventos -------------------------------------
@@ -36,7 +41,7 @@ namespace FrbaHotel.AbmUsuario
         {
             var senderGrid = (DataGridView)sender;
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
-                new VentanaModificarUsuario().Show();
+                new VentanaModificarUsuario().ShowDialog();
         }
 
         private void btnAgregarRol_Click(object sender, EventArgs e)

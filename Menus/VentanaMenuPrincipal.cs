@@ -36,23 +36,20 @@ namespace FrbaHotel.Menus
 
         private void menuRoles_Click(object sender, EventArgs e)
         {
-            VentanaRoles ventanaRoles = new VentanaRoles(this);
-            ventanaRoles.MdiParent = this;
-            ventanaRoles.Show();
+            VentanaRoles ventanaRoles = new VentanaRoles(usuario);
+            ventanaRoles.ShowDialog();
         }
 
-        private void menuUsuarios_Click(object sender, EventArgs e)
+        private void menuUsuarios_Click(object sender, EventArgs e) 
         {
-            VentanaUsuarios ventanaUsuarios = new VentanaUsuarios();
-            ventanaUsuarios.MdiParent = this;
-            ventanaUsuarios.Show();
+            VentanaUsuarios ventanaUsuarios = new VentanaUsuarios(usuario);
+            ventanaUsuarios.ShowDialog();
         }
 
         private void menuCambiarContrasenia_Click(object sender, EventArgs e)
         {
             VentanaCambiarContrasenia ventanaAjustesDeCuenta = new VentanaCambiarContrasenia(usuario.nombre);
-            ventanaAjustesDeCuenta.MdiParent = this;
-            ventanaAjustesDeCuenta.Show();
+            ventanaAjustesDeCuenta.ShowDialog();
         }
 
         private void VentanaMenuPrincipal_Load(object sender, EventArgs e)
