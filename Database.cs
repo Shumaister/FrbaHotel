@@ -143,13 +143,19 @@ namespace FrbaHotel
                 return new LogueoDTO(false, "Error al loguearse. Contrasenia incorrecta.");
         }
 
-        public static bool loginContraseniaEsCorrecta(string contrasenia, byte[] contraseniaReal)
+        public static byte[] loginEncriptarContraseña(string contrasenia)
         {
             using (SHA256 hash = SHA256Managed.Create())
             {
                 Encoding encoder = Encoding.UTF8;
-                return hash.ComputeHash(encoder.GetBytes(contrasenia)).SequenceEqual(contraseniaReal);
+                return hash.ComputeHash(encoder.GetBytes(contrasenia));
             }
+        }
+
+        public static bool loginContraseniaEsCorrecta(string contrasenia, byte[] contraseniaReal)
+        {
+            byte[] contraseniaEncriptada = loginEncriptarContraseña(contrasenia);
+            return contraseniaEncriptada.SequenceEqual(contraseniaReal);
         }
 
         public static LogueoDTO loginAutenticar(string usuario, string contrasenia)
@@ -370,6 +376,15 @@ namespace FrbaHotel
         {
             SqlCommand consulta = consultaCrear("SELECT Usuario_User, Persona_Nombre, Persona_Apellido, Persona_Tipo_Documento, Persona_Identificacion_Nro, Persona_Fecha_Nacimiento, Persona_Telefono, Persona_Mail, Ciudades_Descripcion, Calles_Descripcion, Domicilio_Nro_calle FROM RIP.Usuarios JOIN RIP.Persona ON Usuario_Persona_ID = Persona_ID JOIN RIP.Domicilio ON Persona_Domicilio_ID = Domicilio_ID JOIN RIP.Calles ON Domicilio_Calle_ID = Calles_ID JOIN RIP.Ciudades ON Domicilio_Ciudad_ID = Ciudades_ID");
             return consultaObtenerTabla(consulta);
+        }
+
+        public static void usuarioModificarContrasenia(string nombreUsuario, string nuevaContrasenia)
+        {
+            byte[] contraseniaEncriptada = loginEncriptarContraseña(nuevaContrasenia);
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Usuarios SET Usuario_Contrasena = @nuevaContrasenia WHERE Usuario_User = @nombreUsuario");
+            consulta.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+            consulta.Parameters.AddWithValue("@nuevaContrasenia", contraseniaEncriptada);
+            consultaEjecutar(consulta);
         }
 
         //-------------------------------------- Metodos para Usuarios -------------------------------------
