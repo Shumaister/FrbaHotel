@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FrbaHotel.AbmRol;
 using FrbaHotel.AbmUsuario;
+using FrbaHotel.Login;
 
 namespace FrbaHotel.Menus
 {
@@ -49,15 +50,13 @@ namespace FrbaHotel.Menus
 
         private void menuCambiarContrasenia_Click(object sender, EventArgs e)
         {
-            VentanaAjustesDeCuenta ventanaAjustesDeCuenta = new VentanaAjustesDeCuenta(usuario.nombre);
+            VentanaCambiarContrasenia ventanaAjustesDeCuenta = new VentanaCambiarContrasenia(usuario.nombre);
             ventanaAjustesDeCuenta.MdiParent = this;
             ventanaAjustesDeCuenta.Show();
         }
 
         private void VentanaMenuPrincipal_Load(object sender, EventArgs e)
         {
-            usuario.rolLogueado = "Recepcionista";
-            usuario.funcionalidades = Database.rolObtenerFuncionalidades(usuario.rolLogueado);
             if (usuario.funcionalidades.Contains("Usuarios"))
                 menuUsuarios.Visible = true;
             if (usuario.funcionalidades.Contains("Hoteles"))
@@ -80,6 +79,13 @@ namespace FrbaHotel.Menus
                 menuEstadias.Visible = true;
             if (usuario.funcionalidades.Contains("Estadisticas"))
                 menuEstadisticas.Visible = true;
+        }
+
+        private void nenuCerrarSesion_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            VentanaLogin ventanaLogin = new VentanaLogin();
+            ventanaLogin.Show();
         }
     }
 }

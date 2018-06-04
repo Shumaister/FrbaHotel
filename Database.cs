@@ -79,25 +79,35 @@ namespace FrbaHotel
             return dataSet;
         }
 
-        public static string consultaObtenerValor(SqlCommand consulta)
+        public static DataTable consultaObtenerTabla(SqlCommand consulta)
         {
-            return consultaObtenerColumna(consulta)[0];
+            DataSet dataSet = consultaObtenerDatos(consulta);
+            DataTable tabla = dataSet.Tables[0];
+            if (tabla.Rows.Count > 0)
+                return tabla;
+            else
+                return null;
         }
 
         public static List<string> consultaObtenerColumna(SqlCommand consulta)
         {
-            DataTable tabla = consultaObtenerTabla(consulta);
-            List<string> columna = new List<string>();
-            foreach (DataRow fila in tabla.Rows)
-                columna.Add(fila[0].ToString());
-            return columna;
+            DataTable tabla = consultaObtenerTabla(consulta);          
+            if (tabla != null)
+            {
+                List<string> columna = new List<string>();
+                foreach (DataRow fila in tabla.Rows)
+                    columna.Add(fila[0].ToString());
+                return columna;
+            }
+            else
+                return null;
         }
 
-        public static DataTable consultaObtenerTabla(SqlCommand consulta)
+        public static string consultaObtenerValor(SqlCommand consulta)
         {
-            DataSet dataSet = consultaObtenerDatos(consulta);
-            if (dataSet.Tables.Count > 0)
-                return dataSet.Tables[0];
+            List<string> columna = consultaObtenerColumna(consulta);
+            if(columna != null)
+                return columna[0];
             else
                 return null;
         }

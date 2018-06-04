@@ -68,7 +68,6 @@ namespace FrbaHotel.Login
 
         private void ventanaLogueoFallido(LogueoDTO logueo)
         {
-            txbUser.Clear();
             txbPass.Clear();
             lblErrorLogueo.Text = logueo.mensaje;
             lblErrorLogueo.Show();

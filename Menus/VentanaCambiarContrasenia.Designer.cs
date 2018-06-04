@@ -1,6 +1,6 @@
 ﻿namespace FrbaHotel.Menus
 {
-    partial class VentanaAjustesDeCuenta
+    partial class VentanaCambiarContrasenia
     {
         /// <summary>
         /// Required designer variable.

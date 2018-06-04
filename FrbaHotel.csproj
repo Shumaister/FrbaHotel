@@ -125,11 +125,11 @@
     <Compile Include="Login\VentanaSeleccionRolHotel.Designer.cs">
       <DependentUpon>VentanaSeleccionRolHotel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Menus\VentanaAjustesDeCuenta.cs">
+    <Compile Include="Menus\VentanaCambiarContrasenia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menus\VentanaAjustesDeCuenta.Designer.cs">
-      <DependentUpon>VentanaAjustesDeCuenta.cs</DependentUpon>
+    <Compile Include="Menus\VentanaCambiarContrasenia.Designer.cs">
+      <DependentUpon>VentanaCambiarContrasenia.cs</DependentUpon>
     </Compile>
     <Compile Include="Menus\VentanaMenuPrincipal.cs">
       <SubType>Form</SubType>
@@ -179,8 +179,8 @@
     <EmbeddedResource Include="Login\VentanaSeleccionRolHotel.resx">
       <DependentUpon>VentanaSeleccionRolHotel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menus\VentanaAjustesDeCuenta.resx">
-      <DependentUpon>VentanaAjustesDeCuenta.cs</DependentUpon>
+    <EmbeddedResource Include="Menus\VentanaCambiarContrasenia.resx">
+      <DependentUpon>VentanaCambiarContrasenia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menus\VentanaMenuPrincipal.resx">
       <DependentUpon>VentanaMenuPrincipal.cs</DependentUpon>

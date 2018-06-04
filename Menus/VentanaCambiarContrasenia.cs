@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.Menus
 {
-    public partial class VentanaAjustesDeCuenta : VentanaBase
+    public partial class VentanaCambiarContrasenia : VentanaBase
     {
         //-------------------------------------- Atributos -------------------------------------
 
@@ -18,7 +18,7 @@ namespace FrbaHotel.Menus
 
         //-------------------------------------- Constructores -------------------------------------
 
-        public VentanaAjustesDeCuenta(string nombre)
+        public VentanaCambiarContrasenia(string nombre)
         {
             InitializeComponent();
             nombreUsuario = nombre;

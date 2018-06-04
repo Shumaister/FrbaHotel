@@ -47,7 +47,7 @@ namespace FrbaHotel.Login
         public LogueoDTO informarBloqueo()
         {
             exito = false;
-            mensaje = "Usuario bloqueado por superar el limite de intentos permitidos.";
+            mensaje = "Usuario bloqueado.";
             return this;
         }
     }
