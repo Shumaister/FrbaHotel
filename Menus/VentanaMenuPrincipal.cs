@@ -54,47 +54,67 @@ namespace FrbaHotel.Menus
 
         private void VentanaMenuPrincipal_Load(object sender, EventArgs e)
         {
-            /*
             bool usuarioTieneFuncionesDeAdmnistrador = false;
-            bool usuarioTieneFuncionesDeRecepcion = false;
-            
-            foreach(string )
+            bool usuarioTieneFuncionesDeRecepcion = false;          
             if (usuario.funcionalidades.Contains("Usuarios"))
             {
                 menuUsuarios.Visible = true;
                 usuarioTieneFuncionesDeAdmnistrador = true;
-            }
-                
+            }                
             if (usuario.funcionalidades.Contains("Hoteles"))
             {
                 menuHoteles.Visible = true;
                 usuarioTieneFuncionesDeAdmnistrador = true;
             }
-
-
             if (usuario.funcionalidades.Contains("Habitaciones"))
-                menuHabitaciones.Visible = true;
+            {
+                 menuHabitaciones.Visible = true;
+                usuarioTieneFuncionesDeAdmnistrador = true;
+            }               
             if (usuario.funcionalidades.Contains("Roles"))
+            {
                 menuRoles.Visible = true;
+                usuarioTieneFuncionesDeAdmnistrador = true;
+            }                
             if (usuario.funcionalidades.Contains("Regimenes"))
+            {
                 menuRegimenes.Visible = true;
+                usuarioTieneFuncionesDeAdmnistrador = true;
+            }
             if (usuario.funcionalidades.Contains("Reservas"))
+            {
                 menuReservas.Visible = true;
+                usuarioTieneFuncionesDeRecepcion = true;
+            }                
             if (usuario.funcionalidades.Contains("Facturas"))
+            {
                 menuFacturas.Visible = true;
+                usuarioTieneFuncionesDeRecepcion = true;
+            }
             if (usuario.funcionalidades.Contains("Clientes"))
+            {
                 menuClientes.Visible = true;
+                usuarioTieneFuncionesDeRecepcion = true;
+            }
             if (usuario.funcionalidades.Contains("Consumibles"))
+            {
                 menuConsumibles.Visible = true;
+                usuarioTieneFuncionesDeRecepcion = true;
+            }
             if (usuario.funcionalidades.Contains("Estadias"))
+            {
                 menuEstadias.Visible = true;
+                usuarioTieneFuncionesDeRecepcion = true;
+            }
             if (usuario.funcionalidades.Contains("Estadisticas"))
+            {
                 menuEstadisticas.Visible = true;
-            if ( > 0)
-                
-            else
-                MessageBox.Show("NO TENGO ELEMENTORs");
-             */
+                usuarioTieneFuncionesDeRecepcion = true;
+            }
+            if (!usuarioTieneFuncionesDeAdmnistrador)
+                menuAdministracion.Visible = false;
+            if (!usuarioTieneFuncionesDeRecepcion)
+                menuRecepcion.Visible = false;
         }
 
         private void nenuCerrarSesion_Click(object sender, EventArgs e)
