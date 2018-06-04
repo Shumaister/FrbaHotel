@@ -83,39 +83,32 @@ namespace FrbaHotel
         {
             DataSet dataSet = consultaObtenerDatos(consulta);
             DataTable tabla = dataSet.Tables[0];
-            if (tabla.Rows.Count > 0)
-                return tabla;
-            else
-                return null;
+            return tabla;
         }
 
         public static List<string> consultaObtenerColumna(SqlCommand consulta)
         {
-            DataTable tabla = consultaObtenerTabla(consulta);          
-            if (tabla != null)
-            {
-                List<string> columna = new List<string>();
+            DataTable tabla = consultaObtenerTabla(consulta);
+            List<string> columna = new List<string>();
+            if (tabla.Rows.Count > 0)
                 foreach (DataRow fila in tabla.Rows)
                     columna.Add(fila[0].ToString());
-                return columna;
-            }
-            else
-                return null;
+            return columna;
         }
 
         public static string consultaObtenerValor(SqlCommand consulta)
         {
             List<string> columna = consultaObtenerColumna(consulta);
-            if(columna != null)
+            if(columna.Count > 0)
                 return columna[0];
             else
-                return null;
+                return "";
         }
 
         public static DataRow consultaObtenerFila(SqlCommand consulta)
         {
             DataTable tabla = consultaObtenerTabla(consulta);
-            if (tabla != null)
+            if (tabla.Rows.Count > 0)
                 return tabla.Rows[0];
             else
                 return null;
@@ -346,7 +339,8 @@ namespace FrbaHotel
         {
             SqlCommand consulta = consultaCrear("SELECT Rol_Estado FROM RIP.Roles WHERE Rol_Nombre = @nombreRol");
             consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
-            return bool.Parse(consultaObtenerValor(consulta));
+            bool estado = Boolean.Parse(consultaObtenerValor(consulta));
+            return estado;
         }
 
         public static bool rolNoTieneEsaFuncionalidad(string nombreRol, string nombreFuncionalidad)

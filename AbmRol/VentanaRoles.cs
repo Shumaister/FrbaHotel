@@ -15,7 +15,7 @@ namespace FrbaHotel.AbmRol
     {
         //-------------------------------------- Atributos -------------------------------------
 
-        Usuario usuario { get; set; }
+        public Usuario usuario { get; set; }
 
         //-------------------------------------- Constructores ---------------------------------
 
@@ -31,8 +31,6 @@ namespace FrbaHotel.AbmRol
         {
             dataGridViewCargar(dgvModificarRoles, Database.rolObtenerTodos());
             dataGridViewCargar(dgvEliminarRoles, Database.rolObtenerHabilitados());
-            dataGridViewAgregarBotonModificar(dgvModificarRoles);
-            dataGridViewAgregarBotonEliminar(dgvEliminarRoles);
         }
 
         //-------------------------------------- Metodos para Eventos ----------------------------
@@ -42,6 +40,8 @@ namespace FrbaHotel.AbmRol
             comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
             rbtRolActivado.Select();
             ventanaActualizar();
+            dataGridViewAgregarBotonModificar(dgvModificarRoles);
+            dataGridViewAgregarBotonEliminar(dgvEliminarRoles);
         }
 
         private void tbxNombreRol_TextChanged(object sender, EventArgs e)
@@ -102,7 +102,7 @@ namespace FrbaHotel.AbmRol
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
                 string nombreRol = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Nombre"].Value.ToString();
-                VentanaModificarRol ventanaModificarRol = new VentanaModificarRol(this, nombreRol, usuario);
+                VentanaModificarRol ventanaModificarRol = new VentanaModificarRol(this, nombreRol);
                 ventanaModificarRol.ShowDialog();
             }          
         }

@@ -54,10 +54,24 @@ namespace FrbaHotel.Menus
 
         private void VentanaMenuPrincipal_Load(object sender, EventArgs e)
         {
+            /*
+            bool usuarioTieneFuncionesDeAdmnistrador = false;
+            bool usuarioTieneFuncionesDeRecepcion = false;
+            
+            foreach(string )
             if (usuario.funcionalidades.Contains("Usuarios"))
+            {
                 menuUsuarios.Visible = true;
+                usuarioTieneFuncionesDeAdmnistrador = true;
+            }
+                
             if (usuario.funcionalidades.Contains("Hoteles"))
+            {
                 menuHoteles.Visible = true;
+                usuarioTieneFuncionesDeAdmnistrador = true;
+            }
+
+
             if (usuario.funcionalidades.Contains("Habitaciones"))
                 menuHabitaciones.Visible = true;
             if (usuario.funcionalidades.Contains("Roles"))
@@ -76,6 +90,11 @@ namespace FrbaHotel.Menus
                 menuEstadias.Visible = true;
             if (usuario.funcionalidades.Contains("Estadisticas"))
                 menuEstadisticas.Visible = true;
+            if ( > 0)
+                
+            else
+                MessageBox.Show("NO TENGO ELEMENTORs");
+             */
         }
 
         private void nenuCerrarSesion_Click(object sender, EventArgs e)
