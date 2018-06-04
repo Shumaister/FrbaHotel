@@ -17,15 +17,12 @@ namespace FrbaHotel
         public List<string> roles { get; set; }
         public List<string> funcionalidades { get; set; }
         public List<string> hoteles { get; set; }
-        public bool logueoExitoso { get; set; }
 
         //-------------------------------------- Constructores -------------------------------------
 
-        public Usuario(LogueoDTO logueo)
+        public Usuario()
         {
-            this.nombre = logueo.nombreUsuario;
-            this.roles = logueo.rolesUsuario;
-            this.hoteles = logueo.hotelesUsuario;
+
         }
 
         //-------------------------------------- Metodos para Usuario -------------------------------------

@@ -118,7 +118,7 @@
     <Compile Include="Login\VentanaLogin.Designer.cs">
       <DependentUpon>VentanaLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\LogueoDTO.cs" />
+    <Compile Include="LogueoDTO.cs" />
     <Compile Include="Login\VentanaSeleccionRolHotel.cs">
       <SubType>Form</SubType>
     </Compile>

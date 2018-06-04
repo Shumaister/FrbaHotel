@@ -61,7 +61,8 @@ namespace FrbaHotel.Login
         private void ventanaLogueoExitoso(LogueoDTO logueo)
         {
             this.Hide();
-            Usuario usuario = new Usuario(logueo);
+            Usuario usuario = new Usuario();
+            usuario.nombre = logueo.mensaje;
             ventanaAbrirSegunUsuario(usuario);
         }
 
@@ -69,8 +70,13 @@ namespace FrbaHotel.Login
         {
             txbUser.Clear();
             txbPass.Clear();
-            lblErrorLogueo.Text = logueo.mensajeError;
+            lblErrorLogueo.Text = logueo.mensaje;
             lblErrorLogueo.Show();
+        }
+
+        private void ventanaLogueoFallidoMensaje()
+        {
+
         }
 
         private void ventanaAbrirSegunUsuario(Usuario usuario)

@@ -96,13 +96,19 @@ namespace FrbaHotel
         public static DataTable consultaObtenerTabla(SqlCommand consulta)
         {
             DataSet dataSet = consultaObtenerDatos(consulta);
-            return dataSet.Tables[0];
+            if (dataSet.Tables.Count > 0)
+                return dataSet.Tables[0];
+            else
+                return null;
         }
 
         public static DataRow consultaObtenerFila(SqlCommand consulta)
         {
             DataTable tabla = consultaObtenerTabla(consulta);
-            return tabla.Rows[0];
+            if (tabla != null)
+                return tabla.Rows[0];
+            else
+                return null;
         }
 
         public static bool consultaValorObtenidoEsIgualA(string valor, int numero)
@@ -125,24 +131,6 @@ namespace FrbaHotel
 
         //-------------------------------------- Metodos para Login -------------------------------------
 
-        public static LogueoDTO loginExitoso(string usuario)
-        {
-            loginActualizarIntentos(usuario, 0);
-            List<string> roles = usuarioObtenerRolesHabilitados(usuario);
-            List<string> hoteles = usuarioObtenerHoteles(usuario);
-            return new LogueoDTO(true, "Exito!", usuario, roles, hoteles);
-        }
-
-        public static LogueoDTO loginFallido(string usuario, int intentosFallidos)
-        {
-            intentosFallidos++;
-            loginActualizarIntentos(usuario, intentosFallidos);
-            if (intentosFallidos >= 3)
-                return new LogueoDTO(false, "Usuario bloqueado por superar el limite de intentos. Contactese con un administrador.");
-            else
-                return new LogueoDTO(false, "Error al loguearse. Contrasenia incorrecta.");
-        }
-
         public static byte[] loginEncriptarContraseña(string contrasenia)
         {
             using (SHA256 hash = SHA256Managed.Create())
@@ -158,23 +146,70 @@ namespace FrbaHotel
             return contraseniaEncriptada.SequenceEqual(contraseniaReal);
         }
 
-        public static LogueoDTO loginAutenticar(string usuario, string contrasenia)
+        public static LogueoDTO loginExitoso(string nombreUsuario)
         {
-            SqlCommand logueo = consultaCrear("SELECT Usuario_User, Usuario_Contrasena, Usuario_CantidadDeIntentos FROM RIP.Usuarios WHERE Usuario_User=@username");
-            logueo.Parameters.AddWithValue("@username", usuario);
-#warning validar si usuario no existe
-            DataRow fila = consultaObtenerFila(logueo);
-            string usuarioReal = fila["Usuario_User"].ToString();
-            byte[] contraseniaReal = (byte[])fila["Usuario_Contrasena"];
-            int intentosFallidos = Convert.ToInt32(fila["Usuario_CantidadDeIntentos"].ToString());
-            if (usuarioReal == null)
-                return new LogueoDTO(false, "Error al loguearse. Usuario incorrecto.");
+            loginActualizarIntentos(nombreUsuario, 0);
+            LogueoDTO logueo = new LogueoDTO();
+            return logueo.informarExito(nombreUsuario);
+        }
+
+        public static LogueoDTO loginFallido(string usuario, int intentosFallidos)
+        {
+            intentosFallidos++;
+            loginActualizarIntentos(usuario, intentosFallidos);
+            LogueoDTO logueo = new LogueoDTO();
             if (intentosFallidos >= 3)
-                return new LogueoDTO(false, "Usuario bloqueado por superar el limite de intentos. Contactese con un administrador.");          
-            if (loginContraseniaEsCorrecta(contrasenia, contraseniaReal))
-                return loginExitoso(usuarioReal);
+                return logueo.informarBloqueo();
             else
-                return loginFallido(usuarioReal, intentosFallidos);
+                return logueo.informarContraseniaIncorrecta();
+        }
+
+        public static LogueoDTO loginVerificarContrasenia(string nombreUsuario, string contrasenia, byte[] contraseniaReal, int intentosFallidos)
+        {
+            if (loginContraseniaEsCorrecta(contrasenia, contraseniaReal))
+                return loginExitoso(nombreUsuario);
+            else
+                return loginFallido(nombreUsuario, intentosFallidos);
+        }
+
+        public static LogueoDTO loginCuentaBloqueada()
+        {
+            LogueoDTO logueo = new LogueoDTO();
+            return logueo.informarBloqueo();
+        }
+
+        public static LogueoDTO loginVerificarCuenta(DataRow fila, string contrasenia)
+        {
+            string nombreUsuario = (string)fila["Usuario_User"];
+            byte[] contraseniaReal = (byte[])fila["Usuario_Contrasena"];
+            int intentosFallidos = (int)fila["Usuario_CantidadDeIntentos"];
+            if (intentosFallidos >= 3)
+                return loginCuentaBloqueada();
+            else
+                return loginVerificarContrasenia(nombreUsuario, contrasenia, contraseniaReal, intentosFallidos);
+        }
+
+        public static bool loginUsuarioExiste(DataRow fila)
+        {
+            //LA EXPRESIVIDAD NO SE MANCHA
+            return fila != null;
+        }
+
+        public static LogueoDTO loginUsuarioInexistente()
+        {
+            LogueoDTO logueo = new LogueoDTO();
+            return logueo.informarUsuarioInexistente();
+        }
+
+        public static LogueoDTO loginAutenticar(string nombreUsuario, string contrasenia)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Usuario_User, Usuario_Contrasena, Usuario_CantidadDeIntentos FROM RIP.Usuarios WHERE Usuario_User=@username");
+            consulta.Parameters.AddWithValue("@username", nombreUsuario);            
+            DataRow fila = consultaObtenerFila(consulta);         
+            if(loginUsuarioExiste(fila))
+                return loginVerificarCuenta(fila, contrasenia);
+            else 
+                return loginUsuarioInexistente();
         }
 
         public static void loginActualizarIntentos(string username, int cantidad)
