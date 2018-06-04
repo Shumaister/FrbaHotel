@@ -76,11 +76,11 @@
             // 
             this.lblErrorLogueo.AutoSize = true;
             this.lblErrorLogueo.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorLogueo.Location = new System.Drawing.Point(61, 162);
+            this.lblErrorLogueo.Location = new System.Drawing.Point(93, 162);
             this.lblErrorLogueo.Name = "lblErrorLogueo";
-            this.lblErrorLogueo.Size = new System.Drawing.Size(166, 13);
+            this.lblErrorLogueo.Size = new System.Drawing.Size(101, 13);
             this.lblErrorLogueo.TabIndex = 21;
-            this.lblErrorLogueo.Text = "Usuario o contraseña incorrectos.";
+            this.lblErrorLogueo.Text = "El usuario no existe.";
             this.lblErrorLogueo.Visible = false;
             // 
             // txbUser

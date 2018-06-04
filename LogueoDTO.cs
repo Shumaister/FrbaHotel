@@ -33,21 +33,21 @@ namespace FrbaHotel.Login
         public LogueoDTO informarUsuarioInexistente()
         {
             exito = false;
-            mensaje = "ERROR: El usuario no existe.";
+            mensaje = "El usuario no existe.";
             return this;
         }
 
         public LogueoDTO informarContraseniaIncorrecta()
         {
             exito = false;
-            mensaje = "ERROR: Contraseña invalida.";
+            mensaje = "La contraseña es invalida.";
             return this;
         }
 
         public LogueoDTO informarBloqueo()
         {
             exito = false;
-            mensaje = "ERROR: Usuario bloqueado por superar el limite de intentos fallidos.";
+            mensaje = "Usuario bloqueado por superar el limite de intentos permitidos.";
             return this;
         }
     }

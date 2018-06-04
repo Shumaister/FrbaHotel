@@ -21,49 +21,81 @@ namespace FrbaHotel.Login
 
         public VentanaSeleccionRolHotel(Usuario usuario)
         {
-            this.usuario = usuario;    
             InitializeComponent();
-            this.AcceptButton = btnIngresarRol;
-            lblErrorRol.Hide();
+            this.usuario = usuario;  
+            ventanaConfigurar();
         }
 
         //-------------------------------------- Metodos para Eventos -------------------------------------
+
+        private void VentanaSeleccionRolHotel_Load(object sender, EventArgs e)
+        {
+            this.AcceptButton = btnIngresarRol;
+            lblErrorRol.Hide();
+        }
 
         private void VentanaSeleccionRol_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }
-       
-        public void ventanaConfigurarParaRol()
+
+        private void ventanaConfigurar()
         {
-            lblHotel.Hide();
-            cbxHoteles.Hide();
+            ventanaCargarRolesYHoteles();
+            if (usuario.trabajaEnUnSoloHotel() && usuario.tieneUnSoloRol())
+                ventanaAbrirMenuPrincipal();
+            else if (usuario.trabajaEnUnSoloHotel() && usuario.tieneVariosRoles())
+                ventanaConfigurarParaRol();
+            else if (usuario.trabajaEnVariosHoteles() && usuario.tieneUnSoloRol())
+                ventanaConfigurarParaHotel();
+            else
+                ventanaConfigurarParaRolYHotel();
+        }
+
+        private void ventanaCargarRolesYHoteles()
+        {
+            comboBoxCargar(cbxHoteles, usuario.hoteles);
             comboBoxCargar(cbxRoles, usuario.roles);
         }
 
-        public void ventanaConfigurarParaHotel()
+        private void ventanaConfigurarParaRol()
+        {
+            lblHotel.Hide();
+            cbxHoteles.Hide();
+            this.Show();
+        }
+
+        private void ventanaConfigurarParaHotel()
         {
             cbxRoles.Hide();
             lblRol.Hide();
-            comboBoxCargar(cbxHoteles, usuario.hoteles);
+            this.Show();
         }
 
-        public void ventanaConfigurarParaRolYHotel()
+        private void ventanaConfigurarParaRolYHotel()
         {
-            comboBoxCargar(cbxHoteles, usuario.hoteles);
-            comboBoxCargar(cbxRoles, usuario.roles); ;
+            this.Show();
+        }
+
+        public void ventanaConfigurarUsuario()
+        {
+            string rolLogueado = cbxRoles.SelectedItem.ToString();
+            string hotelLogueado = cbxHoteles.SelectedItem.ToString();
+            List<string> funcionalidades = Database.rolObtenerFuncionalidades(rolLogueado);
+            usuario.configurar(rolLogueado, hotelLogueado, funcionalidades); 
         }
 
         private void btnIngresarRol_Click(object sender, EventArgs e)
         {
             this.Hide();
-            VentanaMenuPrincipal ventanaMenuPrincipal = new VentanaMenuPrincipal(usuario);
-            ventanaMenuPrincipal.Show();
+            ventanaAbrirMenuPrincipal();
         }
 
-        private void VentanaSeleccionRolHotel_Load(object sender, EventArgs e)
+        private void ventanaAbrirMenuPrincipal()
         {
-
+            ventanaConfigurarUsuario();
+            VentanaMenuPrincipal ventanaMenuPrincipal = new VentanaMenuPrincipal(usuario);
+            ventanaMenuPrincipal.Show();
         }
     }
 }

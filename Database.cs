@@ -360,6 +360,14 @@ namespace FrbaHotel
 
         //-------------------------------------- Metodos para Usuarios -------------------------------------
 
+        public static Usuario usuarioCrear(string nombreUsuario)
+        {
+            List<string> roles = usuarioObtenerRoles(nombreUsuario);
+            List<string> hoteles = usuarioObtenerHoteles(nombreUsuario);
+            Usuario usuario = new Usuario(nombreUsuario, roles, hoteles);
+            return usuario;
+        }
+
         public static List<string> usuarioObtenerHoteles(string nombreUsuario)
         {
             SqlCommand consulta = consultaCrear("SELECT ci.Ciudades_Descripcion, c.Calles_Descripcion, d.Domicilio_Nro_calle FROM rip.Hoteles h JOIN RIP.Hotel_Usuario hu on hu.Hotel_Usuario_IdHotel = h.Hoteles_ID JOIN RIP.Usuarios u on u.Usuario_ID = hu.Hotel_Usuario_IdUsuario JOIN RIP.Domicilio d on d.Domicilio_ID = h.Hoteles_Domicilio_ID JOIN RIP.Calles c on c.Calles_ID = d.Domicilio_Calle_ID JOIN RIP.Ciudades ci on ci.Ciudades_ID = d.Domicilio_Ciudad_ID where u.Usuario_User = @username");
