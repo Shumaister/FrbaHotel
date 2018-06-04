@@ -18,8 +18,42 @@ namespace FrbaHotel.Login
         public VentanaLogin()
         {
             InitializeComponent();
-            lblErrorLogueo.Visible = false;
+        }
+
+        //-------------------------------------- Metodos para Eventos -------------------------------------
+
+        private void VentanaLogin_Load(object sender, EventArgs e)
+        {
             this.AcceptButton = btnLogin;
+        }
+
+        private void VentanaLogin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            if (ventanaCamposEstanCompletos(this, controladorError))
+            {
+                LogueoDTO logueo = Database.loginAutenticar(txbUser.Text, txbPass.Text);
+                if (logueo.exito)
+                    ventanaLogueoExitoso(logueo);
+                else
+                    ventanaLogueoFallido(logueo);
+            }
+        }
+
+        private void txbUser_TextChanged(object sender, EventArgs e)
+        {
+            controladorError.Clear();
+            lblErrorLogueo.Hide();
+        }
+
+        private void txbPass_TextChanged(object sender, EventArgs e)
+        {
+            controladorError.Clear();
+            lblErrorLogueo.Hide();
         }
 
         //-------------------------------------- Metodos para Ventana -------------------------------------
@@ -35,8 +69,8 @@ namespace FrbaHotel.Login
         {
             txbUser.Clear();
             txbPass.Clear();
-            lblErrorLogueo.Visible = true;
             lblErrorLogueo.Text = logueo.mensajeError;
+            lblErrorLogueo.Show();
         }
 
         private void ventanaAbrirSegunUsuario(Usuario usuario)
@@ -77,36 +111,6 @@ namespace FrbaHotel.Login
             VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(usuario);
             ventanaSeleccionRol.ventanaConfigurarParaRolYHotel();
             ventanaSeleccionRol.Show();
-        }
-
-        //-------------------------------------- Metodos para Eventos -------------------------------------
-
-        private void txbUser_TextChanged(object sender, EventArgs e)
-        {
-            controladorError.Clear();
-        }
-
-        private void txbPass_TextChanged(object sender, EventArgs e)
-        {
-            controladorError.Clear();
-        }
-
-        private void VentanaLogin_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            lblErrorLogueo.Visible = false;
-            if (ventanaCamposEstanCompletos(this, controladorError)) 
-            {
-                LogueoDTO logueo = Database.loginAutenticar(txbUser.Text, txbPass.Text); 
-                if (logueo.exito)
-                    ventanaLogueoExitoso(logueo);
-                else
-                    ventanaLogueoFallido(logueo);
-            }
         }
     }
 }

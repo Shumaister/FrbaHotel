@@ -17,6 +17,7 @@ namespace FrbaHotel
         public List<string> roles { get; set; }
         public List<string> funcionalidades { get; set; }
         public List<string> hoteles { get; set; }
+        public bool logueoExitoso { get; set; }
 
         //-------------------------------------- Constructores -------------------------------------
 
@@ -25,34 +26,28 @@ namespace FrbaHotel
             this.nombre = logueo.nombreUsuario;
             this.roles = logueo.rolesUsuario;
             this.hoteles = logueo.hotelesUsuario;
-
         }
 
-        //-------------------------------------- Metodos para Usuarios -------------------------------------
+        //-------------------------------------- Metodos para Usuario -------------------------------------
 
-        private List<string> FuncionalidadesDeRol(string rol)
+        public bool trabajaEnUnSoloHotel()
         {
-            return Database.rolObtenerFuncionalidades(rol);
+            return hoteles.Count == 1;
         }
 
-        private bool trabajaEnUnSoloHotel()
+        public bool trabajaEnVariosHoteles()
         {
-            return Database.usuarioTrabajaEnUnSoloHotel(this.nombre);
+            return hoteles.Count > 1;
         }
 
-        private bool trabajaEnVariosHoteles()
+        public bool tieneUnSoloRol()
         {
-            return Database.usuarioTrabajaEnVariosHoteles(this.nombre);
+            return roles.Count == 1;
         }
 
-        private bool tieneUnSoloRol()
+        public bool tieneVariosRoles()
         {
-            return Database.usuarioTieneUnSoloRol(this.nombre);
-        }
-
-        private bool tieneVariosRoles()
-        {
-            return Database.usuarioTieneVariosRoles(this.nombre);
+            return roles.Count > 1;
         }
     }
 }

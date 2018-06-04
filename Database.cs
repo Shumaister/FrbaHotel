@@ -162,6 +162,7 @@ namespace FrbaHotel
         {
             SqlCommand logueo = consultaCrear("SELECT Usuario_User, Usuario_Contrasena, Usuario_CantidadDeIntentos FROM RIP.Usuarios WHERE Usuario_User=@username");
             logueo.Parameters.AddWithValue("@username", usuario);
+#warning validar si usuario no existe
             DataRow fila = consultaObtenerFila(logueo);
             string usuarioReal = fila["Usuario_User"].ToString();
             byte[] contraseniaReal = (byte[])fila["Usuario_Contrasena"];

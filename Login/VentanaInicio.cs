@@ -26,11 +26,17 @@ namespace FrbaHotel.Login
             Application.Exit();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnUsuario_Click(object sender, EventArgs e)
         {
             this.Hide();
             VentanaLogin ventanaLogin = new VentanaLogin();
             ventanaLogin.Show();
         }
+
+        private void btnCliente_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("PROXIMAMENTE");
+        }
+
     }
 }
