@@ -5,32 +5,32 @@ SET ANSI_NULLS ON
 
 IF EXISTS (SELECT * FROM SYS.SCHEMAS WHERE name = 'RIP')
 BEGIN
-		DECLARE @Sql NVARCHAR(MAX) = '';
+	DECLARE @Sql NVARCHAR(MAX) = '';
 
 -------------------------------------
 --		ELIMINACION DE CONSTRAINTS
 -------------------------------------
 
-		SELECT @Sql = @Sql + 'ALTER TABLE ' + QUOTENAME('RIP') + '.' + QUOTENAME(t.name) + ' DROP CONSTRAINT ' + QUOTENAME(f.name)  + ';' + CHAR(13)
-		FROM SYS.TABLES t 
-		INNER JOIN SYS.FOREIGN_KEYS f ON f.parent_object_id = t.object_id 
-		INNER JOIN SYS.SCHEMAS s ON t.SCHEMA_ID = s.SCHEMA_ID
-		WHERE s.name = 'RIP'
-		ORDER BY t.name;
-		PRINT @Sql
-		EXEC  (@Sql)
+	SELECT @Sql = @Sql + 'ALTER TABLE ' + QUOTENAME('RIP') + '.' + QUOTENAME(t.name) + ' DROP CONSTRAINT ' + QUOTENAME(f.name)  + ';' + CHAR(13)
+	FROM SYS.TABLES t 
+	INNER JOIN SYS.FOREIGN_KEYS f ON f.parent_object_id = t.object_id 
+	INNER JOIN SYS.SCHEMAS s ON t.SCHEMA_ID = s.SCHEMA_ID
+	WHERE s.name = 'RIP'
+	ORDER BY t.name;
+	PRINT @Sql
+	EXEC  (@Sql)
 
 -------------------------------------
 --		ELIMINACION DE TABLAS
 -------------------------------------
 
-		DECLARE @SqlStatement NVARCHAR(MAX)
-		SELECT @SqlStatement = COALESCE(@SqlStatement, N'') + N'DROP TABLE [RIP].' + QUOTENAME(TABLE_NAME) + N';' + CHAR(13)
-		FROM INFORMATION_SCHEMA.TABLES
-		WHERE TABLE_SCHEMA = 'RIP' AND TABLE_TYPE = 'BASE TABLE'
-		PRINT @SqlStatement
-		EXEC  (@SqlStatement)
-		DROP SCHEMA [RIP]
+	DECLARE @SqlStatement NVARCHAR(MAX)
+	SELECT @SqlStatement = COALESCE(@SqlStatement, N'') + N'DROP TABLE [RIP].' + QUOTENAME(TABLE_NAME) + N';' + CHAR(13)
+	FROM INFORMATION_SCHEMA.TABLES
+	WHERE TABLE_SCHEMA = 'RIP' AND TABLE_TYPE = 'BASE TABLE'
+	PRINT @SqlStatement
+	EXEC  (@SqlStatement)
+	DROP SCHEMA [RIP]
 END
 GO
 
@@ -59,7 +59,7 @@ IF NOT EXISTS (
 BEGIN
 CREATE TABLE [RIP].[Clientes] (
 	[Cliente_ID] [numeric](18,0) NOT NULL IDENTITY(1,1),
-	[Cliente_IDPersona] [numeric](18,0),
+	[Cliente_PersonaID] [numeric](18,0),
 	[Cliente_Habilitado] [bit] DEFAULT 1,
 	[Cliente_DatoCorrupto] [bit] DEFAULT 0,
 	CONSTRAINT PK_CLIENTE PRIMARY KEY ([Cliente_ID])
@@ -73,11 +73,11 @@ IF NOT EXISTS (
 	SELECT 1 
 	FROM INFORMATION_SCHEMA.TABLES 
 	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'TiposDocumento' 
+    AND TABLE_NAME = 'TiposDocumentos' 
 	AND TABLE_SCHEMA = 'RIP'
 )
 BEGIN
-CREATE TABLE [RIP].[TiposDocumento] (
+CREATE TABLE [RIP].[TiposDocumentos] (
 	[TipoDocumento_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[TipoDocumento_Descripcion] [nvarchar](15) CONSTRAINT UQ_DESC_TIPODOCUMENTO UNIQUE NOT NULL
 )
@@ -96,8 +96,8 @@ IF NOT EXISTS (
 BEGIN
 CREATE TABLE [RIP].[Facturas] (
 	[Factura_Numero] [numeric](18,0) PRIMARY KEY,
-	[Factura_IDEstadia] [numeric](18,0),
-	[Factura_IDCliente] [numeric](18,0),
+	[Factura_EstadiaID] [numeric](18,0),
+	[Factura_ClienteID] [numeric](18,0),
 	[Factura_DiasEfectivos] [numeric](18,0),
 	[Factura_DiasNoUtilizados] [numeric](18,0),
 	[Factura_Fecha] [datetime],
@@ -119,7 +119,7 @@ IF NOT EXISTS (
 BEGIN
 CREATE TABLE [RIP].[Usuarios] (
 	[Usuario_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[Usuario_IDPersona] [numeric](18,0),
+	[Usuario_PersonaID] [numeric](18,0),
 	[Usuario_Nombre] [nvarchar](50) NOT NULL,
 	[Usuario_Contrasenia] [varbinary](100) NOT NULL,
 	[Usuario_CantidadIntentos] [int] DEFAULT 0,
@@ -139,8 +139,8 @@ IF NOT EXISTS (
 )
 BEGIN
 CREATE TABLE [RIP].[Hotel_Usuario] (
-	[HotelUsuario_IDHotel] [numeric](18,0) NOT NULL,
-	[HotelUsuario_IDUsuario] [numeric](18,0) NOT NULL
+	[HotelUsuario_HotelID] [numeric](18,0) NOT NULL,
+	[HotelUsuario_UsuarioID] [numeric](18,0) NOT NULL
 )
 PRINT '----- Tabla Hotel_Usuario creada -----'
 END
@@ -191,8 +191,8 @@ IF NOT EXISTS (
 )
 BEGIN
 CREATE TABLE [RIP].[Rol_Funcionalidad] (
-	[RolFuncionalidad_IDRol] [numeric](18,0) NOT NULL,
-	[RolFuncionalidad_IDFuncionalidad] [numeric](18,0) NOT NULL
+	[RolFuncionalidad_RolID] [numeric](18,0) NOT NULL,
+	[RolFuncionalidad_FuncionalidadID] [numeric](18,0) NOT NULL
 )
 PRINT '----- Tabla Rol_Funcionalidad creada -----'
 END
@@ -208,8 +208,8 @@ IF NOT EXISTS (
 )
 BEGIN
 CREATE TABLE [RIP].[Usuario_Rol] (
-	[UsuarioRol_IDUsuario] [numeric](18,0) NOT NULL,
-	[UsuarioRol_IDRol] [numeric](18,0) NOT NULL
+	[UsuarioRol_UsuarioID] [numeric](18,0) NOT NULL,
+	[UsuarioRol_RolID] [numeric](18,0) NOT NULL
 )
 PRINT '----- Tabla Usuario_Rol creada -----'
 END
@@ -226,7 +226,7 @@ IF NOT EXISTS (
 BEGIN
 CREATE TABLE [RIP].[Habitaciones] (
 	[Habitacion_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[Habitacion_IDHotel] [numeric](18,0),
+	[Habitacion_HotelID] [numeric](18,0),
 	[Habitacion_Numero] [numeric](18,0),
 	[Habitacion_Piso] [numeric](18,0),
 	[Habitacion_Frente] [nvarchar](5),
@@ -252,7 +252,7 @@ CREATE TABLE [RIP].[Hoteles] (
 	[Hotel_Nombre] [nvarchar](255),
 	[Hotel_Email] [nvarchar](255),
 	[Hotel_Telefono] [numeric](18,0),
-	[Hotel_IDDomicilio] [numeric](18,0),
+	[Hotel_DomicilioID] [numeric](18,0),
 	[Hotel_CantidadEstrellas] [numeric](18,0),
 	[Hotel_RecargaEstrellas] [numeric](18,0),
 	[Hotel_FechaCreacion] [datetime],
@@ -272,8 +272,8 @@ IF NOT EXISTS (
 )
 BEGIN
 CREATE TABLE [RIP].[Hotel_Regimen] (
-	[HotelRegimen_IDHotel] [numeric](18,0) NOT NULL,
-	[HotelRegimen_IDRegimen] [numeric](3,0) NOT NULL
+	[HotelRegimen_HotelID] [numeric](18,0) NOT NULL,
+	[HotelRegimen_RegimenID] [numeric](3,0) NOT NULL
 )
 PRINT '----- Tabla Hotel_Regimen creada -----'
 END
@@ -364,10 +364,10 @@ CREATE TABLE [RIP].[Reservas] (
 	[Reserva_FechaInicio] [datetime],
 	[Reserva_CantidadNoches] [numeric](18,0),
 	[Reserva_CantidadHuespedes] [numeric](18,0),
-	[Reserva_IDCliente] [numeric](18,0),
-	[Reserva_IDUsuario] [numeric](18,0),
-	[Reserva_IDHotel] [numeric](18,0),
-	[Reserva_IDRegimen] [numeric](3,0),
+	[Reserva_ClienteID] [numeric](18,0),
+	[Reserva_UsuarioID] [numeric](18,0),
+	[Reserva_HotelID] [numeric](18,0),
+	[Reserva_RegimenID] [numeric](3,0),
 	[Reserva_Estado] [numeric](3,0)
 )
 PRINT '----- Tabla Reservas creada -----'
@@ -384,8 +384,8 @@ IF NOT EXISTS (
 )
 BEGIN
 CREATE TABLE [RIP].[Reserva_Estado] (
-	[ReservaEstado_IDEstado] [numeric](3,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[ReservaEstado_DescripcionEstado] [nvarchar](255) CONSTRAINT UQ_DESC_RESERVA_ESTADO UNIQUE NOT NULL
+	[ReservaEstado_EstadoID] [numeric](3,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[ReservaEstado_EstadoDescripcion] [nvarchar](255) CONSTRAINT UQ_DESC_RESERVA_ESTADO UNIQUE NOT NULL
 )
 PRINT '----- Tabla Reserva_Estado creada -----'
 END
@@ -582,81 +582,95 @@ GO
 
 
 -------------------------------------
---		CONSTRAINTS
+--		CONSTRAINTS DE TABLAS
 -------------------------------------
 
-
+-- Agregando constraints a tabla Rol_Funcionalidad
 ALTER TABLE [RIP].[Rol_Funcionalidad]
 	ADD CONSTRAINT PK_ROL_FUNCIONALIDAD PRIMARY KEY ([RolFuncionalidad_RolID], [RolFuncionalidad_FuncionalidadID]),
 	CONSTRAINT FK_ROL_FUNCIONALIDAD_ROL FOREIGN KEY ([RolFuncionalidad_RolID]) REFERENCES [RIP].[Roles] ([Rol_ID]),
 	CONSTRAINT FK_ROL_FUNCIONALIDAD_FUNCIONALIDAD FOREIGN KEY ([RolFuncionalidad_FuncionalidadID]) REFERENCES [RIP].[Funcionalidades] ([Funcionalidad_ID])
 GO
 
+-- Agregando constraints a tabla Usuario_Rol
 ALTER TABLE [RIP].[Usuario_Rol]
 	ADD CONSTRAINT PK_USUARIO_ROL PRIMARY KEY ([UsuarioRol_UsuarioID], [UsuarioRol_RolID]),
 	CONSTRAINT FK_USUARIO_ROL_USUARIO FOREIGN KEY ([UsuarioRol_UsuarioID]) REFERENCES [RIP].[Usuarios] ([Usuario_ID]),
 	CONSTRAINT FK_USUARIO_ROL_ROL FOREIGN KEY ([UsuarioRol_RolID]) REFERENCES [RIP].[Roles] (Rol_ID)
 GO
 
+-- Agregando constraints a tabla Hotel_Regimen
 ALTER TABLE [RIP].[Hotel_Regimen]
 	ADD CONSTRAINT PK_HOTEL_REGIMEN PRIMARY KEY ([HotelRegimen_HotelID], [HotelRegimen_RegimenID]),
 	CONSTRAINT FK_HOTEL_REGIMEN_HOTEL FOREIGN KEY ([HotelRegimen_HotelID]) REFERENCES [RIP].[Hoteles] ([Hotel_ID]),
 	CONSTRAINT FK_HOTEL_REGIMEN_REGIMEN FOREIGN KEY ([HotelRegimen_RegimenID]) REFERENCES [RIP].[Regimen] ([Regimen_ID])
 GO
 
+-- Agregando constraints a tabla Hotel_Usuario
 ALTER TABLE [RIP].[Hotel_Usuario]
 	ADD CONSTRAINT PK_HOTEL_USUARIO PRIMARY KEY ([HotelUsuario_HotelID], [HotelUsuario_UsuarioID]),
 	CONSTRAINT FK_HOTEL_USUARIO_HOTEL FOREIGN KEY ([HotelUsuario_HotelID]) REFERENCES [RIP].[Hoteles] ([Hotel_ID]),
 	CONSTRAINT FK_HOTEL_USUARIO_USUARIO FOREIGN KEY ([HotelUsuario_UsuarioID]) REFERENCES [RIP].[Usuarios] ([Usuario_ID])
 GO
 
+-- Agregando constraints a tabla Domicilios
 ALTER TABLE [RIP].[Domicilios]
 	ADD CONSTRAINT PK_DOMICILIO PRIMARY KEY ([Domicilio_ID]),
 	CONSTRAINT FK_DOMICILIO_CIUDAD FOREIGN KEY ([Domicilio_CiudadID]) REFERENCES [RIP].[Ciudades] ([Ciudad_ID]),
 	CONSTRAINT FK_DOMICILIO_CALLE FOREIGN KEY ([Domicilio_CalleID]) REFERENCES [RIP].[Calles] ([Calle_ID])
 GO
 
+-- Agregando constraints a tabla Clientes
 ALTER TABLE [RIP].[Clientes]
 	ADD CONSTRAINT FK_CLIENTES_PERSONA FOREIGN KEY ([Cliente_PersonaID]) REFERENCES [RIP].[Personas] ([Persona_ID])
 GO
 
+-- Agregando constraints a tabla Facturas
 ALTER TABLE [RIP].[Facturas]
 	ADD CONSTRAINT FK_FACTURAS_ESTADIA FOREIGN KEY ([Factura_EstadiaID]) REFERENCES [RIP].[Estadias] ([Estadia_ID]),
 	CONSTRAINT FK_FACTURAS_CLIENTE FOREIGN KEY ([Factura_ClienteID]) REFERENCES [RIP].[Clientes] ([Cliente_ID])
 GO
 
+-- Agregando constraints a tabla Usuarios
 ALTER TABLE [RIP].[Usuarios]
 	ADD CONSTRAINT FK_USUARIO_PERSONA FOREIGN KEY ([Usuario_PersonaID]) REFERENCES [RIP].[Persona] ([Persona_ID])
 GO
 
+-- Agregando constraints a tabla Habitaciones
 ALTER TABLE [RIP].[Habitaciones]
 	ADD CONSTRAINT FK_HABITACIONES_HOTEL FOREIGN KEY ([Habitacion_HotelID]) REFERENCES [RIP].[Hoteles] ([Hotel_ID])
 GO
 
+-- Agregando constraints a tabla Hoteles
 ALTER TABLE [RIP].[Hoteles]
 	ADD CONSTRAINT FK_HOTELES_DOMICILIO FOREIGN KEY ([Hotel_DomicilioID]) REFERENCES [RIP].[Domicilio] ([Domicilio_ID])
 GO
 
+-- Agregando constraints a tabla Reservas
 ALTER TABLE [RIP].[Reservas]
 	ADD CONSTRAINT FK_RESERVAS_CLIENTES FOREIGN KEY ([Reserva_ClienteID]) REFERENCES [RIP].[Clientes] ([Cliente_ID]),
 	CONSTRAINT FK_RESERVAS_HOTEL FOREIGN KEY ([Reserva_HotelID]) REFERENCES [RIP].[Hoteles] ([Hoteles_ID]),
 	CONSTRAINT FK_RESERVAS_REGIMEN FOREIGN KEY ([Reserva_RegimenID])  REFERENCES [RIP].[Regimenes] ([Regimen_ID])
 GO
 
-ALTER TABLE [RIP].[Persona]
+-- Agregando constraints a tabla Personas
+ALTER TABLE [RIP].[Personas]
 	ADD CONSTRAINT FK_PERSONA_DOMICILIO FOREIGN KEY ([Persona_DomicilioID]) REFERENCES [RIP].[Domicilios] ([Domicilio_ID]),
 	CONSTRAINT FK_PERSONA_NACIONALIDAD FOREIGN KEY ([Persona_NacionalidadID]) REFERENCES [RIP].[Nacionalidades] ([Nacionalidad_ID])
 GO
 
+-- Agregando constraints a tabla HotelesCerrados
 ALTER TABLE [RIP].[HotelesCerrados]
 	ADD CONSTRAINT FK_CIERRE_MANTENIMIENTO_HOTEL FOREIGN KEY ([HotelCerrado_ID]) REFERENCES [RIP].[Hoteles] ([Hotel_ID])
 GO
 
+-- Agregando constraints a tabla Cancelaciones
 ALTER TABLE [RIP].[Cancelaciones]
 	ADD CONSTRAINT FK_CANCELACION_RESERVA_RESERVA FOREIGN KEY ([Cancelacion_RerservaID]) REFERENCES [RIP].[Reservas] ([Reserva_Codigo]),
 	CONSTRAINT FK_CANCELACION_RESERVA_USUARIO FOREIGN KEY ([Cancelacion_UsuarioID]) REFERENCES [RIP].[Usuarios] ([Usuario_ID])
 GO
 
+-- Agregando constraints a tabla HabitacionesNoDisponibles
 ALTER TABLE [RIP].[HabitacionesNoDisponibles]
 	ADD CONSTRAINT FK_HAB_NODISPONIBLES_RESERVA FOREIGN KEY ([HabitacionNoDisponible_ReservaID]) REFERENCES [RIP].[Reservas] ([Reserva_Codigo]),
 	CONSTRAINT FK_HAB_NODISPONIBLES_HABITACION FOREIGN KEY ([HabitacionNoDisponible_HabitacionID])REFERENCES [RIP].[Habitaciones] ([Habitacion_ID])
@@ -667,57 +681,39 @@ GO
 --	CONSTRAINT FK_ITEM_FACTURA_FACTURA FOREIGN KEY ([Item_Factura_ID]) REFERENCES [RIP].[Facturas] ([Factura_Numero])
 --GO
 
-
 -------------------------------------
---		INSERTS TABLA CALLES
+--		INSERTS DE TABLAS
 -------------------------------------
 
+-- Realizando inserts a tabla Calles
 INSERT INTO RIP.Calles (Calle_Nombre)
 SELECT DISTINCT Hotel_Calle FROM GD_Esquema.Maestra 
 UNION
 SELECT DISTINCT Cliente_Dom_Calle FROM GD_Esquema.Maestra
 
--------------------------------------
---		INSERTS TABLA NACIONALIDADES
--------------------------------------
-
+-- Realizando inserts a tabla Nacionalidades
 INSERT INTO RIP.Nacionalidades (Nacionalidad_Descripcion)
 SELECT DISTINCT Cliente_Nacionalidad FROM GD_Esquema.Maestra
 
--------------------------------------
---		INSERTS TABLA CIUDADES
--------------------------------------
-
+-- Realizando inserts a tabla Ciudades
 INSERT INTO RIP.Ciudades (ciudades_descripcion)
 SELECT DISTINCT  Hotel_Ciudad FROM GD_Esquema.Maestra
 
--------------------------------------
---		INSERTS TABLA CIUDADES
--------------------------------------
-
+-- Realizando inserts a tabla Regimenes
 INSERT INTO RIP.Regimenes (Regimen_Descripcion, Regimen_Precio)
 SELECT DISTINCT Regimen_Descripcion, Regimen_Precio FROM GD_Esquema.Maestra
 
--------------------------------------
---		INSERTS TABLA RESERVA_ESTADO
--------------------------------------
-
+-- Realizando inserts a tabla Reserva_Estado
 INSERT INTO RIP.Reserva_Estado (Reserva_EstadoDescripcion) 
 VALUES ('Reserva Correcta'),('Reserva modificada'),('Reserva cancelada por Recepción'),('Reserva cancelada por Cliente'),('Reserva cancelada por No-Show'),('Reserva con ingreso efectivo')
 
--------------------------------------
---		INSERTS TABLA CONSUMIBLES
--------------------------------------
-
+-- Realizando inserts a tabla Consumibles
 INSERT INTO RIP.Consumibles (Consumible_Codigo, Consumible_Descripcion, Consumible_Precio)
 SELECT DISTINCT  Consumible_Codigo, Consumible_Descripcion, Consumible_Precio 
 FROM GD_Esquema.Maestra
 WHERE Consumible_Descripcion IS NOT NULL
 
--------------------------------------
---		INSERTS TABLA DOMICILIOS
--------------------------------------
-
+-- Realizando inserts a tabla Domicilios
 INSERT INTO RIP.Domicilios (Domicilio_CiudadID, Domicilio_CalleID, Domicilio_NumeroCalle)
 SELECT DISTINCT  Ciudad_ID, Calle_ID, Hotel_Nro_Calle 
 FROM GD_Esquema.Maestra 
@@ -729,52 +725,33 @@ SELECT DISTINCT Calle_ID, Cliente_Nro_Calle, Cliente_Depto, Cliente_Piso
 FROM GD_Esquema.Maestra 
 JOIN RIP.Calle ON Calle_Nombre = Cliente_Dom_Calle
 
--------------------------------------
---		INSERTS TABLA HOTELES
--------------------------------------
-
+-- Realizando inserts a tabla Hoteles
 INSERT INTO RIP.Hoteles (Hotel_DomicilioID, Hotel_CantidadEstrellas, Hotel_RecargaEstrellas)
 SELECT DISTINCT Domicilio_ID, Hotel_CantEstrella, Hotel_Recarga_Estrella 
 FROM GD_Esquema.Maestra
 JOIN RIP.Domicilio ON Hotel_Nro_Calle = Domicilio_Nro_Calle AND Domicilio_CiudadID IS NOT NULL
 
--------------------------------------
---		INSERTS TABLA HABITACIONES
--------------------------------------
-
+-- Realizando inserts a tabla Habitaciones
 INSERT INTO RIP.Habitaciones(habitaciones_hotel_ID,habitaciones_numero,habitaciones_piso,habitaciones_frente,habitaciones_tipo_codigo,habitaciones_descripcion)
 SELECT DISTINCT hoteles_ID,Habitacion_Numero,Habitacion_Piso,Habitacion_Frente,Habitacion_Tipo_Codigo,Habitacion_Tipo_Descripcion from gd_esquema.Maestra
 join rip.Domicilio on Hotel_Nro_Calle=domicilio_nro_calle and domicilio_ciudad_ID is not null join RIP.Hoteles on hoteles_domicilio_ID=domicilio_ID
  --order by 1,2
 
--------------------------------------
---		INSERTS TABLA TIPOSDOCUMENTO
--------------------------------------
+-- Realizando inserts a tabla TiposDocumentos
+INSERT INTO Rip.TiposDocumentos(TipoDocumento_Descripcion) VALUES ('Pasaporte'),('DNI')
 
-INSERT INTO Rip.TipoDocumento(TipoDocumento_Descripcion) VALUES ('Pasaporte'),('DNI')
-
--------------------------------------
---		INSERTS TABLA PERSONAS
--------------------------------------
-
+-- Realizando inserts a tabla Personas
 INSERT INTO RIP.Persona (persona_nombre,persona_apellido,persona_fecha_nacimiento,persona_Tipo_Documento,Persona_Identificacion_Nro,Persona_Domicilio_ID,Persona_Mail,Persona_Nacionalidad_ID)
 SELECT DISTINCT  Cliente_Nombre,Cliente_Apellido,Cliente_Fecha_Nac,1,Cliente_Pasaporte_Nro,Domicilio_ID,Cliente_Mail,1 from gd_esquema.Maestra
 join rip.Calles on calles_descripcion=Cliente_Dom_Calle 
 join rip.Domicilio on calles_ID=domicilio_calle_ID and Cliente_Nro_Calle=domicilio_nro_calle and domicilio_depto=Cliente_Depto and domicilio_piso=Cliente_Piso
 
-
--------------------------------------
---		INSERTS TABLA CLIENTES
--------------------------------------
-
+-- Realizando inserts a tabla Clientes
 INSERT INTO RIP.Clientes (cliente_persona_ID)
 SELECT DISTINCT  persona_ID from gd_esquema.Maestra
 join RIP.Persona on persona_Identificacion_Nro=Cliente_Pasaporte_Nro
 
--------------------------------------
---		INSERTS TABLA RESERVAS
--------------------------------------
-
+-- Realizando inserts a tabla Reservas
 SELECT DISTINCT * from rip.Persona a join rip.Persona b on a.Persona_Identificacion_Nro=b.Persona_Identificacion_Nro and a.Persona_nombre!=b.Persona_nombre
 select * from rip.Persona where Persona_ID=61841
 select * from gd_esquema.Maestra where Cliente_Pasaporte_Nro=5833450
@@ -788,14 +765,22 @@ join rip.Regimen on regimen.regimen_descripcion=gd_esquema.Maestra.Regimen_Descr
 where Reserva_Codigo=10225
 select * from rip.Reservas
 
--------------------------------------
---		INSERTS TABLA ESTADIAS
--------------------------------------
-
+-- Realizando inserts a tabla Estadias
  INSERT INTO RIP.Estadia(Estadia_Reserva_ID,Estadia_Fecha_Inicio,Estadia_Cantidad_Noches,Estadia_Precio_Total_Consumible)
 SELECT DISTINCT  Reserva_Codigo,Estadia_Fecha_Inicio,Estadia_Cant_Noches,sum(isnull(Consumible_Precio,0)) from gd_esquema.Maestra
  where Estadia_Fecha_Inicio is not null
  group by Estadia_Fecha_Inicio,Estadia_Cant_Noches,Reserva_Codigo
+
+ -- Realizando inserts a tabla Hotel_Regimen
+INSERT INTO RIP.Hotel_Regimen (Hotel_Regimen_IdHotel,Hotel_Regimen_IdRegimen)
+select h.Hoteles_ID, r.Regimen_ID from gd_esquema.Maestra a
+join rip.Calles c on c.Calles_Descripcion = a.Hotel_Calle
+join rip.Ciudades ci on ci.Ciudades_Descripcion = a.Hotel_Ciudad
+join rip.Domicilio d on d.Domicilio_Nro_calle = a.Hotel_Nro_Calle and d.Domicilio_Calle_ID=c.Calles_ID and d.Domicilio_Ciudad_ID=ci.Ciudades_ID
+join rip.Hoteles h on h.Hoteles_Domicilio_ID = d.Domicilio_ID
+join rip.Regimen r on r.Regimen_Descripcion=a.Regimen_Descripcion
+ group by  h.Hoteles_ID, r.Regimen_ID
+ order by 1
 
 --Facturas
 --INSERT INTO RIP.Facturas(Factura_Numero,Factura_Fecha,Factura_Total,Factura_Estadia_ID,Factura_Cliente_ID)
@@ -811,19 +796,7 @@ SELECT DISTINCT  Reserva_Codigo,Estadia_Fecha_Inicio,Estadia_Cant_Noches,sum(isn
 --select Consumible_Codigo,Factura_Nro,Item_Factura_Cantidad,Item_Factura_Monto from gd_esquema.Maestra
 --where Factura_Nro is not null
 
--------------------------------------
---		INSERTS TABLA HOTEL_REGIMEN
--------------------------------------
 
-INSERT INTO RIP.Hotel_Regimen (Hotel_Regimen_IdHotel,Hotel_Regimen_IdRegimen)
-select h.Hoteles_ID, r.Regimen_ID from gd_esquema.Maestra a
-join rip.Calles c on c.Calles_Descripcion = a.Hotel_Calle
-join rip.Ciudades ci on ci.Ciudades_Descripcion = a.Hotel_Ciudad
-join rip.Domicilio d on d.Domicilio_Nro_calle = a.Hotel_Nro_Calle and d.Domicilio_Calle_ID=c.Calles_ID and d.Domicilio_Ciudad_ID=ci.Ciudades_ID
-join rip.Hoteles h on h.Hoteles_Domicilio_ID = d.Domicilio_ID
-join rip.Regimen r on r.Regimen_Descripcion=a.Regimen_Descripcion
- group by  h.Hoteles_ID, r.Regimen_ID
- order by 1
 
 -------------------------------------
 --		INSERTS DE PRUEBA
@@ -847,12 +820,17 @@ INSERT INTO RIP.Rol_Funcionalidad (RolFuncionalidad_RolID, RolFuncionalidad_Func
 VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(2,6),(2,7),(2,8),(2,9),(2,10),(2,11),(3,6)
 
 -- Asignando roles a usuarios 'admin' y 'recep'
-INSERT INTO RIP.Usuario_Rol(UsuarioRol_UsuarioID, UsuarioRol_RolID) VALUES ( (select Usuario_ID from rip.Usuarios where Usuario_nombre = 'admin'), (SELECT Rol_ID FROM RIP.Roles WHERE Rol_Nombre = 'Administrador'))
-INSERT INTO RIP.Usuario_Rol(UsuarioRol_UsuarioID, UsuarioRol_RolID) VALUES ( (select Usuario_ID from rip.Usuarios where Usuario_nombre = 'recep'), (SELECT Rol_ID FROM RIP.Roles WHERE Rol_Nombre = 'Recepcionista'))
+INSERT INTO RIP.Usuario_Rol(UsuarioRol_UsuarioID, UsuarioRol_RolID) VALUES ( (SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = 'admin'), (SELECT Rol_ID FROM RIP.Roles WHERE Rol_Nombre = 'Administrador'))
+INSERT INTO RIP.Usuario_Rol(UsuarioRol_UsuarioID, UsuarioRol_RolID) VALUES ( (SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = 'recep'), (SELECT Rol_ID FROM RIP.Roles WHERE Rol_Nombre = 'Recepcionista'))
 
--- Asignamos hoteles a los usuarios iniciales
-INSERT INTO RIP.Hotel_Usuario(Hotel_Usuario_IdHotel,Hotel_Usuario_IdUsuario) select h.hoteles_id,(select Usuario_ID from rip.Usuarios where Usuario_User = 'admin') from rip.Hoteles h
-INSERT INTO RIP.Hotel_Usuario(Hotel_Usuario_IdHotel,Hotel_Usuario_IdUsuario) select h.hoteles_id,(select Usuario_ID from rip.Usuarios where Usuario_User = 'recep') from rip.Hoteles h
+-- Asignando hoteles a usuarios 'admin' y 'recep'
+INSERT INTO RIP.Hotel_Usuario (Hotel_Usuario_HotelID, Hotel_Usuario_UsuarioID) SELECT Hotel_ID ,(SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = 'admin') FROM RIP.Hoteles
+INSERT INTO RIP.Hotel_Usuario (Hotel_Usuario_HotelID, Hotel_Usuario_UsuarioID) SELECT Hotel_ID,(SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = 'recep') FROM RIP.Hoteles
+
+
+
+
+
 
 -- Prueba Gaby
 INSERT INTO RIP.Usuarios (Usuario_User, Usuario_Contrasenia) VALUES ('gaby', HASHBYTES('SHA2_256', 'w23e'))
@@ -867,6 +845,5 @@ UPDATE RIP.Usuarios SET Usuario_PersonaID = @@IDENTITY WHERE Usuario_Nombre = 'g
 
 INSERT INTO RIP.Usuario_Rol(Usuario_Rol_Usuario_ID, Usuario_Rol_Rol_ID) values ( (select Usuario_ID from rip.Usuarios where Usuario_User = 'gaby'), (select Rol_ID from rip.Roles where Rol_Nombre = 'Administrador'))
 INSERT INTO RIP.Usuario_Rol(Usuario_Rol_Usuario_ID, Usuario_Rol_Rol_ID) values ( (select Usuario_ID from rip.Usuarios where Usuario_User = 'gaby'), (select Rol_ID from rip.Roles where Rol_Nombre = 'Recepcionista'))
-
 
 INSERT INTO RIP.Hotel_Usuario(Hotel_Usuario_IdHotel,Hotel_Usuario_IdUsuario) select h.hoteles_id,(select Usuario_ID from rip.Usuarios where Usuario_User = 'gaby') from rip.Hoteles h
