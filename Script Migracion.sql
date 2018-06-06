@@ -53,104 +53,6 @@ IF NOT EXISTS (
 	SELECT 1 
 	FROM INFORMATION_SCHEMA.TABLES 
 	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Clientes' 
-	AND TABLE_SCHEMA = 'RIP'
-) 
-BEGIN
-CREATE TABLE [RIP].[Clientes] (
-	[Cliente_ID] [numeric](18,0) NOT NULL IDENTITY(1,1),
-	[Cliente_PersonaID] [numeric](18,0),
-	[Cliente_Habilitado] [bit] DEFAULT 1,
-	[Cliente_DatoCorrupto] [bit] DEFAULT 0,
-	CONSTRAINT PK_CLIENTE PRIMARY KEY ([Cliente_ID])
-)
-PRINT '----- Tabla Clientes creada -----'
-END
-GO
-
-
-IF NOT EXISTS (
-	SELECT 1 
-	FROM INFORMATION_SCHEMA.TABLES 
-	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'TiposDocumentos' 
-	AND TABLE_SCHEMA = 'RIP'
-)
-BEGIN
-CREATE TABLE [RIP].[TiposDocumentos] (
-	[TipoDocumento_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[TipoDocumento_Descripcion] [nvarchar](15) CONSTRAINT UQ_DESC_TIPODOCUMENTO UNIQUE NOT NULL
-)
-PRINT '----- Tabla TiposDocumento creada -----'
-END
-GO
-
-
-IF NOT EXISTS (
-	SELECT 1 
-	FROM INFORMATION_SCHEMA.TABLES 
-	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Facturas' 
-	AND TABLE_SCHEMA = 'RIP'
-)
-BEGIN
-CREATE TABLE [RIP].[Facturas] (
-	[Factura_Numero] [numeric](18,0) PRIMARY KEY,
-	[Factura_EstadiaID] [numeric](18,0),
-	[Factura_ClienteID] [numeric](18,0),
-	[Factura_DiasEfectivos] [numeric](18,0),
-	[Factura_DiasNoUtilizados] [numeric](18,0),
-	[Factura_Fecha] [datetime],
-	[Factura_Total] [numeric] (18,2),
-	[Factura_FormaDePago] [nvarchar](50),
-)
-PRINT '----- Tabla Facturas creada -----'
-END
-GO
-
-
-IF NOT EXISTS (
-	SELECT 1 
-	FROM INFORMATION_SCHEMA.TABLES 
-	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Usuarios' 
-	AND TABLE_SCHEMA = 'RIP'
-)
-BEGIN
-CREATE TABLE [RIP].[Usuarios] (
-	[Usuario_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[Usuario_PersonaID] [numeric](18,0),
-	[Usuario_Nombre] [nvarchar](50) NOT NULL,
-	[Usuario_Contrasenia] [varbinary](100) NOT NULL,
-	[Usuario_CantidadIntentos] [int] DEFAULT 0,
-	[Usuario_Estado] [bit],
-)
-PRINT '----- Tabla Usuarios creada -----'
-END
-GO
-
-
-IF NOT EXISTS (
-	SELECT 1 
-	FROM INFORMATION_SCHEMA.TABLES 
-	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Hotel_Usuario' 
-	AND TABLE_SCHEMA = 'RIP'
-)
-BEGIN
-CREATE TABLE [RIP].[Hotel_Usuario] (
-	[HotelUsuario_HotelID] [numeric](18,0) NOT NULL,
-	[HotelUsuario_UsuarioID] [numeric](18,0) NOT NULL
-)
-PRINT '----- Tabla Hotel_Usuario creada -----'
-END
-GO
-
-
-IF NOT EXISTS (
-	SELECT 1 
-	FROM INFORMATION_SCHEMA.TABLES 
-	WHERE TABLE_TYPE = 'BASE TABLE' 
     AND TABLE_NAME = 'Roles' 
 	AND TABLE_SCHEMA = 'RIP'
 )
@@ -186,7 +88,7 @@ IF NOT EXISTS (
 	SELECT 1 
 	FROM INFORMATION_SCHEMA.TABLES 
 	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Rol_Funcionalidad' 
+    AND TABLE_NAME = 'Roles_Funcionalidades' 
 	AND TABLE_SCHEMA = 'RIP'
 )
 BEGIN
@@ -194,7 +96,7 @@ CREATE TABLE [RIP].[Rol_Funcionalidad] (
 	[RolFuncionalidad_RolID] [numeric](18,0) NOT NULL,
 	[RolFuncionalidad_FuncionalidadID] [numeric](18,0) NOT NULL
 )
-PRINT '----- Tabla Rol_Funcionalidad creada -----'
+PRINT '----- Tabla Roles_Funcionalidades creada -----'
 END
 GO
 
@@ -203,7 +105,28 @@ IF NOT EXISTS (
 	SELECT 1 
 	FROM INFORMATION_SCHEMA.TABLES 
 	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Usuario_Rol' 
+    AND TABLE_NAME = 'Usuarios' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[Usuarios] (
+	[Usuario_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Usuario_Nombre] [nvarchar](50) NOT NULL,
+	[Usuario_Contrasenia] [varbinary](100) NOT NULL,
+	[Usuario_PersonaID] [numeric](18,0),
+	[Usuario_CantidadIntentos] [int] DEFAULT 0,
+	[Usuario_Estado] [bit] DEFAULT 1
+)
+PRINT '----- Tabla Usuarios creada -----'
+END
+GO
+
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'Usuarios_Roles' 
 	AND TABLE_SCHEMA = 'RIP'
 )
 BEGIN
@@ -211,71 +134,7 @@ CREATE TABLE [RIP].[Usuario_Rol] (
 	[UsuarioRol_UsuarioID] [numeric](18,0) NOT NULL,
 	[UsuarioRol_RolID] [numeric](18,0) NOT NULL
 )
-PRINT '----- Tabla Usuario_Rol creada -----'
-END
-GO
-
-
-IF NOT EXISTS (
-	SELECT 1 
-	FROM INFORMATION_SCHEMA.TABLES 
-	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Habitaciones' 
-	AND TABLE_SCHEMA = 'RIP'
-)
-BEGIN
-CREATE TABLE [RIP].[Habitaciones] (
-	[Habitacion_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[Habitacion_HotelID] [numeric](18,0),
-	[Habitacion_Numero] [numeric](18,0),
-	[Habitacion_Piso] [numeric](18,0),
-	[Habitacion_Frente] [nvarchar](5),
-	[Habitacion_TipoCodigo] [numeric](18,0),
-	[Habitacion_Descripcion] [nvarchar](255) NOT NULL,
-	[Habitacion_Habilitada] [bit] DEFAULT 1
-)
-PRINT '----- Tabla Habitaciones creada -----'
-END
-GO
-
-
-IF NOT EXISTS (
-	SELECT 1 
-	FROM INFORMATION_SCHEMA.TABLES 
-	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Hoteles' 
-	AND TABLE_SCHEMA = 'RIP'
-)
-BEGIN
-CREATE TABLE [RIP].[Hoteles] (
-	[Hotel_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[Hotel_Nombre] [nvarchar](255),
-	[Hotel_Email] [nvarchar](255),
-	[Hotel_Telefono] [numeric](18,0),
-	[Hotel_DomicilioID] [numeric](18,0),
-	[Hotel_CantidadEstrellas] [numeric](18,0),
-	[Hotel_RecargaEstrellas] [numeric](18,0),
-	[Hotel_FechaCreacion] [datetime],
-	[Hotel_Habilitado] [bit] DEFAULT 1
-)
-PRINT '----- Tabla Hoteles creada -----'
-END
-GO
-
-
-IF NOT EXISTS (
-	SELECT 1 
-	FROM INFORMATION_SCHEMA.TABLES 
-	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Hotel_Regimen' 
-	AND TABLE_SCHEMA = 'RIP'
-)
-BEGIN
-CREATE TABLE [RIP].[Hotel_Regimen] (
-	[HotelRegimen_HotelID] [numeric](18,0) NOT NULL,
-	[HotelRegimen_RegimenID] [numeric](3,0) NOT NULL
-)
-PRINT '----- Tabla Hotel_Regimen creada -----'
+PRINT '----- Tabla Usuarios_Roles creada -----'
 END
 GO
 
@@ -301,23 +160,6 @@ IF NOT EXISTS (
 	SELECT 1 
 	FROM INFORMATION_SCHEMA.TABLES 
 	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Nacionalidad' 
-	AND TABLE_SCHEMA = 'RIP'
-)
-BEGIN
-CREATE TABLE [RIP].[Nacionalidad] (
-	[Nacionalidad_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[Nacionalidad_Descripcion] [nvarchar](255) CONSTRAINT UQ_DESC_NACIONALIDAD UNIQUE NOT NULL
-)
-PRINT '----- Tabla Nacionalidad creada -----'
-END
-GO
-
-
-IF NOT EXISTS (
-	SELECT 1 
-	FROM INFORMATION_SCHEMA.TABLES 
-	WHERE TABLE_TYPE = 'BASE TABLE' 
     AND TABLE_NAME = 'Ciudades' 
 	AND TABLE_SCHEMA = 'RIP'
 )
@@ -335,6 +177,168 @@ IF NOT EXISTS (
 	SELECT 1 
 	FROM INFORMATION_SCHEMA.TABLES 
 	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'Paises' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[Ciudades] (
+	[Pais_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Pais_Nombre] [nvarchar](255) CONSTRAINT UQ_DESC_PAISES UNIQUE NOT NULL
+)
+PRINT '----- Tabla Paises creada -----'
+END
+GO
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'Domicilios' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[Domicilios] (
+	[Domicilio_ID] [numeric](18,0) NOT NULL IDENTITY(1,1),
+	[Domicilio_PaisID] [numeric](18,0),
+	[Domicilio_CiudadID] [numeric](18,0),
+	[Domicilio_CalleID] [numeric](18,0),
+	[Domicilio_Numero] [numeric](18,0),
+	[Domicilio_Piso] [numeric](18,0),
+	[Domicilio_Departamento] [nvarchar](3),
+)
+PRINT '----- Tabla Domicilios creada -----'
+END
+GO
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'Nacionalidades' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[Nacionalidades] (
+	[Nacionalidad_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Nacionalidad_Descripcion] [nvarchar](255) CONSTRAINT UQ_DESC_NACIONALIDAD UNIQUE NOT NULL
+)
+PRINT '----- Tabla Nacionalidades creada -----'
+END
+GO
+
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'TiposDocumentos' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[TiposDocumentos] (
+	[TipoDocumento_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[TipoDocumento_Descripcion] [nvarchar](15) CONSTRAINT UQ_DESC_TIPODOCUMENTO UNIQUE NOT NULL
+)
+PRINT '----- Tabla TiposDocumentos creada -----'
+END
+GO
+
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'Personas' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[Personas] (
+	[Persona_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Persona_Nombre] [nvarchar](255),
+	[Persona_Apellido] [nvarchar](255),
+	[Persona_FechaNacimiento] [datetime],
+	[Persona_TipoDocumento] [nvarchar](15), 
+	[Persona_NumeroDocumento] [numeric](18,0),
+	[Persona_NacionalidadID] [numeric](18,0),
+	[Persona_DomicilioID] [numeric](18,0),
+	[Persona_Telefono] [nvarchar](50),
+	[Persona_Email] [nvarchar](255), 
+	--[Persona_DatoCorrupto] [bit] DEFAULT 0
+)
+PRINT '----- Tabla Personas creada -----'
+END
+GO
+
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'Clientes' 
+	AND TABLE_SCHEMA = 'RIP'
+) 
+BEGIN
+CREATE TABLE [RIP].[Clientes] (
+	[Cliente_ID] [numeric](18,0) NOT NULL IDENTITY(1,1),
+	[Cliente_PersonaID] [numeric](18,0),
+	[Cliente_Estado] [bit] DEFAULT 1,
+	--[Cliente_DatoCorrupto] [bit] DEFAULT 0,
+	CONSTRAINT PK_CLIENTE PRIMARY KEY ([Cliente_ID])
+)
+PRINT '----- Tabla Clientes creada -----'
+END
+GO
+
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'Hoteles' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[Hoteles] (
+	[Hotel_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Hotel_Nombre] [nvarchar](255),
+	[Hotel_CantidadEstrellas] [numeric](18,0),
+	[Hotel_RecargaEstrellas] [numeric](18,0),
+	[Hotel_DomicilioID] [numeric](18,0),	
+	[Hotel_Telefono] [numeric](18,0),
+	[Hotel_Email] [nvarchar](255),
+	[Hotel_FechaCreacion] [datetime],
+	[Hotel_Estado] [bit] DEFAULT 1
+)
+PRINT '----- Tabla Hoteles creada -----'
+END
+GO
+
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'HotelesCerrados' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[HotelesCerrados] (
+	[HotelCerrado_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[HotelCerrado_HotelID] [numeric](18,0) NOT NULL,
+	[HotelCerrado_FechaInicio] [datetime],
+	[HotelCerrado_FechaFin] [datetime],
+	[HotelCerrado_Motivo] [nvarchar](255),
+)
+PRINT '----- Tabla HotelesCerrados creada -----'
+END
+GO
+
+
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
     AND TABLE_NAME = 'Regimenes' 
 	AND TABLE_SCHEMA = 'RIP'
 )
@@ -343,9 +347,66 @@ CREATE TABLE [RIP].[Regimenes] (
 	[Regimen_ID] [numeric](3,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[Regimen_Descripcion] [nvarchar](255) CONSTRAINT UQ_DESC_REGIMEN UNIQUE NOT NULL,
 	[Regimen_Precio] [numeric](18,2) NOT NULL,
-	[Regimen_Habilitado] [bit] DEFAULT 1
+	[Regimen_Estado] [bit] DEFAULT 1
 )
 PRINT '----- Tabla Regimenes creada -----'
+END
+GO
+
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'Hoteles_Regimenes' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[Hotel_Regimen] (
+	[HotelRegimen_HotelID] [numeric](18,0) NOT NULL,
+	[HotelRegimen_RegimenID] [numeric](3,0) NOT NULL
+)
+PRINT '----- Tabla Hoteles_Regimenes creada -----'
+END
+GO
+
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'Hoteles_Usuarios' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[Hoteles_Usuarios] (
+	[HotelUsuario_HotelID] [numeric](18,0) NOT NULL,
+	[HotelUsuario_UsuarioID] [numeric](18,0) NOT NULL
+)
+PRINT '----- Tabla Hoteles_Usuarios creada -----'
+END
+GO
+
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'Habitaciones' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[Habitaciones] (
+	[Habitacion_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Habitacion_HotelID] [numeric](18,0),
+	[Habitacion_Numero] [numeric](18,0),
+	[Habitacion_Piso] [numeric](18,0),
+	[Habitacion_Frente] [nvarchar](5),
+	[Habitacion_TipoCodigo] [numeric](18,0),
+	[Habitacion_Descripcion] [nvarchar](255) NOT NULL,
+	[Habitacion_Estado] [bit] DEFAULT 1
+)
+PRINT '----- Tabla Habitaciones creada -----'
 END
 GO
 
@@ -368,7 +429,7 @@ CREATE TABLE [RIP].[Reservas] (
 	[Reserva_UsuarioID] [numeric](18,0),
 	[Reserva_HotelID] [numeric](18,0),
 	[Reserva_RegimenID] [numeric](3,0),
-	[Reserva_Estado] [numeric](3,0)
+	[Reserva_EstadoID] [numeric](3,0)
 )
 PRINT '----- Tabla Reservas creada -----'
 END
@@ -379,15 +440,35 @@ IF NOT EXISTS (
 	SELECT 1 
 	FROM INFORMATION_SCHEMA.TABLES 
 	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Reserva_Estado' 
+    AND TABLE_NAME = 'ReservasCanceladas' 
 	AND TABLE_SCHEMA = 'RIP'
 )
 BEGIN
-CREATE TABLE [RIP].[Reserva_Estado] (
-	[ReservaEstado_EstadoID] [numeric](3,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[ReservaEstado_EstadoDescripcion] [nvarchar](255) CONSTRAINT UQ_DESC_RESERVA_ESTADO UNIQUE NOT NULL
+CREATE TABLE [RIP].[ReservasCanceladas] (
+	[ReservaCancelada_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[ReservaCancelada_RerservaID] [numeric](18,0)NOT NULL,
+	[ReservaCancelada_UsuarioID] [numeric](18,0)NOT NULL,
+	[ReservaCanceladan_FechaCancelacion] [datetime],
+	[ReservaCancelada_Motivo] [nvarchar](255),
 )
-PRINT '----- Tabla Reserva_Estado creada -----'
+PRINT '----- Tabla ReservasCanceladas creada -----'
+END
+GO
+
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'EstadosReservas' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[EstadosReservas] (
+	[EstadoReserva_ID] [numeric](3,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[EstadoReserva_Descripcion] [nvarchar](255) CONSTRAINT UQ_DESC_RESERVA_ESTADO UNIQUE NOT NULL
+)
+PRINT '----- Tabla EstadosReservas creada -----'
 END
 GO
 
@@ -407,9 +488,26 @@ CREATE TABLE [RIP].[Estadias] (
 	[Estadia_CantidadNoches] [numeric](18,0),
 	[Estadia_UsuarioCheckIn] [nvarchar](50),
 	[estadia_UsuarioCheckOut] [nvarchar](50),
-	[Estadia_PrecioTotalConsumible] [numeric](18,2),
+	[Estadia_PrecioTotalConsumible] [numeric](18,2)
 )
 PRINT '----- Tabla Estadias creada -----'
+END
+GO
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'Huespedes' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[Huespedes] (
+	[Huesped_ClienteID] [numeric](18,0),
+	[Huesped_EstadiaID] [numeric](18,0),
+	[Huesped_Presente] [bit] DEFAULT 1
+)
+PRINT '----- Tabla Huespedes creada -----'
 END
 GO
 
@@ -418,19 +516,21 @@ IF NOT EXISTS (
 	SELECT 1 
 	FROM INFORMATION_SCHEMA.TABLES 
 	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'HabitacionesNoDisponibles' 
+    AND TABLE_NAME = 'Facturas' 
 	AND TABLE_SCHEMA = 'RIP'
 )
 BEGIN
-CREATE TABLE [RIP].[HabitacionesNoDisponibles] (
-	[HabitacionNoDisponible_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[HabitacionNoDisponible_ReservaID] [numeric](18,0) NOT NULL,
-	[HabitacionNoDisponible_HabitacionID] [numeric](18,0) NOT NULL,
-	[HabitacionNoDisponible_FechaInicio] [datetime] NOT NULL,
-	[HabitacionNoDisponible_FechaFin] [datetime] NOT NULL,
-	[HabitacionNoDisponible_Finalizado] [bit] DEFAULT 1
+CREATE TABLE [RIP].[Facturas] (
+	[Factura_Numero] [numeric](18,0) PRIMARY KEY,
+	[Factura_EstadiaID] [numeric](18,0),
+	[Factura_ClienteID] [numeric](18,0),
+	[Factura_DiasEfectivos] [numeric](18,0),
+	[Factura_DiasNoUtilizados] [numeric](18,0),
+	[Factura_Fecha] [datetime], 
+	[Factura_Total] [numeric] (18,2),
+	[Factura_FormaDePago] [nvarchar](50)
 )
-PRINT '----- Tabla HabitacionesNoDisponibles creada -----'
+PRINT '----- Tabla Facturas creada -----'
 END
 GO
 
@@ -471,112 +571,6 @@ CREATE TABLE [RIP].[Consumidos] (
 	[Consumido_HabitacionesPrecio] [numeric](18,2),
 )
 PRINT '----- Tabla Consumidos creada -----'
-END
-GO
-
-
-IF NOT EXISTS (
-	SELECT 1 
-	FROM INFORMATION_SCHEMA.TABLES 
-	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Domicilios' 
-	AND TABLE_SCHEMA = 'RIP'
-)
-BEGIN
-CREATE TABLE [RIP].[Domicilios] (
-	[Domicilio_ID] [numeric](18,0) NOT NULL IDENTITY(1,1),
-	[Domicilio_Pais] [nvarchar](50),
-	[Domicilio_CiudadID] [numeric](18,0),
-	[Domicilio_CalleID] [numeric](18,0),
-	[Domicilio_NumeroCalle] [numeric](18,0),
-	[Domicilio_Departamento] [nvarchar](3),
-	[Domicilio_Piso] [numeric](18,0),
-)
-PRINT '----- Tabla Domicilios creada -----'
-END
-GO
-
-
-IF NOT EXISTS (
-	SELECT 1 
-	FROM INFORMATION_SCHEMA.TABLES 
-	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Personas' 
-	AND TABLE_SCHEMA = 'RIP'
-)
-BEGIN
-CREATE TABLE [RIP].[Personas] (
-	[Persona_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[Persona_Nombre] [nvarchar](255),
-	[Persona_Apellido] [nvarchar](255),
-	[Persona_FechaNacimiento] [datetime],
-	[Persona_TipoDocumento] [nvarchar](15), 
-	[Persona_NumeroDocumento] [numeric](18,0),
-	[Persona_DomicilioID] [numeric](18,0),
-	[Persona_Email] [nvarchar](255), 
-	[Persona_Telefono] [nvarchar](50),
-	[Persona_NacionalidadID] [numeric](18,0),
-	[Persona_DatoCorrupto] [bit] DEFAULT 0
-)
-PRINT '----- Tabla Personas creada -----'
-END
-GO
-
-
-IF NOT EXISTS (
-	SELECT 1 
-	FROM INFORMATION_SCHEMA.TABLES 
-	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'HotelesCerrados' 
-	AND TABLE_SCHEMA = 'RIP'
-)
-BEGIN
-CREATE TABLE [RIP].[HotelesCerrados] (
-	[HotelCerrado_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[HotelCerrado_HotelID] [numeric](18,0) NOT NULL,
-	[HotelCerrado_FechaInicio] [datetime],
-	[HotelCerrado_FechaFin] [datetime],
-	[HotelCerrado_Motivo] [nvarchar](255),
-)
-PRINT '----- Tabla HotelesCerrados creada -----'
-END
-GO
-
-
-IF NOT EXISTS (
-	SELECT 1 
-	FROM INFORMATION_SCHEMA.TABLES 
-	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Cancelaciones' 
-	AND TABLE_SCHEMA = 'RIP'
-)
-BEGIN
-CREATE TABLE [RIP].[Cancelaciones] (
-	[Cancelacion_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[Cancelacion_RerservaID] [numeric](18,0)NOT NULL,
-	[Cancelacion_UsuarioID] [numeric](18,0)NOT NULL,
-	[Cancelacion_FechaCancelacion] [datetime],
-	[Cancelacion_Motivo] [nvarchar](255),
-)
-PRINT '----- Tabla Cancelaciones creada -----'
-END
-GO
-
-
-IF NOT EXISTS (
-	SELECT 1 
-	FROM INFORMATION_SCHEMA.TABLES 
-	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Huespedes' 
-	AND TABLE_SCHEMA = 'RIP'
-)
-BEGIN
-CREATE TABLE [RIP].[Huespedes] (
-	[Huesped_ClienteID] [numeric](18,0),
-	[Huesped_EstadiaID] [numeric](18,0),
-	[Huesped_Presente] [bit] DEFAULT 1
-)
-PRINT '----- Tabla Huespedes creada -----'
 END
 GO
 
