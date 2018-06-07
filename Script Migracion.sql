@@ -599,7 +599,7 @@ CREATE TABLE [RIP].[Estadias] (
 	[Estadia_FechaInicio] [datetime],
 	[Estadia_CantidadNoches] [numeric](18,0),
 	[Estadia_CheckInUsuarioID] [numeric](18,0),
-	[estadia_CheckOutUsuarioID] [numeric](18,0),
+	[Estadia_CheckOutUsuarioID] [numeric](18,0),
 	CONSTRAINT FK_ESTADIA_RESERVA FOREIGN KEY ([Estadia_ReservaCodigo]) REFERENCES [RIP].[Reservas] ([Reserva_Codigo]),
 	CONSTRAINT FK_ESTADIA_CHECK_IN_USUARIO FOREIGN KEY ([Estadia_CheckInUsuarioID]) REFERENCES [RIP].[Usuarios] ([Usuario_ID]),
 	CONSTRAINT FK_ESTADIA_CHECK_OUT_USUARIO FOREIGN KEY ([Estadia_CheckOutUsuarioID]) REFERENCES [RIP].[Usuarios] ([Usuario_ID])
