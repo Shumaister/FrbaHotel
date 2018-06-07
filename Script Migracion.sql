@@ -884,9 +884,6 @@ AND g.Habitacion_Numero = h.Habitacion_Numero
 AND g.Habitacion_Piso = h.Habitacion_Piso
 
 
-
-
-
 PRINT''
 PRINT '----- Realizando inserts tabla Huespedes -----'
 INSERT INTO RIP.Huespedes (Huesped_ClienteID, Huesped_EstadiaID)
