@@ -862,7 +862,6 @@ JOIN RIP.Domicilios ON Hotel_Nro_Calle = Domicilio_NumeroCalle
 JOIN RIP.Hoteles ON Domicilio_ID = Hotel_DomicilioID
 JOIN RIP.Regimenes r ON g.Regimen_Descripcion = r.Regimen_Descripcion
 
-
 PRINT''
 PRINT '----- Realizando inserts tabla Estadias -----'
 INSERT INTO RIP.Estadias (Estadia_ReservaCodigo, Estadia_FechaInicio, Estadia_CantidadNoches)
@@ -874,13 +873,18 @@ GROUP BY Estadia_Fecha_Inicio, Estadia_Cant_Noches, Reserva_Codigo
 PRINT''
 PRINT '----- Realizando inserts tabla Estadias_Habitaciones -----'
 INSERT INTO RIP.Estadias_Habitaciones (EstadiaHabitacion_EstadiaID, EstadiaHabitacion_HabitacionID)
-SELECT DISTINCT Estadia_ID, Habitacion_ID FROM GD_Esquema.Maestra 
-JOIN RIP.Estadias ON Estadia_ReservaCodigo = Reserva_Codigo
+SELECT DISTINCT Estadia_ID, Habitacion_ID FROM GD_Esquema.Maestra g
+JOIN RIP.Estadias ON Estadia_ReservaCodigo = Reserva_Codigo  
 JOIN RIP.Ciudades ON Hotel_Ciudad = Ciudad_Nombre
 JOIN RIP.Calles ON Hotel_Calle = Calle_Nombre
 JOIN RIP.Domicilios ON Hotel_Nro_Calle = Domicilio_NumeroCalle
 JOIN RIP.Hoteles ON Domicilio_ID = Hotel_DomicilioID 
-JOIN RIP.Habitaciones ON Hotel_ID = Habitacion_HotelID
+JOIN RIP.Habitaciones h ON Hotel_ID = Habitacion_HotelID
+AND g.Habitacion_Numero = h.Habitacion_Numero
+AND g.Habitacion_Piso = h.Habitacion_Piso
+
+
+
 
 
 PRINT''
