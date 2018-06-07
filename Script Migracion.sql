@@ -506,10 +506,10 @@ CREATE TABLE [RIP].[Habitaciones] (
 	[Habitacion_Numero] [numeric](18,0),
 	[Habitacion_Piso] [numeric](18,0),
 	[Habitacion_Frente] [nvarchar](50),
-	[Habitacion_TipoHabitacionID] [numeric](18,0),
+	[Habitacion_TipoHabitacionCodigo] [numeric](18,0),
 	[Habitacion_Estado] [bit] DEFAULT 1,
 	CONSTRAINT FK_HABITACIONES_HOTEL FOREIGN KEY ([Habitacion_HotelID]) REFERENCES [RIP].[Hoteles] ([Hotel_ID]),
-	CONSTRAINT FK_HABITACIONES_TIPO FOREIGN KEY ([Habitacion_TipoHabitacionID]) REFERENCES [RIP].[TiposHabitaciones] ([TipoHabitacion_Codigo])
+	CONSTRAINT FK_HABITACIONES_TIPO FOREIGN KEY ([Habitacion_TipoHabitacionCodigo]) REFERENCES [RIP].[TiposHabitaciones] ([TipoHabitacion_Codigo])
 )
 PRINT '----- Tabla Habitaciones creada -----'
 END
@@ -718,14 +718,13 @@ GO
 --		INSERTS DE TABLAS
 -------------------------------------
 
--- Realizando inserts a tabla Ciudades
-
+PRINT '----- Realizando inserts a tabla Ciudades -----'
 INSERT INTO RIP.Ciudades (Ciudad_Nombre)
 SELECT DISTINCT  Hotel_Ciudad 
 FROM GD_Esquema.Maestra
 
--- Realizando inserts a tabla Calles
 
+PRINT '----- Realizando inserts a tabla Calles -----'
 INSERT INTO RIP.Calles (Calle_Nombre)
 SELECT DISTINCT Hotel_Calle 
 FROM GD_Esquema.Maestra 
@@ -733,39 +732,39 @@ UNION
 SELECT DISTINCT Cliente_Dom_Calle 
 FROM GD_Esquema.Maestra
 
--- Realizando inserts a tabla Nacionalidades
 
+PRINT '----- Realizando inserts a tabla Nacionalidades -----'
 INSERT INTO RIP.Nacionalidades (Nacionalidad_Descripcion)
 SELECT DISTINCT Cliente_Nacionalidad 
 FROM GD_Esquema.Maestra
 
--- Realizando inserts a tabla TiposDocumentos
 
+PRINT '----- Realizando inserts a tabla TiposDocumentos -----'
 INSERT INTO RIP.TiposDocumentos (TipoDocumento_Descripcion)
 VALUES ('DNI'), ('Pasaporte')
 
--- Realizando inserts a tabla Regimenes
 
+PRINT '----- Realizando inserts a tabla Regimenes -----'
 INSERT INTO RIP.Regimenes (Regimen_Descripcion, Regimen_Precio)
 SELECT DISTINCT Regimen_Descripcion, Regimen_Precio 
 FROM GD_Esquema.Maestra
 
--- Realizando inserts a tabla Reserva_Estado
 
+PRINT '----- Realizando inserts a tabla EstadosReservas -----'
 INSERT INTO RIP.EstadosReservas (EstadoReserva_Descripcion) 
 VALUES ('Reserva correcta'),('Reserva modificada'),
 ('Reserva cancelada por Recepción'),('Reserva cancelada por Cliente')
 ,('Reserva cancelada por No-Show'),('Reserva con ingreso efectivo')
 
--- Realizando inserts a tabla Consumibles
 
+PRINT '----- Realizando inserts a tabla Consumibles -----'
 INSERT INTO RIP.Consumibles (Consumible_Codigo, Consumible_Descripcion, Consumible_Precio)
 SELECT DISTINCT  Consumible_Codigo, Consumible_Descripcion, Consumible_Precio 
 FROM GD_Esquema.Maestra
 WHERE Consumible_Codigo IS NOT NULL
 
--- Realizando inserts a tabla Domicilios
 
+PRINT '----- Realizando inserts tabla Domicilios -----'
 INSERT INTO RIP.Domicilios (Domicilio_CiudadID, Domicilio_CalleID, Domicilio_NumeroCalle)
 SELECT DISTINCT Ciudad_ID, Calle_ID, Hotel_Nro_Calle 
 FROM GD_Esquema.Maestra
@@ -777,49 +776,65 @@ SELECT DISTINCT Calle_ID, Cliente_Nro_Calle, Cliente_Depto, Cliente_Piso
 FROM GD_Esquema.Maestra
 JOIN RIP.Calles ON Calle_Nombre = Cliente_Dom_Calle
 
--- Realizando inserts a tabla Hoteles
 
+PRINT '----- Realizando inserts tabla Hoteles -----'
 INSERT INTO RIP.Hoteles (Hotel_DomicilioID, Hotel_CantidadEstrellas, Hotel_RecargaEstrellas)
 SELECT DISTINCT Domicilio_ID, Hotel_CantEstrella, Hotel_Recarga_Estrella 
 FROM GD_Esquema.Maestra
 JOIN RIP.Domicilios ON Hotel_Nro_Calle = Domicilio_NumeroCalle 
 AND Domicilio_CiudadID IS NOT NULL
 
--- Realizando inserts a tabla Habitaciones
 
-INSERT INTO RIP.Habitaciones (Habitacion_HotelID, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente)
-SELECT DISTINCT Hotel_ID, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente 
+PRINT '----- Realizando inserts tabla TipoHabitacion -----'
+INSERT INTO RIP.TiposHabitaciones (TipoHabitacion_Codigo, TipoHabitacion_Descripcion, TipoHabitacion_Porcentual)
+SELECT DISTINCT Habitacion_Tipo_Codigo, Habitacion_Tipo_Descripcion, Habitacion_Tipo_Porcentual 
+FROM GD_Esquema.Maestra
+
+
+PRINT '----- Realizando inserts tabla Habitaciones -----'
+INSERT INTO RIP.Habitaciones (Habitacion_HotelID, Habitacion_Numero, Habitacion_TipoHabitacionCodigo, Habitacion_Piso, Habitacion_Frente)
+SELECT DISTINCT Hotel_ID, Habitacion_Numero, TipoHabitacion_Codigo, Habitacion_Piso, Habitacion_Frente 
 FROM GD_Esquema.Maestra
 JOIN RIP.Domicilios ON Hotel_Nro_Calle = Domicilio_NumeroCalle 
 AND Domicilio_CiudadID IS NOT NULL 
 JOIN RIP.Hoteles ON Hotel_DomicilioID = Domicilio_ID
+JOIN RIP.TiposHabitaciones ON Habitacion_Tipo_Codigo = TipoHabitacion_Codigo
 
--- Realizando inserts a tabla TiposHabitaciones
 
-INSERT INTO RIP.TiposHabitaciones (TipoHabitacion_Codigo, TipoHabitacion_Descripcion, TipoHabitacion_Porcentual)
-SELECT DISTINCT Habitacion_Tipo_Codigo, Habitacion_Tipo_Descripcion, Habitacion_Tipo_Porcentual FROM GD_Esquema.Maestra
-
--- Realizando inserts a tabla Personas
-
+PRINT '----- Realizando inserts tabla Personas -----'
 INSERT INTO RIP.Personas (Persona_Nombre, Persona_Apellido, Persona_FechaNacimiento, Persona_TipoDocumentoID, Persona_NumeroDocumento, Persona_DomicilioID, Persona_Email, Persona_NacionalidadID)
-SELECT DISTINCT  Cliente_Nombre, Cliente_Apellido, Cliente_Fecha_Nac, 2, Cliente_Pasaporte_Nro, Domicilio_ID, Cliente_Mail, 1 FROM GD_Esquema.Maestra
+SELECT DISTINCT  Cliente_Nombre, Cliente_Apellido, Cliente_Fecha_Nac, 2, Cliente_Pasaporte_Nro, Domicilio_ID, Cliente_Mail, 1 
+FROM GD_Esquema.Maestra
 JOIN RIP.Calles ON Calle_Nombre = Cliente_Dom_Calle 
 JOIN RIP.Domicilios ON Calle_ID = Domicilio_CalleID 
 AND Cliente_Nro_Calle = Domicilio_NumeroCalle 
 AND Domicilio_Departamento = Cliente_Depto 
 AND Domicilio_Piso = Cliente_Piso
 
--- Realizando inserts a tabla Clientes
 
+PRINT '----- Realizando inserts tabla Clientes -----'
 INSERT INTO RIP.Clientes (Cliente_PersonaID)
-SELECT DISTINCT Persona_ID FROM GD_Esquema.Maestra
+SELECT DISTINCT Persona_ID 
+FROM GD_Esquema.Maestra
 JOIN RIP.Personas ON Persona_NumeroDocumento = Cliente_Pasaporte_Nro
 
 
+PRINT '----- Realizando inserts tabla Hoteles_Regimenes -----'
+INSERT INTO RIP.Hoteles_Regimenes (HotelRegimen_HotelID, HotelRegimen_RegimenID)
+SELECT h.Hotel_ID, r.Regimen_ID 
+FROM GD_Esquema.Maestra a
+JOIN RIP.Calles c ON c.Calle_Nombre = a.Hotel_Calle
+JOIN RIP.Ciudades ci ON ci.Ciudad_Nombre = a.Hotel_Ciudad
+JOIN RIP.Domicilios d ON d.Domicilio_NumeroCalle = a.Hotel_Nro_Calle 
+AND d.Domicilio_CalleID= c.Calle_ID 
+AND d.Domicilio_CiudadID = ci.Ciudad_ID
+JOIN RIP.Hoteles h ON h.Hotel_DomicilioID = d.Domicilio_ID
+JOIN RIP.Regimenes r ON r.Regimen_Descripcion = a.Regimen_Descripcion
+ GROUP BY h.Hotel_ID, r.Regimen_ID
+ ORDER BY 1
 
-
-/*
--- Realizando inserts a tabla Reservas
+ /*
+ -- Realizando inserts a tabla Reservas
 
 SELECT DISTINCT * FROM RIP.Personas a 
 JOIN RIP.Personas b
@@ -838,24 +853,35 @@ SELECT * FROM RIP.Reservas
 
 -- Realizando inserts a tabla Estadias
 
- INSERT INTO RIP.Estadias (Estadia_ReservaCodigo, Estadia_FechaInicio, Estadia_CantidadNoches)
+INSERT INTO RIP.Estadias (Estadia_ReservaCodigo, Estadia_FechaInicio, Estadia_CantidadNoches)
 SELECT DISTINCT  Reserva_Codigo, Estadia_Fecha_Inicio, Estadia_Cant_Noches FROM GD_Esquema.Maestra
 WHERE Estadia_Fecha_Inicio IS NOT NULL
 GROUP BY Estadia_Fecha_Inicio, Estadia_Cant_Noches, Reserva_Codigo
 
- -- Realizando inserts a tabla Hotel_Regimen
+-- Realizando inserts a tabla Estadias_Habitaciones
 
-INSERT INTO RIP.Hoteles_Regimenes (HotelRegimen_HotelID, HotelRegimen_RegimenID)
-SELECT h.Hotel_ID, r.Regimen_ID FROM GD_Esquema.Maestra a
-JOIN RIP.Calles c ON c.Calle_Nombre = a.Hotel_Calle
-JOIN RIP.Ciudades ci ON ci.Ciudad_Nombre = a.Hotel_Ciudad
-JOIN RIP.Domicilios d ON d.Domicilio_NumeroCalle = a.Hotel_Nro_Calle AND d.Domicilio_CalleID= c.Calle_ID AND d.Domicilio_CiudadID = ci.Ciudad_ID
-JOIN RIP.Hoteles h ON h.Hotel_DomicilioID = d.Domicilio_ID
-JOIN RIP.Regimenes r ON r.Regimen_Descripcion = a.Regimen_Descripcion
- GROUP BY h.Hotel_ID, r.Regimen_ID
- ORDER BY 1
+INSERT INTO RIP.Estadias_Habitaciones (EstadiaHabitacion_EstadiaID, EstadiaHabitacion_HabitacionID)
+SELECT DISTINCT Estadia_ID, Habitacion_ID FROM GD_Esquema.Maestra 
+JOIN RIP.Estadias ON Estadia_ReservaCodigo = Reserva_Codigo
+JOIN RIP.Ciudades ON Hotel_Ciudad = Ciudad_Nombre
+JOIN RIP.Calles ON Hotel_Calle = Calle_Nombre
+JOIN RIP.Domicilios ON Hotel_Nro_Calle = Domicilio_NumeroCalle
+JOIN RIP.Hoteles ON Domicilio_ID = Hotel_DomicilioID 
+JOIN RIP.Habitaciones ON Hotel_ID = Habitacion_HotelID
 
- */
+-- Realizando inserts a tabla Huespedes
+
+INSERT INTO RIP.Huespedes (Huesped_ClienteID, Huesped_EstadiaID)
+SELECT DISTINCT Cliente_ID, Estadia_ID FROM GD_Esquema.Maestra
+JOIN RIP.Personas ON Cliente_Pasaporte_Nro = Persona_NumeroDocumento 
+JOIN RIP.Clientes ON Persona_ID = Cliente_ID
+JOIN RIP.Estadias ON Reserva_Codigo = Estadia_ReservaCodigo
+
+-- Realizando inserts a tabla Facturas
+
+-- Realizando inserts a tabla ItemsFacturas
+
+*/
 -------------------------------------
 --		INSERTS DE PRUEBA
 -------------------------------------
