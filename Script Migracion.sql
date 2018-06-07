@@ -718,48 +718,63 @@ GO
 --		INSERTS DE TABLAS
 -------------------------------------
 
+-- Realizando inserts a tabla Ciudades
+
+INSERT INTO RIP.Ciudades (Ciudad_Nombre)
+SELECT DISTINCT  Hotel_Ciudad 
+FROM GD_Esquema.Maestra
+
 -- Realizando inserts a tabla Calles
 
 INSERT INTO RIP.Calles (Calle_Nombre)
-SELECT DISTINCT Hotel_Calle FROM GD_Esquema.Maestra 
+SELECT DISTINCT Hotel_Calle 
+FROM GD_Esquema.Maestra 
 UNION
-SELECT DISTINCT Cliente_Dom_Calle FROM GD_Esquema.Maestra
+SELECT DISTINCT Cliente_Dom_Calle 
+FROM GD_Esquema.Maestra
 
 -- Realizando inserts a tabla Nacionalidades
 
 INSERT INTO RIP.Nacionalidades (Nacionalidad_Descripcion)
-SELECT DISTINCT Cliente_Nacionalidad FROM GD_Esquema.Maestra
+SELECT DISTINCT Cliente_Nacionalidad 
+FROM GD_Esquema.Maestra
 
--- Realizando inserts a tabla Ciudades
+-- Realizando inserts a tabla TiposDocumentos
 
-INSERT INTO RIP.Ciudades (Ciudad_Nombre)
-SELECT DISTINCT  Hotel_Ciudad FROM GD_Esquema.Maestra
+INSERT INTO RIP.TiposDocumentos (TipoDocumento_Descripcion)
+VALUES ('DNI'), ('Pasaporte')
 
 -- Realizando inserts a tabla Regimenes
 
 INSERT INTO RIP.Regimenes (Regimen_Descripcion, Regimen_Precio)
-SELECT DISTINCT Regimen_Descripcion, Regimen_Precio FROM GD_Esquema.Maestra
+SELECT DISTINCT Regimen_Descripcion, Regimen_Precio 
+FROM GD_Esquema.Maestra
 
 -- Realizando inserts a tabla Reserva_Estado
 
 INSERT INTO RIP.EstadosReservas (EstadoReserva_Descripcion) 
-VALUES ('Reserva correcta'),('Reserva modificada'),('Reserva cancelada por Recepción'),('Reserva cancelada por Cliente'),('Reserva cancelada por No-Show'),('Reserva con ingreso efectivo')
+VALUES ('Reserva correcta'),('Reserva modificada'),
+('Reserva cancelada por Recepción'),('Reserva cancelada por Cliente')
+,('Reserva cancelada por No-Show'),('Reserva con ingreso efectivo')
 
 -- Realizando inserts a tabla Consumibles
 
 INSERT INTO RIP.Consumibles (Consumible_Codigo, Consumible_Descripcion, Consumible_Precio)
 SELECT DISTINCT  Consumible_Codigo, Consumible_Descripcion, Consumible_Precio 
 FROM GD_Esquema.Maestra
-WHERE Consumible_Descripcion IS NOT NULL
+WHERE Consumible_Codigo IS NOT NULL
 
 -- Realizando inserts a tabla Domicilios
 
 INSERT INTO RIP.Domicilios (Domicilio_CiudadID, Domicilio_CalleID, Domicilio_NumeroCalle)
-SELECT DISTINCT Ciudad_ID, Calle_ID, Hotel_Nro_Calle FROM GD_Esquema.Maestra 
-JOIN RIP.Ciudades ON Ciudad_Nombre = Hotel_Ciudad 
-JOIN RIP.Calles ON Calle_Nombre = Hotel_Calle
+SELECT DISTINCT Ciudad_ID, Calle_ID, Hotel_Nro_Calle 
+FROM GD_Esquema.Maestra
+JOIN RIP.Ciudades ON Hotel_Ciudad = Ciudad_Nombre
+JOIN RIP.Calles ON Hotel_Calle = Calle_Nombre
+ 
 INSERT INTO RIP.Domicilios (Domicilio_CalleID, Domicilio_NumeroCalle, Domicilio_Departamento, Domicilio_Piso)
-SELECT DISTINCT Calle_ID, Cliente_Nro_Calle, Cliente_Depto, Cliente_Piso FROM GD_Esquema.Maestra 
+SELECT DISTINCT Calle_ID, Cliente_Nro_Calle, Cliente_Depto, Cliente_Piso 
+FROM GD_Esquema.Maestra
 JOIN RIP.Calles ON Calle_Nombre = Cliente_Dom_Calle
 
 -- Realizando inserts a tabla Hoteles
@@ -767,37 +782,43 @@ JOIN RIP.Calles ON Calle_Nombre = Cliente_Dom_Calle
 INSERT INTO RIP.Hoteles (Hotel_DomicilioID, Hotel_CantidadEstrellas, Hotel_RecargaEstrellas)
 SELECT DISTINCT Domicilio_ID, Hotel_CantEstrella, Hotel_Recarga_Estrella 
 FROM GD_Esquema.Maestra
-JOIN RIP.Domicilios ON Hotel_Nro_Calle = Domicilio_NumeroCalle AND Domicilio_CiudadID IS NOT NULL
+JOIN RIP.Domicilios ON Hotel_Nro_Calle = Domicilio_NumeroCalle 
+AND Domicilio_CiudadID IS NOT NULL
 
 -- Realizando inserts a tabla Habitaciones
 
 INSERT INTO RIP.Habitaciones (Habitacion_HotelID, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente)
-SELECT DISTINCT Hotel_ID, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente FROM GD_Esquema.Maestra
-JOIN RIP.Domicilios ON Hotel_Nro_Calle = Domicilio_NumeroCalle AND Domicilio_CiudadID IS NOT NULL 
+SELECT DISTINCT Hotel_ID, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente 
+FROM GD_Esquema.Maestra
+JOIN RIP.Domicilios ON Hotel_Nro_Calle = Domicilio_NumeroCalle 
+AND Domicilio_CiudadID IS NOT NULL 
 JOIN RIP.Hoteles ON Hotel_DomicilioID = Domicilio_ID
-
--- Realizando inserts a tabla TiposDocumentos
-
-INSERT INTO RIP.TiposDocumentos (TipoDocumento_Descripcion) VALUES ('DNI'), ('Pasaporte')
-
--- Realizando inserts a tabla Personas
-
-INSERT INTO RIP.Personas (Persona_Nombre, Persona_Apellido, Persona_FechaNacimiento, Persona_TipoDocumentoID, Persona_NumeroDocumento, Persona_DomicilioID, Persona_Email, Persona_NacionalidadID)
-SELECT DISTINCT  Cliente_Nombre, Cliente_Apellido, Cliente_Fecha_Nac, 2, Cliente_Pasaporte_Nro, Domicilio_ID, Cliente_Mail, 1 FROM GD_Esquema.Maestra
-JOIN RIP.Calles ON Calle_Nombre = Cliente_Dom_Calle 
-JOIN RIP.Domicilios ON Calle_ID = Domicilio_CalleID AND Cliente_Nro_Calle = Domicilio_NumeroCalle AND Domicilio_Departamento = Cliente_Depto AND Domicilio_Piso = Cliente_Piso
 
 -- Realizando inserts a tabla TiposHabitaciones
 
 INSERT INTO RIP.TiposHabitaciones (TipoHabitacion_Codigo, TipoHabitacion_Descripcion, TipoHabitacion_Porcentual)
 SELECT DISTINCT Habitacion_Tipo_Codigo, Habitacion_Tipo_Descripcion, Habitacion_Tipo_Porcentual FROM GD_Esquema.Maestra
 
+-- Realizando inserts a tabla Personas
+
+INSERT INTO RIP.Personas (Persona_Nombre, Persona_Apellido, Persona_FechaNacimiento, Persona_TipoDocumentoID, Persona_NumeroDocumento, Persona_DomicilioID, Persona_Email, Persona_NacionalidadID)
+SELECT DISTINCT  Cliente_Nombre, Cliente_Apellido, Cliente_Fecha_Nac, 2, Cliente_Pasaporte_Nro, Domicilio_ID, Cliente_Mail, 1 FROM GD_Esquema.Maestra
+JOIN RIP.Calles ON Calle_Nombre = Cliente_Dom_Calle 
+JOIN RIP.Domicilios ON Calle_ID = Domicilio_CalleID 
+AND Cliente_Nro_Calle = Domicilio_NumeroCalle 
+AND Domicilio_Departamento = Cliente_Depto 
+AND Domicilio_Piso = Cliente_Piso
+
 -- Realizando inserts a tabla Clientes
 
 INSERT INTO RIP.Clientes (Cliente_PersonaID)
-SELECT DISTINCT  Persona_ID FROM GD_Esquema.Maestra
+SELECT DISTINCT Persona_ID FROM GD_Esquema.Maestra
 JOIN RIP.Personas ON Persona_NumeroDocumento = Cliente_Pasaporte_Nro
 
+
+
+
+/*
 -- Realizando inserts a tabla Reservas
 
 SELECT DISTINCT * FROM RIP.Personas a 
@@ -834,7 +855,7 @@ JOIN RIP.Regimenes r ON r.Regimen_Descripcion = a.Regimen_Descripcion
  GROUP BY h.Hotel_ID, r.Regimen_ID
  ORDER BY 1
 
-
+ */
 -------------------------------------
 --		INSERTS DE PRUEBA
 -------------------------------------
