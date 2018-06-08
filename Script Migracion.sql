@@ -1,4 +1,3 @@
-/*
 USE [GD1C2018]
  
 SET QUOTED_IDENTIFIER OFF
@@ -36,65 +35,6 @@ END
 GO
 
 
-eescribir querys en tp
-ABM Usuario
-
-Ver pais en domicilio
-
-fALTAN ESTOS AGREGAR
-
-      ,[Item_Factura_Cantidad]
-      ,[Item_Factura_Monto]
-      ,[Factura_Nro]
-      ,[Factura_Fecha]
-      ,[Factura_Total]
-
-*/
-
-USE [GD1C2018]
- 
-SET QUOTED_IDENTIFIER OFF
-SET ANSI_NULLS ON 
-
-
-IF EXISTS (SELECT * FROM sys.schemas WHERE name = 'RIP')
-BEGIN
-		DECLARE @Sql NVARCHAR(MAX) = '';
-
-		-- Elimino las constraints
-		SELECT @Sql = @Sql + 'ALTER TABLE '+ QUOTENAME('RIP') + '.' + QUOTENAME(t.name) + ' DROP CONSTRAINT ' + QUOTENAME(f.name)  + ';' + CHAR(13)
-		FROM sys.tables t 
-			inner join sys.foreign_keys f on f.parent_object_id = t.object_id 
-			inner join sys.schemas s on t.schema_id = s.schema_id
-		WHERE s.name = 'RIP'
-		ORDER BY t.name;
-		
-		PRINT @Sql
-		EXEC  (@Sql)
-		
-		-- Elimino las tablas
-		DECLARE @SqlStatement NVARCHAR(MAX)
-		SELECT @SqlStatement = 
-			COALESCE(@SqlStatement, N'') + N'DROP TABLE [RIP].' + QUOTENAME(TABLE_NAME) + N';' + CHAR(13)
-		FROM INFORMATION_SCHEMA.TABLES
-		WHERE TABLE_SCHEMA = 'RIP' and TABLE_TYPE = 'BASE TABLE'
-
-		PRINT @SqlStatement
-		EXEC  (@SqlStatement)
-
-		DROP SCHEMA [RIP]
-END
-GO
-
-IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'RIP')
-BEGIN
-	EXEC ('CREATE SCHEMA [RIP] AUTHORIZATION [gdHotel2018]')
-	PRINT 'Esquema creado RIP ... '
-END
-GO
-
-
-
 -------------------------------------
 --		CREACION DE ESQUEMA
 -------------------------------------
@@ -105,6 +45,7 @@ BEGIN
 	PRINT '----- Esquema RIP creado -----'
 END
 GO
+
 
 -------------------------------------
 --		CREACION DE TABLAS
@@ -318,8 +259,8 @@ CREATE TABLE [RIP].[Usuarios] (
 	[Usuario_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[Usuario_Nombre] [nvarchar](50) NOT NULL,
 	[Usuario_Contrasenia] [varbinary](100) NOT NULL,
-	[Usuario_PersonaID] [numeric](18,0),
 	[Usuario_CantidadIntentos] [int] DEFAULT 0,
+	[Usuario_PersonaID] [numeric](18,0),
 	[Usuario_Estado] [bit] DEFAULT 1,
 	CONSTRAINT FK_USUARIO_PERSONA FOREIGN KEY ([Usuario_PersonaID]) REFERENCES [RIP].[Personas] ([Persona_ID])
 )
@@ -357,11 +298,10 @@ IF NOT EXISTS (
 ) 
 BEGIN
 CREATE TABLE [RIP].[Clientes] (
-	[Cliente_ID] [numeric](18,0) NOT NULL IDENTITY(1,1),
+	[Cliente_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[Cliente_PersonaID] [numeric](18,0),
 	[Cliente_Estado] [bit] DEFAULT 1,
 	--[Cliente_DatoCorrupto] [bit] DEFAULT 0,
-	CONSTRAINT PK_CLIENTE PRIMARY KEY ([Cliente_ID]),
 	CONSTRAINT FK_CLIENTES_PERSONA FOREIGN KEY ([Cliente_PersonaID]) REFERENCES [RIP].[Personas] ([Persona_ID])
 )
 PRINT '----- Tabla Clientes creada -----'
@@ -483,7 +423,7 @@ IF NOT EXISTS (
 )
 BEGIN
 CREATE TABLE [RIP].[TiposHabitaciones] (
-	[TipoHabitacion_Codigo] [numeric](18,0) NOT NULL PRIMARY KEY,
+	[TipoHabitacion_ID] [numeric](18,0) NOT NULL PRIMARY KEY,
 	[TipoHabitacion_Descripcion] [nvarchar](255),
 	[TipoHabitacion_Porcentual] [numeric](18,2)
 )
@@ -506,10 +446,10 @@ CREATE TABLE [RIP].[Habitaciones] (
 	[Habitacion_Numero] [numeric](18,0),
 	[Habitacion_Piso] [numeric](18,0),
 	[Habitacion_Frente] [nvarchar](50),
-	[Habitacion_TipoHabitacionCodigo] [numeric](18,0),
+	[Habitacion_TipoHabitacionID] [numeric](18,0),
 	[Habitacion_Estado] [bit] DEFAULT 1,
 	CONSTRAINT FK_HABITACIONES_HOTEL FOREIGN KEY ([Habitacion_HotelID]) REFERENCES [RIP].[Hoteles] ([Hotel_ID]),
-	CONSTRAINT FK_HABITACIONES_TIPO FOREIGN KEY ([Habitacion_TipoHabitacionCodigo]) REFERENCES [RIP].[TiposHabitaciones] ([TipoHabitacion_Codigo])
+	CONSTRAINT FK_HABITACIONES_TIPO FOREIGN KEY ([Habitacion_TipoHabitacionID]) REFERENCES [RIP].[TiposHabitaciones] ([TipoHabitacion_ID])
 )
 PRINT '----- Tabla Habitaciones creada -----'
 END
@@ -542,19 +482,19 @@ IF NOT EXISTS (
 )
 BEGIN
 CREATE TABLE [RIP].[Reservas] (
-	[Reserva_Codigo] [numeric](18,0) NOT NULL PRIMARY KEY,
+	[Reserva_ID] [numeric](18,0) NOT NULL PRIMARY KEY,
 	[Reserva_ClienteID] [numeric](18,0),
 	[Reserva_HotelID] [numeric](18,0),
 	[Reserva_FechaCreacion] [datetime],
 	[Reserva_FechaInicio] [datetime],
-	[Reserva_CantidadNoches] [numeric](18,0),
-	[Reserva_TipoHabitacionCodigo] [numeric](18,0),
+	[Reserva_FechaFin] [datetime],
+	[Reserva_TipoHabitacionID] [numeric](18,0),
 	[Reserva_RegimenID] [numeric](18,0),	
 	[Reserva_EstadoReservaID] [numeric](18,0),
 	[Reserva_UsuarioID] [numeric](18,0),
 	CONSTRAINT FK_RESERVAS_CLIENTE FOREIGN KEY ([Reserva_ClienteID]) REFERENCES [RIP].[Clientes] ([Cliente_ID]),
 	CONSTRAINT FK_RESERVAS_HOTEL FOREIGN KEY ([Reserva_HotelID]) REFERENCES [RIP].[Hoteles] ([Hotel_ID]),
-	CONSTRAINT FK_RESERVAS_TIPO_HABITACION FOREIGN KEY ([Reserva_TipoHabitacionCodigo])  REFERENCES [RIP].[TiposHabitaciones] ([TipoHabitacion_Codigo]),
+	CONSTRAINT FK_RESERVAS_TIPO_HABITACION FOREIGN KEY ([Reserva_TipoHabitacionID])  REFERENCES [RIP].[TiposHabitaciones] ([TipoHabitacion_ID]),
 	CONSTRAINT FK_RESERVAS_REGIMEN FOREIGN KEY ([Reserva_RegimenID])  REFERENCES [RIP].[Regimenes] ([Regimen_ID]),
 	CONSTRAINT FK_RESERVAS_ESTADO FOREIGN KEY ([Reserva_EstadoReservaID])  REFERENCES [RIP].[EstadosReservas] ([EstadoReserva_ID]),
 	CONSTRAINT FK_RESERVAS_USUARIO FOREIGN KEY ([Reserva_UsuarioID])  REFERENCES [RIP].[Usuarios] ([Usuario_ID])
@@ -574,10 +514,10 @@ IF NOT EXISTS (
 BEGIN
 CREATE TABLE [RIP].[ReservasCanceladas] (
 	[ReservaCancelada_RerservaID] [numeric](18,0) NOT NULL PRIMARY KEY,
-	[ReservaCanceladan_FechaCancelacion] [datetime],
+	[ReservaCancelada_Fecha] [datetime],
 	[ReservaCancelada_UsuarioID] [numeric](18,0) NOT NULL,
 	[ReservaCancelada_Motivo] [nvarchar](255),
-	CONSTRAINT FK_RESERVA_CANCELADA_RESERVA FOREIGN KEY ([ReservaCancelada_RerservaID]) REFERENCES [RIP].[Reservas] ([Reserva_Codigo]),
+	CONSTRAINT FK_RESERVA_CANCELADA_RESERVA FOREIGN KEY ([ReservaCancelada_RerservaID]) REFERENCES [RIP].[Reservas] ([Reserva_ID]),
 	CONSTRAINT FK_RESERVA_CANCELADA_USUARIO FOREIGN KEY ([ReservaCancelada_UsuarioID]) REFERENCES [RIP].[Usuarios] ([Usuario_ID])
 )
 PRINT '----- Tabla ReservasCanceladas creada -----'
@@ -595,18 +535,36 @@ IF NOT EXISTS (
 BEGIN
 CREATE TABLE [RIP].[Estadias] (
 	[Estadia_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[Estadia_ReservaCodigo] [numeric](18,0),
+	[Estadia_ReservaID] [numeric](18,0),
 	[Estadia_FechaInicio] [datetime],
-	[Estadia_CantidadNoches] [numeric](18,0),
+	[Estadia_FechaFin] [datetime],
 	[Estadia_CheckInUsuarioID] [numeric](18,0),
 	[Estadia_CheckOutUsuarioID] [numeric](18,0),
-	CONSTRAINT FK_ESTADIA_RESERVA FOREIGN KEY ([Estadia_ReservaCodigo]) REFERENCES [RIP].[Reservas] ([Reserva_Codigo]),
+	CONSTRAINT FK_ESTADIA_RESERVA FOREIGN KEY ([Estadia_ReservaID]) REFERENCES [RIP].[Reservas] ([Reserva_ID]),
 	CONSTRAINT FK_ESTADIA_CHECK_IN_USUARIO FOREIGN KEY ([Estadia_CheckInUsuarioID]) REFERENCES [RIP].[Usuarios] ([Usuario_ID]),
 	CONSTRAINT FK_ESTADIA_CHECK_OUT_USUARIO FOREIGN KEY ([Estadia_CheckOutUsuarioID]) REFERENCES [RIP].[Usuarios] ([Usuario_ID])
 )
 PRINT '----- Tabla Estadias creada -----'
 END
 GO
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'Huespedes' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[Huespedes] (
+	[Huesped_ClienteID] [numeric](18,0),
+	[Huesped_EstadiaID] [numeric](18,0),
+	[Huesped_Presente] [bit] DEFAULT 1
+)
+PRINT '----- Tabla Huespedes creada -----'
+END
+GO
+
 
 IF NOT EXISTS (
 	SELECT 1 
@@ -632,37 +590,12 @@ IF NOT EXISTS (
 	SELECT 1 
 	FROM INFORMATION_SCHEMA.TABLES 
 	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Facturas' 
-	AND TABLE_SCHEMA = 'RIP'
-)
-BEGIN
-CREATE TABLE [RIP].[Facturas] (
-	[Factura_Numero] [numeric](18,0) PRIMARY KEY,
-	[Factura_ClienteID] [numeric](18,0),
-	[Factura_EstadiaID] [numeric](18,0),
-	[Factura_DiasEfectivos] [numeric](18,0),
-	[Factura_DiasNoUtilizados] [numeric](18,0),
-	[Factura_FechaEmision] [datetime], 
-	[Factura_FormaDePago] [nvarchar](50),
-	[Factura_MontoTotal] [numeric] (18,2),
-	CONSTRAINT FK_FACTURAS_CLIENTE FOREIGN KEY ([Factura_ClienteID]) REFERENCES [RIP].[Clientes] ([Cliente_ID]),
-	CONSTRAINT FK_FACTURAS_ESTADIA FOREIGN KEY ([Factura_EstadiaID]) REFERENCES [RIP].[Estadias] ([Estadia_ID])
-)
-PRINT '----- Tabla Facturas creada -----'
-END
-GO
-
-
-IF NOT EXISTS (
-	SELECT 1 
-	FROM INFORMATION_SCHEMA.TABLES 
-	WHERE TABLE_TYPE = 'BASE TABLE' 
     AND TABLE_NAME = 'Consumibles' 
 	AND TABLE_SCHEMA = 'RIP'
 )
 BEGIN
 CREATE TABLE [RIP].[Consumibles] (
-	[Consumible_Codigo] [numeric](18,0) NOT NULL PRIMARY KEY,
+	[Consumible_ID] [numeric](18,0) NOT NULL PRIMARY KEY,
 	[Consumible_Descripcion] [nvarchar](255) CONSTRAINT UQ_DESC_CONSUMIBLE UNIQUE,
 	[Consumible_Precio] [numeric](18,2)
 )
@@ -675,23 +608,38 @@ IF NOT EXISTS (
 	SELECT 1 
 	FROM INFORMATION_SCHEMA.TABLES 
 	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'ItemsFacturas' 
+    AND TABLE_NAME = 'Consumidos' 
 	AND TABLE_SCHEMA = 'RIP'
 )
 
 BEGIN
-CREATE TABLE [RIP].[ItemsFacturas] (
-	[ItemFactura_ID][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[ItemFactura_FacturaNumero] [numeric](18,0),
-	[ItemFactura_ConsumibleCodigo] [numeric](18,0),
-	[ItemFactura_HabitacionID] [numeric](18,0),
-	[ItemFactura_Cantidad] [numeric](18,0),
-	[ItemFactura_Monto] [numeric](18,2)
-	CONSTRAINT FK_ITEMS_FACTURAS_NUMERO FOREIGN KEY ([ItemFactura_FacturaNumero]) REFERENCES [RIP].[Facturas] ([Factura_Numero]),
-	CONSTRAINT FK_ITEMS_FACTURAS_CONSUMIBLE FOREIGN KEY ([ItemFactura_ConsumibleCodigo]) REFERENCES [RIP].[Consumibles] ([Consumible_Codigo]),
-	CONSTRAINT FK_ITEMS_FACTURAS_HABITACION FOREIGN KEY ([ItemFactura_HabitacionID]) REFERENCES [RIP].[Habitaciones] ([Habitacion_ID])
+CREATE TABLE [RIP].[Consumidos] (
+	[Consumido_ID][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Consumido_EstadiaID] [numeric](18,0),
+	[Consumido_HabitacionID] [numeric](18,0),
+	[Consumido_ConsumibleID] [numeric](18,0),
+	[Consumido_Cantidad] [numeric](18,0),
+	CONSTRAINT FK_CONSUMIDOS_CONSUMIBLE FOREIGN KEY ([Consumido_ConsumibleID]) REFERENCES [RIP].[Consumibles] ([Consumible_ID]),
+	CONSTRAINT FK_CONSUMIDOS_ESTADIA FOREIGN KEY ([Consumido_EstadiaID]) REFERENCES [RIP].[Estadia] ([Estadia_ID]),
+	CONSTRAINT FK_CONSUMIDOS_HABITACION FOREIGN KEY ([Consumido_HabitacionID]) REFERENCES [RIP].[Habitaciones] ([Habitacion_ID])
 )
-PRINT '----- Tabla ItemsFacturas creada -----'
+PRINT '----- Tabla Consumidos creada -----'
+END
+GO
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'FormasPagos' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[FormasPagos] (
+	[FormaPago_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[FormaPago_Descripcion] [nvarchar](255) CONSTRAINT UQ_DESC_FORMA_PAGO UNIQUE,
+)
+PRINT '----- Tabla FormasPagos creada -----'
 END
 GO
 
@@ -700,16 +648,23 @@ IF NOT EXISTS (
 	SELECT 1 
 	FROM INFORMATION_SCHEMA.TABLES 
 	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Huespedes' 
+    AND TABLE_NAME = 'Facturas' 
 	AND TABLE_SCHEMA = 'RIP'
 )
 BEGIN
-CREATE TABLE [RIP].[Huespedes] (
-	[Huesped_ClienteID] [numeric](18,0),
-	[Huesped_EstadiaID] [numeric](18,0),
-	[Huesped_Presente] [bit] DEFAULT 1
+CREATE TABLE [RIP].[Facturas] (
+	[Factura_ID] [numeric](18,0) PRIMARY KEY,
+	[Factura_EstadiaID] [numeric](18,0),
+	[Factura_DiasUtilizados] [numeric](18,0),
+	[Factura_DiasNoUtilizados] [numeric](18,0),
+	[Factura_Fecha] [datetime], 
+	[Factura_MontoEstadia] [numeric] (18,2),
+	[Factura_MontoTotal] [numeric] (18,2),
+	[Factura_FormaPagoID] [nvarchar](50),
+	CONSTRAINT FK_FACTURAS_ESTADIA FOREIGN KEY ([Factura_EstadiaID]) REFERENCES [RIP].[Estadias] ([Estadia_ID])	
+	CONSTRAINT FK_FACTURAS_FORMA_PAGO FOREIGN KEY ([Factura_FormaPagoID]) REFERENCES [RIP].[FormasPagos] ([FormaPago_ID])	
 )
-PRINT '----- Tabla Huespedes creada -----'
+PRINT '----- Tabla Facturas creada -----'
 END
 GO
 
