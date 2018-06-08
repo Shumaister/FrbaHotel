@@ -917,11 +917,14 @@ AND Consumible_Codigo IS NULL AND Consumido_ConsumibleID IS NULL
 WHERE Factura_Nro IS NOT NULL
 ORDER BY Factura_Nro
 
---Ver si hay que poner DISTINCT ya que hay valores repetidos deberia dar 345200
+--Ver si hay que poner DISTINCT ya que hay valores repetidos, sin DISTINCT son 345200 filas
 
 -------------------------------------
 --		INSERTS DE PRUEBA
 -------------------------------------
+
+PRINT''
+PRINT '----- Realizando inserts de prueba -----'
 
 -- Insertando roles
 
