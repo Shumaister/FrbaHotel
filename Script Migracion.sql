@@ -447,6 +447,7 @@ CREATE TABLE [RIP].[Habitaciones] (
 	[Habitacion_Piso] [numeric](18,0),
 	[Habitacion_Frente] [nvarchar](50),
 	[Habitacion_TipoHabitacionID] [numeric](18,0),
+	[Habitacion_Descripcion] [nvarchar](255),
 	[Habitacion_Estado] [bit] DEFAULT 1,
 	CONSTRAINT FK_HABITACIONES_HOTEL FOREIGN KEY ([Habitacion_HotelID]) REFERENCES [RIP].[Hoteles] ([Hotel_ID]),
 	CONSTRAINT FK_HABITACIONES_TIPO FOREIGN KEY ([Habitacion_TipoHabitacionID]) REFERENCES [RIP].[TiposHabitaciones] ([TipoHabitacion_ID])
@@ -658,13 +659,33 @@ CREATE TABLE [RIP].[Facturas] (
 	[Factura_DiasUtilizados] [numeric](18,0),
 	[Factura_DiasNoUtilizados] [numeric](18,0),
 	[Factura_Fecha] [datetime], 
-	[Factura_MontoEstadia] [numeric] (18,2),
 	[Factura_MontoTotal] [numeric] (18,2),
 	[Factura_FormaPagoID] [numeric](18,0),
 	CONSTRAINT FK_FACTURAS_ESTADIA FOREIGN KEY ([Factura_EstadiaID]) REFERENCES [RIP].[Estadias] ([Estadia_ID]),
 	CONSTRAINT FK_FACTURAS_FORMA_PAGO FOREIGN KEY ([Factura_FormaPagoID]) REFERENCES [RIP].[FormasPagos] ([FormaPago_ID])	
 )
 PRINT '----- Tabla Facturas creada -----'
+END
+GO
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'ItemsFacturas' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[ItemsFacturas] (
+	[ItemFactura_ID] [numeric](18,0) PRIMARY KEY,
+	[ItemFactura_FacturaID] [numeric](18,0),
+	[ItemFactura_ConsumidoID] [numeric](18,0),
+	[ItemFactura_Cantidad] [numeric](18,0),
+	[ItemFactura_Monto] [numeric] (18,2),
+	CONSTRAINT FK_ITEMS_FACTURAS_FACTURA FOREIGN KEY ([ItemFactura_FacturaID]) REFERENCES [RIP].[Facturas] ([Factura_ID]),
+	CONSTRAINT FK_ITEMS_FACTURAS_CONSUMIDO FOREIGN KEY ([ItemFactura_ConsumidoID]) REFERENCES [RIP].[Consumidos] ([Consumido_ID])	
+)
+PRINT '----- Tabla ItemsFacturas creada -----'
 END
 GO
 
@@ -852,7 +873,6 @@ JOIN RIP.Estadias ON Reserva_Codigo = Estadia_ReservaID
 
 PRINT''
 PRINT '----- Realizando inserts tabla Consumidos -----'
-INSERT INTO RIP.Consumidos (Consumido_EstadiaID, Consumido_HabitacionID, Consumido_ConsumibleID, Consumido_Cantidad)
 SELECT DISTINCT Estadia_ID, Habitacion_ID, Consumible_Codigo, Item_Factura_Cantidad
 FROM GD_Esquema.Maestra g
 JOIN RIP.Estadias ON Estadia_ReservaID = Reserva_Codigo
@@ -863,18 +883,24 @@ JOIN RIP.Hoteles ON Domicilio_ID = Hotel_DomicilioID
 JOIN RIP.Habitaciones h ON Hotel_ID = Habitacion_HotelID
 AND g.Habitacion_Numero = h.Habitacion_Numero
 AND g.Habitacion_Piso = h.Habitacion_Piso
-WHERE Consumible_Codigo IS NOT NULL
+WHERE Factura_Nro IS NOT NULL
 
 
 PRINT''
 PRINT '----- Realizando inserts tabla Facturas -----'
-INSERT INTO RIP.Facturas (Factura_ID, Factura_EstadiaID, Factura_Fecha, Factura_MontoEstadia, Factura_MontoTotal)
-SELECT DISTINCT Factura_Nro, Estadia_ID, Factura_Fecha, (SELECT SUM(Item_Factura_Monto)
-  FROM [GD1C2018].[gd_esquema].[Maestra]
-  WHERE Factura_Nro IS NOT NULL AND Consumible_Codigo IS NULL
-  GROUP BY Factura_Nro), 
+INSERT INTO RIP.Facturas (Factura_ID, Factura_EstadiaID, Factura_Fecha, Factura_MontoTotal)
+SELECT DISTINCT Factura_Nro, Estadia_ID, Factura_Fecha, Factura_Total
 FROM GD_Esquema.Maestra
 JOIN RIP.Estadias ON Reserva_Codigo = Estadia_ReservaID
+WHERE Factura_Nro IS NOT NULL
+
+
+PRINT''
+PRINT '----- Realizando inserts tabla ItemsFacturas -----'
+INSERT INTO RIP.ItemsFacturas (ItemFactura_FacturaID, ItemFactura_ConsumidoID, ItemFactura_Cantidad, ItemFactura_Monto)
+SELECT DISTINCT Factura_ID, Consumido_ID, Item_Factura_Cantidad, Item_Factura_Monto FROM GD_Esquema.Maestra g
+JOIN RIP.Facturas ON Factura_Nro = Factura_ID
+JOIN RIP.Consumidos c ON g.Consumible_Codigo = c.Consumido_ConsumibleID 
 
 -------------------------------------
 --		INSERTS DE PRUEBA
