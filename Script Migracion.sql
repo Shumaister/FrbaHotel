@@ -654,11 +654,11 @@ IF NOT EXISTS (
 )
 BEGIN
 CREATE TABLE [RIP].[Facturas] (
-	[Factura_ID] [numeric](18,0) PRIMARY KEY,
+	[Factura_ID] [numeric](18,0) NOT NULL PRIMARY KEY,
 	[Factura_EstadiaID] [numeric](18,0),
 	[Factura_DiasUtilizados] [numeric](18,0),
 	[Factura_DiasNoUtilizados] [numeric](18,0),
-	[Factura_Fecha] [datetime], 
+	[Factura_Fecha] [datetime],
 	[Factura_MontoTotal] [numeric] (18,2),
 	[Factura_FormaPagoID] [numeric](18,0),
 	CONSTRAINT FK_FACTURAS_ESTADIA FOREIGN KEY ([Factura_EstadiaID]) REFERENCES [RIP].[Estadias] ([Estadia_ID]),
@@ -677,7 +677,7 @@ IF NOT EXISTS (
 )
 BEGIN
 CREATE TABLE [RIP].[ItemsFacturas] (
-	[ItemFactura_ID] [numeric](18,0) PRIMARY KEY,
+	[ItemFactura_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[ItemFactura_FacturaID] [numeric](18,0),
 	[ItemFactura_ConsumidoID] [numeric](18,0),
 	[ItemFactura_Cantidad] [numeric](18,0),
@@ -871,8 +871,10 @@ JOIN RIP.Personas ON Cliente_Pasaporte_Nro = Persona_NumeroDocumento
 JOIN RIP.Clientes ON Persona_ID = Cliente_ID
 JOIN RIP.Estadias ON Reserva_Codigo = Estadia_ReservaID
 
+
 PRINT''
 PRINT '----- Realizando inserts tabla Consumidos -----'
+INSERT INTO RIP.Consumidos(Consumido_EstadiaID, Consumido_HabitacionID, Consumido_ConsumibleID, Consumido_Cantidad)
 SELECT DISTINCT Estadia_ID, Habitacion_ID, Consumible_Codigo, Item_Factura_Cantidad
 FROM GD_Esquema.Maestra g
 JOIN RIP.Estadias ON Estadia_ReservaID = Reserva_Codigo
@@ -889,18 +891,33 @@ WHERE Factura_Nro IS NOT NULL
 PRINT''
 PRINT '----- Realizando inserts tabla Facturas -----'
 INSERT INTO RIP.Facturas (Factura_ID, Factura_EstadiaID, Factura_Fecha, Factura_MontoTotal)
-SELECT DISTINCT Factura_Nro, Estadia_ID, Factura_Fecha, Factura_Total
+SELECT Factura_Nro, Estadia_ID, Factura_Fecha, Factura_Total
 FROM GD_Esquema.Maestra
 JOIN RIP.Estadias ON Reserva_Codigo = Estadia_ReservaID
-WHERE Factura_Nro IS NOT NULL
+WHERE Factura_Nro IS NOT NULL AND Consumible_Codigo IS NULL
 
 
 PRINT''
 PRINT '----- Realizando inserts tabla ItemsFacturas -----'
 INSERT INTO RIP.ItemsFacturas (ItemFactura_FacturaID, ItemFactura_ConsumidoID, ItemFactura_Cantidad, ItemFactura_Monto)
-SELECT DISTINCT Factura_ID, Consumido_ID, Item_Factura_Cantidad, Item_Factura_Monto FROM GD_Esquema.Maestra g
-JOIN RIP.Facturas ON Factura_Nro = Factura_ID
-JOIN RIP.Consumidos c ON g.Consumible_Codigo = c.Consumido_ConsumibleID 
+SELECT Factura_Nro, Consumido_ID, Item_Factura_Cantidad, Item_Factura_Monto
+FROM GD_Esquema.Maestra g
+JOIN RIP.Estadias ON Reserva_Codigo = Estadia_ReservaID
+JOIN RIP.Consumidos ON
+Consumido_EstadiaID = Estadia_ID 
+AND Consumible_Codigo = Consumido_ConsumibleID
+WHERE Factura_Nro IS NOT NULL
+UNION ALL
+SELECT Factura_Nro, Consumido_ID, Item_Factura_Cantidad, Item_Factura_Monto
+FROM GD_Esquema.Maestra g
+JOIN RIP.Estadias ON Reserva_Codigo = Estadia_ReservaID
+JOIN RIP.Consumidos ON
+Consumido_EstadiaID = Estadia_ID 
+AND Consumible_Codigo IS NULL AND Consumido_ConsumibleID IS NULL
+WHERE Factura_Nro IS NOT NULL
+ORDER BY Factura_Nro
+
+--Ver si hay que poner DISTINCT ya que hay valores repetidos deberia dar 345200
 
 -------------------------------------
 --		INSERTS DE PRUEBA
