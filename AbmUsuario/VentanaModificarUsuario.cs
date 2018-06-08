@@ -76,6 +76,12 @@ namespace FrbaHotel.AbmUsuario
             controladorError.Clear();
         }
 
+        private void tbxNacionalidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaLetras(e);
+            controladorError.Clear();
+        }
+
         private void tbxEmail_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaCuenta(e);
