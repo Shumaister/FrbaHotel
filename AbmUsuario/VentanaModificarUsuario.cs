@@ -136,12 +136,12 @@ namespace FrbaHotel.AbmUsuario
             tbxContrasena.Clear();
             comboBoxCargar(cbxRoles, Database.rolObtenerTodosLista());
             listBoxLimpiar(lbxRoles);
-            comboBoxCargar(cbxHoteles, Database.hotelObtenerTodos());
+            comboBoxCargar(cbxHoteles, Database.hotelObtenerTodosLista());
             listBoxLimpiar(lbxHoteles);
             tbxNombre.Clear();
             tbxApellido.Clear();
             tbxDocumento.Clear();
-            comboBoxCargar(cbxTipoDocumento, Database.documentoObtenerTipos());
+            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodos());
             tbxFechaNacimiento.Clear();
             tbxPais.Clear();
             tbxCiudad.Clear();

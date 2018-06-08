@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FrbaHotel
 {
-    class Persona
+    public class Persona
     {
         //-------------------------------------- Atributos -------------------------------------
 
@@ -16,20 +16,24 @@ namespace FrbaHotel
         public string tipoDocumento { get; set; }
         public string numeroDocumento { get; set; }
         public string nacionalidad { get; set; }
-        public string pais { get; set; }
-        public string ciudad { get; set; }
-        public string calle { get; set; }
-        public string numeroCalle { get; set; }
-        public string piso { get; set; }
-        public string departamento { get; set; }
         public string telefono { get; set; }
         public string email { get; set; }
+        public Domicilio domicilio { get; set; }
 
 
         //-------------------------------------- Constructores -------------------------------------
 
-        public Persona(string nombre, string apellido, string fechaNacimiento, string telefono, string email, int tipoDocumentoID, int numeroDocumento, int domicilioID, int nacionalidadID)
+        public Persona(string nombre, string apellido, string fechaNacimiento, string tipoDocumento, string numeroDocumento, string nacionalidadID, string telefono, string email, Domicilio domicilio)
         {
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.fechaNacimiento = fechaNacimiento;
+            this.tipoDocumento = tipoDocumento;
+            this.numeroDocumento = numeroDocumento;
+            this.nacionalidad = nacionalidad;
+            this.telefono = telefono;
+            this.email = email;
+            this.domicilio = domicilio;
         }
         
  

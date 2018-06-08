@@ -20,14 +20,21 @@ namespace FrbaHotel
 
         //-------------------------------------- Constructores -------------------------------------
 
-        public Usuario(string nombreUsuario, List<string> rolesUsuario, List<string> hotelesUsuario)
+        public Usuario(string nombre, List<string> roles, List<string> hoteles)
         {
-            nombre = nombreUsuario;
-            roles = rolesUsuario;
-            hoteles = hotelesUsuario;
+            this.nombre = nombre;
+            this.roles = roles;
+            this.hoteles = hoteles;
         }
 
         //-------------------------------------- Metodos para Usuario -------------------------------------
+
+        public void configurarDatos(string rol, string hotel, List<string> funcionalidades)
+        {
+            this.rolLogueado = rol;
+            this.hotelLogueado = hotel;
+            this.funcionalidades = funcionalidades;
+        }
 
         public bool trabajaEnUnSoloHotel()
         {
@@ -49,11 +56,5 @@ namespace FrbaHotel
             return roles.Count > 1;
         }
 
-        public void configurarDatos(string rol, string hotel, List<string> listaFuncionalidades)
-        {
-            rolLogueado = rol;
-            hotelLogueado = hotel;
-            funcionalidades = listaFuncionalidades;
-        }
     }
 }

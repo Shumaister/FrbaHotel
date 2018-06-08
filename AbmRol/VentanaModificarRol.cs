@@ -82,7 +82,7 @@ namespace FrbaHotel.AbmRol
                     Database.rolHabilitadoModificar(nombreRolActual, nombreRolNuevo);
                 else
                     Database.rolDeshabilitadoModificar(nombreRolActual, nombreRolNuevo);
-                string idRol = Database.rolObtenerId(nombreRolNuevo);
+                string idRol = Database.rolBuscarID(nombreRolNuevo);
                 foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
                         Database.rolAgregarFuncionalidad(idRol, nombreFuncionalidad);
                 ventanaRoles.ventanaActualizar();

@@ -19,9 +19,14 @@ namespace FrbaHotel
 
         //-------------------------------------- Constructores -------------------------------------
         
-        public Domicilio()
+        public Domicilio(string pais, string ciudad, string calle, string numeroCalle, string piso, string departamento)
         {
-
+            this.pais = pais;
+            this.ciudad = ciudad;
+            this.calle = calle;
+            this.numeroCalle = numeroCalle;
+            this.piso = piso;
+            this.departamento = departamento;
         }
 
         //-------------------------------------- Metodos -------------------------------------

@@ -33,8 +33,8 @@ namespace FrbaHotel.AbmUsuario
             dataGridViewAgregarBotonModificar(dgvModificarUsuarios);
             dataGridViewAgregarBotonEliminar(dgvEliminarUsuarios);
             comboBoxCargar(cbxRoles, Database.rolObtenerTodosLista());
-            comboBoxCargar(cbxHoteles, Database.hotelObtenerTodos());
-            comboBoxCargar(cbxTipoDocumento, Database.documentoObtenerTipos());
+            comboBoxCargar(cbxHoteles, Database.hotelObtenerTodosLista());
+            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodos());
         }
 
         private void dgvModificarUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -67,10 +67,7 @@ namespace FrbaHotel.AbmUsuario
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
             if (ventanaCamposEstanCompletos(pagAgregar, controladorError))
-            {
-
-            }
-                
+                Database.usuarioGuardar();        
         }
 
         private void tbxUsuario_KeyPress(object sender, KeyPressEventArgs e)
@@ -157,7 +154,7 @@ namespace FrbaHotel.AbmUsuario
             tbxContrasena.Clear();
             comboBoxCargar(cbxRoles, Database.rolObtenerTodosLista());          
             listBoxLimpiar(lbxRoles);
-            comboBoxCargar(cbxHoteles, Database.hotelObtenerTodos());
+            comboBoxCargar(cbxHoteles, Database.hotelObtenerTodosLista());
             listBoxLimpiar(lbxHoteles);
             tbxNombre.Clear();
             tbxApellido.Clear();

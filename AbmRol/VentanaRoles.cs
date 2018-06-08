@@ -29,8 +29,8 @@ namespace FrbaHotel.AbmRol
 
         public void ventanaActualizar()
         {
-            dataGridViewCargar(dgvModificarRoles, Database.rolObtenerTodos());
-            dataGridViewCargar(dgvEliminarRoles, Database.rolObtenerHabilitados());
+            dataGridViewCargar(dgvModificarRoles, Database.rolObtenerTodosTabla());
+            dataGridViewCargar(dgvEliminarRoles, Database.rolObtenerHabilitadosTabla());
         }
 
         //-------------------------------------- Metodos para Eventos ----------------------------
@@ -87,7 +87,7 @@ namespace FrbaHotel.AbmRol
                     Database.rolHabilitadoAgregar(nombreRol);
                 else 
                     Database.rolDeshabilitadoAgregar(nombreRol);
-                string idRol = Database.rolObtenerId(nombreRol);
+                string idRol = Database.rolBuscarID(nombreRol);
                 foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
                     Database.rolAgregarFuncionalidad(idRol, nombreFuncionalidad);
                 btnLimpiarRol_Click(sender, null);
