@@ -489,10 +489,10 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
-        public static string usuarioObtenerID(string nombreUsuario)
+        public static string usuarioObtenerID(Usuario usuario)
         {
             SqlCommand consulta = consultaCrear("SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = @nombreUsuario");
-            consulta.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+            consulta.Parameters.AddWithValue("@nombreUsuario", usuario.nombre);
             return consultaObtenerValor(consulta);
         }
 
@@ -530,23 +530,21 @@ namespace FrbaHotel
             return consultaValorExiste(consultaObtenerValor(consulta));
         }
 
-        public static void usuarioAgregarRol(string nombreRol, string nombreUsuario)
+        public static void usuarioAgregarRol(Usuario usuario, string nombreRol)
         {
             SqlCommand consulta = consultaCrear("INSERT INTO RIP.Usuarios_Roles (UsuarioRol_UsuarioID, UsuarioRol_RolID) VALUES (@usuarioID, @rolID)");
-            consulta.Parameters.AddWithValue("@usuarioID", usuarioObtenerID(nombreUsuario));
+            consulta.Parameters.AddWithValue("@usuarioID", usuarioObtenerID(usuario));
             consulta.Parameters.AddWithValue("@rolID", rolBuscarID(nombreRol));
             consultaEjecutar(consulta);
         }
 
-        /*
-        public static void usuarioAgregarHotel()
+        public static void usuarioAgregarHotel(Usuario usuario, Hotel hotel)
         {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Usuarios_Roles (UsuarioRol_UsuarioID, UsuarioRol_RolID) VALUES (@usuarioID, @rolID)");
-            consulta.Parameters.AddWithValue("@HotelID", usuarioObtenerID(nombreUsuario));
-            consulta.Parameters.AddWithValue("@UsuarioID", hotelObtenerID(hotel)));  
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Hoteles_Usuarios (HotelUsuario_HotelID, UsuarioRol_RolID) VALUES (@usuarioID, @rolID)");
+            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerID(hotel));
+            consulta.Parameters.AddWithValue("@UsuarioID", usuarioObtenerID(usuario));  
             consultaEjecutar(consulta);
         }
-        */
 
         //-------------------------------------- Metodos para Hoteles -------------------------------------
 
@@ -566,7 +564,46 @@ namespace FrbaHotel
             return hoteles;
         }
 
-        //public static string hotelObtenerID()
+        public static string hotelObtenerID(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Hotel_ID FROM RIP.Hoteles WHERE Hotel_DomicilioID = @domicilioID");
+            consulta.Parameters.AddWithValue("@domicilioID", domicilioObtenerID(hotel.domicilio));
+            return consultaObtenerValor(consulta);
+        }
+
+        public static List<string> hotelObtenerListaHabitaciones(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Habitacion_Numero FROM RIP.Habitaciones WHERE Habitacion_HotelID = @hotelID");
+            consulta.Parameters.AddWithValue("@hotelID", hotelObtenerID(hotel));
+            return consultaObtenerLista(consulta);
+        }
+
+        public static DataTable hotelObtenerTablaHabitaciones(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Habitacion_Numero FROM RIP.Habitaciones WHERE Habitacion_HotelID = @hotelID");
+            consulta.Parameters.AddWithValue("@hotelID", hotelObtenerID(hotel));
+            return consultaObtenerTabla(consulta);
+        }
+
+        public static bool hotelYaExiste(Hotel hotel)
+        {
+            return consultaValorExiste(hotelObtenerID(hotel));
+        }
+
+        //-------------------------------------- Metodos para Habitaciones -------------------------------------
+
+        public static string habitacionObtenerID(Habitacion habitacion)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Habitacion_ID FROM RIP:Habitaciones WHERE Habitacion_HotelID = @hotelID AND Habitacion_Numero = @numero");
+            consulta.Parameters.AddWithValue("@hotelID", hotelObtenerID(habitacion.hotel));
+            consulta.Parameters.AddWithValue("@numero", habitacion.numero);
+            return consultaObtenerValor(consulta);        
+        }
+
+        public static bool habitacionYaExiste(Habitacion habitacion)
+        {
+            return consultaValorExiste(habitacionObtenerID(habitacion));
+        }
 
         //-------------------------------------- Metodos para Personas -------------------------------------
 
