@@ -60,23 +60,22 @@ namespace FrbaHotel.AbmUsuario
                 }
                 if (Database.personaAlguienTieneEseEmail(tbxEmail.Text))
                 {
-                    return;
                     ventanaInformarError("ERROR: El email ya fue registrado para otro usuario");
+                    return;                   
                 }
                 if (Database.personaAlguienTieneEseDocumento(cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text))
                 {
-                    return;
                     ventanaInformarError("ERROR: Otro usuario ya fue registrado con ese documento");
+                    return;
                 }
 
                 Domicilio domicilioModificado = new Domicilio(tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text, tbxPiso.Text, tbxDepartamento.Text);
                 Persona personaModificada = new Persona(tbxNombre.Text, tbxApellido.Text, tbxFechaNacimiento.Text.ToString(), cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text, tbxNacionalidad.Text, tbxTelefono.Text, tbxEmail.Text, domicilioModificado);
                 Usuario usuarioModificado = new Usuario(tbxUsuario.Text, tbxContrasena.Text, personaModificada, "");
-                Database.domicilioModificar(domicilioModificado, usuario.persona.domicilio);
+                Database.domicilioModificar(usuario.persona.domicilio, domicilioModificado);
                 Database.personaModificar(personaModificada, usuario.persona.email);
                 Database.usuarioModificar(usuarioModificado, tbxUsuario.Text);
                 ventanaInformarExito();
-
             }
         }
 
