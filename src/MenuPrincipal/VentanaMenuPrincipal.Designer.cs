@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuAdministracion = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuUsuarios = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuHoteles = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuHabitaciones = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuRoles = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuRegimenes = new System.Windows.Forms.ToolStripMenuItem();
             this.menuRecepcion = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReservas = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFacturas = new System.Windows.Forms.ToolStripMenuItem();
@@ -36,12 +42,6 @@
             this.menuConsumibles = new System.Windows.Forms.ToolStripMenuItem();
             this.menuEstadias = new System.Windows.Forms.ToolStripMenuItem();
             this.menuEstadisticas = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuAdministracion = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuUsuarios = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuHoteles = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuHabitaciones = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuRoles = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuRegimenes = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCuenta = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCambiarContrasenia = new System.Windows.Forms.ToolStripMenuItem();
             this.nenuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,6 +70,55 @@
             this.menuStrip1.Size = new System.Drawing.Size(448, 24);
             this.menuStrip1.TabIndex = 27;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // menuAdministracion
+            // 
+            this.menuAdministracion.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuUsuarios,
+            this.menuHoteles,
+            this.menuHabitaciones,
+            this.menuRoles,
+            this.menuRegimenes});
+            this.menuAdministracion.Name = "menuAdministracion";
+            this.menuAdministracion.Size = new System.Drawing.Size(100, 20);
+            this.menuAdministracion.Text = "Administracion";
+            // 
+            // menuUsuarios
+            // 
+            this.menuUsuarios.Name = "menuUsuarios";
+            this.menuUsuarios.Size = new System.Drawing.Size(143, 22);
+            this.menuUsuarios.Text = "Usuarios";
+            this.menuUsuarios.Visible = false;
+            this.menuUsuarios.Click += new System.EventHandler(this.menuUsuarios_Click);
+            // 
+            // menuHoteles
+            // 
+            this.menuHoteles.Name = "menuHoteles";
+            this.menuHoteles.Size = new System.Drawing.Size(143, 22);
+            this.menuHoteles.Text = "Hoteles";
+            this.menuHoteles.Visible = false;
+            // 
+            // menuHabitaciones
+            // 
+            this.menuHabitaciones.Name = "menuHabitaciones";
+            this.menuHabitaciones.Size = new System.Drawing.Size(143, 22);
+            this.menuHabitaciones.Text = "Habitaciones";
+            this.menuHabitaciones.Visible = false;
+            // 
+            // menuRoles
+            // 
+            this.menuRoles.Name = "menuRoles";
+            this.menuRoles.Size = new System.Drawing.Size(143, 22);
+            this.menuRoles.Text = "Roles";
+            this.menuRoles.Visible = false;
+            this.menuRoles.Click += new System.EventHandler(this.menuRoles_Click);
+            // 
+            // menuRegimenes
+            // 
+            this.menuRegimenes.Name = "menuRegimenes";
+            this.menuRegimenes.Size = new System.Drawing.Size(143, 22);
+            this.menuRegimenes.Text = "Regimenes";
+            this.menuRegimenes.Visible = false;
             // 
             // menuRecepcion
             // 
@@ -111,6 +160,7 @@
             this.menuConsumibles.Size = new System.Drawing.Size(152, 22);
             this.menuConsumibles.Text = "Consumibles";
             this.menuConsumibles.Visible = false;
+            this.menuConsumibles.Click += new System.EventHandler(this.menuConsumibles_Click);
             // 
             // menuEstadias
             // 
@@ -125,55 +175,6 @@
             this.menuEstadisticas.Size = new System.Drawing.Size(152, 22);
             this.menuEstadisticas.Text = "Estadisticas";
             this.menuEstadisticas.Visible = false;
-            // 
-            // menuAdministracion
-            // 
-            this.menuAdministracion.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuUsuarios,
-            this.menuHoteles,
-            this.menuHabitaciones,
-            this.menuRoles,
-            this.menuRegimenes});
-            this.menuAdministracion.Name = "menuAdministracion";
-            this.menuAdministracion.Size = new System.Drawing.Size(100, 20);
-            this.menuAdministracion.Text = "Administracion";
-            // 
-            // menuUsuarios
-            // 
-            this.menuUsuarios.Name = "menuUsuarios";
-            this.menuUsuarios.Size = new System.Drawing.Size(152, 22);
-            this.menuUsuarios.Text = "Usuarios";
-            this.menuUsuarios.Visible = false;
-            this.menuUsuarios.Click += new System.EventHandler(this.menuUsuarios_Click);
-            // 
-            // menuHoteles
-            // 
-            this.menuHoteles.Name = "menuHoteles";
-            this.menuHoteles.Size = new System.Drawing.Size(152, 22);
-            this.menuHoteles.Text = "Hoteles";
-            this.menuHoteles.Visible = false;
-            // 
-            // menuHabitaciones
-            // 
-            this.menuHabitaciones.Name = "menuHabitaciones";
-            this.menuHabitaciones.Size = new System.Drawing.Size(152, 22);
-            this.menuHabitaciones.Text = "Habitaciones";
-            this.menuHabitaciones.Visible = false;
-            // 
-            // menuRoles
-            // 
-            this.menuRoles.Name = "menuRoles";
-            this.menuRoles.Size = new System.Drawing.Size(152, 22);
-            this.menuRoles.Text = "Roles";
-            this.menuRoles.Visible = false;
-            this.menuRoles.Click += new System.EventHandler(this.menuRoles_Click);
-            // 
-            // menuRegimenes
-            // 
-            this.menuRegimenes.Name = "menuRegimenes";
-            this.menuRegimenes.Size = new System.Drawing.Size(152, 22);
-            this.menuRegimenes.Text = "Regimenes";
-            this.menuRegimenes.Visible = false;
             // 
             // menuCuenta
             // 

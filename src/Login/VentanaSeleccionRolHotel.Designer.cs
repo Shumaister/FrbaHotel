@@ -69,6 +69,7 @@
             this.cbxRoles.Name = "cbxRoles";
             this.cbxRoles.Size = new System.Drawing.Size(265, 21);
             this.cbxRoles.TabIndex = 11;
+            this.cbxRoles.SelectedIndexChanged += new System.EventHandler(this.cbxRoles_SelectedIndexChanged);
             // 
             // lblRol
             // 
@@ -78,6 +79,7 @@
             this.lblRol.Size = new System.Drawing.Size(142, 13);
             this.lblRol.TabIndex = 10;
             this.lblRol.Text = "Por favor,  seleccione un rol.";
+            this.lblRol.Click += new System.EventHandler(this.lblRol_Click);
             // 
             // cbxHoteles
             // 

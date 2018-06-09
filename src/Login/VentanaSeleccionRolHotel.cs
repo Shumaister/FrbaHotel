@@ -97,5 +97,15 @@ namespace FrbaHotel.Login
             VentanaMenuPrincipal ventanaMenuPrincipal = new VentanaMenuPrincipal(usuario);
             ventanaMenuPrincipal.Show();
         }
+
+        private void cbxRoles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblRol_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

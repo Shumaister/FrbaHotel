@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using FrbaHotel.AbmRol;
 using FrbaHotel.AbmUsuario;
 using FrbaHotel.Login;
+using FrbaHotel.RegistrarConsumible;
 
 namespace FrbaHotel.Menus
 {
@@ -122,6 +123,12 @@ namespace FrbaHotel.Menus
             this.Hide();
             VentanaLogin ventanaLogin = new VentanaLogin();
             ventanaLogin.Show();
+        }
+
+        private void menuConsumibles_Click(object sender, EventArgs e)
+        {
+            VentanaRegistrarConsumible registrarConsumible = new VentanaRegistrarConsumible();
+            registrarConsumible.ShowDialog();
         }
     }
 }
