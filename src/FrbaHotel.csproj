@@ -121,6 +121,9 @@
     <Compile Include="Clases\Domicilio.cs" />
     <Compile Include="Clases\Habitacion.cs" />
     <Compile Include="Clases\Hotel.cs" />
+    <Compile Include="Clases\HotelCerrado.cs" />
+    <Compile Include="Clases\Regimen.cs" />
+    <Compile Include="Clases\TipoHabitacion.cs" />
     <Compile Include="Clases\Usuario.cs" />
     <Compile Include="GenerarModificacionReserva\Form1.cs">
       <SubType>Form</SubType>

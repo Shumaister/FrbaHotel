@@ -8,9 +8,9 @@ using System.Security.Cryptography;
 using System.Data.SqlTypes;
 using System.Data;
 using System.Configuration;
-using FrbaHotel.Login;
 using System.Windows.Forms;
 using FrbaHotel.Clases;
+using FrbaHotel.Login;
 
 
 namespace FrbaHotel
@@ -79,6 +79,11 @@ namespace FrbaHotel
                 consultaInformarError(excepcion);
             }
             conexionCerrar();
+        }
+
+        public static void consultaAgregarParametro(SqlCommand consulta, string parametro ,object objeto)
+        {
+            consulta.Parameters.AddWithValue(parametro, objeto);
         }
 
         //NO LA VAN A USAR NUNCA 
@@ -590,11 +595,58 @@ namespace FrbaHotel
             return consultaValorExiste(hotelObtenerID(hotel));
         }
 
+        public static void hotelAgregarRegimen(Hotel hotel, Regimen regimen)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Hoteles_Regimenes (HotelRegimen_HotelID, HotelRegimen_RegimenID) VALUES (@hotelID, @regimenID)");
+              
+        }
+
+        public static void hotelAgregarRegimenes(Hotel hotel, List<Regimen> regimenes)
+        {
+            foreach(Regimen regimen in regimenes)
+                hotelAgregarRegimen(hotel, regimen);
+        }
+
+        public static void hotelAgregar(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Hoteles (Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_DomicilioID, Hotel_Telefono, Hotel_Email, Hotel_FechaCreacion) VALUES (@Nombre, @CantidadEstrellas, @DomicilioID, @Telefono, @Email, @FechaCreacion)");
+            consulta.Parameters.AddWithValue("@Nombre", hotel.nombre);
+            consulta.Parameters.AddWithValue("@Nombre", hotel.cantidadEstrellas);
+            consulta.Parameters.AddWithValue("@Nombre", hotel.domicilio);
+            consulta.Parameters.AddWithValue("@Nombre", hotel.telefono);
+            consulta.Parameters.AddWithValue("@Nombre", hotel.email);
+            consulta.Parameters.AddWithValue("@Nombre", hotel.fechaCreacion);
+        }
+
+        public static void hotelModificar(Hotel hotel, Hotel nuevoHotel)
+        {
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Hoteles SET Hotel_Nombre = @NuevoNombre, Hotel_CantidadEstrellas = @NuevaCantidadEstrellas, Hotel_DomicilioID");
+        }
+
+        public static void hotelEliminar(Hotel hotel)
+        {/*
+            if (hotelNoTieneReservasEnElPeriodo())
+            {
+            }
+            else
+                VentanaBase.ventanaInformarError("ERROR: El hotel no puede darse de baja ya que tiene reservas dentro del periodo elegido");
+        
+          */ }
+
+        public static void hotelCerradoAgregar(HotelCerrado hotelCerrado)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.HotelesCerrados (HotelCerrado_HotelID, HotelCerrado_FechaInicio, HotelCerrado_FechaFin, HotelCerrado_Motivo) VALUES (@HotelID, @FechaInicio, @FechaFin, @Motivo)");
+            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerID(hotelCerrado.hotel));
+            consulta.Parameters.AddWithValue("@FechaInicio", hotelCerrado.fechaInicio);
+            consulta.Parameters.AddWithValue("@FechaFin", hotelCerrado.fechaFin);
+            consulta.Parameters.AddWithValue("@Motivo", hotelCerrado.motivo);
+        }
+
         //-------------------------------------- Metodos para Habitaciones -------------------------------------
 
         public static string habitacionObtenerID(Habitacion habitacion)
         {
-            SqlCommand consulta = consultaCrear("SELECT Habitacion_ID FROM RIP:Habitaciones WHERE Habitacion_HotelID = @hotelID AND Habitacion_Numero = @numero");
+            SqlCommand consulta = consultaCrear("SELECT Habitacion_ID FROM RIP.Habitaciones WHERE Habitacion_HotelID = @hotelID AND Habitacion_Numero = @numero");
             consulta.Parameters.AddWithValue("@hotelID", hotelObtenerID(habitacion.hotel));
             consulta.Parameters.AddWithValue("@numero", habitacion.numero);
             return consultaObtenerValor(consulta);        
@@ -604,6 +656,48 @@ namespace FrbaHotel
         {
             return consultaValorExiste(habitacionObtenerID(habitacion));
         }
+
+        public static void habitacionAgregar(Habitacion habitacion)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Habitaciones (Habitacion_HotelID, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, Habitacion_TipoHabitacionID, Habitacion_Descripcion) VALUES (@HotelID, @Numero, @Piso, @Frente, @TipoHabitacionID, @Descripcion)");
+            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerID(habitacion.hotel));
+            consulta.Parameters.AddWithValue("@Numero", habitacion.numero);
+            consulta.Parameters.AddWithValue("@Piso", habitacion.piso);
+            consulta.Parameters.AddWithValue("@Frente", habitacion.frente);
+            consulta.Parameters.AddWithValue("@TipoHabitacionID", tipoHabitacionObtenerID(habitacion.tipoHabitacion));
+            consulta.Parameters.AddWithValue("@Descripcion", habitacion.descripcion);
+            consultaEjecutar(consulta);
+        }
+
+        public static void habitacionModificar(Habitacion habitacion, Habitacion nuevaHabitacion)
+        {
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Habitaciones SET Habitacion_HotelID = @NuevoHotelID, Habitacion_Numero = @NuevoNumero, Habitacion_Piso = @NuevoPiso, Habitacion_Frente = @NuevoFrente, Habitacion_TipoHabitacionID = @NuevoTipoHabitacionID, Habitacion_Descripcion = @NuevaDescripcion WHERE Habitacion_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", habitacionObtenerID(habitacion));
+            consulta.Parameters.AddWithValue("@NuevoHotelID", hotelObtenerID(nuevaHabitacion.hotel));
+            consulta.Parameters.AddWithValue("@NuevoNumero", nuevaHabitacion.numero);
+            consulta.Parameters.AddWithValue("@NuevoPiso", nuevaHabitacion.piso);
+            consulta.Parameters.AddWithValue("@NuevoFrente", nuevaHabitacion.frente);
+            consulta.Parameters.AddWithValue("@NuevoTipoHabitacionID", tipoHabitacionObtenerID(nuevaHabitacion.tipoHabitacion));
+            consulta.Parameters.AddWithValue("@NuevaDescripcion", nuevaHabitacion.descripcion);
+            consultaEjecutar(consulta);
+        }
+
+        public static void habitacionEliminar(Habitacion habitacion)
+        {
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Habitaciones SET Habitacion_Estado = 0 WHERE Habitacion_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", habitacionObtenerID(habitacion));
+            consultaEjecutar(consulta);
+        }
+
+        //-------------------------------------- Metodos para Tipo Habitaciones -------------------------------------
+
+        public static string tipoHabitacionObtenerID(string tipoHabitacion)
+        {
+            SqlCommand consulta = consultaCrear("SELECT TipoHabitacion_ID FROM RIP.TiposHabitaciones WHERE TipoHabitacion_Descripcion = @Descripcion");
+            consulta.Parameters.AddWithValue("@Descripcion", tipoHabitacion);
+            return consultaObtenerValor(consulta);
+        }
+
 
         //-------------------------------------- Metodos para Personas -------------------------------------
 
