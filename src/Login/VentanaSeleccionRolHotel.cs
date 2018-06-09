@@ -15,11 +15,11 @@ namespace FrbaHotel.Login
     {
         //-------------------------------------- Atributos -------------------------------------
 
-        Usuario usuario { get; set; }
+        Sesion usuario { get; set; }
 
         //-------------------------------------- Constructores -------------------------------------
 
-        public VentanaSeleccionRolHotel(Usuario usuario)
+        public VentanaSeleccionRolHotel(Sesion usuario)
         {
             InitializeComponent();
             this.usuario = usuario;  
@@ -42,11 +42,11 @@ namespace FrbaHotel.Login
         private void ventanaConfigurar()
         {
             ventanaCargarRolesYHoteles();
-            if (usuario.trabajaEnUnSoloHotel() && usuario.tieneUnSoloRol())
+            if (usuario.usuarioTrabajaEnUnSoloHotel() && usuario.usuarioTieneUnSoloRol())
                 ventanaAbrirMenuPrincipal();
-            else if (usuario.trabajaEnUnSoloHotel() && usuario.tieneVariosRoles())
+            else if (usuario.usuarioTrabajaEnUnSoloHotel() && usuario.usuarioTieneVariosRoles())
                 ventanaConfigurarParaRol();
-            else if (usuario.trabajaEnVariosHoteles() && usuario.tieneUnSoloRol())
+            else if (usuario.usuarioTrabajaEnVariosHoteles() && usuario.usuarioTieneUnSoloRol())
                 ventanaConfigurarParaHotel();
             else
                 ventanaConfigurarParaRolYHotel();

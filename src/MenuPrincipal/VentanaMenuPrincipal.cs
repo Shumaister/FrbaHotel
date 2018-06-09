@@ -17,11 +17,11 @@ namespace FrbaHotel.Menus
     {
         //-------------------------------------- Atributos -------------------------------------
         
-        Usuario usuario { get; set; }
+        Sesion usuario { get; set; }
 
         //-------------------------------------- Constructores -------------------------------------
 
-        public VentanaMenuPrincipal(Usuario usuario)
+        public VentanaMenuPrincipal(Sesion usuario)
         {
             this.usuario = usuario; 
             InitializeComponent();
@@ -48,7 +48,7 @@ namespace FrbaHotel.Menus
 
         private void menuCambiarContrasenia_Click(object sender, EventArgs e)
         {
-            VentanaCambiarContrasenia ventanaAjustesDeCuenta = new VentanaCambiarContrasenia(usuario.nombre);
+            VentanaCambiarContrasenia ventanaAjustesDeCuenta = new VentanaCambiarContrasenia(usuario.nombreUsuario);
             ventanaAjustesDeCuenta.ShowDialog();
         }
 

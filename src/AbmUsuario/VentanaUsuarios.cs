@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FrbaHotel.Clases;
 
 namespace FrbaHotel.AbmUsuario
 {
@@ -14,11 +15,11 @@ namespace FrbaHotel.AbmUsuario
     {
         //-------------------------------------- Atributos -------------------------------------
 
-        Usuario usuario {get; set;}
+        Sesion usuario {get; set;}
 
         //-------------------------------------- Constructores -------------------------------------
 
-        public VentanaUsuarios(Usuario usuario)
+        public VentanaUsuarios(Sesion usuario)
         {
             InitializeComponent();
             this.usuario = usuario;
@@ -67,7 +68,19 @@ namespace FrbaHotel.AbmUsuario
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
             if (ventanaCamposEstanCompletos(pagAgregar, controladorError))
-                Database.usuarioGuardar();        
+            {
+                Domicilio domicilio = new Domicilio(tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text, tbxPiso.Text, tbxDepartamento.Text);
+                Persona persona = new Persona(tbxNombre.Text, tbxApellido.Text, tbxFechaNacimiento.Text.ToString(), cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text, tbxNacionalidad.Text, tbxTelefono.Text, tbxEmail.Text, domicilio);
+                Usuario usuario = new Usuario(tbxUsuario.Text, tbxContrasena.Text, persona);
+                Database.domicilioAgregar(domicilio);
+                MessageBox.Show("AGREGUE DOMICILIO");
+                Database.personaAgregar(persona);
+                MessageBox.Show("AGREGUE PERSONA");
+                Database.usuarioAgregar(usuario);
+                MessageBox.Show("AGREGUE USUARIO");
+                ventanaInformarExito();
+            }
+                       
         }
 
         private void tbxUsuario_KeyPress(object sender, KeyPressEventArgs e)
@@ -180,7 +193,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnGuardarFecha_Click(object sender, EventArgs e)
         {
-            tbxFechaNacimiento.Text = calendario.SelectionStart.ToShortDateString();
+            tbxFechaNacimiento.Text = calendario.SelectionStart.ToString();
             calendario.Hide();
             btnGuardarFecha.Hide();
         }

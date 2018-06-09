@@ -23,7 +23,7 @@ namespace FrbaHotel
 
         //-------------------------------------- Constructores -------------------------------------
 
-        public Persona(string nombre, string apellido, string fechaNacimiento, string tipoDocumento, string numeroDocumento, string nacionalidadID, string telefono, string email, Domicilio domicilio)
+        public Persona(string nombre, string apellido, string fechaNacimiento, string tipoDocumento, string numeroDocumento, string nacionalidad, string telefono, string email, Domicilio domicilio)
         {
             this.nombre = nombre;
             this.apellido = apellido;

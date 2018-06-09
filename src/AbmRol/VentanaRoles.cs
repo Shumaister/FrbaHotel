@@ -15,11 +15,11 @@ namespace FrbaHotel.AbmRol
     {
         //-------------------------------------- Atributos -------------------------------------
 
-        public Usuario usuario { get; set; }
+        public Sesion usuario { get; set; }
 
         //-------------------------------------- Constructores ---------------------------------
 
-        public VentanaRoles(Usuario usuario)
+        public VentanaRoles(Sesion usuario)
         {
             InitializeComponent();
             this.usuario = usuario;
@@ -115,7 +115,7 @@ namespace FrbaHotel.AbmRol
                 string nombreRol = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Nombre"].Value.ToString();
                 Database.rolEliminar(nombreRol);
                 ventanaActualizar();
-                Database.usuarioActualizarDatos(usuario);
+                Database.sesionActualizarDatos(usuario);
                 VentanaBase.ventanaInformarExito();
             }
         }

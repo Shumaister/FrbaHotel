@@ -234,7 +234,7 @@ CREATE TABLE [RIP].[Personas] (
 	[Persona_NumeroDocumento] [numeric](18,0),
 	[Persona_FechaNacimiento] [datetime],
 	[Persona_DomicilioID] [numeric](18,0),
-	[Persona_Telefono] [nvarchar](50),
+	[Persona_Telefono] [numeric](18,0),
 	[Persona_Email] [nvarchar](255), 
 	--[Persona_DatoCorrupto] [bit] DEFAULT 0
 	CONSTRAINT FK_PERSONA_NACIONALIDAD FOREIGN KEY ([Persona_NacionalidadID]) REFERENCES [RIP].[Nacionalidades] ([Nacionalidad_ID]),
@@ -259,7 +259,7 @@ CREATE TABLE [RIP].[Usuarios] (
 	[Usuario_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[Usuario_Nombre] [nvarchar](50) NOT NULL,
 	[Usuario_Contrasenia] [varbinary](100) NOT NULL,
-	[Usuario_CantidadIntentos] [int] DEFAULT 0,
+	[Usuario_IntentosFallidos] [int] DEFAULT 0,
 	[Usuario_PersonaID] [numeric](18,0),
 	[Usuario_Estado] [bit] DEFAULT 1,
 	CONSTRAINT FK_USUARIO_PERSONA FOREIGN KEY ([Usuario_PersonaID]) REFERENCES [RIP].[Personas] ([Persona_ID])

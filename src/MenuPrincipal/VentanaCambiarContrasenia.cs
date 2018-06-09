@@ -36,7 +36,7 @@ namespace FrbaHotel.Menus
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
                 string nuevaContrasenia = tbxContrasenia.Text;
-                Database.usuarioModificarContrasenia(nombreUsuario, nuevaContrasenia);
+                Database.sesionModificarContrasenia(nombreUsuario, nuevaContrasenia);
                 ventanaInformarExito();
             }
                 

@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="Clases\Database.cs" />
     <Compile Include="Clases\Domicilio.cs" />
+    <Compile Include="Clases\Usuario.cs" />
     <Compile Include="GenerarModificacionReserva\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,7 +154,7 @@
     <Compile Include="RegistrarEstadia\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Clases\Usuario.cs" />
+    <Compile Include="Clases\Sesion.cs" />
     <Compile Include="VentanaBase\VentanaBase.cs">
       <SubType>Form</SubType>
     </Compile>

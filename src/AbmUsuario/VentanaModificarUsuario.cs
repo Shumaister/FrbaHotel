@@ -14,11 +14,11 @@ namespace FrbaHotel.AbmUsuario
     {
         //-------------------------------------- Atributos -------------------------------------
 
-        Usuario usuario { get; set; }
+        Sesion usuario { get; set; }
         
         //-------------------------------------- Constructores -------------------------------------
 
-        public VentanaModificarUsuario(Usuario usuario)
+        public VentanaModificarUsuario(Sesion usuario)
         {
             InitializeComponent();
             this.usuario = usuario;
