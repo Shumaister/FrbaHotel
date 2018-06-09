@@ -73,11 +73,8 @@ namespace FrbaHotel.AbmUsuario
                 Persona persona = new Persona(tbxNombre.Text, tbxApellido.Text, tbxFechaNacimiento.Text.ToString(), cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text, tbxNacionalidad.Text, tbxTelefono.Text, tbxEmail.Text, domicilio);
                 Usuario usuario = new Usuario(tbxUsuario.Text, tbxContrasena.Text, persona);
                 Database.domicilioAgregar(domicilio);
-                MessageBox.Show("AGREGUE DOMICILIO");
                 Database.personaAgregar(persona);
-                MessageBox.Show("AGREGUE PERSONA");
                 Database.usuarioAgregar(usuario);
-                MessageBox.Show("AGREGUE USUARIO");
                 ventanaInformarExito();
             }
                        

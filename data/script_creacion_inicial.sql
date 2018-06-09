@@ -697,7 +697,7 @@ GO
 PRINT''
 PRINT '----- Realizando inserts a tabla Ciudades -----'
 INSERT INTO RIP.Ciudades (Ciudad_Nombre)
-SELECT DISTINCT  Hotel_Ciudad 
+SELECT DISTINCT RTRIM(Hotel_Ciudad) 
 FROM GD_Esquema.Maestra
 
 

@@ -471,7 +471,7 @@ namespace FrbaHotel
             DataTable tabla = consultaObtenerTabla(consulta);
             List<string> hoteles = new List<string>();
             foreach (DataRow fila in tabla.Rows)
-                hoteles.Add(fila[0].ToString().Trim() + " " + fila[1].ToString() + " " + fila[2].ToString());
+                hoteles.Add(fila[0].ToString() + " " + fila[1].ToString() + " " + fila[2].ToString());
             return hoteles;
         }
 
