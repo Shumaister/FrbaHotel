@@ -41,11 +41,32 @@ namespace FrbaHotel
 
         //-------------------------------------- Metodos para Consultas -------------------------------------
 
+        /*PARA HACER CONSULTAS UTILIZAR ESTO
+         * 
+         * SIEMPRE HAY QUE USARLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+         * 
+         * 
+         * Ejemplo: Quiero buscar el ID de un rol, hacer esto
+         * 
+         * SqlCommand consulta = consultaCrear("SELECT Rol_Nombre FROM RIP.Roles WHERE Rol_Nombre = @nombreRol);
+         * consulta.Parameters.AddWithValue("@nombreRol");
+         * 
+         * LO DE ARRIBA LO VAN A TENER QUE HACERLO SIEMPRE SI VAN A NECESITAR UTILIZAR VARIABLES EN LA QUERY
+         * ANTES YO CONTANTENABA LAS VARIABLES EN MEDIO DE LAS CONSULTAS ASI NOMAS PERO A LOS GORDOS DE STACKOVERFLOW NO LES GUSTA 
+         * Y DICEN QUE ES INSEGURO ASI QUE YO LES HAGO CASO, SOLO POR ESA RAZON EXISTE ESTE METODO
+         * 
+         * List<string> nombresDeRoles = consultaObtenerLista(consulta);
+         * 
+         * La gracia de este metodo es poder pasarle las variables de forma "segura" y no estar concatenando string en medio de la query
+         * 
+         * 
+         */
         public static SqlCommand consultaCrear(string consulta)
         {
             return new SqlCommand(consulta, conexionObtener());
         }
 
+        //Para cuando necesiten hacer inserts, updates o deletes, le pasan previamente la consulta
         public static void consultaEjecutar(SqlCommand consulta)
         {
             conexionAbrir();
@@ -60,11 +81,13 @@ namespace FrbaHotel
             conexionCerrar();
         }
 
+        //NO LA VAN A USAR NUNCA 
         public static void consultaInformarError(Exception excepcion)
         {
             MessageBox.Show("ERROR EN LA BASE DE DATOS:\n" + excepcion.ToString());
         }
 
+        //LA USAN IMPLICITAMENTE NUNCA LA VAN A LLAMAR EXPLICITAMENTE
         public static DataSet consultaObtenerDatos(SqlCommand consulta)
         {
             DataSet dataSet = new DataSet();
@@ -80,12 +103,20 @@ namespace FrbaHotel
             return dataSet;
         }
 
+        /* ES PARA CUANDO SU VENTANA TIENE TABLAS O 'DATAGRIDVIEW' MEJOR DICHO Y NECESITAN
+         * LLENARLO CON ALGO BUENO LE MANDA LA CONSULTA COMO PARAMETRO
+         * PREVIAMENTE DEBEN HABER USADO EL 'ConsultaCrear'
+         * LO VAN A USAR SIEMPRE PARA LLENAR UNA TABLA CON DATOS
+         */
         public static DataTable consultaObtenerTabla(SqlCommand consulta)
         {
             DataSet dataSet = consultaObtenerDatos(consulta);
             DataTable tabla = dataSet.Tables[0];
             return tabla;
         }
+
+        //USAR CUANDO NECESITEN OBTENER UNA COLUMNA CON TODOS LOS DATOS
+        //LO VAN A USAR PAR A LLENAR COMBO BOX CASI SIEMPRE
 
         public static List<string> consultaObtenerLista(SqlCommand consulta)
         {
@@ -97,6 +128,16 @@ namespace FrbaHotel
             return columna;
         }
 
+        //USAR ESTO CUANDO NECESITEN OBTENER SOLO UN CAMPO DE UNA SOLA FILA
+        /*
+         * EJEMPLO QUIERO EL ID DEL ROL CON UN X NOMBRE
+         * 
+         * SqlCommand consulta = consultaCrear("SELECT Rol_ID FROM RIP.Roles WHERE Rol_Nombre = @nombre ");
+         * consulta.Parameters.AddWitValue("@nombre", unNombre);
+         * string idDelRol = consultaObtenerValor(consulta);
+         * SI EL NOMBRE NO EXISTIERA DEVUELVE UNA CADENA VACIA
+         * 
+         */
         public static string consultaObtenerValor(SqlCommand consulta)
         {
             List<string> columna = consultaObtenerLista(consulta);
@@ -106,6 +147,17 @@ namespace FrbaHotel
                 return "";
         }
 
+         /*
+         * EJEMPLO QUIERO LA FILA DONDE DEL ROL CON X NOMBRE
+         * 
+         * SqlCommand consulta = consultaCrear("SELECT Rol_ID FROM RIP.Roles WHERE Rol_Nombre = @nombre ");
+         * consulta.Parameters.AddWitValue("@nombre", unNombre);
+         * DataRow miFila = consultaObtenerFila(consulta);
+         * DE ESA FILA SACAN LOS DATOS QUE NECESITE HACIENDO miFila["NombreDelCampoQueNecesites"];
+         * SI EL NOMBRE NO EXISTE, LA FILA NO EXISTE POR LO TANTO DEVUELVE NULL
+         * 
+         */
+
         public static DataRow consultaObtenerFila(SqlCommand consulta)
         {
             DataTable tabla = consultaObtenerTabla(consulta);
@@ -114,6 +166,8 @@ namespace FrbaHotel
             else
                 return null;
         }
+
+        //FUNCIONES PARA SER MAS EXPRESIVO COMO ME ENSEÑO FRANQUITO
 
         public static bool consultaValorEsIgualA(string valor, int numero)
         {
@@ -476,6 +530,24 @@ namespace FrbaHotel
             return consultaValorExiste(consultaObtenerValor(consulta));
         }
 
+        public static void usuarioAgregarRol(string nombreRol, string nombreUsuario)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Usuarios_Roles (UsuarioRol_UsuarioID, UsuarioRol_RolID) VALUES (@usuarioID, @rolID)");
+            consulta.Parameters.AddWithValue("@usuarioID", usuarioObtenerID(nombreUsuario));
+            consulta.Parameters.AddWithValue("@rolID", rolBuscarID(nombreRol));
+            consultaEjecutar(consulta);
+        }
+
+        /*
+        public static void usuarioAgregarHotel()
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Usuarios_Roles (UsuarioRol_UsuarioID, UsuarioRol_RolID) VALUES (@usuarioID, @rolID)");
+            consulta.Parameters.AddWithValue("@HotelID", usuarioObtenerID(nombreUsuario));
+            consulta.Parameters.AddWithValue("@UsuarioID", hotelObtenerID(hotel)));  
+            consultaEjecutar(consulta);
+        }
+        */
+
         //-------------------------------------- Metodos para Hoteles -------------------------------------
 
         public static List<string> hotelConfigurarNombres(SqlCommand consulta)
@@ -493,6 +565,8 @@ namespace FrbaHotel
             List<string> hoteles = hotelConfigurarNombres(consulta);
             return hoteles;
         }
+
+        //public static string hotelObtenerID()
 
         //-------------------------------------- Metodos para Personas -------------------------------------
 
@@ -617,7 +691,6 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@nuevoCaleID", nuevoDomicilio.numeroCalle);
             consulta.Parameters.AddWithValue("@nuevoPiso", nuevoDomicilio.piso);
             consulta.Parameters.AddWithValue("@nuevoDepartamento", nuevoDomicilio.departamento);
- 
         }
 
         //-------------------------------------- Metodos para Calles -------------------------------------

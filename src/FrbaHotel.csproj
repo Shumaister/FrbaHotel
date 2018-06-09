@@ -119,6 +119,7 @@
     </Compile>
     <Compile Include="Clases\Database.cs" />
     <Compile Include="Clases\Domicilio.cs" />
+    <Compile Include="Clases\Hotel.cs" />
     <Compile Include="Clases\Usuario.cs" />
     <Compile Include="GenerarModificacionReserva\Form1.cs">
       <SubType>Form</SubType>
