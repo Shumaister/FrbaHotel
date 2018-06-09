@@ -11,7 +11,7 @@ using FrbaHotel.Menus;
 
 namespace FrbaHotel.AbmRol
 {
-    public partial class VentanaRoles : VentanaBase
+    public partial class VentanaRol : VentanaBase
     {
         //-------------------------------------- Atributos -------------------------------------
 
@@ -19,7 +19,7 @@ namespace FrbaHotel.AbmRol
 
         //-------------------------------------- Constructores ---------------------------------
 
-        public VentanaRoles(Sesion usuario)
+        public VentanaRol(Sesion usuario)
         {
             InitializeComponent();
             this.usuario = usuario;

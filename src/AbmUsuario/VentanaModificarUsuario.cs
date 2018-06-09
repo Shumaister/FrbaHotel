@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FrbaHotel.Clases;
 
 namespace FrbaHotel.AbmUsuario
 {
@@ -14,13 +15,15 @@ namespace FrbaHotel.AbmUsuario
     {
         //-------------------------------------- Atributos -------------------------------------
 
-        Sesion usuario { get; set; }
+        Sesion sesion { get; set; }
+        Usuario usuario { get; set; }
         
         //-------------------------------------- Constructores -------------------------------------
 
-        public VentanaModificarUsuario(Sesion usuario)
+        public VentanaModificarUsuario(Sesion sesion, Usuario usuario)
         {
             InitializeComponent();
+            this.sesion = sesion;
             this.usuario = usuario;
         }
 
@@ -49,7 +52,32 @@ namespace FrbaHotel.AbmUsuario
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
             if (ventanaCamposEstanCompletos(this, controladorError))
-                MessageBox.Show("IZI");
+            {
+                if (Database.usuarioYaExiste(tbxUsuario.Text))
+                {
+                    ventanaInformarError("ERROR: El nombre de usuario ya existe");
+                    return;
+                }
+                if (Database.personaAlguienTieneEseEmail(tbxEmail.Text))
+                {
+                    return;
+                    ventanaInformarError("ERROR: El email ya fue registrado para otro usuario");
+                }
+                if (Database.personaAlguienTieneEseDocumento(cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text))
+                {
+                    return;
+                    ventanaInformarError("ERROR: Otro usuario ya fue registrado con ese documento");
+                }
+
+                Domicilio domicilioModificado = new Domicilio(tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text, tbxPiso.Text, tbxDepartamento.Text);
+                Persona personaModificada = new Persona(tbxNombre.Text, tbxApellido.Text, tbxFechaNacimiento.Text.ToString(), cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text, tbxNacionalidad.Text, tbxTelefono.Text, tbxEmail.Text, domicilioModificado);
+                Usuario usuarioModificado = new Usuario(tbxUsuario.Text, tbxContrasena.Text, personaModificada, "");
+                Database.domicilioModificar(domicilioModificado, usuario.persona.domicilio);
+                Database.personaModificar(personaModificada, usuario.persona.email);
+                Database.usuarioModificar(usuarioModificado, tbxUsuario.Text);
+                ventanaInformarExito();
+
+            }
         }
 
         private void tbxUsuario_KeyPress(object sender, KeyPressEventArgs e)
@@ -156,7 +184,25 @@ namespace FrbaHotel.AbmUsuario
 
         private void VentanaModificarUsuario_Load(object sender, EventArgs e)
         {
-            //Cargar con datos del usuario
+            tbxUsuario.Text = usuario.nombre;
+            tbxContrasena.Text = usuario.contrasenia;
+            tbxNombre.Text = usuario.persona.nombre;
+            comboBoxCargar(cbxHoteles, Database.usuarioObtenerHotelesLista(usuario.nombre));
+            comboBoxCargar(cbxRoles, Database.usuarioObtenerRoles(usuario.nombre));
+            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodos());
+            tbxApellido.Text = usuario.persona.apellido;
+            if(usuario.persona.tipoDocumento == "DNI")
+                cbxTipoDocumento.SelectedIndex = 0;
+            else
+                cbxTipoDocumento.SelectedIndex = 1;
+            tbxDocumento.Text = usuario.persona.numeroDocumento;
+            tbxTelefono.Text = usuario.persona.telefono;
+            tbxEmail.Text = usuario.persona.email;
+            tbxCalle.Text = usuario.persona.domicilio.calle;
+            tbxCiudad.Text = usuario.persona.domicilio.ciudad;
+            tbxPais.Text = usuario.persona.domicilio.pais;
+            tbxPiso.Text = usuario.persona.domicilio.piso;
+            tbxDepartamento.Text = usuario.persona.domicilio.departamento;
         }
 
         private void btnSeleccionarFecha_Click(object sender, EventArgs e)

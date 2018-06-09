@@ -1,6 +1,6 @@
 ﻿namespace FrbaHotel.AbmUsuario
 {
-    partial class VentanaUsuarios
+    partial class VentanaUsuario
     {
         /// <summary>
         /// Required designer variable.

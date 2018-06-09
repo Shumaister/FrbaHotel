@@ -13,11 +13,12 @@ namespace FrbaHotel.Clases
         public string estado { get; set; }
         public Persona persona { get; set; }
 
-        public Usuario(string nombre, string contrasenia, Persona persona)
+        public Usuario(string nombre, string contrasenia, Persona persona, string estado)
         {
             this.nombre = nombre;
             this.contrasenia = contrasenia;
             this.persona = persona;
+            this.estado = estado;
         }
 
     }

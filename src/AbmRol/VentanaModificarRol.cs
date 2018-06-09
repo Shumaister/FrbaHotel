@@ -14,12 +14,12 @@ namespace FrbaHotel.AbmRol
     {
         //-------------------------------------- Atributos -----------------------------------
 
-        VentanaRoles ventanaRoles {get; set;}
+        VentanaRol ventanaRoles {get; set;}
         string nombreRolActual {get; set;}
 
         //-------------------------------------- Constructores -----------------------------------
 
-        public VentanaModificarRol(VentanaRoles ventana, string nombre)
+        public VentanaModificarRol(VentanaRol ventana, string nombre)
         {
             InitializeComponent();
             ventanaRoles = ventana;

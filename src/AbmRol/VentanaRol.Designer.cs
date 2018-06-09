@@ -1,6 +1,6 @@
 ﻿namespace FrbaHotel.AbmRol
 {
-    partial class VentanaRoles
+    partial class VentanaRol
     {
         /// <summary>
         /// Required designer variable.

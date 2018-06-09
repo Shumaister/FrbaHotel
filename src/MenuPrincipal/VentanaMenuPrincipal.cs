@@ -36,13 +36,13 @@ namespace FrbaHotel.Menus
 
         private void menuRoles_Click(object sender, EventArgs e)
         {
-            VentanaRoles ventanaRoles = new VentanaRoles(usuario);
+            VentanaRol ventanaRoles = new VentanaRol(usuario);
             ventanaRoles.ShowDialog();
         }
 
         private void menuUsuarios_Click(object sender, EventArgs e) 
         {
-            VentanaUsuarios ventanaUsuarios = new VentanaUsuarios(usuario);
+            VentanaUsuario ventanaUsuarios = new VentanaUsuario(usuario);
             ventanaUsuarios.ShowDialog();
         }
 

@@ -11,18 +11,18 @@ using FrbaHotel.Clases;
 
 namespace FrbaHotel.AbmUsuario
 {
-    public partial class VentanaUsuarios : VentanaBase
+    public partial class VentanaUsuario : VentanaBase
     {
         //-------------------------------------- Atributos -------------------------------------
 
-        Sesion usuario {get; set;}
+        Sesion sesion {get; set;}
 
         //-------------------------------------- Constructores -------------------------------------
 
-        public VentanaUsuarios(Sesion usuario)
+        public VentanaUsuario(Sesion sesion)
         {
             InitializeComponent();
-            this.usuario = usuario;
+            this.sesion = sesion;
         }
 
         //-------------------------------------- Metodos para Eventos -------------------------------------
@@ -42,7 +42,29 @@ namespace FrbaHotel.AbmUsuario
         {
             var senderGrid = (DataGridView)sender;
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
-                new VentanaModificarUsuario(usuario).ShowDialog();
+            {
+                string nombreUsuario = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Nombre"].Value.ToString();
+                string contrasenia = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Contrasenia"].Value.ToString();
+                string estado = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Estado"].Value.ToString();
+                string nombre = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Nombre"].Value.ToString();
+                string apellido = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Pesona_Apellido"].Value.ToString();
+                string tipoDocumento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_TipoDocumento"].Value.ToString();
+                string numeroDocumento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_NumeroDocumento"].Value.ToString();
+                string nacionalidad = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Nacionalidad"].Value.ToString();
+                string fechaNacimiento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_FechaNacimiento"].Value.ToString();
+                string telefono = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Telefono"].Value.ToString();
+                string email = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Email"].Value.ToString();
+                string numeroCalle = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_NumeroCalle"].Value.ToString();
+                string piso = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Piso"].Value.ToString();
+                string departamento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Departamento"].Value.ToString();
+                string pais = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Pais_Nombre"].Value.ToString();
+                string ciudad = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Ciudad_Nombre"].Value.ToString();
+                string calle = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Calle_Nombre"].Value.ToString();
+                Domicilio domicilio = new Domicilio(pais, ciudad, calle, numeroCalle, piso, departamento);
+                Persona persona = new Persona(nombre, apellido, fechaNacimiento, tipoDocumento, numeroDocumento, nacionalidad, telefono, email, domicilio);
+                Usuario usuario = new Usuario(nombreUsuario, contrasenia, persona, estado);
+                new VentanaModificarUsuario(sesion, usuario).ShowDialog(); 
+            }
         }
 
         private void btnAgregarRol_Click(object sender, EventArgs e)
@@ -69,9 +91,25 @@ namespace FrbaHotel.AbmUsuario
         {
             if (ventanaCamposEstanCompletos(pagAgregar, controladorError))
             {
+                if(Database.usuarioYaExiste(tbxUsuario.Text))
+                {
+                    ventanaInformarError("ERROR: El nombre de usuario ya existe");
+                    return;
+                }
+                if (Database.personaAlguienTieneEseEmail(tbxEmail.Text))
+                {
+                    ventanaInformarError("ERROR: El email ya fue registrado para otro usuario");      
+                    return;                                                  
+                }
+                if (Database.personaAlguienTieneEseDocumento(cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text))
+                {
+                    ventanaInformarError("ERROR: Otro usuario ya fue registrado con ese documento");
+                    return;                   
+                }
+                    
                 Domicilio domicilio = new Domicilio(tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text, tbxPiso.Text, tbxDepartamento.Text);
                 Persona persona = new Persona(tbxNombre.Text, tbxApellido.Text, tbxFechaNacimiento.Text.ToString(), cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text, tbxNacionalidad.Text, tbxTelefono.Text, tbxEmail.Text, domicilio);
-                Usuario usuario = new Usuario(tbxUsuario.Text, tbxContrasena.Text, persona);
+                Usuario usuario = new Usuario(tbxUsuario.Text, tbxContrasena.Text, persona, "");
                 Database.domicilioAgregar(domicilio);
                 Database.personaAgregar(persona);
                 Database.usuarioAgregar(usuario);
