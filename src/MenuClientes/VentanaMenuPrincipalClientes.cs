@@ -11,6 +11,7 @@ using FrbaHotel.AbmRol;
 using FrbaHotel.AbmUsuario;
 using FrbaHotel.Login;
 using FrbaHotel.RegistrarConsumible;
+using FrbaHotel.GenerarModificacionReserva;
 
 namespace FrbaHotel.Menus
 {
@@ -39,7 +40,9 @@ namespace FrbaHotel.Menus
 
         private void nuevaReservaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            VentanaGenerarReserva ven = new VentanaGenerarReserva();
+            ven.Show();
         }
 
         private void modificarReservaToolStripMenuItem_Click(object sender, EventArgs e)
