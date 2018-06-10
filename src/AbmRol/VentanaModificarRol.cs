@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FrbaHotel.Clases;
 
 namespace FrbaHotel.AbmRol
 {
@@ -14,26 +15,26 @@ namespace FrbaHotel.AbmRol
     {
         //-------------------------------------- Atributos -----------------------------------
 
-        VentanaRol ventanaRoles {get; set;}
-        string nombreRolActual {get; set;}
+        VentanaRol ventanaRol {get; set;}
+        Rol rol {get; set;}
 
         //-------------------------------------- Constructores -----------------------------------
 
-        public VentanaModificarRol(VentanaRol ventana, string nombre)
+        public VentanaModificarRol(VentanaRol ventanaRol, Rol rol)
         {
             InitializeComponent();
-            ventanaRoles = ventana;
-            nombreRolActual = nombre;
+            this.ventanaRol = ventanaRol;
+            this.rol = rol;
         }
 
         //-------------------------------------- Metodos para Eventos -----------------------------------
 
         private void VentanaModificarRol_Load(object sender, EventArgs e)
         {
-            tbxNombreRol.Text = nombreRolActual;
-            listBoxCargar(lbxFuncionalidades, Database.rolObtenerFuncionalidades(nombreRolActual));
-            comboBoxCargar(cbxFuncionalidades, Database.rolObtenerFuncionalidadesFaltantes(nombreRolActual));
-            if (Database.rolEstaHabilitado(nombreRolActual))
+            tbxNombreRol.Text = rol.nombre;
+            listBoxCargar(lbxFuncionalidades, rol.funcionalidades);
+            comboBoxCargar(cbxFuncionalidades, Database.rolObtenerFuncionalidadesFaltantes(rol));
+            if (rol.estado == "1")
                 rbtRolActivado.Select();
             else
                 rbtRolDesactivado.Select();          
@@ -72,23 +73,21 @@ namespace FrbaHotel.AbmRol
         {
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
-                string nombreRolNuevo = tbxNombreRol.Text;
-                if (Database.rolYaExiste(nombreRolNuevo) && nombreRolNuevo != nombreRolActual)
-                {
-                    ventanaInformarError("Un rol ya posee el mismo nombre");
-                    return;
-                }
+                List<string> funcionalidades = new List<string>();
+                foreach (string funcionalidad in lbxFuncionalidades.Items)
+                    funcionalidades.Add(funcionalidad);
+                Rol rolModificado = new Rol(tbxNombreRol.Text);
+                rolModificado.funcionalidades = funcionalidades;
                 if (rbtRolActivado.Checked)
-                    Database.rolHabilitadoModificar(nombreRolActual, nombreRolNuevo);
+                    rolModificado.estado = "1";
                 else
-                    Database.rolDeshabilitadoModificar(nombreRolActual, nombreRolNuevo);
-                string idRol = Database.rolObtenerID(nombreRolNuevo);
-                foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
-                        Database.rolAgregarFuncionalidad(idRol, nombreFuncionalidad);
-                ventanaRoles.ventanaActualizar();
-                nombreRolActual = nombreRolNuevo;
-                Database.sesionActualizarDatos(ventanaRoles.usuario);
-                ventanaInformarExito();
+                    rolModificado.estado = "0";
+                if (Database.rolModificadoConExito(rol, rolModificado))
+                {
+                    this.Hide();
+                    ventanaRol.ventanaActualizar();
+                    Database.sesionActualizarDatos(ventanaRol.sesion);
+                }
             }
         }
     }

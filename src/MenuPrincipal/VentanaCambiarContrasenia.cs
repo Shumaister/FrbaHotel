@@ -14,32 +14,30 @@ namespace FrbaHotel.Menus
     {
         //-------------------------------------- Atributos -------------------------------------
 
-        string nombreUsuario { get; set; }
+        Sesion sesion { get; set; }
 
         //-------------------------------------- Constructores -------------------------------------
 
-        public VentanaCambiarContrasenia(string nombre)
+        public VentanaCambiarContrasenia(Sesion sesion)
         {
             InitializeComponent();
-            nombreUsuario = nombre;
+            this.sesion = sesion;
         }
 
         //-------------------------------------- Metodos para Ventana -------------------------------------
 
         private void VentanaAjustesDeCuenta_Load(object sender, EventArgs e)
         {
-            tbxNombreUsuario.Text = nombreUsuario;
+            tbxNombreUsuario.Text = sesion.usuario.nombre;
         }
 
         private void btnGuardarContrasenia_Click(object sender, EventArgs e)
         {
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
-                string nuevaContrasenia = tbxContrasenia.Text;
-                Database.sesionModificarContrasenia(nombreUsuario, nuevaContrasenia);
-                ventanaInformarExito();
-            }
-                
+                sesion.usuario.contrasenia = tbxContrasenia.Text;
+                Database.sesionModificarContrasenia(sesion);
+            }               
         }
 
         private void tbxContrasenia_TextChanged (object sender, EventArgs e)

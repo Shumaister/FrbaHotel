@@ -30,13 +30,6 @@ namespace FrbaHotel
 
         //-------------------------------------- Metodos para Usuario -------------------------------------
 
-        public void configurarDatos(Rol rol, Hotel hotel, List<string> funcionalidades)
-        {
-            this.rol = rol;
-            this.hotel = hotel;
-            this.funcionalidades = funcionalidades;
-        }
-
         public bool usuarioTrabajaEnUnSoloHotel()
         {
             return hoteles.Count == 1;

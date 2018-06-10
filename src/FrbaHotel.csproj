@@ -123,6 +123,7 @@
     <Compile Include="Clases\Habitacion.cs" />
     <Compile Include="Clases\Hotel.cs" />
     <Compile Include="Clases\HotelCerrado.cs" />
+    <Compile Include="Clases\LogueoDTO.cs" />
     <Compile Include="Clases\Regimen.cs" />
     <Compile Include="Clases\Rol.cs" />
     <Compile Include="Clases\TipoHabitacion.cs" />
@@ -151,7 +152,6 @@
     <Compile Include="Login\VentanaLogin.Designer.cs">
       <DependentUpon>VentanaLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Clases\LogueoDTO.cs" />
     <Compile Include="Login\VentanaSeleccionRolHotel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,12 +173,6 @@
     <Compile Include="Clases\Persona.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistrarConsumible\Summary.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RegistrarConsumible\Summary.Designer.cs">
-      <DependentUpon>Summary.cs</DependentUpon>
-    </Compile>
     <Compile Include="RegistrarConsumible\VentanaRegistrarConsumible.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,9 +229,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="RegistrarConsumible\Summary.resx">
-      <DependentUpon>Summary.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="RegistrarConsumible\VentanaRegistrarConsumible.resx">
       <DependentUpon>VentanaRegistrarConsumible.cs</DependentUpon>
     </EmbeddedResource>

@@ -8,21 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FrbaHotel.Menus;
+using FrbaHotel.Clases;
 
 namespace FrbaHotel.AbmRol
-{
+{ 
     public partial class VentanaRol : VentanaBase
     {
         //-------------------------------------- Atributos -------------------------------------
 
-        public Sesion usuario { get; set; }
+        public Sesion sesion { get; set; }
 
         //-------------------------------------- Constructores ---------------------------------
 
-        public VentanaRol(Sesion usuario)
+        public VentanaRol(Sesion sesion)
         {
             InitializeComponent();
-            this.usuario = usuario;
+            this.sesion = sesion;
         }
 
         //-------------------------------------- Metodos para Ventana ----------------------------
@@ -77,22 +78,16 @@ namespace FrbaHotel.AbmRol
         {
             if (ventanaCamposEstanCompletos(tabAgregar, controladorError))
             {
-                string nombreRol = tbxNombreRol.Text;
-                if (Database.rolYaExiste(nombreRol))
+                List<string> funcionalidades = new List<string>();
+                foreach (string funcionalidad in lbxFuncionalidades.Items)
+                    funcionalidades.Add(funcionalidad);
+                Rol rol = new Rol(tbxNombreRol.Text);
+                rol.funcionalidades = funcionalidades;
+                if(Database.rolAgregadoConExito(rol))
                 {
-                    ventanaInformarError("Un rol ya posee el mismo nombre");
-                    return;
+                    btnLimpiarRol_Click(sender, null);
+                    ventanaActualizar();
                 }
-                if (rbtRolActivado.Checked)
-                    Database.rolHabilitadoAgregar(nombreRol);
-                else 
-                    Database.rolDeshabilitadoAgregar(nombreRol);
-                string idRol = Database.rolObtenerID(nombreRol);
-                foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
-                    Database.rolAgregarFuncionalidad(idRol, nombreFuncionalidad);
-                btnLimpiarRol_Click(sender, null);
-                ventanaActualizar();
-                ventanaInformarExito();
             }    
         }
 
@@ -101,8 +96,12 @@ namespace FrbaHotel.AbmRol
             var senderGrid = (DataGridView)sender;
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                string nombreRol = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Nombre"].Value.ToString();
-                VentanaModificarRol ventanaModificarRol = new VentanaModificarRol(this, nombreRol);
+                string rolNombre = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Nombre"].Value.ToString();
+                string rolEstado = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Estado"].Value.ToString();
+                Rol rol = new Rol(rolNombre);
+                rol.estado = rolEstado;
+                rol.funcionalidades = Database.rolObtenerFuncionalidades(rol);
+                VentanaModificarRol ventanaModificarRol = new VentanaModificarRol(this, rol);
                 ventanaModificarRol.ShowDialog();
             }          
         }
@@ -112,11 +111,13 @@ namespace FrbaHotel.AbmRol
             var senderGrid = (DataGridView)sender;
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                string nombreRol = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Nombre"].Value.ToString();
-                Database.rolEliminar(nombreRol);
-                ventanaActualizar();
-                Database.sesionActualizarDatos(usuario);
-                VentanaBase.ventanaInformarExito();
+                string rolNombre = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Nombre"].Value.ToString();
+                Rol rol = new Rol(rolNombre);
+                if (Database.rolEliminadoConExito(rol))
+                {
+                    ventanaActualizar();
+                    Database.sesionActualizarDatos(sesion);
+                }
             }
         }
     }

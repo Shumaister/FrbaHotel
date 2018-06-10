@@ -18,13 +18,13 @@ namespace FrbaHotel.Menus
     {
         //-------------------------------------- Atributos -------------------------------------
         
-        Sesion usuario { get; set; }
+        Sesion sesion { get; set; }
 
         //-------------------------------------- Constructores -------------------------------------
 
-        public VentanaMenuPrincipal(Sesion usuario)
+        public VentanaMenuPrincipal(Sesion sesion)
         {
-            this.usuario = usuario; 
+            this.sesion = sesion; 
             InitializeComponent();
         }
 
@@ -37,77 +37,77 @@ namespace FrbaHotel.Menus
 
         private void menuRoles_Click(object sender, EventArgs e)
         {
-            VentanaRol ventanaRoles = new VentanaRol(usuario);
+            VentanaRol ventanaRoles = new VentanaRol(sesion);
             ventanaRoles.ShowDialog();
         }
 
         private void menuUsuarios_Click(object sender, EventArgs e) 
         {
-            VentanaUsuario ventanaUsuarios = new VentanaUsuario(usuario);
+            VentanaUsuario ventanaUsuarios = new VentanaUsuario(sesion);
             ventanaUsuarios.ShowDialog();
         }
 
         private void menuCambiarContrasenia_Click(object sender, EventArgs e)
         {
-            VentanaCambiarContrasenia ventanaAjustesDeCuenta = new VentanaCambiarContrasenia(usuario.usuario);
-            ventanaAjustesDeCuenta.ShowDialog();
+            VentanaCambiarContrasenia ventanaCambiarContrasenia = new VentanaCambiarContrasenia(sesion);
+            ventanaCambiarContrasenia.ShowDialog();
         }
 
         private void VentanaMenuPrincipal_Load(object sender, EventArgs e)
         {
             bool usuarioTieneFuncionesDeAdmnistrador = false;
             bool usuarioTieneFuncionesDeRecepcion = false;          
-            if (usuario.funcionalidades.Contains("Usuarios"))
+            if (sesion.funcionalidades.Contains("Usuarios"))
             {
                 menuUsuarios.Visible = true;
                 usuarioTieneFuncionesDeAdmnistrador = true;
             }                
-            if (usuario.funcionalidades.Contains("Hoteles"))
+            if (sesion.funcionalidades.Contains("Hoteles"))
             {
                 menuHoteles.Visible = true;
                 usuarioTieneFuncionesDeAdmnistrador = true;
             }
-            if (usuario.funcionalidades.Contains("Habitaciones"))
+            if (sesion.funcionalidades.Contains("Habitaciones"))
             {
                  menuHabitaciones.Visible = true;
                 usuarioTieneFuncionesDeAdmnistrador = true;
             }               
-            if (usuario.funcionalidades.Contains("Roles"))
+            if (sesion.funcionalidades.Contains("Roles"))
             {
                 menuRoles.Visible = true;
                 usuarioTieneFuncionesDeAdmnistrador = true;
             }                
-            if (usuario.funcionalidades.Contains("Regimenes"))
+            if (sesion.funcionalidades.Contains("Regimenes"))
             {
                 menuRegimenes.Visible = true;
                 usuarioTieneFuncionesDeAdmnistrador = true;
             }
-            if (usuario.funcionalidades.Contains("Reservas"))
+            if (sesion.funcionalidades.Contains("Reservas"))
             {
                 menuReservas.Visible = true;
                 usuarioTieneFuncionesDeRecepcion = true;
             }                
-            if (usuario.funcionalidades.Contains("Facturas"))
+            if (sesion.funcionalidades.Contains("Facturas"))
             {
                 menuFacturas.Visible = true;
                 usuarioTieneFuncionesDeRecepcion = true;
             }
-            if (usuario.funcionalidades.Contains("Clientes"))
+            if (sesion.funcionalidades.Contains("Clientes"))
             {
                 menuClientes.Visible = true;
                 usuarioTieneFuncionesDeRecepcion = true;
             }
-            if (usuario.funcionalidades.Contains("Consumibles"))
+            if (sesion.funcionalidades.Contains("Consumibles"))
             {
                 menuConsumibles.Visible = true;
                 usuarioTieneFuncionesDeRecepcion = true;
             }
-            if (usuario.funcionalidades.Contains("Estadias"))
+            if (sesion.funcionalidades.Contains("Estadias"))
             {
                 menuEstadias.Visible = true;
                 usuarioTieneFuncionesDeRecepcion = true;
             }
-            if (usuario.funcionalidades.Contains("Estadisticas"))
+            if (sesion.funcionalidades.Contains("Estadisticas"))
             {
                 menuEstadisticas.Visible = true;
                 usuarioTieneFuncionesDeRecepcion = true;

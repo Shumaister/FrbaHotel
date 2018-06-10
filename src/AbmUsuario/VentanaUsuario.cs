@@ -91,6 +91,7 @@ namespace FrbaHotel.AbmUsuario
         {
             if (ventanaCamposEstanCompletos(pagAgregar, controladorError))
             {
+                /*
                 if(Database.usuarioExiste(tbxUsuario.Text))
                 {
                     ventanaInformarError("ERROR: El nombre de usuario ya existe");
@@ -114,6 +115,7 @@ namespace FrbaHotel.AbmUsuario
                 Database.personaAgregar(persona);
                 Database.usuarioAgregar(usuario);
                 ventanaInformarExito();
+                 */
             }
                        
         }

@@ -51,6 +51,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
+            /*
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
                 if (Database.usuarioExiste(tbxUsuario.Text))
@@ -77,6 +78,7 @@ namespace FrbaHotel.AbmUsuario
                 Database.usuarioModificar(usuarioModificado, tbxUsuario.Text);
                 ventanaInformarExito();
             }
+             */
         }
 
         private void tbxUsuario_KeyPress(object sender, KeyPressEventArgs e)
@@ -183,6 +185,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void VentanaModificarUsuario_Load(object sender, EventArgs e)
         {
+            /*
             tbxUsuario.Text = usuario.nombre;
             tbxContrasena.Text = usuario.contrasenia;
             tbxNombre.Text = usuario.persona.nombre;
@@ -202,6 +205,7 @@ namespace FrbaHotel.AbmUsuario
             tbxPais.Text = usuario.persona.domicilio.pais;
             tbxPiso.Text = usuario.persona.domicilio.piso;
             tbxDepartamento.Text = usuario.persona.domicilio.departamento;
+             */
         }
 
         private void btnSeleccionarFecha_Click(object sender, EventArgs e)

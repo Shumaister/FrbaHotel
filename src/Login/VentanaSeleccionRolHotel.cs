@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FrbaHotel.Clases;
 
 namespace FrbaHotel.Login 
 {
@@ -15,14 +16,14 @@ namespace FrbaHotel.Login
     {
         //-------------------------------------- Atributos -------------------------------------
 
-        Sesion usuario { get; set; }
+        Sesion sesion { get; set; }
 
         //-------------------------------------- Constructores -------------------------------------
 
-        public VentanaSeleccionRolHotel(Sesion usuario)
+        public VentanaSeleccionRolHotel(Sesion sesion)
         {
             InitializeComponent();
-            this.usuario = usuario;  
+            this.sesion = sesion;  
             ventanaConfigurar();
         }
 
@@ -42,11 +43,11 @@ namespace FrbaHotel.Login
         private void ventanaConfigurar()
         {
             ventanaCargarRolesYHoteles();
-            if (usuario.usuarioTrabajaEnUnSoloHotel() && usuario.usuarioTieneUnSoloRol())
+            if (sesion.usuarioTrabajaEnUnSoloHotel() && sesion.usuarioTieneUnSoloRol())
                 ventanaAbrirMenuPrincipal();
-            else if (usuario.usuarioTrabajaEnUnSoloHotel() && usuario.usuarioTieneVariosRoles())
+            else if (sesion.usuarioTrabajaEnUnSoloHotel() && sesion.usuarioTieneVariosRoles())
                 ventanaConfigurarParaRol();
-            else if (usuario.usuarioTrabajaEnVariosHoteles() && usuario.usuarioTieneUnSoloRol())
+            else if (sesion.usuarioTrabajaEnVariosHoteles() && sesion.usuarioTieneUnSoloRol())
                 ventanaConfigurarParaHotel();
             else
                 ventanaConfigurarParaRolYHotel();
@@ -54,8 +55,8 @@ namespace FrbaHotel.Login
 
         private void ventanaCargarRolesYHoteles()
         {
-            comboBoxCargar(cbxHoteles, usuario.hoteles);
-            comboBoxCargar(cbxRoles, usuario.roles);
+            comboBoxCargar(cbxHoteles, sesion.hoteles);
+            comboBoxCargar(cbxRoles, sesion.roles);
         }
 
         private void ventanaConfigurarParaRol()
@@ -77,12 +78,11 @@ namespace FrbaHotel.Login
             this.Show();
         }
 
-        public void ventanaConfigurarUsuario()
+        public void ventanaConfigurarSesion()
         {
-            string rolLogueado = cbxRoles.SelectedItem.ToString();
-            string hotelLogueado = cbxHoteles.SelectedItem.ToString();
-            List<string> funcionalidades = Database.rolObtenerFuncionalidades(rolLogueado);
-            usuario.configurarDatos(rolLogueado, hotelLogueado, funcionalidades); 
+            sesion.rol = new Rol(cbxRoles.SelectedItem.ToString());
+            //sesion.hotel = new Hotel(cbxHoteles.SelectedItem.ToString());
+            sesion.funcionalidades = Database.rolObtenerFuncionalidades(sesion.rol);
         }
 
         private void btnIngresarRol_Click(object sender, EventArgs e)
@@ -93,19 +93,9 @@ namespace FrbaHotel.Login
 
         private void ventanaAbrirMenuPrincipal()
         {
-            ventanaConfigurarUsuario();
-            VentanaMenuPrincipal ventanaMenuPrincipal = new VentanaMenuPrincipal(usuario);
+            ventanaConfigurarSesion();
+            VentanaMenuPrincipal ventanaMenuPrincipal = new VentanaMenuPrincipal(sesion);
             ventanaMenuPrincipal.Show();
-        }
-
-        private void cbxRoles_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblRol_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

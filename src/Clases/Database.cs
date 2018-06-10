@@ -44,18 +44,20 @@ namespace FrbaHotel
             return new SqlCommand(consulta, conexionObtener());
         }
 
-        public static void consultaEjecutar(SqlCommand consulta)
+        public static int consultaEjecutar(SqlCommand consulta)
         {
-            conexionAbrir();
+            int resultado = 0;
+            conexionAbrir();           
             try
             {
-                consulta.ExecuteNonQuery();
+                resultado = consulta.ExecuteNonQuery();
             }
             catch (Exception excepcion)
             {
                 ventanaInformarErrorDatabase(excepcion);
             }
             conexionCerrar();
+            return resultado;
         }
 
         public static DataSet consultaObtenerDatos(SqlCommand consulta)
@@ -136,6 +138,11 @@ namespace FrbaHotel
             return valor != "";
         }
 
+        public static bool consultaExitosa(int resultadoConsulta)
+        {
+            return resultadoConsulta > 0;
+        }
+
         //-------------------------------------- Metodos para Ventanas -------------------------------------
 
         public static void ventanaInformarErrorDatabase(Exception excepcion)
@@ -143,14 +150,14 @@ namespace FrbaHotel
             VentanaBase.ventanaInformarErrorDatabase(excepcion);
         }
 
-        public static void ventanaInformarError(string mensaje)
+        public static bool ventanaInformarError(string mensaje)
         {
-            VentanaBase.ventanaInformarError(mensaje);
+            return VentanaBase.ventanaInformarError(mensaje);
         }
 
-        public static void ventanaInformarExito(string mensaje)
+        public static bool ventanaInformarExito(string mensaje)
         {
-            VentanaBase.ventanaInformarExito(mensaje);
+            return VentanaBase.ventanaInformarExito(mensaje);
         }
 
         //-------------------------------------- Metodos para Login -------------------------------------
@@ -267,6 +274,7 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@Nombre", sesion.usuario.nombre);
             consulta.Parameters.AddWithValue("@Contrasenia", loginEncriptarContraseña(sesion.usuario.contrasenia));
             consultaEjecutar(consulta);
+            ventanaInformarExito("La contraseña fue cambiada exitosamente");
         }
 
 
@@ -286,32 +294,47 @@ namespace FrbaHotel
         }
         
         //-------------------------------------- Metodos para Roles -------------------------------------
-
-        public static void rolAgregar(Rol rol)
+        
+        public static bool rolAgregadoConExito(Rol rol)
         {
             if (rolYaExiste(rol))
-                VentanaBase.ventanaInformarError("ERROR: Ya existe un rol registrado con ese nombre");
-            else
-            {
-                SqlCommand consulta = consultaCrear("INSERT INTO RIP.Roles (Rol_Nombre) VALUES (@Nombre)");
-                consulta.Parameters.AddWithValue("@Nombre", rol.nombre);
-                consultaEjecutar(consulta);
-            }
+                return ventanaInformarError("Ya existe un rol registrado con ese nombre");
+            if (consultaExitosa(rolAgregar(rol)))
+                return ventanaInformarExito("El rol fue creado con exito");
+            return ventanaInformarError("No se puedo ejecutar la consulta en la Base de datos");
         }
 
-        public static void rolModificar(Rol rol, Rol nuevoRol)
+        public static bool rolModificadoConExito(Rol rol, Rol rolModificado)
         {
-            if (rolYaExiste(nuevoRol) && rolSonDistintos(rol, nuevoRol))
-                VentanaBase.ventanaInformarError("ERROR: Ya existe un rol registrado con ese nombre");
-            else
-            {
-                rolEliminarFuncionalidades(rol);
-                SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Nombre = @NuevoNombre, Rol_Estado = @NuevoEstado WHERE Rol_Nombre = @Nombre");
-                consulta.Parameters.AddWithValue("@Nombre", rol.nombre);
-                consulta.Parameters.AddWithValue("@NuevoNombre", nuevoRol.nombre);
-                consulta.Parameters.AddWithValue("@NuevoEstado", nuevoRol.estado);
-                consultaEjecutar(consulta);
-            }
+            if (rolYaExiste(rolModificado) && rolSonDistintos(rol, rolModificado))
+                return ventanaInformarError("Ya existe un rol registrado con ese nombre");
+            if(consultaExitosa(rolModificar(rol, rolModificado)))
+                return ventanaInformarExito("El rol fue modificado con exito");
+            return ventanaInformarError("No se puedo ejecutar la consulta en la Base de datos");
+        }
+
+        public static bool rolEliminadoConExito(Rol rol)
+        {
+            if (consultaExitosa(rolEliminar(rol)))
+                return ventanaInformarExito("El rol fue eliminado con exito");
+            return ventanaInformarError("No se puedo ejecutar la consulta en la Base de datos");
+        }
+        
+        public static int rolAgregar(Rol rol)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Roles (Rol_Nombre) VALUES (@Nombre)");
+            consulta.Parameters.AddWithValue("@Nombre", rol.nombre);
+            return consultaEjecutar(consulta);
+        }
+
+        public static int rolModificar(Rol rol, Rol rolModificado)
+        {
+            rolEliminarFuncionalidades(rol);
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Nombre = @NuevoNombre, Rol_Estado = @NuevoEstado WHERE Rol_Nombre = @Nombre");
+            consulta.Parameters.AddWithValue("@Nombre", rol.nombre);
+            consulta.Parameters.AddWithValue("@NuevoNombre", rolModificado.nombre);
+            consulta.Parameters.AddWithValue("@NuevoEstado", rolModificado.estado);
+            return consultaEjecutar(consulta);
         }
 
         public static bool rolSonDistintos(Rol unRol, Rol otroRol)
@@ -319,11 +342,11 @@ namespace FrbaHotel
             return rolObtenerID(unRol) != rolObtenerID(otroRol);
         }
 
-        public static void rolEliminar(Rol rol)
+        public static int rolEliminar(Rol rol)
         {
             SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Estado = 0 WHERE Rol_Nombre = @Nombre");
             consulta.Parameters.AddWithValue("@Nombre", rol.nombre);
-            consultaEjecutar(consulta);
+            return consultaEjecutar(consulta);
         }
 
         public static string rolObtenerID(Rol rol)
@@ -339,6 +362,12 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@RolID", rolObtenerID(rol));
             consulta.Parameters.AddWithValue("@FuncionalidadID", funcionalidadObtenerID(funcionalidad));
             consultaEjecutar(consulta);
+        }
+
+        public static void rolAgregarFuncionalidades(Rol rol)
+        {
+            foreach (string funcionalidad in rol.funcionalidades)
+                rolAgregarFuncionalidad(rol, funcionalidad);
         }
 
         public static void rolEliminarFuncionalidades(Rol rol)

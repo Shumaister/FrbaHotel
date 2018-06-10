@@ -9,12 +9,12 @@ namespace FrbaHotel.Clases
     public class Rol
     {
         public string nombre { get; set; }
+        public List<string> funcionalidades { get; set; }
         public string estado { get; set; }
 
-        public Rol(string nombre, string estado)
+        public Rol(string nombre)
         {
             this.nombre = nombre;
-            this.estado = estado;
         }
     }
 }

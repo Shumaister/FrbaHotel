@@ -58,20 +58,22 @@ namespace FrbaHotel
          
         public static void ventanaInformarErrorDatabase(Exception excepcion)
         {
-            MessageBox.Show("ERROR EN LA BASE DE DATOS:\n" + excepcion.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("ERROR EN LA BASE DE DATOS:\n" + excepcion.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             SystemSounds.Hand.Play();
         }
 
-        public static void ventanaInformarExito(string mensaje)
+        public static bool ventanaInformarExito(string mensaje)
         {
-            MessageBox.Show(mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show("AVISO: " + mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             SystemSounds.Exclamation.Play();
+            return true;
         }
 
-        public static void ventanaInformarError(string mensaje)
+        public static bool ventanaInformarError(string mensaje)
         {
-            MessageBox.Show("ERROR: " + mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("ERROR: " + mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             SystemSounds.Hand.Play();
+            return false;
         }
 
         //-------------------------------------- Metodos para Elementos -------------------------------------

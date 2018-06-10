@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FrbaHotel.Menus;
+using FrbaHotel.Clases;
 
 namespace FrbaHotel.Login
 {
@@ -61,9 +61,8 @@ namespace FrbaHotel.Login
         private void ventanaLogueoExitoso(LogueoDTO logueo)
         {
             this.Hide();
-            string nombreUsuario = logueo.mensaje;
-            Sesion usuario = Database.sesionCrear(nombreUsuario);
-            VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(usuario);
+            Sesion sesion = Database.sesionCrear(logueo.mensaje, "");
+            VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(sesion);
         }
 
         private void ventanaLogueoFallido(LogueoDTO logueo)
