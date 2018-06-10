@@ -15,12 +15,14 @@ namespace FrbaHotel
 {
     public class Database
     {
-        //-------------------------------------- Atributos -------------------------------------
+        #region Atributos
 
         private static String configuracionConexion = ConfigurationManager.AppSettings["conexionSQL"];
         private static SqlConnection conexion = new SqlConnection(configuracionConexion);
 
-        //-------------------------------------- Metodos para Conexion -------------------------------------
+        #endregion
+
+        #region Conexion
 
         public static SqlConnection conexionObtener()
         {
@@ -37,7 +39,9 @@ namespace FrbaHotel
             conexion.Close();
         }
 
-        //-------------------------------------- Metodos para Consultas -------------------------------------
+        #endregion
+
+        #region Consulta
 
         public static SqlCommand consultaCrear(string consulta)
         {
@@ -138,7 +142,9 @@ namespace FrbaHotel
             return valor != "";
         }
 
-        //-------------------------------------- Metodos para Ventanas -------------------------------------
+        #endregion
+
+        #region Ventana
 
         public static void ventanaInformarErrorDatabase(Exception excepcion)
         {
@@ -155,7 +161,9 @@ namespace FrbaHotel
             VentanaBase.ventanaInformarExito(mensaje);
         }
 
-        //-------------------------------------- Metodos para Login -------------------------------------
+        #endregion
+
+        #region Login
 
         public static byte[] loginEncriptarContraseña(string contrasenia)
         {
@@ -245,18 +253,13 @@ namespace FrbaHotel
             consultaEjecutar(query);
         }
 
-        //-------------------------------------- Metodos para Sesion -------------------------------------
+        #endregion
 
-        public static void sesionActualizarDatos(Sesion sesion)
-        {
-            sesion.roles = usuarioObtenerRoles(sesion.usuario);
-            sesion.hoteles = usuarioObtenerHotelesLista(sesion.usuario);
-            sesion.rol.funcionalidades = rolObtenerFuncionalidades(sesion.rol);
-        }
+        #region Sesion
 
         public static Sesion sesionCrear(string nombreUsuario, string contrasenia)
         {
-            Usuario usuario = new Usuario(nombreUsuario, contrasenia, null, "");
+            Usuario usuario = new Usuario(nombreUsuario, contrasenia, null);
             List<string> roles = usuarioObtenerRoles(usuario);
             List<string> hoteles = usuarioObtenerHotelesLista(usuario);
             Sesion sesion = new Sesion(usuario, roles, hoteles);
@@ -272,8 +275,9 @@ namespace FrbaHotel
             ventanaInformarExito("La contraseña fue cambiada exitosamente");
         }
 
+        #endregion
 
-        //-------------------------------------- Metodos para Funcionalidades -------------------------------------
+        #region Funcionalidad
 
         public static string funcionalidadObtenerID(string funcionalidad)
         {
@@ -282,14 +286,16 @@ namespace FrbaHotel
             return consultaObtenerValor(consulta);
         }
         
-        public static List<string> funcionalidadObtenerListaRegistros()
+        public static List<string> funcionalidadObtenerTodasEnLista()
         {
             SqlCommand consulta = consultaCrear("SELECT Funcionalidad_Nombre FROM RIP.Funcionalidades");
             return consultaObtenerLista(consulta);
         }
-        
-        //-------------------------------------- Metodos para Roles -------------------------------------
-     
+
+        #endregion
+
+        #region Rol
+
         public static bool rolAgregadoConExito(Rol rol)
         {
             if (rolExiste(rol))
@@ -444,7 +450,58 @@ namespace FrbaHotel
             return consultaObtenerLista(consulta);
         }
 
-        //-------------------------------------- Metodos para Usuarios -------------------------------------
+        #endregion
+
+        #region Usuario
+
+        public static bool usuarioAgregadoConExito(Usuario usuario)
+        {
+            if (usuarioExiste(usuario))
+            {
+                ventanaInformarError("Ya existe un usuario registrado con ese nombre");
+                return false;
+            }
+            else
+            {
+                domicilioAgregar(usuario.persona.domicilio);
+                personaAgregar(usuario.persona);
+                usuarioAgregar(usuario);
+                usuarioAgregarHoteles(usuario);
+                usuarioAgregarRoles(usuario);
+                ventanaInformarExito("El usuario fue creado con exito");
+                return true;
+            }
+        }
+
+        public static void usuarioModificadoConExito(Usuario usuario)
+        {
+            /*
+            if (usuarioExisteYEsDistinto(usuario))
+            {
+                ventanaInformarError("Ya existe un usuario registrado con ese nombre");
+                return false;
+            }
+            else
+            {
+                usuarioEliminarHoteles(usuario);
+                usuarioEliminarRoles(usuario);
+                domicilioModificar(usuario.persona.domicilio);
+                personaModificar(usuario.persona);
+                usuarioModificar(usuario);
+                usuarioAgregarHoteles(usuario);
+                usuarioAgregarRoles(usuario);
+                ventanaInformarExito("El usuario fue modificado con exito");
+                return true;
+            }
+             */
+        }
+
+        public static void usuarioEliminadoConExito(Usuario usuario)
+        {
+            usuarioEliminar(usuario);
+            ventanaInformarExito("El rol fue eliminado con exito");
+        }
+
 
         public static void usuarioAgregar(Usuario usuario)
         {
@@ -462,29 +519,29 @@ namespace FrbaHotel
             }
         }
 
-        public static void usuarioModificar(Usuario usuario, Usuario nuevoUsuario)
+        public static void usuarioModificar(Usuario usuario)
         {
-            if (usuarioExiste(usuario) && usuarioSonDistintos(usuario, nuevoUsuario))
+            if (usuarioExiste(usuario) && usuarioSonDistintos(usuario, usuario))
                 VentanaBase.ventanaInformarError("ERROR: Ya existe un usuario registrado con ese nombre");
             else
             {
-                SqlCommand consulta = consultaCrear("UPDATE RIP.Usuarios SET Usuario_Nombre = @NuevoNombre, Usuario_Contrasenia = @NuevaContrasenia, Usuario_Estado = @NuevoEstado WHERE Usuario_Nombre = @Nombre");
-                consulta.Parameters.AddWithValue("@NuevoNombre", nuevoUsuario.nombre);
-                consulta.Parameters.AddWithValue("@NuevaContrasenia", loginEncriptarContraseña(nuevoUsuario.contrasenia));
-                consulta.Parameters.AddWithValue("@NuevoEstado", nuevoUsuario.estado);
+                SqlCommand consulta = consultaCrear("UPDATE RIP.Usuarios SET Usuario_Nombre = @Nombre, Usuario_Contrasenia = @Contrasenia, Usuario_Estado = @Estado WHERE Usuario_ID = @ID");
+                consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
+                consulta.Parameters.AddWithValue("@Contrasenia", loginEncriptarContraseña(usuario.contrasenia));
+                consulta.Parameters.AddWithValue("@NuevoEstado", usuario.estado);
                 consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
                 consultaEjecutar(consulta);
                 usuarioEliminarHoteles(usuario);
                 usuarioEliminarRoles(usuario);
-                usuarioAgregarHoteles(nuevoUsuario);
-                usuarioAgregarRoles(nuevoUsuario);
+                usuarioAgregarHoteles(usuario);
+                usuarioAgregarRoles(usuario);
             }
         }
 
         public static void usuarioEliminar(Usuario usuario)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Usuarios SET Usuario_Estado = 0 WHERE Usuario_Nombre = @Nombre");
-            consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Usuarios SET Usuario_Estado = 0 WHERE Usuario_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", usuario.id);
             consultaEjecutar(consulta);
         }
 
@@ -575,7 +632,10 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@UsuarioID", usuarioObtenerID(usuario));
             consultaEjecutar(consulta);
         }
-        //-------------------------------------- Metodos para Hoteles -------------------------------------
+
+        #endregion
+
+        #region Hotel
 
         public static void hotelAgregar(Hotel hotel)
         {
@@ -683,7 +743,9 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@Motivo", hotelCerrado.motivo);
         }
 
-        //-------------------------------------- Metodos para Habitaciones -------------------------------------
+        #endregion
+
+        #region Habitacion
 
         public static string habitacionObtenerID(Habitacion habitacion)
         {
@@ -730,7 +792,9 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
-        //-------------------------------------- Metodos para Personas -------------------------------------
+        #endregion
+
+        #region Personas
 
         public static void personaAgregar(Persona persona)
         {
@@ -801,7 +865,9 @@ namespace FrbaHotel
             return consultaValorExiste(consultaObtenerValor(consulta));
         }
 
-        //-------------------------------------- Metodos para Domicilios -------------------------------------
+        #endregion
+
+        #region Domicilio
 
         public static void domicilioAgregar(Domicilio domicilio)
         {
@@ -852,7 +918,9 @@ namespace FrbaHotel
             return consultaObtenerValor(consulta);
         }
 
-        //-------------------------------------- Metodos para Calles -------------------------------------
+        #endregion
+
+        #region Calle
 
         public static void calleAgregar(string calle)
         {
@@ -894,7 +962,9 @@ namespace FrbaHotel
             return consultaValorEsMayorA(consultaObtenerValor(consulta), 0);
         }
 
-        //-------------------------------------- Metodos para Ciudades -------------------------------------
+        #endregion
+
+        #region Ciudad
 
         public static void ciudadAgregar(string ciudad)
         {
@@ -936,7 +1006,9 @@ namespace FrbaHotel
             return consultaValorEsMayorA(consultaObtenerValor(consulta), 0);
         }
 
-        //-------------------------------------- Metodos para Paises -------------------------------------
+        #endregion
+
+        #region Pais
 
         public static void paisAgregar(string pais)
         {
@@ -978,7 +1050,9 @@ namespace FrbaHotel
             return consultaValorEsMayorA(consultaObtenerValor(consulta), 0);
         }
 
-        //-------------------------------------- Metodos para Nacionalidades -------------------------------------
+        #endregion
+
+        #region Nacionalidad
 
         public static void nacionalidadAgregar(string nacionalidad) 
         {
@@ -1020,7 +1094,9 @@ namespace FrbaHotel
             return consultaValorEsMayorA(consultaObtenerValor(consulta), 0);
         }
 
-        //-------------------------------------- Metodos para Tipos Documentos -------------------------------------
+        #endregion
+
+        #region TipoDocumento
 
         public static string tipoDocumentoObtenerID(string tipoDocumento)
         {
@@ -1035,7 +1111,9 @@ namespace FrbaHotel
             return consultaObtenerLista(consulta);
         }
 
-        //-------------------------------------- Metodos para Tipos Habitaciones -------------------------------------
+        #endregion
+
+        #region TipoHabitacion
 
         public static string tipoHabitacionObtenerID(string tipoHabitacion)
         {
@@ -1043,6 +1121,8 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@Descripcion", tipoHabitacion);
             return consultaObtenerValor(consulta);
         }
+
+        #endregion
 
         public static List<string> tipoHabitacionObtenerTodas()
         {

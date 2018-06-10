@@ -961,14 +961,15 @@
             this.dgvEliminarUsuarios.RowHeadersVisible = false;
             this.dgvEliminarUsuarios.Size = new System.Drawing.Size(745, 471);
             this.dgvEliminarUsuarios.TabIndex = 0;
+            this.dgvEliminarUsuarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEliminarUsuarios_CellContentClick);
             // 
-            // VentanaUsuarios
+            // VentanaUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(874, 644);
             this.Controls.Add(this.tabControl);
-            this.Name = "VentanaUsuarios";
+            this.Name = "VentanaUsuario";
             this.Text = "Usuarios - FRBA Hotel ©";
             this.Load += new System.EventHandler(this.VentanaUsuarios_Load);
             this.Controls.SetChildIndex(this.logo, 0);

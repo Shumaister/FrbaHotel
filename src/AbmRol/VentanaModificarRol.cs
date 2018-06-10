@@ -63,7 +63,7 @@ namespace FrbaHotel.AbmRol
         private void btnLimpiarRol_Click(object sender, EventArgs e)
         {
             listBoxLimpiar(lbxFuncionalidades);
-            comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerListaRegistros());
+            comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodasEnLista());
             tbxNombreRol.Clear();
             rbtRolActivado.Select();
             controladorError.Clear();
@@ -78,7 +78,6 @@ namespace FrbaHotel.AbmRol
                 {
                     this.Hide();
                     ventanaRol.ventanaActualizar();
-                    Database.sesionActualizarDatos(ventanaRol.sesion);
                 }
             }
         }

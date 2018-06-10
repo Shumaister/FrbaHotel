@@ -13,21 +13,104 @@ namespace FrbaHotel.AbmUsuario
 {
     public partial class VentanaUsuario : VentanaBase
     {
-        //-------------------------------------- Atributos -------------------------------------
+        #region Atributos
 
         Sesion sesion {get; set;}
 
-        //-------------------------------------- Constructores -------------------------------------
+        #endregion
+
+        #region Constructores
 
         public VentanaUsuario(Sesion sesion)
         {
             InitializeComponent();
             this.sesion = sesion;
         }
+        
+        #endregion
 
-        //-------------------------------------- Metodos para Eventos -------------------------------------
+        #region Agregar
 
-        private void VentanaUsuarios_Load(object sender, EventArgs e)
+        private Usuario ventanaCrearUsuarioParaAgregar()
+        {
+            Domicilio domicilio = new Domicilio(tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text, tbxPiso.Text, tbxDepartamento.Text);
+            Persona persona = new Persona(tbxNombre.Text, tbxApellido.Text, tbxFechaNacimiento.Text, cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text, tbxNacionalidad.Text, tbxTelefono.Text, tbxEmail.Text, domicilio);
+            Usuario usuario = new Usuario(tbxUsuario.Text, tbxContrasena.Text, persona);
+            return usuario;
+        }
+
+        private void btnGuardarUsuario_Click(object sender, EventArgs e)
+        {
+            if (ventanaCamposEstanCompletos(pagAgregar, controladorError))
+            {
+                Usuario usuario = ventanaCrearUsuarioParaAgregar();
+                if (Database.usuarioAgregadoConExito(usuario))
+                {
+                    btnLimpiarUsuario_Click(sender, e);
+                    VentanaUsuarios_Load(sender, e);
+                }
+            }
+        }
+
+        #endregion
+
+        #region Modificar
+
+        private void dgvModificarUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                Usuario usuario = ventanaCrearUsuarioParaModificar(e);
+                new VentanaModificarUsuario(this, sesion, usuario).ShowDialog();
+            }
+        }
+
+        private Usuario ventanaCrearUsuarioParaModificar(DataGridViewCellEventArgs e)
+        {
+            string pais = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Pais_Nombre"].Value.ToString();
+            string ciudad = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Ciudad_Nombre"].Value.ToString();
+            string calle = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Calle_Nombre"].Value.ToString();
+            string numeroCalle = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_NumeroCalle"].Value.ToString();
+            string piso = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Piso"].Value.ToString();
+            string departamento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Departamento"].Value.ToString();
+            string nombre = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Nombre"].Value.ToString();
+            string apellido = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Pesona_Apellido"].Value.ToString();
+            string tipoDocumento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_TipoDocumento"].Value.ToString();
+            string numeroDocumento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_NumeroDocumento"].Value.ToString();
+            string nacionalidad = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Nacionalidad"].Value.ToString();
+            string fechaNacimiento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_FechaNacimiento"].Value.ToString();
+            string telefono = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Telefono"].Value.ToString();
+            string email = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Email"].Value.ToString();
+            string nombreUsuario = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Nombre"].Value.ToString();
+            string contrasenia = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Contrasenia"].Value.ToString();
+            Domicilio domicilio = new Domicilio(pais, ciudad, calle, numeroCalle, piso, departamento);
+            Persona persona = new Persona(nombre, apellido, fechaNacimiento, tipoDocumento, numeroDocumento, nacionalidad, telefono, email, domicilio);
+            Usuario usuario = new Usuario(nombreUsuario, contrasenia, persona);
+            usuario.id = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString();
+            return usuario;
+        }
+
+        #endregion
+
+        #region Eliminar
+
+        private void dgvEliminarUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                string id = dgvEliminarUsuarios.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString();
+                Usuario usuario = new Usuario(id);
+                Database.usuarioEliminar(usuario);
+            }
+        }
+
+        #endregion
+
+        #region Eventos
+
+        public void VentanaUsuarios_Load(object sender, EventArgs e)
         {
             dataGridViewCargar(dgvModificarUsuarios, Database.usuarioObtenerTodos());
             dataGridViewCargar(dgvEliminarUsuarios, Database.usuarioObtenerTodos());
@@ -38,34 +121,6 @@ namespace FrbaHotel.AbmUsuario
             comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
         }
 
-        private void dgvModificarUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var senderGrid = (DataGridView)sender;
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
-            {
-                string nombreUsuario = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Nombre"].Value.ToString();
-                string contrasenia = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Contrasenia"].Value.ToString();
-                string estado = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Estado"].Value.ToString();
-                string nombre = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Nombre"].Value.ToString();
-                string apellido = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Pesona_Apellido"].Value.ToString();
-                string tipoDocumento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_TipoDocumento"].Value.ToString();
-                string numeroDocumento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_NumeroDocumento"].Value.ToString();
-                string nacionalidad = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Nacionalidad"].Value.ToString();
-                string fechaNacimiento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_FechaNacimiento"].Value.ToString();
-                string telefono = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Telefono"].Value.ToString();
-                string email = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Email"].Value.ToString();
-                string numeroCalle = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_NumeroCalle"].Value.ToString();
-                string piso = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Piso"].Value.ToString();
-                string departamento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Departamento"].Value.ToString();
-                string pais = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Pais_Nombre"].Value.ToString();
-                string ciudad = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Ciudad_Nombre"].Value.ToString();
-                string calle = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Calle_Nombre"].Value.ToString();
-                Domicilio domicilio = new Domicilio(pais, ciudad, calle, numeroCalle, piso, departamento);
-                Persona persona = new Persona(nombre, apellido, fechaNacimiento, tipoDocumento, numeroDocumento, nacionalidad, telefono, email, domicilio);
-                Usuario usuario = new Usuario(nombreUsuario, contrasenia, persona, estado);
-                new VentanaModificarUsuario(sesion, usuario).ShowDialog(); 
-            }
-        }
 
         private void btnAgregarRol_Click(object sender, EventArgs e)
         {
@@ -85,39 +140,6 @@ namespace FrbaHotel.AbmUsuario
         private void btnQuitarHotel_Click(object sender, EventArgs e)
         {
             botonQuitarComboBoxListBox(cbxHoteles, lbxHoteles);
-        }
-
-        private void btnGuardarUsuario_Click(object sender, EventArgs e)
-        {
-            if (ventanaCamposEstanCompletos(pagAgregar, controladorError))
-            {
-                /*
-                if(Database.usuarioExiste(tbxUsuario.Text))
-                {
-                    ventanaInformarError("ERROR: El nombre de usuario ya existe");
-                    return;
-                }
-                if (Database.personaAlguienTieneEseEmail(tbxEmail.Text))
-                {
-                    ventanaInformarError("ERROR: El email ya fue registrado para otro usuario");      
-                    return;                                                  
-                }
-                if (Database.personaAlguienTieneEseDocumento(cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text))
-                {
-                    ventanaInformarError("ERROR: Otro usuario ya fue registrado con ese documento");
-                    return;                   
-                }
-                    
-                Domicilio domicilio = new Domicilio(tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text, tbxPiso.Text, tbxDepartamento.Text);
-                Persona persona = new Persona(tbxNombre.Text, tbxApellido.Text, tbxFechaNacimiento.Text.ToString(), cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text, tbxNacionalidad.Text, tbxTelefono.Text, tbxEmail.Text, domicilio);
-                Usuario usuario = new Usuario(tbxUsuario.Text, tbxContrasena.Text, persona, "");
-                Database.domicilioAgregar(domicilio);
-                Database.personaAgregar(persona);
-                Database.usuarioAgregar(usuario);
-                ventanaInformarExito();
-                 */
-            }
-                       
         }
 
         private void tbxUsuario_KeyPress(object sender, KeyPressEventArgs e)
@@ -250,5 +272,6 @@ namespace FrbaHotel.AbmUsuario
             controladorError.Clear();
         }
 
+#endregion
     }
 }
