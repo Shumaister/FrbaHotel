@@ -1,0 +1,340 @@
+
+-------------------------------------------------------------------------------------------------
+METODOS PARA CONEXION
+
+-------------------------------------------------------------------------------------------------
+
+No las toquen y tampoco las van a necesitar, tampoco hacen mucho son mas para expresividad
+
+public static SqlConnection conexionObtener()
+public static void conexionAbrir()
+public static void conexionCerrar()
+
+
+-------------------------------------------------------------------------------------------------
+METODOS PARA CONSULTAS
+-------------------------------------------------------------------------------------------------
+
+public static SqlCommand consultaCrear(string consulta)
+
+Este metodo es fundamental usenlo siempre que quieran algo de la BD
+ 
+Ejemplo: Quiero buscar el ID de un rol, hacer esto
+
+SqlCommand consulta = consultaCrear("SELECT Rol_Nombre FROM RIP.Roles WHERE Rol_Nombre = @nombreRol);
+consulta.Parameters.AddWithValue("@nombreRol");
+
+Lo de arriba lo van a tener que hacer siempre que necesiten consultas o querys (como mas les guste) con variables, si ya se que es una paja si son 897987 parametros pero la razon de esto es que a los gordos de stackOverflow no les gusta concatenar strings en medio de la query ya que dicen que es inseguro asi que yo les hago caso, solo por esta razon existe este metodo.
+
+
+-------------------------------------------------------------------------------------------------
+
+public static void consultaEjecutar(SqlCommand consulta)
+
+Sirve para cuando tengan que ejecutar una consulta como dice el nombre
+
+Ejemplo:
+
+	SqlCommand consulta = consultaCrear("DELETE FROM RIP.Roles_Funcionalidades WHERE 	RolFuncionalidad_RolID = @RolID");
+	consulta.Parameters.AddWithValue("@RolID", rolObtenerID(rol));
+	consultaEjecutar(consulta);
+
+Siempre previamente para usar el consultaEjecutar tienen que haber utilizado un consultaCrear, van de la mano
+
+-------------------------------------------------------------------------------------------------
+
+public static DataSet consultaObtenerDatos(SqlCommand consulta)
+
+No la van a tener que llamar nunca es mas bien una funcion interna de la que sigue
+
+-------------------------------------------------------------------------------------------------
+
+public static DataTable consultaObtenerTabla(SqlCommand consulta)
+
+Lo van a usar para cargar datos en tablas o DataGridViews (son lo mismo, solo que el ultimo es el nombre de la clase)
+
+Ejemplo:
+
+        public static DataTable rolObtenerTodosEnTabla()
+        {
+            SqlCommand consulta = consultaCrear("SELECT Rol_ID, Rol_Nombre FROM RIP.Roles ORDER BY Rol_ID");
+            return consultaObtenerTabla(consulta);
+        }
+
+Y luego en la ventana de roles por ejemplo solo llaman esta otra funcion y listo, el dataGridViewCargar se explica mas abajo pero es basicamente cargar los datos a una tabla, lo deducis por contexto papu 
+
+            dataGridViewCargar(dgvModificarRoles, Database.rolObtenerTodosEnTabla());
+
+-------------------------------------------------------------------------------------------------
+
+public static List<string> consultaObtenerLista(SqlCommand consulta)
+
+Siempre usar para cargar comboBox's, me devuelve una lista de strings con los valores de una columna, basicamente es el segundo parametro de comboBoxCargar que se explica mas adelante
+
+Ejemplo:
+
+Aca le pido las funcionalidades de un rol y me va a devolver una lista con "Usuarios", "Roles", "Hoteles" que serian los nombres de dichas funcionalidades
+
+        public static List<string> rolObtenerFuncionalidades(Rol rol)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Funcionalidad_Nombre FROM RIP.Funcionalidades JOIN RIP.Roles_Funcionalidades ON Funcionalidad_ID = RolFuncionalidad_FuncionalidadID JOIN RIP.Roles ON RolFuncionalidad_RolID = Rol_ID WHERE Rol_Nombre = @Nombre");
+            consulta.Parameters.AddWithValue("@Nombre", rol.nombre);
+            ---> return consultaObtenerLista(consulta);
+        }
+
+Y aca luego seria para utilizarlo para cargar un comboBox
+
+        private void btnLimpiarRol_Click(object sender, EventArgs e)
+        {
+            listBoxLimpiar(lbxFuncionalidades);
+            ---> comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerListaRegistros());
+            tbxNombreRol.Clear();
+            controladorError.Clear();
+            rbtRolActivado.Select();  
+	}
+
+-------------------------------------------------------------------------------------------------
+
+public static string consultaObtenerValor(SqlCommand consulta)
+
+Para obtener un valor de una columna de una sola fila, es decir si queres obtener solo un campo nada mas, el ejemplo creo que se explica solo
+
+        public static string usuarioObtenerID(Usuario usuario)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = @Nombre");
+            consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
+            return consultaObtenerValor(consulta);
+        }
+
+Me devuelve un numerito en este caso que serai el ID
+
+-------------------------------------------------------------------------------------------------
+
+public static DataRow consultaObtenerFila(SqlCommand consulta)
+
+Si necesitan por ejemplo obtener una fila con todos sus campos por ejemplo
+
+            SqlCommand consulta = consultaCrear("SELECT Usuario_Nombre FROM RIP.Usuarios WHERE Usuario_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", usuario.id);	
+	DataRow = consultaObtenerFila(consulta);
+	string nombre = fila["Rol_Nombre"]
+
+-------------------------------------------------------------------------------------------------
+
+Son solo para expresividad como me enseño franquito, si quieren las usan
+
+public static bool consultaValorEsIgualA(string valor, int numero)
+public static bool consultaValorEsMayorA(string valor, int numero)
+public static bool consultaValorEsMenorA(string valor, int numero)
+public static bool consultaValorNoExiste(string valor)
+public static bool consultaValorExiste(string valor)
+
+-------------------------------------------------------------------------------------------------
+METODOS PARA VENTANAS
+-------------------------------------------------------------------------------------------------
+
+public static void ventanaInformarErrorDatabase(Exception excepcion)
+
+Nunca la van a usar hace lo que dice el titulo
+
+-------------------------------------------------------------------------------------------------
+
+public static void ventanaInformarError(string mensaje)
+
+Usar para informar errores, tira sonidito, le pasan el mensaje que quieren por ejemplo si alguien crea un usuario con un username que ya existe hacen esto
+
+	public void crearUsuario(Usuario usuario)
+	{
+		if(usuarioYaExiste(usuario))
+			ventanaInformarError("El usuario ya existe")
+	}
+-------------------------------------------------------------------------------------------------
+
+public static void ventanaInformarExito(string mensaje)
+
+Usar para informar exitos, tira sonidito, le pasan el mensaje que quieren por ejemplo siguiendo el ejemplo anterior
+ 
+	public void crearUsuario(Usuario usuario)
+	{
+		if(usuarioYaExiste(usuario))
+			ventanaInformarError("El usuario ya existe")
+		else
+			ventanaInformarExito("El usuario fue creado")
+	}
+
+-------------------------------------------------------------------------------------------------
+
+public static bool ventanaCamposEstanCompletos(Control ventana, ErrorProvider errorProvider)
+
+        /*PARA VER QUE LOS CAMPOS NO ESTEN VACIOS SIEMPRE PONERLO DENTRO DE LA FUNCION botoncito_Click
+         * O SEA SIEMPRE QUE HAGAN UN CLICK DONDE SE GUARDE O MODIFIQUE ALGO
+         * Ejemplo
+         * 
+         * private static void miBoton_Click()
+         * {
+         *      if(ventanaCamposEstanCompletos(this, controladorError))
+         *      {
+         *          ACA PONEN QUE GUARDE O MODIFIQUE ALG
+         *          la variable 'controladorError' lo tienen todas las ventanas asi que solo llamenla y listo
+         *      }
+         * }
+
+        */
+-------------------------------------------------------------------------------------------------
+
+Son los mismo que las otras, las anteriores llaman a estas
+
+public static void ventanaInformarErrorDatabase(Exception excepcion)
+public static void ventanaInformarExito(string mensaje) 
+public static void ventanaInformarError(string mensaje)
+
+-------------------------------------------------------------------------------------------------
+
+public static void comboBoxCargar(ComboBox comboBox, List<string> listaDatos)
+
+        /* NECESITAS LLENAR UN COMBO BOX Y NO SABES COMO? ACA ESTA LA SOLUCION
+         * Ejemplo : Quiero un combo box que me muestre todos los roles existentes
+         * 
+         * SqlCommand consulta = consultaCrear("SELECT Rol_Nombre FROM RIP.Roles")
+         * List<string> lista = consultaObtenerLista(consulta);
+         * ComboBox miComboBox;
+         * comboBoxCargar(miComboBox, lista)
+         * 
+         * CON ESAS 4 LINEAS YA TENES EL COMBO BOX LLENO PAPU Y SELECCIONADO EN EL PRIMER ITEM
+         * PARA EL SEGUNDO PARAMETRO SIEMPRE HAY USAR UN 'consultaObtenerLista' CON SU CONSULTA
+         * CREADA PREVIAMENTE CON 'consultaCrear'
+         */
+
+-------------------------------------------------------------------------------------------------
+          
+/* NECESITAS LLENAR UN LIST BOX AHORA? ACA VA A OTRA FUNCION MAGICA
+           * 
+         * Ejemplo : Quiero un listBox que me muestre todos los roles existentes
+         * 
+         * SqlCommand consulta = consultaCrear("SELECT Rol_Nombre FROM RIP.Roles")
+         * List<string> lista = consultaObtenerLista(consulta);
+         * ListBox miListBox;
+         * listBoxCargar(miListBox, lista);
+         * 
+         * ES LO MISMO QUE LA ANTERIOR, SOLO CAMBIA LA CLASE BASICAMENTE
+         * PARA EL SEGUNDO PARAMETRO SIEMPRE HAY USAR UN 'consultaObtenerLista' CON SU CONSULTA
+         * CREADA PREVIAMENTE CON 'consultaCrear'
+         */
+
+public static void listBoxCargar(ListBox listBox, List<string> listaDatos)
+
+-------------------------------------------------------------------------------------------------
+public static void dataGridViewCargar(DataGridView dataGridView, DataTable tablaDatos)
+
+         /* AHORA NECESITO LLENAR UNA TABLA O DATAGRIDVIEW COMO QUIERAN DECIRLE
+          * 
+         * Ejemplo : Quiero un dataGridView (o tabla) que me muestre todos los roles existentes
+         * 
+         * SqlCommand consulta = consultaCrear("SELECT * FROM RIP.Roles")
+         * DataTable datosParaMiTabla = consultaObtenerTabla(consulta);
+         * DataGridView miTabla;
+         * dataGridViewCargar(miTabla, datosParaMiTabla);
+         * 
+         * Y LISTO YA TIENEN SU TABLA CARGADA CON LINDOS DATOS
+         * 
+         */
+
+-------------------------------------------------------------------------------------------------
+
+public static void dataGridViewAgregarBoton(DataGridView dataGridView, string textoBoton)
+
+Esta no la van a usar es una funcion interna de las dos de abajo, nuevamente solo para delegar y ser mas expresivo
+
+-------------------------------------------------------------------------------------------------
+
+public static void dataGridViewAgregarBotonModificar(DataGridView dataGridView)
+public static void dataGridViewAgregarBotonEliminar(DataGridView dataGridView)
+
+
+      /*POR QUE SI NECESITAN QUE APAREZCA UN BOTON ELMINAR O MODIFICAR DENTRO DE LA TABLA
+         * POR EJEMPLO ESTO LO UTIILZO CUANDO APARECE LA VENTANA DEL ABM USUARIOS
+         * 
+         * private void VentanaUsuarios_Load(object sender, EventArgs e)
+        {
+            dataGridViewCargar(dgvModificarUsuarios, Database.usuarioObtenerTodos());
+            dataGridViewCargar(dgvEliminarUsuarios, Database.usuarioObtenerTodos());
+            ------------dataGridViewAgregarBotonModificar(dgvModificarUsuarios);-------------
+            ------------dataGridViewAgregarBotonEliminar(dgvEliminarUsuarios);------------
+            comboBoxCargar(cbxRoles, Database.rolObtenerTodosLista());
+            comboBoxCargar(cbxHoteles, Database.hotelObtenerTodosLista());
+            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodos());
+        }
+         * SIMPLEMENTE LLAMANDOLAS SE CREAN LOS BOTONES, PREVIAMENTE TIENEN QUE HABER CREADO EL DATAGRIDVIEW O TABLA OBVIAMENTE
+         * 
+        */
+
+-------------------------------------------------------------------------------------------------
+
+public static void botonAgregarComboBoxListBox(ComboBox comboBox, ListBox listBox)
+public static void botonQuitarComboBoxListBox(ComboBox comboBox, ListBox listBox)
+
+
+        /*ESTAS DOS FUNCIONES MISTICAS ES PARA CUANDO NECESITES COMBINAR
+         * UN COMBO BOX DONDE AL SELECCIONAR UN ITEM SE TE GUARDE EN EL LIST BOX
+         * 
+         * ES DECIR PARA ESTAS DOS FUNCIONES SIEMPRE VA A TENER QUE HABER
+         * 
+         * UN COMBO BOX
+         * UN LIST BOX
+         * UN BOTON PARA AGREGAR
+         * UN BOTON PARA QUITAR
+         * 
+         * CUANDO HAGAN CLICK EN AGREGAR EL ELEMETNO SELECCIONADO EN EL COMBO BOX SE GUARDA EN EL LIST BOX
+         * CUANDO HAGAN CLICK EN QUITAR EL ELEMNTO SELECCIONADO EN EL LIST BOX VUELVE AL COMBO BOX
+         * 
+         * LAS FUCIONES SIEMPRE PONERLAS EN EL EVENTO 'Click' DE UN BOTON
+         * ES DECIR CUANDO APRETAN EL BOTON
+         * 
+         * nombreDelBoton_Click(object sender, KeyPressEventArgs e)
+         * {
+         *      botonAgregarComboBoxListBox(miComboBox, miListBox);
+         *     
+         * }
+         * 
+         * CON ESO SERIA SUFICIENTE       
+         PD: SI YA SE QUE SE DICEN "METODOS" PERO A MI ME GUSTA DECIR MAS FUNCIONES
+        */
+
+-------------------------------------------------------------------------------------------------
+
+public static void textBoxConfigurarParaNumeros(KeyPressEventArgs evento)
+
+        //POR SI NECESITAS UN TEXT BOX SOLO PARA NUMEROS 
+        //SIEMPRE UTILIZARLO DENTRO DEL METODO PARA EL EVENTO KEY PRESS
+        // ES DECIR SI VEN UN METODO TIPO
+        // nombreDelTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        //PONEN ESTO DENTRO DE ESE METODO SIEMPRE
+        public static void textBoxConfigurarParaNumeros(KeyPressEventArgs evento) 
+
+-------------------------------------------------------------------------------------------------
+
+
+public static void textBoxConfigurarParaLetras(KeyPressEventArgs evento)
+public static void textBoxConfigurarParaCuenta(KeyPressEventArgs evento)
+
+Lo mismo pero para letras y cuenta
+
+-------------------------------------------------------------------------------------------------
+
+public static bool textBoxNumerosCaracterValido(char caracter)
+public static bool textBoxLetrasCaracterValido(char caracter)
+public static bool textBoxEmailCaracterValido(char caracter)
+
+Para controlar que no pongan cualuqier cosa
+
+-------------------------------------------------------------------------------------------------
+
+ACLARACION VERY IMPORTANT
+
+Siempre que creen una ventana heredar de la VentanaBase
+
+namespace FrbaHotel.AbmRol
+{
+    public partial class VentanaRol : VentanaBase
+
+SIEMPREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE    
