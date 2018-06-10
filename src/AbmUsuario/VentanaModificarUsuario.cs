@@ -161,7 +161,7 @@ namespace FrbaHotel.AbmUsuario
         {
             tbxUsuario.Clear();
             tbxContrasena.Clear();
-            comboBoxCargar(cbxRoles, Database.rolObtenerTodosLista());
+            comboBoxCargar(cbxRoles, Database.rolObtenerTodosEnLista());
             listBoxLimpiar(lbxRoles);
             comboBoxCargar(cbxHoteles, Database.hotelObtenerTodosLista());
             listBoxLimpiar(lbxHoteles);

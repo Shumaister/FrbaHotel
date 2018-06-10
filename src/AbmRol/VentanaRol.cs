@@ -29,15 +29,15 @@ namespace FrbaHotel.AbmRol
 
         public void ventanaActualizar()
         {
-            dataGridViewCargar(dgvModificarRoles, Database.rolObtenerTodosTabla());
-            dataGridViewCargar(dgvEliminarRoles, Database.rolObtenerHabilitadosTabla());
+            dataGridViewCargar(dgvModificarRoles, Database.rolObtenerTodosEnTabla());
+            dataGridViewCargar(dgvEliminarRoles, Database.rolObtenerHabilitadosEnTabla());
         }
 
         //-------------------------------------- Metodos para Eventos ----------------------------
 
         private void VentanaRoles_Load(object sender, EventArgs e)
         {
-            comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
+            comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerListaRegistros());
             rbtRolActivado.Select();
             ventanaActualizar();
             dataGridViewAgregarBotonModificar(dgvModificarRoles);
@@ -67,7 +67,7 @@ namespace FrbaHotel.AbmRol
         private void btnLimpiarRol_Click(object sender, EventArgs e)
         {
             listBoxLimpiar(lbxFuncionalidades);
-            comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
+            comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerListaRegistros());
             tbxNombreRol.Clear();
             controladorError.Clear();
             rbtRolActivado.Select();           
@@ -78,7 +78,7 @@ namespace FrbaHotel.AbmRol
             if (ventanaCamposEstanCompletos(tabAgregar, controladorError))
             {
                 string nombreRol = tbxNombreRol.Text;
-                if (Database.rolNombreYaExiste(nombreRol))
+                if (Database.rolYaExiste(nombreRol))
                 {
                     ventanaInformarError("Un rol ya posee el mismo nombre");
                     return;
@@ -87,7 +87,7 @@ namespace FrbaHotel.AbmRol
                     Database.rolHabilitadoAgregar(nombreRol);
                 else 
                     Database.rolDeshabilitadoAgregar(nombreRol);
-                string idRol = Database.rolBuscarID(nombreRol);
+                string idRol = Database.rolObtenerID(nombreRol);
                 foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
                     Database.rolAgregarFuncionalidad(idRol, nombreFuncionalidad);
                 btnLimpiarRol_Click(sender, null);

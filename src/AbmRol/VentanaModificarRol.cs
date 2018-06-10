@@ -62,7 +62,7 @@ namespace FrbaHotel.AbmRol
         private void btnLimpiarRol_Click(object sender, EventArgs e)
         {
             listBoxLimpiar(lbxFuncionalidades);
-            comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodas());
+            comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerListaRegistros());
             tbxNombreRol.Clear();
             rbtRolActivado.Select();
             controladorError.Clear();
@@ -73,7 +73,7 @@ namespace FrbaHotel.AbmRol
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
                 string nombreRolNuevo = tbxNombreRol.Text;
-                if (Database.rolNombreYaExiste(nombreRolNuevo) && nombreRolNuevo != nombreRolActual)
+                if (Database.rolYaExiste(nombreRolNuevo) && nombreRolNuevo != nombreRolActual)
                 {
                     ventanaInformarError("Un rol ya posee el mismo nombre");
                     return;
@@ -82,7 +82,7 @@ namespace FrbaHotel.AbmRol
                     Database.rolHabilitadoModificar(nombreRolActual, nombreRolNuevo);
                 else
                     Database.rolDeshabilitadoModificar(nombreRolActual, nombreRolNuevo);
-                string idRol = Database.rolBuscarID(nombreRolNuevo);
+                string idRol = Database.rolObtenerID(nombreRolNuevo);
                 foreach (string nombreFuncionalidad in lbxFuncionalidades.Items)
                         Database.rolAgregarFuncionalidad(idRol, nombreFuncionalidad);
                 ventanaRoles.ventanaActualizar();
