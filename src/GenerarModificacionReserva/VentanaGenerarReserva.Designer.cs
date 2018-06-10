@@ -28,18 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnGuardarFecha = new System.Windows.Forms.Button();
+            this.btnConfirmarPaso1 = new System.Windows.Forms.Button();
             this.calendarInicio = new System.Windows.Forms.MonthCalendar();
             this.tbxCantidadHuespedes = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblerrorcantidad = new System.Windows.Forms.Label();
+            this.lblerrorfechas = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lblErrorPaso1 = new System.Windows.Forms.Label();
+            this.lblFechaFin = new System.Windows.Forms.Label();
+            this.lblFechaInicio = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnCheckear = new System.Windows.Forms.Button();
             this.lblResumenReserva = new System.Windows.Forms.Label();
             this.cbxRegimenEstadia = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.cbxTipoHabitacion = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -59,28 +64,30 @@
             this.logo.Location = new System.Drawing.Point(1011, 527);
             this.logo.Size = new System.Drawing.Size(10, 10);
             // 
-            // btnGuardarFecha
+            // btnConfirmarPaso1
             // 
-            this.btnGuardarFecha.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btnGuardarFecha.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGuardarFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardarFecha.Location = new System.Drawing.Point(372, 457);
-            this.btnGuardarFecha.Name = "btnGuardarFecha";
-            this.btnGuardarFecha.Size = new System.Drawing.Size(114, 40);
-            this.btnGuardarFecha.TabIndex = 308;
-            this.btnGuardarFecha.Text = "Confirmar Datos!";
-            this.btnGuardarFecha.UseVisualStyleBackColor = false;
-            this.btnGuardarFecha.Click += new System.EventHandler(this.btnGuardarFecha_Click);
+            this.btnConfirmarPaso1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnConfirmarPaso1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConfirmarPaso1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirmarPaso1.Location = new System.Drawing.Point(372, 503);
+            this.btnConfirmarPaso1.Name = "btnConfirmarPaso1";
+            this.btnConfirmarPaso1.Size = new System.Drawing.Size(114, 40);
+            this.btnConfirmarPaso1.TabIndex = 308;
+            this.btnConfirmarPaso1.Text = "Confirmar Datos!";
+            this.btnConfirmarPaso1.UseVisualStyleBackColor = false;
+            this.btnConfirmarPaso1.Click += new System.EventHandler(this.btnGuardarFecha_Click);
             // 
             // calendarInicio
             // 
             this.calendarInicio.Location = new System.Drawing.Point(14, 170);
             this.calendarInicio.Name = "calendarInicio";
             this.calendarInicio.TabIndex = 307;
+            this.calendarInicio.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.calendarInicio_DateChanged);
             // 
             // tbxCantidadHuespedes
             // 
             this.tbxCantidadHuespedes.Location = new System.Drawing.Point(143, 63);
+            this.tbxCantidadHuespedes.MaxLength = 100;
             this.tbxCantidadHuespedes.Name = "tbxCantidadHuespedes";
             this.tbxCantidadHuespedes.Size = new System.Drawing.Size(98, 20);
             this.tbxCantidadHuespedes.TabIndex = 291;
@@ -110,7 +117,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label1.Location = new System.Drawing.Point(153, 16);
+            this.label1.Location = new System.Drawing.Point(169, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(159, 16);
             this.label1.TabIndex = 309;
@@ -119,11 +126,16 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBox1.Controls.Add(this.lblerrorcantidad);
+            this.groupBox1.Controls.Add(this.lblerrorfechas);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.lblErrorPaso1);
+            this.groupBox1.Controls.Add(this.lblFechaFin);
+            this.groupBox1.Controls.Add(this.lblFechaInicio);
             this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.btnCheckear);
             this.groupBox1.Controls.Add(this.lblResumenReserva);
             this.groupBox1.Controls.Add(this.cbxRegimenEstadia);
-            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.cbxTipoHabitacion);
             this.groupBox1.Controls.Add(this.label6);
@@ -134,70 +146,123 @@
             this.groupBox1.Controls.Add(this.calendarFin);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.calendarInicio);
-            this.groupBox1.Controls.Add(this.btnGuardarFecha);
+            this.groupBox1.Controls.Add(this.btnConfirmarPaso1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.tbxCantidadHuespedes);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(500, 503);
+            this.groupBox1.Size = new System.Drawing.Size(500, 549);
             this.groupBox1.TabIndex = 310;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Paso 1";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // lblerrorcantidad
+            // 
+            this.lblerrorcantidad.AutoSize = true;
+            this.lblerrorcantidad.ForeColor = System.Drawing.Color.Red;
+            this.lblerrorcantidad.Location = new System.Drawing.Point(266, 66);
+            this.lblerrorcantidad.Name = "lblerrorcantidad";
+            this.lblerrorcantidad.Size = new System.Drawing.Size(209, 13);
+            this.lblerrorcantidad.TabIndex = 329;
+            this.lblerrorcantidad.Text = "La cantidad debe ser un numero mayor a 0";
+            this.lblerrorcantidad.Visible = false;
+            // 
+            // lblerrorfechas
+            // 
+            this.lblerrorfechas.AutoSize = true;
+            this.lblerrorfechas.ForeColor = System.Drawing.Color.Red;
+            this.lblerrorfechas.Location = new System.Drawing.Point(112, 350);
+            this.lblerrorfechas.Name = "lblerrorfechas";
+            this.lblerrorfechas.Size = new System.Drawing.Size(294, 13);
+            this.lblerrorfechas.TabIndex = 328;
+            this.lblerrorfechas.Text = "Verifique que la fecha de fin sea mayor que la fecha de inicio";
+            this.lblerrorfechas.Visible = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(11, 422);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(78, 13);
+            this.label10.TabIndex = 327;
+            this.label10.Text = "Su reserva es: ";
+            // 
+            // lblErrorPaso1
+            // 
+            this.lblErrorPaso1.AutoSize = true;
+            this.lblErrorPaso1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErrorPaso1.ForeColor = System.Drawing.Color.Red;
+            this.lblErrorPaso1.Location = new System.Drawing.Point(88, 455);
+            this.lblErrorPaso1.Name = "lblErrorPaso1";
+            this.lblErrorPaso1.Size = new System.Drawing.Size(344, 13);
+            this.lblErrorPaso1.TabIndex = 326;
+            this.lblErrorPaso1.Text = "Ya hay una reserva dentro de los dias que ha seleccionado";
+            this.lblErrorPaso1.Visible = false;
+            // 
+            // lblFechaFin
+            // 
+            this.lblFechaFin.AutoSize = true;
+            this.lblFechaFin.Location = new System.Drawing.Point(396, 148);
+            this.lblFechaFin.Name = "lblFechaFin";
+            this.lblFechaFin.Size = new System.Drawing.Size(10, 13);
+            this.lblFechaFin.TabIndex = 325;
+            this.lblFechaFin.Text = " ";
+            // 
+            // lblFechaInicio
+            // 
+            this.lblFechaInicio.AutoSize = true;
+            this.lblFechaInicio.Location = new System.Drawing.Point(161, 148);
+            this.lblFechaInicio.Name = "lblFechaInicio";
+            this.lblFechaInicio.Size = new System.Drawing.Size(10, 13);
+            this.lblFechaInicio.TabIndex = 324;
+            this.lblFechaInicio.Text = " ";
             // 
             // btnLimpiar
             // 
             this.btnLimpiar.BackColor = System.Drawing.SystemColors.Control;
-            this.btnLimpiar.Location = new System.Drawing.Point(6, 469);
+            this.btnLimpiar.Location = new System.Drawing.Point(6, 515);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(85, 28);
             this.btnLimpiar.TabIndex = 323;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnCheckear
             // 
             this.btnCheckear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnCheckear.Location = new System.Drawing.Point(269, 457);
+            this.btnCheckear.Location = new System.Drawing.Point(269, 503);
             this.btnCheckear.Name = "btnCheckear";
             this.btnCheckear.Size = new System.Drawing.Size(97, 40);
             this.btnCheckear.TabIndex = 322;
             this.btnCheckear.Text = "Checkear";
             this.btnCheckear.UseVisualStyleBackColor = false;
+            this.btnCheckear.Click += new System.EventHandler(this.btnCheckear_Click);
             // 
             // lblResumenReserva
             // 
             this.lblResumenReserva.AutoSize = true;
-            this.lblResumenReserva.Location = new System.Drawing.Point(13, 414);
+            this.lblResumenReserva.Location = new System.Drawing.Point(127, 422);
             this.lblResumenReserva.Name = "lblResumenReserva";
-            this.lblResumenReserva.Size = new System.Drawing.Size(78, 13);
+            this.lblResumenReserva.Size = new System.Drawing.Size(10, 13);
             this.lblResumenReserva.TabIndex = 321;
-            this.lblResumenReserva.Text = "Su reserva es: ";
+            this.lblResumenReserva.Text = " ";
             // 
             // cbxRegimenEstadia
             // 
             this.cbxRegimenEstadia.FormattingEnabled = true;
-            this.cbxRegimenEstadia.Location = new System.Drawing.Point(143, 357);
+            this.cbxRegimenEstadia.Location = new System.Drawing.Point(141, 376);
             this.cbxRegimenEstadia.Name = "cbxRegimenEstadia";
             this.cbxRegimenEstadia.Size = new System.Drawing.Size(98, 21);
             this.cbxRegimenEstadia.TabIndex = 320;
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.Red;
-            this.label10.Location = new System.Drawing.Point(111, 360);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(17, 22);
-            this.label10.TabIndex = 319;
-            this.label10.Text = "*";
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(13, 360);
+            this.label11.Location = new System.Drawing.Point(11, 379);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(102, 13);
             this.label11.TabIndex = 318;
@@ -283,7 +348,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1024, 526);
+            this.ClientSize = new System.Drawing.Size(1024, 573);
             this.Controls.Add(this.groupBox1);
             this.Name = "VentanaGenerarReserva";
             this.Text = "VentanaGenerarReserva";
@@ -300,7 +365,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnGuardarFecha;
+        private System.Windows.Forms.Button btnConfirmarPaso1;
         private System.Windows.Forms.MonthCalendar calendarInicio;
         private System.Windows.Forms.TextBox tbxCantidadHuespedes;
         private System.Windows.Forms.Label label8;
@@ -314,12 +379,17 @@
         private System.Windows.Forms.Button btnCheckear;
         private System.Windows.Forms.Label lblResumenReserva;
         private System.Windows.Forms.ComboBox cbxRegimenEstadia;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cbxTipoHabitacion;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblFechaFin;
+        private System.Windows.Forms.Label lblFechaInicio;
+        private System.Windows.Forms.Label lblErrorPaso1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblerrorfechas;
+        private System.Windows.Forms.Label lblerrorcantidad;
     }
 }

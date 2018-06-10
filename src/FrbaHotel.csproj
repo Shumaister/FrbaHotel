@@ -120,6 +120,7 @@
     </Compile>
     <Compile Include="Clases\Database.cs" />
     <Compile Include="Clases\Domicilio.cs" />
+    <Compile Include="Clases\Estadia.cs" />
     <Compile Include="Clases\Habitacion.cs" />
     <Compile Include="Clases\Hotel.cs" />
     <Compile Include="Clases\HotelCerrado.cs" />

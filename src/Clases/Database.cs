@@ -1043,5 +1043,17 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@Descripcion", tipoHabitacion);
             return consultaObtenerValor(consulta);
         }
+
+        public static List<string> tipoHabitacionObtenerTodas()
+        {
+            SqlCommand consulta = consultaCrear("SELECT TipoHabitacion_Descripcion FROM RIP.TiposHabitaciones");
+            return consultaObtenerLista(consulta);
+        }
+
+        public static List<string> DescripcionRegimenObtenerTodos()
+        {
+            SqlCommand consulta = consultaCrear("SELECT Regimen_Descripcion FROM RIP.Regimenes");
+            return consultaObtenerLista(consulta);
+        }
     }
 }
