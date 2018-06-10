@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrbaHotel.Menus;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -35,7 +36,9 @@ namespace FrbaHotel.Login
 
         private void btnCliente_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("PROXIMAMENTE");
+            this.Hide();
+            VentanaMenuPrincipalClientes ventanaMenu = new VentanaMenuPrincipalClientes();
+            ventanaMenu.Show();
         }
 
     }
