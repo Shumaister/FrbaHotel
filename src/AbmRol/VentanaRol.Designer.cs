@@ -35,7 +35,6 @@
             this.tabRoles = new System.Windows.Forms.TabControl();
             this.tabAgregar = new System.Windows.Forms.TabPage();
             this.label32 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnQuitarFuncionalidad = new System.Windows.Forms.Button();
@@ -44,11 +43,8 @@
             this.lbxFuncionalidades = new System.Windows.Forms.ListBox();
             this.btnGuardarRol = new System.Windows.Forms.Button();
             this.btnLimpiarRol = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cbxFuncionalidades = new System.Windows.Forms.ComboBox();
-            this.rbtRolDesactivado = new System.Windows.Forms.RadioButton();
-            this.rbtRolActivado = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.tabModificar = new System.Windows.Forms.TabPage();
             this.dgvModificarRoles = new System.Windows.Forms.DataGridView();
@@ -81,13 +77,12 @@
             this.tabRoles.Location = new System.Drawing.Point(12, 12);
             this.tabRoles.Name = "tabRoles";
             this.tabRoles.SelectedIndex = 0;
-            this.tabRoles.Size = new System.Drawing.Size(374, 403);
+            this.tabRoles.Size = new System.Drawing.Size(374, 381);
             this.tabRoles.TabIndex = 1;
             // 
             // tabAgregar
             // 
             this.tabAgregar.Controls.Add(this.label32);
-            this.tabAgregar.Controls.Add(this.label6);
             this.tabAgregar.Controls.Add(this.label5);
             this.tabAgregar.Controls.Add(this.label4);
             this.tabAgregar.Controls.Add(this.btnQuitarFuncionalidad);
@@ -96,16 +91,13 @@
             this.tabAgregar.Controls.Add(this.lbxFuncionalidades);
             this.tabAgregar.Controls.Add(this.btnGuardarRol);
             this.tabAgregar.Controls.Add(this.btnLimpiarRol);
-            this.tabAgregar.Controls.Add(this.label3);
             this.tabAgregar.Controls.Add(this.label2);
             this.tabAgregar.Controls.Add(this.cbxFuncionalidades);
-            this.tabAgregar.Controls.Add(this.rbtRolDesactivado);
-            this.tabAgregar.Controls.Add(this.rbtRolActivado);
             this.tabAgregar.Controls.Add(this.label1);
             this.tabAgregar.Location = new System.Drawing.Point(4, 22);
             this.tabAgregar.Name = "tabAgregar";
             this.tabAgregar.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAgregar.Size = new System.Drawing.Size(366, 377);
+            this.tabAgregar.Size = new System.Drawing.Size(366, 355);
             this.tabAgregar.TabIndex = 0;
             this.tabAgregar.Text = " Agregar";
             this.tabAgregar.UseVisualStyleBackColor = true;
@@ -120,17 +112,6 @@
             this.label32.Size = new System.Drawing.Size(90, 16);
             this.label32.TabIndex = 263;
             this.label32.Text = "Datos del Rol";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(122, 283);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(17, 22);
-            this.label6.TabIndex = 28;
-            this.label6.Text = "*";
             // 
             // label5
             // 
@@ -193,7 +174,7 @@
             // 
             // btnGuardarRol
             // 
-            this.btnGuardarRol.Location = new System.Drawing.Point(211, 341);
+            this.btnGuardarRol.Location = new System.Drawing.Point(196, 302);
             this.btnGuardarRol.Name = "btnGuardarRol";
             this.btnGuardarRol.Size = new System.Drawing.Size(75, 23);
             this.btnGuardarRol.TabIndex = 8;
@@ -203,22 +184,13 @@
             // 
             // btnLimpiarRol
             // 
-            this.btnLimpiarRol.Location = new System.Drawing.Point(87, 341);
+            this.btnLimpiarRol.Location = new System.Drawing.Point(72, 302);
             this.btnLimpiarRol.Name = "btnLimpiarRol";
             this.btnLimpiarRol.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiarRol.TabIndex = 7;
             this.btnLimpiarRol.Text = "Limpiar";
             this.btnLimpiarRol.UseVisualStyleBackColor = true;
             this.btnLimpiarRol.Click += new System.EventHandler(this.btnLimpiarRol_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(84, 283);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Estado";
             // 
             // label2
             // 
@@ -236,28 +208,6 @@
             this.cbxFuncionalidades.Name = "cbxFuncionalidades";
             this.cbxFuncionalidades.Size = new System.Drawing.Size(121, 21);
             this.cbxFuncionalidades.TabIndex = 4;
-            // 
-            // rbtRolDesactivado
-            // 
-            this.rbtRolDesactivado.AutoSize = true;
-            this.rbtRolDesactivado.Location = new System.Drawing.Point(195, 306);
-            this.rbtRolDesactivado.Name = "rbtRolDesactivado";
-            this.rbtRolDesactivado.Size = new System.Drawing.Size(85, 17);
-            this.rbtRolDesactivado.TabIndex = 3;
-            this.rbtRolDesactivado.TabStop = true;
-            this.rbtRolDesactivado.Text = "Desactivado";
-            this.rbtRolDesactivado.UseVisualStyleBackColor = true;
-            // 
-            // rbtRolActivado
-            // 
-            this.rbtRolActivado.AutoSize = true;
-            this.rbtRolActivado.Location = new System.Drawing.Point(87, 306);
-            this.rbtRolActivado.Name = "rbtRolActivado";
-            this.rbtRolActivado.Size = new System.Drawing.Size(67, 17);
-            this.rbtRolActivado.TabIndex = 2;
-            this.rbtRolActivado.TabStop = true;
-            this.rbtRolActivado.Text = "Activado";
-            this.rbtRolActivado.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -368,13 +318,13 @@
             this.label7.TabIndex = 3;
             this.label7.Text = "Roles";
             // 
-            // VentanaRoles
+            // VentanaRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 429);
+            this.ClientSize = new System.Drawing.Size(398, 415);
             this.Controls.Add(this.tabRoles);
-            this.Name = "VentanaRoles";
+            this.Name = "VentanaRol";
             this.Text = "Roles - FRBA Hotel ©";
             this.Load += new System.EventHandler(this.VentanaRoles_Load);
             this.Controls.SetChildIndex(this.tabRoles, 0);
@@ -399,10 +349,7 @@
         private System.Windows.Forms.TabControl tabRoles;
         private System.Windows.Forms.TabPage tabAgregar;
         private System.Windows.Forms.TabPage tabModificar;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RadioButton rbtRolDesactivado;
-        private System.Windows.Forms.RadioButton rbtRolActivado;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabEliminar;
         private System.Windows.Forms.Label lblSeleccionarRol1;
@@ -415,7 +362,6 @@
         private System.Windows.Forms.Button btnQuitarFuncionalidad;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView dgvModificarRoles;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label32;

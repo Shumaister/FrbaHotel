@@ -17,7 +17,6 @@ namespace FrbaHotel
         public Hotel hotel { get; set; }
         public List<string> roles { get; set; }
         public List<string> hoteles { get; set; }
-        public List<string> funcionalidades { get; set; }
 
         //-------------------------------------- Constructores -------------------------------------
 
