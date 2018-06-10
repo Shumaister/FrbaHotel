@@ -264,7 +264,6 @@ namespace FrbaHotel
 
         public static bool loginUsuarioExiste(DataRow fila)
         {
-            //LA EXPRESIVIDAD NO SE MANCHA
             return fila != null;
         }
 
@@ -345,6 +344,23 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
+        public static void rolModificar(string nombreRolActual, string nombreRolNuevo, string estado)
+        {
+            rolEliminarFuncionalidades(nombreRolActual);
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Nombre = @nombreRolNuevo, Rol_Estado = @estado WHERE Rol_Nombre = @nombreRolActual");
+            consulta.Parameters.AddWithValue("@nombreRolActual", nombreRolActual);
+            consulta.Parameters.AddWithValue("@nombreRolNuevo", nombreRolNuevo);
+            consulta.Parameters.AddWithValue("@estado", estado);
+            consultaEjecutar(consulta);
+        }
+
+        public static void rolEliminar(string nombreRol)
+        {
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Estado = 0 WHERE Rol_Nombre = @nombreRol");
+            consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
+            consultaEjecutar(consulta);
+        }
+
         public static void rolHabilitadoAgregar(string nombreRol)
         {
             rolAgregar(nombreRol, "1");
@@ -372,15 +388,7 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
-        public static void rolModificar(string nombreRolActual, string nombreRolNuevo, string estado)
-        {
-            rolEliminarFuncionalidades(nombreRolActual);
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Nombre = @nombreRolNuevo, Rol_Estado = @estado WHERE Rol_Nombre = @nombreRolActual");
-            consulta.Parameters.AddWithValue("@nombreRolActual", nombreRolActual);
-            consulta.Parameters.AddWithValue("@nombreRolNuevo", nombreRolNuevo);
-            consulta.Parameters.AddWithValue("@estado", estado);
-            consultaEjecutar(consulta);
-        }
+
 
         public static void rolHabilitadoModificar(string nombreRolActual, string nombreRolNuevo)
         {
@@ -392,12 +400,7 @@ namespace FrbaHotel
             rolModificar(nombreRolActual, nombreRolNuevo, "0");
         }
 
-        public static void rolEliminar(string nombreRol)
-        {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Estado = 0 WHERE Rol_Nombre = @nombreRol");
-            consulta.Parameters.AddWithValue("@nombreRol", nombreRol);
-            consultaEjecutar(consulta);
-        }
+
 
         public static string rolBuscarID(string nombreRol)
         {
@@ -620,7 +623,16 @@ namespace FrbaHotel
 
         public static void hotelModificar(Hotel hotel, Hotel nuevoHotel)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Hoteles SET Hotel_Nombre = @NuevoNombre, Hotel_CantidadEstrellas = @NuevaCantidadEstrellas, Hotel_DomicilioID");
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Hoteles SET Hotel_Nombre = @NuevoNombre, Hotel_CantidadEstrellas = @NuevaCantidadEstrellas, Hotel_DomicilioID = @NuevoDomicilioID, Hotel_Telefono = @NuevoTelefono, Hotel_Email = @NuevoEmail, Hotel_FechaCreacion = @NuevaFechaCreacion, Hotel_Estado = @NuevoEstado WHERE Hotel_ID = @HotelID");
+            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerID(hotel));
+            consulta.Parameters.AddWithValue("@NuevoNombre", nuevoHotel.nombre);
+            consulta.Parameters.AddWithValue("@NuevaCantidadEstrellas", nuevoHotel.cantidadEstrellas);
+            consulta.Parameters.AddWithValue("@NuevoDomicilio", nuevoHotel.domicilio);
+            consulta.Parameters.AddWithValue("@NuevoTelefono", nuevoHotel.telefono);
+            consulta.Parameters.AddWithValue("@NuevoEmail", nuevoHotel.email);
+            consulta.Parameters.AddWithValue("@NuevaFechaCreacion", nuevoHotel.fechaCreacion);
+            consulta.Parameters.AddWithValue("@NuevoEstado", nuevoHotel.estado);
+
         }
 
         public static void hotelEliminar(Hotel hotel)
@@ -905,6 +917,34 @@ namespace FrbaHotel
             return paisID;
         }
 
+        public static bool paisEstaEnAlgunDomicilio(string pais)
+        {
+            SqlCommand consulta = consultaCrear("SELECT COUNT(*) FROM RIP.Domicilios WHERE Domicilio_PaisID = @PaisID");
+            consulta.Parameters.AddWithValue("@PaisID", paisBuscarID(pais));
+            return consultaValorEsMayorA(consultaObtenerValor(consulta), 0);
+        }
+
+        public static void paisEliminar(string pais)
+        {
+            SqlCommand consulta = consultaCrear("DELETE FROM RIP.Paises WHERE Pais_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", paisBuscarID(pais));
+            consultaEjecutar(consulta);
+        }
+
+        public static void ciudadEliminar(string ciudad)
+        {
+            SqlCommand consulta = consultaCrear("DELETE FROM RIP.Ciudades WHERE Ciudad_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", ciudadBuscarID(ciudad));
+            consultaEjecutar(consulta);
+        }
+
+        public static void calleEliminar(string calle)
+        {
+            SqlCommand consulta = consultaCrear("DELETE FROM RIP.Calles WHERE Calle_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", calleBuscarID(calle));
+            consultaEjecutar(consulta);
+        }
+
         //-------------------------------------- Metodos para Nacionalidades -------------------------------------
 
         public static string nacionalidadAgregar(string nacionalidad) 
@@ -932,24 +972,21 @@ namespace FrbaHotel
             return nacionalidadID;
         }
 
-        //-------------------------------------- Metodos para Tipos Documentos -------------------------------------
-
-        public static string tipoDocumentoAgregar(string tipoDocumento)
+        public static bool nacionalidadEstaEnAlgunaPersona(string nacionalidad)
         {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.TiposDocumentos (TipoDocumento_Descripcion) VALUES (@tipoDocumento)");
-            consulta.Parameters.AddWithValue("@tipoDocumento", tipoDocumento);
+            SqlCommand consulta = consultaCrear("SELECT COUNT(*) FROM RIP.Personas WHERE Persona_Nacionalidad = @Nacionalidad");
+            consulta.Parameters.AddWithValue("@Nacionalidad", nacionalidadBuscarID(nacionalidad));
+            return consultaValorEsMayorA(consultaObtenerValor(consulta), 0);
+        }
+
+        public static void nacionalidadEliminar(string nacionalidad)
+        {
+            SqlCommand consulta = consultaCrear("DELETE FROM RIP.Personas WHERE Nacionalidad_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", nacionalidadBuscarID(nacionalidad));
             consultaEjecutar(consulta);
-            string tipoDocumentoID = tipoDocumentoBuscarID(tipoDocumento);
-            return tipoDocumentoID;
         }
 
-        public static string tipoDocumentoObtenerID(string tipoDocumento)
-        {
-            string tipoDocumentoID = tipoDocumentoBuscarID(tipoDocumento);
-            if (consultaValorNoExiste(tipoDocumentoID))
-                tipoDocumentoID = tipoDocumentoAgregar(tipoDocumento);
-            return tipoDocumentoID;
-        }
+        //-------------------------------------- Metodos para Tipos Documentos -------------------------------------
 
         public static string tipoDocumentoBuscarID(string tipoDocumento)
         {
