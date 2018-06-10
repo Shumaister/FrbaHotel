@@ -294,26 +294,27 @@ namespace FrbaHotel
 
         //-------------------------------------- Metodos para Sesion -------------------------------------
 
-        public static void sesionActualizarDatos(Sesion usuario)
+        public static void sesionActualizarDatos(Sesion sesion)
         {
-            usuario.roles = usuarioObtenerRoles(usuario.nombreUsuario);
-            usuario.hoteles = usuarioObtenerHotelesLista(usuario.nombreUsuario);
-            usuario.funcionalidades = rolObtenerFuncionalidades(usuario.rolLogueado);
+            sesion.roles = usuarioObtenerRoles(sesion.usuario);
+            sesion.hoteles = usuarioObtenerHotelesLista(sesion.usuario);
+            sesion.funcionalidades = rolObtenerFuncionalidades(sesion.rol);
         }
 
-        public static Sesion sesionCrear(string nombreUsuario)
+        public static Sesion sesionCrear(string nombreUsuario, string contrasenia)
         {
-            List<string> roles = usuarioObtenerRoles(nombreUsuario);
-            List<string> hoteles = usuarioObtenerHotelesLista(nombreUsuario);
-            Sesion sesion = new Sesion(nombreUsuario, roles, hoteles);
+            Usuario usuario = new Usuario(nombreUsuario, contrasenia, null, "");
+            List<string> roles = usuarioObtenerRoles(usuario);
+            List<string> hoteles = usuarioObtenerHotelesLista(usuario);
+            Sesion sesion = new Sesion(usuario, roles, hoteles);
             return sesion;
         }
 
-        public static void sesionModificarContrasenia(string nombreUsuario, string nuevaContrasenia)
+        public static void sesionModificarContrasenia(Sesion sesion)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Usuarios SET Usuario_Contrasenia = @contrasenia WHERE Usuario_Nombre = @nombreUsuario");
-            consulta.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
-            consulta.Parameters.AddWithValue("@contrasenia", loginEncriptarContraseña(nuevaContrasenia));
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Usuarios SET Usuario_Contrasenia = @Contrasenia WHERE Usuario_Nombre = @Nombre");
+            consulta.Parameters.AddWithValue("@Nombre", sesion.usuario.nombre);
+            consulta.Parameters.AddWithValue("@Contrasenia", loginEncriptarContraseña(sesion.usuario.contrasenia));
             consultaEjecutar(consulta);
         }
 
@@ -782,7 +783,7 @@ namespace FrbaHotel
         public static bool personaAlguienTieneEseDocumento(string tipoDocumento, string numeroDocumento)
         {
             SqlCommand consulta = consultaCrear("SELECT Persona_Email FROM RIP.Personas WHERE Persona_TipoDocumentoID = @tipoDocumentoID AND Persona_NumeroDocumento = @numeroDocumento");
-            consulta.Parameters.AddWithValue("@tipoDocumentoID", tipoDocumentoBuscarID(tipoDocumento));
+            consulta.Parameters.AddWithValue("@tipoDocumentoID", tipoDocumentoObtenerID(tipoDocumento));
             consulta.Parameters.AddWithValue("@numeroDocumento", numeroDocumento);
             return consultaValorExiste(consultaObtenerValor(consulta));
         }
@@ -993,7 +994,7 @@ namespace FrbaHotel
 
         //-------------------------------------- Metodos para Tipos Documentos -------------------------------------
 
-        public static string tipoDocumentoBuscarID(string tipoDocumento)
+        public static string tipoDocumentoObtenerID(string tipoDocumento)
         {
             SqlCommand consulta = consultaCrear("SELECT TipoDocumento_ID FROM RIP.TiposDocumentos WHERE TipoDocumento_Descripcion = @tipoDocumento");
             consulta.Parameters.AddWithValue("@tipoDocumento", tipoDocumento);

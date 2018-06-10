@@ -49,7 +49,7 @@ namespace FrbaHotel.Menus
 
         private void menuCambiarContrasenia_Click(object sender, EventArgs e)
         {
-            VentanaCambiarContrasenia ventanaAjustesDeCuenta = new VentanaCambiarContrasenia(usuario.nombreUsuario);
+            VentanaCambiarContrasenia ventanaAjustesDeCuenta = new VentanaCambiarContrasenia(usuario.usuario);
             ventanaAjustesDeCuenta.ShowDialog();
         }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FrbaHotel.Clases;
 
 namespace FrbaHotel
 {
@@ -11,28 +12,28 @@ namespace FrbaHotel
     {
         //-------------------------------------- Atributos -------------------------------------
 
-        public string nombreUsuario { get; set; }
-        public string rolLogueado { get; set; }
-        public string hotelLogueado { get; set; }
+        public Usuario usuario { get; set; }
+        public Rol rol { get; set; }
+        public Hotel hotel { get; set; }
         public List<string> roles { get; set; }
-        public List<string> funcionalidades { get; set; }
         public List<string> hoteles { get; set; }
+        public List<string> funcionalidades { get; set; }
 
         //-------------------------------------- Constructores -------------------------------------
 
-        public Sesion(string nombre, List<string> roles, List<string> hoteles)
+        public Sesion(Usuario usuario, List<string> roles, List<string> hoteles)
         {
-            this.nombreUsuario = nombre;
+            this.usuario = usuario;
             this.roles = roles;
             this.hoteles = hoteles;
         }
 
         //-------------------------------------- Metodos para Usuario -------------------------------------
 
-        public void configurarDatos(string rol, string hotel, List<string> funcionalidades)
+        public void configurarDatos(Rol rol, Hotel hotel, List<string> funcionalidades)
         {
-            this.rolLogueado = rol;
-            this.hotelLogueado = hotel;
+            this.rol = rol;
+            this.hotel = hotel;
             this.funcionalidades = funcionalidades;
         }
 
