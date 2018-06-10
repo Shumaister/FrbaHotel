@@ -37,9 +37,9 @@ namespace FrbaHotel.AbmRol
         //-------------------------------------- Metodos para Eventos ----------------------------
 
         private void VentanaRoles_Load(object sender, EventArgs e)
-        {
-            comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerListaRegistros());
+        {           
             ventanaActualizar();
+            comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodasEnLista());
             dataGridViewAgregarBotonModificar(dgvModificarRoles);
             dataGridViewAgregarBotonEliminar(dgvEliminarRoles);
         }
@@ -67,7 +67,7 @@ namespace FrbaHotel.AbmRol
         private void btnLimpiarRol_Click(object sender, EventArgs e)
         {
             listBoxLimpiar(lbxFuncionalidades);
-            comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerListaRegistros());
+            comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodasEnLista());
             tbxNombreRol.Clear();
             controladorError.Clear();        
         }
@@ -104,7 +104,6 @@ namespace FrbaHotel.AbmRol
                 Rol rol = ventanaCrearRolParaEliminar(e);
                 Database.rolEliminadoConExito(rol);
                 ventanaActualizar();
-                Database.sesionActualizarDatos(sesion);
             }
         }
 

@@ -13,21 +13,72 @@ namespace FrbaHotel.AbmUsuario
 {
     public partial class VentanaModificarUsuario : VentanaBase
     {
-        //-------------------------------------- Atributos -------------------------------------
 
+        #region Atributos
+
+        VentanaUsuario ventanaUsuario {get; set;}
         Sesion sesion { get; set; }
         Usuario usuario { get; set; }
-        
-        //-------------------------------------- Constructores -------------------------------------
 
-        public VentanaModificarUsuario(Sesion sesion, Usuario usuario)
+        #endregion
+
+        #region Constructores
+
+        public VentanaModificarUsuario(VentanaUsuario ventanaUsuario, Sesion sesion, Usuario usuario)
         {
             InitializeComponent();
+            this.ventanaUsuario = ventanaUsuario;
             this.sesion = sesion;
             this.usuario = usuario;
         }
 
-        //-------------------------------------- Metodos para Eventos -------------------------------------
+        #endregion
+        
+        #region Modificar
+
+        private void VentanaModificarUsuario_Load(object sender, EventArgs e)
+        {
+            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
+            cbxTipoDocumento.SelectedIndex = cbxTipoDocumento.Items.IndexOf(usuario.persona.tipoDocumento);
+            tbxUsuario.Text = usuario.nombre;
+            tbxContrasena.Text = usuario.contrasenia;        
+            tbxNombre.Text = usuario.persona.nombre;
+            tbxApellido.Text = usuario.persona.apellido;
+            tbxDocumento.Text = usuario.persona.numeroDocumento;
+            tbxFechaNacimiento.Text = usuario.persona.fechaNacimiento;
+            tbxPais.Text = usuario.persona.domicilio.pais;
+            tbxCiudad.Text = usuario.persona.domicilio.ciudad;
+            tbxCalle.Text = usuario.persona.domicilio.calle;
+            tbxNumeroCalle.Text = usuario.persona.domicilio.numeroCalle;
+            tbxPiso.Text = usuario.persona.domicilio.piso;
+            tbxDepartamento.Text = usuario.persona.domicilio.piso;
+        }
+
+        private void btnGuardarUsuario_Click(object sender, EventArgs e)
+        {
+            if (ventanaCamposEstanCompletos(this, controladorError))
+            {
+                Usuario usuarioModificado = ventanaCrearUsuarioModificado();
+                if (true)//Database.usuarioModificadoConExito(usuarioModificado))
+                {
+                    btnLimpiarUsuario_Click(sender, e);
+                    ventanaUsuario.VentanaUsuarios_Load(sender, e);
+                }
+            }
+        }
+
+        private Usuario ventanaCrearUsuarioModificado()
+        {
+            Domicilio domicilio = new Domicilio(tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text, tbxPiso.Text, tbxDepartamento.Text);
+            Persona persona = new Persona(tbxNombre.Text, tbxApellido.Text, tbxFechaNacimiento.Text, cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text, tbxNacionalidad.Text, tbxTelefono.Text, tbxEmail.Text, domicilio);
+            Usuario usuarioModificado = new Usuario(tbxUsuario.Text, tbxContrasena.Text, persona);
+            usuarioModificado.id = usuario.id;
+            return usuarioModificado;
+        }
+
+        #endregion
+
+        #region Eventos 
 
         private void btnAgregarRol_Click(object sender, EventArgs e)
         {
@@ -47,38 +98,6 @@ namespace FrbaHotel.AbmUsuario
         private void btnQuitarHotel_Click(object sender, EventArgs e)
         {
             botonQuitarComboBoxListBox(cbxHoteles, lbxHoteles);
-        }
-
-        private void btnGuardarUsuario_Click(object sender, EventArgs e)
-        {
-            /*
-            if (ventanaCamposEstanCompletos(this, controladorError))
-            {
-                if (Database.usuarioExiste(tbxUsuario.Text))
-                {
-                    ventanaInformarError("ERROR: El nombre de usuario ya existe");
-                    return;
-                }
-                if (Database.personaAlguienTieneEseEmail(tbxEmail.Text))
-                {
-                    ventanaInformarError("ERROR: El email ya fue registrado para otro usuario");
-                    return;                   
-                }
-                if (Database.personaAlguienTieneEseDocumento(cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text))
-                {
-                    ventanaInformarError("ERROR: Otro usuario ya fue registrado con ese documento");
-                    return;
-                }
-
-                Domicilio domicilioModificado = new Domicilio(tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text, tbxPiso.Text, tbxDepartamento.Text);
-                Persona personaModificada = new Persona(tbxNombre.Text, tbxApellido.Text, tbxFechaNacimiento.Text.ToString(), cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text, tbxNacionalidad.Text, tbxTelefono.Text, tbxEmail.Text, domicilioModificado);
-                Usuario usuarioModificado = new Usuario(tbxUsuario.Text, tbxContrasena.Text, personaModificada, "");
-                Database.domicilioModificar(usuario.persona.domicilio, domicilioModificado);
-                Database.personaModificar(personaModificada, usuario.persona.email);
-                Database.usuarioModificar(usuarioModificado, tbxUsuario.Text);
-                ventanaInformarExito();
-            }
-             */
         }
 
         private void tbxUsuario_KeyPress(object sender, KeyPressEventArgs e)
@@ -183,31 +202,6 @@ namespace FrbaHotel.AbmUsuario
             controladorError.Clear();
         }
 
-        private void VentanaModificarUsuario_Load(object sender, EventArgs e)
-        {
-            /*
-            tbxUsuario.Text = usuario.nombre;
-            tbxContrasena.Text = usuario.contrasenia;
-            tbxNombre.Text = usuario.persona.nombre;
-            comboBoxCargar(cbxHoteles, Database.usuarioObtenerHotelesLista(usuario.nombre));
-            comboBoxCargar(cbxRoles, Database.usuarioObtenerRoles(usuario.nombre));
-            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
-            tbxApellido.Text = usuario.persona.apellido;
-            if(usuario.persona.tipoDocumento == "DNI")
-                cbxTipoDocumento.SelectedIndex = 0;
-            else
-                cbxTipoDocumento.SelectedIndex = 1;
-            tbxDocumento.Text = usuario.persona.numeroDocumento;
-            tbxTelefono.Text = usuario.persona.telefono;
-            tbxEmail.Text = usuario.persona.email;
-            tbxCalle.Text = usuario.persona.domicilio.calle;
-            tbxCiudad.Text = usuario.persona.domicilio.ciudad;
-            tbxPais.Text = usuario.persona.domicilio.pais;
-            tbxPiso.Text = usuario.persona.domicilio.piso;
-            tbxDepartamento.Text = usuario.persona.domicilio.departamento;
-             */
-        }
-
         private void btnSeleccionarFecha_Click(object sender, EventArgs e)
         {
             calendario.Show();
@@ -236,5 +230,6 @@ namespace FrbaHotel.AbmUsuario
         {
             controladorError.Clear();
         }
-    }
+        #endregion
+    }   
 }
