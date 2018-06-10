@@ -37,13 +37,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cbxFuncionalidades = new System.Windows.Forms.ComboBox();
-            this.rbtRolDesactivado = new System.Windows.Forms.RadioButton();
-            this.rbtRolActivado = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
+            this.rbtRolActivado = new System.Windows.Forms.RadioButton();
+            this.rbtRolDesactivado = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.SuspendLayout();
@@ -137,28 +137,6 @@
             this.cbxFuncionalidades.Size = new System.Drawing.Size(121, 21);
             this.cbxFuncionalidades.TabIndex = 16;
             // 
-            // rbtRolDesactivado
-            // 
-            this.rbtRolDesactivado.AutoSize = true;
-            this.rbtRolDesactivado.Location = new System.Drawing.Point(138, 303);
-            this.rbtRolDesactivado.Name = "rbtRolDesactivado";
-            this.rbtRolDesactivado.Size = new System.Drawing.Size(85, 17);
-            this.rbtRolDesactivado.TabIndex = 15;
-            this.rbtRolDesactivado.TabStop = true;
-            this.rbtRolDesactivado.Text = "Desactivado";
-            this.rbtRolDesactivado.UseVisualStyleBackColor = true;
-            // 
-            // rbtRolActivado
-            // 
-            this.rbtRolActivado.AutoSize = true;
-            this.rbtRolActivado.Location = new System.Drawing.Point(30, 303);
-            this.rbtRolActivado.Name = "rbtRolActivado";
-            this.rbtRolActivado.Size = new System.Drawing.Size(67, 17);
-            this.rbtRolActivado.TabIndex = 14;
-            this.rbtRolActivado.TabStop = true;
-            this.rbtRolActivado.Text = "Activado";
-            this.rbtRolActivado.UseVisualStyleBackColor = true;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -212,6 +190,28 @@
             this.label32.TabIndex = 264;
             this.label32.Text = "Datos del Rol";
             // 
+            // rbtRolActivado
+            // 
+            this.rbtRolActivado.AutoSize = true;
+            this.rbtRolActivado.Location = new System.Drawing.Point(30, 303);
+            this.rbtRolActivado.Name = "rbtRolActivado";
+            this.rbtRolActivado.Size = new System.Drawing.Size(67, 17);
+            this.rbtRolActivado.TabIndex = 14;
+            this.rbtRolActivado.TabStop = true;
+            this.rbtRolActivado.Text = "Activado";
+            this.rbtRolActivado.UseVisualStyleBackColor = true;
+            // 
+            // rbtRolDesactivado
+            // 
+            this.rbtRolDesactivado.AutoSize = true;
+            this.rbtRolDesactivado.Location = new System.Drawing.Point(138, 303);
+            this.rbtRolDesactivado.Name = "rbtRolDesactivado";
+            this.rbtRolDesactivado.Size = new System.Drawing.Size(85, 17);
+            this.rbtRolDesactivado.TabIndex = 15;
+            this.rbtRolDesactivado.TabStop = true;
+            this.rbtRolDesactivado.Text = "Desactivado";
+            this.rbtRolDesactivado.UseVisualStyleBackColor = true;
+            // 
             // VentanaModificarRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -251,8 +251,8 @@
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.label6, 0);
-            this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.label32, 0);
+            this.Controls.SetChildIndex(this.logo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.ResumeLayout(false);
@@ -271,12 +271,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbxFuncionalidades;
-        private System.Windows.Forms.RadioButton rbtRolDesactivado;
-        private System.Windows.Forms.RadioButton rbtRolActivado;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.RadioButton rbtRolActivado;
+        private System.Windows.Forms.RadioButton rbtRolDesactivado;
     }
 }

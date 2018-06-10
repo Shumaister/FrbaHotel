@@ -138,11 +138,6 @@ namespace FrbaHotel
             return valor != "";
         }
 
-        public static bool consultaExitosa(int resultadoConsulta)
-        {
-            return resultadoConsulta > 0;
-        }
-
         //-------------------------------------- Metodos para Ventanas -------------------------------------
 
         public static void ventanaInformarErrorDatabase(Exception excepcion)
@@ -150,14 +145,14 @@ namespace FrbaHotel
             VentanaBase.ventanaInformarErrorDatabase(excepcion);
         }
 
-        public static bool ventanaInformarError(string mensaje)
+        public static void ventanaInformarError(string mensaje)
         {
-            return VentanaBase.ventanaInformarError(mensaje);
+            VentanaBase.ventanaInformarError(mensaje);
         }
 
-        public static bool ventanaInformarExito(string mensaje)
+        public static void ventanaInformarExito(string mensaje)
         {
-            return VentanaBase.ventanaInformarExito(mensaje);
+            VentanaBase.ventanaInformarExito(mensaje);
         }
 
         //-------------------------------------- Metodos para Login -------------------------------------
@@ -256,7 +251,7 @@ namespace FrbaHotel
         {
             sesion.roles = usuarioObtenerRoles(sesion.usuario);
             sesion.hoteles = usuarioObtenerHotelesLista(sesion.usuario);
-            sesion.funcionalidades = rolObtenerFuncionalidades(sesion.rol);
+            sesion.rol.funcionalidades = rolObtenerFuncionalidades(sesion.rol);
         }
 
         public static Sesion sesionCrear(string nombreUsuario, string contrasenia)
@@ -294,52 +289,60 @@ namespace FrbaHotel
         }
         
         //-------------------------------------- Metodos para Roles -------------------------------------
-        
+     
         public static bool rolAgregadoConExito(Rol rol)
         {
-            if (rolYaExiste(rol))
-                return ventanaInformarError("Ya existe un rol registrado con ese nombre");
-            if (consultaExitosa(rolAgregar(rol)))
-                return ventanaInformarExito("El rol fue creado con exito");
-            return ventanaInformarError("No se puedo ejecutar la consulta en la Base de datos");
+            if (rolExiste(rol))
+            {
+                ventanaInformarError("Ya existe un rol registrado con ese nombre");
+                return false;
+            }
+            else
+            {
+                rolAgregar(rol);
+                rolAgregarFuncionalidades(rol);
+                ventanaInformarExito("El rol fue creado con exito");
+                return true;
+            }
         }
 
         public static bool rolModificadoConExito(Rol rol, Rol rolModificado)
         {
-            if (rolYaExiste(rolModificado) && rolSonDistintos(rol, rolModificado))
-                return ventanaInformarError("Ya existe un rol registrado con ese nombre");
-            if(consultaExitosa(rolModificar(rol, rolModificado)))
-                return ventanaInformarExito("El rol fue modificado con exito");
-            return ventanaInformarError("No se puedo ejecutar la consulta en la Base de datos");
+            if (rolExisteYEsDistinto(rol, rolModificado))
+            {
+                ventanaInformarError("Ya existe un rol registrado con ese nombre");
+                return false;
+            }
+            else
+            {
+                rolEliminarFuncionalidades(rol);
+                rolModificar(rol, rolModificado);
+                rolAgregarFuncionalidades(rolModificado);
+                ventanaInformarExito("El rol fue modificado con exito");
+                return true;
+            }
         }
 
-        public static bool rolEliminadoConExito(Rol rol)
+        public static void rolEliminadoConExito(Rol rol)
         {
-            if (consultaExitosa(rolEliminar(rol)))
-                return ventanaInformarExito("El rol fue eliminado con exito");
-            return ventanaInformarError("No se puedo ejecutar la consulta en la Base de datos");
+            rolEliminar(rol);
+            ventanaInformarExito("El rol fue eliminado con exito");
         }
         
-        public static int rolAgregar(Rol rol)
+        public static void rolAgregar(Rol rol)
         {
             SqlCommand consulta = consultaCrear("INSERT INTO RIP.Roles (Rol_Nombre) VALUES (@Nombre)");
             consulta.Parameters.AddWithValue("@Nombre", rol.nombre);
-            return consultaEjecutar(consulta);
+            consultaEjecutar(consulta);
         }
 
-        public static int rolModificar(Rol rol, Rol rolModificado)
+        public static void rolModificar(Rol rol, Rol rolModificado)
         {
-            rolEliminarFuncionalidades(rol);
             SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Nombre = @NuevoNombre, Rol_Estado = @NuevoEstado WHERE Rol_Nombre = @Nombre");
             consulta.Parameters.AddWithValue("@Nombre", rol.nombre);
             consulta.Parameters.AddWithValue("@NuevoNombre", rolModificado.nombre);
             consulta.Parameters.AddWithValue("@NuevoEstado", rolModificado.estado);
-            return consultaEjecutar(consulta);
-        }
-
-        public static bool rolSonDistintos(Rol unRol, Rol otroRol)
-        {
-            return rolObtenerID(unRol) != rolObtenerID(otroRol);
+            consultaEjecutar(consulta);
         }
 
         public static int rolEliminar(Rol rol)
@@ -347,6 +350,16 @@ namespace FrbaHotel
             SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Estado = 0 WHERE Rol_Nombre = @Nombre");
             consulta.Parameters.AddWithValue("@Nombre", rol.nombre);
             return consultaEjecutar(consulta);
+        }
+
+        public static bool rolExisteYEsDistinto(Rol rol, Rol rolModificado)
+        {
+            return rolExiste(rolModificado) && rolSonDistintos(rol, rolModificado);
+        }
+
+        public static bool rolSonDistintos(Rol unRol, Rol otroRol)
+        {
+            return rolObtenerID(unRol) != rolObtenerID(otroRol);
         }
 
         public static string rolObtenerID(Rol rol)
@@ -370,14 +383,14 @@ namespace FrbaHotel
                 rolAgregarFuncionalidad(rol, funcionalidad);
         }
 
-        public static void rolEliminarFuncionalidades(Rol rol)
+        public static int rolEliminarFuncionalidades(Rol rol)
         {
             SqlCommand consulta = consultaCrear("DELETE FROM RIP.Roles_Funcionalidades WHERE RolFuncionalidad_RolID = @RolID");
             consulta.Parameters.AddWithValue("@RolID", rolObtenerID(rol));
-            consultaEjecutar(consulta);
+            return consultaEjecutar(consulta);
         }
 
-        public static bool rolYaExiste(Rol rol)
+        public static bool rolExiste(Rol rol)
         {
             SqlCommand consulta = consultaCrear("SELECT COUNT(*) FROM RIP.Roles WHERE Rol_Nombre = @Nombre");
             consulta.Parameters.AddWithValue("@Nombre", rol.nombre);            

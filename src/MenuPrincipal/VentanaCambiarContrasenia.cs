@@ -37,6 +37,7 @@ namespace FrbaHotel.Menus
             {
                 sesion.usuario.contrasenia = tbxContrasenia.Text;
                 Database.sesionModificarContrasenia(sesion);
+                this.Hide();
             }               
         }
 

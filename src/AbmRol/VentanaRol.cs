@@ -39,7 +39,6 @@ namespace FrbaHotel.AbmRol
         private void VentanaRoles_Load(object sender, EventArgs e)
         {
             comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerListaRegistros());
-            rbtRolActivado.Select();
             ventanaActualizar();
             dataGridViewAgregarBotonModificar(dgvModificarRoles);
             dataGridViewAgregarBotonEliminar(dgvEliminarRoles);
@@ -70,19 +69,14 @@ namespace FrbaHotel.AbmRol
             listBoxLimpiar(lbxFuncionalidades);
             comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerListaRegistros());
             tbxNombreRol.Clear();
-            controladorError.Clear();
-            rbtRolActivado.Select();           
+            controladorError.Clear();        
         }
 
         private void btnGuardarRol_Click(object sender, EventArgs e)
         {
             if (ventanaCamposEstanCompletos(tabAgregar, controladorError))
             {
-                List<string> funcionalidades = new List<string>();
-                foreach (string funcionalidad in lbxFuncionalidades.Items)
-                    funcionalidades.Add(funcionalidad);
-                Rol rol = new Rol(tbxNombreRol.Text);
-                rol.funcionalidades = funcionalidades;
+                Rol rol = ventanaCrearRolParaAgregar();
                 if(Database.rolAgregadoConExito(rol))
                 {
                     btnLimpiarRol_Click(sender, null);
@@ -96,11 +90,7 @@ namespace FrbaHotel.AbmRol
             var senderGrid = (DataGridView)sender;
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                string rolNombre = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Nombre"].Value.ToString();
-                string rolEstado = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Estado"].Value.ToString();
-                Rol rol = new Rol(rolNombre);
-                rol.estado = rolEstado;
-                rol.funcionalidades = Database.rolObtenerFuncionalidades(rol);
+                Rol rol = ventanaCrearRolParaModificar(e);
                 VentanaModificarRol ventanaModificarRol = new VentanaModificarRol(this, rol);
                 ventanaModificarRol.ShowDialog();
             }          
@@ -111,14 +101,35 @@ namespace FrbaHotel.AbmRol
             var senderGrid = (DataGridView)sender;
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                string rolNombre = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Nombre"].Value.ToString();
-                Rol rol = new Rol(rolNombre);
-                if (Database.rolEliminadoConExito(rol))
-                {
-                    ventanaActualizar();
-                    Database.sesionActualizarDatos(sesion);
-                }
+                Rol rol = ventanaCrearRolParaEliminar(e);
+                Database.rolEliminadoConExito(rol);
+                ventanaActualizar();
+                Database.sesionActualizarDatos(sesion);
             }
+        }
+
+        private Rol ventanaCrearRolParaAgregar()
+        {
+            List<string> funcionalidades = new List<string>();
+            foreach (string funcionalidad in lbxFuncionalidades.Items)
+                funcionalidades.Add(funcionalidad);
+            Rol rol = new Rol(tbxNombreRol.Text);
+            rol.funcionalidades = funcionalidades;
+            return rol;
+        }
+
+        private Rol ventanaCrearRolParaModificar(DataGridViewCellEventArgs e)
+        {
+            string rolNombre = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Nombre"].Value.ToString();
+            Rol rol = new Rol(rolNombre);
+            rol.funcionalidades = Database.rolObtenerFuncionalidades(rol);
+            return rol;
+        }
+
+        private Rol ventanaCrearRolParaEliminar(DataGridViewCellEventArgs e)
+        {
+            string rolNombre = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Nombre"].Value.ToString();
+            return new Rol(rolNombre);
         }
     }
 }

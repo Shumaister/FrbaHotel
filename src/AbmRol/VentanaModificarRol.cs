@@ -34,7 +34,7 @@ namespace FrbaHotel.AbmRol
             tbxNombreRol.Text = rol.nombre;
             listBoxCargar(lbxFuncionalidades, rol.funcionalidades);
             comboBoxCargar(cbxFuncionalidades, Database.rolObtenerFuncionalidadesFaltantes(rol));
-            if (rol.estado == "1")
+            if (Database.rolEstaHabilitado(rol))
                 rbtRolActivado.Select();
             else
                 rbtRolDesactivado.Select();          
@@ -73,15 +73,7 @@ namespace FrbaHotel.AbmRol
         {
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
-                List<string> funcionalidades = new List<string>();
-                foreach (string funcionalidad in lbxFuncionalidades.Items)
-                    funcionalidades.Add(funcionalidad);
-                Rol rolModificado = new Rol(tbxNombreRol.Text);
-                rolModificado.funcionalidades = funcionalidades;
-                if (rbtRolActivado.Checked)
-                    rolModificado.estado = "1";
-                else
-                    rolModificado.estado = "0";
+                Rol rolModificado = ventanaCrearRol();
                 if (Database.rolModificadoConExito(rol, rolModificado))
                 {
                     this.Hide();
@@ -89,6 +81,20 @@ namespace FrbaHotel.AbmRol
                     Database.sesionActualizarDatos(ventanaRol.sesion);
                 }
             }
+        }
+
+        private Rol ventanaCrearRol()
+        {
+            List<string> funcionalidades = new List<string>();
+            foreach (string funcionalidad in lbxFuncionalidades.Items)
+                funcionalidades.Add(funcionalidad);
+            Rol rolModificado = new Rol(tbxNombreRol.Text);
+            rolModificado.funcionalidades = funcionalidades;
+            if (rbtRolActivado.Checked)
+                rolModificado.estado = "1";
+            else
+                rolModificado.estado = "0";
+            return rolModificado;
         }
     }
 }

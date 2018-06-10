@@ -82,7 +82,7 @@ namespace FrbaHotel.Login
         {
             sesion.rol = new Rol(cbxRoles.SelectedItem.ToString());
             //sesion.hotel = new Hotel(cbxHoteles.SelectedItem.ToString());
-            sesion.funcionalidades = Database.rolObtenerFuncionalidades(sesion.rol);
+            sesion.rol.funcionalidades = Database.rolObtenerFuncionalidades(sesion.rol);
         }
 
         private void btnIngresarRol_Click(object sender, EventArgs e)

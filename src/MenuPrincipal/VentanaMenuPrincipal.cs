@@ -57,57 +57,57 @@ namespace FrbaHotel.Menus
         {
             bool usuarioTieneFuncionesDeAdmnistrador = false;
             bool usuarioTieneFuncionesDeRecepcion = false;          
-            if (sesion.funcionalidades.Contains("Usuarios"))
+            if (sesion.rol.funcionalidades.Contains("Usuarios"))
             {
                 menuUsuarios.Visible = true;
                 usuarioTieneFuncionesDeAdmnistrador = true;
-            }                
-            if (sesion.funcionalidades.Contains("Hoteles"))
+            }
+            if (sesion.rol.funcionalidades.Contains("Hoteles"))
             {
                 menuHoteles.Visible = true;
                 usuarioTieneFuncionesDeAdmnistrador = true;
             }
-            if (sesion.funcionalidades.Contains("Habitaciones"))
+            if (sesion.rol.funcionalidades.Contains("Habitaciones"))
             {
                  menuHabitaciones.Visible = true;
                 usuarioTieneFuncionesDeAdmnistrador = true;
-            }               
-            if (sesion.funcionalidades.Contains("Roles"))
+            }
+            if (sesion.rol.funcionalidades.Contains("Roles"))
             {
                 menuRoles.Visible = true;
                 usuarioTieneFuncionesDeAdmnistrador = true;
-            }                
-            if (sesion.funcionalidades.Contains("Regimenes"))
+            }
+            if (sesion.rol.funcionalidades.Contains("Regimenes"))
             {
                 menuRegimenes.Visible = true;
                 usuarioTieneFuncionesDeAdmnistrador = true;
             }
-            if (sesion.funcionalidades.Contains("Reservas"))
+            if (sesion.rol.funcionalidades.Contains("Reservas"))
             {
                 menuReservas.Visible = true;
                 usuarioTieneFuncionesDeRecepcion = true;
-            }                
-            if (sesion.funcionalidades.Contains("Facturas"))
+            }
+            if (sesion.rol.funcionalidades.Contains("Facturas"))
             {
                 menuFacturas.Visible = true;
                 usuarioTieneFuncionesDeRecepcion = true;
             }
-            if (sesion.funcionalidades.Contains("Clientes"))
+            if (sesion.rol.funcionalidades.Contains("Clientes"))
             {
                 menuClientes.Visible = true;
                 usuarioTieneFuncionesDeRecepcion = true;
             }
-            if (sesion.funcionalidades.Contains("Consumibles"))
+            if (sesion.rol.funcionalidades.Contains("Consumibles"))
             {
                 menuConsumibles.Visible = true;
                 usuarioTieneFuncionesDeRecepcion = true;
             }
-            if (sesion.funcionalidades.Contains("Estadias"))
+            if (sesion.rol.funcionalidades.Contains("Estadias"))
             {
                 menuEstadias.Visible = true;
                 usuarioTieneFuncionesDeRecepcion = true;
             }
-            if (sesion.funcionalidades.Contains("Estadisticas"))
+            if (sesion.rol.funcionalidades.Contains("Estadisticas"))
             {
                 menuEstadisticas.Visible = true;
                 usuarioTieneFuncionesDeRecepcion = true;
