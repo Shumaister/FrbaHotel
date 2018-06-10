@@ -17,6 +17,7 @@ namespace FrbaHotel.Clases
         public string telefono { get; set; }
         public string fechaCreacion { get; set; }
         public string tipoRegimen { get; set; }
+        public string estado { get; set; }
 
         //-------------------------------------- Constructores -------------------------------------
 
