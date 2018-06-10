@@ -168,7 +168,7 @@ namespace FrbaHotel.AbmUsuario
             tbxNombre.Clear();
             tbxApellido.Clear();
             tbxDocumento.Clear();
-            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodos());
+            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
             tbxFechaNacimiento.Clear();
             tbxPais.Clear();
             tbxCiudad.Clear();
@@ -188,7 +188,7 @@ namespace FrbaHotel.AbmUsuario
             tbxNombre.Text = usuario.persona.nombre;
             comboBoxCargar(cbxHoteles, Database.usuarioObtenerHotelesLista(usuario.nombre));
             comboBoxCargar(cbxRoles, Database.usuarioObtenerRoles(usuario.nombre));
-            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodos());
+            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
             tbxApellido.Text = usuario.persona.apellido;
             if(usuario.persona.tipoDocumento == "DNI")
                 cbxTipoDocumento.SelectedIndex = 0;

@@ -12,6 +12,8 @@ namespace FrbaHotel.Clases
         public string contrasenia { get; set; }
         public string estado { get; set; }
         public Persona persona { get; set; }
+        public List<Hotel> hoteles {get; set;}
+        public List<Rol> roles { get; set; }
 
         public Usuario(string nombre, string contrasenia, Persona persona, string estado)
         {

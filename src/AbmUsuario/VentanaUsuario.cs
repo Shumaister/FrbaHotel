@@ -35,7 +35,7 @@ namespace FrbaHotel.AbmUsuario
             dataGridViewAgregarBotonEliminar(dgvEliminarUsuarios);
             comboBoxCargar(cbxRoles, Database.rolObtenerTodosEnLista());
             comboBoxCargar(cbxHoteles, Database.hotelObtenerTodosLista());
-            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodos());
+            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
         }
 
         private void dgvModificarUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
