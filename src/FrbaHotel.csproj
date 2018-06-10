@@ -128,12 +128,6 @@
     <Compile Include="Clases\Rol.cs" />
     <Compile Include="Clases\TipoHabitacion.cs" />
     <Compile Include="Clases\Usuario.cs" />
-    <Compile Include="GenerarModificacionReserva\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GenerarModificacionReserva\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="ListadoEstadistico\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +151,12 @@
     </Compile>
     <Compile Include="Login\VentanaSeleccionRolHotel.Designer.cs">
       <DependentUpon>VentanaSeleccionRolHotel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuClientes\VentanaMenuPrincipalClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuClientes\VentanaMenuPrincipalClientes.Designer.cs">
+      <DependentUpon>VentanaMenuPrincipalClientes.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuPrincipal\VentanaCambiarContrasenia.cs">
       <SubType>Form</SubType>
@@ -213,6 +213,9 @@
     <EmbeddedResource Include="Login\VentanaSeleccionRolHotel.resx">
       <DependentUpon>VentanaSeleccionRolHotel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MenuClientes\VentanaMenuPrincipalClientes.resx">
+      <DependentUpon>VentanaMenuPrincipalClientes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal\VentanaCambiarContrasenia.resx">
       <DependentUpon>VentanaCambiarContrasenia.cs</DependentUpon>
     </EmbeddedResource>
@@ -250,6 +253,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Logo TP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GenerarModificacionReserva\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
