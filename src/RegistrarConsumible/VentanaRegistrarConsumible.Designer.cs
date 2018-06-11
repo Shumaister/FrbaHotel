@@ -41,7 +41,14 @@
             this.ConsumibleCombo = new System.Windows.Forms.ComboBox();
             this.TextCantidad = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.SuspendLayout();
+            // 
+            // logo
+            // 
+            this.logo.Location = new System.Drawing.Point(243, 137);
+            this.logo.Size = new System.Drawing.Size(22, 20);
             // 
             // label1
             // 
@@ -127,8 +134,7 @@
             this.TextEstadia.Name = "TextEstadia";
             this.TextEstadia.Size = new System.Drawing.Size(121, 20);
             this.TextEstadia.TabIndex = 11;
-            this.TextEstadia.TextChanged += new System.EventHandler(this.TextEstadia_TextChanged);
-            this.TextEstadia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextEstadia_KeyPress);
+            this.TextEstadia.TextChanged += new System.EventHandler(this.TextEstadia_TextChanged_1);
             // 
             // ConsumibleCombo
             // 
@@ -179,8 +185,24 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Name = "VentanaRegistrarConsumible";
-            this.Text = "Form1";
+            this.Text = "Registrar Consumibles";
             this.Load += new System.EventHandler(this.VentanaRegistrarConsumible_Load);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.TextHotel, 0);
+            this.Controls.SetChildIndex(this.label6, 0);
+            this.Controls.SetChildIndex(this.TextHabitacion, 0);
+            this.Controls.SetChildIndex(this.label8, 0);
+            this.Controls.SetChildIndex(this.TextRegimen, 0);
+            this.Controls.SetChildIndex(this.label10, 0);
+            this.Controls.SetChildIndex(this.label12, 0);
+            this.Controls.SetChildIndex(this.TextEstadia, 0);
+            this.Controls.SetChildIndex(this.ConsumibleCombo, 0);
+            this.Controls.SetChildIndex(this.TextCantidad, 0);
+            this.Controls.SetChildIndex(this.button1, 0);
+            this.Controls.SetChildIndex(this.logo, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
