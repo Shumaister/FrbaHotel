@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FrbaHotel.Clases;
@@ -49,7 +50,7 @@ namespace FrbaHotel.AbmUsuario
             tbxNombre.Text = usuario.persona.nombre;
             tbxApellido.Text = usuario.persona.apellido;
             tbxDocumento.Text = usuario.persona.numeroDocumento;
-            tbxFechaNacimiento.Text = usuario.persona.fechaNacimiento.ToString();
+            tbxFechaNacimiento.Text = usuario.persona.fechaNacimiento.ToShortDateString();
             tbxNacionalidad.Text = usuario.persona.nacionalidad;
             tbxTelefono.Text = usuario.persona.telefono;
             tbxEmail.Text = usuario.persona.email;
@@ -59,11 +60,15 @@ namespace FrbaHotel.AbmUsuario
             tbxNumeroCalle.Text = usuario.persona.domicilio.numeroCalle;
             tbxPiso.Text = usuario.persona.domicilio.piso;
             tbxDepartamento.Text = usuario.persona.domicilio.departamento;
+            if (Database.usuarioHabilitado(usuario))
+                rbtActivado.Select();
+            else
+                rbtDesactivado.Select();
         }
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
-            if (ventanaCamposEstanCompletos(this, controladorError))
+            if (ventanaCamposEstanCompletos(this, controladorError) && ventanaEmailValido())
             {
                 ventanaModificarUsuario();
                 if (Database.usuarioModificadoConExito(usuario))
@@ -123,7 +128,22 @@ namespace FrbaHotel.AbmUsuario
 
         private string ventanaObtenerEstado()
         {
-            return null;
+            if (rbtActivado.Checked)
+                return "1";
+            else
+                return "0";
+        }
+
+        private bool ventanaEmailValido()
+        {
+            Regex expresionParaEmail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            if (!expresionParaEmail.IsMatch(tbxEmail.Text))
+            {
+                ventanaInformarError("El email no es valido");
+                return false;
+            }
+            else
+                return true;
         }
 
         #endregion
@@ -182,7 +202,6 @@ namespace FrbaHotel.AbmUsuario
 
         private void tbxEmail_KeyPress(object sender, KeyPressEventArgs e)
         {
-            textBoxConfigurarParaCuenta(e);
             controladorError.Clear();
         }
 
