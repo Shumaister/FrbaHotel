@@ -72,7 +72,12 @@ namespace FrbaHotel.ListadoEstadistico
                         break;
                     case 2:
                         {
-                         //   dataGridEstadisticas.DataSource = 
+
+                            SqlCommand consulta = Database.consultaCrear("select CONCAT(Domicilio_Ciudad,' ',Domicilio_Calle,' ',Domicilio_NumeroCalle)'Hotel',sum(DATEDIFF ( DAY ,HotelCerrado_FechaInicio,HotelCerrado_FechaFin))'Dias fuera de servicio' from rip.HotelesCerrados join rip.Hoteles on Hotel_ID=HotelCerrado_HotelID join rip.Domicilios on Domicilio_ID=Hotel_DomicilioID where YEAR(HotelCerrado_FechaInicio)=@anio and DATEPART(QUARTER,HotelCerrado_FechaInicio)=@trimestre group by Domicilio_Ciudad,Domicilio_Calle,Domicilio_NumeroCalle order by 2 desc");
+                            consulta.Parameters.AddWithValue("@anio", anio);
+                            consulta.Parameters.AddWithValue("@trimestre", trimestre);
+                            dataGridViewCargar(dataGridEstadisticas,Database.consultaObtenerTabla(consulta)); 
+                         
                         };
                         break;
                     case 3://Clientes cumplidores

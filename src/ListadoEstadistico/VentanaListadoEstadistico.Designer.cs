@@ -145,7 +145,7 @@
             "Octubre-Diciembre"});
             this.cmbTrimestre.Location = new System.Drawing.Point(81, 56);
             this.cmbTrimestre.Name = "cmbTrimestre";
-            this.cmbTrimestre.Size = new System.Drawing.Size(265, 21);
+            this.cmbTrimestre.Size = new System.Drawing.Size(315, 21);
             this.cmbTrimestre.TabIndex = 10;
             this.cmbTrimestre.Text = "Seleccione";
             // 
@@ -169,7 +169,7 @@
             "Cliente con mayor cantidad de puntos."});
             this.cmbTipo.Location = new System.Drawing.Point(81, 28);
             this.cmbTipo.Name = "cmbTipo";
-            this.cmbTipo.Size = new System.Drawing.Size(265, 21);
+            this.cmbTipo.Size = new System.Drawing.Size(315, 21);
             this.cmbTipo.TabIndex = 7;
             this.cmbTipo.Text = "Seleccione...";
             // 
