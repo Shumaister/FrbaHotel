@@ -128,6 +128,7 @@
             this.TextEstadia.Size = new System.Drawing.Size(121, 20);
             this.TextEstadia.TabIndex = 11;
             this.TextEstadia.TextChanged += new System.EventHandler(this.TextEstadia_TextChanged);
+            this.TextEstadia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextEstadia_KeyPress);
             // 
             // ConsumibleCombo
             // 
