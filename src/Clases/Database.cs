@@ -312,9 +312,9 @@ namespace FrbaHotel
             }
         }
 
-        public static bool rolModificadoConExito(Rol rol, Rol rolModificado)
+        public static bool rolModificadoConExito(Rol rol)
         {
-            if (rolExisteYEsDistinto(rol, rolModificado))
+            if (rolExiste(rol) && rol.id != rolObtenerID(rol))
             {
                 ventanaInformarError("Ya existe un rol registrado con ese nombre");
                 return false;
@@ -322,8 +322,8 @@ namespace FrbaHotel
             else
             {
                 rolEliminarFuncionalidades(rol);
-                rolModificar(rol, rolModificado);
-                rolAgregarFuncionalidades(rolModificado);
+                rolModificar(rol);
+                rolAgregarFuncionalidades(rol);
                 ventanaInformarExito("El rol fue modificado con exito");
                 return true;
             }
@@ -342,30 +342,21 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
-        public static void rolModificar(Rol rol, Rol rolModificado)
+        public static void rolModificar(Rol rol)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Nombre = @NuevoNombre, Rol_Estado = @NuevoEstado WHERE Rol_Nombre = @Nombre");
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Nombre = @NuevoNombre, Rol_Estado = @NuevoEstado WHERE Rol_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", rol.id);
             consulta.Parameters.AddWithValue("@Nombre", rol.nombre);
-            consulta.Parameters.AddWithValue("@NuevoNombre", rolModificado.nombre);
-            consulta.Parameters.AddWithValue("@NuevoEstado", rolModificado.estado);
+            consulta.Parameters.AddWithValue("@NuevoNombre", rol.nombre);
+            consulta.Parameters.AddWithValue("@NuevoEstado", rol.estado);
             consultaEjecutar(consulta);
         }
 
         public static int rolEliminar(Rol rol)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Estado = 0 WHERE Rol_Nombre = @Nombre");
-            consulta.Parameters.AddWithValue("@Nombre", rol.nombre);
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Estado = 0 WHERE Rol_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", rol.id);
             return consultaEjecutar(consulta);
-        }
-
-        public static bool rolExisteYEsDistinto(Rol rol, Rol rolModificado)
-        {
-            return rolExiste(rolModificado) && rolSonDistintos(rol, rolModificado);
-        }
-
-        public static bool rolSonDistintos(Rol unRol, Rol otroRol)
-        {
-            return rolObtenerID(unRol) != rolObtenerID(otroRol);
         }
 
         public static string rolObtenerID(Rol rol)
@@ -473,10 +464,10 @@ namespace FrbaHotel
             }
         }
 
-        public static void usuarioModificadoConExito(Usuario usuario)
+        public static bool usuarioModificadoConExito(Usuario usuario)
         {
-            /*
-            if (usuarioExisteYEsDistinto(usuario))
+
+            if (usuarioExiste(usuario) && usuario.id != usuarioObtenerID(usuario))
             {
                 ventanaInformarError("Ya existe un usuario registrado con ese nombre");
                 return false;
@@ -493,7 +484,6 @@ namespace FrbaHotel
                 ventanaInformarExito("El usuario fue modificado con exito");
                 return true;
             }
-             */
         }
 
         public static void usuarioEliminadoConExito(Usuario usuario)
@@ -502,40 +492,23 @@ namespace FrbaHotel
             ventanaInformarExito("El rol fue eliminado con exito");
         }
 
-
         public static void usuarioAgregar(Usuario usuario)
         {
-            if (usuarioExiste(usuario))
-                VentanaBase.ventanaInformarError("ERROR: Ya existe un usuario registrado con ese nombre");
-            else
-            {
-                SqlCommand consulta = consultaCrear("INSERT INTO RIP.Usuarios (Usuario_Nombre, Usuario_Contrasenia, Usuario_PersonaID) VALUES (@Nombre, @Contrasenia, @PersonaID)");
-                consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
-                consulta.Parameters.AddWithValue("@Contrasenia", loginEncriptarContraseña(usuario.contrasenia));
-                consulta.Parameters.AddWithValue("@PersonaID", personaObtenerID(usuario.persona));
-                consultaEjecutar(consulta);
-                usuarioAgregarHoteles(usuario);
-                usuarioAgregarRoles(usuario);
-            }
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Usuarios (Usuario_Nombre, Usuario_Contrasenia, Usuario_PersonaID) VALUES (@Nombre, @Contrasenia, @PersonaID)");
+            consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
+            consulta.Parameters.AddWithValue("@Contrasenia", loginEncriptarContraseña(usuario.contrasenia));
+            consulta.Parameters.AddWithValue("@PersonaID", personaObtenerID(usuario.persona));
+            consultaEjecutar(consulta);
         }
 
         public static void usuarioModificar(Usuario usuario)
         {
-            if (usuarioExiste(usuario) && usuarioSonDistintos(usuario, usuario))
-                VentanaBase.ventanaInformarError("ERROR: Ya existe un usuario registrado con ese nombre");
-            else
-            {
-                SqlCommand consulta = consultaCrear("UPDATE RIP.Usuarios SET Usuario_Nombre = @Nombre, Usuario_Contrasenia = @Contrasenia, Usuario_Estado = @Estado WHERE Usuario_ID = @ID");
-                consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
-                consulta.Parameters.AddWithValue("@Contrasenia", loginEncriptarContraseña(usuario.contrasenia));
-                consulta.Parameters.AddWithValue("@NuevoEstado", usuario.estado);
-                consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
-                consultaEjecutar(consulta);
-                usuarioEliminarHoteles(usuario);
-                usuarioEliminarRoles(usuario);
-                usuarioAgregarHoteles(usuario);
-                usuarioAgregarRoles(usuario);
-            }
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Usuarios SET Usuario_Nombre = @Nombre, Usuario_Contrasenia = @Contrasenia, Usuario_Estado = @Estado WHERE Usuario_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", usuario.id);
+            consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
+            consulta.Parameters.AddWithValue("@Contrasenia", loginEncriptarContraseña(usuario.contrasenia));
+            consulta.Parameters.AddWithValue("@NuevoEstado", usuario.estado);
+            consultaEjecutar(consulta);
         }
 
         public static void usuarioEliminar(Usuario usuario)
@@ -548,45 +521,6 @@ namespace FrbaHotel
         public static string usuarioObtenerID(Usuario usuario)
         {
             SqlCommand consulta = consultaCrear("SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = @Nombre");
-            consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
-            return consultaObtenerValor(consulta);
-        }
-
-        public static bool usuarioSonDistintos(Usuario unUsuario, Usuario otroUsuario)
-        {
-            return usuarioObtenerID(unUsuario) != usuarioObtenerID(otroUsuario);
-        }
-
-        public static List<string> usuarioObtenerHotelesEnLista(Usuario usuario)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Ciudad_Nombre, Calle_Nombre, Domicilio_NumeroCalle FROM RIP.Hoteles JOIN RIP.Hoteles_Usuarios ON HotelUsuario_HotelID = Hotel_ID JOIN RIP.Usuarios ON Usuario_ID = HotelUsuario_UsuarioID JOIN RIP.Domicilios ON Domicilio_ID = Hotel_DomicilioID JOIN RIP.Calles ON Calle_ID = Domicilio_CalleID JOIN RIP.Ciudades ON Ciudad_ID = Domicilio_CiudadID WHERE Usuario_Nombre = @Nombre");
-            consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
-            return hotelConfigurarNombres(consulta);
-        }
-       
-        public static List<string> usuarioObtenerRoles(Usuario usuario)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Rol_Nombre FROM RIP.Roles JOIN RIP.Usuarios_Roles ON Rol_ID = UsuarioRol_RolID JOIN RIP.Usuarios ON UsuarioRol_UsuarioID = Usuario_ID WHERE Usuario_Nombre = @Nombre");
-            consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
-            return consultaObtenerLista(consulta);
-        }
-
-        public static List<string> usuarioObtenerRolesHabilitadosLista(Usuario usuario)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Rol_Nombre FROM RIP.Roles JOIN RIP.Usuarios_Roles ON Rol_ID = UsuarioRol_RolID JOIN RIP.Usuarios ON UsuarioRol_UsuarioID = Usuario_ID WHERE Usuario_Nombre = @Nombre AND Rol_Estado = 1");
-            consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
-            return consultaObtenerLista(consulta);
-        }
-
-        public static DataTable usuarioObtenerTodos()
-        {
-            SqlCommand consulta = consultaCrear("SELECT Usuario_ID, Usuario_Nombre, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Nacionalidad_Descripcion, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, Pais_Nombre, Ciudad_Nombre, Calle_Nombre, Domicilio_NumeroCalle, Domicilio_Piso, Domicilio_Departamento FROM RIP.Usuarios JOIN RIP.Personas ON Usuario_PersonaID = Persona_ID JOIN RIP.Nacionalidades ON Nacionalidad_ID = Persona_NacionalidadID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID JOIN RIP.Paises ON Domicilio_PaisID = Pais_ID JOIN RIP.Calles ON Domicilio_CalleID = Calle_ID JOIN RIP.Ciudades ON Domicilio_CiudadID = Ciudad_ID");
-            return consultaObtenerTabla(consulta);
-        }
-
-        public static string usuarioObtenerContrasenia(Usuario usuario)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Usuario_Contrasenia FROM RIP.Usuarios WHERE Usuario_Nombre = @Nombre");
             consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
             return consultaObtenerValor(consulta);
         }
@@ -640,6 +574,145 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
+        public static List<string> usuarioObtenerHotelesEnLista(Usuario usuario)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Ciudad_Nombre, Calle_Nombre, Domicilio_NumeroCalle FROM RIP.Hoteles JOIN RIP.Hoteles_Usuarios ON HotelUsuario_HotelID = Hotel_ID JOIN RIP.Usuarios ON Usuario_ID = HotelUsuario_UsuarioID JOIN RIP.Domicilios ON Domicilio_ID = Hotel_DomicilioID JOIN RIP.Calles ON Calle_ID = Domicilio_CalleID JOIN RIP.Ciudades ON Ciudad_ID = Domicilio_CiudadID WHERE Usuario_Nombre = @Nombre");
+            consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
+            return hotelConfigurarNombres(consulta);
+        }
+
+        public static List<string> usuarioObtenerRoles(Usuario usuario)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Rol_Nombre FROM RIP.Roles JOIN RIP.Usuarios_Roles ON Rol_ID = UsuarioRol_RolID JOIN RIP.Usuarios ON UsuarioRol_UsuarioID = Usuario_ID WHERE Usuario_Nombre = @Nombre");
+            consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
+            return consultaObtenerLista(consulta);
+        }
+
+        public static List<string> usuarioObtenerRolesHabilitadosLista(Usuario usuario)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Rol_Nombre FROM RIP.Roles JOIN RIP.Usuarios_Roles ON Rol_ID = UsuarioRol_RolID JOIN RIP.Usuarios ON UsuarioRol_UsuarioID = Usuario_ID WHERE Usuario_Nombre = @Nombre AND Rol_Estado = 1");
+            consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
+            return consultaObtenerLista(consulta);
+        }
+
+        public static DataTable usuarioObtenerTodos()
+        {
+            SqlCommand consulta = consultaCrear("SELECT Usuario_ID, Usuario_Nombre, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Nacionalidad_Descripcion, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, Pais_Nombre, Ciudad_Nombre, Calle_Nombre, Domicilio_NumeroCalle, Domicilio_Piso, Domicilio_Departamento FROM RIP.Usuarios JOIN RIP.Personas ON Usuario_PersonaID = Persona_ID JOIN RIP.Nacionalidades ON Nacionalidad_ID = Persona_NacionalidadID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID JOIN RIP.Paises ON Domicilio_PaisID = Pais_ID JOIN RIP.Calles ON Domicilio_CalleID = Calle_ID JOIN RIP.Ciudades ON Domicilio_CiudadID = Ciudad_ID");
+            return consultaObtenerTabla(consulta);
+        }
+
+        public static string usuarioObtenerContrasenia(Usuario usuario)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Usuario_Contrasenia FROM RIP.Usuarios WHERE Usuario_Nombre = @Nombre");
+            consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
+            return consultaObtenerValor(consulta);
+        }
+
+        #endregion
+
+        #region Persona
+
+        public static void personaAgregar(Persona persona)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Personas (Persona_Nombre, Persona_Apellido, Persona_TipoDocumentoID, Persona_NumeroDocumento, Persona_FechaNacimiento, Persona_NacionalidadID, Persona_DomicilioID, Persona_Telefono, Persona_Email) VALUES (@Nombre, @Apellido, @TipoDocumentoID, @NumeroDocumento, @FechaNacimiento, @Nacionalidad, @DomicilioID, @Telefono, @Email)");
+            consulta.Parameters.AddWithValue("@Nombre", persona.nombre);
+            consulta.Parameters.AddWithValue("@Apellido", persona.apellido);
+            consulta.Parameters.AddWithValue("@TipoDocumentoID", tipoDocumentoObtenerID(persona.tipoDocumento));
+            consulta.Parameters.AddWithValue("@NumeroDocumento", persona.numeroDocumento);
+            consulta.Parameters.AddWithValue("@FechaNacimiento", persona.fechaNacimiento);
+            consulta.Parameters.AddWithValue("@Nacionalidad", persona.nacionalidad);
+            consulta.Parameters.AddWithValue("@DomicilioID", domicilioObtenerID(persona.domicilio));
+            consulta.Parameters.AddWithValue("@Telefono", persona.telefono);
+            consulta.Parameters.AddWithValue("@Email", persona.email);
+            consultaEjecutar(consulta);
+        }
+
+        public static void personaModificar(Persona persona)
+        {
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Personas SET Persona_Nombre = @Nombre, Persona_Apellido = @Apellido, Persona_TipoDocumentoID = @TipoDocumentoID, Persona_NumeroDocumento = @NumeroDocumento, Persona_FechaNacimiento = @FechaNacimiento, Persona_Nacionalidad = @Nacionalidad, Persona_DomicilioID = @DomicilioID, Persona_Telefono = @Telefono, Persona_Email = @Email WHERE Persona_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", persona.id);
+            consulta.Parameters.AddWithValue("@Nombre", persona.nombre);
+            consulta.Parameters.AddWithValue("@Apellido", persona.apellido);
+            consulta.Parameters.AddWithValue("@TipoDocumentoID", tipoDocumentoObtenerID(persona.tipoDocumento));
+            consulta.Parameters.AddWithValue("@NumeroDocumento", persona.numeroDocumento);
+            consulta.Parameters.AddWithValue("@FechaNacimiento", persona.fechaNacimiento);
+            consulta.Parameters.AddWithValue("@Nacionalidad", persona.nacionalidad);
+            consulta.Parameters.AddWithValue("@DomicilioID", domicilioObtenerID(persona.domicilio));
+            consulta.Parameters.AddWithValue("@Telefono", persona.telefono);
+            consulta.Parameters.AddWithValue("@Email", persona.email);
+            consultaEjecutar(consulta);
+        }
+
+        public static string personaObtenerID(Persona persona)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Persona_ID FROM RIP.Personas WHERE Persona_TipoDocumentoID = @TipoDocumentoID AND Persona_NumeroDocumento = @NumeroDocmento AND Persona_Email = @Email");
+            consulta.Parameters.AddWithValue("@TipoDocumentoID", tipoDocumentoObtenerID(persona.tipoDocumento));
+            consulta.Parameters.AddWithValue("@NumeroDocumento", persona.numeroDocumento);
+            consulta.Parameters.AddWithValue("@Email", persona.email);
+            return consultaObtenerValor(consulta);
+        }
+
+        public static bool personaEmailExiste(Persona persona)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Persona_Email FROM RIP.Personas WHERE Persona_Email = @Email");
+            consulta.Parameters.AddWithValue("@Email", persona.email);
+            return consultaValorExiste(consultaObtenerValor(consulta));
+        }
+
+        public static bool personaDocumentoExiste(Persona persona)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Persona_Email FROM RIP.Personas WHERE Persona_TipoDocumentoID = @TipoDocumentoID AND Persona_NumeroDocumento = @NumeroDocumento");
+            consulta.Parameters.AddWithValue("@TipoDocumentoID", tipoDocumentoObtenerID(persona.tipoDocumento));
+            consulta.Parameters.AddWithValue("@NumeroDocumento", persona.numeroDocumento);
+            return consultaValorExiste(consultaObtenerValor(consulta));
+        }
+
+        #endregion
+
+        #region Domicilio
+
+        public static void domicilioAgregar(Domicilio domicilio)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Domicilios (Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle, Domicilio_Piso, Domicilio_Departamento) VALUES (@Pais, @Ciudad, @Calle, @NumeroCalle, @Piso, @Departamento)");
+            consulta.Parameters.AddWithValue("@Pais", domicilio.pais);
+            consulta.Parameters.AddWithValue("@Ciudad", domicilio.ciudad);
+            consulta.Parameters.AddWithValue("@Calle", domicilio.calle);
+            consulta.Parameters.AddWithValue("@NumeroCalle", domicilio.numeroCalle);
+            consulta.Parameters.AddWithValue("@Piso", domicilio.piso);
+            consulta.Parameters.AddWithValue("@Departamento", domicilio.departamento);
+            consultaEjecutar(consulta);
+        }
+
+        public static void domicilioModificar(Domicilio domicilio)
+        {
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Domicilios SET Domicilio_Pais = @Pais, Domicilio_Ciudad = @Ciudad, Domicilio_Calle = @Calle, Domicilio_NumeroCalle = @NumeroCalle, Domicilio_Piso = @Piso, Domicilio_Departamento = @Departamento WHERE Domicilio_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", domicilio.id);
+            consulta.Parameters.AddWithValue("@Pais", domicilio.pais);
+            consulta.Parameters.AddWithValue("@Ciudad", domicilio.ciudad);
+            consulta.Parameters.AddWithValue("@Calle", domicilio.calle);
+            consulta.Parameters.AddWithValue("@NumeroCalle", domicilio.numeroCalle);
+            consulta.Parameters.AddWithValue("@Piso", domicilio.piso);
+            consulta.Parameters.AddWithValue("@Departamento", domicilio.departamento);
+            consultaEjecutar(consulta);
+        }
+
+        public static string domicilioObtenerID(Domicilio domicilio)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Domicilio_ID FROM RIP.Domicilios WHERE Domicilio_Pais = @Pais AND Domicilio_Ciudad = @Ciudad AND Domicilio_Calle = @Calle AND Domicilio_NumeroCalle = @NumeroCalle AND Domicilio_Piso = @Piso AND Domicilio_Departamento = @Departamento");
+            consulta.Parameters.AddWithValue("@Pais", (domicilio.pais));
+            consulta.Parameters.AddWithValue("@Ciudad", domicilio.ciudad);
+            consulta.Parameters.AddWithValue("@Calle", domicilio.calle);
+            consulta.Parameters.AddWithValue("@NumeroCalle", domicilio.numeroCalle);
+            consulta.Parameters.AddWithValue("@Piso", domicilio.piso);
+            consulta.Parameters.AddWithValue("@Departamento", domicilio.departamento);
+            return consultaObtenerValor(consulta);
+        }
+
+        public static bool domicilioNoExiste(Domicilio domicilio)
+        {
+            return consultaValorNoExiste(domicilioObtenerID(domicilio));
+        }
+
         #endregion
 
         #region Hotel
@@ -648,35 +721,28 @@ namespace FrbaHotel
         {
             SqlCommand consulta = consultaCrear("INSERT INTO RIP.Hoteles (Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_DomicilioID, Hotel_Telefono, Hotel_Email, Hotel_FechaCreacion) VALUES (@Nombre, @CantidadEstrellas, @DomicilioID, @Telefono, @Email, @FechaCreacion)");
             consulta.Parameters.AddWithValue("@Nombre", hotel.nombre);
-            consulta.Parameters.AddWithValue("@Nombre", hotel.cantidadEstrellas);
-            consulta.Parameters.AddWithValue("@Nombre", hotel.domicilio);
-            consulta.Parameters.AddWithValue("@Nombre", hotel.telefono);
-            consulta.Parameters.AddWithValue("@Nombre", hotel.email);
-            consulta.Parameters.AddWithValue("@Nombre", hotel.fechaCreacion);
+            consulta.Parameters.AddWithValue("@CantidadEstrellas", hotel.cantidadEstrellas);
+            consulta.Parameters.AddWithValue("@DomicilioID", domicilioObtenerID(hotel.domicilio));
+            consulta.Parameters.AddWithValue("@Telefono", hotel.telefono);
+            consulta.Parameters.AddWithValue("@Hotel", hotel.email);
+            consulta.Parameters.AddWithValue("@FechaCreacion", hotel.fechaCreacion);
         }
 
-        public static void hotelModificar(Hotel hotel, Hotel nuevoHotel)
+        public static void hotelModificar(Hotel hotel)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Hoteles SET Hotel_Nombre = @NuevoNombre, Hotel_CantidadEstrellas = @NuevaCantidadEstrellas, Hotel_DomicilioID = @NuevoDomicilioID, Hotel_Telefono = @NuevoTelefono, Hotel_Email = @NuevoEmail, Hotel_FechaCreacion = @NuevaFechaCreacion, Hotel_Estado = @NuevoEstado WHERE Hotel_ID = @HotelID");
-            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerID(hotel));
-            consulta.Parameters.AddWithValue("@NuevoNombre", nuevoHotel.nombre);
-            consulta.Parameters.AddWithValue("@NuevaCantidadEstrellas", nuevoHotel.cantidadEstrellas);
-            consulta.Parameters.AddWithValue("@NuevoDomicilio", nuevoHotel.domicilio);
-            consulta.Parameters.AddWithValue("@NuevoTelefono", nuevoHotel.telefono);
-            consulta.Parameters.AddWithValue("@NuevoEmail", nuevoHotel.email);
-            consulta.Parameters.AddWithValue("@NuevaFechaCreacion", nuevoHotel.fechaCreacion);
-            consulta.Parameters.AddWithValue("@NuevoEstado", nuevoHotel.estado);
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Hoteles SET Hotel_Nombre = @Nombre, Hotel_CantidadEstrellas = @CantidadEstrellas, Hotel_DomicilioID = @DomicilioID, Hotel_Telefono = @Telefono, Hotel_Email = @Email, Hotel_FechaCreacion = @FechaCreacion, Hotel_Estado = @Estado WHERE Hotel_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", hotel.id);
+            consulta.Parameters.AddWithValue("@Nombre", hotel.nombre);
+            consulta.Parameters.AddWithValue("@CantidadEstrellas", hotel.cantidadEstrellas);
+            consulta.Parameters.AddWithValue("@DomicilioID", domicilioObtenerID(hotel.domicilio));
+            consulta.Parameters.AddWithValue("@Telefono", hotel.telefono);
+            consulta.Parameters.AddWithValue("@Hotel", hotel.email);
+            consulta.Parameters.AddWithValue("@FechaCreacion", hotel.fechaCreacion);
         }
 
         public static void hotelEliminar(Hotel hotel)
-        {/*
-            if (hotelNoTieneReservasEnElPeriodo())
-            {
-            }
-            else
-                VentanaBase.ventanaInformarError("ERROR: El hotel no puede darse de baja ya que tiene reservas dentro del periodo elegido");
-        
-          */
+        {
+
         }
 
         public static List<string> hotelConfigurarNombres(SqlCommand consulta)
@@ -697,8 +763,8 @@ namespace FrbaHotel
 
         public static string hotelObtenerID(Hotel hotel)
         {
-            SqlCommand consulta = consultaCrear("SELECT Hotel_ID FROM RIP.Hoteles WHERE Hotel_DomicilioID = @domicilioID");
-            consulta.Parameters.AddWithValue("@domicilioID", domicilioObtenerID(hotel.domicilio));
+            SqlCommand consulta = consultaCrear("SELECT Hotel_ID FROM RIP.Hoteles WHERE Hotel_DomicilioID = @DomicilioID");
+            consulta.Parameters.AddWithValue("@DomicilioID", domicilioObtenerID(hotel.domicilio));
             return consultaObtenerValor(consulta);
         }
 
@@ -721,25 +787,32 @@ namespace FrbaHotel
             return consultaValorExiste(hotelObtenerID(hotel));
         }
 
-        public static void hotelAgregarRegimen(Hotel hotel, Regimen regimen)
+        public static void hotelAgregarRegimen(Hotel hotel, string regimen)
         {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Hoteles_Regimenes (HotelRegimen_HotelID, HotelRegimen_RegimenID) VALUES (@hotelID, @regimenID)");     
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Hoteles_Regimenes (HotelRegimen_HotelID, HotelRegimen_RegimenID) VALUES (@HotelID, @RegimenID)");
+            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerID(hotel));
+            consulta.Parameters.AddWithValue("@RegimenID", regimenObtenerID(regimen));
         }
 
-       
+        public static void hotelAgregarRegimenes(Hotel hotel, List<string> regimenes)
+        {
+            foreach (string regimen in regimenes)
+                hotelAgregarRegimen(hotel, regimen);
+        }
+      
         public static void hotelEliminarRegimenes(Hotel hotel)
         {
             SqlCommand consulta = consultaCrear("DELETE FROM RIP.Hoteles_Regimenes WHERE HotelRegimen_HotelID = @HotelID");
-            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerID(hotel));
+            consulta.Parameters.AddWithValue("@HotelID", hotel.id);
             consultaEjecutar(consulta);
         }
 
-        public static void hotelAgregarRegimenes(Hotel hotel, List<Regimen> regimenes)
+        public static string regimenObtenerID(string regimen)
         {
-            foreach(Regimen regimen in regimenes)
-                hotelAgregarRegimen(hotel, regimen);
+            SqlCommand consulta = consultaCrear("SELECT Regimen_Descripcion FROM RIP.Regimenes WHERE Regimen_Descripcion = @Descripcion");
+            consulta.Parameters.AddWithValue("@Descripcion", regimen);
+            return consultaObtenerValor(consulta);
         }
-
 
         public static void hotelCerradoAgregar(HotelCerrado hotelCerrado)
         {
@@ -801,310 +874,6 @@ namespace FrbaHotel
 
         #endregion
 
-        #region Personas
-
-        public static void personaAgregar(Persona persona)
-        {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Personas (Persona_Nombre, Persona_Apellido, Persona_TipoDocumentoID, Persona_NumeroDocumento, Persona_FechaNacimiento, Persona_NacionalidadID, Persona_DomicilioID, Persona_Telefono, Persona_Email) VALUES (@nombre, @apellido, @tipoDocumentoID, @numeroDocumento, @fechaNacimiento, @nacionalidadID, @domicilioID, @telefono, @email)");
-            consulta.Parameters.AddWithValue("@nombre", persona.nombre);
-            consulta.Parameters.AddWithValue("@apellido", persona.apellido);
-            consulta.Parameters.AddWithValue("@tipoDocumentoID", tipoDocumentoObtenerID(persona.tipoDocumento));
-            consulta.Parameters.AddWithValue("@numeroDocumento", persona.numeroDocumento);
-            consulta.Parameters.AddWithValue("@fechaNacimiento", DateTime.Parse(persona.fechaNacimiento));
-            consulta.Parameters.AddWithValue("@nacionalidadID", nacionalidadObtenerID(persona.nacionalidad));
-            consulta.Parameters.AddWithValue("@domicilioID", domicilioObtenerID(persona.domicilio));
-            consulta.Parameters.AddWithValue("@telefono", persona.telefono);
-            consulta.Parameters.AddWithValue("@email", persona.email);
-            consultaEjecutar(consulta);
-        }
-
-        public static void personaModificar(Persona persona, string emailActual)
-        {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Personas SET Persona_Nombre = @nombre, Persona_Apellido = @apellido, Persona_TipoDocumentoID = @tipoDocumentoID, Persona_NumeroDocumento = @numeroDocumento, Persona_FechaNacimiento = @fechaNacimiento, Persona_NacionalidadID = @nacionalidadID, Persona_DomicilioID = @domicilioID, Persona_Telefono = @telefono, Persona_Email = @email WHERE Persona_Email = @emailActual");
-            consulta.Parameters.AddWithValue("@emailActual", emailActual);
-            consulta.Parameters.AddWithValue("@nombre", persona.nombre);
-            consulta.Parameters.AddWithValue("@apellido", persona.apellido);
-            consulta.Parameters.AddWithValue("@tipoDocumentoID", tipoDocumentoObtenerID(persona.tipoDocumento));
-            consulta.Parameters.AddWithValue("@numeroDocumento", persona.numeroDocumento);
-            consulta.Parameters.AddWithValue("@fechaNacimiento", persona.fechaNacimiento);
-            consulta.Parameters.AddWithValue("@nacionalidadID", nacionalidadObtenerID(persona.nacionalidad));
-            consulta.Parameters.AddWithValue("@domicilioID", domicilioObtenerID(persona.domicilio));
-            consulta.Parameters.AddWithValue("@telefono", persona.telefono);
-            consulta.Parameters.AddWithValue("@email", persona.email);
-            consultaEjecutar(consulta);
-        }
-
-        public static void personaEliminar(string email, string numeroDocumento)
-        {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Personas SET Persona_Estado = 0 WHERE Persona_Email = @email AND Persona_NumeroDocumento = @numeroDocumento");
-            consulta.Parameters.AddWithValue("@email", email);
-            consulta.Parameters.AddWithValue("@numeroDocumento", numeroDocumento);
-            consultaEjecutar(consulta);
-        }
-
-        public static string personaObtenerID(Persona persona)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Persona_ID FROM RIP.Personas WHERE Persona_Nombre = @nombre AND Persona_Apellido = @apellido AND Persona_TipoDocumentoID = @tipoDocumentoID AND Persona_NumeroDocumento = @numeroDocumento AND Persona_FechaNacimiento = @fechaNacimiento AND Persona_NacionalidadID = @nacionalidadID AND Persona_DomicilioID = @domicilioID AND Persona_Telefono = @telefono AND Persona_Email = @email");
-            consulta.Parameters.AddWithValue("@nombre", persona.nombre);
-            consulta.Parameters.AddWithValue("@apellido", persona.apellido);
-            consulta.Parameters.AddWithValue("@tipoDocumentoID", tipoDocumentoObtenerID(persona.tipoDocumento));
-            consulta.Parameters.AddWithValue("@numeroDocumento", persona.numeroDocumento);
-            consulta.Parameters.AddWithValue("@fechaNacimiento", DateTime.Parse(persona.fechaNacimiento));
-            consulta.Parameters.AddWithValue("@nacionalidadID", nacionalidadObtenerID(persona.nacionalidad));
-            consulta.Parameters.AddWithValue("@domicilioID", domicilioObtenerID(persona.domicilio));
-            consulta.Parameters.AddWithValue("@telefono", persona.telefono);
-            consulta.Parameters.AddWithValue("@email", persona.email);
-            return consultaObtenerValor(consulta);
-        }
-
-        public static bool personaAlguienTieneEseEmail(string email)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Persona_Email FROM RIP.Personas WHERE Persona_Email = @email");
-            consulta.Parameters.AddWithValue("@email", email);
-            return consultaValorExiste(consultaObtenerValor(consulta));
-        }
-
-        public static bool personaAlguienTieneEseDocumento(string tipoDocumento, string numeroDocumento)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Persona_Email FROM RIP.Personas WHERE Persona_TipoDocumentoID = @tipoDocumentoID AND Persona_NumeroDocumento = @numeroDocumento");
-            consulta.Parameters.AddWithValue("@tipoDocumentoID", tipoDocumentoObtenerID(tipoDocumento));
-            consulta.Parameters.AddWithValue("@numeroDocumento", numeroDocumento);
-            return consultaValorExiste(consultaObtenerValor(consulta));
-        }
-
-        #endregion
-
-        #region Domicilio
-
-        public static void domicilioAgregar(Domicilio domicilio)
-        {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Domicilios (Domicilio_PaisID, Domicilio_CiudadID, Domicilio_CalleID, Domicilio_NumeroCalle, Domicilio_Piso, Domicilio_Departamento) VALUES (@PaisID, @CiudadID, @CalleID, @NumeroCalle, @Piso, @Departamento)");
-            consulta.Parameters.AddWithValue("@PaisID", paisObtenerID(domicilio.pais));
-            consulta.Parameters.AddWithValue("@CiudadID", ciudadObtenerID(domicilio.ciudad));
-            consulta.Parameters.AddWithValue("@CalleID", calleObtenerID(domicilio.calle));
-            consulta.Parameters.AddWithValue("@NumeroCalle", domicilio.numeroCalle);
-            consulta.Parameters.AddWithValue("@Piso", domicilio.piso);
-            consulta.Parameters.AddWithValue("@Departamento", domicilio.departamento);
-            consultaEjecutar(consulta);
-        }
-
-        public static void domicilioModificar(Domicilio domicilio, Domicilio domicilioModificado)
-        {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Domicilios SET Domicilio_PaisID = @PaisID, Domicilio_CiudadID = @CiudadID, Domicilio_CalleID = @CalleID, Domicilio_NumeroCalle = @NumeroCalle, Domicilio_Piso = @Piso, Domicilio_Departamento = @Departamento WHERE Domicilio_ID = @ID");
-            consulta.Parameters.AddWithValue("@ID", domicilioBuscarID(domicilio));
-            consulta.Parameters.AddWithValue("@PaisID", paisObtenerID(domicilioModificado.pais));
-            consulta.Parameters.AddWithValue("@CiudadID", ciudadObtenerID(domicilioModificado.ciudad));
-            consulta.Parameters.AddWithValue("@CalleID", calleObtenerID(domicilioModificado.calle));
-            consulta.Parameters.AddWithValue("@NumeroCalle", domicilioModificado.numeroCalle);
-            consulta.Parameters.AddWithValue("@Piso", domicilioModificado.piso);
-            consulta.Parameters.AddWithValue("@Departamento", domicilioModificado.departamento);
-            consultaEjecutar(consulta);
-        }
-        
-        public static string domicilioObtenerID(Domicilio domicilio)
-        {
-            if (domicilioNoExiste(domicilio))
-                domicilioAgregar(domicilio);
-            return domicilioBuscarID(domicilio);
-        }
-
-        public static bool domicilioNoExiste(Domicilio domicilio)
-        {
-            return consultaValorNoExiste(domicilioBuscarID(domicilio));
-        }
-
-        public static string domicilioBuscarID(Domicilio domicilio)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Domicilio_ID FROM RIP.Domicilios WHERE Domicilio_PaisID = @PaisID AND Domicilio_CiudadID = @CiudadID AND Domicilio_CalleID = @CalleID AND Domicilio_NumeroCalle = @NumeroCalle AND Domicilio_Piso = @Piso AND Domicilio_Departamento = @Departamento");
-            consulta.Parameters.AddWithValue("@PaisID", paisObtenerID(domicilio.pais));
-            consulta.Parameters.AddWithValue("@CiudadID", ciudadObtenerID(domicilio.ciudad));
-            consulta.Parameters.AddWithValue("@CalleID", calleObtenerID(domicilio.calle));
-            consulta.Parameters.AddWithValue("@NumeroCalle", domicilio.numeroCalle);
-            consulta.Parameters.AddWithValue("@Piso", domicilio.piso);
-            consulta.Parameters.AddWithValue("@Departamento", domicilio.departamento);
-            return consultaObtenerValor(consulta);
-        }
-
-        #endregion
-
-        #region Calle
-
-        public static void calleAgregar(string calle)
-        {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Calles (Calle_Nombre) VALUES (@Nombre)");
-            consulta.Parameters.AddWithValue("@Nombre", calle);
-            consultaEjecutar(consulta);
-        }
-
-        public static void calleEliminar(string calle)
-        {
-            SqlCommand consulta = consultaCrear("DELETE FROM RIP.Calles WHERE Calle_ID = @ID");
-            consulta.Parameters.AddWithValue("@ID", calleBuscarID(calle));
-            consultaEjecutar(consulta);
-        }
-
-        public static string calleObtenerID(string calle)
-        {
-            if (calleNoExiste(calle))
-                calleAgregar(calle);
-            return calleBuscarID(calle);
-        }
-
-        public static bool calleNoExiste(string calle)
-        {
-            return consultaValorNoExiste(calleBuscarID(calle)); 
-        }
-
-        public static string calleBuscarID(string calle)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Calle_ID FROM RIP.Calles WHERE Calle_Nombre = @calle");
-            consulta.Parameters.AddWithValue("@calle", calle);
-            return consultaObtenerValor(consulta);
-        }
-
-        public static bool calleEstaEnAlgunDomicilio(string calle)
-        {
-            SqlCommand consulta = consultaCrear("SELECT COUNT(*) FROM RIP.Domicilios WHERE Domicilio_CalleID = @CalleID");
-            consulta.Parameters.AddWithValue("@CalleID", calleBuscarID(calle));
-            return consultaValorEsMayorA(consultaObtenerValor(consulta), 0);
-        }
-
-        #endregion
-
-        #region Ciudad
-
-        public static void ciudadAgregar(string ciudad)
-        {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Ciudades (Ciudad_Nombre) VALUES (@Nombre)");
-            consulta.Parameters.AddWithValue("@Nombre", ciudad);
-            consultaEjecutar(consulta);
-        }
-
-        public static void ciudadEliminar(string ciudad)
-        {
-            SqlCommand consulta = consultaCrear("DELETE FROM RIP.Ciudades WHERE Ciudad_ID = @ID");
-            consulta.Parameters.AddWithValue("@ID", ciudadBuscarID(ciudad));
-            consultaEjecutar(consulta);
-        }
-
-        public static string ciudadObtenerID(string ciudad)
-        {
-            if (ciudadNoExiste(ciudad))
-                ciudadAgregar(ciudad);
-            return ciudadBuscarID(ciudad);
-        }
-
-        public static bool ciudadNoExiste(string ciudad)
-        {
-            return consultaValorNoExiste(ciudadBuscarID(ciudad));
-        }
-
-        public static string ciudadBuscarID(string ciudad)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Ciudad_ID FROM RIP.Ciudades WHERE Ciudad_Nombre = @Nombre");
-            consulta.Parameters.AddWithValue("@Nombre", ciudad);
-            return consultaObtenerValor(consulta);
-        }
-
-        public static bool ciudadEstaEnAlgunDomicilio(string ciudad)
-        {
-            SqlCommand consulta = consultaCrear("SELECT COUNT(*) FROM RIP.Domicilios WHERE Domicilio_CiudadID = @CiudadID");
-            consulta.Parameters.AddWithValue("@CiudadID", ciudadBuscarID(ciudad));
-            return consultaValorEsMayorA(consultaObtenerValor(consulta), 0);
-        }
-
-        #endregion
-
-        #region Pais
-
-        public static void paisAgregar(string pais)
-        {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Paises (Pais_Nombre) VALUES (@Nombre)");
-            consulta.Parameters.AddWithValue("@Nombre", pais);
-            consultaEjecutar(consulta);
-        }
-
-        public static void paisEliminar(string pais)
-        {
-            SqlCommand consulta = consultaCrear("DELETE FROM RIP.Paises WHERE Pais_ID = @ID");
-            consulta.Parameters.AddWithValue("@ID", paisBuscarID(pais));
-            consultaEjecutar(consulta);
-        }
-
-        public static string paisObtenerID(string pais)
-        {
-            if (pais == null)
-                return null;
-            if (paisNoExiste(pais))
-                paisAgregar(pais);
-            return paisBuscarID(pais);
-        }
-
-        public static bool paisNoExiste(string pais)
-        {
-            return consultaValorNoExiste(paisObtenerID(pais));
-        }
-
-        public static string paisBuscarID(string pais)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Pais_ID FROM RIP.Paises WHERE Pais_Nombre = @Nombre");
-            consulta.Parameters.AddWithValue("@Nombre", pais);
-            return consultaObtenerValor(consulta);
-        }
-
-        public static bool paisEstaEnAlgunDomicilio(string pais)
-        {
-            SqlCommand consulta = consultaCrear("SELECT COUNT(*) FROM RIP.Domicilios WHERE Domicilio_PaisID = @PaisID");
-            consulta.Parameters.AddWithValue("@PaisID", paisBuscarID(pais));
-            return consultaValorEsMayorA(consultaObtenerValor(consulta), 0);
-        }
-
-        #endregion
-
-        #region Nacionalidad
-
-        public static void nacionalidadAgregar(string nacionalidad) 
-        {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Nacionalidades (Nacionalidad_Descripcion) VALUES (@Descripcion)");
-            consulta.Parameters.AddWithValue("@Descripcion", nacionalidad);
-            consultaEjecutar(consulta);
-        }
-
-        public static void nacionalidadEliminar(string nacionalidad)
-        {
-            SqlCommand consulta = consultaCrear("DELETE FROM RIP.Personas WHERE Nacionalidad_ID = @ID");
-            consulta.Parameters.AddWithValue("@ID", nacionalidadBuscarID(nacionalidad));
-            consultaEjecutar(consulta);
-        }
-
-        public static string nacionalidadObtenerID(string nacionalidad)
-        {
-            if(nacionalidadNoExiste(nacionalidad))
-                nacionalidadAgregar(nacionalidad);
-            return nacionalidadBuscarID(nacionalidad);
-        }
-
-        public static bool nacionalidadNoExiste(string nacionalidad)
-        {
-            return consultaValorNoExiste(nacionalidadBuscarID(nacionalidad));
-        }
-
-        public static string nacionalidadBuscarID(string nacionalidad)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Nacionalidad_ID FROM RIP.Nacionalidades WHERE Nacionalidad_Descripcion = @Descripcion");
-            consulta.Parameters.AddWithValue("@Descripcion", nacionalidad);
-            return consultaObtenerValor(consulta);
-        }
-
-        public static bool nacionalidadEstaEnAlgunaPersona(string nacionalidad)
-        {
-            SqlCommand consulta = consultaCrear("SELECT COUNT(*) FROM RIP.Personas WHERE Persona_Nacionalidad = @Nacionalidad");
-            consulta.Parameters.AddWithValue("@Nacionalidad", nacionalidadBuscarID(nacionalidad));
-            return consultaValorEsMayorA(consultaObtenerValor(consulta), 0);
-        }
-
-        #endregion
-
         #region TipoDocumento
 
         public static string tipoDocumentoObtenerID(string tipoDocumento)
@@ -1147,12 +916,11 @@ namespace FrbaHotel
             return consultaObtenerLista(consulta);
         }
 
-        #endregion
-
-
         internal static bool HayReservasEntreFechas(DateTime dateTime1, DateTime dateTime2)
         {
             return true;
         }
+
+        #endregion
     }
 }

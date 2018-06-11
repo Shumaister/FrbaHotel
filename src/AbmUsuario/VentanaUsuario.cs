@@ -31,19 +31,39 @@ namespace FrbaHotel.AbmUsuario
 
         #region Agregar
 
+        private List<Hotel> ventanaObtenerHotelesSeleccionados()
+        {
+            List<Hotel> hoteles = new List<Hotel>();
+            foreach (string nombreHotel in lbxHoteles.Items)
+            {
+                //string[] direccion = nombreHotel.Split('|');
+                //Domicilio domicilio = new Domicilio("", null, direccion[0], direccion[1], direccion[2]);
+               // Hotel hotel = new Hotel(domicilio);
+                //hoteles.Add(hotel);
+            }
+            return hoteles;
+        }
+
+        private List<Rol> ventanaObtenerRolesSeleccionados()
+        {
+            List<Rol> roles = new List<Rol>();
+            foreach (string nombreRol in lbxRoles.Items)
+            {
+                Rol rol = new Rol(nombreRol);
+                roles.Add(rol);
+            }
+            return roles;
+        }
+
         private Usuario ventanaCrearUsuarioParaAgregar()
         {
-            List<string> hoteles = new List<string>();
-            foreach (string funcionalidad in lbxHoteles.Items)
-                hoteles.Add(funcionalidad);
-            List<string> roles = new List<string>();
-            foreach (string funcionalidad in lbxRoles.Items)
-                roles.Add(funcionalidad);
-            Domicilio domicilio = new Domicilio(tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text, tbxPiso.Text, tbxDepartamento.Text);
-            //Persona persona = new Persona(tbxNombre.Text, tbxApellido.Text, tbxFechaNacimiento.Text, cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text, tbxNacionalidad.Text, tbxTelefono.Text, tbxEmail.Text, domicilio);
+            List<Rol> roles = ventanaObtenerRolesSeleccionados();
+            List<Hotel> hoteles = ventanaObtenerHotelesSeleccionados();
+            //Domicilio domicilio = new Domicilio("", tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text, tbxPiso.Text, tbxDepartamento.Text);
+            //Persona persona = new Persona("", tbxNombre.Text, tbxApellido.Text, tbxFechaNacimiento.Text, cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text, tbxNacionalidad.Text, tbxTelefono.Text, tbxEmail.Text, domicilio);
             //Usuario usuario = new Usuario(tbxUsuario.Text, tbxContrasena.Text, persona, hoteles, roles);
-            return null;
             //return usuario;
+            return null;
         }
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
@@ -86,12 +106,14 @@ namespace FrbaHotel.AbmUsuario
             string tipoDocumento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["TipoDocumento_Descripcion"].Value.ToString();
             string numeroDocumento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_NumeroDocumento"].Value.ToString();
             string nacionalidad = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Nacionalidad_Descripcion"].Value.ToString();
-            string fechaNacimiento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_FechaNacimiento"].Value.ToString();
+            DateTime fechaNacimiento = DateTime.Parse(dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_FechaNacimiento"].Value.ToString());
             string telefono = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Telefono"].Value.ToString();
             string email = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Email"].Value.ToString();
             string nombreUsuario = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Nombre"].Value.ToString();
             Domicilio domicilio = new Domicilio(pais, ciudad, calle, numeroCalle, piso, departamento);
+            domicilio.id = Database.domicilioObtenerID(domicilio);
             Persona persona = new Persona(nombre, apellido, fechaNacimiento, tipoDocumento, numeroDocumento, nacionalidad, telefono, email, domicilio);
+            persona.id = Database.personaObtenerID(persona);
             Usuario usuario = new Usuario(nombreUsuario, "", persona, null, null);
             //usuario.hoteles = Database.usuarioObtenerHotelesEnLista(usuario);
             //usuario.roles = Database.usuarioObtenerRolesEnLista(usuario);

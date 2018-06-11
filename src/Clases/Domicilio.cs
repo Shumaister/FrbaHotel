@@ -8,8 +8,9 @@ namespace FrbaHotel
 {
     public class Domicilio
     {
-        //-------------------------------------- Atributos -------------------------------------
-       
+        #region Atributos
+
+        public string id { get; set; }
         public string pais { get; set; }
         public string ciudad { get; set; }
         public string calle { get; set; }
@@ -17,8 +18,10 @@ namespace FrbaHotel
         public string piso { get; set; }
         public string departamento { get; set; }
 
-        //-------------------------------------- Constructores -------------------------------------
-        
+        #endregion
+
+        #region Constructores
+
         public Domicilio(string pais, string ciudad, string calle, string numeroCalle, string piso, string departamento)
         {
             this.pais = pais;
@@ -29,7 +32,14 @@ namespace FrbaHotel
             this.departamento = departamento;
         }
 
-        //-------------------------------------- Metodos -------------------------------------
+        public Domicilio(string pais, string ciudad, string calle, string numeroCalle)
+        {
+            this.pais = pais;
+            this.ciudad = ciudad;
+            this.calle = calle;
+            this.numeroCalle = numeroCalle;
+        }
 
+        #endregion
     }
 }

@@ -74,7 +74,7 @@ namespace FrbaHotel.AbmRol
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
                 Rol rolModificado = ventanaCrearRol();
-                if (Database.rolModificadoConExito(rol, rolModificado))
+                if (Database.rolModificadoConExito(rolModificado))
                 {
                     this.Hide();
                     ventanaRol.ventanaActualizar();

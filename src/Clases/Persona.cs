@@ -10,9 +10,10 @@ namespace FrbaHotel
     {
         //-------------------------------------- Atributos -------------------------------------
 
+        public string id { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
-        public string fechaNacimiento { get; set; }
+        public DateTime fechaNacimiento { get; set; }
         public string tipoDocumento { get; set; }
         public string numeroDocumento { get; set; }
         public string nacionalidad { get; set; }
@@ -23,7 +24,7 @@ namespace FrbaHotel
 
         //-------------------------------------- Constructores -------------------------------------
 
-        public Persona(string nombre, string apellido, string fechaNacimiento, string tipoDocumento, string numeroDocumento, string nacionalidad, string telefono, string email, Domicilio domicilio)
+        public Persona(string nombre, string apellido, DateTime fechaNacimiento, string tipoDocumento, string numeroDocumento, string nacionalidad, string telefono, string email, Domicilio domicilio)
         {
             this.nombre = nombre;
             this.apellido = apellido;
