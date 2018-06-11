@@ -40,9 +40,9 @@ namespace FrbaHotel.Clases
             this.persona = persona;
         }
 
-        public Usuario(string id)
+        public Usuario(string nombre)
         {
-            this.id = id;
+            this.nombre = nombre;
         }
 
         #endregion

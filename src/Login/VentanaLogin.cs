@@ -61,7 +61,9 @@ namespace FrbaHotel.Login
         private void ventanaLogueoExitoso(LogueoDTO logueo)
         {
             this.Hide();
-            Sesion sesion = Database.sesionCrear(logueo.mensaje, "");
+            string nombreUsuario = logueo.mensaje;
+            Usuario usuario = new Usuario(nombreUsuario);
+            Sesion sesion = new Sesion(usuario, Database.usuarioObtenerHotelesEnLista(usuario), Database.usuarioObtenerRolesEnLista(usuario));
             VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(sesion);
         }
 

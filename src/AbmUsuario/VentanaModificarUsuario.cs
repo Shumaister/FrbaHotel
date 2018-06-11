@@ -58,7 +58,7 @@ namespace FrbaHotel.AbmUsuario
             tbxCalle.Text = usuario.persona.domicilio.calle;
             tbxNumeroCalle.Text = usuario.persona.domicilio.numeroCalle;
             tbxPiso.Text = usuario.persona.domicilio.piso;
-            tbxDepartamento.Text = usuario.persona.domicilio.piso;
+            tbxDepartamento.Text = usuario.persona.domicilio.departamento;
         }
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
@@ -68,8 +68,8 @@ namespace FrbaHotel.AbmUsuario
                 ventanaModificarUsuario();
                 if (Database.usuarioModificadoConExito(usuario))
                 {
-                    btnLimpiarUsuario_Click(sender, e);
-                    ventanaUsuario.VentanaUsuarios_Load(sender, e);
+                    this.Hide();
+                    ventanaUsuario.ventanaActualizar();
                 }
             }
         }
@@ -94,7 +94,7 @@ namespace FrbaHotel.AbmUsuario
             usuario.persona.domicilio.piso = tbxPiso.Text;
             usuario.persona.domicilio.departamento = tbxDepartamento.Text;
             usuario.roles = ventanaObtenerRolesSeleccionados();
-            usuario.hoteles = ventanaObtenerHotelesSeleccionados(); ;
+            usuario.hoteles = ventanaObtenerHotelesSeleccionados();
         }
 
         private List<Hotel> ventanaObtenerHotelesSeleccionados()
@@ -102,7 +102,7 @@ namespace FrbaHotel.AbmUsuario
             List<Hotel> hoteles = new List<Hotel>();
             foreach (string nombreHotel in lbxHoteles.Items)
             {
-                string[] direccion = nombreHotel.Split('|');
+                string[] direccion = nombreHotel.Split('-');
                 Domicilio domicilio = new Domicilio("", direccion[0], direccion[1], direccion[2], direccion[3]);
                 Hotel hotel = new Hotel(domicilio);
                 hoteles.Add(hotel);
@@ -200,13 +200,13 @@ namespace FrbaHotel.AbmUsuario
 
         private void tbxCiudad_KeyPress(object sender, KeyPressEventArgs e)
         {
-            textBoxConfigurarParaLetras(e);
+            textBoxConfigurarParaLetrasYNumeros(e);
             controladorError.Clear();
         }
 
         private void tbxCalle_KeyPress(object sender, KeyPressEventArgs e)
         {
-            textBoxConfigurarParaLetras(e);
+            textBoxConfigurarParaLetrasYNumeros(e);
             controladorError.Clear();
         }
 

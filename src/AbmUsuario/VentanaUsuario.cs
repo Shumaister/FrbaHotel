@@ -36,7 +36,7 @@ namespace FrbaHotel.AbmUsuario
             List<Hotel> hoteles = new List<Hotel>();
             foreach (string nombreHotel in lbxHoteles.Items)
             {
-                string[] direccion = nombreHotel.Split('|');
+                string[] direccion = nombreHotel.Split('-');
                 Domicilio domicilio = new Domicilio("", direccion[0], direccion[1], direccion[2], direccion[3]);
                 Hotel hotel = new Hotel(domicilio);
                 hoteles.Add(hotel);
@@ -73,7 +73,7 @@ namespace FrbaHotel.AbmUsuario
                 if (Database.usuarioAgregadoConExito(usuario))
                 {
                     btnLimpiarUsuario_Click(sender, e);
-                    VentanaUsuarios_Load(sender, e);
+                    ventanaActualizar();
                 }
             }
         }
@@ -96,11 +96,10 @@ namespace FrbaHotel.AbmUsuario
         {
             string usuarioID = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString();
             string usuarioNombre = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Nombre"].Value.ToString();
-            string usuarioContrasenia = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Contrasenia"].Value.ToString();
             string idPersona = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_ID"].Value.ToString();
             string nombre = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Nombre"].Value.ToString();
             string apellido = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Apellido"].Value.ToString();
-            string nacionalidad = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Pesona_Nacionalidad"].Value.ToString();
+            string nacionalidad = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Nacionalidad"].Value.ToString();
             string tipoDocumento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["TipoDocumento_Descripcion"].Value.ToString();
             string numeroDocumento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_NumeroDocumento"].Value.ToString();
             DateTime fechaNacimiento = DateTime.Parse(dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_FechaNacimiento"].Value.ToString());
@@ -115,8 +114,8 @@ namespace FrbaHotel.AbmUsuario
             string departamento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Departamento"].Value.ToString();       
             Domicilio domicilio = new Domicilio(idDomicilio, pais, ciudad, calle, numeroCalle, piso, departamento);
             Persona persona = new Persona(idPersona, nombre, apellido, nacionalidad, tipoDocumento, numeroDocumento, fechaNacimiento, telefono, email, domicilio);
-            Usuario usuario = new Usuario(usuarioID, usuarioNombre, usuarioContrasenia, persona);
-            //usuario.contrasenia = Database.usuarioObtenerContrasenia(usuario);                        
+            Usuario usuario = new Usuario(usuarioID, usuarioNombre, "", persona);
+            usuario.contrasenia = Database.usuarioObtenerContrasenia(usuario);                        
             return usuario;
         }
 
@@ -131,7 +130,8 @@ namespace FrbaHotel.AbmUsuario
             {
                 string id = dgvEliminarUsuarios.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString();
                 Usuario usuario = new Usuario(id);
-                Database.usuarioEliminar(usuario);
+                Database.usuarioEliminadoConExito(usuario);
+                ventanaActualizar();
             }
         }
 
@@ -141,13 +141,18 @@ namespace FrbaHotel.AbmUsuario
 
         public void VentanaUsuarios_Load(object sender, EventArgs e)
         {
-            dataGridViewCargar(dgvModificarUsuarios, Database.usuarioObtenerTodosEnTabla());
-            dataGridViewCargar(dgvEliminarUsuarios, Database.usuarioObtenerTodosEnTabla());
+            ventanaActualizar();
             dataGridViewAgregarBotonModificar(dgvModificarUsuarios);
             dataGridViewAgregarBotonEliminar(dgvEliminarUsuarios);
             comboBoxCargar(cbxRoles, Database.rolObtenerTodosEnLista());
             comboBoxCargar(cbxHoteles, Database.hotelObtenerTodosLista());
             comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
+        }
+
+        public void ventanaActualizar()
+        {
+            dataGridViewCargar(dgvModificarUsuarios, Database.usuarioObtenerTodosEnTabla());
+            dataGridViewCargar(dgvEliminarUsuarios, Database.usuarioObtenerHabilitadosEnTabla());
         }
 
 
@@ -221,13 +226,13 @@ namespace FrbaHotel.AbmUsuario
 
         private void tbxCiudad_KeyPress(object sender, KeyPressEventArgs e)
         {
-            textBoxConfigurarParaLetras(e);
+            textBoxConfigurarParaLetrasYNumeros(e);
             controladorError.Clear();
         }
 
         private void tbxCalle_KeyPress(object sender, KeyPressEventArgs e)
         {
-            textBoxConfigurarParaLetras(e);
+            textBoxConfigurarParaLetrasYNumeros(e);
             controladorError.Clear();
         }
 
