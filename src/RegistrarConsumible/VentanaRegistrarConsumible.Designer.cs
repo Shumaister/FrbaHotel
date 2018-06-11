@@ -178,7 +178,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Name = "VentanaRegistrarConsumible";
-            this.Text = "Form1";
+            this.Text = "Registrar Consumibles";
             this.Load += new System.EventHandler(this.VentanaRegistrarConsumible_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
