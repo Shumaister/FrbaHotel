@@ -456,7 +456,6 @@ PRINT '----- Tabla Habitaciones creada -----'
 END
 GO
 
-
 IF NOT EXISTS (
 	SELECT 1 
 	FROM INFORMATION_SCHEMA.TABLES 
@@ -501,6 +500,29 @@ CREATE TABLE [RIP].[Reservas] (
 	CONSTRAINT FK_RESERVAS_USUARIO FOREIGN KEY ([Reserva_UsuarioID])  REFERENCES [RIP].[Usuarios] ([Usuario_ID])
 )
 PRINT '----- Tabla Reservas creada -----'
+END
+GO
+
+
+IF NOT EXISTS (
+	SELECT 1 
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE' 
+    AND TABLE_NAME = 'HabitacionesNoDisponibles' 
+	AND TABLE_SCHEMA = 'RIP'
+)
+BEGIN
+CREATE TABLE [RIP].[HabitacionesNoDisponibles](
+	[HabitacionNoDisponible_ID][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[HabitacionNoDisponible_ReservaID][numeric](18,0) NOT NULL,
+	[HabitacionNoDisponible_HabitacionID][numeric](18,0) NOT NULL,
+	[HabitacionNoDisponible_FechaInicio][datetime] NOT NULL,
+	[HabitacionNoDisponible_FechaFin][datetime] NOT NULL,
+	[HabitacionNoDisponible_Finalizado][bit] DEFAULT 1,
+	CONSTRAINT FK_HAB_NODISPONIBLES_RESERVA FOREIGN KEY ([HabitacionNoDisponible_ReservaID]) REFERENCES [RIP].[Reservas] ([Reserva_ID]),
+	CONSTRAINT FK_HAB_NODISPONIBLES_HABITACION FOREIGN KEY ([HabitacionNoDisponible_HabitacionID])REFERENCES [RIP].[Habitaciones] ([Habitacion_ID])
+)
+PRINT '----- Tabla HabitacionesNoDisponibles creada -----'
 END
 GO
 
