@@ -146,6 +146,7 @@
             this.menuFacturas.Size = new System.Drawing.Size(152, 22);
             this.menuFacturas.Text = "Facturas";
             this.menuFacturas.Visible = false;
+            this.menuFacturas.Click += new System.EventHandler(this.menuFacturas_Click);
             // 
             // menuClientes
             // 
