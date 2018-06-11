@@ -33,10 +33,17 @@ namespace FrbaHotel.AbmUsuario
 
         private Usuario ventanaCrearUsuarioParaAgregar()
         {
+            List<string> hoteles = new List<string>();
+            foreach (string funcionalidad in lbxHoteles.Items)
+                hoteles.Add(funcionalidad);
+            List<string> roles = new List<string>();
+            foreach (string funcionalidad in lbxRoles.Items)
+                roles.Add(funcionalidad);
             Domicilio domicilio = new Domicilio(tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text, tbxPiso.Text, tbxDepartamento.Text);
-            Persona persona = new Persona(tbxNombre.Text, tbxApellido.Text, tbxFechaNacimiento.Text, cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text, tbxNacionalidad.Text, tbxTelefono.Text, tbxEmail.Text, domicilio);
-            Usuario usuario = new Usuario(tbxUsuario.Text, tbxContrasena.Text, persona);
-            return usuario;
+            //Persona persona = new Persona(tbxNombre.Text, tbxApellido.Text, tbxFechaNacimiento.Text, cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text, tbxNacionalidad.Text, tbxTelefono.Text, tbxEmail.Text, domicilio);
+            //Usuario usuario = new Usuario(tbxUsuario.Text, tbxContrasena.Text, persona, hoteles, roles);
+            return null;
+            //return usuario;
         }
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
@@ -75,19 +82,21 @@ namespace FrbaHotel.AbmUsuario
             string piso = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Piso"].Value.ToString();
             string departamento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Departamento"].Value.ToString();
             string nombre = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Nombre"].Value.ToString();
-            string apellido = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Pesona_Apellido"].Value.ToString();
-            string tipoDocumento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_TipoDocumento"].Value.ToString();
+            string apellido = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Apellido"].Value.ToString();
+            string tipoDocumento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["TipoDocumento_Descripcion"].Value.ToString();
             string numeroDocumento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_NumeroDocumento"].Value.ToString();
-            string nacionalidad = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Nacionalidad"].Value.ToString();
+            string nacionalidad = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Nacionalidad_Descripcion"].Value.ToString();
             string fechaNacimiento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_FechaNacimiento"].Value.ToString();
             string telefono = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Telefono"].Value.ToString();
             string email = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Email"].Value.ToString();
             string nombreUsuario = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Nombre"].Value.ToString();
-            string contrasenia = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Contrasenia"].Value.ToString();
             Domicilio domicilio = new Domicilio(pais, ciudad, calle, numeroCalle, piso, departamento);
             Persona persona = new Persona(nombre, apellido, fechaNacimiento, tipoDocumento, numeroDocumento, nacionalidad, telefono, email, domicilio);
-            Usuario usuario = new Usuario(nombreUsuario, contrasenia, persona);
-            usuario.id = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString();
+            Usuario usuario = new Usuario(nombreUsuario, "", persona, null, null);
+            //usuario.hoteles = Database.usuarioObtenerHotelesEnLista(usuario);
+            //usuario.roles = Database.usuarioObtenerRolesEnLista(usuario);
+            usuario.contrasenia = Database.usuarioObtenerContrasenia(usuario);   
+            usuario.id = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString();                    
             return usuario;
         }
 

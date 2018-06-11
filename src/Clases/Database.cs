@@ -259,9 +259,9 @@ namespace FrbaHotel
 
         public static Sesion sesionCrear(string nombreUsuario, string contrasenia)
         {
-            Usuario usuario = new Usuario(nombreUsuario, contrasenia, null);
+            Usuario usuario = new Usuario(nombreUsuario, contrasenia, null, null, null);
             List<string> roles = usuarioObtenerRoles(usuario);
-            List<string> hoteles = usuarioObtenerHotelesLista(usuario);
+            List<string> hoteles = usuarioObtenerHotelesEnLista(usuario);
             Sesion sesion = new Sesion(usuario, roles, hoteles);
             return sesion;
         }
@@ -557,7 +557,7 @@ namespace FrbaHotel
             return usuarioObtenerID(unUsuario) != usuarioObtenerID(otroUsuario);
         }
 
-        public static List<string> usuarioObtenerHotelesLista(Usuario usuario)
+        public static List<string> usuarioObtenerHotelesEnLista(Usuario usuario)
         {
             SqlCommand consulta = consultaCrear("SELECT Ciudad_Nombre, Calle_Nombre, Domicilio_NumeroCalle FROM RIP.Hoteles JOIN RIP.Hoteles_Usuarios ON HotelUsuario_HotelID = Hotel_ID JOIN RIP.Usuarios ON Usuario_ID = HotelUsuario_UsuarioID JOIN RIP.Domicilios ON Domicilio_ID = Hotel_DomicilioID JOIN RIP.Calles ON Calle_ID = Domicilio_CalleID JOIN RIP.Ciudades ON Ciudad_ID = Domicilio_CiudadID WHERE Usuario_Nombre = @Nombre");
             consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
@@ -580,8 +580,15 @@ namespace FrbaHotel
 
         public static DataTable usuarioObtenerTodos()
         {
-            SqlCommand consulta = consultaCrear("SELECT Usuario_Nombre, Persona_Nombre, Persona_Apellido, Persona_TipoDocumentoID, Persona_NumeroDocumento, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, Ciudad_Nombre, Calle_Nombre, Domicilio_NumeroCalle FROM RIP.Usuarios JOIN RIP.Personas ON Usuario_PersonaID = Persona_ID JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID JOIN RIP.Calles ON Domicilio_CalleID = Calle_ID JOIN RIP.Ciudades ON Domicilio_CiudadID = Ciudad_ID");
+            SqlCommand consulta = consultaCrear("SELECT Usuario_ID, Usuario_Nombre, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Nacionalidad_Descripcion, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, Pais_Nombre, Ciudad_Nombre, Calle_Nombre, Domicilio_NumeroCalle, Domicilio_Piso, Domicilio_Departamento FROM RIP.Usuarios JOIN RIP.Personas ON Usuario_PersonaID = Persona_ID JOIN RIP.Nacionalidades ON Nacionalidad_ID = Persona_NacionalidadID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID JOIN RIP.Paises ON Domicilio_PaisID = Pais_ID JOIN RIP.Calles ON Domicilio_CalleID = Calle_ID JOIN RIP.Ciudades ON Domicilio_CiudadID = Ciudad_ID");
             return consultaObtenerTabla(consulta);
+        }
+
+        public static string usuarioObtenerContrasenia(Usuario usuario)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Usuario_Contrasenia FROM RIP.Usuarios WHERE Usuario_Nombre = @Nombre");
+            consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
+            return consultaObtenerValor(consulta);
         }
 
         public static bool usuarioExiste(Usuario usuario)
@@ -1026,6 +1033,8 @@ namespace FrbaHotel
 
         public static string paisObtenerID(string pais)
         {
+            if (pais == null)
+                return null;
             if (paisNoExiste(pais))
                 paisAgregar(pais);
             return paisBuscarID(pais);
