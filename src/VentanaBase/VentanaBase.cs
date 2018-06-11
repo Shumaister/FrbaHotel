@@ -149,6 +149,14 @@ namespace FrbaHotel
             }
         }
 
+        public static void textBoxConfigurarParaLetras(KeyPressEventArgs evento)
+        {
+            if (textBoxLetrasCaracterValido(evento.KeyChar))
+                evento.Handled = false;
+            else
+                evento.Handled = true;
+        }
+
         public static void textBoxConfigurarParaNumeros(KeyPressEventArgs evento) 
         {
             if (textBoxNumerosCaracterValido(evento.KeyChar))
@@ -157,25 +165,20 @@ namespace FrbaHotel
                 evento.Handled = true;   
         }
 
-        public static void textBoxConfigurarParaLetras(KeyPressEventArgs evento)
+        public static void textBoxConfigurarParaLetrasYNumeros(KeyPressEventArgs evento)
         {
-            if (textBoxLetrasCaracterValido(evento.KeyChar))
+            if (textBoxLetrasYNumerosCaracterValido(evento.KeyChar))
                 evento.Handled = false;
             else
-                evento.Handled = true;   
+                evento.Handled = true;
         }
 
         public static void textBoxConfigurarParaCuenta(KeyPressEventArgs evento)
         {
-            if (textBoxEmailCaracterValido(evento.KeyChar))
+            if (textBoxCuentaCaracterValido(evento.KeyChar))
                 evento.Handled = false;
             else
                 evento.Handled = true;   
-        }
-
-        public static bool textBoxNumerosCaracterValido(char caracter)
-        {
-            return Char.IsDigit(caracter) || Char.IsControl(caracter);
         }
 
         public static bool textBoxLetrasCaracterValido(char caracter)
@@ -183,7 +186,17 @@ namespace FrbaHotel
             return Char.IsLetter(caracter) || Char.IsControl(caracter) || Char.IsSeparator(caracter);
         }
 
-        public static bool textBoxEmailCaracterValido(char caracter)
+        public static bool textBoxNumerosCaracterValido(char caracter)
+        {
+            return Char.IsDigit(caracter) || Char.IsControl(caracter);
+        }
+
+        public static bool textBoxLetrasYNumerosCaracterValido(char caracter)
+        {
+            return Char.IsLetterOrDigit(caracter) || Char.IsControl(caracter) || Char.IsSeparator(caracter);
+        }
+
+        public static bool textBoxCuentaCaracterValido(char caracter)
         {
             return Char.IsLetter(caracter) || Char.IsDigit(caracter) || Char.IsControl(caracter) || caracter == '-' || caracter == '_' || caracter == '.';
         }

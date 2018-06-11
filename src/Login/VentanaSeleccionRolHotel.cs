@@ -32,7 +32,6 @@ namespace FrbaHotel.Login
         private void VentanaSeleccionRolHotel_Load(object sender, EventArgs e)
         {
             this.AcceptButton = btnIngresarRol;
-            lblErrorRol.Hide();
         }
 
         private void VentanaSeleccionRol_FormClosed(object sender, FormClosedEventArgs e)
@@ -80,8 +79,9 @@ namespace FrbaHotel.Login
 
         public void ventanaConfigurarSesion()
         {
+#warning Hacer que devuelve un rol y hotel completos
             sesion.rol = new Rol(cbxRoles.SelectedItem.ToString());
-            //sesion.hotel = new Hotel(cbxHoteles.SelectedItem.ToString());
+            sesion.hotel = new Hotel(cbxHoteles.SelectedItem.ToString());
             sesion.rol.funcionalidades = Database.rolObtenerFuncionalidades(sesion.rol);
         }
 

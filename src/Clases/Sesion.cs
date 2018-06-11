@@ -20,11 +20,11 @@ namespace FrbaHotel
 
         //-------------------------------------- Constructores -------------------------------------
 
-        public Sesion(Usuario usuario, List<string> roles, List<string> hoteles)
+        public Sesion(Usuario usuario, List<string> hoteles, List<string> roles)
         {
             this.usuario = usuario;
-            this.roles = roles;
             this.hoteles = hoteles;
+            this.roles = roles;
         }
 
         //-------------------------------------- Metodos para Usuario -------------------------------------

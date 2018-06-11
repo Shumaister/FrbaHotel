@@ -96,6 +96,8 @@
             this.tbxNacionalidad = new System.Windows.Forms.TextBox();
             this.lblNacionalidad = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.SuspendLayout();
@@ -165,7 +167,6 @@
             this.tbxDepartamento.Location = new System.Drawing.Point(580, 361);
             this.tbxDepartamento.MaxLength = 1;
             this.tbxDepartamento.Name = "tbxDepartamento";
-            this.tbxDepartamento.ShortcutsEnabled = false;
             this.tbxDepartamento.Size = new System.Drawing.Size(100, 20);
             this.tbxDepartamento.TabIndex = 196;
             this.tbxDepartamento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxDepartamento_KeyPress);
@@ -183,7 +184,6 @@
             // 
             this.tbxPiso.Location = new System.Drawing.Point(440, 361);
             this.tbxPiso.Name = "tbxPiso";
-            this.tbxPiso.ShortcutsEnabled = false;
             this.tbxPiso.Size = new System.Drawing.Size(100, 20);
             this.tbxPiso.TabIndex = 194;
             this.tbxPiso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxPiso_KeyPress);
@@ -754,11 +754,35 @@
             this.label40.TabIndex = 292;
             this.label40.Text = "*";
             // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.ForeColor = System.Drawing.Color.Red;
+            this.label38.Location = new System.Drawing.Point(462, 337);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(17, 22);
+            this.label38.TabIndex = 293;
+            this.label38.Text = "*";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.ForeColor = System.Drawing.Color.Red;
+            this.label39.Location = new System.Drawing.Point(651, 336);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(17, 22);
+            this.label39.TabIndex = 294;
+            this.label39.Text = "*";
+            // 
             // VentanaModificarUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(843, 568);
+            this.Controls.Add(this.label39);
+            this.Controls.Add(this.label38);
             this.Controls.Add(this.tbxNacionalidad);
             this.Controls.Add(this.lblNacionalidad);
             this.Controls.Add(this.label40);
@@ -899,6 +923,8 @@
             this.Controls.SetChildIndex(this.label40, 0);
             this.Controls.SetChildIndex(this.lblNacionalidad, 0);
             this.Controls.SetChildIndex(this.tbxNacionalidad, 0);
+            this.Controls.SetChildIndex(this.label38, 0);
+            this.Controls.SetChildIndex(this.label39, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.ResumeLayout(false);
@@ -976,6 +1002,8 @@
         private System.Windows.Forms.TextBox tbxNacionalidad;
         private System.Windows.Forms.Label lblNacionalidad;
         private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label39;
 
 
     }

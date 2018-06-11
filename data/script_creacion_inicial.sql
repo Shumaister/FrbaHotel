@@ -672,8 +672,8 @@ ORDER BY 1
 
 PRINT''
 PRINT '----- Realizando inserts tabla Domicilios -----'
-INSERT INTO RIP.Domicilios (Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle)
-SELECT DISTINCT RTRIM(Hotel_Ciudad), Hotel_Calle, Hotel_Nro_Calle 
+INSERT INTO RIP.Domicilios (Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle)
+SELECT DISTINCT 'Argentina', RTRIM(Hotel_Ciudad), Hotel_Calle, Hotel_Nro_Calle 
 FROM GD_Esquema.Maestra
 ORDER BY 1
  
