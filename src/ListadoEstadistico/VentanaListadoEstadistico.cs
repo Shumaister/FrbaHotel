@@ -82,7 +82,21 @@ namespace FrbaHotel.ListadoEstadistico
                         break;
                     case 3://Clientes cumplidores
                         {
-                         //   dataGridEstadisticas.DataSource = 
+                            
+                            SqlCommand consulta = Database.consultaCrear("select distinct top 5 CONCAT(Domicilio_Ciudad,' ',Domicilio_Calle,' ',Domicilio_NumeroCalle) 'Hotel',Habitacion_Numero,DATEDIFF(day,Estadia_FechaInicio,Estadia_FechaFin)'Dias utilizados',(select COUNT(EstadiaHabitacion_HabitacionID)'Cantidad de veces utilizadas' from rip.Estadias_Habitaciones where a.EstadiaHabitacion_HabitacionID=EstadiaHabitacion_HabitacionID group by EstadiaHabitacion_HabitacionID) from rip.Estadias join rip.Estadias_Habitaciones a on Estadia_ID=EstadiaHabitacion_EstadiaID join rip.Habitaciones on EstadiaHabitacion_HabitacionID=Habitacion_ID join rip.Hoteles on Habitacion_HotelID=Hotel_ID join rip.Domicilios on Domicilio_ID=Hotel_DomicilioID where YEAR(Estadia_FechaInicio)=@anio and DATEPART(QUARTER,Estadia_FechaInicio)=@trimestre group by Domicilio_Ciudad,Domicilio_Calle,habitacion_Numero,Domicilio_NumeroCalle,Estadia_FechaInicio,Estadia_FechaFin,a.EstadiaHabitacion_HabitacionID order by 2 desc ,3 desc ");
+                            consulta.Parameters.AddWithValue("@anio", anio);
+                            consulta.Parameters.AddWithValue("@trimestre", trimestre);
+                            dataGridViewCargar(dataGridEstadisticas,Database.consultaObtenerTabla(consulta));
+                        };
+                        break;
+                        case 4:
+                        {
+
+                            SqlCommand consulta = Database.consultaCrear("select top 5 Persona_Nombre,Persona_Apellido,((sum((Consumido_Cantidad*Consumible_Precio))/10)+((DATEDIFF(DAY,Estadia_FechaInicio,Estadia_FechaFin)*Regimen_Precio)/20))'Puntos' from rip.Consumidos join rip.Consumibles on Consumido_ConsumibleID=Consumible_ID join rip.Estadias on Consumido_EstadiaID=Estadia_ID join rip.Reservas on Reserva_ID=Estadia_ReservaID join rip.Clientes on Reserva_ClienteID=Cliente_ID join rip.Personas on Cliente_PersonaID=Persona_ID join rip.Regimenes on Reserva_RegimenID=Regimen_ID where YEAR(Estadia_FechaInicio)=@anio and DATEPART(QUARTER,Estadia_FechaInicio)=@trimestre group by Persona_Nombre,Persona_Apellido,Estadia_FechaInicio,Estadia_FechaFin,Regimen_Precio order by 3 desc,1 asc");
+                            consulta.Parameters.AddWithValue("@anio", anio);
+                            consulta.Parameters.AddWithValue("@trimestre", trimestre);
+                            dataGridViewCargar(dataGridEstadisticas,Database.consultaObtenerTabla(consulta)); 
+                         
                         };
                         break;
                 }
