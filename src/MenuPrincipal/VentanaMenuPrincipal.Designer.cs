@@ -175,6 +175,7 @@
             this.menuEstadisticas.Size = new System.Drawing.Size(152, 22);
             this.menuEstadisticas.Text = "Estadisticas";
             this.menuEstadisticas.Visible = false;
+            this.menuEstadisticas.Click += new System.EventHandler(this.menuEstadisticas_Click);
             // 
             // menuCuenta
             // 
