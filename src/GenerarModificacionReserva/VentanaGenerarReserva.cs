@@ -59,7 +59,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             {
                 Estadia.FechaInicio = calendarInicio.SelectionStart;
                 Estadia.FechaFin = calendarFin.SelectionStart;
-                Estadia.CantidadHuespedes = int.Parse(this.tbxCantidadHuespedes.Text);
+                Estadia.CantidadHuespedes = int.Parse(this.tbxCantidadHuespedes.Text.Trim());
 
                 lblResumenReserva.Text = "Para la cantidad de " + Estadia.CantidadHuespedes + " huespedes,\n con fecha inicio: " + Estadia.FechaInicio.ToShortDateString() + " con fecha fin: " + Estadia.FechaFin.ToShortDateString();
 
@@ -88,7 +88,8 @@ namespace FrbaHotel.GenerarModificacionReserva
             }
             else
             {
-                if (int.Parse(lblerrorcantidad.Text) <= 0)
+                             
+                if (int.Parse(this.tbxCantidadHuespedes.Text.Trim()) <= 0)
                 {
                     this.lblerrorcantidad.Text = "La cantidad debe ser un numero mayor a 0";
                     this.lblerrorcantidad.Visible = true;
@@ -96,9 +97,18 @@ namespace FrbaHotel.GenerarModificacionReserva
                 }
             }
 
-
+            if (Database.HayReservasEntreFechas(this.calendarInicio.SelectionStart, this.calendarFin.SelectionStart))
+            {
+                lblErrorPaso1.Visible = true;
+            }
 
             return true;
+        }
+
+        private void tbxCantidadHuespedes_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaNumeros(e);
+            controladorError.Clear();
         }
 
         private void calendarInicio_DateChanged(object sender, DateRangeEventArgs e)
@@ -120,10 +130,10 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             this.tbxCantidadHuespedes.Clear();
             this.lblResumenReserva.Text = "";
-            this.lblFechaInicio.Text = "";
+           /* this.lblFechaInicio.Text = "";
             this.lblFechaFin.Text = "";
-            this.calendarInicio.ResetText();
-            this.calendarFin.ResetText();
+            this.calendarInicio.SelectionStart = DateTime.Now;
+            this.calendarFin.SelectionStart = DateTime.Now;*/
         }
     }
 }

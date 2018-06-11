@@ -1149,5 +1149,10 @@ namespace FrbaHotel
 
         #endregion
 
+
+        internal static bool HayReservasEntreFechas(DateTime dateTime1, DateTime dateTime2)
+        {
+            return true;
+        }
     }
 }
