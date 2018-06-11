@@ -65,10 +65,10 @@ namespace FrbaHotel.RegistrarConsumible
         private void button1_Click(object sender, System.EventArgs e)
         {
 
-
+        
             if (TextEstadia.Text.Trim() == "" | TextCantidad.Text.Trim() == "")
             {
-                MessageBox.Show("Faltan completar campos obligatorios", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+               MessageBox.Show("Faltan completar campos obligatorios", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (!System.Text.RegularExpressions.Regex.IsMatch(TextEstadia.Text, @"^\d+$"))
