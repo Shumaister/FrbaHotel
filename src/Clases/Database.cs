@@ -217,7 +217,8 @@ namespace FrbaHotel
             string nombreUsuario = (string)fila["Usuario_Nombre"];
             byte[] contraseniaReal = (byte[])fila["Usuario_Contrasenia"];
             int intentosFallidos = (int)fila["Usuario_IntentosFallidos"];
-            if (intentosFallidos >= 3)
+            Usuario usuario = new Usuario(nombreUsuario);
+            if (intentosFallidos >= 3 || usuarioBloqueado(usuario))
                 return loginCuentaBloqueada();
             else
                 return loginVerificarContrasenia(nombreUsuario, contrasenia, contraseniaReal, intentosFallidos);
@@ -444,7 +445,7 @@ namespace FrbaHotel
 
         public static bool usuarioAgregadoConExito(Usuario usuario)
         {
-            if (usuarioExiste(usuario))
+            if (usuarioExiste(usuario) || personaDatosInvalidos(usuario.persona))
             {
                 ventanaInformarError("Ya existe un usuario registrado con ese nombre");
                 return false;
@@ -464,23 +465,33 @@ namespace FrbaHotel
         public static bool usuarioModificadoConExito(Usuario usuario)
         {
 
-            if (usuarioExiste(usuario) && usuario.id != usuarioObtenerID(usuario))
+            if (usuarioExiste(usuario) && usuarioDistinto(usuario))
             {
                 ventanaInformarError("Ya existe un usuario registrado con ese nombre");
                 return false;
             }
-            else
+            /*
+            if (personaEmailExiste(usuario.persona) && personaDistinta(usuario))
             {
-                usuarioEliminarHoteles(usuario);
-                usuarioEliminarRoles(usuario);
-                domicilioPersonaModificar(usuario.persona.domicilio);
-                personaModificar(usuario.persona);
-                usuarioModificar(usuario);
-                usuarioAgregarHoteles(usuario);
-                usuarioAgregarRoles(usuario);
-                ventanaInformarExito("El usuario fue modificado con exito");
-                return true;
+                ventanaInformarError("Ya existe un usuario registrado con ese email");
+                return false;
             }
+            if (personaDocumentoExiste(usuario.persona) && personaDistinta(usuario))
+            {
+                ventanaInformarError("Ya existe un usuario registrado con ese documento");
+                return false;
+            }
+            */
+            usuarioEliminarHoteles(usuario);
+            usuarioEliminarRoles(usuario);
+            domicilioPersonaModificar(usuario.persona.domicilio);
+            personaModificar(usuario.persona);
+            usuarioModificar(usuario);
+            usuarioAgregarHoteles(usuario);
+            usuarioAgregarRoles(usuario);
+            ventanaInformarExito("El usuario fue modificado con exito");
+            return true;
+
         }
 
         public static void usuarioEliminadoConExito(Usuario usuario)
@@ -504,7 +515,7 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@ID", usuario.id);
             consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
             consulta.Parameters.AddWithValue("@Contrasenia", loginEncriptarContraseña(usuario.contrasenia));
-            consulta.Parameters.AddWithValue("@NuevoEstado", usuario.estado);
+            consulta.Parameters.AddWithValue("@Estado", usuario.estado);
             consultaEjecutar(consulta);
         }
 
@@ -527,6 +538,11 @@ namespace FrbaHotel
             SqlCommand consulta = consultaCrear("SELECT Usuario_Nombre FROM RIP.Usuarios WHERE Usuario_Nombre = @Nombre");
             consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
             return consultaValorExiste(consultaObtenerValor(consulta));
+        }
+
+        public static bool usuarioDistinto(Usuario usuario)
+        {
+            return usuario.id != usuarioObtenerID(usuario);
         }
 
         public static void usuarioAgregarRol(Usuario usuario, Rol rol)
@@ -625,6 +641,18 @@ namespace FrbaHotel
             return consultaObtenerValor(consulta);
         }
 
+        public static bool usuarioHabilitado(Usuario usuario)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Usuario_Estado FROM RIP.Usuarios WHERE Usuario_Nombre = @Nombre");
+            consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
+            return bool.Parse(consultaObtenerValor(consulta));
+        }
+
+        public static bool usuarioBloqueado(Usuario usuario)
+        {
+            return !usuarioHabilitado(usuario);
+        }
+
         #endregion
 
         #region Persona
@@ -667,6 +695,11 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@NumeroDocumento", persona.numeroDocumento);
             consulta.Parameters.AddWithValue("@Email", persona.email);
             return consultaObtenerValor(consulta);
+        }
+
+        public static bool personaDatosInvalidos(Persona persona)
+        {
+            return personaEmailExiste(persona) || personaDocumentoExiste(persona);
         }
 
         public static bool personaEmailExiste(Persona persona)

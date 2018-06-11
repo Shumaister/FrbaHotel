@@ -5,9 +5,11 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FrbaHotel.Clases;
+
 
 namespace FrbaHotel.AbmUsuario
 {
@@ -67,7 +69,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
-            if (ventanaCamposEstanCompletos(pagAgregar, controladorError))
+            if (ventanaCamposEstanCompletos(pagAgregar, controladorError) && ventanaEmailValido())
             {
                 Usuario usuario = ventanaCrearUsuarioParaAgregar();
                 if (Database.usuarioAgregadoConExito(usuario))
@@ -129,10 +131,22 @@ namespace FrbaHotel.AbmUsuario
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
                 string id = dgvEliminarUsuarios.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString();
-                Usuario usuario = new Usuario(id);
+                Usuario usuario = new Usuario(id, null, null, null);
                 Database.usuarioEliminadoConExito(usuario);
                 ventanaActualizar();
             }
+        }
+
+        private bool ventanaEmailValido()
+        {
+            Regex expresionParaEmail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            if (!expresionParaEmail.IsMatch(tbxEmail.Text))
+            {
+                ventanaInformarError("El email no es valido");
+                return false;
+            }
+            else
+                return true;
         }
 
         #endregion
@@ -208,7 +222,6 @@ namespace FrbaHotel.AbmUsuario
 
         private void tbxEmail_KeyPress(object sender, KeyPressEventArgs e)
         {
-            textBoxConfigurarParaCuenta(e);
             controladorError.Clear();
         }
 
@@ -286,7 +299,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnGuardarFecha_Click(object sender, EventArgs e)
         {
-            tbxFechaNacimiento.Text = calendario.SelectionStart.ToString();
+            tbxFechaNacimiento.Text = calendario.SelectionStart.ToShortDateString();
             calendario.Hide();
             btnGuardarFecha.Hide();
         }
