@@ -91,6 +91,7 @@
             this.tbxCantidadHuespedes.Name = "tbxCantidadHuespedes";
             this.tbxCantidadHuespedes.Size = new System.Drawing.Size(98, 20);
             this.tbxCantidadHuespedes.TabIndex = 291;
+            this.tbxCantidadHuespedes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCantidadHuespedes_KeyPress);
             // 
             // label8
             // 

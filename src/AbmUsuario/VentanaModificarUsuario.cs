@@ -46,6 +46,9 @@ namespace FrbaHotel.AbmUsuario
             tbxApellido.Text = usuario.persona.apellido;
             tbxDocumento.Text = usuario.persona.numeroDocumento;
             tbxFechaNacimiento.Text = usuario.persona.fechaNacimiento;
+            tbxNacionalidad.Text = usuario.persona.nacionalidad;
+            tbxTelefono.Text = usuario.persona.telefono;
+            tbxEmail.Text = usuario.persona.email;
             tbxPais.Text = usuario.persona.domicilio.pais;
             tbxCiudad.Text = usuario.persona.domicilio.ciudad;
             tbxCalle.Text = usuario.persona.domicilio.calle;
@@ -69,9 +72,25 @@ namespace FrbaHotel.AbmUsuario
 
         private Usuario ventanaCrearUsuarioModificado()
         {
+            //lbxHoteles.Items.
+            List<Hotel> hoteles = new List<Hotel>();
+            foreach (string nombreHotel in lbxHoteles.Items)
+            {
+                //string[] direccion = nombreHotel.Split('|'),
+                //Domicilio domicilio = new Domicilio(null, direccion[0], direccion[1], direccion[2],null,null);
+                //Hotel hotel = new Hotel(nombreHotel);
+                //hoteles.Add(hotel);
+            }    
+            List<Rol> roles = new List<Rol>();
+            foreach (string nombreRol in lbxRoles.Items)
+            {
+                Rol rol = new Rol(nombreRol);
+                roles.Add(rol);
+            }
+                
             Domicilio domicilio = new Domicilio(tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text, tbxPiso.Text, tbxDepartamento.Text);
             Persona persona = new Persona(tbxNombre.Text, tbxApellido.Text, tbxFechaNacimiento.Text, cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text, tbxNacionalidad.Text, tbxTelefono.Text, tbxEmail.Text, domicilio);
-            Usuario usuarioModificado = new Usuario(tbxUsuario.Text, tbxContrasena.Text, persona);
+            Usuario usuarioModificado = new Usuario(tbxUsuario.Text, tbxContrasena.Text, persona, hoteles, roles);
             usuarioModificado.id = usuario.id;
             return usuarioModificado;
         }

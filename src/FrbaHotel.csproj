@@ -180,7 +180,9 @@
     <Compile Include="Clases\Persona.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistrarConsumible\VentanaRegistrarConsumible.cs" />
+    <Compile Include="RegistrarConsumible\VentanaRegistrarConsumible.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RegistrarConsumible\VentanaRegistrarConsumible.Designer.cs">
       <DependentUpon>VentanaRegistrarConsumible.cs</DependentUpon>
     </Compile>
@@ -197,6 +199,9 @@
     <Compile Include="VentanaBase\VentanaBase.Designer.cs">
       <DependentUpon>VentanaBase.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AbmCliente\VentanaClientes.resx">
+      <DependentUpon>VentanaClientes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\VentanaModificarRol.resx">
       <DependentUpon>VentanaModificarRol.cs</DependentUpon>
     </EmbeddedResource>

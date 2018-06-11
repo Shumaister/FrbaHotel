@@ -15,7 +15,7 @@ namespace FrbaHotel.Clases
         public string contrasenia { get; set; }
         public string estado { get; set; }
         public Persona persona { get; set; }
-        public List<Hotel> hoteles {get; set;}
+        public List<Hotel> hoteles { get; set; }
         public List<Rol> roles { get; set; }
 
 
@@ -23,11 +23,13 @@ namespace FrbaHotel.Clases
 
         #region Constructores
 
-        public Usuario(string nombre, string contrasenia, Persona persona)
+        public Usuario(string nombre, string contrasenia, Persona persona, List<Hotel> hoteles, List<Rol> roles)
         {
             this.nombre = nombre;
             this.contrasenia = contrasenia;
             this.persona = persona;
+            this.hoteles = hoteles;
+            this.roles = roles;
         }
 
         public Usuario(string id)
