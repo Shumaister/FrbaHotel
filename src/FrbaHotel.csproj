@@ -133,11 +133,11 @@
     <Compile Include="GenerarModificacionReserva\VentanaGenerarReserva.Designer.cs">
       <DependentUpon>VentanaGenerarReserva.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListadoEstadistico\Form1.cs">
+    <Compile Include="ListadoEstadistico\VentanaListadoEstadistico.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ListadoEstadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ListadoEstadistico\VentanaListadoEstadistico.Designer.cs">
+      <DependentUpon>VentanaListadoEstadistico.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\VentanaInicio.cs">
       <SubType>Form</SubType>
@@ -214,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GenerarModificacionReserva\VentanaGenerarReserva.resx">
       <DependentUpon>VentanaGenerarReserva.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListadoEstadistico\VentanaListadoEstadistico.resx">
+      <DependentUpon>VentanaListadoEstadistico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\VentanaInicio.resx">
       <DependentUpon>VentanaInicio.cs</DependentUpon>

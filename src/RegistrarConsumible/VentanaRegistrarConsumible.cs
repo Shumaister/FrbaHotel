@@ -103,12 +103,12 @@ namespace FrbaHotel.RegistrarConsumible
             {
                 case DialogResult.Yes:
 
-                    SqlCommand Regimen = Database.consultaCrear("select Regimen_ID from rip.Regimenes where Regimen_Descripcion=@Regimen");
+              SqlCommand Regimen = Database.consultaCrear("select Regimen_ID from rip.Regimenes where Regimen_Descripcion=@Regimen");
               Regimen.Parameters.AddWithValue("@Regimen", TextRegimen.Text);
               string idRegimen = Database.consultaObtenerValor(Regimen);
 
 
-              if (int.Parse(idRegimen) == 4)
+              if (int.Parse(idRegimen) == 1)
               {
                 SqlCommand consulta = Database.consultaCrear("Insert into rip.Consumidos(Consumido_EstadiaID,Consumido_HabitacionID,Consumido_ConsumibleID,Consumido_Cantidad)values(@Estadia,(select Habitacion_ID from rip.Habitaciones where Habitacion_Numero=@NumeroHabitacion and Habitacion_HotelID=@NumeroHotel),@ConsumibleId,@Cantidad)");
                 consulta.Parameters.AddWithValue("@Estadia",TextEstadia.Text);
