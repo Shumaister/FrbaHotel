@@ -38,28 +38,23 @@ namespace FrbaHotel.RegistrarConsumible
         private void TextEstadia_TextChanged(object sender, EventArgs e)
         {
 
-            if (!System.Text.RegularExpressions.Regex.IsMatch(TextEstadia.Text, @"^\d+$"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(TextEstadia.Text, @"^\d+$"))
             {
-                MessageBox.Show("Sólo se permiten numeros en id Estadia", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                SqlCommand hotel = Database.consultaCrear("select distinct CONCAT(Domicilio_Pais, ' | ', Domicilio_Ciudad, ' | ', Domicilio_Calle, ' | ', Domicilio_NumeroCalle) from rip.Consumidos join rip.Estadias on Consumido_EstadiaID=Estadia_ID join rip.Reservas on Estadia_ReservaID=Reserva_ID join rip.Hoteles on Reserva_HotelID=Hotel_ID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID join rip.Habitaciones on Consumido_HabitacionID=Habitacion_ID join rip.Regimenes on Reserva_RegimenID=Regimen_ID where estadia_id=@Estadia");
+                hotel.Parameters.AddWithValue("@Estadia", TextEstadia.Text);
+                string nombreHotel = Database.consultaObtenerValor(hotel);
+                TextHotel.Text = nombreHotel;
+
+                SqlCommand habitacion = Database.consultaCrear("select distinct Habitacion_Numero from rip.Consumidos join rip.Estadias on Consumido_EstadiaID=Estadia_ID join rip.Reservas on Estadia_ReservaID=Reserva_ID join rip.Hoteles on Reserva_HotelID=Hotel_ID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID join rip.Habitaciones on Consumido_HabitacionID=Habitacion_ID join rip.Regimenes on Reserva_RegimenID=Regimen_ID where estadia_id=@Estadia");
+                habitacion.Parameters.AddWithValue("@Estadia", TextEstadia.Text);
+                string numeroHabitacion = Database.consultaObtenerValor(habitacion);
+                TextHabitacion.Text = numeroHabitacion;
+
+                SqlCommand regimen = Database.consultaCrear("select distinct Regimen_Descripcion from rip.Consumidos join rip.Estadias on Consumido_EstadiaID=Estadia_ID join rip.Reservas on Estadia_ReservaID=Reserva_ID join rip.Hoteles on Reserva_HotelID=Hotel_ID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID join rip.Habitaciones on Consumido_HabitacionID=Habitacion_ID join rip.Regimenes on Reserva_RegimenID=Regimen_ID where estadia_id=@Estadia");
+                regimen.Parameters.AddWithValue("@Estadia", TextEstadia.Text);
+                string nombreRegimen = Database.consultaObtenerValor(regimen);
+                TextRegimen.Text = nombreRegimen;
             }
-
-            SqlCommand hotel = Database.consultaCrear("select distinct Calle_Nombre from rip.Consumidos join rip.Estadias on Consumido_EstadiaID=Estadia_ID join rip.Reservas on Estadia_ReservaID=Reserva_ID join rip.Hoteles on Reserva_HotelID=Hotel_ID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID join rip.Calles on Domicilio_CalleID=Calle_ID join rip.Habitaciones on Consumido_HabitacionID=Habitacion_ID join rip.Regimenes on Reserva_RegimenID=Regimen_ID where estadia_id=@Estadia");
-            hotel.Parameters.AddWithValue("@Estadia", TextEstadia.Text);
-            string nombreHotel = Database.consultaObtenerValor(hotel);
-            TextHotel.Text = nombreHotel;
-
-            SqlCommand habitacion = Database.consultaCrear("select distinct Habitacion_Numero from rip.Consumidos join rip.Estadias on Consumido_EstadiaID=Estadia_ID join rip.Reservas on Estadia_ReservaID=Reserva_ID join rip.Hoteles on Reserva_HotelID=Hotel_ID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID join rip.Calles on Domicilio_CalleID=Calle_ID join rip.Habitaciones on Consumido_HabitacionID=Habitacion_ID join rip.Regimenes on Reserva_RegimenID=Regimen_ID where estadia_id=@Estadia");
-            habitacion.Parameters.AddWithValue("@Estadia", TextEstadia.Text);
-            string numeroHabitacion = Database.consultaObtenerValor(habitacion);
-            TextHabitacion.Text = numeroHabitacion;
-
-            SqlCommand regimen = Database.consultaCrear("select distinct Regimen_Descripcion from rip.Consumidos join rip.Estadias on Consumido_EstadiaID=Estadia_ID join rip.Reservas on Estadia_ReservaID=Reserva_ID join rip.Hoteles on Reserva_HotelID=Hotel_ID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID join rip.Calles on Domicilio_CalleID=Calle_ID join rip.Habitaciones on Consumido_HabitacionID=Habitacion_ID join rip.Regimenes on Reserva_RegimenID=Regimen_ID where estadia_id=@Estadia");
-            regimen.Parameters.AddWithValue("@Estadia", TextEstadia.Text);
-            string nombreRegimen = Database.consultaObtenerValor(regimen);
-            TextRegimen.Text = nombreRegimen;
-
-
         }
 
         private void button1_Click(object sender, System.EventArgs e)
@@ -98,7 +93,7 @@ namespace FrbaHotel.RegistrarConsumible
              consumible.Parameters.AddWithValue("@Consumible", consumibleSeleccionado);
              string idConsumible = Database.consultaObtenerValor(consumible);
 
-             SqlCommand hotel = Database.consultaCrear("select distinct Habitacion_HotelID from rip.Consumidos join rip.Estadias on Consumido_EstadiaID=Estadia_ID join rip.Reservas on Estadia_ReservaID=Reserva_ID join rip.Hoteles on Reserva_HotelID=Hotel_ID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID join rip.Calles on Domicilio_CalleID=Calle_ID join rip.Habitaciones on Consumido_HabitacionID=Habitacion_ID join rip.Regimenes on Reserva_RegimenID=Regimen_ID where estadia_id=@Estadia");
+             SqlCommand hotel = Database.consultaCrear("select distinct Habitacion_HotelID from rip.Consumidos join rip.Estadias on Consumido_EstadiaID=Estadia_ID join rip.Reservas on Estadia_ReservaID=Reserva_ID join rip.Hoteles on Reserva_HotelID=Hotel_ID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID join rip.Habitaciones on Consumido_HabitacionID=Habitacion_ID join rip.Regimenes on Reserva_RegimenID=Regimen_ID where estadia_id=@Estadia");
             hotel.Parameters.AddWithValue("@Estadia", TextEstadia.Text);
             string idHotel = Database.consultaObtenerValor(hotel);
           
@@ -158,28 +153,28 @@ namespace FrbaHotel.RegistrarConsumible
 
         private void TextEstadia_TextChanged_1(object sender, EventArgs e)
         {
-            if (!System.Text.RegularExpressions.Regex.IsMatch(TextEstadia.Text, @"^\d+$"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(TextEstadia.Text, @"^\d+$"))
             {
-                MessageBox.Show("Sólo se permiten numeros en id Estadia", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                SqlCommand hotel = Database.consultaCrear("select distinct CONCAT(Domicilio_Pais, ' | ', Domicilio_Ciudad, ' | ', Domicilio_Calle, ' | ', Domicilio_NumeroCalle) from rip.Consumidos join rip.Estadias on Consumido_EstadiaID=Estadia_ID join rip.Reservas on Estadia_ReservaID=Reserva_ID join rip.Hoteles on Reserva_HotelID=Hotel_ID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID join rip.Habitaciones on Consumido_HabitacionID=Habitacion_ID join rip.Regimenes on Reserva_RegimenID=Regimen_ID where estadia_id=@Estadia");
+                hotel.Parameters.AddWithValue("@Estadia", TextEstadia.Text);
+                string nombreHotel = Database.consultaObtenerValor(hotel);
+                TextHotel.Text = nombreHotel;
+
+                SqlCommand habitacion = Database.consultaCrear("select distinct Habitacion_Numero from rip.Consumidos join rip.Estadias on Consumido_EstadiaID=Estadia_ID join rip.Reservas on Estadia_ReservaID=Reserva_ID join rip.Hoteles on Reserva_HotelID=Hotel_ID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID join rip.Habitaciones on Consumido_HabitacionID=Habitacion_ID join rip.Regimenes on Reserva_RegimenID=Regimen_ID where estadia_id=@Estadia");
+                habitacion.Parameters.AddWithValue("@Estadia", TextEstadia.Text);
+                string numeroHabitacion = Database.consultaObtenerValor(habitacion);
+                TextHabitacion.Text = numeroHabitacion;
+
+                SqlCommand regimen = Database.consultaCrear("select distinct Regimen_Descripcion from rip.Consumidos join rip.Estadias on Consumido_EstadiaID=Estadia_ID join rip.Reservas on Estadia_ReservaID=Reserva_ID join rip.Hoteles on Reserva_HotelID=Hotel_ID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID join rip.Habitaciones on Consumido_HabitacionID=Habitacion_ID join rip.Regimenes on Reserva_RegimenID=Regimen_ID where estadia_id=@Estadia");
+                regimen.Parameters.AddWithValue("@Estadia", TextEstadia.Text);
+                string nombreRegimen = Database.consultaObtenerValor(regimen);
+                TextRegimen.Text = nombreRegimen;
             }
+        }
 
-            SqlCommand hotel = Database.consultaCrear("select distinct Calle_Nombre from rip.Consumidos join rip.Estadias on Consumido_EstadiaID=Estadia_ID join rip.Reservas on Estadia_ReservaID=Reserva_ID join rip.Hoteles on Reserva_HotelID=Hotel_ID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID join rip.Calles on Domicilio_CalleID=Calle_ID join rip.Habitaciones on Consumido_HabitacionID=Habitacion_ID join rip.Regimenes on Reserva_RegimenID=Regimen_ID where estadia_id=@Estadia");
-            hotel.Parameters.AddWithValue("@Estadia", TextEstadia.Text);
-            string nombreHotel = Database.consultaObtenerValor(hotel);
-            TextHotel.Text = nombreHotel;
-
-            SqlCommand habitacion = Database.consultaCrear("select distinct Habitacion_Numero from rip.Consumidos join rip.Estadias on Consumido_EstadiaID=Estadia_ID join rip.Reservas on Estadia_ReservaID=Reserva_ID join rip.Hoteles on Reserva_HotelID=Hotel_ID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID join rip.Calles on Domicilio_CalleID=Calle_ID join rip.Habitaciones on Consumido_HabitacionID=Habitacion_ID join rip.Regimenes on Reserva_RegimenID=Regimen_ID where estadia_id=@Estadia");
-            habitacion.Parameters.AddWithValue("@Estadia", TextEstadia.Text);
-            string numeroHabitacion = Database.consultaObtenerValor(habitacion);
-            TextHabitacion.Text = numeroHabitacion;
-
-            SqlCommand regimen = Database.consultaCrear("select distinct Regimen_Descripcion from rip.Consumidos join rip.Estadias on Consumido_EstadiaID=Estadia_ID join rip.Reservas on Estadia_ReservaID=Reserva_ID join rip.Hoteles on Reserva_HotelID=Hotel_ID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID join rip.Calles on Domicilio_CalleID=Calle_ID join rip.Habitaciones on Consumido_HabitacionID=Habitacion_ID join rip.Regimenes on Reserva_RegimenID=Regimen_ID where estadia_id=@Estadia");
-            regimen.Parameters.AddWithValue("@Estadia", TextEstadia.Text);
-            string nombreRegimen = Database.consultaObtenerValor(regimen);
-            TextRegimen.Text = nombreRegimen;
-
-
+        private void TextEstadia_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            VentanaBase.textBoxConfigurarParaNumeros(e);
         }
     }
 }

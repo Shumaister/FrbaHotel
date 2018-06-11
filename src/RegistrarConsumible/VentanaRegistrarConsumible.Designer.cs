@@ -47,8 +47,10 @@
             // 
             // logo
             // 
-            this.logo.Location = new System.Drawing.Point(243, 137);
+            this.logo.Image = null;
+            this.logo.Location = new System.Drawing.Point(394, 233);
             this.logo.Size = new System.Drawing.Size(22, 20);
+            this.logo.Visible = false;
             // 
             // label1
             // 
@@ -132,9 +134,10 @@
             // 
             this.TextEstadia.Location = new System.Drawing.Point(81, 9);
             this.TextEstadia.Name = "TextEstadia";
-            this.TextEstadia.Size = new System.Drawing.Size(121, 20);
+            this.TextEstadia.Size = new System.Drawing.Size(167, 20);
             this.TextEstadia.TabIndex = 11;
             this.TextEstadia.TextChanged += new System.EventHandler(this.TextEstadia_TextChanged_1);
+            this.TextEstadia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextEstadia_KeyPress);
             // 
             // ConsumibleCombo
             // 
@@ -146,19 +149,19 @@
             "Agua Mineral"});
             this.ConsumibleCombo.Location = new System.Drawing.Point(81, 137);
             this.ConsumibleCombo.Name = "ConsumibleCombo";
-            this.ConsumibleCombo.Size = new System.Drawing.Size(121, 21);
+            this.ConsumibleCombo.Size = new System.Drawing.Size(167, 21);
             this.ConsumibleCombo.TabIndex = 12;
             // 
             // TextCantidad
             // 
             this.TextCantidad.Location = new System.Drawing.Point(81, 173);
             this.TextCantidad.Name = "TextCantidad";
-            this.TextCantidad.Size = new System.Drawing.Size(32, 20);
+            this.TextCantidad.Size = new System.Drawing.Size(52, 20);
             this.TextCantidad.TabIndex = 13;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(127, 226);
+            this.button1.Location = new System.Drawing.Point(138, 221);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 14;
@@ -170,7 +173,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(226, 265);
+            this.ClientSize = new System.Drawing.Size(428, 265);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.TextCantidad);
             this.Controls.Add(this.ConsumibleCombo);
