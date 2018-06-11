@@ -36,10 +36,10 @@ namespace FrbaHotel.AbmUsuario
             List<Hotel> hoteles = new List<Hotel>();
             foreach (string nombreHotel in lbxHoteles.Items)
             {
-                //string[] direccion = nombreHotel.Split('|');
-                //Domicilio domicilio = new Domicilio("", null, direccion[0], direccion[1], direccion[2]);
-               // Hotel hotel = new Hotel(domicilio);
-                //hoteles.Add(hotel);
+                string[] direccion = nombreHotel.Split('|');
+                Domicilio domicilio = new Domicilio("", direccion[0], direccion[1], direccion[2], direccion[3]);
+                Hotel hotel = new Hotel(domicilio);
+                hoteles.Add(hotel);
             }
             return hoteles;
         }
@@ -59,11 +59,10 @@ namespace FrbaHotel.AbmUsuario
         {
             List<Rol> roles = ventanaObtenerRolesSeleccionados();
             List<Hotel> hoteles = ventanaObtenerHotelesSeleccionados();
-            //Domicilio domicilio = new Domicilio("", tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text, tbxPiso.Text, tbxDepartamento.Text);
-            //Persona persona = new Persona("", tbxNombre.Text, tbxApellido.Text, tbxFechaNacimiento.Text, cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text, tbxNacionalidad.Text, tbxTelefono.Text, tbxEmail.Text, domicilio);
-            //Usuario usuario = new Usuario(tbxUsuario.Text, tbxContrasena.Text, persona, hoteles, roles);
-            //return usuario;
-            return null;
+            Domicilio domicilio = new Domicilio("", tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text, tbxPiso.Text, tbxDepartamento.Text);
+            Persona persona = new Persona("", tbxNombre.Text, tbxApellido.Text, tbxNacionalidad.Text, cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text,  DateTime.Parse(tbxFechaNacimiento.Text), tbxTelefono.Text, tbxEmail.Text, domicilio);
+            Usuario usuario = new Usuario("",tbxUsuario.Text, tbxContrasena.Text, persona, hoteles, roles);
+            return usuario;
         }
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
@@ -95,30 +94,29 @@ namespace FrbaHotel.AbmUsuario
 
         private Usuario ventanaCrearUsuarioParaModificar(DataGridViewCellEventArgs e)
         {
-            string pais = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Pais_Nombre"].Value.ToString();
-            string ciudad = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Ciudad_Nombre"].Value.ToString();
-            string calle = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Calle_Nombre"].Value.ToString();
-            string numeroCalle = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_NumeroCalle"].Value.ToString();
-            string piso = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Piso"].Value.ToString();
-            string departamento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Departamento"].Value.ToString();
+            string usuarioID = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString();
+            string usuarioNombre = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Nombre"].Value.ToString();
+            string usuarioContrasenia = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Contrasenia"].Value.ToString();
+            string idPersona = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_ID"].Value.ToString();
             string nombre = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Nombre"].Value.ToString();
             string apellido = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Apellido"].Value.ToString();
+            string nacionalidad = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Pesona_Nacionalidad"].Value.ToString();
             string tipoDocumento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["TipoDocumento_Descripcion"].Value.ToString();
             string numeroDocumento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_NumeroDocumento"].Value.ToString();
-            string nacionalidad = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Nacionalidad_Descripcion"].Value.ToString();
             DateTime fechaNacimiento = DateTime.Parse(dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_FechaNacimiento"].Value.ToString());
             string telefono = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Telefono"].Value.ToString();
-            string email = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Email"].Value.ToString();
-            string nombreUsuario = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Nombre"].Value.ToString();
-            Domicilio domicilio = new Domicilio(pais, ciudad, calle, numeroCalle, piso, departamento);
-            domicilio.id = Database.domicilioObtenerID(domicilio);
-            Persona persona = new Persona(nombre, apellido, fechaNacimiento, tipoDocumento, numeroDocumento, nacionalidad, telefono, email, domicilio);
-            persona.id = Database.personaObtenerID(persona);
-            Usuario usuario = new Usuario(nombreUsuario, "", persona, null, null);
-            //usuario.hoteles = Database.usuarioObtenerHotelesEnLista(usuario);
-            //usuario.roles = Database.usuarioObtenerRolesEnLista(usuario);
-            usuario.contrasenia = Database.usuarioObtenerContrasenia(usuario);   
-            usuario.id = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString();                    
+            string email = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Email"].Value.ToString();    
+            string idDomicilio = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_ID"].Value.ToString();
+            string pais = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Pais"].Value.ToString();
+            string ciudad = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Ciudad"].Value.ToString();
+            string calle = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Calle"].Value.ToString();
+            string numeroCalle = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_NumeroCalle"].Value.ToString();
+            string piso = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Piso"].Value.ToString();
+            string departamento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Departamento"].Value.ToString();       
+            Domicilio domicilio = new Domicilio(idDomicilio, pais, ciudad, calle, numeroCalle, piso, departamento);
+            Persona persona = new Persona(idPersona, nombre, apellido, nacionalidad, tipoDocumento, numeroDocumento, fechaNacimiento, telefono, email, domicilio);
+            Usuario usuario = new Usuario(usuarioID, usuarioNombre, usuarioContrasenia, persona);
+            //usuario.contrasenia = Database.usuarioObtenerContrasenia(usuario);                        
             return usuario;
         }
 
@@ -143,8 +141,8 @@ namespace FrbaHotel.AbmUsuario
 
         public void VentanaUsuarios_Load(object sender, EventArgs e)
         {
-            dataGridViewCargar(dgvModificarUsuarios, Database.usuarioObtenerTodos());
-            dataGridViewCargar(dgvEliminarUsuarios, Database.usuarioObtenerTodos());
+            dataGridViewCargar(dgvModificarUsuarios, Database.usuarioObtenerTodosEnTabla());
+            dataGridViewCargar(dgvEliminarUsuarios, Database.usuarioObtenerTodosEnTabla());
             dataGridViewAgregarBotonModificar(dgvModificarUsuarios);
             dataGridViewAgregarBotonEliminar(dgvEliminarUsuarios);
             comboBoxCargar(cbxRoles, Database.rolObtenerTodosEnLista());

@@ -22,8 +22,9 @@ namespace FrbaHotel
 
         #region Constructores
 
-        public Domicilio(string pais, string ciudad, string calle, string numeroCalle, string piso, string departamento)
+        public Domicilio(string id, string pais, string ciudad, string calle, string numeroCalle, string piso, string departamento)
         {
+            this.id = id;
             this.pais = pais;
             this.ciudad = ciudad;
             this.calle = calle;
@@ -32,8 +33,9 @@ namespace FrbaHotel
             this.departamento = departamento;
         }
 
-        public Domicilio(string pais, string ciudad, string calle, string numeroCalle)
+        public Domicilio(string id, string pais, string ciudad, string calle, string numeroCalle)
         {
+            this.id = id;
             this.pais = pais;
             this.ciudad = ciudad;
             this.calle = calle;

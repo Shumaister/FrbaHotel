@@ -39,6 +39,10 @@ namespace FrbaHotel.AbmUsuario
         private void VentanaModificarUsuario_Load(object sender, EventArgs e)
         {
             comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
+            comboBoxCargar(cbxHoteles, Database.usuarioObtenerHotelesFaltantesEnLista(usuario));
+            comboBoxCargar(cbxRoles, Database.usuarioObtenerRolesFaltantesEnLista(usuario));
+            listBoxCargar(lbxHoteles, Database.usuarioObtenerHotelesEnLista(usuario));
+            listBoxCargar(lbxRoles, Database.usuarioObtenerRolesEnLista(usuario));
             cbxTipoDocumento.SelectedIndex = cbxTipoDocumento.Items.IndexOf(usuario.persona.tipoDocumento);
             tbxUsuario.Text = usuario.nombre;
             tbxContrasena.Text = usuario.contrasenia;        
@@ -61,8 +65,8 @@ namespace FrbaHotel.AbmUsuario
         {
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
-                Usuario usuarioModificado = ventanaCrearUsuarioModificado();
-                if (true)//Database.usuarioModificadoConExito(usuarioModificado))
+                ventanaModificarUsuario();
+                if (Database.usuarioModificadoConExito(usuario))
                 {
                     btnLimpiarUsuario_Click(sender, e);
                     ventanaUsuario.VentanaUsuarios_Load(sender, e);
@@ -70,27 +74,55 @@ namespace FrbaHotel.AbmUsuario
             }
         }
 
-        private Usuario ventanaCrearUsuarioModificado()
+        private void ventanaModificarUsuario()
+        {
+            cbxTipoDocumento.SelectedIndex = cbxTipoDocumento.Items.IndexOf(usuario.persona.tipoDocumento);
+            usuario.nombre = tbxUsuario.Text;
+            usuario.contrasenia = tbxContrasena.Text;
+            usuario.estado = ventanaObtenerEstado();
+            usuario.persona.nombre = tbxNombre.Text;
+            usuario.persona.apellido = tbxApellido.Text;
+            usuario.persona.numeroDocumento = tbxDocumento.Text;
+            usuario.persona.fechaNacimiento = DateTime.Parse(tbxFechaNacimiento.Text);
+            usuario.persona.nacionalidad = tbxNacionalidad.Text;
+            usuario.persona.telefono = tbxTelefono.Text;
+            usuario.persona.email = tbxEmail.Text;
+            usuario.persona.domicilio.pais = tbxPais.Text;
+            usuario.persona.domicilio.ciudad = tbxCiudad.Text;
+            usuario.persona.domicilio.calle = tbxCalle.Text;
+            usuario.persona.domicilio.numeroCalle = tbxNumeroCalle.Text;
+            usuario.persona.domicilio.piso = tbxPiso.Text;
+            usuario.persona.domicilio.departamento = tbxDepartamento.Text;
+            usuario.roles = ventanaObtenerRolesSeleccionados();
+            usuario.hoteles = ventanaObtenerHotelesSeleccionados(); ;
+        }
+
+        private List<Hotel> ventanaObtenerHotelesSeleccionados()
         {
             List<Hotel> hoteles = new List<Hotel>();
             foreach (string nombreHotel in lbxHoteles.Items)
             {
                 string[] direccion = nombreHotel.Split('|');
-                Domicilio unDomicilio = new Domicilio(null, direccion[0], direccion[1], direccion[2],null,null);
-                Hotel hotel = new Hotel(unDomicilio);
+                Domicilio domicilio = new Domicilio("", direccion[0], direccion[1], direccion[2], direccion[3]);
+                Hotel hotel = new Hotel(domicilio);
                 hoteles.Add(hotel);
-            }    
+            }
+            return hoteles;
+        }
+
+        private List<Rol> ventanaObtenerRolesSeleccionados()
+        {
             List<Rol> roles = new List<Rol>();
             foreach (string nombreRol in lbxRoles.Items)
             {
                 Rol rol = new Rol(nombreRol);
                 roles.Add(rol);
-            }              
-            Domicilio domicilio = new Domicilio(tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text, tbxPiso.Text, tbxDepartamento.Text);
-            //Persona persona = new Persona(tbxNombre.Text, tbxApellido.Text, tbxFechaNacimiento.Text, cbxTipoDocumento.SelectedItem.ToString(), tbxDocumento.Text, tbxNacionalidad.Text, tbxTelefono.Text, tbxEmail.Text, domicilio);
-            //Usuario usuarioModificado = new Usuario(tbxUsuario.Text, tbxContrasena.Text, persona, hoteles, roles);
-            //usuarioModificado.id = usuario.id;
-            //return usuarioModificado;
+            }
+            return roles;
+        }
+
+        private string ventanaObtenerEstado()
+        {
             return null;
         }
 

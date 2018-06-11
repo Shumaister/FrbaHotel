@@ -8,7 +8,7 @@ namespace FrbaHotel
 {
     public class Persona
     {
-        //-------------------------------------- Atributos -------------------------------------
+        #region Atributos
 
         public string id { get; set; }
         public string nombre { get; set; }
@@ -21,22 +21,24 @@ namespace FrbaHotel
         public string email { get; set; }
         public Domicilio domicilio { get; set; }
 
+        #endregion
 
-        //-------------------------------------- Constructores -------------------------------------
+        #region Constructores
 
-        public Persona(string nombre, string apellido, DateTime fechaNacimiento, string tipoDocumento, string numeroDocumento, string nacionalidad, string telefono, string email, Domicilio domicilio)
+        public Persona(string id, string nombre, string apellido, string nacionalidad, string tipoDocumento, string numeroDocumento, DateTime fechaNacimiento, string telefono, string email, Domicilio domicilio)
         {
+            this.id = id;
             this.nombre = nombre;
             this.apellido = apellido;
-            this.fechaNacimiento = fechaNacimiento;
+            this.nacionalidad = nacionalidad;
             this.tipoDocumento = tipoDocumento;
             this.numeroDocumento = numeroDocumento;
-            this.nacionalidad = nacionalidad;
+            this.fechaNacimiento = fechaNacimiento;
             this.telefono = telefono;
             this.email = email;
             this.domicilio = domicilio;
         }
-        
- 
+
+        #endregion
     }
 }
