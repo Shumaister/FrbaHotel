@@ -445,21 +445,28 @@ namespace FrbaHotel
 
         public static bool usuarioAgregadoConExito(Usuario usuario)
         {
-            if (usuarioExiste(usuario) || personaDatosInvalidos(usuario.persona))
+            if (usuarioExiste(usuario))
             {
                 ventanaInformarError("Ya existe un usuario registrado con ese nombre");
                 return false;
             }
-            else
+            if (personaEmailExiste(usuario.persona))
             {
-                domicilioPersonaAgregar(usuario.persona.domicilio);
-                personaAgregar(usuario.persona);
-                usuarioAgregar(usuario);
-                usuarioAgregarHoteles(usuario);
-                usuarioAgregarRoles(usuario);
-                ventanaInformarExito("El usuario fue creado con exito");
-                return true;
+                ventanaInformarError("Ya existe un usuario registrado con ese email");
+                return false;
             }
+            if (personaDocumentoExiste(usuario.persona))
+            {
+                ventanaInformarError("Ya existe un usuario registrado con ese documento");
+                return false;
+            }
+            domicilioPersonaAgregar(usuario.persona.domicilio);
+            personaAgregar(usuario.persona);
+            usuarioAgregar(usuario);
+            usuarioAgregarHoteles(usuario);
+            usuarioAgregarRoles(usuario);
+            ventanaInformarExito("El usuario fue creado con exito");
+            return true;
         }
 
         public static bool usuarioModificadoConExito(Usuario usuario)
@@ -470,18 +477,18 @@ namespace FrbaHotel
                 ventanaInformarError("Ya existe un usuario registrado con ese nombre");
                 return false;
             }
-            /*
-            if (personaEmailExiste(usuario.persona) && personaDistinta(usuario))
+
+            if (personaEmailExiste(usuario.persona) && personaDistinta(usuario.persona))
             {
                 ventanaInformarError("Ya existe un usuario registrado con ese email");
                 return false;
             }
-            if (personaDocumentoExiste(usuario.persona) && personaDistinta(usuario))
+            if (personaDocumentoExiste(usuario.persona) && personaDistinta(usuario.persona))
             {
                 ventanaInformarError("Ya existe un usuario registrado con ese documento");
                 return false;
             }
-            */
+ 
             usuarioEliminarHoteles(usuario);
             usuarioEliminarRoles(usuario);
             domicilioPersonaModificar(usuario.persona.domicilio);
@@ -697,9 +704,9 @@ namespace FrbaHotel
             return consultaObtenerValor(consulta);
         }
 
-        public static bool personaDatosInvalidos(Persona persona)
+        public static bool personaDistinta(Persona persona)
         {
-            return personaEmailExiste(persona) || personaDocumentoExiste(persona);
+            return persona.id != personaObtenerID(persona);
         }
 
         public static bool personaEmailExiste(Persona persona)
