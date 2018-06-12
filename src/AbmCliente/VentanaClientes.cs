@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.AbmCliente
 {
-    public partial class VentanaClientes : Form
+    public partial class VentanaClientes : VentanaBase
     {
         public VentanaClientes()
         {
             InitializeComponent();
+        }
+
+        private void pagModificar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
