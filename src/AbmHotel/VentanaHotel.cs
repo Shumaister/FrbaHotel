@@ -10,11 +10,26 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.AbmHotel
 {
-    public partial class VentanaHotel : Form
+    public partial class VentanaHotel : VentanaBase
     {
         public VentanaHotel()
         {
             InitializeComponent();
+        }
+
+        private void label34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pagAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

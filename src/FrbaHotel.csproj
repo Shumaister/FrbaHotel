@@ -208,6 +208,9 @@
     <EmbeddedResource Include="AbmCliente\VentanaClientes.resx">
       <DependentUpon>VentanaClientes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AbmHotel\VentanaHotel.resx">
+      <DependentUpon>VentanaHotel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\VentanaModificarRol.resx">
       <DependentUpon>VentanaModificarRol.cs</DependentUpon>
     </EmbeddedResource>
