@@ -951,33 +951,105 @@ namespace FrbaHotel
             return consultaObtenerValor(consulta);
         }
 
+        public static bool domicilioHotelExiste(Domicilio domicilio)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Domicilio_ID FROM RIP.Domicilios WHERE Domicilio_Pais = @Pais AND Domicilio_Ciudad = @Ciudad AND Domicilio_Calle = @Calle AND Domicilio_NumeroCalle = @NumeroCalle");
+            consulta.Parameters.AddWithValue("@Pais", domicilio.pais);
+            consulta.Parameters.AddWithValue("@Ciudad", domicilio.ciudad);
+            consulta.Parameters.AddWithValue("@Calle", domicilio.calle);
+            consulta.Parameters.AddWithValue("@NumeroCalle", domicilio.numeroCalle);
+            return consultaValorExiste(consultaObtenerValor(consulta));
+        }
+
         #endregion
 
         #region Hotel
 
         public static bool hotelAgregadoConExito(Hotel hotel)
         {
+            if (hotelNombreExiste(hotel))
+            {
+                ventanaInformarError("Ya existe un hotel registrado con ese nombre");
+                return false;
+            }
+            if (domicilioHotelExiste(hotel.domicilio))
+            {
+                ventanaInformarError("Ya existe un hotel registrado con esa direccion");
+                return false;
+            }
+            domicilioHotelAgregar(hotel.domicilio);
+            hotelAgregar(hotel);
+            ventanaInformarExito("El Hotel fue creado con exito");
             return true;
         }
 
         public static bool hotelModificadoConExito(Hotel hotel)
         {
+            if (hotelNombreExiste(hotel))
+            {
+                ventanaInformarError("Ya existe un hotel registrado con ese nombre");
+                return false;
+            }
+            if (domicilioHotelExiste(hotel.domicilio) && hotelDistinto(hotel))
+            {
+                ventanaInformarError("Ya existe un hotel registrado con esa direccion");
+                return false;
+            }
+            domicilioHotelModificar(hotel.domicilio);
+            hotelModificar(hotel);
+            ventanaInformarExito("El Hotel fue modificado con exito");
             return true;
         }
 
-        public static bool hotelEliminadoConExito(Hotel hotel)
+        public static void hotelEliminadoConExito(Hotel hotel)
         {
+            hotelEliminar(hotel);
+            ventanaInformarExito("El Hotel fue eliminado con exito");
+        }
+
+        public static bool hotelCerradoTieneReservasEnPeriodo(HotelCerrado hotelCerrado)
+        {
+            SqlCommand consulta = consultaCrear("SELECT COUNT(Reserva_ID) FROM RIP.Reservas WHERE Reserva_HotelID = @ID AND ((Reserva_FechaInicio BETWEEN @FechaInicio AND @FechaFin OR Reserva_FechaFin BETWEEN @FechaInicio AND @FechaFin) OR (Reserva_FechaInicio <= @FechaInicio AND Reserva_FechaFin >= @FechaFin))");
+            consulta.Parameters.AddWithValue("@ID", hotelCerrado.hotel.id);
+            consulta.Parameters.AddWithValue("@FechaInicio", hotelCerrado.fechaInicio);
+            consulta.Parameters.AddWithValue("@FechaFin", hotelCerrado.fechaFin);
+            return consultaValorEsMayorA(consultaObtenerValor(consulta), 0);
+        }
+
+        public static bool hotelCerradoAgregadoConExito(HotelCerrado hotelCerrado)
+        {
+            if (hotelCerradoTieneReservasEnPeriodo(hotelCerrado))
+            {
+                ventanaInformarError("El Hotel posee reservas o huespedes alojados dentro del periodo elegido");
+                return false;
+            }
+            hotelCerradoAgregar(hotelCerrado);
+            hotelEliminar(hotelCerrado.hotel);
+            ventanaInformarExito("El hotel fue eliminado con exito");
             return true;
+        }
+
+        public static void hotelCerradoAgregar(HotelCerrado hotelCerrado)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.HotelesCerrados (HotelCerrado_HotelID, HotelCerrado_FechaInicio, HotelCerrado_FechaFin, HotelCerrado_Motivo) VALUES (@HotelID, @FechaInicio, @FechaFin, @Motivo)");
+            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerID(hotelCerrado.hotel));
+            consulta.Parameters.AddWithValue("@FechaInicio", hotelCerrado.fechaInicio);
+            consulta.Parameters.AddWithValue("@FechaFin", hotelCerrado.fechaFin);
+            consulta.Parameters.AddWithValue("@Motivo", hotelCerrado.motivo);
         }
 
         public static List<string> hotelObtenerRegimenesEnLista(Hotel hotel)
         {
-            return null;
+            SqlCommand consulta = consultaCrear("SELECT Regimen_Descripcion FROM RIP.Regimenes JOIN RIP.Hoteles_Regimenes ON Regimen_ID = HotelRegimen_RegimenID WHERE HotelRegimen_HotelID = @ID");
+            consulta.Parameters.AddWithValue("@ID", hotel.id);
+            return consultaObtenerLista(consulta);
         }
 
         public static List<string> hotelObtenerRegimenesFaltantesEnLista(Hotel hotel)
         {
-            return null;
+            SqlCommand consulta = consultaCrear("SELECT Regimen_Descripcion FROM RIP.Regimenes WHERE Regimen_ID NOT IN (SELECT HotelRegimen_RegimenID FROM RIP.Hoteles_Regimenes WHERE HotelRegimen_HotelID = @ID)");
+            consulta.Parameters.AddWithValue("@ID", hotel.id);
+            return consultaObtenerLista(consulta);
         }
 
         public static void hotelAgregar(Hotel hotel)
@@ -1019,12 +1091,14 @@ namespace FrbaHotel
             return consultaObtenerValor(consulta);
         }
 
-        public static bool hotelYaExiste(Hotel hotel)
+        public static bool hotelNombreExiste(Hotel hotel)
         {
-            return consultaValorExiste(hotelObtenerID(hotel));
+            SqlCommand consulta = consultaCrear("SELECT Hotel_Nombre FROM RIP.Hoteles WHERE Hotel_Nombre = @Nombre");
+            consulta.Parameters.AddWithValue("@Nombre", hotel.nombre);
+            return consultaValorExiste(consultaObtenerValor(consulta));
         }
 
-        public static bool hotelEsDistinto(Hotel hotel)
+        public static bool hotelDistinto(Hotel hotel)
         {
             return hotel.id != hotelObtenerID(hotel);
         }
@@ -1049,28 +1123,21 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
-        public static List<string> hotelObtenerListaHabitaciones(Hotel hotel)
+        public static List<string> hotelObtenerHabitacionesEnLista(Hotel hotel)
         {
             SqlCommand consulta = consultaCrear("SELECT Habitacion_Numero FROM RIP.Habitaciones WHERE Habitacion_HotelID = @hotelID");
             consulta.Parameters.AddWithValue("@hotelID", hotelObtenerID(hotel));
             return consultaObtenerLista(consulta);
         }
 
-        public static DataTable hotelObtenerTablaHabitaciones(Hotel hotel)
+        public static DataTable hotelObtenerHabitacionesEnTabla(Hotel hotel)
         {
             SqlCommand consulta = consultaCrear("SELECT Habitacion_Numero FROM RIP.Habitaciones WHERE Habitacion_HotelID = @hotelID");
             consulta.Parameters.AddWithValue("@hotelID", hotelObtenerID(hotel));
             return consultaObtenerTabla(consulta);
         }
 
-        public static void hotelCerradoAgregar(HotelCerrado hotelCerrado)
-        {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.HotelesCerrados (HotelCerrado_HotelID, HotelCerrado_FechaInicio, HotelCerrado_FechaFin, HotelCerrado_Motivo) VALUES (@HotelID, @FechaInicio, @FechaFin, @Motivo)");
-            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerID(hotelCerrado.hotel));
-            consulta.Parameters.AddWithValue("@FechaInicio", hotelCerrado.fechaInicio);
-            consulta.Parameters.AddWithValue("@FechaFin", hotelCerrado.fechaFin);
-            consulta.Parameters.AddWithValue("@Motivo", hotelCerrado.motivo);
-        }
+
 
         public static List<string> hotelObtenerTodosLista()
         {
