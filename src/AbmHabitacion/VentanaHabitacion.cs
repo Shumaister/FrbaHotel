@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.AbmHabitacion
 {
-    public partial class VentanaHabitacion : Form
+    public partial class VentanaHabitacion : VentanaBase
     {
         public VentanaHabitacion()
         {
