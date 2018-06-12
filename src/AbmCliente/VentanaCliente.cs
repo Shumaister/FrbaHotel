@@ -65,7 +65,7 @@ namespace FrbaHotel.AbmCliente
             return cliente;
         }
 
-        private void dgvModificarUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvModificarClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var senderGrid = (DataGridView)sender;
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)

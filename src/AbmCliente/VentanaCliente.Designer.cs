@@ -853,6 +853,7 @@
             this.dgvModificarClientes.RowHeadersVisible = false;
             this.dgvModificarClientes.Size = new System.Drawing.Size(648, 205);
             this.dgvModificarClientes.TabIndex = 0;
+            this.dgvModificarClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvModificarClientes_CellContentClick);
             // 
             // pagEliminar
             // 
@@ -923,6 +924,7 @@
             this.dgvEliminarClientes.RowHeadersVisible = false;
             this.dgvEliminarClientes.Size = new System.Drawing.Size(648, 203);
             this.dgvEliminarClientes.TabIndex = 0;
+            this.dgvEliminarClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEliminarClientes_CellContentClick);
             // 
             // label6
             // 

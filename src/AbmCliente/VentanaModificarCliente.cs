@@ -33,7 +33,7 @@ namespace FrbaHotel.AbmCliente
 
         #region Modificar
 
-        private void VentanaModificarUsuario_Load(object sender, EventArgs e)
+        private void VentanaModificarCliente_Load(object sender, EventArgs e)
         {
             comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
             cbxTipoDocumento.SelectedIndex = cbxTipoDocumento.Items.IndexOf(cliente.persona.tipoDocumento);

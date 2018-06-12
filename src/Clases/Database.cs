@@ -753,21 +753,21 @@ namespace FrbaHotel
 
         public static bool clienteHabilitado(Cliente cliente)
         {
-            SqlCommand consulta = consultaCrear("SELECT Cliente_Estado FROM RIP.Clientes WHERE ClienteID = @ID");
-            consulta.Parameters.AddWithValue("@ID", cliente.estado);
+            SqlCommand consulta = consultaCrear("SELECT Cliente_Estado FROM RIP.Clientes WHERE Cliente_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", cliente.id);
             return bool.Parse(consultaObtenerValor(consulta));
         }
 
 
         public static DataTable clienteObtenerTodosEnTabla()
         {
-            SqlCommand consulta = consultaCrear("SELECT Cliente_ID, Persona_ID, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Nacionalidad, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle, Domicilio_Piso, Domicilio_Departamento FROM RIP.Clientes JOIN RIP.Personas ON Cliente_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID");
+            SqlCommand consulta = consultaCrear("SELECT TOP 100 Cliente_ID, Persona_ID, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Nacionalidad, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle, Domicilio_Piso, Domicilio_Departamento FROM RIP.Clientes JOIN RIP.Personas ON Cliente_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID");
             return consultaObtenerTabla(consulta);
         }
 
         public static DataTable clienteObtenerHabilitadosEnTabla()
         {
-            SqlCommand consulta = consultaCrear("SELECT Cliente_ID, Persona_ID, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Nacionalidad, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle, Domicilio_Piso, Domicilio_Departamento FROM RIP.Clientes JOIN RIP.Personas ON Cliente_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID WHERE Cliente_Estado");
+            SqlCommand consulta = consultaCrear("SELECT TOP 100 Cliente_ID, Persona_ID, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Nacionalidad, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle, Domicilio_Piso, Domicilio_Departamento FROM RIP.Clientes JOIN RIP.Personas ON Cliente_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID WHERE Cliente_Estado = 1");
             return consultaObtenerTabla(consulta);
         }
 

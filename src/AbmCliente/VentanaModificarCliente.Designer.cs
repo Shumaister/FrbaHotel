@@ -672,6 +672,7 @@
             this.Controls.Add(this.btnLimpiarCliente);
             this.Name = "VentanaModificarCliente";
             this.Text = "VentanaModificarCliente";
+            this.Load += new System.EventHandler(this.VentanaModificarCliente_Load);
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.btnLimpiarCliente, 0);
             this.Controls.SetChildIndex(this.btnGuardarCliente, 0);
