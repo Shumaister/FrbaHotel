@@ -746,20 +746,42 @@ namespace FrbaHotel
             return consultaValorExiste(consultaObtenerValor(consulta));
         }
 
-        public static DataTable clienteFiltrar(Cliente cliente)
+        public static DataTable clienteFiltrarParaModificar(Cliente cliente)
         {
             string filtroNombre = string.IsNullOrEmpty(cliente.persona.nombre)? "" : cliente.persona.nombre;
             string filtroApellido = string.IsNullOrEmpty(cliente.persona.apellido)? "" : cliente.persona.apellido;
             string filtroEmail = string.IsNullOrEmpty(cliente.persona.email)? "" : cliente.persona.email;
-            string filtroTipoDocumento = string.IsNullOrEmpty(cliente.persona.tipoDocumento)? "" : " AND Persona_TipoDocumentoID = " + tipoDocumentoObtenerID(cliente.persona.tipoDocumento);
+            string filtroTipoDocumento = string.IsNullOrEmpty(cliente.persona.tipoDocumento) || cliente.persona.tipoDocumento == "Todos"? "" : " AND Persona_TipoDocumentoID = " + tipoDocumentoObtenerID(cliente.persona.tipoDocumento);
             string filtroNumeroDocumento = string.IsNullOrEmpty(cliente.persona.numeroDocumento)? "" : " AND CONVERT(nvarchar(50), Persona_NumeroDocumento) LIKE '" + cliente.persona.numeroDocumento + "%'";
-            string query = "SELECT TOP 100 Cliente_ID, Persona_ID, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, " + 
+            string query = "SELECT TOP 50 Cliente_ID, Persona_ID, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, " + 
             "Persona_NumeroDocumento, Persona_Nacionalidad, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, " + 
             "Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle, " +
             "Domicilio_Piso, Domicilio_Departamento FROM RIP.Clientes " + 
             "JOIN RIP.Personas ON Cliente_PersonaID = Persona_ID " +
             "JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID " + 
             "JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID WHERE " +          
+            "Persona_Nombre LIKE '" + cliente.persona.nombre + "%' AND " +
+            "Persona_Apellido LIKE '" + cliente.persona.apellido + "%' AND " +
+            "Persona_Email LIKE '" + cliente.persona.email + "%'" +
+            filtroTipoDocumento + filtroNumeroDocumento;
+            SqlCommand consulta = consultaCrear(query);
+            return consultaObtenerTabla(consulta);
+        }
+
+        public static DataTable clienteFiltrarParaEliminar(Cliente cliente)
+        {
+            string filtroNombre = string.IsNullOrEmpty(cliente.persona.nombre) ? "" : cliente.persona.nombre;
+            string filtroApellido = string.IsNullOrEmpty(cliente.persona.apellido) ? "" : cliente.persona.apellido;
+            string filtroEmail = string.IsNullOrEmpty(cliente.persona.email) ? "" : cliente.persona.email;
+            string filtroTipoDocumento = string.IsNullOrEmpty(cliente.persona.tipoDocumento) || cliente.persona.tipoDocumento == "Todos" ? "" : " AND Persona_TipoDocumentoID = " + tipoDocumentoObtenerID(cliente.persona.tipoDocumento);
+            string filtroNumeroDocumento = string.IsNullOrEmpty(cliente.persona.numeroDocumento) ? "" : " AND CONVERT(nvarchar(50), Persona_NumeroDocumento) LIKE '" + cliente.persona.numeroDocumento + "%'";
+            string query = "SELECT TOP 50 Cliente_ID, Persona_ID, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, " +
+            "Persona_NumeroDocumento, Persona_Nacionalidad, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, " +
+            "Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle, " +
+            "Domicilio_Piso, Domicilio_Departamento FROM RIP.Clientes " +
+            "JOIN RIP.Personas ON Cliente_PersonaID = Persona_ID " +
+            "JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID " +
+            "JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID WHERE Cliente_Estado = 1 AND " +
             "Persona_Nombre LIKE '" + cliente.persona.nombre + "%' AND " +
             "Persona_Apellido LIKE '" + cliente.persona.apellido + "%' AND " +
             "Persona_Email LIKE '" + cliente.persona.email + "%'" +
@@ -1091,6 +1113,14 @@ namespace FrbaHotel
         {
             SqlCommand consulta = consultaCrear("SELECT TipoDocumento_Descripcion FROM RIP.TiposDocumentos");
             return consultaObtenerLista(consulta);
+        }
+
+        public static List<string> tipoDocumentoFiltroObtenerTodosEnLista()
+        {
+            SqlCommand consulta = consultaCrear("SELECT TipoDocumento_Descripcion FROM RIP.TiposDocumentos");
+            List<string> tiposDocumentos = consultaObtenerLista(consulta);
+            tiposDocumentos.Insert(0, "Todos");
+            return tiposDocumentos;
         }
 
         #endregion

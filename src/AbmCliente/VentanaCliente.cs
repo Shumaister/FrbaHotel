@@ -41,7 +41,7 @@ namespace FrbaHotel.AbmCliente
                 if (Database.clienteAgregadoConExito(cliente))
                 {
                     btnLimpiarCliente_Click(sender, e);
-                    ventanaActualizar();
+                    ventanaActualizar(sender, e);
                 }
             }
         }
@@ -87,14 +87,19 @@ namespace FrbaHotel.AbmCliente
 
         private void btnFiltrarModificar_Click(object sender, EventArgs e)
         {
-            string nombre = tbxFiltroNombreModificar.Text;
-            string apellido = tbxFiltroApellidoModificar.Text;
-            string numeroDocumento = tbxFiltroDocumentoModificar.Text;
-            string tipoDocumento = cbxFiltroTipoDocumentoModificar.SelectedItem.ToString();
-            string email = tbxFiltroEmailModificar.Text;
-            Persona persona = new Persona(nombre, apellido, tipoDocumento, numeroDocumento, email);
+            Persona persona = new Persona(tbxFiltroNombreModificar.Text, tbxFiltroApellidoModificar.Text,cbxFiltroTipoDocumentoModificar.SelectedItem.ToString(), tbxFiltroDocumentoModificar.Text, tbxFiltroEmailModificar.Text);
             Cliente cliente = new Cliente(null, persona, null);
-            dataGridViewCargar(dgvModificarClientes, Database.clienteFiltrar(cliente));
+            dataGridViewCargar(dgvModificarClientes, Database.clienteFiltrarParaModificar(cliente));
+        }
+
+        private void btnLimpiarModificar_Click(object sender, EventArgs e)
+        {
+            tbxFiltroNombreModificar.Clear();
+            tbxFiltroApellidoModificar.Clear();
+            tbxFiltroDocumentoModificar.Clear();
+            tbxFiltroEmailModificar.Clear();
+            cbxFiltroTipoDocumentoModificar.SelectedIndex = 0;
+            btnFiltrarModificar_Click(sender, e);
         }
 
         #endregion
@@ -109,8 +114,25 @@ namespace FrbaHotel.AbmCliente
                 string id = dgvEliminarClientes.Rows[e.RowIndex].Cells["Cliente_ID"].Value.ToString();
                 Cliente cliente = new Cliente(id, null, null);
                 Database.clienteEliminadoConExito(cliente);
-                ventanaActualizar();
+                ventanaActualizar(sender, e);
             }
+        }
+
+        private void btnFiltrarEliminar_Click(object sender, EventArgs e)
+        {
+            Persona persona = new Persona(tbxFiltroNombreEliminar.Text, tbxFiltroApellidoEliminar.Text, cbxFiltroTipoDocumentoEliminar.SelectedItem.ToString(), tbxFiltroDocumentoEliminar.Text, tbxFiltroEmailEliminar.Text);
+            Cliente cliente = new Cliente(null, persona, null);
+            dataGridViewCargar(dgvEliminarClientes, Database.clienteFiltrarParaEliminar(cliente));
+        }
+
+        private void btnLimpiarEliminar_Click(object sender, EventArgs e)
+        {
+            tbxFiltroNombreEliminar.Clear();
+            tbxFiltroApellidoEliminar.Clear();
+            tbxFiltroDocumentoEliminar.Clear();
+            tbxFiltroEmailEliminar.Clear();
+            cbxFiltroTipoDocumentoEliminar.SelectedIndex = 0;
+            btnFiltrarEliminar_Click(sender, e);
         }
 
         #endregion
@@ -118,19 +140,20 @@ namespace FrbaHotel.AbmCliente
         #region Control
 
 
-        public void ventanaActualizar()
+        public void ventanaActualizar(object sender, EventArgs e)
         {
-            dataGridViewCargar(dgvModificarClientes, Database.clienteObtenerTodosEnTabla());
-            dataGridViewCargar(dgvEliminarClientes, Database.clienteObtenerHabilitadosEnTabla());
+            btnFiltrarEliminar_Click(sender, e);
+            btnFiltrarModificar_Click(sender, e);
         }
 
         private void VentanaCliente_Load(object sender, EventArgs e)
         {
-            ventanaActualizar();
-            dataGridViewAgregarBotonModificar(dgvModificarClientes);
-            dataGridViewAgregarBotonEliminar(dgvEliminarClientes);
             comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
-            comboBoxCargar(cbxFiltroTipoDocumentoModificar, Database.tipoDocumentoObtenerTodosEnLista());
+            comboBoxCargar(cbxFiltroTipoDocumentoModificar, Database.tipoDocumentoFiltroObtenerTodosEnLista());
+            comboBoxCargar(cbxFiltroTipoDocumentoEliminar, Database.tipoDocumentoFiltroObtenerTodosEnLista());
+            ventanaActualizar(sender, e);
+            dataGridViewAgregarBotonModificar(dgvModificarClientes);
+            dataGridViewAgregarBotonEliminar(dgvEliminarClientes);            
         }
 
         private void tbxNombre_KeyPress(object sender, KeyPressEventArgs e)
@@ -237,5 +260,6 @@ namespace FrbaHotel.AbmCliente
         }
 
         #endregion
+
     }
 }

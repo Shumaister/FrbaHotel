@@ -41,7 +41,7 @@ namespace FrbaHotel.AbmCliente
                 if (Database.clienteModificadoConExito(cliente))
                 {
                     this.Hide();
-                    ventanaCliente.ventanaActualizar();
+                    ventanaCliente.ventanaActualizar(sender, e);
                 }
             }
         }
