@@ -1,6 +1,6 @@
 ﻿namespace FrbaHotel.AbmCliente
 {
-    partial class VentanaClientes
+    partial class VentanaCliente
     {
         /// <summary>
         /// Required designer variable.
@@ -82,50 +82,50 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.tbxEmail = new System.Windows.Forms.TextBox();
-            this.btnGuardarUsuario = new System.Windows.Forms.Button();
-            this.btnLimpiarUsuario = new System.Windows.Forms.Button();
+            this.btnGuardarCliente = new System.Windows.Forms.Button();
+            this.btnLimpiarCliente = new System.Windows.Forms.Button();
             this.pagModificar = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.dgvModificarUsuarios = new System.Windows.Forms.DataGridView();
-            this.pagEliminar = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dgvEliminarUsuarios = new System.Windows.Forms.DataGridView();
-            this.tbxFiltroNombre = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.tbxFiltroApell = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label37 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.cbxFiltroTipoDocumentoModificar = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnLimpiarModificar = new System.Windows.Forms.Button();
+            this.label37 = new System.Windows.Forms.Label();
+            this.btnFiltrarModificar = new System.Windows.Forms.Button();
+            this.tbxFiltroEmailModificar = new System.Windows.Forms.TextBox();
+            this.tbxFiltroDocumentoModificar = new System.Windows.Forms.TextBox();
+            this.tbxFiltroApellidoModificar = new System.Windows.Forms.TextBox();
+            this.tbxFiltroNombreModificar = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dgvModificarClientes = new System.Windows.Forms.DataGridView();
+            this.pagEliminar = new System.Windows.Forms.TabPage();
+            this.cbxFiltroTipoDocumentoEliminar = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dgvEliminarClientes = new System.Windows.Forms.DataGridView();
             this.label6 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             this.label42 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.tbxFiltroNombreEliminar = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.tbxFiltroApellidoEliminar = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.tbxFiltroDocumentoEliminar = new System.Windows.Forms.TextBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.tbxFiltroEmailEliminar = new System.Windows.Forms.TextBox();
+            this.btnLimpiarEliminar = new System.Windows.Forms.Button();
+            this.btnFiltrarEliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.tabControl.SuspendLayout();
             this.pagAgregar.SuspendLayout();
             this.pagModificar.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvModificarUsuarios)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModificarClientes)).BeginInit();
             this.pagEliminar.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEliminarUsuarios)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEliminarClientes)).BeginInit();
             this.SuspendLayout();
             // 
             // logo
@@ -196,8 +196,8 @@
             this.pagAgregar.Controls.Add(this.label17);
             this.pagAgregar.Controls.Add(this.label18);
             this.pagAgregar.Controls.Add(this.tbxEmail);
-            this.pagAgregar.Controls.Add(this.btnGuardarUsuario);
-            this.pagAgregar.Controls.Add(this.btnLimpiarUsuario);
+            this.pagAgregar.Controls.Add(this.btnGuardarCliente);
+            this.pagAgregar.Controls.Add(this.btnLimpiarCliente);
             this.pagAgregar.Location = new System.Drawing.Point(4, 22);
             this.pagAgregar.Name = "pagAgregar";
             this.pagAgregar.Padding = new System.Windows.Forms.Padding(3);
@@ -234,6 +234,7 @@
             this.tbxNacionalidad.Name = "tbxNacionalidad";
             this.tbxNacionalidad.Size = new System.Drawing.Size(100, 20);
             this.tbxNacionalidad.TabIndex = 288;
+            this.tbxNacionalidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxNacionalidad_KeyPress);
             // 
             // lblNacionalidad
             // 
@@ -264,6 +265,7 @@
             this.btnGuardarFecha.Text = "Guardar";
             this.btnGuardarFecha.UseVisualStyleBackColor = true;
             this.btnGuardarFecha.Visible = false;
+            this.btnGuardarFecha.Click += new System.EventHandler(this.btnGuardarFecha_Click);
             // 
             // calendario
             // 
@@ -292,6 +294,7 @@
             this.btnSeleccionarFecha.TabIndex = 283;
             this.btnSeleccionarFecha.Text = "Seleccionar";
             this.btnSeleccionarFecha.UseVisualStyleBackColor = true;
+            this.btnSeleccionarFecha.Click += new System.EventHandler(this.btnSeleccionarFecha_Click);
             // 
             // cbxTipoDocumento
             // 
@@ -347,6 +350,7 @@
             this.tbxDocumento.Name = "tbxDocumento";
             this.tbxDocumento.Size = new System.Drawing.Size(100, 20);
             this.tbxDocumento.TabIndex = 277;
+            this.tbxDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxDocumento_KeyPress);
             // 
             // label14
             // 
@@ -374,6 +378,7 @@
             this.tbxNombre.Name = "tbxNombre";
             this.tbxNombre.Size = new System.Drawing.Size(100, 20);
             this.tbxNombre.TabIndex = 269;
+            this.tbxNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxNombre_KeyPress);
             // 
             // tbxApellido
             // 
@@ -381,6 +386,7 @@
             this.tbxApellido.Name = "tbxApellido";
             this.tbxApellido.Size = new System.Drawing.Size(100, 20);
             this.tbxApellido.TabIndex = 274;
+            this.tbxApellido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxApellido_KeyPress);
             // 
             // label8
             // 
@@ -469,6 +475,7 @@
             this.tbxDepartamento.Name = "tbxDepartamento";
             this.tbxDepartamento.Size = new System.Drawing.Size(100, 20);
             this.tbxDepartamento.TabIndex = 261;
+            this.tbxDepartamento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxDepartamento_KeyPress);
             // 
             // label35
             // 
@@ -485,6 +492,7 @@
             this.tbxPiso.Name = "tbxPiso";
             this.tbxPiso.Size = new System.Drawing.Size(100, 20);
             this.tbxPiso.TabIndex = 259;
+            this.tbxPiso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxPiso_KeyPress);
             // 
             // label28
             // 
@@ -512,6 +520,7 @@
             this.tbxNumeroCalle.Name = "tbxNumeroCalle";
             this.tbxNumeroCalle.Size = new System.Drawing.Size(100, 20);
             this.tbxNumeroCalle.TabIndex = 256;
+            this.tbxNumeroCalle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxNumeroCalle_KeyPress);
             // 
             // label30
             // 
@@ -539,6 +548,7 @@
             this.tbxCalle.Name = "tbxCalle";
             this.tbxCalle.Size = new System.Drawing.Size(100, 20);
             this.tbxCalle.TabIndex = 253;
+            this.tbxCalle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCalle_KeyPress);
             // 
             // label26
             // 
@@ -566,6 +576,7 @@
             this.tbxCiudad.Name = "tbxCiudad";
             this.tbxCiudad.Size = new System.Drawing.Size(100, 20);
             this.tbxCiudad.TabIndex = 250;
+            this.tbxCiudad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCiudad_KeyPress);
             // 
             // label21
             // 
@@ -593,6 +604,7 @@
             this.tbxPais.Name = "tbxPais";
             this.tbxPais.Size = new System.Drawing.Size(100, 20);
             this.tbxPais.TabIndex = 223;
+            this.tbxPais.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxPais_KeyPress);
             // 
             // label15
             // 
@@ -611,6 +623,7 @@
             this.tbxTelefono.Name = "tbxTelefono";
             this.tbxTelefono.Size = new System.Drawing.Size(100, 20);
             this.tbxTelefono.TabIndex = 220;
+            this.tbxTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxTelefono_KeyPress);
             // 
             // label16
             // 
@@ -647,40 +660,43 @@
             this.tbxEmail.Name = "tbxEmail";
             this.tbxEmail.Size = new System.Drawing.Size(99, 20);
             this.tbxEmail.TabIndex = 209;
+            this.tbxEmail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxEmail_KeyPress);
             // 
-            // btnGuardarUsuario
+            // btnGuardarCliente
             // 
-            this.btnGuardarUsuario.Location = new System.Drawing.Point(388, 370);
-            this.btnGuardarUsuario.Name = "btnGuardarUsuario";
-            this.btnGuardarUsuario.Size = new System.Drawing.Size(75, 23);
-            this.btnGuardarUsuario.TabIndex = 204;
-            this.btnGuardarUsuario.Text = "Guardar";
-            this.btnGuardarUsuario.UseVisualStyleBackColor = true;
+            this.btnGuardarCliente.Location = new System.Drawing.Point(388, 370);
+            this.btnGuardarCliente.Name = "btnGuardarCliente";
+            this.btnGuardarCliente.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardarCliente.TabIndex = 204;
+            this.btnGuardarCliente.Text = "Guardar";
+            this.btnGuardarCliente.UseVisualStyleBackColor = true;
+            this.btnGuardarCliente.Click += new System.EventHandler(this.btnGuardarCliente_Click);
             // 
-            // btnLimpiarUsuario
+            // btnLimpiarCliente
             // 
-            this.btnLimpiarUsuario.Location = new System.Drawing.Point(250, 370);
-            this.btnLimpiarUsuario.Name = "btnLimpiarUsuario";
-            this.btnLimpiarUsuario.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiarUsuario.TabIndex = 203;
-            this.btnLimpiarUsuario.Text = "Limpiar";
-            this.btnLimpiarUsuario.UseVisualStyleBackColor = true;
+            this.btnLimpiarCliente.Location = new System.Drawing.Point(250, 370);
+            this.btnLimpiarCliente.Name = "btnLimpiarCliente";
+            this.btnLimpiarCliente.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiarCliente.TabIndex = 203;
+            this.btnLimpiarCliente.Text = "Limpiar";
+            this.btnLimpiarCliente.UseVisualStyleBackColor = true;
+            this.btnLimpiarCliente.Click += new System.EventHandler(this.btnLimpiarCliente_Click);
             // 
             // pagModificar
             // 
-            this.pagModificar.Controls.Add(this.comboBox1);
+            this.pagModificar.Controls.Add(this.cbxFiltroTipoDocumentoModificar);
             this.pagModificar.Controls.Add(this.label5);
             this.pagModificar.Controls.Add(this.label4);
             this.pagModificar.Controls.Add(this.label3);
             this.pagModificar.Controls.Add(this.label2);
             this.pagModificar.Controls.Add(this.label1);
-            this.pagModificar.Controls.Add(this.button2);
+            this.pagModificar.Controls.Add(this.btnLimpiarModificar);
             this.pagModificar.Controls.Add(this.label37);
-            this.pagModificar.Controls.Add(this.button1);
-            this.pagModificar.Controls.Add(this.textBox4);
-            this.pagModificar.Controls.Add(this.tbxFiltroApell);
-            this.pagModificar.Controls.Add(this.textBox2);
-            this.pagModificar.Controls.Add(this.tbxFiltroNombre);
+            this.pagModificar.Controls.Add(this.btnFiltrarModificar);
+            this.pagModificar.Controls.Add(this.tbxFiltroEmailModificar);
+            this.pagModificar.Controls.Add(this.tbxFiltroDocumentoModificar);
+            this.pagModificar.Controls.Add(this.tbxFiltroApellidoModificar);
+            this.pagModificar.Controls.Add(this.tbxFiltroNombreModificar);
             this.pagModificar.Controls.Add(this.groupBox3);
             this.pagModificar.Location = new System.Drawing.Point(4, 22);
             this.pagModificar.Name = "pagModificar";
@@ -689,144 +705,68 @@
             this.pagModificar.TabIndex = 1;
             this.pagModificar.Text = "Modificar";
             this.pagModificar.UseVisualStyleBackColor = true;
-            this.pagModificar.Click += new System.EventHandler(this.pagModificar_Click);
             // 
-            // groupBox3
+            // cbxFiltroTipoDocumentoModificar
             // 
-            this.groupBox3.Controls.Add(this.dgvModificarUsuarios);
-            this.groupBox3.Location = new System.Drawing.Point(12, 167);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(684, 261);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Clientes";
+            this.cbxFiltroTipoDocumentoModificar.FormattingEnabled = true;
+            this.cbxFiltroTipoDocumentoModificar.Location = new System.Drawing.Point(537, 42);
+            this.cbxFiltroTipoDocumentoModificar.Name = "cbxFiltroTipoDocumentoModificar";
+            this.cbxFiltroTipoDocumentoModificar.Size = new System.Drawing.Size(121, 21);
+            this.cbxFiltroTipoDocumentoModificar.TabIndex = 273;
             // 
-            // dgvModificarUsuarios
+            // label5
             // 
-            this.dgvModificarUsuarios.AllowUserToAddRows = false;
-            this.dgvModificarUsuarios.AllowUserToDeleteRows = false;
-            this.dgvModificarUsuarios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvModificarUsuarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvModificarUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvModificarUsuarios.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvModificarUsuarios.Location = new System.Drawing.Point(16, 29);
-            this.dgvModificarUsuarios.Name = "dgvModificarUsuarios";
-            this.dgvModificarUsuarios.RowHeadersVisible = false;
-            this.dgvModificarUsuarios.Size = new System.Drawing.Size(648, 205);
-            this.dgvModificarUsuarios.TabIndex = 0;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(432, 45);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(99, 13);
+            this.label5.TabIndex = 272;
+            this.label5.Text = "Tipo de documento";
             // 
-            // pagEliminar
+            // label4
             // 
-            this.pagEliminar.Controls.Add(this.comboBox2);
-            this.pagEliminar.Controls.Add(this.groupBox1);
-            this.pagEliminar.Controls.Add(this.label6);
-            this.pagEliminar.Controls.Add(this.label42);
-            this.pagEliminar.Controls.Add(this.label23);
-            this.pagEliminar.Controls.Add(this.textBox6);
-            this.pagEliminar.Controls.Add(this.label24);
-            this.pagEliminar.Controls.Add(this.textBox5);
-            this.pagEliminar.Controls.Add(this.label25);
-            this.pagEliminar.Controls.Add(this.textBox3);
-            this.pagEliminar.Controls.Add(this.label41);
-            this.pagEliminar.Controls.Add(this.textBox1);
-            this.pagEliminar.Controls.Add(this.button3);
-            this.pagEliminar.Controls.Add(this.button4);
-            this.pagEliminar.Location = new System.Drawing.Point(4, 22);
-            this.pagEliminar.Name = "pagEliminar";
-            this.pagEliminar.Padding = new System.Windows.Forms.Padding(3);
-            this.pagEliminar.Size = new System.Drawing.Size(716, 418);
-            this.pagEliminar.TabIndex = 2;
-            this.pagEliminar.Text = "Eliminar";
-            this.pagEliminar.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(254, 98);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.TabIndex = 271;
+            this.label4.Text = "E- mail";
             // 
-            // groupBox1
+            // label3
             // 
-            this.groupBox1.Controls.Add(this.dgvEliminarUsuarios);
-            this.groupBox1.Location = new System.Drawing.Point(12, 167);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(689, 348);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Clientes";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(254, 45);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 13);
+            this.label3.TabIndex = 270;
+            this.label3.Text = "Apellido";
             // 
-            // dgvEliminarUsuarios
+            // label2
             // 
-            this.dgvEliminarUsuarios.AllowUserToAddRows = false;
-            this.dgvEliminarUsuarios.AllowUserToDeleteRows = false;
-            this.dgvEliminarUsuarios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEliminarUsuarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvEliminarUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEliminarUsuarios.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvEliminarUsuarios.Location = new System.Drawing.Point(16, 29);
-            this.dgvEliminarUsuarios.Name = "dgvEliminarUsuarios";
-            this.dgvEliminarUsuarios.RowHeadersVisible = false;
-            this.dgvEliminarUsuarios.Size = new System.Drawing.Size(648, 203);
-            this.dgvEliminarUsuarios.TabIndex = 0;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(29, 98);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(92, 13);
+            this.label2.TabIndex = 269;
+            this.label2.Text = "N° de Documento";
             // 
-            // tbxFiltroNombre
+            // label1
             // 
-            this.tbxFiltroNombre.Location = new System.Drawing.Point(127, 43);
-            this.tbxFiltroNombre.Name = "tbxFiltroNombre";
-            this.tbxFiltroNombre.Size = new System.Drawing.Size(100, 20);
-            this.tbxFiltroNombre.TabIndex = 3;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(29, 46);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.TabIndex = 268;
+            this.label1.Text = "Nombre";
             // 
-            // textBox2
+            // btnLimpiarModificar
             // 
-            this.textBox2.Location = new System.Drawing.Point(304, 42);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 4;
-            // 
-            // tbxFiltroApell
-            // 
-            this.tbxFiltroApell.Location = new System.Drawing.Point(127, 95);
-            this.tbxFiltroApell.Name = "tbxFiltroApell";
-            this.tbxFiltroApell.Size = new System.Drawing.Size(100, 20);
-            this.tbxFiltroApell.TabIndex = 5;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(304, 95);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 6;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(583, 136);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Filtrar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnLimpiarModificar.Location = new System.Drawing.Point(29, 136);
+            this.btnLimpiarModificar.Name = "btnLimpiarModificar";
+            this.btnLimpiarModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiarModificar.TabIndex = 267;
+            this.btnLimpiarModificar.Text = "Limpiar";
+            this.btnLimpiarModificar.UseVisualStyleBackColor = true;
             // 
             // label37
             // 
@@ -839,75 +779,150 @@
             this.label37.TabIndex = 266;
             this.label37.Text = "Filtros de busqueda";
             // 
-            // button2
+            // btnFiltrarModificar
             // 
-            this.button2.Location = new System.Drawing.Point(29, 136);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 267;
-            this.button2.Text = "Limpiar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnFiltrarModificar.Location = new System.Drawing.Point(583, 136);
+            this.btnFiltrarModificar.Name = "btnFiltrarModificar";
+            this.btnFiltrarModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnFiltrarModificar.TabIndex = 8;
+            this.btnFiltrarModificar.Text = "Filtrar";
+            this.btnFiltrarModificar.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // tbxFiltroEmailModificar
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 46);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 268;
-            this.label1.Text = "Nombre";
+            this.tbxFiltroEmailModificar.Location = new System.Drawing.Point(304, 95);
+            this.tbxFiltroEmailModificar.Name = "tbxFiltroEmailModificar";
+            this.tbxFiltroEmailModificar.Size = new System.Drawing.Size(100, 20);
+            this.tbxFiltroEmailModificar.TabIndex = 6;
             // 
-            // label2
+            // tbxFiltroDocumentoModificar
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 98);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 13);
-            this.label2.TabIndex = 269;
-            this.label2.Text = "N° de Documento";
+            this.tbxFiltroDocumentoModificar.Location = new System.Drawing.Point(127, 95);
+            this.tbxFiltroDocumentoModificar.Name = "tbxFiltroDocumentoModificar";
+            this.tbxFiltroDocumentoModificar.Size = new System.Drawing.Size(100, 20);
+            this.tbxFiltroDocumentoModificar.TabIndex = 5;
             // 
-            // label3
+            // tbxFiltroApellidoModificar
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(254, 45);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 13);
-            this.label3.TabIndex = 270;
-            this.label3.Text = "Apellido";
+            this.tbxFiltroApellidoModificar.Location = new System.Drawing.Point(304, 42);
+            this.tbxFiltroApellidoModificar.Name = "tbxFiltroApellidoModificar";
+            this.tbxFiltroApellidoModificar.Size = new System.Drawing.Size(100, 20);
+            this.tbxFiltroApellidoModificar.TabIndex = 4;
             // 
-            // label4
+            // tbxFiltroNombreModificar
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(254, 98);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 13);
-            this.label4.TabIndex = 271;
-            this.label4.Text = "E- mail";
+            this.tbxFiltroNombreModificar.Location = new System.Drawing.Point(127, 43);
+            this.tbxFiltroNombreModificar.Name = "tbxFiltroNombreModificar";
+            this.tbxFiltroNombreModificar.Size = new System.Drawing.Size(100, 20);
+            this.tbxFiltroNombreModificar.TabIndex = 3;
             // 
-            // label5
+            // groupBox3
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(432, 45);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(99, 13);
-            this.label5.TabIndex = 272;
-            this.label5.Text = "Tipo de documento";
+            this.groupBox3.Controls.Add(this.dgvModificarClientes);
+            this.groupBox3.Location = new System.Drawing.Point(12, 167);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(684, 261);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Clientes";
             // 
-            // comboBox1
+            // dgvModificarClientes
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(537, 42);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 273;
+            this.dgvModificarClientes.AllowUserToAddRows = false;
+            this.dgvModificarClientes.AllowUserToDeleteRows = false;
+            this.dgvModificarClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvModificarClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvModificarClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvModificarClientes.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvModificarClientes.Location = new System.Drawing.Point(16, 29);
+            this.dgvModificarClientes.Name = "dgvModificarClientes";
+            this.dgvModificarClientes.RowHeadersVisible = false;
+            this.dgvModificarClientes.Size = new System.Drawing.Size(648, 205);
+            this.dgvModificarClientes.TabIndex = 0;
             // 
-            // comboBox2
+            // pagEliminar
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(537, 42);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 286;
+            this.pagEliminar.Controls.Add(this.cbxFiltroTipoDocumentoEliminar);
+            this.pagEliminar.Controls.Add(this.groupBox1);
+            this.pagEliminar.Controls.Add(this.label6);
+            this.pagEliminar.Controls.Add(this.label42);
+            this.pagEliminar.Controls.Add(this.label23);
+            this.pagEliminar.Controls.Add(this.tbxFiltroNombreEliminar);
+            this.pagEliminar.Controls.Add(this.label24);
+            this.pagEliminar.Controls.Add(this.tbxFiltroApellidoEliminar);
+            this.pagEliminar.Controls.Add(this.label25);
+            this.pagEliminar.Controls.Add(this.tbxFiltroDocumentoEliminar);
+            this.pagEliminar.Controls.Add(this.label41);
+            this.pagEliminar.Controls.Add(this.tbxFiltroEmailEliminar);
+            this.pagEliminar.Controls.Add(this.btnLimpiarEliminar);
+            this.pagEliminar.Controls.Add(this.btnFiltrarEliminar);
+            this.pagEliminar.Location = new System.Drawing.Point(4, 22);
+            this.pagEliminar.Name = "pagEliminar";
+            this.pagEliminar.Padding = new System.Windows.Forms.Padding(3);
+            this.pagEliminar.Size = new System.Drawing.Size(716, 418);
+            this.pagEliminar.TabIndex = 2;
+            this.pagEliminar.Text = "Eliminar";
+            this.pagEliminar.UseVisualStyleBackColor = true;
+            // 
+            // cbxFiltroTipoDocumentoEliminar
+            // 
+            this.cbxFiltroTipoDocumentoEliminar.FormattingEnabled = true;
+            this.cbxFiltroTipoDocumentoEliminar.Location = new System.Drawing.Point(537, 42);
+            this.cbxFiltroTipoDocumentoEliminar.Name = "cbxFiltroTipoDocumentoEliminar";
+            this.cbxFiltroTipoDocumentoEliminar.Size = new System.Drawing.Size(121, 21);
+            this.cbxFiltroTipoDocumentoEliminar.TabIndex = 286;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.dgvEliminarClientes);
+            this.groupBox1.Location = new System.Drawing.Point(12, 167);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(689, 348);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Clientes";
+            // 
+            // dgvEliminarClientes
+            // 
+            this.dgvEliminarClientes.AllowUserToAddRows = false;
+            this.dgvEliminarClientes.AllowUserToDeleteRows = false;
+            this.dgvEliminarClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEliminarClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvEliminarClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEliminarClientes.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvEliminarClientes.Location = new System.Drawing.Point(16, 29);
+            this.dgvEliminarClientes.Name = "dgvEliminarClientes";
+            this.dgvEliminarClientes.RowHeadersVisible = false;
+            this.dgvEliminarClientes.Size = new System.Drawing.Size(648, 203);
+            this.dgvEliminarClientes.TabIndex = 0;
             // 
             // label6
             // 
@@ -917,51 +932,6 @@
             this.label6.Size = new System.Drawing.Size(99, 13);
             this.label6.TabIndex = 285;
             this.label6.Text = "Tipo de documento";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(254, 98);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(38, 13);
-            this.label23.TabIndex = 284;
-            this.label23.Text = "E- mail";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(254, 45);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(44, 13);
-            this.label24.TabIndex = 283;
-            this.label24.Text = "Apellido";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(29, 98);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(92, 13);
-            this.label25.TabIndex = 282;
-            this.label25.Text = "N° de Documento";
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(29, 46);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(44, 13);
-            this.label41.TabIndex = 281;
-            this.label41.Text = "Nombre";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(29, 136);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 280;
-            this.button3.Text = "Limpiar";
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // label42
             // 
@@ -974,51 +944,97 @@
             this.label42.TabIndex = 279;
             this.label42.Text = "Filtros de busqueda";
             // 
-            // button4
+            // label23
             // 
-            this.button4.Location = new System.Drawing.Point(583, 136);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 278;
-            this.button4.Text = "Filtrar";
-            this.button4.UseVisualStyleBackColor = true;
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(254, 98);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(38, 13);
+            this.label23.TabIndex = 284;
+            this.label23.Text = "E- mail";
             // 
-            // textBox1
+            // tbxFiltroNombreEliminar
             // 
-            this.textBox1.Location = new System.Drawing.Point(304, 95);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 277;
+            this.tbxFiltroNombreEliminar.Location = new System.Drawing.Point(127, 43);
+            this.tbxFiltroNombreEliminar.Name = "tbxFiltroNombreEliminar";
+            this.tbxFiltroNombreEliminar.Size = new System.Drawing.Size(100, 20);
+            this.tbxFiltroNombreEliminar.TabIndex = 274;
             // 
-            // textBox3
+            // label24
             // 
-            this.textBox3.Location = new System.Drawing.Point(127, 95);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 276;
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(254, 45);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(44, 13);
+            this.label24.TabIndex = 283;
+            this.label24.Text = "Apellido";
             // 
-            // textBox5
+            // tbxFiltroApellidoEliminar
             // 
-            this.textBox5.Location = new System.Drawing.Point(304, 42);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 275;
+            this.tbxFiltroApellidoEliminar.Location = new System.Drawing.Point(304, 42);
+            this.tbxFiltroApellidoEliminar.Name = "tbxFiltroApellidoEliminar";
+            this.tbxFiltroApellidoEliminar.Size = new System.Drawing.Size(100, 20);
+            this.tbxFiltroApellidoEliminar.TabIndex = 275;
             // 
-            // textBox6
+            // label25
             // 
-            this.textBox6.Location = new System.Drawing.Point(127, 43);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 274;
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(29, 98);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(92, 13);
+            this.label25.TabIndex = 282;
+            this.label25.Text = "N° de Documento";
             // 
-            // VentanaClientes
+            // tbxFiltroDocumentoEliminar
+            // 
+            this.tbxFiltroDocumentoEliminar.Location = new System.Drawing.Point(127, 95);
+            this.tbxFiltroDocumentoEliminar.Name = "tbxFiltroDocumentoEliminar";
+            this.tbxFiltroDocumentoEliminar.Size = new System.Drawing.Size(100, 20);
+            this.tbxFiltroDocumentoEliminar.TabIndex = 276;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(29, 46);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(44, 13);
+            this.label41.TabIndex = 281;
+            this.label41.Text = "Nombre";
+            // 
+            // tbxFiltroEmailEliminar
+            // 
+            this.tbxFiltroEmailEliminar.Location = new System.Drawing.Point(304, 95);
+            this.tbxFiltroEmailEliminar.Name = "tbxFiltroEmailEliminar";
+            this.tbxFiltroEmailEliminar.Size = new System.Drawing.Size(100, 20);
+            this.tbxFiltroEmailEliminar.TabIndex = 277;
+            // 
+            // btnLimpiarEliminar
+            // 
+            this.btnLimpiarEliminar.Location = new System.Drawing.Point(29, 136);
+            this.btnLimpiarEliminar.Name = "btnLimpiarEliminar";
+            this.btnLimpiarEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiarEliminar.TabIndex = 280;
+            this.btnLimpiarEliminar.Text = "Limpiar";
+            this.btnLimpiarEliminar.UseVisualStyleBackColor = true;
+            // 
+            // btnFiltrarEliminar
+            // 
+            this.btnFiltrarEliminar.Location = new System.Drawing.Point(583, 136);
+            this.btnFiltrarEliminar.Name = "btnFiltrarEliminar";
+            this.btnFiltrarEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnFiltrarEliminar.TabIndex = 278;
+            this.btnFiltrarEliminar.Text = "Filtrar";
+            this.btnFiltrarEliminar.UseVisualStyleBackColor = true;
+            // 
+            // VentanaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(772, 503);
             this.Controls.Add(this.tabControl);
-            this.Name = "VentanaClientes";
+            this.Name = "VentanaCliente";
             this.Text = "Clientes - FRBA Hotel ©";
+            this.Load += new System.EventHandler(this.VentanaCliente_Load);
             this.Controls.SetChildIndex(this.tabControl, 0);
             this.Controls.SetChildIndex(this.logo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
@@ -1029,11 +1045,11 @@
             this.pagModificar.ResumeLayout(false);
             this.pagModificar.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvModificarUsuarios)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModificarClientes)).EndInit();
             this.pagEliminar.ResumeLayout(false);
             this.pagEliminar.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEliminarUsuarios)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEliminarClientes)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1090,39 +1106,39 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox tbxEmail;
-        private System.Windows.Forms.Button btnGuardarUsuario;
-        private System.Windows.Forms.Button btnLimpiarUsuario;
+        private System.Windows.Forms.Button btnGuardarCliente;
+        private System.Windows.Forms.Button btnLimpiarCliente;
         private System.Windows.Forms.TabPage pagModificar;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.DataGridView dgvModificarUsuarios;
+        private System.Windows.Forms.DataGridView dgvModificarClientes;
         private System.Windows.Forms.TabPage pagEliminar;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dgvEliminarUsuarios;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox tbxFiltroApell;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox tbxFiltroNombre;
+        private System.Windows.Forms.DataGridView dgvEliminarClientes;
+        private System.Windows.Forms.Button btnFiltrarModificar;
+        private System.Windows.Forms.TextBox tbxFiltroEmailModificar;
+        private System.Windows.Forms.TextBox tbxFiltroDocumentoModificar;
+        private System.Windows.Forms.TextBox tbxFiltroApellidoModificar;
+        private System.Windows.Forms.TextBox tbxFiltroNombreModificar;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button btnLimpiarModificar;
+        private System.Windows.Forms.ComboBox cbxFiltroTipoDocumentoModificar;
+        private System.Windows.Forms.ComboBox cbxFiltroTipoDocumentoEliminar;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox tbxFiltroNombreEliminar;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox tbxFiltroApellidoEliminar;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tbxFiltroDocumentoEliminar;
         private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox tbxFiltroEmailEliminar;
+        private System.Windows.Forms.Button btnLimpiarEliminar;
+        private System.Windows.Forms.Button btnFiltrarEliminar;
     }
 }

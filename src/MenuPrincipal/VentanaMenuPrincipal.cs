@@ -9,10 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FrbaHotel.AbmRol;
 using FrbaHotel.AbmUsuario;
+using FrbaHotel.AbmCliente;
+using FrbaHotel.AbmHabitacion;
+using FrbaHotel.AbmHotel;
 using FrbaHotel.Login;
 using FrbaHotel.RegistrarConsumible;
 using FrbaHotel.ListadoEstadistico;
 using FrbaHotel.FacturarEstadia;
+
 
 namespace FrbaHotel.Menus
 {
@@ -35,24 +39,6 @@ namespace FrbaHotel.Menus
         private void VentanaMenuPrincipal_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
-        }
-
-        private void menuRoles_Click(object sender, EventArgs e)
-        {
-            VentanaRol ventanaRoles = new VentanaRol(sesion);
-            ventanaRoles.ShowDialog();
-        }
-
-        private void menuUsuarios_Click(object sender, EventArgs e) 
-        {
-            VentanaUsuario ventanaUsuarios = new VentanaUsuario(sesion);
-            ventanaUsuarios.ShowDialog();
-        }
-
-        private void menuCambiarContrasenia_Click(object sender, EventArgs e)
-        {
-            VentanaCambiarContrasenia ventanaCambiarContrasenia = new VentanaCambiarContrasenia(sesion);
-            ventanaCambiarContrasenia.ShowDialog();
         }
 
         private void VentanaMenuPrincipal_Load(object sender, EventArgs e)
@@ -120,6 +106,42 @@ namespace FrbaHotel.Menus
                 menuRecepcion.Visible = false;
         }
 
+        private void menuRoles_Click(object sender, EventArgs e)
+        {
+            VentanaRol ventanaRoles = new VentanaRol(sesion);
+            ventanaRoles.ShowDialog();
+        }
+
+        private void menuUsuarios_Click(object sender, EventArgs e)
+        {
+            VentanaUsuario ventanaUsuarios = new VentanaUsuario(sesion);
+            ventanaUsuarios.ShowDialog();
+        }
+
+        private void menuHoteles_Click(object sender, EventArgs e)
+        {
+            VentanaHotel ventanaHotel = new VentanaHotel();
+            ventanaHotel.ShowDialog();
+        }
+
+        private void menuHabitaciones_Click(object sender, EventArgs e)
+        {
+            VentanaHabitacion ventanaHabitacion = new VentanaHabitacion();
+            ventanaHabitacion.ShowDialog();
+        }
+
+        private void menuClientes_Click(object sender, EventArgs e)
+        {
+            VentanaCliente ventanaCliente = new VentanaCliente();
+            ventanaCliente.ShowDialog();
+        }
+
+        private void menuCambiarContrasenia_Click(object sender, EventArgs e)
+        {
+            VentanaCambiarContrasenia ventanaCambiarContrasenia = new VentanaCambiarContrasenia(sesion);
+            ventanaCambiarContrasenia.ShowDialog();
+        }
+
         private void nenuCerrarSesion_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -144,5 +166,6 @@ namespace FrbaHotel.Menus
             VentanaFacturarEstadia facturaestadia = new VentanaFacturarEstadia();
             facturaestadia.ShowDialog();
         }
+
     }
 }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
@@ -75,6 +76,26 @@ namespace FrbaHotel
         }
 
         //-------------------------------------- Metodos para Elementos -------------------------------------
+
+        public bool textBoxValidarEmail(TextBox textbox)
+        {
+            Regex expresionParaEmail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            if (!expresionParaEmail.IsMatch(textbox.Text))
+            {
+                ventanaInformarError("El email ingresado no es valido");
+                return false;
+            }
+            else
+                return true;
+        }
+
+        public string radioButtonActivado(RadioButton radioButton)
+        {
+            if (radioButton.Checked)
+                return "1";
+            else
+                return "0";
+        }
 
         public static void comboBoxCargar(ComboBox comboBox, List<string> listaDatos)
         {

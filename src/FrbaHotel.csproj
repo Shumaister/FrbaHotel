@@ -48,11 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbmCliente\VentanaClientes.cs">
+    <Compile Include="AbmCliente\VentanaCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmCliente\VentanaClientes.Designer.cs">
-      <DependentUpon>VentanaClientes.cs</DependentUpon>
+    <Compile Include="AbmCliente\VentanaCliente.Designer.cs">
+      <DependentUpon>VentanaCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmCliente\VentanaModificarCliente.cs">
       <SubType>Form</SubType>
@@ -120,6 +120,7 @@
     <Compile Include="CancelarReserva\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Clases\Cliente.cs" />
     <Compile Include="Clases\Database.cs" />
     <Compile Include="Clases\Domicilio.cs" />
     <Compile Include="Clases\Estadia.cs" />
@@ -205,8 +206,14 @@
     <Compile Include="VentanaBase\VentanaBase.Designer.cs">
       <DependentUpon>VentanaBase.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AbmCliente\VentanaClientes.resx">
-      <DependentUpon>VentanaClientes.cs</DependentUpon>
+    <EmbeddedResource Include="AbmCliente\VentanaCliente.resx">
+      <DependentUpon>VentanaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmCliente\VentanaModificarCliente.resx">
+      <DependentUpon>VentanaModificarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmHabitacion\VentanaHabitacion.resx">
+      <DependentUpon>VentanaHabitacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmHotel\VentanaHotel.resx">
       <DependentUpon>VentanaHotel.cs</DependentUpon>

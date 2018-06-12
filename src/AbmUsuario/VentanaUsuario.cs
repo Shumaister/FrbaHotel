@@ -69,7 +69,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
-            if (ventanaCamposEstanCompletos(pagAgregar, controladorError) && ventanaEmailValido())
+            if (ventanaCamposEstanCompletos(pagAgregar, controladorError) && textBoxValidarEmail(tbxEmail))
             {
                 Usuario usuario = ventanaCrearUsuarioParaAgregar();
                 if (Database.usuarioAgregadoConExito(usuario))
@@ -137,17 +137,7 @@ namespace FrbaHotel.AbmUsuario
             }
         }
 
-        private bool ventanaEmailValido()
-        {
-            Regex expresionParaEmail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            if (!expresionParaEmail.IsMatch(tbxEmail.Text))
-            {
-                ventanaInformarError("El email no es valido");
-                return false;
-            }
-            else
-                return true;
-        }
+
 
         #endregion
 

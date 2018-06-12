@@ -86,7 +86,7 @@
             // menuUsuarios
             // 
             this.menuUsuarios.Name = "menuUsuarios";
-            this.menuUsuarios.Size = new System.Drawing.Size(143, 22);
+            this.menuUsuarios.Size = new System.Drawing.Size(152, 22);
             this.menuUsuarios.Text = "Usuarios";
             this.menuUsuarios.Visible = false;
             this.menuUsuarios.Click += new System.EventHandler(this.menuUsuarios_Click);
@@ -94,21 +94,23 @@
             // menuHoteles
             // 
             this.menuHoteles.Name = "menuHoteles";
-            this.menuHoteles.Size = new System.Drawing.Size(143, 22);
+            this.menuHoteles.Size = new System.Drawing.Size(152, 22);
             this.menuHoteles.Text = "Hoteles";
             this.menuHoteles.Visible = false;
+            this.menuHoteles.Click += new System.EventHandler(this.menuHoteles_Click);
             // 
             // menuHabitaciones
             // 
             this.menuHabitaciones.Name = "menuHabitaciones";
-            this.menuHabitaciones.Size = new System.Drawing.Size(143, 22);
+            this.menuHabitaciones.Size = new System.Drawing.Size(152, 22);
             this.menuHabitaciones.Text = "Habitaciones";
             this.menuHabitaciones.Visible = false;
+            this.menuHabitaciones.Click += new System.EventHandler(this.menuHabitaciones_Click);
             // 
             // menuRoles
             // 
             this.menuRoles.Name = "menuRoles";
-            this.menuRoles.Size = new System.Drawing.Size(143, 22);
+            this.menuRoles.Size = new System.Drawing.Size(152, 22);
             this.menuRoles.Text = "Roles";
             this.menuRoles.Visible = false;
             this.menuRoles.Click += new System.EventHandler(this.menuRoles_Click);
@@ -116,7 +118,7 @@
             // menuRegimenes
             // 
             this.menuRegimenes.Name = "menuRegimenes";
-            this.menuRegimenes.Size = new System.Drawing.Size(143, 22);
+            this.menuRegimenes.Size = new System.Drawing.Size(152, 22);
             this.menuRegimenes.Text = "Regimenes";
             this.menuRegimenes.Visible = false;
             // 
@@ -154,6 +156,7 @@
             this.menuClientes.Size = new System.Drawing.Size(152, 22);
             this.menuClientes.Text = "Clientes";
             this.menuClientes.Visible = false;
+            this.menuClientes.Click += new System.EventHandler(this.menuClientes_Click);
             // 
             // menuConsumibles
             // 

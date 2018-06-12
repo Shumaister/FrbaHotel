@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FrbaHotel.Clases;
@@ -68,7 +67,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
-            if (ventanaCamposEstanCompletos(this, controladorError) && ventanaEmailValido())
+            if (ventanaCamposEstanCompletos(this, controladorError) && textBoxValidarEmail(tbxEmail))
             {
                 ventanaModificarUsuario();
                 if (Database.usuarioModificadoConExito(usuario))
@@ -84,7 +83,7 @@ namespace FrbaHotel.AbmUsuario
             cbxTipoDocumento.SelectedIndex = cbxTipoDocumento.Items.IndexOf(usuario.persona.tipoDocumento);
             usuario.nombre = tbxUsuario.Text;
             usuario.contrasenia = tbxContrasena.Text;
-            usuario.estado = ventanaObtenerEstado();
+            usuario.estado = radioButtonActivado(rbtActivado);
             usuario.persona.nombre = tbxNombre.Text;
             usuario.persona.apellido = tbxApellido.Text;
             usuario.persona.numeroDocumento = tbxDocumento.Text;
@@ -124,26 +123,6 @@ namespace FrbaHotel.AbmUsuario
                 roles.Add(rol);
             }
             return roles;
-        }
-
-        private string ventanaObtenerEstado()
-        {
-            if (rbtActivado.Checked)
-                return "1";
-            else
-                return "0";
-        }
-
-        private bool ventanaEmailValido()
-        {
-            Regex expresionParaEmail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            if (!expresionParaEmail.IsMatch(tbxEmail.Text))
-            {
-                ventanaInformarError("El email no es valido");
-                return false;
-            }
-            else
-                return true;
         }
 
         #endregion

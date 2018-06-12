@@ -662,6 +662,117 @@ namespace FrbaHotel
 
         #endregion
 
+        #region Cliente
+
+        public static bool clienteAgregadoConExito(Cliente cliente)
+        {
+            if (personaEmailExiste(cliente.persona))
+            {
+                ventanaInformarError("Ya existe un cliente registrado con ese email");
+                return false;
+            }
+            if (personaDocumentoExiste(cliente.persona))
+            {
+                ventanaInformarError("Ya existe un cliente registrado con ese documento");
+                return false;
+            }
+            domicilioPersonaAgregar(cliente.persona.domicilio);
+            personaAgregar(cliente.persona);
+            clienteAgregar(cliente);
+            ventanaInformarExito("El cliente fue creado con exito");
+            return true;
+        }
+
+        public static bool clienteModificadoConExito(Cliente cliente)
+        {
+            if (personaEmailExiste(cliente.persona) && personaDistinta(cliente.persona))
+            {
+                ventanaInformarError("Ya existe un cliente registrado con ese email");
+                return false;
+            }
+            if (personaDocumentoExiste(cliente.persona) && personaDistinta(cliente.persona))
+            {
+                ventanaInformarError("Ya existe un cliente registrado con ese documento");
+                return false;
+            }
+
+            domicilioPersonaModificar(cliente.persona.domicilio);
+            personaModificar(cliente.persona);
+            clienteModificar(cliente);
+            ventanaInformarExito("El cliente fue modificado con exito");
+            return true;
+
+        }
+
+        public static void clienteEliminadoConExito(Cliente cliente)
+        {
+            clienteEliminar(cliente);
+            ventanaInformarExito("El cliente fue eliminado con exito");
+        }
+
+        public static void clienteAgregar(Cliente cliente)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Clientes (Cliente_PersonaID) VALUES (@PersonaID)");
+            consulta.Parameters.AddWithValue("@PersonaID", personaObtenerID(cliente.persona));
+            consultaEjecutar(consulta);
+        }
+
+        public static void clienteModificar(Cliente cliente)
+        {
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Clientes SET Cliente_Estado = @Estado WHERE Cliente_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", cliente.id);
+            consulta.Parameters.AddWithValue("@Estado", cliente.estado);
+            consultaEjecutar(consulta);
+        }
+
+        public static void clienteEliminar(Cliente cliente)
+        {
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Clientes SET Cliente_Estado = 0 WHERE Cliente_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", cliente.id);
+            consultaEjecutar(consulta);
+        }
+
+        public static string clienteObtenerID(Cliente cliente)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Cliente_ID FROM RIP.Clientes WHERE Cliente_PersonaID = @PersonaID");
+            consulta.Parameters.AddWithValue("@PersonaID", personaObtenerID(cliente.persona));
+            return consultaObtenerValor(consulta);
+        }
+
+        public static bool clienteExiste(Cliente cliente)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Cliente_ID FROM RIP.Clientes WHERE Cliente_PersonaID = @PersonaID");
+            consulta.Parameters.AddWithValue("@PersonaID", personaObtenerID(cliente.persona));
+            return consultaValorExiste(consultaObtenerValor(consulta));
+        }
+
+        public static bool clienteDistinto(Cliente cliente)
+        {
+            return cliente.id != clienteObtenerID(cliente);
+        }
+
+        public static bool clienteHabilitado(Cliente cliente)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Cliente_Estado FROM RIP.Clientes WHERE ClienteID = @ID");
+            consulta.Parameters.AddWithValue("@ID", cliente.estado);
+            return bool.Parse(consultaObtenerValor(consulta));
+        }
+
+
+        public static DataTable clienteObtenerTodosEnTabla()
+        {
+            SqlCommand consulta = consultaCrear("SELECT Cliente_ID, Persona_ID, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Nacionalidad, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle, Domicilio_Piso, Domicilio_Departamento FROM RIP.Clientes JOIN RIP.Personas ON Cliente_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID");
+            return consultaObtenerTabla(consulta);
+        }
+
+        public static DataTable clienteObtenerHabilitadosEnTabla()
+        {
+            SqlCommand consulta = consultaCrear("SELECT Cliente_ID, Persona_ID, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Nacionalidad, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle, Domicilio_Piso, Domicilio_Departamento FROM RIP.Clientes JOIN RIP.Personas ON Cliente_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID WHERE Cliente_Estado");
+            return consultaObtenerTabla(consulta);
+        }
+
+        #endregion
+
         #region Persona
 
         public static void personaAgregar(Persona persona)
