@@ -257,9 +257,52 @@ namespace FrbaHotel.AbmCliente
             tbxEmail.Clear();
             tbxTelefono.Clear();
             controladorError.Clear();
+            cbxTipoDocumento.SelectedIndex = 0;
+            calendario.Hide();
+            btnGuardarFecha.Hide();
         }
 
         #endregion
+
+        private void tbxFiltroNombreModificar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaLetras(e);
+        }
+
+        private void tbxFiltroDocumentoModificar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void tbxFiltroApellidoModificar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaLetras(e);
+        }
+
+        private void tbxFiltroEmailModificar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void tbxFiltroNombreEliminar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaLetras(e);
+        }
+
+        private void tbxFiltroDocumentoEliminar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void tbxFiltroApellidoEliminar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaLetras(e);
+        }
+
+        private void tbxFiltroEmailEliminar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
 
     }
 }

@@ -955,6 +955,31 @@ namespace FrbaHotel
 
         #region Hotel
 
+        public static bool hotelAgregadoConExito(Hotel hotel)
+        {
+            return true;
+        }
+
+        public static bool hotelModificadoConExito(Hotel hotel)
+        {
+            return true;
+        }
+
+        public static bool hotelEliminadoConExito(Hotel hotel)
+        {
+            return true;
+        }
+
+        public static List<string> hotelObtenerRegimenesEnLista(Hotel hotel)
+        {
+            return null;
+        }
+
+        public static List<string> hotelObtenerRegimenesFaltantesEnLista(Hotel hotel)
+        {
+            return null;
+        }
+
         public static void hotelAgregar(Hotel hotel)
         {
             SqlCommand consulta = consultaCrear("INSERT INTO RIP.Hoteles (Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_DomicilioID, Hotel_Telefono, Hotel_Email, Hotel_FechaCreacion) VALUES (@Nombre, @CantidadEstrellas, @DomicilioID, @Telefono, @Email, @FechaCreacion)");
@@ -964,6 +989,7 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@Telefono", hotel.telefono);
             consulta.Parameters.AddWithValue("@Hotel", hotel.email);
             consulta.Parameters.AddWithValue("@FechaCreacion", hotel.fechaCreacion);
+            consultaEjecutar(consulta);
         }
 
         public static void hotelModificar(Hotel hotel)
@@ -976,11 +1002,14 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@Telefono", hotel.telefono);
             consulta.Parameters.AddWithValue("@Hotel", hotel.email);
             consulta.Parameters.AddWithValue("@FechaCreacion", hotel.fechaCreacion);
+            consultaEjecutar(consulta);
         }
 
         public static void hotelEliminar(Hotel hotel)
         {
-
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Hoteles SET Hotel_Estado = 0 WHERE Hotel_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", hotel.id);
+            consultaEjecutar(consulta);
         }
 
         public static string hotelObtenerID(Hotel hotel)
@@ -1047,6 +1076,40 @@ namespace FrbaHotel
         {
             SqlCommand consulta = consultaCrear("SELECT CONCAT(Domicilio_Pais, '-', Domicilio_Ciudad, '-', Domicilio_Calle, '-', Domicilio_NumeroCalle) FROM RIP.Domicilios JOIN RIP.Hoteles ON Domicilio_ID = Hotel_DomicilioID");
             return consultaObtenerLista(consulta);
+        }
+
+        public static DataTable hotelFiltrarParaModificar(Hotel hotel)
+        {
+            string filtroNombre = string.IsNullOrEmpty(hotel.nombre) ? "" : hotel.nombre;
+            string filtroEstrellas = string.IsNullOrEmpty(hotel.cantidadEstrellas) ? "" : hotel.cantidadEstrellas;
+            string filtroPais = string.IsNullOrEmpty(hotel.domicilio.pais) ? "" : hotel.domicilio.pais;
+            string filtroCiudad = string.IsNullOrEmpty(hotel.domicilio.ciudad)? "" : hotel.domicilio.pais;
+            string query = "SELECT TOP 50 Hotel_ID, Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_FechaCreacion, " +
+            "Hotel_Email, Hotel_Telefono, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle" +
+            "Domicilio_NumeroCalle FROM RIP.Hoteles JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID WHERE " +
+            "Hotel_Nombre LIKE '" + hotel.nombre + "%' AND " +
+            "Domicilio_Pais LIKE '" + hotel.domicilio.pais+ "%' AND " +
+            "Persona_Ciudad LIKE '" + hotel.domicilio.ciudad + "%' AND " +
+            "CONVERT(nvarchar(50), Hotel_CantidadEstrellas) LIKE '" + hotel.cantidadEstrellas + "%'";
+            SqlCommand consulta = consultaCrear(query);
+            return consultaObtenerTabla(consulta);
+        }
+
+        public static DataTable hotelFiltrarParaEliminar(Hotel hotel)
+        {
+            string filtroNombre = string.IsNullOrEmpty(hotel.nombre) ? "" : hotel.nombre;
+            string filtroEstrellas = string.IsNullOrEmpty(hotel.cantidadEstrellas) ? "" : hotel.cantidadEstrellas;
+            string filtroPais = string.IsNullOrEmpty(hotel.domicilio.pais) ? "" : hotel.domicilio.pais;
+            string filtroCiudad = string.IsNullOrEmpty(hotel.domicilio.ciudad) ? "" : hotel.domicilio.pais;
+            string query = "SELECT TOP 50 Hotel_ID, Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_FechaCreacion, " +
+            "Hotel_Email, Hotel_Telefono, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle" +
+            "Domicilio_NumeroCalle FROM RIP.Hoteles JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID WHERE Hotel_Estado = 1 AND " +
+            "Hotel_Nombre LIKE '" + hotel.nombre + "%' AND " +
+            "Domicilio_Pais LIKE '" + hotel.domicilio.pais + "%' AND " +
+            "Persona_Ciudad LIKE '" + hotel.domicilio.ciudad + "%' AND " +
+            "CONVERT(nvarchar(50), Hotel_CantidadEstrellas) LIKE '" + hotel.cantidadEstrellas + "%'";
+            SqlCommand consulta = consultaCrear(query);
+            return consultaObtenerTabla(consulta);
         }
 
         #endregion

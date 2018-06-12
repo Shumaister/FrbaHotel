@@ -15,8 +15,7 @@ namespace FrbaHotel.Clases
         public string cantidadEstrellas { get; set; }
         public string email { get; set; }
         public string telefono { get; set; }
-        public string fechaCreacion { get; set; }
-        public string tipoRegimen { get; set; }
+        public DateTime fechaCreacion { get; set; }
         public string estado { get; set; }
         public Domicilio domicilio { get; set; }
 
@@ -32,17 +31,23 @@ namespace FrbaHotel.Clases
             this.domicilio = domicilio;
         }
 
-        public Hotel(string id, string nombre, string cantidadEstrellas, string email, string telefono, string fechaCreacion, string tipoRegimen, string estado, Domicilio domicilio)
+        public Hotel(string id, string nombre, string cantidadEstrellas, DateTime fechaCreacion, string email, string telefono, Domicilio domicilio)
         {
             this.id = id;
             this.nombre = nombre;
             this.cantidadEstrellas = cantidadEstrellas;
+            this.fechaCreacion = fechaCreacion;
             this.email = email;
             this.telefono = telefono;
-            this.fechaCreacion = fechaCreacion;
-            this.tipoRegimen = tipoRegimen;
-            this.estado = estado;
             this.domicilio = domicilio;
+        }
+
+        public Hotel(string nombre, string cantidadEstrellas, string pais, string ciudad)
+        {
+            this.nombre = nombre;
+            this.cantidadEstrellas = cantidadEstrellas;
+            this.domicilio.pais = pais;
+            this.domicilio.ciudad = ciudad;
         }
     }
 }

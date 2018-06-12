@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.pagAgregar = new System.Windows.Forms.TabPage();
             this.label39 = new System.Windows.Forms.Label();
@@ -796,6 +796,7 @@
             this.tbxFiltroEmailModificar.Name = "tbxFiltroEmailModificar";
             this.tbxFiltroEmailModificar.Size = new System.Drawing.Size(100, 20);
             this.tbxFiltroEmailModificar.TabIndex = 6;
+            this.tbxFiltroEmailModificar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxFiltroEmailModificar_KeyPress);
             // 
             // tbxFiltroDocumentoModificar
             // 
@@ -803,6 +804,7 @@
             this.tbxFiltroDocumentoModificar.Name = "tbxFiltroDocumentoModificar";
             this.tbxFiltroDocumentoModificar.Size = new System.Drawing.Size(100, 20);
             this.tbxFiltroDocumentoModificar.TabIndex = 5;
+            this.tbxFiltroDocumentoModificar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxFiltroDocumentoModificar_KeyPress);
             // 
             // tbxFiltroApellidoModificar
             // 
@@ -810,6 +812,7 @@
             this.tbxFiltroApellidoModificar.Name = "tbxFiltroApellidoModificar";
             this.tbxFiltroApellidoModificar.Size = new System.Drawing.Size(100, 20);
             this.tbxFiltroApellidoModificar.TabIndex = 4;
+            this.tbxFiltroApellidoModificar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxFiltroApellidoModificar_KeyPress);
             // 
             // tbxFiltroNombreModificar
             // 
@@ -817,6 +820,7 @@
             this.tbxFiltroNombreModificar.Name = "tbxFiltroNombreModificar";
             this.tbxFiltroNombreModificar.Size = new System.Drawing.Size(100, 20);
             this.tbxFiltroNombreModificar.TabIndex = 3;
+            this.tbxFiltroNombreModificar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxFiltroNombreModificar_KeyPress);
             // 
             // groupBox3
             // 
@@ -833,23 +837,23 @@
             this.dgvModificarClientes.AllowUserToAddRows = false;
             this.dgvModificarClientes.AllowUserToDeleteRows = false;
             this.dgvModificarClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvModificarClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle29.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvModificarClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle29;
             this.dgvModificarClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvModificarClientes.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvModificarClientes.DefaultCellStyle = dataGridViewCellStyle30;
             this.dgvModificarClientes.Location = new System.Drawing.Point(16, 29);
             this.dgvModificarClientes.Name = "dgvModificarClientes";
             this.dgvModificarClientes.RowHeadersVisible = false;
@@ -904,23 +908,23 @@
             this.dgvEliminarClientes.AllowUserToAddRows = false;
             this.dgvEliminarClientes.AllowUserToDeleteRows = false;
             this.dgvEliminarClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEliminarClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEliminarClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
             this.dgvEliminarClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEliminarClientes.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle32.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEliminarClientes.DefaultCellStyle = dataGridViewCellStyle32;
             this.dgvEliminarClientes.Location = new System.Drawing.Point(16, 29);
             this.dgvEliminarClientes.Name = "dgvEliminarClientes";
             this.dgvEliminarClientes.RowHeadersVisible = false;
@@ -963,6 +967,7 @@
             this.tbxFiltroNombreEliminar.Name = "tbxFiltroNombreEliminar";
             this.tbxFiltroNombreEliminar.Size = new System.Drawing.Size(100, 20);
             this.tbxFiltroNombreEliminar.TabIndex = 274;
+            this.tbxFiltroNombreEliminar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxFiltroNombreEliminar_KeyPress);
             // 
             // label24
             // 
@@ -979,6 +984,7 @@
             this.tbxFiltroApellidoEliminar.Name = "tbxFiltroApellidoEliminar";
             this.tbxFiltroApellidoEliminar.Size = new System.Drawing.Size(100, 20);
             this.tbxFiltroApellidoEliminar.TabIndex = 275;
+            this.tbxFiltroApellidoEliminar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxFiltroApellidoEliminar_KeyPress);
             // 
             // label25
             // 
@@ -995,6 +1001,7 @@
             this.tbxFiltroDocumentoEliminar.Name = "tbxFiltroDocumentoEliminar";
             this.tbxFiltroDocumentoEliminar.Size = new System.Drawing.Size(100, 20);
             this.tbxFiltroDocumentoEliminar.TabIndex = 276;
+            this.tbxFiltroDocumentoEliminar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxFiltroDocumentoEliminar_KeyPress);
             // 
             // label41
             // 
@@ -1011,6 +1018,7 @@
             this.tbxFiltroEmailEliminar.Name = "tbxFiltroEmailEliminar";
             this.tbxFiltroEmailEliminar.Size = new System.Drawing.Size(100, 20);
             this.tbxFiltroEmailEliminar.TabIndex = 277;
+            this.tbxFiltroEmailEliminar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxFiltroEmailEliminar_KeyPress);
             // 
             // btnLimpiarEliminar
             // 
