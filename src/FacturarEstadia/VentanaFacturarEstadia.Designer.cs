@@ -33,9 +33,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataConsumibles = new System.Windows.Forms.DataGridView();
             this.SubTotal = new System.Windows.Forms.Label();
-            this.labelpre = new System.Windows.Forms.Label();
             this.sub = new System.Windows.Forms.Label();
-            this.labec = new System.Windows.Forms.Label();
             this.RegimenPrecio = new System.Windows.Forms.Label();
             this.DiasRegimen = new System.Windows.Forms.Label();
             this.Regimen = new System.Windows.Forms.Label();
@@ -48,6 +46,9 @@
             this.subRegimen = new System.Windows.Forms.Label();
             this.Total = new System.Windows.Forms.Label();
             this.TotalNumero = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -81,9 +82,7 @@
             // 
             this.groupBox1.Controls.Add(this.dataConsumibles);
             this.groupBox1.Controls.Add(this.SubTotal);
-            this.groupBox1.Controls.Add(this.labelpre);
             this.groupBox1.Controls.Add(this.sub);
-            this.groupBox1.Controls.Add(this.labec);
             this.groupBox1.Location = new System.Drawing.Point(12, 53);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(418, 262);
@@ -109,15 +108,6 @@
             this.SubTotal.Size = new System.Drawing.Size(0, 13);
             this.SubTotal.TabIndex = 6;
             // 
-            // labelpre
-            // 
-            this.labelpre.AutoSize = true;
-            this.labelpre.Location = new System.Drawing.Point(268, 0);
-            this.labelpre.Name = "labelpre";
-            this.labelpre.Size = new System.Drawing.Size(37, 13);
-            this.labelpre.TabIndex = 18;
-            this.labelpre.Text = "Precio";
-            // 
             // sub
             // 
             this.sub.AutoSize = true;
@@ -127,15 +117,6 @@
             this.sub.TabIndex = 5;
             this.sub.Text = "Subtotal";
             this.sub.Click += new System.EventHandler(this.sub_Click);
-            // 
-            // labec
-            // 
-            this.labec.AutoSize = true;
-            this.labec.Location = new System.Drawing.Point(168, 0);
-            this.labec.Name = "labec";
-            this.labec.Size = new System.Drawing.Size(49, 13);
-            this.labec.TabIndex = 5;
-            this.labec.Text = "Cantidad";
             // 
             // RegimenPrecio
             // 
@@ -194,7 +175,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
+            this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -250,11 +231,43 @@
             this.TotalNumero.TabIndex = 26;
             this.TotalNumero.Text = "Numero";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(180, 558);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(86, 13);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "Metodo de Pago";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Tarjeta",
+            "Efectivo"});
+            this.comboBox1.Location = new System.Drawing.Point(286, 555);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 28;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(452, 555);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 29;
+            this.button2.Text = "Pagar";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // VentanaFacturarEstadia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(569, 621);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.TotalNumero);
             this.Controls.Add(this.Total);
             this.Controls.Add(this.groupBox2);
@@ -273,6 +286,9 @@
             this.Controls.SetChildIndex(this.groupBox2, 0);
             this.Controls.SetChildIndex(this.Total, 0);
             this.Controls.SetChildIndex(this.TotalNumero, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.comboBox1, 0);
+            this.Controls.SetChildIndex(this.button2, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -291,8 +307,6 @@
         private System.Windows.Forms.TextBox CodReserva;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label labelpre;
-        private System.Windows.Forms.Label labec;
         private System.Windows.Forms.Label sub;
         private System.Windows.Forms.Label SubTotal;
         private System.Windows.Forms.Label allInclusivePrecio;
@@ -307,5 +321,8 @@
         private System.Windows.Forms.Label Total;
         private System.Windows.Forms.Label TotalNumero;
         private System.Windows.Forms.DataGridView dataConsumibles;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button2;
     }
 }

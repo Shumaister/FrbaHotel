@@ -91,10 +91,12 @@ namespace FrbaHotel.FacturarEstadia
                 RegimenPrecio.Text = Convert.ToString(tablaRegimen.Rows[0][2]);
 
 
-                Decimal diasInt = Convert.ToDecimal(DiasRegimen.Text);
+               Decimal diasInt = Convert.ToDecimal(DiasRegimen.Text);
                Decimal regimenPrecioInt = Convert.ToDecimal(RegimenPrecio.Text);
                Decimal subtotalInt = allinclusive;
-                subRegimenPrecio.Text = Convert.ToString((diasInt * regimenPrecioInt) + (subtotalInt ));
+               subRegimenPrecio.Text = Convert.ToString((diasInt * regimenPrecioInt) + (subtotalInt ));
+
+               TotalNumero.Text = Convert.ToString(Convert.ToDecimal(subRegimenPrecio.Text)+ Convert.ToDecimal(subtotal));
             }
             
             
