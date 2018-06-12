@@ -13,24 +13,17 @@ namespace FrbaHotel.AbmCliente
 {
     public partial class VentanaCliente : VentanaBase
     {
+
+        #region Constructores
+        
         public VentanaCliente()
         {
             InitializeComponent();
         }
 
-        private void VentanaCliente_Load(object sender, EventArgs e)
-        {
-            ventanaActualizar();
-            dataGridViewAgregarBotonModificar(dgvModificarClientes);
-            dataGridViewAgregarBotonEliminar(dgvEliminarClientes);
-            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
-        }
+        #endregion
 
-        public void ventanaActualizar()
-        {
-            dataGridViewCargar(dgvModificarClientes, Database.clienteObtenerTodosEnTabla());
-            dataGridViewCargar(dgvEliminarClientes, Database.clienteObtenerHabilitadosEnTabla());
-        }
+        #region Agregar
 
         private Cliente ventanaCrearClienteParaAgregar()
         {
@@ -39,6 +32,23 @@ namespace FrbaHotel.AbmCliente
             Cliente cliente = new Cliente(null, persona, null);
             return cliente;
         }
+
+        private void btnGuardarCliente_Click(object sender, EventArgs e)
+        {
+            if (ventanaCamposEstanCompletos(pagAgregar, controladorError) && textBoxValidarEmail(tbxEmail))
+            {
+                Cliente cliente = ventanaCrearClienteParaAgregar();
+                if (Database.clienteAgregadoConExito(cliente))
+                {
+                    btnLimpiarCliente_Click(sender, e);
+                    ventanaActualizar();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Modificar
 
         private Cliente ventanaCrearClienteParaModificar(DataGridViewCellEventArgs e)
         {
@@ -75,18 +85,19 @@ namespace FrbaHotel.AbmCliente
             }
         }
 
-        private void btnGuardarCliente_Click(object sender, EventArgs e)
+        private void btnFiltrarModificar_Click(object sender, EventArgs e)
         {
-            if (ventanaCamposEstanCompletos(pagAgregar, controladorError) && textBoxValidarEmail(tbxEmail))
-            {
-                Cliente cliente = ventanaCrearClienteParaAgregar();
-                if (Database.clienteAgregadoConExito(cliente))
-                {
-                    btnLimpiarCliente_Click(sender, e);
-                    ventanaActualizar();
-                }
-            }
+            string nombre = tbxFiltroNombreModificar.Text;
+            string apellido = tbxFiltroApellidoModificar.Text;
+            string numeroDocumento = tbxFiltroDocumentoModificar.Text;
+            string tipoDocumento = cbxFiltroTipoDocumentoModificar.SelectedItem.ToString();
+            string email = tbxFiltroEmailModificar.Text;
+            Persona persona = new Persona(nombre, apellido, tipoDocumento, numeroDocumento, email);
+            Cliente cliente = new Cliente(null, persona, null);
+            dataGridViewCargar(dgvModificarClientes, Database.clienteFiltrar(cliente));
         }
+
+        #endregion
 
         #region Eliminar
 
@@ -103,6 +114,24 @@ namespace FrbaHotel.AbmCliente
         }
 
         #endregion
+
+        #region Control
+
+
+        public void ventanaActualizar()
+        {
+            dataGridViewCargar(dgvModificarClientes, Database.clienteObtenerTodosEnTabla());
+            dataGridViewCargar(dgvEliminarClientes, Database.clienteObtenerHabilitadosEnTabla());
+        }
+
+        private void VentanaCliente_Load(object sender, EventArgs e)
+        {
+            ventanaActualizar();
+            dataGridViewAgregarBotonModificar(dgvModificarClientes);
+            dataGridViewAgregarBotonEliminar(dgvEliminarClientes);
+            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
+            comboBoxCargar(cbxFiltroTipoDocumentoModificar, Database.tipoDocumentoObtenerTodosEnLista());
+        }
 
         private void tbxNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -193,6 +222,7 @@ namespace FrbaHotel.AbmCliente
         {
             tbxNombre.Clear();
             tbxApellido.Clear();
+            tbxNacionalidad.Clear();
             tbxDocumento.Clear();
             tbxFechaNacimiento.Clear();
             tbxPais.Clear();
@@ -205,5 +235,7 @@ namespace FrbaHotel.AbmCliente
             tbxTelefono.Clear();
             controladorError.Clear();
         }
+
+        #endregion
     }
 }

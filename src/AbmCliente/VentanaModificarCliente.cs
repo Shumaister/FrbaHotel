@@ -33,6 +33,19 @@ namespace FrbaHotel.AbmCliente
 
         #region Modificar
 
+        private void btnGuardarCliente_Click(object sender, EventArgs e)
+        {
+            if (ventanaCamposEstanCompletos(this, controladorError) && textBoxValidarEmail(tbxEmail))
+            {
+                ventanaCrearClienteModificado();
+                if (Database.clienteModificadoConExito(cliente))
+                {
+                    this.Hide();
+                    ventanaCliente.ventanaActualizar();
+                }
+            }
+        }
+
         private void VentanaModificarCliente_Load(object sender, EventArgs e)
         {
             comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
@@ -56,20 +69,7 @@ namespace FrbaHotel.AbmCliente
                 rbtDesactivado.Select();
         }
 
-        private void btnGuardarCliente_Click(object sender, EventArgs e)
-        {
-            if (ventanaCamposEstanCompletos(this, controladorError) && textBoxValidarEmail(tbxEmail))
-            {
-                ventanaModificarUsuario();
-                if (Database.clienteModificadoConExito(cliente))
-                {
-                    this.Hide();
-                    ventanaCliente.ventanaActualizar();
-                }
-            }
-        }
-
-        private void ventanaModificarUsuario()
+        private void ventanaCrearClienteModificado()
         {
             cbxTipoDocumento.SelectedIndex = cbxTipoDocumento.Items.IndexOf(cliente.persona.tipoDocumento);
             cliente.estado = radioButtonActivado(rbtActivado);
@@ -165,17 +165,34 @@ namespace FrbaHotel.AbmCliente
 
         private void btnSeleccionarFecha_Click(object sender, EventArgs e)
         {
-
+            calendario.Show();
+            btnGuardarFecha.Show();
+            controladorError.Clear();
         }
 
         private void btnGuardarFecha_Click(object sender, EventArgs e)
         {
-
+            tbxFechaNacimiento.Text = calendario.SelectionStart.ToShortDateString();
+            calendario.Hide();
+            btnGuardarFecha.Hide();
         }
 
         private void btnLimpiarCliente_Click(object sender, EventArgs e)
         {
-
+            tbxNombre.Clear();
+            tbxApellido.Clear();
+            tbxNacionalidad.Clear();
+            tbxDocumento.Clear();
+            tbxFechaNacimiento.Clear();
+            tbxPais.Clear();
+            tbxCiudad.Clear();
+            tbxCalle.Clear();
+            tbxNumeroCalle.Clear();
+            tbxPiso.Clear();
+            tbxDepartamento.Clear();
+            tbxEmail.Clear();
+            tbxTelefono.Clear();
+            controladorError.Clear();
         }
 
         #endregion

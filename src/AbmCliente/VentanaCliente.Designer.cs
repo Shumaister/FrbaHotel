@@ -787,6 +787,7 @@
             this.btnFiltrarModificar.TabIndex = 8;
             this.btnFiltrarModificar.Text = "Filtrar";
             this.btnFiltrarModificar.UseVisualStyleBackColor = true;
+            this.btnFiltrarModificar.Click += new System.EventHandler(this.btnFiltrarModificar_Click);
             // 
             // tbxFiltroEmailModificar
             // 

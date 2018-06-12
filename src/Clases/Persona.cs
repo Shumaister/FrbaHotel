@@ -39,6 +39,15 @@ namespace FrbaHotel
             this.domicilio = domicilio;
         }
 
+        public Persona(string nombre, string apellido, string tipoDocumento, string numeroDocumento, string email)
+        {
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.tipoDocumento = tipoDocumento;
+            this.numeroDocumento = numeroDocumento;
+            this.email = email;
+        }
+
         #endregion
     }
 }
