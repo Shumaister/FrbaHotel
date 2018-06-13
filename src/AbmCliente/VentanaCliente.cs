@@ -35,7 +35,7 @@ namespace FrbaHotel.AbmCliente
 
         private void btnGuardarCliente_Click(object sender, EventArgs e)
         {
-            if (ventanaCamposEstanCompletos(pagAgregar, controladorError) && textBoxValidarEmail(tbxEmail))
+            if (ventanaCamposEstanCompletos(pagAgregar, controladorError))
             {
                 Cliente cliente = ventanaCrearClienteParaAgregar();
                 if (Database.clienteAgregadoConExito(cliente))

@@ -850,18 +850,13 @@ ORDER BY Factura_Nro
 -------------------------------------
 
 PRINT''
-PRINT '----- Realizando inserts de prueba -----'
+PRINT '----- Realizando inserts necesarios para la aplicacion -----'
 
 -- Insertando roles
 
-INSERT INTO RIP.Roles (Rol_Nombre) VALUES ('Administrador')
+INSERT INTO RIP.Roles (Rol_Nombre) VALUES ('Administrador General')
 INSERT INTO RIP.Roles (Rol_Nombre) VALUES ('Recepcionista')
 INSERT INTO RIP.Roles (Rol_Nombre) VALUES ('Guest')
-
--- Insertando usuarios 'admin' y 'recep'
-
-INSERT INTO RIP.Usuarios (Usuario_Nombre, Usuario_Contrasenia) VALUES ('admin', HASHBYTES('SHA2_256', 'w23e'))
-INSERT INTO RIP.Usuarios (Usuario_Nombre, Usuario_Contrasenia) VALUES ('recep', HASHBYTES('SHA2_256', 'w23e'))
 
 -- Insertando funcionalidades
 
@@ -873,24 +868,13 @@ VALUES ('Usuarios'),('Hoteles'),('Habitaciones'),('Roles'),('Regimenes'),('Reser
 INSERT INTO RIP.Roles_Funcionalidades (RolFuncionalidad_RolID, RolFuncionalidad_FuncionalidadID)
 VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(2,6),(2,7),(2,8),(2,9),(2,10),(2,11),(3,6)
 
--- Asignando roles a usuarios 'admin' y 'recep'
+-- Creando usuario 'admin' 
 
-INSERT INTO RIP.Usuarios_Roles(UsuarioRol_UsuarioID, UsuarioRol_RolID) VALUES ((SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = 'admin'), (SELECT Rol_ID FROM RIP.Roles WHERE Rol_Nombre = 'Administrador'))
-INSERT INTO RIP.Usuarios_Roles(UsuarioRol_UsuarioID, UsuarioRol_RolID) VALUES ((SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = 'recep'), (SELECT Rol_ID FROM RIP.Roles WHERE Rol_Nombre = 'Recepcionista'))
-
--- Asignando hoteles a usuarios 'admin' y 'recep'
-
-INSERT INTO RIP.Usuarios_Hoteles (UsuarioHotel_HotelID, UsuarioHotel_UsuarioID) SELECT Hotel_ID ,(SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = 'admin') FROM RIP.Hoteles
-INSERT INTO RIP.Usuarios_Hoteles (UsuarioHotel_HotelID, UsuarioHotel_UsuarioID) SELECT Hotel_ID,(SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = 'recep') FROM RIP.Hoteles
-
--- Prueba Gaby
-
-INSERT INTO RIP.Usuarios (Usuario_Nombre, Usuario_Contrasenia) VALUES ('gaby', HASHBYTES('SHA2_256', 'w23e'))
+INSERT INTO RIP.Usuarios (Usuario_Nombre, Usuario_Contrasenia) VALUES ('admin', HASHBYTES('SHA2_256', 'w23e'))
 INSERT INTO RIP.Domicilios (Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle) 
-VALUES ('Argentina', 'Buenos Aires', 'CalleFalsa', '123')
+VALUES ('Argentina', 'Buenos Aires', 'Avenida Medrano', '951')
 INSERT INTO RIP.Personas (Persona_Nombre, Persona_Apellido, Persona_FechaNacimiento, Persona_TipoDocumentoID, Persona_NumeroDocumento, Persona_DomicilioID, Persona_Email, Persona_Telefono, Persona_Nacionalidad) 
-VALUES ('Gabriel', 'Maiori', '19960725 13:31:00.000', 1, 39769742, @@IDENTITY, 'gabrielmaiori@gmail.com', '1154249902', 'ARGENTINO')
-UPDATE RIP.Usuarios SET Usuario_PersonaID = @@IDENTITY WHERE Usuario_Nombre = 'gaby'
-INSERT INTO RIP.Usuarios_Roles(UsuarioRol_UsuarioID, UsuarioRol_RolID) VALUES ((SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = 'gaby'), (SELECT Rol_ID FROM RIP.Roles WHERE Rol_Nombre = 'Administrador'))
-INSERT INTO RIP.Usuarios_Roles(UsuarioRol_UsuarioID, UsuarioRol_RolID) VALUES ((SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = 'gaby'), (SELECT Rol_ID FROM RIP.Roles WHERE Rol_Nombre = 'Recepcionista'))
-INSERT INTO RIP.Usuarios_Hoteles (UsuarioHotel_HotelID, UsuarioHotel_UsuarioID) SELECT Hotel_ID,(SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = 'gaby') FROM RIP.Hoteles
+VALUES ('Usuario', 'Administrador', '19960725 13:31:00.000', 1, 39769742, @@IDENTITY, 'usuarioAdministrador@gmail.com', '1154249901', 'ARGENTINO')
+UPDATE RIP.Usuarios SET Usuario_PersonaID = @@IDENTITY WHERE Usuario_Nombre = 'admin'
+INSERT INTO RIP.Usuarios_Roles(UsuarioRol_UsuarioID, UsuarioRol_RolID) VALUES ((SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = 'admin'), (SELECT Rol_ID FROM RIP.Roles WHERE Rol_Nombre = 'Administrador General'))
+INSERT INTO RIP.Usuarios_Hoteles (UsuarioHotel_HotelID, UsuarioHotel_UsuarioID) SELECT Hotel_ID,(SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = 'admin') FROM RIP.Hoteles WHERE Hotel_ID = 1 OR Hotel_ID = 2

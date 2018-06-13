@@ -545,6 +545,7 @@
             // 
             this.tbxEmail.Location = new System.Drawing.Point(568, 254);
             this.tbxEmail.Name = "tbxEmail";
+            this.tbxEmail.ShortcutsEnabled = false;
             this.tbxEmail.Size = new System.Drawing.Size(99, 20);
             this.tbxEmail.TabIndex = 294;
             this.tbxEmail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxEmail_KeyPress);

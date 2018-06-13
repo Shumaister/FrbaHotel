@@ -59,7 +59,7 @@ namespace FrbaHotel.AbmUsuario
             tbxNumeroCalle.Text = usuario.persona.domicilio.numeroCalle;
             tbxPiso.Text = usuario.persona.domicilio.piso;
             tbxDepartamento.Text = usuario.persona.domicilio.departamento;
-            if (Database.usuarioHabilitado(usuario))
+            if (bool.Parse(usuario.estado))
                 rbtActivado.Select();
             else
                 rbtDesactivado.Select();
@@ -67,7 +67,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
-            if (ventanaCamposEstanCompletos(this, controladorError) && textBoxValidarEmail(tbxEmail))
+            if (ventanaCamposEstanCompletos(this, controladorError))
             {
                 ventanaModificarUsuario();
                 if (Database.usuarioModificadoConExito(usuario))

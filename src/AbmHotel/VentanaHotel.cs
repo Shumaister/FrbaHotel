@@ -29,7 +29,7 @@ namespace FrbaHotel.AbmHotel
 
         private void btnGuardarHotel_Click(object sender, EventArgs e)
         {
-            if (ventanaCamposEstanCompletos(pagAgregar, controladorError) && textBoxValidarEmail(tbxEmail))
+            if (ventanaCamposEstanCompletos(pagAgregar, controladorError))
             {
                 Hotel hotel = ventanaCrearHotelParaAgregar();
                 if (Database.hotelAgregadoConExito(hotel))

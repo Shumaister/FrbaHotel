@@ -32,12 +32,13 @@ namespace FrbaHotel.Clases
             this.roles = roles;
         }
 
-        public Usuario(string id, string nombre, string contrasenia, Persona persona)
+        public Usuario(string id, string nombre, string contrasenia, Persona persona, string estado)
         {
             this.id = id;
             this.nombre = nombre;
             this.contrasenia = contrasenia;
             this.persona = persona;
+            this.estado = estado;
         }
 
         public Usuario(string nombre)

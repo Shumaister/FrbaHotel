@@ -68,7 +68,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
-            if (ventanaCamposEstanCompletos(pagAgregar, controladorError) && textBoxValidarEmail(tbxEmail))
+            if (ventanaCamposEstanCompletos(pagAgregar, controladorError))
             {
                 Usuario usuario = ventanaCrearUsuarioParaAgregar();
                 if (Database.usuarioAgregadoConExito(usuario))
@@ -97,6 +97,7 @@ namespace FrbaHotel.AbmUsuario
         {
             string usuarioID = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString();
             string usuarioNombre = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Nombre"].Value.ToString();
+            string usuarioEstado = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Usuario_Estado"].Value.ToString();
             string idPersona = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_ID"].Value.ToString();
             string nombre = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Nombre"].Value.ToString();
             string apellido = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Persona_Apellido"].Value.ToString();
@@ -115,7 +116,7 @@ namespace FrbaHotel.AbmUsuario
             string departamento = dgvModificarUsuarios.Rows[e.RowIndex].Cells["Domicilio_Departamento"].Value.ToString();       
             Domicilio domicilio = new Domicilio(idDomicilio, pais, ciudad, calle, numeroCalle, piso, departamento);
             Persona persona = new Persona(idPersona, nombre, apellido, nacionalidad, tipoDocumento, numeroDocumento, fechaNacimiento, telefono, email, domicilio);
-            Usuario usuario = new Usuario(usuarioID, usuarioNombre, "", persona);
+            Usuario usuario = new Usuario(usuarioID, usuarioNombre, "", persona, usuarioEstado);
             usuario.contrasenia = Database.usuarioObtenerContrasenia(usuario);                        
             return usuario;
         }
@@ -130,7 +131,7 @@ namespace FrbaHotel.AbmUsuario
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
                 string id = dgvEliminarUsuarios.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString();
-                Usuario usuario = new Usuario(id, null, null, null);
+                Usuario usuario = new Usuario(id, null, null, null, null);
                 Database.usuarioEliminadoConExito(usuario);
                 ventanaActualizar();
             }
@@ -147,6 +148,7 @@ namespace FrbaHotel.AbmUsuario
             ventanaActualizar();
             dataGridViewAgregarBotonModificar(dgvModificarUsuarios);
             dataGridViewAgregarBotonEliminar(dgvEliminarUsuarios);
+            ventanaOcultarColumnas();
             comboBoxCargar(cbxRoles, Database.rolObtenerTodosEnLista());
             comboBoxCargar(cbxHoteles, Database.hotelObtenerTodosLista());
             comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
@@ -154,8 +156,44 @@ namespace FrbaHotel.AbmUsuario
 
         public void ventanaActualizar()
         {
-            dataGridViewCargar(dgvModificarUsuarios, Database.usuarioObtenerTodosEnTabla());
-            dataGridViewCargar(dgvEliminarUsuarios, Database.usuarioObtenerHabilitadosEnTabla());
+            dataGridViewCargar(dgvModificarUsuarios, Database.hotelObtenerUsuariosEnTabla(sesion.hotel));
+            dataGridViewCargar(dgvEliminarUsuarios, Database.hotelObtenerUsuariosHabilitadosEnTabla(sesion.hotel));
+        }
+
+        public void ventanaOcultarColumnas()
+        {
+            dgvModificarUsuarios.Columns["Usuario_ID"].Visible = false;
+            dgvModificarUsuarios.Columns["Usuario_Estado"].Visible = false;
+            dgvModificarUsuarios.Columns["Persona_ID"].Visible = false;
+            dgvModificarUsuarios.Columns["Usuario_Estado"].Visible = false;
+            dgvModificarUsuarios.Columns["Persona_Nacionalidad"].Visible = false;
+            dgvModificarUsuarios.Columns["Persona_NumeroDocumento"].Visible = false;
+            dgvModificarUsuarios.Columns["Persona_FechaNacimiento"].Visible = false;
+            dgvModificarUsuarios.Columns["Persona_ID"].Visible = false;
+            dgvModificarUsuarios.Columns["Persona_Telefono"].Visible = false;
+            dgvModificarUsuarios.Columns["TipoDocumento_Descripcion"].Visible = false;
+            dgvModificarUsuarios.Columns["Domicilio_ID"].Visible = false;
+            dgvModificarUsuarios.Columns["Domicilio_Pais"].Visible = false;
+            dgvModificarUsuarios.Columns["Domicilio_Ciudad"].Visible = false;
+            dgvModificarUsuarios.Columns["Domicilio_Calle"].Visible = false;
+            dgvModificarUsuarios.Columns["Domicilio_NumeroCalle"].Visible = false;
+            dgvModificarUsuarios.Columns["Domicilio_Piso"].Visible = false;
+            dgvModificarUsuarios.Columns["Domicilio_Departamento"].Visible = false;
+            dgvEliminarUsuarios.Columns["Usuario_ID"].Visible = false;
+            dgvEliminarUsuarios.Columns["Persona_ID"].Visible = false;
+            dgvEliminarUsuarios.Columns["Persona_Nacionalidad"].Visible = false;
+            dgvEliminarUsuarios.Columns["Persona_NumeroDocumento"].Visible = false;
+            dgvEliminarUsuarios.Columns["Persona_FechaNacimiento"].Visible = false;
+            dgvEliminarUsuarios.Columns["Persona_ID"].Visible = false;
+            dgvEliminarUsuarios.Columns["Persona_Telefono"].Visible = false;
+            dgvEliminarUsuarios.Columns["TipoDocumento_Descripcion"].Visible = false;
+            dgvEliminarUsuarios.Columns["Domicilio_ID"].Visible = false;
+            dgvEliminarUsuarios.Columns["Domicilio_Pais"].Visible = false;
+            dgvEliminarUsuarios.Columns["Domicilio_Ciudad"].Visible = false;
+            dgvEliminarUsuarios.Columns["Domicilio_Calle"].Visible = false;
+            dgvEliminarUsuarios.Columns["Domicilio_NumeroCalle"].Visible = false;
+            dgvEliminarUsuarios.Columns["Domicilio_Piso"].Visible = false;
+            dgvEliminarUsuarios.Columns["Domicilio_Departamento"].Visible = false;
         }
 
 

@@ -36,10 +36,19 @@ namespace FrbaHotel
                 if(objeto is TextBox)
                 {
                     TextBox textBox = (TextBox)objeto;
-                    if (textBox.ShortcutsEnabled && string.IsNullOrEmpty(textBox.Text.Trim()))
+                    if (string.IsNullOrEmpty(textBox.Text.Trim()))
                     {
                         camposTodosCompletos = false;
                         errorProvider.SetError(textBox, "El campo no puede estar vacio");
+                    }
+                    if (!textBox.ShortcutsEnabled)
+                    {
+                        Regex expresionParaEmail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                        if (!expresionParaEmail.IsMatch(textBox.Text))
+                        {
+                            camposTodosCompletos = false;
+                            errorProvider.SetError(textBox, "El formato de E-mail es invalido");
+                        }
                     }
                 }
                 if(objeto is ListBox)
@@ -76,18 +85,6 @@ namespace FrbaHotel
         }
 
         //-------------------------------------- Metodos para Elementos -------------------------------------
-
-        public bool textBoxValidarEmail(TextBox textbox)
-        {
-            Regex expresionParaEmail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            if (!expresionParaEmail.IsMatch(textbox.Text))
-            {
-                ventanaInformarError("El email ingresado no es valido");
-                return false;
-            }
-            else
-                return true;
-        }
 
         public string radioButtonActivado(RadioButton radioButton)
         {

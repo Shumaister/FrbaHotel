@@ -45,7 +45,6 @@
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.tbxCiudad = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
             this.btnQuitarHotel = new System.Windows.Forms.Button();
             this.btnAgregarHotel = new System.Windows.Forms.Button();
             this.lbxHoteles = new System.Windows.Forms.ListBox();
@@ -275,15 +274,6 @@
             this.tbxCiudad.Size = new System.Drawing.Size(100, 20);
             this.tbxCiudad.TabIndex = 185;
             this.tbxCiudad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCiudad_KeyPress);
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(692, 422);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(65, 13);
-            this.label25.TabIndex = 183;
-            this.label25.Text = "@gmail.com";
             // 
             // btnQuitarHotel
             // 
@@ -688,6 +678,7 @@
             // 
             this.tbxEmail.Location = new System.Drawing.Point(578, 419);
             this.tbxEmail.Name = "tbxEmail";
+            this.tbxEmail.ShortcutsEnabled = false;
             this.tbxEmail.Size = new System.Drawing.Size(99, 20);
             this.tbxEmail.TabIndex = 144;
             this.tbxEmail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxEmail_KeyPress);
@@ -855,7 +846,6 @@
             this.Controls.Add(this.label26);
             this.Controls.Add(this.label27);
             this.Controls.Add(this.tbxCiudad);
-            this.Controls.Add(this.label25);
             this.Controls.Add(this.btnQuitarHotel);
             this.Controls.Add(this.btnAgregarHotel);
             this.Controls.Add(this.lbxHoteles);
@@ -950,7 +940,6 @@
             this.Controls.SetChildIndex(this.lbxHoteles, 0);
             this.Controls.SetChildIndex(this.btnAgregarHotel, 0);
             this.Controls.SetChildIndex(this.btnQuitarHotel, 0);
-            this.Controls.SetChildIndex(this.label25, 0);
             this.Controls.SetChildIndex(this.tbxCiudad, 0);
             this.Controls.SetChildIndex(this.label27, 0);
             this.Controls.SetChildIndex(this.label26, 0);
@@ -1005,7 +994,6 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox tbxCiudad;
-        private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Button btnQuitarHotel;
         private System.Windows.Forms.Button btnAgregarHotel;
         private System.Windows.Forms.ListBox lbxHoteles;
