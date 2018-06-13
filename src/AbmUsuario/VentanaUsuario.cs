@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FrbaHotel.Clases;
 
-
 namespace FrbaHotel.AbmUsuario
 {
     public partial class VentanaUsuario : VentanaBase

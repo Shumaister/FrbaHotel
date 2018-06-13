@@ -28,17 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.pagAgregar = new System.Windows.Forms.TabPage();
+            this.rbtInterna = new System.Windows.Forms.RadioButton();
+            this.rbtExterna = new System.Windows.Forms.RadioButton();
+            this.lblHotel = new System.Windows.Forms.Label();
             this.cbxTipoHabitaciones = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tbxDescripcion = new System.Windows.Forms.TextBox();
-            this.cbxFrentes = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
@@ -53,26 +55,11 @@
             this.btnAgregarGuardar = new System.Windows.Forms.Button();
             this.btnAgregarLimpiar = new System.Windows.Forms.Button();
             this.pagModificar = new System.Windows.Forms.TabPage();
-            this.cbxModificarFiltroTipo = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnModificarLimpiar = new System.Windows.Forms.Button();
-            this.label37 = new System.Windows.Forms.Label();
-            this.btnModificarFiltrar = new System.Windows.Forms.Button();
-            this.tbxModificarFiltroNumero = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgvModificarHabitacion = new System.Windows.Forms.DataGridView();
             this.pagEliminar = new System.Windows.Forms.TabPage();
-            this.cbxEliminarFiltroTipo = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnEliminarLimpiar = new System.Windows.Forms.Button();
-            this.label16 = new System.Windows.Forms.Label();
-            this.btnEliminarFiltrar = new System.Windows.Forms.Button();
-            this.tbxElminarFiltroNumero = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dgwEliminarHabitacion = new System.Windows.Forms.DataGridView();
-            this.lblHotel = new System.Windows.Forms.Label();
+            this.dgvEliminarHabitacion = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.tabControl.SuspendLayout();
@@ -82,7 +69,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvModificarHabitacion)).BeginInit();
             this.pagEliminar.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwEliminarHabitacion)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEliminarHabitacion)).BeginInit();
             this.SuspendLayout();
             // 
             // logo
@@ -105,12 +92,13 @@
             // 
             // pagAgregar
             // 
+            this.pagAgregar.Controls.Add(this.rbtInterna);
+            this.pagAgregar.Controls.Add(this.rbtExterna);
             this.pagAgregar.Controls.Add(this.lblHotel);
             this.pagAgregar.Controls.Add(this.cbxTipoHabitaciones);
             this.pagAgregar.Controls.Add(this.label5);
             this.pagAgregar.Controls.Add(this.label6);
             this.pagAgregar.Controls.Add(this.tbxDescripcion);
-            this.pagAgregar.Controls.Add(this.cbxFrentes);
             this.pagAgregar.Controls.Add(this.label9);
             this.pagAgregar.Controls.Add(this.label10);
             this.pagAgregar.Controls.Add(this.label32);
@@ -131,6 +119,37 @@
             this.pagAgregar.TabIndex = 0;
             this.pagAgregar.Text = "Agregar";
             this.pagAgregar.UseVisualStyleBackColor = true;
+            // 
+            // rbtInterna
+            // 
+            this.rbtInterna.AutoSize = true;
+            this.rbtInterna.Location = new System.Drawing.Point(161, 156);
+            this.rbtInterna.Name = "rbtInterna";
+            this.rbtInterna.Size = new System.Drawing.Size(58, 17);
+            this.rbtInterna.TabIndex = 319;
+            this.rbtInterna.TabStop = true;
+            this.rbtInterna.Text = "Interna";
+            this.rbtInterna.UseVisualStyleBackColor = true;
+            // 
+            // rbtExterna
+            // 
+            this.rbtExterna.AutoSize = true;
+            this.rbtExterna.Location = new System.Drawing.Point(247, 156);
+            this.rbtExterna.Name = "rbtExterna";
+            this.rbtExterna.Size = new System.Drawing.Size(61, 17);
+            this.rbtExterna.TabIndex = 318;
+            this.rbtExterna.TabStop = true;
+            this.rbtExterna.Text = "Externa";
+            this.rbtExterna.UseVisualStyleBackColor = true;
+            // 
+            // lblHotel
+            // 
+            this.lblHotel.AutoSize = true;
+            this.lblHotel.Location = new System.Drawing.Point(26, 41);
+            this.lblHotel.Name = "lblHotel";
+            this.lblHotel.Size = new System.Drawing.Size(78, 13);
+            this.lblHotel.TabIndex = 317;
+            this.lblHotel.Text = "Hotel direccion";
             // 
             // cbxTipoHabitaciones
             // 
@@ -168,20 +187,12 @@
             this.tbxDescripcion.Size = new System.Drawing.Size(306, 138);
             this.tbxDescripcion.TabIndex = 294;
             // 
-            // cbxFrentes
-            // 
-            this.cbxFrentes.FormattingEnabled = true;
-            this.cbxFrentes.Location = new System.Drawing.Point(161, 153);
-            this.cbxFrentes.Name = "cbxFrentes";
-            this.cbxFrentes.Size = new System.Drawing.Size(147, 21);
-            this.cbxFrentes.TabIndex = 289;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(194, 128);
+            this.label9.Location = new System.Drawing.Point(189, 128);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(17, 22);
             this.label9.TabIndex = 288;
@@ -192,9 +203,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(158, 130);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(37, 13);
+            this.label10.Size = new System.Drawing.Size(30, 13);
             this.label10.TabIndex = 287;
-            this.label10.Text = "Frente";
+            this.label10.Text = "Vista";
             // 
             // label32
             // 
@@ -305,13 +316,6 @@
             // 
             // pagModificar
             // 
-            this.pagModificar.Controls.Add(this.cbxModificarFiltroTipo);
-            this.pagModificar.Controls.Add(this.label4);
-            this.pagModificar.Controls.Add(this.label1);
-            this.pagModificar.Controls.Add(this.btnModificarLimpiar);
-            this.pagModificar.Controls.Add(this.label37);
-            this.pagModificar.Controls.Add(this.btnModificarFiltrar);
-            this.pagModificar.Controls.Add(this.tbxModificarFiltroNumero);
             this.pagModificar.Controls.Add(this.groupBox3);
             this.pagModificar.Location = new System.Drawing.Point(4, 22);
             this.pagModificar.Name = "pagModificar";
@@ -321,76 +325,12 @@
             this.pagModificar.Text = "Modificar";
             this.pagModificar.UseVisualStyleBackColor = true;
             // 
-            // cbxModificarFiltroTipo
-            // 
-            this.cbxModificarFiltroTipo.FormattingEnabled = true;
-            this.cbxModificarFiltroTipo.Location = new System.Drawing.Point(226, 47);
-            this.cbxModificarFiltroTipo.Name = "cbxModificarFiltroTipo";
-            this.cbxModificarFiltroTipo.Size = new System.Drawing.Size(127, 21);
-            this.cbxModificarFiltroTipo.TabIndex = 303;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(191, 50);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(28, 13);
-            this.label4.TabIndex = 301;
-            this.label4.Text = "Tipo";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 51);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 268;
-            this.label1.Text = "Nombre";
-            // 
-            // btnModificarLimpiar
-            // 
-            this.btnModificarLimpiar.Location = new System.Drawing.Point(23, 92);
-            this.btnModificarLimpiar.Name = "btnModificarLimpiar";
-            this.btnModificarLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnModificarLimpiar.TabIndex = 267;
-            this.btnModificarLimpiar.Text = "Limpiar";
-            this.btnModificarLimpiar.UseVisualStyleBackColor = true;
-            this.btnModificarLimpiar.Click += new System.EventHandler(this.btnModificarLimpiar_Click);
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label37.Location = new System.Drawing.Point(20, 11);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(127, 16);
-            this.label37.TabIndex = 266;
-            this.label37.Text = "Filtros de busqueda";
-            // 
-            // btnModificarFiltrar
-            // 
-            this.btnModificarFiltrar.Location = new System.Drawing.Point(278, 94);
-            this.btnModificarFiltrar.Name = "btnModificarFiltrar";
-            this.btnModificarFiltrar.Size = new System.Drawing.Size(75, 23);
-            this.btnModificarFiltrar.TabIndex = 8;
-            this.btnModificarFiltrar.Text = "Filtrar";
-            this.btnModificarFiltrar.UseVisualStyleBackColor = true;
-            this.btnModificarFiltrar.Click += new System.EventHandler(this.btnModificarFiltrar_Click);
-            // 
-            // tbxModificarFiltroNumero
-            // 
-            this.tbxModificarFiltroNumero.Location = new System.Drawing.Point(70, 48);
-            this.tbxModificarFiltroNumero.Name = "tbxModificarFiltroNumero";
-            this.tbxModificarFiltroNumero.Size = new System.Drawing.Size(100, 20);
-            this.tbxModificarFiltroNumero.TabIndex = 3;
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.dgvModificarHabitacion);
-            this.groupBox3.Location = new System.Drawing.Point(5, 127);
+            this.groupBox3.Location = new System.Drawing.Point(6, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(364, 274);
+            this.groupBox3.Size = new System.Drawing.Size(364, 395);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Habitaciones";
@@ -400,38 +340,32 @@
             this.dgvModificarHabitacion.AllowUserToAddRows = false;
             this.dgvModificarHabitacion.AllowUserToDeleteRows = false;
             this.dgvModificarHabitacion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvModificarHabitacion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvModificarHabitacion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvModificarHabitacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvModificarHabitacion.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvModificarHabitacion.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvModificarHabitacion.Location = new System.Drawing.Point(16, 29);
             this.dgvModificarHabitacion.Name = "dgvModificarHabitacion";
             this.dgvModificarHabitacion.RowHeadersVisible = false;
-            this.dgvModificarHabitacion.Size = new System.Drawing.Size(332, 226);
+            this.dgvModificarHabitacion.Size = new System.Drawing.Size(332, 347);
             this.dgvModificarHabitacion.TabIndex = 0;
+            this.dgvModificarHabitacion.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvModificarHabitacion_CellContentClick);
             // 
             // pagEliminar
             // 
-            this.pagEliminar.Controls.Add(this.cbxEliminarFiltroTipo);
-            this.pagEliminar.Controls.Add(this.label2);
-            this.pagEliminar.Controls.Add(this.label3);
-            this.pagEliminar.Controls.Add(this.btnEliminarLimpiar);
-            this.pagEliminar.Controls.Add(this.label16);
-            this.pagEliminar.Controls.Add(this.btnEliminarFiltrar);
-            this.pagEliminar.Controls.Add(this.tbxElminarFiltroNumero);
             this.pagEliminar.Controls.Add(this.groupBox1);
             this.pagEliminar.Location = new System.Drawing.Point(4, 22);
             this.pagEliminar.Name = "pagEliminar";
@@ -441,116 +375,44 @@
             this.pagEliminar.Text = "Eliminar";
             this.pagEliminar.UseVisualStyleBackColor = true;
             // 
-            // cbxEliminarFiltroTipo
-            // 
-            this.cbxEliminarFiltroTipo.FormattingEnabled = true;
-            this.cbxEliminarFiltroTipo.Location = new System.Drawing.Point(226, 47);
-            this.cbxEliminarFiltroTipo.Name = "cbxEliminarFiltroTipo";
-            this.cbxEliminarFiltroTipo.Size = new System.Drawing.Size(127, 21);
-            this.cbxEliminarFiltroTipo.TabIndex = 311;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(191, 50);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(28, 13);
-            this.label2.TabIndex = 310;
-            this.label2.Text = "Tipo";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 51);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 13);
-            this.label3.TabIndex = 309;
-            this.label3.Text = "Nombre";
-            // 
-            // btnEliminarLimpiar
-            // 
-            this.btnEliminarLimpiar.Location = new System.Drawing.Point(23, 92);
-            this.btnEliminarLimpiar.Name = "btnEliminarLimpiar";
-            this.btnEliminarLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminarLimpiar.TabIndex = 308;
-            this.btnEliminarLimpiar.Text = "Limpiar";
-            this.btnEliminarLimpiar.UseVisualStyleBackColor = true;
-            this.btnEliminarLimpiar.Click += new System.EventHandler(this.btnEliminarLimpiar_Click);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label16.Location = new System.Drawing.Point(20, 11);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(127, 16);
-            this.label16.TabIndex = 307;
-            this.label16.Text = "Filtros de busqueda";
-            // 
-            // btnEliminarFiltrar
-            // 
-            this.btnEliminarFiltrar.Location = new System.Drawing.Point(278, 94);
-            this.btnEliminarFiltrar.Name = "btnEliminarFiltrar";
-            this.btnEliminarFiltrar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminarFiltrar.TabIndex = 306;
-            this.btnEliminarFiltrar.Text = "Filtrar";
-            this.btnEliminarFiltrar.UseVisualStyleBackColor = true;
-            this.btnEliminarFiltrar.Click += new System.EventHandler(this.btnEliminarFiltrar_Click);
-            // 
-            // tbxElminarFiltroNumero
-            // 
-            this.tbxElminarFiltroNumero.Location = new System.Drawing.Point(70, 48);
-            this.tbxElminarFiltroNumero.Name = "tbxElminarFiltroNumero";
-            this.tbxElminarFiltroNumero.Size = new System.Drawing.Size(100, 20);
-            this.tbxElminarFiltroNumero.TabIndex = 305;
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dgwEliminarHabitacion);
-            this.groupBox1.Location = new System.Drawing.Point(5, 127);
+            this.groupBox1.Controls.Add(this.dgvEliminarHabitacion);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(364, 274);
-            this.groupBox1.TabIndex = 304;
+            this.groupBox1.Size = new System.Drawing.Size(364, 395);
+            this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Habitaciones";
             // 
-            // dgwEliminarHabitacion
+            // dgvEliminarHabitacion
             // 
-            this.dgwEliminarHabitacion.AllowUserToAddRows = false;
-            this.dgwEliminarHabitacion.AllowUserToDeleteRows = false;
-            this.dgwEliminarHabitacion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgwEliminarHabitacion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
-            this.dgwEliminarHabitacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgwEliminarHabitacion.DefaultCellStyle = dataGridViewCellStyle16;
-            this.dgwEliminarHabitacion.Location = new System.Drawing.Point(16, 29);
-            this.dgwEliminarHabitacion.Name = "dgwEliminarHabitacion";
-            this.dgwEliminarHabitacion.RowHeadersVisible = false;
-            this.dgwEliminarHabitacion.Size = new System.Drawing.Size(332, 226);
-            this.dgwEliminarHabitacion.TabIndex = 0;
-            // 
-            // lblHotel
-            // 
-            this.lblHotel.AutoSize = true;
-            this.lblHotel.Location = new System.Drawing.Point(26, 41);
-            this.lblHotel.Name = "lblHotel";
-            this.lblHotel.Size = new System.Drawing.Size(78, 13);
-            this.lblHotel.TabIndex = 317;
-            this.lblHotel.Text = "Hotel direccion";
+            this.dgvEliminarHabitacion.AllowUserToAddRows = false;
+            this.dgvEliminarHabitacion.AllowUserToDeleteRows = false;
+            this.dgvEliminarHabitacion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEliminarHabitacion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvEliminarHabitacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEliminarHabitacion.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvEliminarHabitacion.Location = new System.Drawing.Point(16, 29);
+            this.dgvEliminarHabitacion.Name = "dgvEliminarHabitacion";
+            this.dgvEliminarHabitacion.RowHeadersVisible = false;
+            this.dgvEliminarHabitacion.Size = new System.Drawing.Size(332, 347);
+            this.dgvEliminarHabitacion.TabIndex = 0;
+            this.dgvEliminarHabitacion.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEliminarHabitacion_CellContentClick);
             // 
             // VentanaHabitacion
             // 
@@ -560,6 +422,7 @@
             this.Controls.Add(this.tabControl);
             this.Name = "VentanaHabitacion";
             this.Text = "Habitaciones - FRBA Hotel ©";
+            this.Load += new System.EventHandler(this.VentanaHabitacion_Load);
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.tabControl, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
@@ -568,13 +431,11 @@
             this.pagAgregar.ResumeLayout(false);
             this.pagAgregar.PerformLayout();
             this.pagModificar.ResumeLayout(false);
-            this.pagModificar.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvModificarHabitacion)).EndInit();
             this.pagEliminar.ResumeLayout(false);
-            this.pagEliminar.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgwEliminarHabitacion)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEliminarHabitacion)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -583,7 +444,6 @@
 
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage pagAgregar;
-        private System.Windows.Forms.ComboBox cbxFrentes;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label32;
@@ -598,11 +458,6 @@
         private System.Windows.Forms.Button btnAgregarGuardar;
         private System.Windows.Forms.Button btnAgregarLimpiar;
         private System.Windows.Forms.TabPage pagModificar;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnModificarLimpiar;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Button btnModificarFiltrar;
-        private System.Windows.Forms.TextBox tbxModificarFiltroNumero;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView dgvModificarHabitacion;
         private System.Windows.Forms.TabPage pagEliminar;
@@ -610,17 +465,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbxDescripcion;
-        private System.Windows.Forms.ComboBox cbxModificarFiltroTipo;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox cbxEliminarFiltroTipo;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnEliminarLimpiar;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Button btnEliminarFiltrar;
-        private System.Windows.Forms.TextBox tbxElminarFiltroNumero;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dgwEliminarHabitacion;
         private System.Windows.Forms.Label lblHotel;
+        private System.Windows.Forms.RadioButton rbtInterna;
+        private System.Windows.Forms.RadioButton rbtExterna;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataGridView dgvEliminarHabitacion;
     }
 }

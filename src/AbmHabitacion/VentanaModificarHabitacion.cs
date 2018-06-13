@@ -39,13 +39,17 @@ namespace FrbaHotel.AbmHabitacion
             tbxNumero.Text = habitacion.numero;
             tbxPiso.Text = habitacion.piso;
             tbxDescripcion.Text = habitacion.descripcion;
-            cbxFrentes.SelectedIndex = cbxFrentes.Items.IndexOf(habitacion.frente);
+            if (habitacion.frente == "S")
+                rbtExterna.Select();
+            else
+                rbtInterna.Select();
+            comboBoxCargar(cbxTipoHabitaciones, Database.tipoHabitacionObtenerTodas());
             cbxTipoHabitaciones.SelectedIndex = cbxTipoHabitaciones.Items.IndexOf(habitacion.tipoHabitacion);
         }
 
         private Habitacion ventanaCrearHabitacionParaModificar()
         {
-            Habitacion habitacionModificada = new Habitacion(null, tbxNumero.Text, tbxPiso.Text, cbxFrentes.SelectedItem.ToString(), cbxTipoHabitaciones.SelectedItem.ToString(), tbxDescripcion.Text, habitacion.hotel);
+            Habitacion habitacionModificada = new Habitacion(null, tbxNumero.Text, tbxPiso.Text, rbtExterna.Checked ? "S" : "N", cbxTipoHabitaciones.SelectedItem.ToString(), tbxDescripcion.Text, habitacion.hotel);
             return habitacionModificada;
         }
 
@@ -67,7 +71,7 @@ namespace FrbaHotel.AbmHabitacion
             tbxNumero.Clear();
             tbxPiso.Clear();
             tbxDescripcion.Clear();
-            cbxFrentes.SelectedIndex = 0;
+            rbtInterna.Select();
             cbxTipoHabitaciones.SelectedIndex = 0;
         }
 

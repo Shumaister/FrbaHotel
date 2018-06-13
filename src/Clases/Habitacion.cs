@@ -23,6 +23,7 @@ namespace FrbaHotel.Clases
             this.id = id;
             this.numero = numero;
             this.piso = piso;
+            this.frente = frente;
             this.tipoHabitacion = tipoHabitacion;
             this.descripcion = descripcion;
             this.hotel = hotel;

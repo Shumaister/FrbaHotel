@@ -32,9 +32,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tbxDescripcion = new System.Windows.Forms.TextBox();
-            this.cbxFrentes = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -47,6 +44,10 @@
             this.btnModificarGuardar = new System.Windows.Forms.Button();
             this.btnModificarLimpiar = new System.Windows.Forms.Button();
             this.lblHotel = new System.Windows.Forms.Label();
+            this.rbtInterna = new System.Windows.Forms.RadioButton();
+            this.rbtExterna = new System.Windows.Forms.RadioButton();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.SuspendLayout();
@@ -93,34 +94,6 @@
             this.tbxDescripcion.Name = "tbxDescripcion";
             this.tbxDescripcion.Size = new System.Drawing.Size(306, 138);
             this.tbxDescripcion.TabIndex = 312;
-            // 
-            // cbxFrentes
-            // 
-            this.cbxFrentes.FormattingEnabled = true;
-            this.cbxFrentes.Location = new System.Drawing.Point(162, 168);
-            this.cbxFrentes.Name = "cbxFrentes";
-            this.cbxFrentes.Size = new System.Drawing.Size(147, 21);
-            this.cbxFrentes.TabIndex = 311;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(195, 143);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(17, 22);
-            this.label9.TabIndex = 310;
-            this.label9.Text = "*";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(159, 145);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(37, 13);
-            this.label10.TabIndex = 309;
-            this.label10.Text = "Frente";
             // 
             // label32
             // 
@@ -238,19 +211,62 @@
             this.lblHotel.TabIndex = 316;
             this.lblHotel.Text = "Hotel direccion";
             // 
+            // rbtInterna
+            // 
+            this.rbtInterna.AutoSize = true;
+            this.rbtInterna.Location = new System.Drawing.Point(162, 171);
+            this.rbtInterna.Name = "rbtInterna";
+            this.rbtInterna.Size = new System.Drawing.Size(58, 17);
+            this.rbtInterna.TabIndex = 323;
+            this.rbtInterna.TabStop = true;
+            this.rbtInterna.Text = "Interna";
+            this.rbtInterna.UseVisualStyleBackColor = true;
+            // 
+            // rbtExterna
+            // 
+            this.rbtExterna.AutoSize = true;
+            this.rbtExterna.Location = new System.Drawing.Point(248, 171);
+            this.rbtExterna.Name = "rbtExterna";
+            this.rbtExterna.Size = new System.Drawing.Size(61, 17);
+            this.rbtExterna.TabIndex = 322;
+            this.rbtExterna.TabStop = true;
+            this.rbtExterna.Text = "Externa";
+            this.rbtExterna.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(190, 143);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(17, 22);
+            this.label9.TabIndex = 321;
+            this.label9.Text = "*";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(159, 145);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(30, 13);
+            this.label10.TabIndex = 320;
+            this.label10.Text = "Vista";
+            // 
             // VentanaModificarHabitacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(370, 427);
+            this.Controls.Add(this.rbtInterna);
+            this.Controls.Add(this.rbtExterna);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.lblHotel);
             this.Controls.Add(this.cbxTipoHabitaciones);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.tbxDescripcion);
-            this.Controls.Add(this.cbxFrentes);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.label32);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label20);
@@ -276,15 +292,16 @@
             this.Controls.SetChildIndex(this.label20, 0);
             this.Controls.SetChildIndex(this.label19, 0);
             this.Controls.SetChildIndex(this.label32, 0);
-            this.Controls.SetChildIndex(this.label10, 0);
-            this.Controls.SetChildIndex(this.label9, 0);
-            this.Controls.SetChildIndex(this.cbxFrentes, 0);
             this.Controls.SetChildIndex(this.tbxDescripcion, 0);
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.cbxTipoHabitaciones, 0);
             this.Controls.SetChildIndex(this.lblHotel, 0);
             this.Controls.SetChildIndex(this.logo, 0);
+            this.Controls.SetChildIndex(this.label10, 0);
+            this.Controls.SetChildIndex(this.label9, 0);
+            this.Controls.SetChildIndex(this.rbtExterna, 0);
+            this.Controls.SetChildIndex(this.rbtInterna, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.ResumeLayout(false);
@@ -298,9 +315,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbxDescripcion;
-        private System.Windows.Forms.ComboBox cbxFrentes;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
@@ -313,5 +327,9 @@
         private System.Windows.Forms.Button btnModificarGuardar;
         private System.Windows.Forms.Button btnModificarLimpiar;
         private System.Windows.Forms.Label lblHotel;
+        private System.Windows.Forms.RadioButton rbtInterna;
+        private System.Windows.Forms.RadioButton rbtExterna;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }
