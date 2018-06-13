@@ -151,7 +151,7 @@
             this.tbxNombreRol.Name = "tbxNombreRol";
             this.tbxNombreRol.Size = new System.Drawing.Size(100, 20);
             this.tbxNombreRol.TabIndex = 11;
-            this.tbxNombreRol.TextChanged += new System.EventHandler(this.tbxNombreRol_TextChanged);
+            this.tbxNombreRol.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxNombreRol_KeyPress);
             // 
             // btnAgregarFuncionalidad
             // 
@@ -225,7 +225,7 @@
             this.tabModificar.Location = new System.Drawing.Point(4, 22);
             this.tabModificar.Name = "tabModificar";
             this.tabModificar.Padding = new System.Windows.Forms.Padding(3);
-            this.tabModificar.Size = new System.Drawing.Size(366, 377);
+            this.tabModificar.Size = new System.Drawing.Size(366, 355);
             this.tabModificar.TabIndex = 1;
             this.tabModificar.Text = "Modificar";
             this.tabModificar.UseVisualStyleBackColor = true;
@@ -275,7 +275,7 @@
             this.tabEliminar.Location = new System.Drawing.Point(4, 22);
             this.tabEliminar.Name = "tabEliminar";
             this.tabEliminar.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEliminar.Size = new System.Drawing.Size(366, 377);
+            this.tabEliminar.Size = new System.Drawing.Size(366, 355);
             this.tabEliminar.TabIndex = 2;
             this.tabEliminar.Text = "Eliminar";
             this.tabEliminar.UseVisualStyleBackColor = true;

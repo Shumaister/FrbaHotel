@@ -13,12 +13,14 @@ namespace FrbaHotel.AbmRol
 {
     public partial class VentanaModificarRol : VentanaBase
     {
-        //-------------------------------------- Atributos -----------------------------------
+        #region Atributos
 
         VentanaRol ventanaRol {get; set;}
         Rol rol {get; set;}
 
-        //-------------------------------------- Constructores -----------------------------------
+        #endregion
+
+        #region Constructores
 
         public VentanaModificarRol(VentanaRol ventanaRol, Rol rol)
         {
@@ -27,7 +29,45 @@ namespace FrbaHotel.AbmRol
             this.rol = rol;
         }
 
-        //-------------------------------------- Metodos para Eventos -----------------------------------
+        #endregion
+
+        #region Modificar
+
+        private void ventanaCrearRol()
+        {
+            List<string> funcionalidades = new List<string>();
+            foreach (string funcionalidad in lbxFuncionalidades.Items)
+                funcionalidades.Add(funcionalidad);
+            rol.nombre = tbxNombreRol.Text;
+            rol.estado = rbtRolActivado.Checked ? "1" : "0";
+            rol.funcionalidades = funcionalidades;
+        }
+
+        private void btnGuardarRol_Click(object sender, EventArgs e)
+        {
+            if (ventanaCamposEstanCompletos(this, controladorError))
+            {
+                ventanaCrearRol();
+                if (Database.rolModificadoConExito(rol))
+                {
+                    this.Hide();
+                    ventanaRol.ventanaActualizar();
+                }
+            }
+        }
+
+        private void btnLimpiarRol_Click(object sender, EventArgs e)
+        {
+            listBoxLimpiar(lbxFuncionalidades);
+            comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodasEnLista());
+            tbxNombreRol.Clear();
+            rbtRolActivado.Select();
+            controladorError.Clear();
+        }
+
+        #endregion
+
+        #region Eventos
 
         private void VentanaModificarRol_Load(object sender, EventArgs e)
         {
@@ -40,8 +80,9 @@ namespace FrbaHotel.AbmRol
                 rbtRolDesactivado.Select();          
         }
 
-        private void tbxNombreRol_TextChanged(object sender, EventArgs e)
+        private void tbxNombreRol_KeyPress(object sender, KeyPressEventArgs e)
         {
+            textBoxConfigurarParaLetras(e);
             controladorError.Clear();
         }
 
@@ -60,36 +101,6 @@ namespace FrbaHotel.AbmRol
             botonQuitarComboBoxListBox(cbxFuncionalidades, lbxFuncionalidades);
         }
 
-        private void btnLimpiarRol_Click(object sender, EventArgs e)
-        {
-            listBoxLimpiar(lbxFuncionalidades);
-            comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodasEnLista());
-            tbxNombreRol.Clear();
-            rbtRolActivado.Select();
-            controladorError.Clear();
-        }
-
-        private void btnGuardarRol_Click(object sender, EventArgs e)
-        {
-            if (ventanaCamposEstanCompletos(this, controladorError))
-            {
-                ventanaCrearRol();
-                if (Database.rolModificadoConExito(rol))
-                {
-                    this.Hide();
-                    ventanaRol.ventanaActualizar();
-                }
-            }
-        }
-
-        private void ventanaCrearRol()
-        {
-            List<string> funcionalidades = new List<string>();
-            foreach (string funcionalidad in lbxFuncionalidades.Items)
-                funcionalidades.Add(funcionalidad);
-            rol.nombre = tbxNombreRol.Text;
-            rol.estado = rbtRolActivado.Checked ? "1" : "0";
-            rol.funcionalidades = funcionalidades;
-        }
+        #endregion
     }
 }

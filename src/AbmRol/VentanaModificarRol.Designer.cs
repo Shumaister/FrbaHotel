@@ -71,6 +71,7 @@
             this.tbxNombreRol.Name = "tbxNombreRol";
             this.tbxNombreRol.Size = new System.Drawing.Size(100, 20);
             this.tbxNombreRol.TabIndex = 23;
+            this.tbxNombreRol.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxNombreRol_KeyPress);
             // 
             // btnAgregarFuncionalidad
             // 
