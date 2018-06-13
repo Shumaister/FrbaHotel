@@ -468,6 +468,7 @@
             this.btnGuardarHotel.TabIndex = 295;
             this.btnGuardarHotel.Text = "Guardar";
             this.btnGuardarHotel.UseVisualStyleBackColor = true;
+            this.btnGuardarHotel.Click += new System.EventHandler(this.btnGuardarHotel_Click);
             // 
             // btnLimpiarModificar
             // 
@@ -574,7 +575,7 @@
             this.Controls.Add(this.btnLimpiarModificar);
             this.Name = "VentanaModificarHotel";
             this.Text = "VentanaModificarHotel";
-            this.Click += new System.EventHandler(this.btnGuardarHotel_Click);
+            this.Load += new System.EventHandler(this.VentanaModificarHotel_Load);
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.btnLimpiarModificar, 0);
             this.Controls.SetChildIndex(this.btnGuardarHotel, 0);

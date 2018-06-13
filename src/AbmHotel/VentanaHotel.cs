@@ -55,7 +55,7 @@ namespace FrbaHotel.AbmHotel
             tbxEmail.Clear();
             tbxTelefono.Clear();
             controladorError.Clear();
-            cbxRegimenes.SelectedIndex = 0;
+            comboBoxCargar(cbxRegimenes, Database.regimenObtenerTodosEnLista());
             listBoxLimpiar(lbxRegimenes);
             calendario.Hide();
             btnGuardarFecha.Hide();
@@ -209,7 +209,7 @@ namespace FrbaHotel.AbmHotel
 
         private void tbxNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
-            textBoxConfigurarParaLetras(e);
+            textBoxConfigurarParaLetrasYNumeros(e);
             controladorError.Clear();
         }
 

@@ -51,7 +51,7 @@ namespace FrbaHotel.AbmHotel
                 rbtDesactivado.Select();
         }
 
-         private void btnGuardarHotel_Click(object sender, EventArgs e)
+        private void btnGuardarHotel_Click(object sender, EventArgs e)
         {
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
@@ -112,7 +112,7 @@ namespace FrbaHotel.AbmHotel
             tbxEmail.Clear();
             tbxTelefono.Clear();
             controladorError.Clear();
-            cbxRegimenes.SelectedIndex = 0;
+            comboBoxCargar(cbxRegimenes, Database.regimenObtenerTodosEnLista());
             listBoxLimpiar(lbxRegimenes);
             calendario.Hide();
             btnGuardarFecha.Hide();
@@ -122,7 +122,7 @@ namespace FrbaHotel.AbmHotel
 
         #region Eventos
 
-        private void VentanaModificarCliente_Load(object sender, EventArgs e)
+        private void VentanaModificarHotel_Load(object sender, EventArgs e)
         {
             comboBoxCargar(cbxRegimenes, Database.hotelObtenerRegimenesFaltantesEnLista(hotel));
             listBoxCargar(lbxRegimenes, Database.hotelObtenerRegimenesEnLista(hotel));
@@ -170,7 +170,6 @@ namespace FrbaHotel.AbmHotel
             textBoxConfigurarParaNumeros(e);
             controladorError.Clear();
         }
-
         #endregion
     }
 }

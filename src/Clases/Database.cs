@@ -1068,8 +1068,9 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@CantidadEstrellas", hotel.cantidadEstrellas);
             consulta.Parameters.AddWithValue("@DomicilioID", domicilioHotelObtenerID(hotel.domicilio));
             consulta.Parameters.AddWithValue("@Telefono", hotel.telefono);
-            consulta.Parameters.AddWithValue("@Hotel", hotel.email);
+            consulta.Parameters.AddWithValue("@Email", hotel.email);
             consulta.Parameters.AddWithValue("@FechaCreacion", hotel.fechaCreacion);
+            consulta.Parameters.AddWithValue("@Estado", hotel.estado);
             consultaEjecutar(consulta);
         }
 
@@ -1134,8 +1135,11 @@ namespace FrbaHotel
         public static void hotelAgregarRegimen(Hotel hotel, string regimen)
         {
             SqlCommand consulta = consultaCrear("INSERT INTO RIP.Hoteles_Regimenes (HotelRegimen_HotelID, HotelRegimen_RegimenID) VALUES (@HotelID, @RegimenID)");
-            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerIDPorDomicilio(hotel));
-            consulta.Parameters.AddWithValue("@RegimenID", regimenObtenerID(regimen));
+            string idh = hotelObtenerIDPorDomicilio(hotel);
+            string idreg = regimenObtenerID(regimen);
+            consulta.Parameters.AddWithValue("@HotelID", idh);
+            consulta.Parameters.AddWithValue("@RegimenID", idreg);
+            consultaEjecutar(consulta);
         }
 
         public static void hotelAgregarRegimenes(Hotel hotel)
@@ -1421,7 +1425,7 @@ namespace FrbaHotel
 
         public static string regimenObtenerID(string regimen)
         {
-            SqlCommand consulta = consultaCrear("SELECT Regimen_Descripcion FROM RIP.Regimenes WHERE Regimen_Descripcion = @Descripcion");
+            SqlCommand consulta = consultaCrear("SELECT Regimen_ID FROM RIP.Regimenes WHERE Regimen_Descripcion = @Descripcion");
             consulta.Parameters.AddWithValue("@Descripcion", regimen);
             return consultaObtenerValor(consulta);
         }
