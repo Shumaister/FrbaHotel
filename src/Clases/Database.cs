@@ -473,12 +473,12 @@ namespace FrbaHotel
                 return false;
             }
 
-            if (personaEmailExiste(usuario.persona) && personaDistinta(usuario.persona))
+            if (personaEmailExiste(usuario.persona) && personaDistintaEmail(usuario.persona))
             {
                 ventanaInformarError("Ya existe un usuario registrado con ese email");
                 return false;
             }
-            if (personaDocumentoExiste(usuario.persona) && personaDistinta(usuario.persona))
+            if (personaDocumentoExiste(usuario.persona) && personaDistintaDocumento(usuario.persona))
             {
                 ventanaInformarError("Ya existe un usuario registrado con ese documento");
                 return false;
@@ -507,7 +507,7 @@ namespace FrbaHotel
             SqlCommand consulta = consultaCrear("INSERT INTO RIP.Usuarios (Usuario_Nombre, Usuario_Contrasenia, Usuario_PersonaID) VALUES (@Nombre, @Contrasenia, @PersonaID)");
             consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
             consulta.Parameters.AddWithValue("@Contrasenia", loginEncriptarContraseña(usuario.contrasenia));
-            consulta.Parameters.AddWithValue("@PersonaID", personaObtenerID(usuario.persona));
+            consulta.Parameters.AddWithValue("@PersonaID", personaObtenerIDPorEmail(usuario.persona));
             consultaEjecutar(consulta);
         }
 
@@ -699,12 +699,12 @@ namespace FrbaHotel
 
         public static bool clienteModificadoConExito(Cliente cliente)
         {
-            if (personaEmailExiste(cliente.persona) && personaDistinta(cliente.persona))
+            if (personaEmailExiste(cliente.persona) && personaDistintaEmail(cliente.persona))
             {
                 ventanaInformarError("Ya existe un cliente registrado con ese email");
                 return false;
             }
-            if (personaDocumentoExiste(cliente.persona) && personaDistinta(cliente.persona))
+            if (personaDocumentoExiste(cliente.persona) && personaDistintaDocumento(cliente.persona))
             {
                 ventanaInformarError("Ya existe un cliente registrado con ese documento");
                 return false;
@@ -726,7 +726,7 @@ namespace FrbaHotel
         public static void clienteAgregar(Cliente cliente)
         {
             SqlCommand consulta = consultaCrear("INSERT INTO RIP.Clientes (Cliente_PersonaID) VALUES (@PersonaID)");
-            consulta.Parameters.AddWithValue("@PersonaID", personaObtenerID(cliente.persona));
+            consulta.Parameters.AddWithValue("@PersonaID", personaObtenerIDPorEmail(cliente.persona));
             consultaEjecutar(consulta);
         }
 
@@ -748,14 +748,14 @@ namespace FrbaHotel
         public static string clienteObtenerID(Cliente cliente)
         {
             SqlCommand consulta = consultaCrear("SELECT Cliente_ID FROM RIP.Clientes WHERE Cliente_PersonaID = @PersonaID");
-            consulta.Parameters.AddWithValue("@PersonaID", personaObtenerID(cliente.persona));
+            consulta.Parameters.AddWithValue("@PersonaID", personaObtenerIDPorEmail(cliente.persona));
             return consultaObtenerValor(consulta);
         }
 
         public static bool clienteExiste(Cliente cliente)
         {
             SqlCommand consulta = consultaCrear("SELECT Cliente_ID FROM RIP.Clientes WHERE Cliente_PersonaID = @PersonaID");
-            consulta.Parameters.AddWithValue("@PersonaID", personaObtenerID(cliente.persona));
+            consulta.Parameters.AddWithValue("@PersonaID", personaObtenerIDPorEmail(cliente.persona));
             return consultaValorExiste(consultaObtenerValor(consulta));
         }
 
@@ -766,7 +766,7 @@ namespace FrbaHotel
             string filtroEmail = string.IsNullOrEmpty(cliente.persona.email)? "" : cliente.persona.email;
             string filtroTipoDocumento = string.IsNullOrEmpty(cliente.persona.tipoDocumento) || cliente.persona.tipoDocumento == "Todos"? "" : " AND Persona_TipoDocumentoID = " + tipoDocumentoObtenerID(cliente.persona.tipoDocumento);
             string filtroNumeroDocumento = string.IsNullOrEmpty(cliente.persona.numeroDocumento)? "" : " AND CONVERT(nvarchar(50), Persona_NumeroDocumento) LIKE '" + cliente.persona.numeroDocumento + "%'";
-            string query = "SELECT TOP 50 Cliente_ID, Persona_ID, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, " + 
+            string query = "SELECT TOP 50 Cliente_ID, Cliente_Estado, Persona_ID, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, " + 
             "Persona_NumeroDocumento, Persona_Nacionalidad, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, " + 
             "Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle, " +
             "Domicilio_Piso, Domicilio_Departamento FROM RIP.Clientes " + 
@@ -862,10 +862,18 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
-        public static string personaObtenerID(Persona persona)
+        public static string personaObtenerIDPorEmail(Persona persona)
         {
             SqlCommand consulta = consultaCrear("SELECT Persona_ID FROM RIP.Personas WHERE Persona_Email = @Email");
             consulta.Parameters.AddWithValue("@Email", persona.email);
+            return consultaObtenerValor(consulta);
+        }
+
+        public static string personaObtenerIDPorDocumento(Persona persona)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Persona_ID FROM RIP.Personas WHERE Persona_NumeroDocumento = @NumeroDocumento AND Persona_TipoDocumentoID = @TipoDocumentoID");
+            consulta.Parameters.AddWithValue("@NumeroDocumento", persona.numeroDocumento);
+            consulta.Parameters.AddWithValue("@TipoDocumentoID", tipoDocumentoObtenerID(persona.tipoDocumento));
             return consultaObtenerValor(consulta);
         }
 
@@ -884,9 +892,14 @@ namespace FrbaHotel
             return consultaValorExiste(consultaObtenerValor(consulta));
         }
 
-        public static bool personaDistinta(Persona persona)
+        public static bool personaDistintaEmail(Persona persona)
         {
-            return persona.id != personaObtenerID(persona);
+            return persona.id != personaObtenerIDPorEmail(persona);
+        }
+
+        public static bool personaDistintaDocumento(Persona persona)
+        {
+            return persona.id != personaObtenerIDPorDocumento(persona);
         }
 
         #endregion

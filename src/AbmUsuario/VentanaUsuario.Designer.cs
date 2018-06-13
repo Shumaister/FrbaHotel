@@ -522,7 +522,7 @@
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label28.ForeColor = System.Drawing.Color.Red;
-            this.label28.Location = new System.Drawing.Point(614, 278);
+            this.label28.Location = new System.Drawing.Point(623, 278);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(17, 22);
             this.label28.TabIndex = 257;
@@ -533,9 +533,9 @@
             this.label29.AutoSize = true;
             this.label29.Location = new System.Drawing.Point(582, 279);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(34, 13);
+            this.label29.Size = new System.Drawing.Size(44, 13);
             this.label29.TabIndex = 255;
-            this.label29.Text = "Altura";
+            this.label29.Text = "Numero";
             // 
             // tbxNumeroCalle
             // 

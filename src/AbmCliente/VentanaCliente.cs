@@ -39,10 +39,7 @@ namespace FrbaHotel.AbmCliente
             {
                 Cliente cliente = ventanaCrearClienteParaAgregar();
                 if (Database.clienteAgregadoConExito(cliente))
-                {
-                    btnLimpiarCliente_Click(sender, e);
                     ventanaActualizar(sender, e);
-                }
             }
         }
 

@@ -58,10 +58,10 @@ namespace FrbaHotel.AbmCliente
 
         private void ventanaCrearClienteModificado()
         {
-            cbxTipoDocumento.SelectedIndex = cbxTipoDocumento.Items.IndexOf(cliente.persona.tipoDocumento);
             cliente.estado = radioButtonEstado(rbtActivado);
             cliente.persona.nombre = tbxNombre.Text;
             cliente.persona.apellido = tbxApellido.Text;
+            cliente.persona.tipoDocumento = cbxTipoDocumento.SelectedItem.ToString();
             cliente.persona.numeroDocumento = tbxDocumento.Text;
             cliente.persona.fechaNacimiento = DateTime.Parse(tbxFechaNacimiento.Text);
             cliente.persona.nacionalidad = tbxNacionalidad.Text;
@@ -86,6 +86,39 @@ namespace FrbaHotel.AbmCliente
                     ventanaCliente.ventanaActualizar(sender, e);
                 }
             }
+        }
+
+        private void btnLimpiarCliente_Click(object sender, EventArgs e)
+        {
+            tbxNombre.Clear();
+            tbxApellido.Clear();
+            tbxNacionalidad.Clear();
+            tbxDocumento.Clear();
+            cbxTipoDocumento.SelectedIndex = 0;
+            tbxFechaNacimiento.Clear();
+            tbxPais.Clear();
+            tbxCiudad.Clear();
+            tbxCalle.Clear();
+            tbxNumeroCalle.Clear();
+            tbxPiso.Clear();
+            tbxDepartamento.Clear();
+            tbxEmail.Clear();
+            tbxTelefono.Clear();
+            controladorError.Clear();
+        }
+
+        private void btnSeleccionarFecha_Click(object sender, EventArgs e)
+        {
+            calendario.Show();
+            btnGuardarFecha.Show();
+            controladorError.Clear();
+        }
+
+        private void btnGuardarFecha_Click(object sender, EventArgs e)
+        {
+            tbxFechaNacimiento.Text = calendario.SelectionStart.ToShortDateString();
+            calendario.Hide();
+            btnGuardarFecha.Hide();
         }
 
         #endregion
@@ -160,38 +193,6 @@ namespace FrbaHotel.AbmCliente
         private void tbxDepartamento_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaLetras(e);
-            controladorError.Clear();
-        }
-
-        private void btnSeleccionarFecha_Click(object sender, EventArgs e)
-        {
-            calendario.Show();
-            btnGuardarFecha.Show();
-            controladorError.Clear();
-        }
-
-        private void btnGuardarFecha_Click(object sender, EventArgs e)
-        {
-            tbxFechaNacimiento.Text = calendario.SelectionStart.ToShortDateString();
-            calendario.Hide();
-            btnGuardarFecha.Hide();
-        }
-
-        private void btnLimpiarCliente_Click(object sender, EventArgs e)
-        {
-            tbxNombre.Clear();
-            tbxApellido.Clear();
-            tbxNacionalidad.Clear();
-            tbxDocumento.Clear();
-            tbxFechaNacimiento.Clear();
-            tbxPais.Clear();
-            tbxCiudad.Clear();
-            tbxCalle.Clear();
-            tbxNumeroCalle.Clear();
-            tbxPiso.Clear();
-            tbxDepartamento.Clear();
-            tbxEmail.Clear();
-            tbxTelefono.Clear();
             controladorError.Clear();
         }
 
