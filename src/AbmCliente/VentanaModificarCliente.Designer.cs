@@ -595,10 +595,10 @@
             this.rbtDesactivado.AutoSize = true;
             this.rbtDesactivado.Location = new System.Drawing.Point(540, 324);
             this.rbtDesactivado.Name = "rbtDesactivado";
-            this.rbtDesactivado.Size = new System.Drawing.Size(85, 17);
+            this.rbtDesactivado.Size = new System.Drawing.Size(89, 17);
             this.rbtDesactivado.TabIndex = 343;
             this.rbtDesactivado.TabStop = true;
-            this.rbtDesactivado.Text = "Desactivado";
+            this.rbtDesactivado.Text = "Deshabilitado";
             this.rbtDesactivado.UseVisualStyleBackColor = true;
             // 
             // rbtActivado
@@ -606,10 +606,10 @@
             this.rbtActivado.AutoSize = true;
             this.rbtActivado.Location = new System.Drawing.Point(432, 324);
             this.rbtActivado.Name = "rbtActivado";
-            this.rbtActivado.Size = new System.Drawing.Size(67, 17);
+            this.rbtActivado.Size = new System.Drawing.Size(72, 17);
             this.rbtActivado.TabIndex = 342;
             this.rbtActivado.TabStop = true;
-            this.rbtActivado.Text = "Activado";
+            this.rbtActivado.Text = "Habilitado";
             this.rbtActivado.UseVisualStyleBackColor = true;
             // 
             // VentanaModificarCliente
@@ -672,7 +672,7 @@
             this.Controls.Add(this.btnGuardarCliente);
             this.Controls.Add(this.btnLimpiarCliente);
             this.Name = "VentanaModificarCliente";
-            this.Text = "VentanaModificarCliente";
+            this.Text = "Modificar Cliente - FRBA Hotel ©";
             this.Load += new System.EventHandler(this.VentanaModificarCliente_Load);
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.btnLimpiarCliente, 0);

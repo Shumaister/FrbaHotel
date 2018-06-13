@@ -796,10 +796,10 @@
             this.rbtDesactivado.AutoSize = true;
             this.rbtDesactivado.Location = new System.Drawing.Point(548, 488);
             this.rbtDesactivado.Name = "rbtDesactivado";
-            this.rbtDesactivado.Size = new System.Drawing.Size(85, 17);
+            this.rbtDesactivado.Size = new System.Drawing.Size(89, 17);
             this.rbtDesactivado.TabIndex = 296;
             this.rbtDesactivado.TabStop = true;
-            this.rbtDesactivado.Text = "Desactivado";
+            this.rbtDesactivado.Text = "Deshabilitado";
             this.rbtDesactivado.UseVisualStyleBackColor = true;
             // 
             // rbtActivado
@@ -807,10 +807,10 @@
             this.rbtActivado.AutoSize = true;
             this.rbtActivado.Location = new System.Drawing.Point(440, 488);
             this.rbtActivado.Name = "rbtActivado";
-            this.rbtActivado.Size = new System.Drawing.Size(67, 17);
+            this.rbtActivado.Size = new System.Drawing.Size(72, 17);
             this.rbtActivado.TabIndex = 295;
             this.rbtActivado.TabStop = true;
-            this.rbtActivado.Text = "Activado";
+            this.rbtActivado.Text = "Habilitado";
             this.rbtActivado.UseVisualStyleBackColor = true;
             // 
             // VentanaModificarUsuario

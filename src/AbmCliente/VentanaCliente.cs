@@ -46,6 +46,41 @@ namespace FrbaHotel.AbmCliente
             }
         }
 
+        private void btnLimpiarCliente_Click(object sender, EventArgs e)
+        {
+            tbxNombre.Clear();
+            tbxApellido.Clear();
+            tbxNacionalidad.Clear();
+            tbxDocumento.Clear();
+            tbxFechaNacimiento.Clear();
+            tbxPais.Clear();
+            tbxCiudad.Clear();
+            tbxCalle.Clear();
+            tbxNumeroCalle.Clear();
+            tbxPiso.Clear();
+            tbxDepartamento.Clear();
+            tbxEmail.Clear();
+            tbxTelefono.Clear();
+            controladorError.Clear();
+            cbxTipoDocumento.SelectedIndex = 0;
+            calendario.Hide();
+            btnGuardarFecha.Hide();
+        }
+
+        private void btnSeleccionarFecha_Click(object sender, EventArgs e)
+        {
+            calendario.Show();
+            btnGuardarFecha.Show();
+            controladorError.Clear();
+        }
+
+        private void btnGuardarFecha_Click(object sender, EventArgs e)
+        {
+            tbxFechaNacimiento.Text = calendario.SelectionStart.ToShortDateString();
+            calendario.Hide();
+            btnGuardarFecha.Hide();
+        }
+
         #endregion
 
         #region Modificar
@@ -53,6 +88,7 @@ namespace FrbaHotel.AbmCliente
         private Cliente ventanaCrearClienteParaModificar(DataGridViewCellEventArgs e)
         {
             string clienteID = dgvModificarClientes.Rows[e.RowIndex].Cells["Cliente_ID"].Value.ToString();
+            string clienteEstado = dgvModificarClientes.Rows[e.RowIndex].Cells["Cliente_Estado"].Value.ToString();
             string personaID = dgvModificarClientes.Rows[e.RowIndex].Cells["Persona_ID"].Value.ToString();
             string nombre = dgvModificarClientes.Rows[e.RowIndex].Cells["Persona_Nombre"].Value.ToString();
             string apellido = dgvModificarClientes.Rows[e.RowIndex].Cells["Persona_Apellido"].Value.ToString();
@@ -71,7 +107,7 @@ namespace FrbaHotel.AbmCliente
             string departamento = dgvModificarClientes.Rows[e.RowIndex].Cells["Domicilio_Departamento"].Value.ToString();
             Domicilio domicilio = new Domicilio(idDomicilio, pais, ciudad, calle, numeroCalle, piso, departamento);
             Persona persona = new Persona(personaID, nombre, apellido, nacionalidad, tipoDocumento, numeroDocumento, fechaNacimiento, telefono, email, domicilio);
-            Cliente cliente = new Cliente(clienteID, persona, null);
+            Cliente cliente = new Cliente(clienteID, persona, clienteEstado);
             return cliente;
         }
 
@@ -111,8 +147,8 @@ namespace FrbaHotel.AbmCliente
             var senderGrid = (DataGridView)sender;
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                string id = dgvEliminarClientes.Rows[e.RowIndex].Cells["Cliente_ID"].Value.ToString();
-                Cliente cliente = new Cliente(id, null, null);
+                string clienteID = dgvEliminarClientes.Rows[e.RowIndex].Cells["Cliente_ID"].Value.ToString();
+                Cliente cliente = new Cliente(clienteID, null, null);
                 Database.clienteEliminadoConExito(cliente);
                 ventanaActualizar(sender, e);
             }
@@ -139,7 +175,6 @@ namespace FrbaHotel.AbmCliente
 
         #region Control
 
-
         public void ventanaActualizar(object sender, EventArgs e)
         {
             btnFiltrarEliminar_Click(sender, e);
@@ -153,7 +188,37 @@ namespace FrbaHotel.AbmCliente
             comboBoxCargar(cbxFiltroTipoDocumentoEliminar, Database.tipoDocumentoFiltroObtenerTodosEnLista());
             ventanaActualizar(sender, e);
             dataGridViewAgregarBotonModificar(dgvModificarClientes);
-            dataGridViewAgregarBotonEliminar(dgvEliminarClientes);            
+            dataGridViewAgregarBotonEliminar(dgvEliminarClientes);
+            ventanaOcultarColumnas();
+        }
+
+        private void ventanaOcultarColumnas()
+        {
+            dgvModificarClientes.Columns["Cliente_ID"].Visible = false;
+            dgvModificarClientes.Columns["Cliente_Estado"].Visible = false;
+            dgvModificarClientes.Columns["Persona_ID"].Visible = false;
+            dgvModificarClientes.Columns["Persona_Nacionalidad"].Visible = false;
+            dgvModificarClientes.Columns["Persona_FechaNacimiento"].Visible = false;
+            dgvModificarClientes.Columns["Persona_Telefono"].Visible = false;
+            dgvModificarClientes.Columns["Domicilio_ID"].Visible = false;
+            dgvModificarClientes.Columns["Domicilio_Pais"].Visible = false;
+            dgvModificarClientes.Columns["Domicilio_Ciudad"].Visible = false;
+            dgvModificarClientes.Columns["Domicilio_Calle"].Visible = false;
+            dgvModificarClientes.Columns["Domicilio_NumeroCalle"].Visible = false;
+            dgvModificarClientes.Columns["Domicilio_Piso"].Visible = false;
+            dgvModificarClientes.Columns["Domicilio_Departamento"].Visible = false;
+            dgvEliminarClientes.Columns["Cliente_ID"].Visible = false;
+            dgvEliminarClientes.Columns["Persona_ID"].Visible = false;
+            dgvEliminarClientes.Columns["Persona_Nacionalidad"].Visible = false;
+            dgvEliminarClientes.Columns["Persona_FechaNacimiento"].Visible = false;
+            dgvEliminarClientes.Columns["Persona_Telefono"].Visible = false;
+            dgvEliminarClientes.Columns["Domicilio_ID"].Visible = false;
+            dgvEliminarClientes.Columns["Domicilio_Pais"].Visible = false;
+            dgvEliminarClientes.Columns["Domicilio_Ciudad"].Visible = false;
+            dgvEliminarClientes.Columns["Domicilio_Calle"].Visible = false;
+            dgvEliminarClientes.Columns["Domicilio_NumeroCalle"].Visible = false;
+            dgvEliminarClientes.Columns["Domicilio_Piso"].Visible = false;
+            dgvEliminarClientes.Columns["Domicilio_Departamento"].Visible = false;
         }
 
         private void tbxNombre_KeyPress(object sender, KeyPressEventArgs e)
@@ -227,43 +292,6 @@ namespace FrbaHotel.AbmCliente
             controladorError.Clear();
         }
 
-        private void btnSeleccionarFecha_Click(object sender, EventArgs e)
-        {
-            calendario.Show();
-            btnGuardarFecha.Show();
-            controladorError.Clear();
-        }
-
-        private void btnGuardarFecha_Click(object sender, EventArgs e)
-        {
-            tbxFechaNacimiento.Text = calendario.SelectionStart.ToShortDateString();
-            calendario.Hide();
-            btnGuardarFecha.Hide();
-        }
-
-        private void btnLimpiarCliente_Click(object sender, EventArgs e)
-        {
-            tbxNombre.Clear();
-            tbxApellido.Clear();
-            tbxNacionalidad.Clear();
-            tbxDocumento.Clear();
-            tbxFechaNacimiento.Clear();
-            tbxPais.Clear();
-            tbxCiudad.Clear();
-            tbxCalle.Clear();
-            tbxNumeroCalle.Clear();
-            tbxPiso.Clear();
-            tbxDepartamento.Clear();
-            tbxEmail.Clear();
-            tbxTelefono.Clear();
-            controladorError.Clear();
-            cbxTipoDocumento.SelectedIndex = 0;
-            calendario.Hide();
-            btnGuardarFecha.Hide();
-        }
-
-        #endregion
-
         private void tbxFiltroNombreModificar_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaLetras(e);
@@ -271,17 +299,12 @@ namespace FrbaHotel.AbmCliente
 
         private void tbxFiltroDocumentoModificar_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            textBoxConfigurarParaNumeros(e);
         }
 
         private void tbxFiltroApellidoModificar_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaLetras(e);
-        }
-
-        private void tbxFiltroEmailModificar_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
         }
 
         private void tbxFiltroNombreEliminar_KeyPress(object sender, KeyPressEventArgs e)
@@ -291,7 +314,7 @@ namespace FrbaHotel.AbmCliente
 
         private void tbxFiltroDocumentoEliminar_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            textBoxConfigurarParaNumeros(e);
         }
 
         private void tbxFiltroApellidoEliminar_KeyPress(object sender, KeyPressEventArgs e)
@@ -299,10 +322,6 @@ namespace FrbaHotel.AbmCliente
             textBoxConfigurarParaLetras(e);
         }
 
-        private void tbxFiltroEmailEliminar_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
+        #endregion
     }
 }

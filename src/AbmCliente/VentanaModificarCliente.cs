@@ -33,19 +33,6 @@ namespace FrbaHotel.AbmCliente
 
         #region Modificar
 
-        private void btnGuardarCliente_Click(object sender, EventArgs e)
-        {
-            if (ventanaCamposEstanCompletos(this, controladorError))
-            {
-                ventanaCrearClienteModificado();
-                if (Database.clienteModificadoConExito(cliente))
-                {
-                    this.Hide();
-                    ventanaCliente.ventanaActualizar(sender, e);
-                }
-            }
-        }
-
         private void VentanaModificarCliente_Load(object sender, EventArgs e)
         {
             comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
@@ -63,7 +50,7 @@ namespace FrbaHotel.AbmCliente
             tbxNumeroCalle.Text = cliente.persona.domicilio.numeroCalle;
             tbxPiso.Text = cliente.persona.domicilio.piso;
             tbxDepartamento.Text = cliente.persona.domicilio.departamento;
-            if (Database.clienteHabilitado(cliente))
+            if (bool.Parse(cliente.estado))
                 rbtActivado.Select();
             else
                 rbtDesactivado.Select();
@@ -72,7 +59,7 @@ namespace FrbaHotel.AbmCliente
         private void ventanaCrearClienteModificado()
         {
             cbxTipoDocumento.SelectedIndex = cbxTipoDocumento.Items.IndexOf(cliente.persona.tipoDocumento);
-            cliente.estado = radioButtonActivado(rbtActivado);
+            cliente.estado = radioButtonEstado(rbtActivado);
             cliente.persona.nombre = tbxNombre.Text;
             cliente.persona.apellido = tbxApellido.Text;
             cliente.persona.numeroDocumento = tbxDocumento.Text;
@@ -88,9 +75,22 @@ namespace FrbaHotel.AbmCliente
             cliente.persona.domicilio.departamento = tbxDepartamento.Text;
         }
 
+        private void btnGuardarCliente_Click(object sender, EventArgs e)
+        {
+            if (ventanaCamposEstanCompletos(this, controladorError))
+            {
+                ventanaCrearClienteModificado();
+                if (Database.clienteModificadoConExito(cliente))
+                {
+                    this.Hide();
+                    ventanaCliente.ventanaActualizar(sender, e);
+                }
+            }
+        }
+
         #endregion
 
-        #region Eventos
+        #region Control
 
         private void tbxNombre_KeyPress(object sender, KeyPressEventArgs e)
         {

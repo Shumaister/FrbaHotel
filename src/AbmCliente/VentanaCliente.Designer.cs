@@ -797,7 +797,7 @@
             this.tbxFiltroEmailModificar.Name = "tbxFiltroEmailModificar";
             this.tbxFiltroEmailModificar.Size = new System.Drawing.Size(100, 20);
             this.tbxFiltroEmailModificar.TabIndex = 6;
-            this.tbxFiltroEmailModificar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxFiltroEmailModificar_KeyPress);
+       
             // 
             // tbxFiltroDocumentoModificar
             // 
@@ -1019,7 +1019,6 @@
             this.tbxFiltroEmailEliminar.Name = "tbxFiltroEmailEliminar";
             this.tbxFiltroEmailEliminar.Size = new System.Drawing.Size(100, 20);
             this.tbxFiltroEmailEliminar.TabIndex = 277;
-            this.tbxFiltroEmailEliminar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxFiltroEmailEliminar_KeyPress);
             // 
             // btnLimpiarEliminar
             // 

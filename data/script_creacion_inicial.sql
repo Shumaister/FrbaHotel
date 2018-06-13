@@ -871,8 +871,8 @@ VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(2,6)
 -- Creando usuario 'admin' 
 
 INSERT INTO RIP.Usuarios (Usuario_Nombre, Usuario_Contrasenia) VALUES ('admin', HASHBYTES('SHA2_256', 'w23e'))
-INSERT INTO RIP.Domicilios (Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle) 
-VALUES ('Argentina', 'Buenos Aires', 'Avenida Medrano', '951')
+INSERT INTO RIP.Domicilios (Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle, Domicilio_Piso, Domicilio_Departamento) 
+VALUES ('Argentina', 'Buenos Aires', 'Avenida Medrano', '951', 1, 'D')
 INSERT INTO RIP.Personas (Persona_Nombre, Persona_Apellido, Persona_FechaNacimiento, Persona_TipoDocumentoID, Persona_NumeroDocumento, Persona_DomicilioID, Persona_Email, Persona_Telefono, Persona_Nacionalidad) 
 VALUES ('Usuario', 'Administrador', '19960725 13:31:00.000', 1, 39769742, @@IDENTITY, 'usuarioAdministrador@gmail.com', '1154249901', 'ARGENTINO')
 UPDATE RIP.Usuarios SET Usuario_PersonaID = @@IDENTITY WHERE Usuario_Nombre = 'admin'

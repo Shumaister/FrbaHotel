@@ -93,12 +93,12 @@ namespace FrbaHotel.AbmRol
 
         private void btnAgregarFuncionalidad_Click(object sender, EventArgs e)
         {
-            botonAgregarComboBoxListBox(cbxFuncionalidades, lbxFuncionalidades);
+            buttonAgregarComboBoxListBox(cbxFuncionalidades, lbxFuncionalidades);
         }
 
         private void btnQuitarFuncionalidad_Click(object sender, EventArgs e)
         {
-            botonQuitarComboBoxListBox(cbxFuncionalidades, lbxFuncionalidades);
+            buttonQuitarComboBoxListBox(cbxFuncionalidades, lbxFuncionalidades);
         }
 
         #endregion

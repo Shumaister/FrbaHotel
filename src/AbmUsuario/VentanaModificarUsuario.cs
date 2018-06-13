@@ -65,42 +65,6 @@ namespace FrbaHotel.AbmUsuario
                 rbtDesactivado.Select();
         }
 
-        private void btnGuardarUsuario_Click(object sender, EventArgs e)
-        {
-            if (ventanaCamposEstanCompletos(this, controladorError))
-            {
-                ventanaModificarUsuario();
-                if (Database.usuarioModificadoConExito(usuario))
-                {
-                    this.Hide();
-                    ventanaUsuario.ventanaActualizar();
-                }
-            }
-        }
-
-        private void ventanaModificarUsuario()
-        {
-            cbxTipoDocumento.SelectedIndex = cbxTipoDocumento.Items.IndexOf(usuario.persona.tipoDocumento);
-            usuario.nombre = tbxUsuario.Text;
-            usuario.contrasenia = tbxContrasena.Text;
-            usuario.estado = radioButtonActivado(rbtActivado);
-            usuario.persona.nombre = tbxNombre.Text;
-            usuario.persona.apellido = tbxApellido.Text;
-            usuario.persona.numeroDocumento = tbxDocumento.Text;
-            usuario.persona.fechaNacimiento = DateTime.Parse(tbxFechaNacimiento.Text);
-            usuario.persona.nacionalidad = tbxNacionalidad.Text;
-            usuario.persona.telefono = tbxTelefono.Text;
-            usuario.persona.email = tbxEmail.Text;
-            usuario.persona.domicilio.pais = tbxPais.Text;
-            usuario.persona.domicilio.ciudad = tbxCiudad.Text;
-            usuario.persona.domicilio.calle = tbxCalle.Text;
-            usuario.persona.domicilio.numeroCalle = tbxNumeroCalle.Text;
-            usuario.persona.domicilio.piso = tbxPiso.Text;
-            usuario.persona.domicilio.departamento = tbxDepartamento.Text;
-            usuario.roles = ventanaObtenerRolesSeleccionados();
-            usuario.hoteles = ventanaObtenerHotelesSeleccionados();
-        }
-
         private List<Hotel> ventanaObtenerHotelesSeleccionados()
         {
             List<Hotel> hoteles = new List<Hotel>();
@@ -125,28 +89,103 @@ namespace FrbaHotel.AbmUsuario
             return roles;
         }
 
+        private void ventanaModificarUsuario()
+        {
+            cbxTipoDocumento.SelectedIndex = cbxTipoDocumento.Items.IndexOf(usuario.persona.tipoDocumento);
+            usuario.nombre = tbxUsuario.Text;
+            usuario.contrasenia = tbxContrasena.Text;
+            usuario.estado = radioButtonEstado(rbtActivado);
+            usuario.persona.nombre = tbxNombre.Text;
+            usuario.persona.apellido = tbxApellido.Text;
+            usuario.persona.numeroDocumento = tbxDocumento.Text;
+            usuario.persona.fechaNacimiento = DateTime.Parse(tbxFechaNacimiento.Text);
+            usuario.persona.nacionalidad = tbxNacionalidad.Text;
+            usuario.persona.telefono = tbxTelefono.Text;
+            usuario.persona.email = tbxEmail.Text;
+            usuario.persona.domicilio.pais = tbxPais.Text;
+            usuario.persona.domicilio.ciudad = tbxCiudad.Text;
+            usuario.persona.domicilio.calle = tbxCalle.Text;
+            usuario.persona.domicilio.numeroCalle = tbxNumeroCalle.Text;
+            usuario.persona.domicilio.piso = tbxPiso.Text;
+            usuario.persona.domicilio.departamento = tbxDepartamento.Text;
+            usuario.roles = ventanaObtenerRolesSeleccionados();
+            usuario.hoteles = ventanaObtenerHotelesSeleccionados();
+        }
+
+        private void btnGuardarUsuario_Click(object sender, EventArgs e)
+        {
+            if (ventanaCamposEstanCompletos(this, controladorError))
+            {
+                ventanaModificarUsuario();
+                if (Database.usuarioModificadoConExito(usuario))
+                {
+                    this.Hide();
+                    ventanaUsuario.ventanaActualizar();
+                }
+            }
+        }
+
+        private void btnLimpiarUsuario_Click(object sender, EventArgs e)
+        {
+            tbxUsuario.Clear();
+            tbxContrasena.Clear();
+            comboBoxCargar(cbxRoles, Database.rolObtenerTodosEnLista());
+            listBoxLimpiar(lbxRoles);
+            comboBoxCargar(cbxHoteles, Database.hotelObtenerTodosLista());
+            listBoxLimpiar(lbxHoteles);
+            tbxNombre.Clear();
+            tbxApellido.Clear();
+            tbxDocumento.Clear();
+            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
+            tbxFechaNacimiento.Clear();
+            tbxNacionalidad.Clear();
+            tbxPais.Clear();
+            tbxCiudad.Clear();
+            tbxCalle.Clear();
+            tbxNumeroCalle.Clear();
+            tbxPiso.Clear();
+            tbxDepartamento.Clear();
+            tbxEmail.Clear();
+            tbxTelefono.Clear();
+            controladorError.Clear();
+        }
+
+        private void btnSeleccionarFecha_Click(object sender, EventArgs e)
+        {
+            calendario.Show();
+            btnGuardarFecha.Show();
+            controladorError.Clear();
+        }
+
+        private void btnGuardarFecha_Click(object sender, EventArgs e)
+        {
+            tbxFechaNacimiento.Text = calendario.SelectionStart.ToShortDateString();
+            calendario.Hide();
+            btnGuardarFecha.Hide();
+        }
+
         #endregion
 
         #region Eventos 
 
         private void btnAgregarRol_Click(object sender, EventArgs e)
         {
-            botonAgregarComboBoxListBox(cbxRoles, lbxRoles);
+            buttonAgregarComboBoxListBox(cbxRoles, lbxRoles);
         }
 
         private void btnQuitarRol_Click(object sender, EventArgs e)
         {
-            botonQuitarComboBoxListBox(cbxRoles, lbxRoles);
+            buttonQuitarComboBoxListBox(cbxRoles, lbxRoles);
         }
 
         private void btnAgregarHotel_Click(object sender, EventArgs e)
         {
-            botonAgregarComboBoxListBox(cbxHoteles, lbxHoteles);
+            buttonAgregarComboBoxListBox(cbxHoteles, lbxHoteles);
         }
 
         private void btnQuitarHotel_Click(object sender, EventArgs e)
         {
-            botonQuitarComboBoxListBox(cbxHoteles, lbxHoteles);
+            buttonQuitarComboBoxListBox(cbxHoteles, lbxHoteles);
         }
 
         private void tbxUsuario_KeyPress(object sender, KeyPressEventArgs e)
@@ -226,44 +265,6 @@ namespace FrbaHotel.AbmUsuario
             controladorError.Clear();
         }
 
-        private void btnLimpiarUsuario_Click(object sender, EventArgs e)
-        {
-            tbxUsuario.Clear();
-            tbxContrasena.Clear();
-            comboBoxCargar(cbxRoles, Database.rolObtenerTodosEnLista());
-            listBoxLimpiar(lbxRoles);
-            comboBoxCargar(cbxHoteles, Database.hotelObtenerTodosLista());
-            listBoxLimpiar(lbxHoteles);
-            tbxNombre.Clear();
-            tbxApellido.Clear();
-            tbxDocumento.Clear();
-            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
-            tbxFechaNacimiento.Clear();
-            tbxPais.Clear();
-            tbxCiudad.Clear();
-            tbxCalle.Clear();
-            tbxNumeroCalle.Clear();
-            tbxPiso.Clear();
-            tbxDepartamento.Clear();
-            tbxEmail.Clear();
-            tbxTelefono.Clear();
-            controladorError.Clear();
-        }
-
-        private void btnSeleccionarFecha_Click(object sender, EventArgs e)
-        {
-            calendario.Show();
-            btnGuardarFecha.Show();
-            controladorError.Clear();
-        }
-
-        private void btnGuardarFecha_Click(object sender, EventArgs e)
-        {
-            tbxFechaNacimiento.Text = calendario.SelectionStart.ToShortDateString();
-            calendario.Hide();
-            btnGuardarFecha.Hide();
-        }
-
         private void lbxRoles_SelectedIndexChanged(object sender, EventArgs e)
         {
             controladorError.Clear();
@@ -278,6 +279,7 @@ namespace FrbaHotel.AbmUsuario
         {
             controladorError.Clear();
         }
+
         #endregion
     }   
 }

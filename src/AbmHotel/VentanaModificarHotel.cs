@@ -45,7 +45,7 @@ namespace FrbaHotel.AbmHotel
             tbxCiudad.Text = hotel.domicilio.ciudad;
             tbxCalle.Text = hotel.domicilio.calle;
             tbxNumeroCalle.Text = hotel.domicilio.numeroCalle;
-            radioButtonActivado(rbtActivado);
+            radioButtonEstado(rbtActivado);
         }
 
          private void btnGuardarHotel_Click(object sender, EventArgs e)
@@ -89,7 +89,7 @@ namespace FrbaHotel.AbmHotel
             hotel.fechaCreacion = DateTime.Parse(tbxFechaCreacion.Text);
             hotel.email = tbxEmail.Text;
             hotel.telefono = tbxTelefono.Text;
-            hotel.estado = radioButtonActivado(rbtActivado);
+            hotel.estado = radioButtonEstado(rbtActivado);
         }
     
 

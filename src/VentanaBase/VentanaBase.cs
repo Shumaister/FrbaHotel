@@ -14,11 +14,13 @@ namespace FrbaHotel
 {
     public partial class VentanaBase : Form
     {
-        //-------------------------------------- Atributos -------------------------------------
+        #region Atributos
 
         protected string ProgramTitle { get; set; }
 
-        //-------------------------------------- Constructores -------------------------------------
+        #endregion
+
+        #region Constructores
 
         public VentanaBase()
         {
@@ -26,7 +28,9 @@ namespace FrbaHotel
             ProgramTitle = "Frba Hotel";
         }
 
-        //-------------------------------------- Metodos para Ventanas -------------------------------------
+        #endregion
+
+        #region Ventana
 
         public static bool ventanaCamposEstanCompletos(Control ventana, ErrorProvider errorProvider)
         {
@@ -84,15 +88,9 @@ namespace FrbaHotel
             MessageBox.Show("ERROR: " + mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);        
         }
 
-        //-------------------------------------- Metodos para Elementos -------------------------------------
+        #endregion
 
-        public string radioButtonActivado(RadioButton radioButton)
-        {
-            if (radioButton.Checked)
-                return "1";
-            else
-                return "0";
-        }
+        #region ComboBox
 
         public static void comboBoxCargar(ComboBox comboBox, List<string> listaDatos)
         {
@@ -102,6 +100,10 @@ namespace FrbaHotel
             if(comboBox.Items.Count > 0)
                 comboBox.SelectedIndex = 0;
         }
+
+        #endregion
+
+        #region ListBox
 
         public static void listBoxCargar(ListBox listBox, List<string> listaDatos)
         {
@@ -115,6 +117,10 @@ namespace FrbaHotel
         {
             listBox.Items.Clear();
         }
+
+        #endregion
+
+        #region DataGridView
 
         public static void dataGridViewCargar(DataGridView dataGridView, DataTable tablaDatos)
         {
@@ -140,7 +146,11 @@ namespace FrbaHotel
             VentanaBase.dataGridViewAgregarBoton(dataGridView, "            Eliminar            ");
         }
 
-        public static void botonAgregarComboBoxListBox(ComboBox comboBox, ListBox listBox)
+        #endregion
+
+        #region Button
+
+        public static void buttonAgregarComboBoxListBox(ComboBox comboBox, ListBox listBox)
         {
             if (comboBox.SelectedItem != null)
             {
@@ -154,7 +164,7 @@ namespace FrbaHotel
             }
         }
 
-        public static void botonQuitarComboBoxListBox(ComboBox comboBox, ListBox listBox)
+        public static void buttonQuitarComboBoxListBox(ComboBox comboBox, ListBox listBox)
         {
             if (listBox.SelectedItem != null)
             {
@@ -166,6 +176,10 @@ namespace FrbaHotel
                     listBox.SelectedIndex = 0;
             }
         }
+
+        #endregion
+
+        #region TextBox
 
         public static void textBoxConfigurarParaLetras(KeyPressEventArgs evento)
         {
@@ -218,5 +232,19 @@ namespace FrbaHotel
         {
             return Char.IsLetter(caracter) || Char.IsDigit(caracter) || Char.IsControl(caracter) || caracter == '-' || caracter == '_' || caracter == '.';
         }
+
+        #endregion
+       
+        #region RadioButton
+
+        public string radioButtonEstado(RadioButton radioButtonHabilitar)
+        {
+            if (radioButtonHabilitar.Checked)
+                return "1";
+            else
+                return "0";
+        }
+
+        #endregion
     }
 }
