@@ -45,7 +45,10 @@ namespace FrbaHotel.AbmHotel
             tbxCiudad.Text = hotel.domicilio.ciudad;
             tbxCalle.Text = hotel.domicilio.calle;
             tbxNumeroCalle.Text = hotel.domicilio.numeroCalle;
-            radioButtonEstado(rbtActivado);
+            if (bool.Parse(hotel.estado))
+                rbtActivado.Select();
+            else
+                rbtDesactivado.Select();
         }
 
          private void btnGuardarHotel_Click(object sender, EventArgs e)
@@ -60,8 +63,44 @@ namespace FrbaHotel.AbmHotel
                 }                  
             }
         }
+        private void ventanaCrearHotelModificado()
+        {
+            hotel.domicilio.pais = tbxPais.Text;
+            hotel.domicilio.ciudad = tbxCiudad.Text;
+            hotel.domicilio.calle = tbxCalle.Text;
+            hotel.domicilio.numeroCalle = tbxNumeroCalle.Text;
+            hotel.cantidadEstrellas = tbxEstrellas.Text;
+            hotel.fechaCreacion = DateTime.Parse(tbxFechaCreacion.Text);
+            hotel.email = tbxEmail.Text;
+            hotel.telefono = tbxTelefono.Text;
+            hotel.estado = radioButtonEstado(rbtActivado);
+        }
 
-        private void btnLimpiarAgregar_Click(object sender, EventArgs e)
+        private void btnAgregarRegimen_Click(object sender, EventArgs e)
+        {
+            buttonAgregarComboBoxListBox(cbxRegimenes, lbxRegimenes);
+        }
+
+        private void btnQuitarRegimen_Click(object sender, EventArgs e)
+        {
+            buttonQuitarComboBoxListBox(cbxRegimenes, lbxRegimenes);
+        }
+
+        private void btnSeleccionarFecha_Click(object sender, EventArgs e)
+        {
+            calendario.Show();
+            btnGuardarFecha.Show();
+            controladorError.Clear();
+        }
+
+        private void btnGuardarFecha_Click(object sender, EventArgs e)
+        {
+            tbxFechaCreacion.Text = calendario.SelectionStart.ToShortDateString();
+            calendario.Hide();
+            btnGuardarFecha.Hide();
+        }
+
+        private void btnLimpiarModificar_Click(object sender, EventArgs e)
         {
             tbxNombre.Clear();
             tbxEstrellas.Clear();
@@ -78,20 +117,6 @@ namespace FrbaHotel.AbmHotel
             calendario.Hide();
             btnGuardarFecha.Hide();
         }
-
-        private void ventanaCrearHotelModificado()
-        {
-            hotel.domicilio.pais = tbxPais.Text;
-            hotel.domicilio.ciudad = tbxCiudad.Text;
-            hotel.domicilio.calle = tbxCalle.Text;
-            hotel.domicilio.numeroCalle = tbxNumeroCalle.Text;
-            hotel.cantidadEstrellas = tbxEstrellas.Text;
-            hotel.fechaCreacion = DateTime.Parse(tbxFechaCreacion.Text);
-            hotel.email = tbxEmail.Text;
-            hotel.telefono = tbxTelefono.Text;
-            hotel.estado = radioButtonEstado(rbtActivado);
-        }
-    
 
         #endregion
 
@@ -147,10 +172,5 @@ namespace FrbaHotel.AbmHotel
         }
 
         #endregion
-
-        private void btnAgregarRegimen_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

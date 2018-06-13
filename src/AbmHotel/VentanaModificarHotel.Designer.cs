@@ -69,7 +69,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.tbxEmail = new System.Windows.Forms.TextBox();
             this.btnGuardarHotel = new System.Windows.Forms.Button();
-            this.btnLimpiarAgregar = new System.Windows.Forms.Button();
+            this.btnLimpiarModificar = new System.Windows.Forms.Button();
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
             this.rbtDesactivado = new System.Windows.Forms.RadioButton();
@@ -120,6 +120,7 @@
             this.btnQuitarRegimen.TabIndex = 333;
             this.btnQuitarRegimen.Text = "Quitar";
             this.btnQuitarRegimen.UseVisualStyleBackColor = true;
+            this.btnQuitarRegimen.Click += new System.EventHandler(this.btnQuitarRegimen_Click);
             // 
             // label9
             // 
@@ -160,6 +161,7 @@
             this.btnGuardarFecha.Text = "Guardar";
             this.btnGuardarFecha.UseVisualStyleBackColor = true;
             this.btnGuardarFecha.Visible = false;
+            this.btnGuardarFecha.Click += new System.EventHandler(this.btnGuardarFecha_Click);
             // 
             // calendario
             // 
@@ -188,6 +190,7 @@
             this.btnSeleccionarFecha.TabIndex = 325;
             this.btnSeleccionarFecha.Text = "Seleccionar";
             this.btnSeleccionarFecha.UseVisualStyleBackColor = true;
+            this.btnSeleccionarFecha.Click += new System.EventHandler(this.btnSeleccionarFecha_Click);
             // 
             // label19
             // 
@@ -466,14 +469,15 @@
             this.btnGuardarHotel.Text = "Guardar";
             this.btnGuardarHotel.UseVisualStyleBackColor = true;
             // 
-            // btnLimpiarAgregar
+            // btnLimpiarModificar
             // 
-            this.btnLimpiarAgregar.Location = new System.Drawing.Point(171, 491);
-            this.btnLimpiarAgregar.Name = "btnLimpiarAgregar";
-            this.btnLimpiarAgregar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiarAgregar.TabIndex = 294;
-            this.btnLimpiarAgregar.Text = "Limpiar";
-            this.btnLimpiarAgregar.UseVisualStyleBackColor = true;
+            this.btnLimpiarModificar.Location = new System.Drawing.Point(171, 491);
+            this.btnLimpiarModificar.Name = "btnLimpiarModificar";
+            this.btnLimpiarModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiarModificar.TabIndex = 294;
+            this.btnLimpiarModificar.Text = "Limpiar";
+            this.btnLimpiarModificar.UseVisualStyleBackColor = true;
+            this.btnLimpiarModificar.Click += new System.EventHandler(this.btnLimpiarModificar_Click);
             // 
             // label41
             // 
@@ -567,11 +571,12 @@
             this.Controls.Add(this.label18);
             this.Controls.Add(this.tbxEmail);
             this.Controls.Add(this.btnGuardarHotel);
-            this.Controls.Add(this.btnLimpiarAgregar);
+            this.Controls.Add(this.btnLimpiarModificar);
             this.Name = "VentanaModificarHotel";
             this.Text = "VentanaModificarHotel";
+            this.Click += new System.EventHandler(this.btnGuardarHotel_Click);
             this.Controls.SetChildIndex(this.logo, 0);
-            this.Controls.SetChildIndex(this.btnLimpiarAgregar, 0);
+            this.Controls.SetChildIndex(this.btnLimpiarModificar, 0);
             this.Controls.SetChildIndex(this.btnGuardarHotel, 0);
             this.Controls.SetChildIndex(this.tbxEmail, 0);
             this.Controls.SetChildIndex(this.label18, 0);
@@ -667,7 +672,7 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox tbxEmail;
         private System.Windows.Forms.Button btnGuardarHotel;
-        private System.Windows.Forms.Button btnLimpiarAgregar;
+        private System.Windows.Forms.Button btnLimpiarModificar;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.RadioButton rbtDesactivado;

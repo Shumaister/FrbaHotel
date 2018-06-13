@@ -118,6 +118,14 @@ namespace FrbaHotel
             listBox.Items.Clear();
         }
 
+        public List<string> listBoxExtraerItemsEnLista(ListBox listBox)
+        {
+            List<string> lista = new List<string>();
+            foreach (string item in listBox.Items)
+                lista.Add(item);
+            return lista;
+        }
+
         #endregion
 
         #region DataGridView

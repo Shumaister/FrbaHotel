@@ -25,10 +25,11 @@ namespace FrbaHotel.AbmHotel
 
         #region Agregar
 
+
         private Hotel ventanaCrearHotelParaAgregar()
         {
             Domicilio domicilio = new Domicilio(null, tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text);
-            Hotel hotel = new Hotel(null, tbxNombre.Text, tbxEstrellas.Text, DateTime.Parse(tbxFechaCreacion.Text), tbxEmail.Text, tbxTelefono.Text, domicilio);
+            Hotel hotel = new Hotel(null, tbxNombre.Text, tbxEstrellas.Text, DateTime.Parse(tbxFechaCreacion.Text), tbxEmail.Text, tbxTelefono.Text, domicilio, listBoxExtraerItemsEnLista(lbxRegimenes), null);
             return hotel;
         }
 
@@ -175,6 +176,7 @@ namespace FrbaHotel.AbmHotel
         {
             string hotelID = datagridView.Rows[e.RowIndex].Cells["Hotel_ID"].Value.ToString();
             string nombre = datagridView.Rows[e.RowIndex].Cells["Hotel_Nombre"].Value.ToString();
+            string estado = datagridView.Rows[e.RowIndex].Cells["Hotel_Estado"].Value.ToString();
             string cantidadEstrellas = datagridView.Rows[e.RowIndex].Cells["Hotel_CantidadEstrellas"].Value.ToString();
             DateTime fechaCreacion = DateTime.Parse(datagridView.Rows[e.RowIndex].Cells["Hotel_FechaCreacion"].Value.ToString());
             string telefono = datagridView.Rows[e.RowIndex].Cells["Hotel_Telefono"].Value.ToString();
@@ -185,7 +187,7 @@ namespace FrbaHotel.AbmHotel
             string calle = datagridView.Rows[e.RowIndex].Cells["Domicilio_Calle"].Value.ToString();
             string numeroCalle = datagridView.Rows[e.RowIndex].Cells["Domicilio_NumeroCalle"].Value.ToString();
             Domicilio domicilio = new Domicilio(domicilioID, pais, ciudad, calle, numeroCalle);
-            Hotel hotel = new Hotel(hotelID, nombre, cantidadEstrellas, fechaCreacion, email, telefono, domicilio);
+            Hotel hotel = new Hotel(hotelID, nombre, cantidadEstrellas, fechaCreacion, email, telefono, domicilio, null, estado);
             return hotel;
         }
 
@@ -196,11 +198,13 @@ namespace FrbaHotel.AbmHotel
             dgvModificarHotel.Columns["Hotel_Telefono"].Visible = false;
             dgvModificarHotel.Columns["Hotel_Email"].Visible = false;
             dgvModificarHotel.Columns["Hotel_FechaCreacion"].Visible = false;
+            dgvModificarHotel.Columns["Hotel_Estado"].Visible = false;
             dgvEliminarHotel.Columns["Hotel_ID"].Visible = false;
             dgvEliminarHotel.Columns["Domicilio_ID"].Visible = false;
             dgvEliminarHotel.Columns["Hotel_Telefono"].Visible = false;
             dgvEliminarHotel.Columns["Hotel_Email"].Visible = false;
             dgvEliminarHotel.Columns["Hotel_FechaCreacion"].Visible = false;
+            dgvEliminarHotel.Columns["Hotel_Estado"].Visible = false;
         }
 
         private void tbxNombre_KeyPress(object sender, KeyPressEventArgs e)
@@ -291,5 +295,6 @@ namespace FrbaHotel.AbmHotel
         }
 
         #endregion
+
     }
 }

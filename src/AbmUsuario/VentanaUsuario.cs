@@ -82,7 +82,7 @@ namespace FrbaHotel.AbmUsuario
             tbxContrasena.Clear();
             comboBoxCargar(cbxRoles, Database.rolObtenerTodosEnLista());
             listBoxLimpiar(lbxRoles);
-            comboBoxCargar(cbxHoteles, Database.hotelObtenerTodosLista());
+            comboBoxCargar(cbxHoteles, Database.hotelObtenerTodosEnLista());
             listBoxLimpiar(lbxHoteles);
             cbxTipoDocumento.SelectedIndex = 0;
             tbxNombre.Clear();
@@ -186,7 +186,7 @@ namespace FrbaHotel.AbmUsuario
             dataGridViewAgregarBotonEliminar(dgvEliminarUsuarios);
             ventanaOcultarColumnas();
             comboBoxCargar(cbxRoles, Database.rolObtenerTodosEnLista());
-            comboBoxCargar(cbxHoteles, Database.hotelObtenerTodosLista());
+            comboBoxCargar(cbxHoteles, Database.hotelObtenerTodosEnLista());
             comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
         }
 

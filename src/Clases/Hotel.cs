@@ -18,6 +18,7 @@ namespace FrbaHotel.Clases
         public DateTime fechaCreacion { get; set; }
         public string estado { get; set; }
         public Domicilio domicilio { get; set; }
+        public List<string> regimenes { get; set; }
 
         //-------------------------------------- Constructores -------------------------------------
 
@@ -31,7 +32,7 @@ namespace FrbaHotel.Clases
             this.domicilio = domicilio;
         }
 
-        public Hotel(string id, string nombre, string cantidadEstrellas, DateTime fechaCreacion, string email, string telefono, Domicilio domicilio)
+        public Hotel(string id, string nombre, string cantidadEstrellas, DateTime fechaCreacion, string email, string telefono, Domicilio domicilio, List<string> regimenes, string estado)
         {
             this.id = id;
             this.nombre = nombre;
@@ -40,6 +41,8 @@ namespace FrbaHotel.Clases
             this.email = email;
             this.telefono = telefono;
             this.domicilio = domicilio;
+            this.regimenes = regimenes;
+            this.estado = estado;
         }
 
         public Hotel(string nombre, string cantidadEstrellas, Domicilio domicilio)

@@ -567,7 +567,7 @@ namespace FrbaHotel
         {
             SqlCommand consulta = consultaCrear("INSERT INTO RIP.Usuarios_Hoteles (UsuarioHotel_UsuarioID, UsuarioHotel_HotelID) VALUES (@UsuarioID, @HotelID)");
             consulta.Parameters.AddWithValue("@UsuarioID", usuarioObtenerID(usuario));
-            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerID(hotel));
+            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerIDPorDomicilio(hotel));
             consultaEjecutar(consulta);
         }
 
@@ -991,16 +991,6 @@ namespace FrbaHotel
             return consultaObtenerValor(consulta);
         }
 
-        public static bool domicilioHotelExiste(Domicilio domicilio)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Domicilio_ID FROM RIP.Domicilios WHERE Domicilio_Pais = @Pais AND Domicilio_Ciudad = @Ciudad AND Domicilio_Calle = @Calle AND Domicilio_NumeroCalle = @NumeroCalle");
-            consulta.Parameters.AddWithValue("@Pais", domicilio.pais);
-            consulta.Parameters.AddWithValue("@Ciudad", domicilio.ciudad);
-            consulta.Parameters.AddWithValue("@Calle", domicilio.calle);
-            consulta.Parameters.AddWithValue("@NumeroCalle", domicilio.numeroCalle);
-            return consultaValorExiste(consultaObtenerValor(consulta));
-        }
-
         #endregion
 
         #region Hotel
@@ -1012,27 +1002,38 @@ namespace FrbaHotel
                 ventanaInformarError("Ya existe un hotel registrado con ese nombre");
                 return false;
             }
-            if (domicilioHotelExiste(hotel.domicilio))
+            if (hotelDomicilioExiste(hotel))
             {
                 ventanaInformarError("Ya existe un hotel registrado con esa direccion");
                 return false;
             }
+            if (hotelEmailExiste(hotel))
+            {
+                ventanaInformarError("Ya existe un hotel registrado con ese E-mail");
+                return false;
+            }
             domicilioHotelAgregar(hotel.domicilio);
             hotelAgregar(hotel);
-            ventanaInformarExito("El Hotel fue creado con exito");
+            hotelAgregarRegimenes(hotel);
+            ventanaInformarExito("El hotel fue creado con exito");
             return true;
         }
 
         public static bool hotelModificadoConExito(Hotel hotel)
         {
-            if (hotelNombreExiste(hotel))
+            if (hotelNombreExiste(hotel) && hotelDistintoPorNombre(hotel))
             {
                 ventanaInformarError("Ya existe un hotel registrado con ese nombre");
                 return false;
             }
-            if (domicilioHotelExiste(hotel.domicilio) && hotelDistinto(hotel))
+            if (hotelDomicilioExiste(hotel) && hotelDistintoPorDomicilio(hotel))
             {
                 ventanaInformarError("Ya existe un hotel registrado con esa direccion");
+                return false;
+            }
+            if (hotelEmailExiste(hotel) && hotelDistintoPorEmail(hotel))
+            {
+                ventanaInformarError("Ya existe un hotel registrado con ese E-mail");
                 return false;
             }
             domicilioHotelModificar(hotel.domicilio);
@@ -1046,6 +1047,204 @@ namespace FrbaHotel
             hotelEliminar(hotel);
             ventanaInformarExito("El Hotel fue eliminado con exito");
         }
+
+        public static void hotelAgregar(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Hoteles (Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_DomicilioID, Hotel_Telefono, Hotel_Email, Hotel_FechaCreacion) VALUES (@Nombre, @CantidadEstrellas, @DomicilioID, @Telefono, @Email, @FechaCreacion)");
+            consulta.Parameters.AddWithValue("@Nombre", hotel.nombre);
+            consulta.Parameters.AddWithValue("@CantidadEstrellas", hotel.cantidadEstrellas);
+            consulta.Parameters.AddWithValue("@DomicilioID", domicilioHotelObtenerID(hotel.domicilio));
+            consulta.Parameters.AddWithValue("@Telefono", hotel.telefono);
+            consulta.Parameters.AddWithValue("@Email", hotel.email);
+            consulta.Parameters.AddWithValue("@FechaCreacion", hotel.fechaCreacion);
+            consultaEjecutar(consulta);
+        }
+
+        public static void hotelModificar(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Hoteles SET Hotel_Nombre = @Nombre, Hotel_CantidadEstrellas = @CantidadEstrellas, Hotel_DomicilioID = @DomicilioID, Hotel_Telefono = @Telefono, Hotel_Email = @Email, Hotel_FechaCreacion = @FechaCreacion, Hotel_Estado = @Estado WHERE Hotel_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", hotel.id);
+            consulta.Parameters.AddWithValue("@Nombre", hotel.nombre);
+            consulta.Parameters.AddWithValue("@CantidadEstrellas", hotel.cantidadEstrellas);
+            consulta.Parameters.AddWithValue("@DomicilioID", domicilioHotelObtenerID(hotel.domicilio));
+            consulta.Parameters.AddWithValue("@Telefono", hotel.telefono);
+            consulta.Parameters.AddWithValue("@Hotel", hotel.email);
+            consulta.Parameters.AddWithValue("@FechaCreacion", hotel.fechaCreacion);
+            consultaEjecutar(consulta);
+        }
+
+        public static void hotelEliminar(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Hoteles SET Hotel_Estado = 0 WHERE Hotel_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", hotel.id);
+            consultaEjecutar(consulta);
+        }
+
+        public static string hotelObtenerIDPorNombre(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Hotel_ID FROM RIP.Hoteles WHERE Hotel_Nombre = @Nombre");
+            consulta.Parameters.AddWithValue("@Nombre", hotel.nombre);
+            return consultaObtenerValor(consulta);
+        }
+
+        public static string hotelObtenerIDPorDomicilio(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Hotel_ID FROM RIP.Hoteles WHERE Hotel_DomicilioID = @DomicilioID");
+            consulta.Parameters.AddWithValue("@DomicilioID", domicilioHotelObtenerID(hotel.domicilio));
+            return consultaObtenerValor(consulta);
+        }
+
+        public static string hotelObtenerIDPorEmail(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Hotel_ID FROM RIP.Hoteles WHERE Hotel_Email = @Email");
+            consulta.Parameters.AddWithValue("@Email", hotel.email);
+            return consultaObtenerValor(consulta);
+        }
+
+        public static bool hotelNombreExiste(Hotel hotel)
+        {
+            return consultaValorExiste(hotelObtenerIDPorNombre(hotel));
+        }
+
+        public static bool hotelDomicilioExiste(Hotel hotel)
+        {
+            return consultaValorExiste(domicilioHotelObtenerID(hotel.domicilio));
+        }
+
+        public static bool hotelEmailExiste(Hotel hotel)
+        {
+            return consultaValorExiste(hotelObtenerIDPorEmail(hotel));
+        }
+
+        public static bool hotelDistintoPorNombre(Hotel hotel)
+        {
+            return hotel.id != hotelObtenerIDPorNombre(hotel);
+        }
+
+        public static bool hotelDistintoPorDomicilio(Hotel hotel)
+        {
+            return hotel.id != hotelObtenerIDPorDomicilio(hotel);
+        }
+
+        public static bool hotelDistintoPorEmail(Hotel hotel)
+        {
+            return hotel.id != hotelObtenerIDPorEmail(hotel);
+        }
+
+        public static void hotelAgregarRegimen(Hotel hotel, string regimen)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Hoteles_Regimenes (HotelRegimen_HotelID, HotelRegimen_RegimenID) VALUES (@HotelID, @RegimenID)");
+            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerIDPorDomicilio(hotel));
+            consulta.Parameters.AddWithValue("@RegimenID", regimenObtenerID(regimen));
+        }
+
+        public static void hotelAgregarRegimenes(Hotel hotel)
+        {
+            foreach (string regimen in hotel.regimenes)
+                hotelAgregarRegimen(hotel, regimen);
+        }
+
+        public static void hotelEliminarRegimenes(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("DELETE FROM RIP.Hoteles_Regimenes WHERE HotelRegimen_HotelID = @HotelID");
+            consulta.Parameters.AddWithValue("@HotelID", hotel.id);
+            consultaEjecutar(consulta);
+        }
+
+        public static List<string> hotelObtenerRegimenesEnLista(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Regimen_Descripcion FROM RIP.Regimenes JOIN RIP.Hoteles_Regimenes ON Regimen_ID = HotelRegimen_RegimenID WHERE HotelRegimen_HotelID = @ID");
+            consulta.Parameters.AddWithValue("@ID", hotel.id);
+            return consultaObtenerLista(consulta);
+        }
+
+        public static List<string> hotelObtenerRegimenesFaltantesEnLista(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Regimen_Descripcion FROM RIP.Regimenes WHERE Regimen_ID NOT IN (SELECT HotelRegimen_RegimenID FROM RIP.Hoteles_Regimenes WHERE HotelRegimen_HotelID = @ID)");
+            consulta.Parameters.AddWithValue("@ID", hotel.id);
+            return consultaObtenerLista(consulta);
+        }
+
+        public static DataTable hotelObtenerUsuariosEnTabla(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Usuario_ID, Usuario_Nombre, Usuario_Estado, Persona_ID, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Nacionalidad, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle, Domicilio_Piso, Domicilio_Departamento FROM RIP.Usuarios JOIN RIP.Personas ON Usuario_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID JOIN RIP.Usuarios_Hoteles ON Usuario_ID = UsuarioHotel_UsuarioID WHERE UsuarioHotel_HotelID = @HotelID");
+            consulta.Parameters.AddWithValue("@HotelID", hotel.id);
+            return consultaObtenerTabla(consulta);
+        }
+
+        public static DataTable hotelObtenerUsuariosHabilitadosEnTabla(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Usuario_ID, Usuario_Nombre, Persona_ID, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Nacionalidad, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle, Domicilio_Piso, Domicilio_Departamento FROM RIP.Usuarios JOIN RIP.Personas ON Usuario_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID JOIN RIP.Usuarios_Hoteles ON Usuario_ID = UsuarioHotel_UsuarioID WHERE UsuarioHotel_HotelID = @HotelID AND Usuario_Estado = 1");
+            consulta.Parameters.AddWithValue("@HotelID", hotel.id);
+            return consultaObtenerTabla(consulta);
+        }
+
+        public static DataTable hotelObtenerHabitacionesEnTabla(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Habitacion_ID, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, Habitacion_Estado, TipoHabitacion_Descripcion, Habitacion_Descripcion,  Habitacion_HotelID FROM RIP.Habitaciones JOIN RIP.TiposHabitaciones ON Habitacion_TipoHabitacionID = TipoHabitacion_ID WHERE Habitacion_HotelID = @HotelID ORDER BY 2");
+            consulta.Parameters.AddWithValue("@HotelID", hotel.id);
+            return consultaObtenerTabla(consulta);
+        }
+
+        public static DataTable hotelObtenerHabitacionesHabilitadasEnTabla(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Habitacion_ID, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, TipoHabitacion_Descripcion, Habitacion_Descripcion,  Habitacion_HotelID FROM RIP.Habitaciones JOIN RIP.TiposHabitaciones ON Habitacion_TipoHabitacionID = TipoHabitacion_ID WHERE Habitacion_HotelID = @HotelID AND Habitacion_Estado = 1 ORDER BY 2");
+            consulta.Parameters.AddWithValue("@HotelID", hotel.id);
+            return consultaObtenerTabla(consulta);
+        }
+
+        public static List<string> hotelObtenerTodosEnLista()
+        {
+            SqlCommand consulta = consultaCrear("SELECT CONCAT(Domicilio_Pais, '-', Domicilio_Ciudad, '-', Domicilio_Calle, '-', Domicilio_NumeroCalle) FROM RIP.Domicilios JOIN RIP.Hoteles ON Domicilio_ID = Hotel_DomicilioID");
+            return consultaObtenerLista(consulta);
+        }
+
+        public static Hotel hotelObtenerDesdeNombre(string nombreHotel)
+        {
+            string[] direccion = nombreHotel.Split('-');
+            Domicilio domicilio = new Domicilio("", direccion[0], direccion[1], direccion[2], direccion[3]);
+            Hotel hotel = new Hotel(domicilio);
+            hotel.id = hotelObtenerIDPorDomicilio(hotel);
+            return hotel;
+        }
+
+        public static DataTable hotelFiltrarParaModificar(Hotel hotel)
+        {
+            string filtroNombre = string.IsNullOrEmpty(hotel.nombre) ? "" : hotel.nombre;
+            string filtroEstrellas = string.IsNullOrEmpty(hotel.cantidadEstrellas) ? "" : hotel.cantidadEstrellas;
+            string filtroPais = string.IsNullOrEmpty(hotel.domicilio.pais) ? "" : hotel.domicilio.pais;
+            string filtroCiudad = string.IsNullOrEmpty(hotel.domicilio.ciudad)? "" : hotel.domicilio.pais;
+            string query = "SELECT Hotel_ID, Hotel_Estado, Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_FechaCreacion, " +
+            "Hotel_Email, Hotel_Telefono, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, " +
+            "Domicilio_NumeroCalle FROM RIP.Hoteles JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID WHERE " +
+            "ISNULL(Hotel_Nombre, '') LIKE '" + hotel.nombre + "%' AND " +
+            "Domicilio_Pais LIKE '" + hotel.domicilio.pais+ "%' AND " +
+            "Domicilio_Ciudad LIKE '" + hotel.domicilio.ciudad + "%' AND " +
+            "CONVERT(nvarchar(50), Hotel_CantidadEstrellas) LIKE '" + hotel.cantidadEstrellas + "%'";
+            SqlCommand consulta = consultaCrear(query);
+            return consultaObtenerTabla(consulta);
+        }
+
+        public static DataTable hotelFiltrarParaEliminar(Hotel hotel)
+        {
+            string filtroNombre = string.IsNullOrEmpty(hotel.nombre) ? "" : hotel.nombre;
+            string filtroEstrellas = string.IsNullOrEmpty(hotel.cantidadEstrellas) ? "" : hotel.cantidadEstrellas;
+            string filtroPais = string.IsNullOrEmpty(hotel.domicilio.pais) ? "" : hotel.domicilio.pais;
+            string filtroCiudad = string.IsNullOrEmpty(hotel.domicilio.ciudad) ? "" : hotel.domicilio.pais;
+            string query = "SELECT Hotel_ID, Hotel_Nombre, Hotel_Estado, Hotel_CantidadEstrellas, Hotel_FechaCreacion, " +
+            "Hotel_Email, Hotel_Telefono, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, " +
+            "Domicilio_NumeroCalle FROM RIP.Hoteles JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID WHERE Hotel_Estado = 1 AND " +
+            "ISNULL(Hotel_Nombre, '') LIKE '" + hotel.nombre + "%' AND " +
+            "Domicilio_Pais LIKE '" + hotel.domicilio.pais + "%' AND " +
+            "Domicilio_Ciudad LIKE '" + hotel.domicilio.ciudad + "%' AND " +
+            "CONVERT(nvarchar(50), Hotel_CantidadEstrellas) LIKE '" + hotel.cantidadEstrellas + "%'";
+            SqlCommand consulta = consultaCrear(query);
+            return consultaObtenerTabla(consulta);
+        }
+
+        #endregion
+
+        #region HotelCerrado
 
         public static bool hotelCerradoTieneReservasEnPeriodo(HotelCerrado hotelCerrado)
         {
@@ -1071,172 +1270,10 @@ namespace FrbaHotel
         public static void hotelCerradoAgregar(HotelCerrado hotelCerrado)
         {
             SqlCommand consulta = consultaCrear("INSERT INTO RIP.HotelesCerrados (HotelCerrado_HotelID, HotelCerrado_FechaInicio, HotelCerrado_FechaFin, HotelCerrado_Motivo) VALUES (@HotelID, @FechaInicio, @FechaFin, @Motivo)");
-            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerID(hotelCerrado.hotel));
+            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerIDPorDomicilio(hotelCerrado.hotel));
             consulta.Parameters.AddWithValue("@FechaInicio", hotelCerrado.fechaInicio);
             consulta.Parameters.AddWithValue("@FechaFin", hotelCerrado.fechaFin);
             consulta.Parameters.AddWithValue("@Motivo", hotelCerrado.motivo);
-        }
-
-        public static List<string> hotelObtenerRegimenesEnLista(Hotel hotel)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Regimen_Descripcion FROM RIP.Regimenes JOIN RIP.Hoteles_Regimenes ON Regimen_ID = HotelRegimen_RegimenID WHERE HotelRegimen_HotelID = @ID");
-            consulta.Parameters.AddWithValue("@ID", hotel.id);
-            return consultaObtenerLista(consulta);
-        }
-
-        public static List<string> hotelObtenerRegimenesFaltantesEnLista(Hotel hotel)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Regimen_Descripcion FROM RIP.Regimenes WHERE Regimen_ID NOT IN (SELECT HotelRegimen_RegimenID FROM RIP.Hoteles_Regimenes WHERE HotelRegimen_HotelID = @ID)");
-            consulta.Parameters.AddWithValue("@ID", hotel.id);
-            return consultaObtenerLista(consulta);
-        }
-
-        public static void hotelAgregar(Hotel hotel)
-        {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Hoteles (Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_DomicilioID, Hotel_Telefono, Hotel_Email, Hotel_FechaCreacion) VALUES (@Nombre, @CantidadEstrellas, @DomicilioID, @Telefono, @Email, @FechaCreacion)");
-            consulta.Parameters.AddWithValue("@Nombre", hotel.nombre);
-            consulta.Parameters.AddWithValue("@CantidadEstrellas", hotel.cantidadEstrellas);
-            consulta.Parameters.AddWithValue("@DomicilioID", domicilioHotelObtenerID(hotel.domicilio));
-            consulta.Parameters.AddWithValue("@Telefono", hotel.telefono);
-            consulta.Parameters.AddWithValue("@Hotel", hotel.email);
-            consulta.Parameters.AddWithValue("@FechaCreacion", hotel.fechaCreacion);
-            consultaEjecutar(consulta);
-        }
-
-        public static void hotelModificar(Hotel hotel)
-        {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Hoteles SET Hotel_Nombre = @Nombre, Hotel_CantidadEstrellas = @CantidadEstrellas, Hotel_DomicilioID = @DomicilioID, Hotel_Telefono = @Telefono, Hotel_Email = @Email, Hotel_FechaCreacion = @FechaCreacion, Hotel_Estado = @Estado WHERE Hotel_ID = @ID");
-            consulta.Parameters.AddWithValue("@ID", hotel.id);
-            consulta.Parameters.AddWithValue("@Nombre", hotel.nombre);
-            consulta.Parameters.AddWithValue("@CantidadEstrellas", hotel.cantidadEstrellas);
-            consulta.Parameters.AddWithValue("@DomicilioID", domicilioHotelObtenerID(hotel.domicilio));
-            consulta.Parameters.AddWithValue("@Telefono", hotel.telefono);
-            consulta.Parameters.AddWithValue("@Hotel", hotel.email);
-            consulta.Parameters.AddWithValue("@FechaCreacion", hotel.fechaCreacion);
-            consultaEjecutar(consulta);
-        }
-
-        public static void hotelEliminar(Hotel hotel)
-        {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Hoteles SET Hotel_Estado = 0 WHERE Hotel_ID = @ID");
-            consulta.Parameters.AddWithValue("@ID", hotel.id);
-            consultaEjecutar(consulta);
-        }
-
-        public static string hotelObtenerID(Hotel hotel)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Hotel_ID FROM RIP.Hoteles WHERE Hotel_DomicilioID = @DomicilioID");
-            consulta.Parameters.AddWithValue("@DomicilioID", domicilioHotelObtenerID(hotel.domicilio));
-            return consultaObtenerValor(consulta);
-        }
-
-        public static bool hotelNombreExiste(Hotel hotel)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Hotel_Nombre FROM RIP.Hoteles WHERE Hotel_Nombre = @Nombre");
-            consulta.Parameters.AddWithValue("@Nombre", hotel.nombre);
-            return consultaValorExiste(consultaObtenerValor(consulta));
-        }
-
-        public static bool hotelDistinto(Hotel hotel)
-        {
-            return hotel.id != hotelObtenerID(hotel);
-        }
-
-        public static void hotelAgregarRegimen(Hotel hotel, string regimen)
-        {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Hoteles_Regimenes (HotelRegimen_HotelID, HotelRegimen_RegimenID) VALUES (@HotelID, @RegimenID)");
-            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerID(hotel));
-            consulta.Parameters.AddWithValue("@RegimenID", regimenObtenerID(regimen));
-        }
-
-        public static void hotelAgregarRegimenes(Hotel hotel, List<string> regimenes)
-        {
-            foreach (string regimen in regimenes)
-                hotelAgregarRegimen(hotel, regimen);
-        }
-
-        public static void hotelEliminarRegimenes(Hotel hotel)
-        {
-            SqlCommand consulta = consultaCrear("DELETE FROM RIP.Hoteles_Regimenes WHERE HotelRegimen_HotelID = @HotelID");
-            consulta.Parameters.AddWithValue("@HotelID", hotel.id);
-            consultaEjecutar(consulta);
-        }
-
-        public static DataTable hotelObtenerHabitacionesEnTabla(Hotel hotel)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Habitacion_ID, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, Habitacion_Estado, TipoHabitacion_Descripcion, Habitacion_Descripcion,  Habitacion_HotelID FROM RIP.Habitaciones JOIN RIP.TiposHabitaciones ON Habitacion_TipoHabitacionID = TipoHabitacion_ID WHERE Habitacion_HotelID = @HotelID ORDER BY 2");
-            consulta.Parameters.AddWithValue("@HotelID", hotel.id);
-            return consultaObtenerTabla(consulta);
-        }
-
-        public static DataTable hotelObtenerHabitacionesHabilitadasEnTabla(Hotel hotel)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Habitacion_ID, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, TipoHabitacion_Descripcion, Habitacion_Descripcion,  Habitacion_HotelID FROM RIP.Habitaciones JOIN RIP.TiposHabitaciones ON Habitacion_TipoHabitacionID = TipoHabitacion_ID WHERE Habitacion_HotelID = @HotelID AND Habitacion_Estado = 1 ORDER BY 2");
-            consulta.Parameters.AddWithValue("@HotelID", hotel.id);
-            return consultaObtenerTabla(consulta);
-        }
-
-        public static Hotel hotelObtenerDesdeNombre(string nombreHotel)
-        {
-            string[] direccion = nombreHotel.Split('-');
-            Domicilio domicilio = new Domicilio("", direccion[0], direccion[1], direccion[2], direccion[3]);
-            Hotel hotel = new Hotel(domicilio);
-            hotel.id = hotelObtenerID(hotel);
-            return hotel;
-        }
-
-        public static List<string> hotelObtenerTodosLista()
-        {
-            SqlCommand consulta = consultaCrear("SELECT CONCAT(Domicilio_Pais, '-', Domicilio_Ciudad, '-', Domicilio_Calle, '-', Domicilio_NumeroCalle) FROM RIP.Domicilios JOIN RIP.Hoteles ON Domicilio_ID = Hotel_DomicilioID");
-            return consultaObtenerLista(consulta);
-        }
-
-        public static DataTable hotelFiltrarParaModificar(Hotel hotel)
-        {
-            string filtroNombre = string.IsNullOrEmpty(hotel.nombre) ? "" : hotel.nombre;
-            string filtroEstrellas = string.IsNullOrEmpty(hotel.cantidadEstrellas) ? "" : hotel.cantidadEstrellas;
-            string filtroPais = string.IsNullOrEmpty(hotel.domicilio.pais) ? "" : hotel.domicilio.pais;
-            string filtroCiudad = string.IsNullOrEmpty(hotel.domicilio.ciudad)? "" : hotel.domicilio.pais;
-            string query = "SELECT Hotel_ID, Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_FechaCreacion, " +
-            "Hotel_Email, Hotel_Telefono, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, " +
-            "Domicilio_NumeroCalle FROM RIP.Hoteles JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID WHERE " +
-            "ISNULL(Hotel_Nombre, '') LIKE '" + hotel.nombre + "%' AND " +
-            "Domicilio_Pais LIKE '" + hotel.domicilio.pais+ "%' AND " +
-            "Domicilio_Ciudad LIKE '" + hotel.domicilio.ciudad + "%' AND " +
-            "CONVERT(nvarchar(50), Hotel_CantidadEstrellas) LIKE '" + hotel.cantidadEstrellas + "%'";
-            SqlCommand consulta = consultaCrear(query);
-            return consultaObtenerTabla(consulta);
-        }
-
-        public static DataTable hotelFiltrarParaEliminar(Hotel hotel)
-        {
-            string filtroNombre = string.IsNullOrEmpty(hotel.nombre) ? "" : hotel.nombre;
-            string filtroEstrellas = string.IsNullOrEmpty(hotel.cantidadEstrellas) ? "" : hotel.cantidadEstrellas;
-            string filtroPais = string.IsNullOrEmpty(hotel.domicilio.pais) ? "" : hotel.domicilio.pais;
-            string filtroCiudad = string.IsNullOrEmpty(hotel.domicilio.ciudad) ? "" : hotel.domicilio.pais;
-            string query = "SELECT Hotel_ID, Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_FechaCreacion, " +
-            "Hotel_Email, Hotel_Telefono, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, " +
-            "Domicilio_NumeroCalle FROM RIP.Hoteles JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID WHERE Hotel_Estado = 1 AND " +
-            "ISNULL(Hotel_Nombre, '') LIKE '" + hotel.nombre + "%' AND " +
-            "Domicilio_Pais LIKE '" + hotel.domicilio.pais + "%' AND " +
-            "Domicilio_Ciudad LIKE '" + hotel.domicilio.ciudad + "%' AND " +
-            "CONVERT(nvarchar(50), Hotel_CantidadEstrellas) LIKE '" + hotel.cantidadEstrellas + "%'";
-            SqlCommand consulta = consultaCrear(query);
-            return consultaObtenerTabla(consulta);
-        }
-
-        public static DataTable hotelObtenerUsuariosEnTabla(Hotel hotel)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Usuario_ID, Usuario_Nombre, Usuario_Estado, Persona_ID, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Nacionalidad, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle, Domicilio_Piso, Domicilio_Departamento FROM RIP.Usuarios JOIN RIP.Personas ON Usuario_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID JOIN RIP.Usuarios_Hoteles ON Usuario_ID = UsuarioHotel_UsuarioID WHERE UsuarioHotel_HotelID = @HotelID");
-            consulta.Parameters.AddWithValue("@HotelID", hotel.id);
-            return consultaObtenerTabla(consulta);
-        }
-
-        public static DataTable hotelObtenerUsuariosHabilitadosEnTabla(Hotel hotel)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Usuario_ID, Usuario_Nombre, Persona_ID, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Nacionalidad, Persona_FechaNacimiento, Persona_Telefono, Persona_Email, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle, Domicilio_Piso, Domicilio_Departamento FROM RIP.Usuarios JOIN RIP.Personas ON Usuario_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID JOIN RIP.Usuarios_Hoteles ON Usuario_ID = UsuarioHotel_UsuarioID WHERE UsuarioHotel_HotelID = @HotelID AND Usuario_Estado = 1");
-            consulta.Parameters.AddWithValue("@HotelID", hotel.id);
-            return consultaObtenerTabla(consulta);
         }
 
         #endregion
