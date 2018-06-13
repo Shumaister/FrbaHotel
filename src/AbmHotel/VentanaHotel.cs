@@ -178,7 +178,8 @@ namespace FrbaHotel.AbmHotel
             string nombre = datagridView.Rows[e.RowIndex].Cells["Hotel_Nombre"].Value.ToString();
             string estado = datagridView.Rows[e.RowIndex].Cells["Hotel_Estado"].Value.ToString();
             string cantidadEstrellas = datagridView.Rows[e.RowIndex].Cells["Hotel_CantidadEstrellas"].Value.ToString();
-            DateTime fechaCreacion = DateTime.Parse(datagridView.Rows[e.RowIndex].Cells["Hotel_FechaCreacion"].Value.ToString());
+            string fecha = datagridView.Rows[e.RowIndex].Cells["Hotel_FechaCreacion"].Value.ToString();
+            DateTime fechaCreacion = string.IsNullOrEmpty(fecha)? new DateTime() : fechaCreacion = DateTime.Parse(fecha);           
             string telefono = datagridView.Rows[e.RowIndex].Cells["Hotel_Telefono"].Value.ToString();
             string email = datagridView.Rows[e.RowIndex].Cells["Hotel_Email"].Value.ToString();
             string domicilioID = datagridView.Rows[e.RowIndex].Cells["Domicilio_ID"].Value.ToString();

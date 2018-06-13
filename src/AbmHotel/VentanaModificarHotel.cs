@@ -38,7 +38,7 @@ namespace FrbaHotel.AbmHotel
         {
             tbxNombre.Text = hotel.nombre;
             tbxEstrellas.Text = hotel.cantidadEstrellas;
-            tbxFechaCreacion.Text = hotel.fechaCreacion.ToShortDateString();
+            tbxFechaCreacion.Text = hotel.fechaCreacion.ToShortDateString() == "01/01/0001"? "" : hotel.fechaCreacion.ToShortDateString();
             tbxTelefono.Text = hotel.telefono;
             tbxEmail.Text = hotel.email;
             tbxPais.Text = hotel.domicilio.pais;
@@ -65,6 +65,7 @@ namespace FrbaHotel.AbmHotel
         }
         private void ventanaCrearHotelModificado()
         {
+            hotel.nombre = tbxNombre.Text;
             hotel.domicilio.pais = tbxPais.Text;
             hotel.domicilio.ciudad = tbxCiudad.Text;
             hotel.domicilio.calle = tbxCalle.Text;
@@ -73,6 +74,7 @@ namespace FrbaHotel.AbmHotel
             hotel.fechaCreacion = DateTime.Parse(tbxFechaCreacion.Text);
             hotel.email = tbxEmail.Text;
             hotel.telefono = tbxTelefono.Text;
+            hotel.regimenes = listBoxExtraerItemsEnLista(lbxRegimenes);
             hotel.estado = radioButtonEstado(rbtActivado);
         }
 

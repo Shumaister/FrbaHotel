@@ -744,6 +744,7 @@
             this.dgvModificarHotel.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvModificarHotel.Location = new System.Drawing.Point(16, 29);
             this.dgvModificarHotel.Name = "dgvModificarHotel";
+            this.dgvModificarHotel.ReadOnly = true;
             this.dgvModificarHotel.RowHeadersVisible = false;
             this.dgvModificarHotel.Size = new System.Drawing.Size(506, 254);
             this.dgvModificarHotel.TabIndex = 0;
@@ -904,6 +905,7 @@
             this.dgvEliminarHotel.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvEliminarHotel.Location = new System.Drawing.Point(16, 29);
             this.dgvEliminarHotel.Name = "dgvEliminarHotel";
+            this.dgvEliminarHotel.ReadOnly = true;
             this.dgvEliminarHotel.RowHeadersVisible = false;
             this.dgvEliminarHotel.Size = new System.Drawing.Size(506, 254);
             this.dgvEliminarHotel.TabIndex = 0;

@@ -1014,7 +1014,7 @@ namespace FrbaHotel
             }
             domicilioHotelAgregar(hotel.domicilio);
             hotelAgregar(hotel);
-            hotelAgregarRegimenes(hotel);
+
             ventanaInformarExito("El hotel fue creado con exito");
             return true;
         }
@@ -1037,7 +1037,9 @@ namespace FrbaHotel
                 return false;
             }
             domicilioHotelModificar(hotel.domicilio);
+            hotelEliminarRegimenes(hotel);
             hotelModificar(hotel);
+            hotelAgregarRegimenes(hotel);
             ventanaInformarExito("El Hotel fue modificado con exito");
             return true;
         }
@@ -1104,6 +1106,7 @@ namespace FrbaHotel
 
         public static bool hotelNombreExiste(Hotel hotel)
         {
+            string id = hotelObtenerIDPorNombre(hotel);
             return consultaValorExiste(hotelObtenerIDPorNombre(hotel));
         }
 
