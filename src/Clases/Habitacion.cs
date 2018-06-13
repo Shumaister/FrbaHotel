@@ -8,18 +8,30 @@ namespace FrbaHotel.Clases
 {
     public class Habitacion
     {
-        public Hotel hotel { get; set; }
+        public string id { get; set; }
         public string numero { get; set; }
         public string piso { get; set; }
         public string frente { get; set; }
         public string tipoHabitacion { get; set; }
         public string descripcion { get; set; }
         public string estado { get; set; }
+        public Hotel hotel { get; set; }
 
-        public Habitacion(Hotel hotel, string numero)
+
+        public Habitacion(string id, string numero, string piso, string frente, string tipoHabitacion, string descripcion, Hotel hotel)
         {
-            this.hotel = hotel;
+            this.id = id;
             this.numero = numero;
+            this.piso = piso;
+            this.tipoHabitacion = tipoHabitacion;
+            this.descripcion = descripcion;
+            this.hotel = hotel;
         }
+
+        public Habitacion(string id)
+        {
+            this.id = id;
+        }
+
     }
 }

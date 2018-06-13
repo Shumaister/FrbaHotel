@@ -72,6 +72,12 @@
     <Compile Include="AbmHabitacion\VentanaModificarHabitacion.Designer.cs">
       <DependentUpon>VentanaModificarHabitacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmHotel\VentanaEliminarHotel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmHotel\VentanaEliminarHotel.Designer.cs">
+      <DependentUpon>VentanaEliminarHotel.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmHotel\VentanaHotel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,6 +220,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmHabitacion\VentanaHabitacion.resx">
       <DependentUpon>VentanaHabitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmHabitacion\VentanaModificarHabitacion.resx">
+      <DependentUpon>VentanaModificarHabitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmHotel\VentanaEliminarHotel.resx">
+      <DependentUpon>VentanaEliminarHotel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmHotel\VentanaHotel.resx">
       <DependentUpon>VentanaHotel.cs</DependentUpon>

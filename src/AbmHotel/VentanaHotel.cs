@@ -62,22 +62,32 @@ namespace FrbaHotel.AbmHotel
 
         #region Modificar
 
-        private Hotel ventanaCrearHotelParaModificar(DataGridViewCellEventArgs e)
+        private Hotel ventanaCrearHotel(DataGridView datagridView, DataGridViewCellEventArgs e)
         {
-            string hotelID = dgvModificarHotel.Rows[e.RowIndex].Cells["Hotel_ID"].Value.ToString();
-            string nombre = dgvModificarHotel.Rows[e.RowIndex].Cells["Hotel_Nombre"].Value.ToString();
-            string cantidadEstrellas = dgvModificarHotel.Rows[e.RowIndex].Cells["Hotel_CantidadEstrellas"].Value.ToString();
-            DateTime fechaCreacion = DateTime.Parse(dgvModificarHotel.Rows[e.RowIndex].Cells["Hotel_FechaCreacion"].Value.ToString());
-            string telefono = dgvModificarHotel.Rows[e.RowIndex].Cells["Hotel_Telefono"].Value.ToString();
-            string email = dgvModificarHotel.Rows[e.RowIndex].Cells["Hotel_Email"].Value.ToString();
-            string domicilioID = dgvModificarHotel.Rows[e.RowIndex].Cells["Domicilio_ID"].Value.ToString();
-            string pais = dgvModificarHotel.Rows[e.RowIndex].Cells["Domicilio_Pais"].Value.ToString();
-            string ciudad = dgvModificarHotel.Rows[e.RowIndex].Cells["Domicilio_Ciudad"].Value.ToString();
-            string calle = dgvModificarHotel.Rows[e.RowIndex].Cells["Domicilio_Calle"].Value.ToString();
-            string numeroCalle = dgvModificarHotel.Rows[e.RowIndex].Cells["Domicilio_NumeroCalle"].Value.ToString();
+            string hotelID = datagridView.Rows[e.RowIndex].Cells["Hotel_ID"].Value.ToString();
+            string nombre = datagridView.Rows[e.RowIndex].Cells["Hotel_Nombre"].Value.ToString();
+            string cantidadEstrellas = datagridView.Rows[e.RowIndex].Cells["Hotel_CantidadEstrellas"].Value.ToString();
+            DateTime fechaCreacion = DateTime.Parse(datagridView.Rows[e.RowIndex].Cells["Hotel_FechaCreacion"].Value.ToString());
+            string telefono = datagridView.Rows[e.RowIndex].Cells["Hotel_Telefono"].Value.ToString();
+            string email = datagridView.Rows[e.RowIndex].Cells["Hotel_Email"].Value.ToString();
+            string domicilioID = datagridView.Rows[e.RowIndex].Cells["Domicilio_ID"].Value.ToString();
+            string pais = datagridView.Rows[e.RowIndex].Cells["Domicilio_Pais"].Value.ToString();
+            string ciudad = datagridView.Rows[e.RowIndex].Cells["Domicilio_Ciudad"].Value.ToString();
+            string calle = datagridView.Rows[e.RowIndex].Cells["Domicilio_Calle"].Value.ToString();
+            string numeroCalle = datagridView.Rows[e.RowIndex].Cells["Domicilio_NumeroCalle"].Value.ToString();
             Domicilio domicilio = new Domicilio(domicilioID, pais, ciudad, calle, numeroCalle);
             Hotel hotel = new Hotel(hotelID, nombre, cantidadEstrellas, fechaCreacion, email, telefono, domicilio);
             return hotel;
+        }
+
+        private Hotel ventanaCrearHotelParaModificar(DataGridViewCellEventArgs e)
+        {
+            return ventanaCrearHotel(dgvModificarHotel, e);
+        }
+
+        private Hotel ventanaCrearHotelParaEliminar(DataGridViewCellEventArgs e)
+        {
+            return ventanaCrearHotel(dgvEliminarHotel, e);
         }
 
         private void dgvModificarHotel_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -114,10 +124,8 @@ namespace FrbaHotel.AbmHotel
             var senderGrid = (DataGridView)sender;
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                string id = dgvEliminarHotel.Rows[e.RowIndex].Cells["Hotel_ID"].Value.ToString();
-                Hotel hotel = new Hotel(id);
-                Database.hotelEliminadoConExito(hotel);
-                ventanaActualizar(sender, e);
+                Hotel hotel = ventanaCrearHotelParaEliminar(e);
+                new VentanaEliminarHotel(this, hotel).ShowDialog();
             }
         }
 

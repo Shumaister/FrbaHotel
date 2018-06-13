@@ -126,7 +126,7 @@ namespace FrbaHotel.Menus
 
         private void menuHabitaciones_Click(object sender, EventArgs e)
         {
-            VentanaHabitacion ventanaHabitacion = new VentanaHabitacion();
+            VentanaHabitacion ventanaHabitacion = new VentanaHabitacion(sesion);
             ventanaHabitacion.ShowDialog();
         }
 
