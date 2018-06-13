@@ -91,7 +91,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void ventanaModificarUsuario()
         {
-            cbxTipoDocumento.SelectedIndex = cbxTipoDocumento.Items.IndexOf(usuario.persona.tipoDocumento);
+            usuario.persona.tipoDocumento = cbxTipoDocumento.SelectedItem.ToString();
             usuario.nombre = tbxUsuario.Text;
             usuario.contrasenia = tbxContrasena.Text;
             usuario.estado = radioButtonEstado(rbtActivado);
@@ -136,7 +136,7 @@ namespace FrbaHotel.AbmUsuario
             tbxNombre.Clear();
             tbxApellido.Clear();
             tbxDocumento.Clear();
-            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
+            cbxTipoDocumento.SelectedIndex = 0;
             tbxFechaNacimiento.Clear();
             tbxNacionalidad.Clear();
             tbxPais.Clear();
@@ -148,6 +148,8 @@ namespace FrbaHotel.AbmUsuario
             tbxEmail.Clear();
             tbxTelefono.Clear();
             controladorError.Clear();
+            calendario.Hide();
+            btnGuardarFecha.Hide();
         }
 
         private void btnSeleccionarFecha_Click(object sender, EventArgs e)

@@ -72,10 +72,7 @@ namespace FrbaHotel.AbmUsuario
             {
                 Usuario usuario = ventanaCrearUsuarioParaAgregar();
                 if (Database.usuarioAgregadoConExito(usuario))
-                {
-                    btnLimpiarUsuario_Click(sender, e);
                     ventanaActualizar();
-                }
             }
         }
 
@@ -87,6 +84,7 @@ namespace FrbaHotel.AbmUsuario
             listBoxLimpiar(lbxRoles);
             comboBoxCargar(cbxHoteles, Database.hotelObtenerTodosLista());
             listBoxLimpiar(lbxHoteles);
+            cbxTipoDocumento.SelectedIndex = 0;
             tbxNombre.Clear();
             tbxApellido.Clear();
             tbxDocumento.Clear();
@@ -101,6 +99,8 @@ namespace FrbaHotel.AbmUsuario
             tbxEmail.Clear();
             tbxTelefono.Clear();
             controladorError.Clear();
+            calendario.Hide();
+            btnGuardarFecha.Hide();
         }
 
         private void btnSeleccionarFecha_Click(object sender, EventArgs e)

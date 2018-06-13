@@ -483,12 +483,14 @@ namespace FrbaHotel
                 ventanaInformarError("Ya existe un usuario registrado con ese documento");
                 return false;
             }
-
             usuarioEliminarHoteles(usuario);
             usuarioEliminarRoles(usuario);
             domicilioPersonaModificar(usuario.persona.domicilio);
             personaModificar(usuario.persona);
-            usuarioModificar(usuario);
+            if (usuarioContraseniaIguales(usuario))
+                usuarioModificarSinContrasenia(usuario);
+            else
+                usuarioModificar(usuario);
             usuarioAgregarHoteles(usuario);
             usuarioAgregarRoles(usuario);
             usuarioVerificarIntentosFallidos(usuario);
@@ -545,6 +547,20 @@ namespace FrbaHotel
         public static bool usuarioDistinto(Usuario usuario)
         {
             return usuario.id != usuarioObtenerID(usuario);
+        }
+
+        public static bool usuarioContraseniaIguales(Usuario usuario)
+        {
+            return usuario.contrasenia == usuarioObtenerContrasenia(usuario);
+        }
+
+        public static void usuarioModificarSinContrasenia(Usuario usuario)
+        {
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Usuarios SET Usuario_Nombre = @Nombre, Usuario_Estado = @Estado WHERE Usuario_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", usuario.id);
+            consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
+            consulta.Parameters.AddWithValue("@Estado", usuario.estado);
+            consultaEjecutar(consulta);
         }
 
         public static void usuarioAgregarHotel(Usuario usuario, Hotel hotel)
@@ -636,12 +652,7 @@ namespace FrbaHotel
             return consultaObtenerTabla(consulta);
         }
 
-        public static string usuarioObtenerContrasenia(Usuario usuario)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Usuario_Contrasenia FROM RIP.Usuarios WHERE Usuario_Nombre = @Nombre");
-            consulta.Parameters.AddWithValue("@Nombre", usuario.nombre);
-            return consultaObtenerValor(consulta);
-        }
+
 
         public static bool usuarioHabilitado(Usuario usuario)
         {
@@ -672,6 +683,12 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
+        public static string usuarioObtenerContrasenia(Usuario usuario)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Usuario_Contrasenia FROM RIP.Usuarios WHERE Usuario_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", usuario.id);
+            return consultaObtenerValor(consulta);
+        }
 
 
         #endregion
