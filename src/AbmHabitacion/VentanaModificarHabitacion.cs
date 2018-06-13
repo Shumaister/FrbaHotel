@@ -43,7 +43,7 @@ namespace FrbaHotel.AbmHabitacion
                 rbtActivado.Select();
             else
                 rbtDesactivado.Select();
-            comboBoxCargar(cbxTipoHabitaciones, Database.tipoHabitacionObtenerTodas());
+            comboBoxCargar(cbxTipoHabitaciones, Database.tipoHabitacionObtenerTodasEnLista());
             cbxTipoHabitaciones.SelectedIndex = cbxTipoHabitaciones.Items.IndexOf(habitacion.tipoHabitacion);
             cbxTipoHabitaciones.Enabled = false;
             comboBoxCargar(cbxFrentes, Database.habitacionObtenerFrentes());

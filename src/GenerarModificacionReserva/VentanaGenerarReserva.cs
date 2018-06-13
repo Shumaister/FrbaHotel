@@ -22,8 +22,8 @@ namespace FrbaHotel.GenerarModificacionReserva
             Estadia = new Estadia();
             this.logo.Visible = false;
             this.btnConfirmarPaso1.Enabled = false;
-            comboBoxCargar(cbxTipoHabitacion, Database.tipoHabitacionObtenerTodas());
-            comboBoxCargar(cbxRegimenEstadia, Database.DescripcionRegimenObtenerTodos());
+            comboBoxCargar(cbxTipoHabitacion, Database.tipoHabitacionObtenerTodasEnLista());
+            comboBoxCargar(cbxRegimenEstadia, Database.regimenObtenerTodosEnLista());
         }
 
         private void VentanaGenerarReserva_Load(object sender, EventArgs e)
@@ -96,12 +96,12 @@ namespace FrbaHotel.GenerarModificacionReserva
                     return false;
                 }
             }
-
+            /*
             if (Database.HayReservasEntreFechas(this.calendarInicio.SelectionStart, this.calendarFin.SelectionStart))
             {
                 lblErrorPaso1.Visible = true;
             }
-
+            */
             return true;
         }
 

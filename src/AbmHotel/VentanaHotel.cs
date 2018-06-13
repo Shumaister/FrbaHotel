@@ -13,10 +13,15 @@ namespace FrbaHotel.AbmHotel
 {
     public partial class VentanaHotel : VentanaBase
     {
+
+        #region Constructores
+        
         public VentanaHotel()
         {
             InitializeComponent();
         }
+
+        #endregion
 
         #region Agregar
 
@@ -33,10 +38,7 @@ namespace FrbaHotel.AbmHotel
             {
                 Hotel hotel = ventanaCrearHotelParaAgregar();
                 if (Database.hotelAgregadoConExito(hotel))
-                {
-                    btnLimpiarAgregar_Click(sender, e);
                     ventanaActualizar(sender, e);
-                }
             }
         }
 
@@ -58,27 +60,33 @@ namespace FrbaHotel.AbmHotel
             btnGuardarFecha.Hide();
         }
 
+        private void btnAgregarRegimen_Click(object sender, EventArgs e)
+        {
+            buttonAgregarComboBoxListBox(cbxRegimenes, lbxRegimenes);
+        }
+
+        private void btnQuitarRegimen_Click(object sender, EventArgs e)
+        {
+            buttonQuitarComboBoxListBox(cbxRegimenes, lbxRegimenes);
+        }
+
+        private void btnGuardarFecha_Click(object sender, EventArgs e)
+        {
+            tbxFechaCreacion.Text = calendario.SelectionStart.ToShortDateString();
+            calendario.Hide();
+            btnGuardarFecha.Hide();
+        }
+
+        private void btnSeleccionarFecha_Click(object sender, EventArgs e)
+        {
+            calendario.Show();
+            btnGuardarFecha.Show();
+            controladorError.Clear();
+        }
+
         #endregion
 
         #region Modificar
-
-        private Hotel ventanaCrearHotel(DataGridView datagridView, DataGridViewCellEventArgs e)
-        {
-            string hotelID = datagridView.Rows[e.RowIndex].Cells["Hotel_ID"].Value.ToString();
-            string nombre = datagridView.Rows[e.RowIndex].Cells["Hotel_Nombre"].Value.ToString();
-            string cantidadEstrellas = datagridView.Rows[e.RowIndex].Cells["Hotel_CantidadEstrellas"].Value.ToString();
-            DateTime fechaCreacion = DateTime.Parse(datagridView.Rows[e.RowIndex].Cells["Hotel_FechaCreacion"].Value.ToString());
-            string telefono = datagridView.Rows[e.RowIndex].Cells["Hotel_Telefono"].Value.ToString();
-            string email = datagridView.Rows[e.RowIndex].Cells["Hotel_Email"].Value.ToString();
-            string domicilioID = datagridView.Rows[e.RowIndex].Cells["Domicilio_ID"].Value.ToString();
-            string pais = datagridView.Rows[e.RowIndex].Cells["Domicilio_Pais"].Value.ToString();
-            string ciudad = datagridView.Rows[e.RowIndex].Cells["Domicilio_Ciudad"].Value.ToString();
-            string calle = datagridView.Rows[e.RowIndex].Cells["Domicilio_Calle"].Value.ToString();
-            string numeroCalle = datagridView.Rows[e.RowIndex].Cells["Domicilio_NumeroCalle"].Value.ToString();
-            Domicilio domicilio = new Domicilio(domicilioID, pais, ciudad, calle, numeroCalle);
-            Hotel hotel = new Hotel(hotelID, nombre, cantidadEstrellas, fechaCreacion, email, telefono, domicilio);
-            return hotel;
-        }
 
         private Hotel ventanaCrearHotelParaModificar(DataGridViewCellEventArgs e)
         {
@@ -100,23 +108,23 @@ namespace FrbaHotel.AbmHotel
             }
         }
 
-        private void btnFiltrarModificar_Click(object sender, EventArgs e)
+        private void btnModificarFiltrar_Click(object sender, EventArgs e)
         {
-            Hotel hotel = new Hotel(tbxModificarFiltroNombre.Text, tbxModificarFiltroEstrellas.Text, tbxModificarFiltroPais.Text, tbxModificarFiltroCiudad.Text);
+            Domicilio domicilio = new Domicilio(null, tbxModificarFiltroPais.Text, tbxModificarFiltroCiudad.Text, null, null);
+            Hotel hotel = new Hotel(tbxModificarFiltroNombre.Text, tbxModificarFiltroEstrellas.Text, domicilio);
             dataGridViewCargar(dgvModificarHotel, Database.hotelFiltrarParaModificar(hotel));
         }
 
-        private void btnLimpiarModificar_Click(object sender, EventArgs e)
+        private void btnModificarLimpiar_Click(object sender, EventArgs e)
         {
-            tbxModificarFiltroCiudad.Clear();
-            tbxModificarFiltroEstrellas.Clear();
             tbxModificarFiltroNombre.Clear();
             tbxModificarFiltroPais.Clear();
+            tbxModificarFiltroCiudad.Clear();
+            tbxModificarFiltroEstrellas.Clear();
         }
 
         #endregion
-
-        
+      
         #region Eliminar
 
         private void dgvEliminarClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -129,33 +137,70 @@ namespace FrbaHotel.AbmHotel
             }
         }
 
-        private void btnFiltrarEliminar_Click(object sender, EventArgs e)
+        private void btnEliminarFiltrar_Click(object sender, EventArgs e)
         {
-            Hotel hotel = new Hotel(tbxEliminarFiltrarNombre.Text, tbxEliminarFiltrarEstrellas.Text, tbxEliminarFiltrarPais.Text, tbxEliminarFiltrarCiudad.Text);
+            Domicilio domicilio = new Domicilio(null, tbxEliminarFiltroPais.Text, tbxEliminarFiltroCiudad.Text, null, null);
+            Hotel hotel = new Hotel(tbxEliminarFiltroNombre.Text, tbxEliminarFiltroEstrellas.Text, domicilio);
             dataGridViewCargar(dgvEliminarHotel, Database.hotelFiltrarParaEliminar(hotel));
         }
 
-        private void btnLimpiarEliminar_Click(object sender, EventArgs e)
+        private void btnEliminarLimpiar_Click(object sender, EventArgs e)
         {
-            tbxEliminarFiltrarCiudad.Clear();
-            tbxEliminarFiltrarEstrellas.Clear();
-            tbxEliminarFiltrarNombre.Clear();
-            tbxEliminarFiltrarPais.Clear();
+            tbxEliminarFiltroNombre.Clear();
+            tbxEliminarFiltroEstrellas.Clear();
+            tbxEliminarFiltroPais.Clear();
+            tbxEliminarFiltroCiudad.Clear();
         }
 
         #endregion
 
-        #region Eventos
+        #region Control
 
         public void ventanaActualizar(object sender, EventArgs e)
         {
-            btnFiltrarEliminar_Click(sender, e);
-            btnFiltrarModificar_Click(sender, e);
+            btnModificarFiltrar_Click(sender, e);
+            btnEliminarFiltrar_Click(sender, e);
         }
 
         private void VentanaHotel_Load(object sender, EventArgs e)
         {
+            ventanaActualizar(sender, e);
+            comboBoxCargar(cbxRegimenes, Database.regimenObtenerTodosEnLista());
+            dataGridViewAgregarBotonModificar(dgvModificarHotel);
+            dataGridViewAgregarBotonEliminar(dgvEliminarHotel);
+            ventanaOcultarColumnas();
+        }
 
+        private Hotel ventanaCrearHotel(DataGridView datagridView, DataGridViewCellEventArgs e)
+        {
+            string hotelID = datagridView.Rows[e.RowIndex].Cells["Hotel_ID"].Value.ToString();
+            string nombre = datagridView.Rows[e.RowIndex].Cells["Hotel_Nombre"].Value.ToString();
+            string cantidadEstrellas = datagridView.Rows[e.RowIndex].Cells["Hotel_CantidadEstrellas"].Value.ToString();
+            DateTime fechaCreacion = DateTime.Parse(datagridView.Rows[e.RowIndex].Cells["Hotel_FechaCreacion"].Value.ToString());
+            string telefono = datagridView.Rows[e.RowIndex].Cells["Hotel_Telefono"].Value.ToString();
+            string email = datagridView.Rows[e.RowIndex].Cells["Hotel_Email"].Value.ToString();
+            string domicilioID = datagridView.Rows[e.RowIndex].Cells["Domicilio_ID"].Value.ToString();
+            string pais = datagridView.Rows[e.RowIndex].Cells["Domicilio_Pais"].Value.ToString();
+            string ciudad = datagridView.Rows[e.RowIndex].Cells["Domicilio_Ciudad"].Value.ToString();
+            string calle = datagridView.Rows[e.RowIndex].Cells["Domicilio_Calle"].Value.ToString();
+            string numeroCalle = datagridView.Rows[e.RowIndex].Cells["Domicilio_NumeroCalle"].Value.ToString();
+            Domicilio domicilio = new Domicilio(domicilioID, pais, ciudad, calle, numeroCalle);
+            Hotel hotel = new Hotel(hotelID, nombre, cantidadEstrellas, fechaCreacion, email, telefono, domicilio);
+            return hotel;
+        }
+
+        private void ventanaOcultarColumnas()
+        {
+            dgvModificarHotel.Columns["Hotel_ID"].Visible = false;
+            dgvModificarHotel.Columns["Domicilio_ID"].Visible = false;
+            dgvModificarHotel.Columns["Hotel_Telefono"].Visible = false;
+            dgvModificarHotel.Columns["Hotel_Email"].Visible = false;
+            dgvModificarHotel.Columns["Hotel_FechaCreacion"].Visible = false;
+            dgvEliminarHotel.Columns["Hotel_ID"].Visible = false;
+            dgvEliminarHotel.Columns["Domicilio_ID"].Visible = false;
+            dgvEliminarHotel.Columns["Hotel_Telefono"].Visible = false;
+            dgvEliminarHotel.Columns["Hotel_Email"].Visible = false;
+            dgvEliminarHotel.Columns["Hotel_FechaCreacion"].Visible = false;
         }
 
         private void tbxNombre_KeyPress(object sender, KeyPressEventArgs e)
@@ -202,10 +247,49 @@ namespace FrbaHotel.AbmHotel
 
         private void tbxEmail_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            controladorError.Clear();
         }
 
-#endregion
+        private void tbxModificarFiltroNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaLetrasYNumeros(e);
+        }
 
+        private void tbxModificarFiltroEstrellas_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaNumeros(e);
+        }
+
+        private void tbxModificarFiltroCiudad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaLetrasYNumeros(e);
+        }
+
+        private void tbxModificarFiltroPais_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaLetras(e);
+        }
+
+        private void tbxEliminarFiltroNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaLetrasYNumeros(e);
+        }
+
+        private void tbxEliminarFiltroCiudad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaLetrasYNumeros(e);
+        }
+
+        private void tbxEliminarFiltroEstrellas_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaNumeros(e);
+        }
+
+        private void tbxEliminarFiltroPais_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaLetras(e);
+        }
+
+        #endregion
     }
 }

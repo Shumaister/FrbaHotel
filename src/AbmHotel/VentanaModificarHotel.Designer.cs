@@ -140,6 +140,7 @@
             this.btnAgregarRegimen.TabIndex = 332;
             this.btnAgregarRegimen.Text = "Agregar";
             this.btnAgregarRegimen.UseVisualStyleBackColor = true;
+            this.btnAgregarRegimen.Click += new System.EventHandler(this.btnAgregarRegimen_Click);
             // 
             // label10
             // 

@@ -147,5 +147,10 @@ namespace FrbaHotel.AbmHotel
         }
 
         #endregion
+
+        private void btnAgregarRegimen_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -123,7 +123,7 @@ namespace FrbaHotel.AbmHabitacion
         {
             lblHotel.Text = "Hotel: " + sesion.hotel.domicilio.pais + " - " + sesion.hotel.domicilio.ciudad + " - " + sesion.hotel.domicilio.calle + " - " + sesion.hotel.domicilio.numeroCalle;
             comboBoxCargar(cbxFrentes, Database.habitacionObtenerFrentes());
-            comboBoxCargar(cbxTipoHabitaciones, Database.tipoHabitacionObtenerTodas());
+            comboBoxCargar(cbxTipoHabitaciones, Database.tipoHabitacionObtenerTodasEnLista());
             ventanaActualizar(sender, e);
             dataGridViewAgregarBotonModificar(dgvModificarHabitacion);
             dataGridViewAgregarBotonEliminar(dgvEliminarHabitacion);

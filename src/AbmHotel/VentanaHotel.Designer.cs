@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle65 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle66 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle67 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle68 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.pagAgregar = new System.Windows.Forms.TabPage();
             this.label13 = new System.Windows.Forms.Label();
@@ -91,19 +91,19 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgvModificarHotel = new System.Windows.Forms.DataGridView();
             this.pagEliminar = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.btnEliminarLimpiar = new System.Windows.Forms.Button();
+            this.label24 = new System.Windows.Forms.Label();
             this.btnEliminarFiltrar = new System.Windows.Forms.Button();
+            this.tbxEliminarFiltroPais = new System.Windows.Forms.TextBox();
+            this.tbxEliminarFiltroEstrellas = new System.Windows.Forms.TextBox();
+            this.tbxEliminarFiltroCiudad = new System.Windows.Forms.TextBox();
+            this.tbxEliminarFiltroNombre = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvEliminarHotel = new System.Windows.Forms.DataGridView();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.tbxEliminarFiltrarNombre = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.tbxEliminarFiltrarCiudad = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.tbxEliminarFiltrarEstrellas = new System.Windows.Forms.TextBox();
-            this.label41 = new System.Windows.Forms.Label();
-            this.tbxEliminarFiltrarPais = new System.Windows.Forms.TextBox();
-            this.btnEliminarLimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.tabControl.SuspendLayout();
@@ -221,6 +221,7 @@
             this.btnQuitarRegimen.TabIndex = 291;
             this.btnQuitarRegimen.Text = "Quitar";
             this.btnQuitarRegimen.UseVisualStyleBackColor = true;
+            this.btnQuitarRegimen.Click += new System.EventHandler(this.btnQuitarRegimen_Click);
             // 
             // label9
             // 
@@ -241,6 +242,7 @@
             this.btnAgregarRegimen.TabIndex = 290;
             this.btnAgregarRegimen.Text = "Agregar";
             this.btnAgregarRegimen.UseVisualStyleBackColor = true;
+            this.btnAgregarRegimen.Click += new System.EventHandler(this.btnAgregarRegimen_Click);
             // 
             // label10
             // 
@@ -260,6 +262,7 @@
             this.btnGuardarFecha.Text = "Guardar";
             this.btnGuardarFecha.UseVisualStyleBackColor = true;
             this.btnGuardarFecha.Visible = false;
+            this.btnGuardarFecha.Click += new System.EventHandler(this.btnGuardarFecha_Click);
             // 
             // calendario
             // 
@@ -288,6 +291,7 @@
             this.btnSeleccionarFecha.TabIndex = 283;
             this.btnSeleccionarFecha.Text = "Seleccionar";
             this.btnSeleccionarFecha.UseVisualStyleBackColor = true;
+            this.btnSeleccionarFecha.Click += new System.EventHandler(this.btnSeleccionarFecha_Click);
             // 
             // label19
             // 
@@ -609,7 +613,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(312, 98);
+            this.label4.Location = new System.Drawing.Point(312, 99);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(27, 13);
             this.label4.TabIndex = 271;
@@ -618,7 +622,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(299, 45);
+            this.label3.Location = new System.Drawing.Point(299, 46);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 270;
@@ -627,7 +631,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(74, 98);
+            this.label2.Location = new System.Drawing.Point(74, 99);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 13);
             this.label2.TabIndex = 269;
@@ -636,7 +640,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(74, 46);
+            this.label1.Location = new System.Drawing.Point(74, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 268;
@@ -644,19 +648,20 @@
             // 
             // btnModificarLimpiar
             // 
-            this.btnModificarLimpiar.Location = new System.Drawing.Point(74, 136);
+            this.btnModificarLimpiar.Location = new System.Drawing.Point(74, 137);
             this.btnModificarLimpiar.Name = "btnModificarLimpiar";
             this.btnModificarLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnModificarLimpiar.TabIndex = 267;
             this.btnModificarLimpiar.Text = "Limpiar";
             this.btnModificarLimpiar.UseVisualStyleBackColor = true;
+            this.btnModificarLimpiar.Click += new System.EventHandler(this.btnModificarLimpiar_Click);
             // 
             // label37
             // 
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label37.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label37.Location = new System.Drawing.Point(71, 11);
+            this.label37.Location = new System.Drawing.Point(71, 12);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(127, 16);
             this.label37.TabIndex = 266;
@@ -664,45 +669,50 @@
             // 
             // btnModificarFiltrar
             // 
-            this.btnModificarFiltrar.Location = new System.Drawing.Point(374, 138);
+            this.btnModificarFiltrar.Location = new System.Drawing.Point(374, 139);
             this.btnModificarFiltrar.Name = "btnModificarFiltrar";
             this.btnModificarFiltrar.Size = new System.Drawing.Size(75, 23);
             this.btnModificarFiltrar.TabIndex = 8;
             this.btnModificarFiltrar.Text = "Filtrar";
             this.btnModificarFiltrar.UseVisualStyleBackColor = true;
+            this.btnModificarFiltrar.Click += new System.EventHandler(this.btnModificarFiltrar_Click);
             // 
             // tbxModificarFiltroPais
             // 
-            this.tbxModificarFiltroPais.Location = new System.Drawing.Point(349, 95);
+            this.tbxModificarFiltroPais.Location = new System.Drawing.Point(349, 96);
             this.tbxModificarFiltroPais.Name = "tbxModificarFiltroPais";
             this.tbxModificarFiltroPais.Size = new System.Drawing.Size(100, 20);
             this.tbxModificarFiltroPais.TabIndex = 6;
+            this.tbxModificarFiltroPais.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxModificarFiltroPais_KeyPress);
             // 
             // tbxModificarFiltroEstrellas
             // 
-            this.tbxModificarFiltroEstrellas.Location = new System.Drawing.Point(156, 95);
+            this.tbxModificarFiltroEstrellas.Location = new System.Drawing.Point(156, 96);
             this.tbxModificarFiltroEstrellas.Name = "tbxModificarFiltroEstrellas";
             this.tbxModificarFiltroEstrellas.Size = new System.Drawing.Size(100, 20);
             this.tbxModificarFiltroEstrellas.TabIndex = 5;
+            this.tbxModificarFiltroEstrellas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxModificarFiltroEstrellas_KeyPress);
             // 
             // tbxModificarFiltroCiudad
             // 
-            this.tbxModificarFiltroCiudad.Location = new System.Drawing.Point(349, 42);
+            this.tbxModificarFiltroCiudad.Location = new System.Drawing.Point(349, 43);
             this.tbxModificarFiltroCiudad.Name = "tbxModificarFiltroCiudad";
             this.tbxModificarFiltroCiudad.Size = new System.Drawing.Size(100, 20);
             this.tbxModificarFiltroCiudad.TabIndex = 4;
+            this.tbxModificarFiltroCiudad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxModificarFiltroCiudad_KeyPress);
             // 
             // tbxModificarFiltroNombre
             // 
-            this.tbxModificarFiltroNombre.Location = new System.Drawing.Point(156, 43);
+            this.tbxModificarFiltroNombre.Location = new System.Drawing.Point(156, 44);
             this.tbxModificarFiltroNombre.Name = "tbxModificarFiltroNombre";
             this.tbxModificarFiltroNombre.Size = new System.Drawing.Size(100, 20);
             this.tbxModificarFiltroNombre.TabIndex = 3;
+            this.tbxModificarFiltroNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxModificarFiltroNombre_KeyPress);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.dgvModificarHotel);
-            this.groupBox3.Location = new System.Drawing.Point(7, 167);
+            this.groupBox3.Location = new System.Drawing.Point(7, 168);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(537, 303);
             this.groupBox3.TabIndex = 2;
@@ -714,23 +724,23 @@
             this.dgvModificarHotel.AllowUserToAddRows = false;
             this.dgvModificarHotel.AllowUserToDeleteRows = false;
             this.dgvModificarHotel.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvModificarHotel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle65.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle65.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle65.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle65.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle65.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle65.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle65.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvModificarHotel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle65;
             this.dgvModificarHotel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvModificarHotel.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle66.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle66.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle66.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle66.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle66.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle66.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle66.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvModificarHotel.DefaultCellStyle = dataGridViewCellStyle66;
             this.dgvModificarHotel.Location = new System.Drawing.Point(16, 29);
             this.dgvModificarHotel.Name = "dgvModificarHotel";
             this.dgvModificarHotel.RowHeadersVisible = false;
@@ -739,18 +749,18 @@
             // 
             // pagEliminar
             // 
-            this.pagEliminar.Controls.Add(this.btnEliminarFiltrar);
-            this.pagEliminar.Controls.Add(this.groupBox1);
-            this.pagEliminar.Controls.Add(this.label42);
+            this.pagEliminar.Controls.Add(this.label5);
+            this.pagEliminar.Controls.Add(this.label6);
+            this.pagEliminar.Controls.Add(this.label14);
             this.pagEliminar.Controls.Add(this.label23);
-            this.pagEliminar.Controls.Add(this.tbxEliminarFiltrarNombre);
-            this.pagEliminar.Controls.Add(this.label24);
-            this.pagEliminar.Controls.Add(this.tbxEliminarFiltrarCiudad);
-            this.pagEliminar.Controls.Add(this.label25);
-            this.pagEliminar.Controls.Add(this.tbxEliminarFiltrarEstrellas);
-            this.pagEliminar.Controls.Add(this.label41);
-            this.pagEliminar.Controls.Add(this.tbxEliminarFiltrarPais);
             this.pagEliminar.Controls.Add(this.btnEliminarLimpiar);
+            this.pagEliminar.Controls.Add(this.label24);
+            this.pagEliminar.Controls.Add(this.btnEliminarFiltrar);
+            this.pagEliminar.Controls.Add(this.tbxEliminarFiltroPais);
+            this.pagEliminar.Controls.Add(this.tbxEliminarFiltroEstrellas);
+            this.pagEliminar.Controls.Add(this.tbxEliminarFiltroCiudad);
+            this.pagEliminar.Controls.Add(this.tbxEliminarFiltroNombre);
+            this.pagEliminar.Controls.Add(this.groupBox1);
             this.pagEliminar.Location = new System.Drawing.Point(4, 22);
             this.pagEliminar.Name = "pagEliminar";
             this.pagEliminar.Padding = new System.Windows.Forms.Padding(3);
@@ -759,22 +769,112 @@
             this.pagEliminar.Text = "Eliminar";
             this.pagEliminar.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(312, 99);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(27, 13);
+            this.label5.TabIndex = 283;
+            this.label5.Text = "Pais";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(299, 46);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(40, 13);
+            this.label6.TabIndex = 282;
+            this.label6.Text = "Ciudad";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(74, 99);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(76, 13);
+            this.label14.TabIndex = 281;
+            this.label14.Text = "N° de Estrellas";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(74, 47);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(44, 13);
+            this.label23.TabIndex = 280;
+            this.label23.Text = "Nombre";
+            // 
+            // btnEliminarLimpiar
+            // 
+            this.btnEliminarLimpiar.Location = new System.Drawing.Point(74, 137);
+            this.btnEliminarLimpiar.Name = "btnEliminarLimpiar";
+            this.btnEliminarLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminarLimpiar.TabIndex = 279;
+            this.btnEliminarLimpiar.Text = "Limpiar";
+            this.btnEliminarLimpiar.UseVisualStyleBackColor = true;
+            this.btnEliminarLimpiar.Click += new System.EventHandler(this.btnEliminarLimpiar_Click);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.Color.DarkBlue;
+            this.label24.Location = new System.Drawing.Point(71, 12);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(127, 16);
+            this.label24.TabIndex = 278;
+            this.label24.Text = "Filtros de busqueda";
+            // 
             // btnEliminarFiltrar
             // 
-            this.btnEliminarFiltrar.Location = new System.Drawing.Point(370, 138);
+            this.btnEliminarFiltrar.Location = new System.Drawing.Point(374, 139);
             this.btnEliminarFiltrar.Name = "btnEliminarFiltrar";
             this.btnEliminarFiltrar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminarFiltrar.TabIndex = 285;
+            this.btnEliminarFiltrar.TabIndex = 277;
             this.btnEliminarFiltrar.Text = "Filtrar";
             this.btnEliminarFiltrar.UseVisualStyleBackColor = true;
+            this.btnEliminarFiltrar.Click += new System.EventHandler(this.btnEliminarFiltrar_Click);
+            // 
+            // tbxEliminarFiltroPais
+            // 
+            this.tbxEliminarFiltroPais.Location = new System.Drawing.Point(349, 96);
+            this.tbxEliminarFiltroPais.Name = "tbxEliminarFiltroPais";
+            this.tbxEliminarFiltroPais.Size = new System.Drawing.Size(100, 20);
+            this.tbxEliminarFiltroPais.TabIndex = 276;
+            this.tbxEliminarFiltroPais.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxEliminarFiltroPais_KeyPress);
+            // 
+            // tbxEliminarFiltroEstrellas
+            // 
+            this.tbxEliminarFiltroEstrellas.Location = new System.Drawing.Point(156, 96);
+            this.tbxEliminarFiltroEstrellas.Name = "tbxEliminarFiltroEstrellas";
+            this.tbxEliminarFiltroEstrellas.Size = new System.Drawing.Size(100, 20);
+            this.tbxEliminarFiltroEstrellas.TabIndex = 275;
+            this.tbxEliminarFiltroEstrellas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxEliminarFiltroEstrellas_KeyPress);
+            // 
+            // tbxEliminarFiltroCiudad
+            // 
+            this.tbxEliminarFiltroCiudad.Location = new System.Drawing.Point(349, 43);
+            this.tbxEliminarFiltroCiudad.Name = "tbxEliminarFiltroCiudad";
+            this.tbxEliminarFiltroCiudad.Size = new System.Drawing.Size(100, 20);
+            this.tbxEliminarFiltroCiudad.TabIndex = 274;
+            this.tbxEliminarFiltroCiudad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxEliminarFiltroCiudad_KeyPress);
+            // 
+            // tbxEliminarFiltroNombre
+            // 
+            this.tbxEliminarFiltroNombre.Location = new System.Drawing.Point(156, 44);
+            this.tbxEliminarFiltroNombre.Name = "tbxEliminarFiltroNombre";
+            this.tbxEliminarFiltroNombre.Size = new System.Drawing.Size(100, 20);
+            this.tbxEliminarFiltroNombre.TabIndex = 273;
+            this.tbxEliminarFiltroNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxEliminarFiltroNombre_KeyPress);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgvEliminarHotel);
-            this.groupBox1.Location = new System.Drawing.Point(12, 167);
+            this.groupBox1.Location = new System.Drawing.Point(7, 168);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(521, 315);
-            this.groupBox1.TabIndex = 3;
+            this.groupBox1.Size = new System.Drawing.Size(537, 303);
+            this.groupBox1.TabIndex = 272;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Hoteles";
             // 
@@ -783,112 +883,28 @@
             this.dgvEliminarHotel.AllowUserToAddRows = false;
             this.dgvEliminarHotel.AllowUserToDeleteRows = false;
             this.dgvEliminarHotel.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEliminarHotel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle67.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle67.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle67.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle67.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle67.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle67.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEliminarHotel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle67;
             this.dgvEliminarHotel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEliminarHotel.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle68.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle68.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle68.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle68.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle68.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle68.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEliminarHotel.DefaultCellStyle = dataGridViewCellStyle68;
             this.dgvEliminarHotel.Location = new System.Drawing.Point(16, 29);
             this.dgvEliminarHotel.Name = "dgvEliminarHotel";
             this.dgvEliminarHotel.RowHeadersVisible = false;
-            this.dgvEliminarHotel.Size = new System.Drawing.Size(486, 271);
+            this.dgvEliminarHotel.Size = new System.Drawing.Size(506, 254);
             this.dgvEliminarHotel.TabIndex = 0;
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label42.Location = new System.Drawing.Point(67, 13);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(127, 16);
-            this.label42.TabIndex = 279;
-            this.label42.Text = "Filtros de busqueda";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(307, 100);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(27, 13);
-            this.label23.TabIndex = 284;
-            this.label23.Text = "Pais";
-            // 
-            // tbxEliminarFiltrarNombre
-            // 
-            this.tbxEliminarFiltrarNombre.Location = new System.Drawing.Point(152, 45);
-            this.tbxEliminarFiltrarNombre.Name = "tbxEliminarFiltrarNombre";
-            this.tbxEliminarFiltrarNombre.Size = new System.Drawing.Size(100, 20);
-            this.tbxEliminarFiltrarNombre.TabIndex = 274;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(294, 47);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(40, 13);
-            this.label24.TabIndex = 283;
-            this.label24.Text = "Ciudad";
-            // 
-            // tbxEliminarFiltrarCiudad
-            // 
-            this.tbxEliminarFiltrarCiudad.Location = new System.Drawing.Point(345, 44);
-            this.tbxEliminarFiltrarCiudad.Name = "tbxEliminarFiltrarCiudad";
-            this.tbxEliminarFiltrarCiudad.Size = new System.Drawing.Size(100, 20);
-            this.tbxEliminarFiltrarCiudad.TabIndex = 275;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(70, 100);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(76, 13);
-            this.label25.TabIndex = 282;
-            this.label25.Text = "N° de Estrellas";
-            // 
-            // tbxEliminarFiltrarEstrellas
-            // 
-            this.tbxEliminarFiltrarEstrellas.Location = new System.Drawing.Point(152, 97);
-            this.tbxEliminarFiltrarEstrellas.Name = "tbxEliminarFiltrarEstrellas";
-            this.tbxEliminarFiltrarEstrellas.Size = new System.Drawing.Size(100, 20);
-            this.tbxEliminarFiltrarEstrellas.TabIndex = 276;
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(70, 47);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(44, 13);
-            this.label41.TabIndex = 281;
-            this.label41.Text = "Nombre";
-            // 
-            // tbxEliminarFiltrarPais
-            // 
-            this.tbxEliminarFiltrarPais.Location = new System.Drawing.Point(345, 97);
-            this.tbxEliminarFiltrarPais.Name = "tbxEliminarFiltrarPais";
-            this.tbxEliminarFiltrarPais.Size = new System.Drawing.Size(100, 20);
-            this.tbxEliminarFiltrarPais.TabIndex = 277;
-            // 
-            // btnEliminarLimpiar
-            // 
-            this.btnEliminarLimpiar.Location = new System.Drawing.Point(70, 138);
-            this.btnEliminarLimpiar.Name = "btnEliminarLimpiar";
-            this.btnEliminarLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminarLimpiar.TabIndex = 280;
-            this.btnEliminarLimpiar.Text = "Limpiar";
-            this.btnEliminarLimpiar.UseVisualStyleBackColor = true;
             // 
             // VentanaHotel
             // 
@@ -972,18 +988,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView dgvModificarHotel;
         private System.Windows.Forms.TabPage pagEliminar;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dgvEliminarHotel;
-        private System.Windows.Forms.Label label42;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox tbxEliminarFiltrarNombre;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TextBox tbxEliminarFiltrarCiudad;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.TextBox tbxEliminarFiltrarEstrellas;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.TextBox tbxEliminarFiltrarPais;
-        private System.Windows.Forms.Button btnEliminarLimpiar;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ListBox lbxRegimenes;
         private System.Windows.Forms.ComboBox cbxRegimenes;
@@ -991,6 +995,18 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnAgregarRegimen;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Button btnEliminarLimpiar;
+        private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Button btnEliminarFiltrar;
+        private System.Windows.Forms.TextBox tbxEliminarFiltroPais;
+        private System.Windows.Forms.TextBox tbxEliminarFiltroEstrellas;
+        private System.Windows.Forms.TextBox tbxEliminarFiltroCiudad;
+        private System.Windows.Forms.TextBox tbxEliminarFiltroNombre;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataGridView dgvEliminarHotel;
     }
 }

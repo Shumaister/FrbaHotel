@@ -1197,12 +1197,12 @@ namespace FrbaHotel
             string filtroEstrellas = string.IsNullOrEmpty(hotel.cantidadEstrellas) ? "" : hotel.cantidadEstrellas;
             string filtroPais = string.IsNullOrEmpty(hotel.domicilio.pais) ? "" : hotel.domicilio.pais;
             string filtroCiudad = string.IsNullOrEmpty(hotel.domicilio.ciudad)? "" : hotel.domicilio.pais;
-            string query = "SELECT TOP 50 Hotel_ID, Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_FechaCreacion, " +
-            "Hotel_Email, Hotel_Telefono, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle" +
+            string query = "SELECT Hotel_ID, Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_FechaCreacion, " +
+            "Hotel_Email, Hotel_Telefono, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, " +
             "Domicilio_NumeroCalle FROM RIP.Hoteles JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID WHERE " +
-            "Hotel_Nombre LIKE '" + hotel.nombre + "%' AND " +
+            "ISNULL(Hotel_Nombre, '') LIKE '" + hotel.nombre + "%' AND " +
             "Domicilio_Pais LIKE '" + hotel.domicilio.pais+ "%' AND " +
-            "Persona_Ciudad LIKE '" + hotel.domicilio.ciudad + "%' AND " +
+            "Domicilio_Ciudad LIKE '" + hotel.domicilio.ciudad + "%' AND " +
             "CONVERT(nvarchar(50), Hotel_CantidadEstrellas) LIKE '" + hotel.cantidadEstrellas + "%'";
             SqlCommand consulta = consultaCrear(query);
             return consultaObtenerTabla(consulta);
@@ -1214,12 +1214,12 @@ namespace FrbaHotel
             string filtroEstrellas = string.IsNullOrEmpty(hotel.cantidadEstrellas) ? "" : hotel.cantidadEstrellas;
             string filtroPais = string.IsNullOrEmpty(hotel.domicilio.pais) ? "" : hotel.domicilio.pais;
             string filtroCiudad = string.IsNullOrEmpty(hotel.domicilio.ciudad) ? "" : hotel.domicilio.pais;
-            string query = "SELECT TOP 50 Hotel_ID, Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_FechaCreacion, " +
-            "Hotel_Email, Hotel_Telefono, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle" +
+            string query = "SELECT Hotel_ID, Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_FechaCreacion, " +
+            "Hotel_Email, Hotel_Telefono, Domicilio_ID, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, " +
             "Domicilio_NumeroCalle FROM RIP.Hoteles JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID WHERE Hotel_Estado = 1 AND " +
-            "Hotel_Nombre LIKE '" + hotel.nombre + "%' AND " +
+            "ISNULL(Hotel_Nombre, '') LIKE '" + hotel.nombre + "%' AND " +
             "Domicilio_Pais LIKE '" + hotel.domicilio.pais + "%' AND " +
-            "Persona_Ciudad LIKE '" + hotel.domicilio.ciudad + "%' AND " +
+            "Domicilio_Ciudad LIKE '" + hotel.domicilio.ciudad + "%' AND " +
             "CONVERT(nvarchar(50), Hotel_CantidadEstrellas) LIKE '" + hotel.cantidadEstrellas + "%'";
             SqlCommand consulta = consultaCrear(query);
             return consultaObtenerTabla(consulta);
@@ -1372,9 +1372,15 @@ namespace FrbaHotel
             return consultaObtenerValor(consulta);
         }
 
+        public static List<string> tipoHabitacionObtenerTodasEnLista()
+        {
+            SqlCommand consulta = consultaCrear("SELECT TipoHabitacion_Descripcion FROM RIP.TiposHabitaciones");
+            return consultaObtenerLista(consulta);
+        }
+
         #endregion
 
-        #region TipoRegimen
+        #region Regimen
 
         public static string regimenObtenerID(string regimen)
         {
@@ -1383,28 +1389,15 @@ namespace FrbaHotel
             return consultaObtenerValor(consulta);
         }
 
-        #endregion
-
-        #region Reserva
-
-
-
-        public static List<string> tipoHabitacionObtenerTodas()
-        {
-            SqlCommand consulta = consultaCrear("SELECT TipoHabitacion_Descripcion FROM RIP.TiposHabitaciones");
-            return consultaObtenerLista(consulta);
-        }
-
-        public static List<string> DescripcionRegimenObtenerTodos()
+        public static List<string> regimenObtenerTodosEnLista()
         {
             SqlCommand consulta = consultaCrear("SELECT Regimen_Descripcion FROM RIP.Regimenes");
             return consultaObtenerLista(consulta);
         }
 
-        internal static bool HayReservasEntreFechas(DateTime dateTime1, DateTime dateTime2)
-        {
-            return true;
-        }
+        #endregion
+
+        #region Reserva
 
         #endregion
     }

@@ -42,12 +42,11 @@ namespace FrbaHotel.Clases
             this.domicilio = domicilio;
         }
 
-        public Hotel(string nombre, string cantidadEstrellas, string pais, string ciudad)
+        public Hotel(string nombre, string cantidadEstrellas, Domicilio domicilio)
         {
             this.nombre = nombre;
             this.cantidadEstrellas = cantidadEstrellas;
-            this.domicilio.pais = pais;
-            this.domicilio.ciudad = ciudad;
+            this.domicilio = domicilio;
         }
     }
 }
