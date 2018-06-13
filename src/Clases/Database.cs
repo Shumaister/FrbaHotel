@@ -1121,23 +1121,16 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
-        public static List<string> hotelObtenerHabitacionesEnLista(Hotel hotel)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Habitacion_ID, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, TipoHabitacion_Descripcion, Habitacion_Descripcion,  Habitacion_HotelID FROM RIP.Habitaciones JOIN RIP.TiposHabitaciones ON Habitacion_TipoHabitacionID = TipoHabitacion_ID WHERE Habitacion_HotelID = @HotelID");
-            consulta.Parameters.AddWithValue("@HotelID", hotel.id);
-            return consultaObtenerLista(consulta);
-        }
-
         public static DataTable hotelObtenerHabitacionesEnTabla(Hotel hotel)
         {
-            SqlCommand consulta = consultaCrear("SELECT Habitacion_ID, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, TipoHabitacion_Descripcion, Habitacion_Descripcion,  Habitacion_HotelID FROM RIP.Habitaciones JOIN RIP.TiposHabitaciones ON Habitacion_TipoHabitacionID = TipoHabitacion_ID WHERE Habitacion_HotelID = @HotelID");
+            SqlCommand consulta = consultaCrear("SELECT Habitacion_ID, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, Habitacion_Estado, TipoHabitacion_Descripcion, Habitacion_Descripcion,  Habitacion_HotelID FROM RIP.Habitaciones JOIN RIP.TiposHabitaciones ON Habitacion_TipoHabitacionID = TipoHabitacion_ID WHERE Habitacion_HotelID = @HotelID ORDER BY 2");
             consulta.Parameters.AddWithValue("@HotelID", hotel.id);
             return consultaObtenerTabla(consulta);
         }
 
         public static DataTable hotelObtenerHabitacionesHabilitadasEnTabla(Hotel hotel)
         {
-            SqlCommand consulta = consultaCrear("SELECT Habitacion_ID, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, TipoHabitacion_Descripcion, Habitacion_Descripcion,  Habitacion_HotelID FROM RIP.Habitaciones JOIN RIP.TiposHabitaciones ON Habitacion_TipoHabitacionID = TipoHabitacion_ID WHERE Habitacion_HotelID = @HotelID AND Habitacion_Estado = 1");
+            SqlCommand consulta = consultaCrear("SELECT Habitacion_ID, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, TipoHabitacion_Descripcion, Habitacion_Descripcion,  Habitacion_HotelID FROM RIP.Habitaciones JOIN RIP.TiposHabitaciones ON Habitacion_TipoHabitacionID = TipoHabitacion_ID WHERE Habitacion_HotelID = @HotelID AND Habitacion_Estado = 1 ORDER BY 2");
             consulta.Parameters.AddWithValue("@HotelID", hotel.id);
             return consultaObtenerTabla(consulta);
         }
@@ -1239,12 +1232,13 @@ namespace FrbaHotel
 
         public static void habitacionModificar(Habitacion habitacion)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Habitaciones SET Habitacion_Numero = @Numero, Habitacion_Piso = @Piso, Habitacion_Frente = @Frente, Habitacion_Descripcion = @Descripcion WHERE Habitacion_ID = @ID");
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Habitaciones SET Habitacion_Numero = @Numero, Habitacion_Piso = @Piso, Habitacion_Frente = @Frente, Habitacion_Descripcion = @Descripcion, Habitacion_Estado = @Estado WHERE Habitacion_ID = @ID");
             consulta.Parameters.AddWithValue("@ID", habitacion.id);
             consulta.Parameters.AddWithValue("@Numero", habitacion.numero);
             consulta.Parameters.AddWithValue("@Piso", habitacion.piso);
             consulta.Parameters.AddWithValue("@Frente", habitacion.frente);
             consulta.Parameters.AddWithValue("@Descripcion", habitacion.descripcion);
+            consulta.Parameters.AddWithValue("@Estado", habitacion.estado);
             consultaEjecutar(consulta);
         }
 
@@ -1258,7 +1252,7 @@ namespace FrbaHotel
         public static string habitacionObtenerID(Habitacion habitacion)
         {
             SqlCommand consulta = consultaCrear("SELECT Habitacion_ID FROM RIP.Habitaciones WHERE Habitacion_HotelID = @HotelID AND Habitacion_Numero = @Numero");
-            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerID(habitacion.hotel));
+            consulta.Parameters.AddWithValue("@HotelID", habitacion.hotel.id);
             consulta.Parameters.AddWithValue("@Numero", habitacion.numero);
             return consultaObtenerValor(consulta);
         }
@@ -1271,6 +1265,14 @@ namespace FrbaHotel
         public static bool habitacionDistinta(Habitacion habitacion)
         {
             return habitacion.id != habitacionObtenerID(habitacion);
+        }
+
+        public static List<string> habitacionObtenerFrentes()
+        {
+            List<string> frentes = new List<string>();
+            frentes.Add("Interna");
+            frentes.Add("Externa");
+            return frentes;
         }
 
         public static List<string> habitacionObtenerTodasEnLista()

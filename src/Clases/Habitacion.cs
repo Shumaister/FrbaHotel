@@ -18,7 +18,7 @@ namespace FrbaHotel.Clases
         public Hotel hotel { get; set; }
 
 
-        public Habitacion(string id, string numero, string piso, string frente, string tipoHabitacion, string descripcion, Hotel hotel)
+        public Habitacion(string id, string numero, string piso, string frente, string tipoHabitacion, string descripcion, Hotel hotel, string estado)
         {
             this.id = id;
             this.numero = numero;
@@ -27,6 +27,7 @@ namespace FrbaHotel.Clases
             this.tipoHabitacion = tipoHabitacion;
             this.descripcion = descripcion;
             this.hotel = hotel;
+            this.estado = estado;
         }
 
         public Habitacion(string id)

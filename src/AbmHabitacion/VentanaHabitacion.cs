@@ -32,9 +32,8 @@ namespace FrbaHotel.AbmHabitacion
         #region Agregar
 
         private Habitacion ventanaCrearHabitacionParaAgregar()
-        { 
-
-            Habitacion habitacion = new Habitacion(null, tbxNumero.Text, tbxPiso.Text, rbtExterna.Checked? "S" : "N", cbxTipoHabitaciones.SelectedItem.ToString(), tbxDescripcion.Text, sesion.hotel); 
+        {
+            Habitacion habitacion = new Habitacion(null, tbxNumero.Text, tbxPiso.Text, cbxFrentes.SelectedItem.ToString() == "Interna"? "N" : "S" , cbxTipoHabitaciones.SelectedItem.ToString(), tbxDescripcion.Text, sesion.hotel, null); 
             return habitacion;
         }
 
@@ -63,7 +62,8 @@ namespace FrbaHotel.AbmHabitacion
             string tipoHabitacion = dgvModificarHabitacion.Rows[e.RowIndex].Cells["TipoHabitacion_Descripcion"].Value.ToString();
             string frente = dgvModificarHabitacion.Rows[e.RowIndex].Cells["Habitacion_Frente"].Value.ToString();
             string descripcion = dgvModificarHabitacion.Rows[e.RowIndex].Cells["Habitacion_Descripcion"].Value.ToString();
-            Habitacion habitacion = new Habitacion(habitacionID, numero, piso, frente, tipoHabitacion, descripcion, sesion.hotel);
+            string estado = dgvModificarHabitacion.Rows[e.RowIndex].Cells["Habitacion_Estado"].Value.ToString();
+            Habitacion habitacion = new Habitacion(habitacionID, numero, piso, frente, tipoHabitacion, descripcion, sesion.hotel, estado);
             return habitacion;
 
         }
@@ -83,12 +83,11 @@ namespace FrbaHotel.AbmHabitacion
             tbxNumero.Clear();
             tbxPiso.Clear();
             tbxDescripcion.Clear();
-            rbtInterna.Select();
+            cbxFrentes.SelectedIndex = 0;
             cbxTipoHabitaciones.SelectedIndex = 0;
         }
 
         #endregion
-
 
         #region Eliminar
 
@@ -123,11 +122,17 @@ namespace FrbaHotel.AbmHabitacion
         private void VentanaHabitacion_Load(object sender, EventArgs e)
         {
             lblHotel.Text = "Hotel: " + sesion.hotel.domicilio.pais + " - " + sesion.hotel.domicilio.ciudad + " - " + sesion.hotel.domicilio.calle + " - " + sesion.hotel.domicilio.numeroCalle;
-            rbtInterna.Select();
+            comboBoxCargar(cbxFrentes, Database.habitacionObtenerFrentes());
             comboBoxCargar(cbxTipoHabitaciones, Database.tipoHabitacionObtenerTodas());
             ventanaActualizar(sender, e);
             dataGridViewAgregarBotonModificar(dgvModificarHabitacion);
             dataGridViewAgregarBotonEliminar(dgvEliminarHabitacion);
+            ventanaOcultarColumnas();
+        }
+
+        private void ventanaOcultarColumnas()
+        {
+            dgvModificarHabitacion.Columns["Habitacion_Estado"].Visible = false;
             dgvModificarHabitacion.Columns["Habitacion_Descripcion"].Visible = false;
             dgvEliminarHabitacion.Columns["Habitacion_Descripcion"].Visible = false;
             dgvModificarHabitacion.Columns["Habitacion_HotelID"].Visible = false;

@@ -34,15 +34,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.pagAgregar = new System.Windows.Forms.TabPage();
-            this.rbtInterna = new System.Windows.Forms.RadioButton();
-            this.rbtExterna = new System.Windows.Forms.RadioButton();
+            this.cbxFrentes = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.lblHotel = new System.Windows.Forms.Label();
             this.cbxTipoHabitaciones = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tbxDescripcion = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -92,15 +91,14 @@
             // 
             // pagAgregar
             // 
-            this.pagAgregar.Controls.Add(this.rbtInterna);
-            this.pagAgregar.Controls.Add(this.rbtExterna);
+            this.pagAgregar.Controls.Add(this.cbxFrentes);
+            this.pagAgregar.Controls.Add(this.label9);
+            this.pagAgregar.Controls.Add(this.label10);
             this.pagAgregar.Controls.Add(this.lblHotel);
             this.pagAgregar.Controls.Add(this.cbxTipoHabitaciones);
             this.pagAgregar.Controls.Add(this.label5);
             this.pagAgregar.Controls.Add(this.label6);
             this.pagAgregar.Controls.Add(this.tbxDescripcion);
-            this.pagAgregar.Controls.Add(this.label9);
-            this.pagAgregar.Controls.Add(this.label10);
             this.pagAgregar.Controls.Add(this.label32);
             this.pagAgregar.Controls.Add(this.label19);
             this.pagAgregar.Controls.Add(this.label20);
@@ -120,27 +118,33 @@
             this.pagAgregar.Text = "Agregar";
             this.pagAgregar.UseVisualStyleBackColor = true;
             // 
-            // rbtInterna
+            // cbxFrentes
             // 
-            this.rbtInterna.AutoSize = true;
-            this.rbtInterna.Location = new System.Drawing.Point(161, 156);
-            this.rbtInterna.Name = "rbtInterna";
-            this.rbtInterna.Size = new System.Drawing.Size(58, 17);
-            this.rbtInterna.TabIndex = 319;
-            this.rbtInterna.TabStop = true;
-            this.rbtInterna.Text = "Interna";
-            this.rbtInterna.UseVisualStyleBackColor = true;
+            this.cbxFrentes.FormattingEnabled = true;
+            this.cbxFrentes.Location = new System.Drawing.Point(161, 153);
+            this.cbxFrentes.Name = "cbxFrentes";
+            this.cbxFrentes.Size = new System.Drawing.Size(147, 21);
+            this.cbxFrentes.TabIndex = 331;
             // 
-            // rbtExterna
+            // label9
             // 
-            this.rbtExterna.AutoSize = true;
-            this.rbtExterna.Location = new System.Drawing.Point(247, 156);
-            this.rbtExterna.Name = "rbtExterna";
-            this.rbtExterna.Size = new System.Drawing.Size(61, 17);
-            this.rbtExterna.TabIndex = 318;
-            this.rbtExterna.TabStop = true;
-            this.rbtExterna.Text = "Externa";
-            this.rbtExterna.UseVisualStyleBackColor = true;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(185, 128);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(17, 22);
+            this.label9.TabIndex = 330;
+            this.label9.Text = "*";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(156, 128);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(30, 13);
+            this.label10.TabIndex = 329;
+            this.label10.Text = "Vista";
             // 
             // lblHotel
             // 
@@ -186,26 +190,6 @@
             this.tbxDescripcion.Name = "tbxDescripcion";
             this.tbxDescripcion.Size = new System.Drawing.Size(306, 138);
             this.tbxDescripcion.TabIndex = 294;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(189, 128);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(17, 22);
-            this.label9.TabIndex = 288;
-            this.label9.Text = "*";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(158, 130);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(30, 13);
-            this.label10.TabIndex = 287;
-            this.label10.Text = "Vista";
             // 
             // label32
             // 
@@ -444,8 +428,6 @@
 
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage pagAgregar;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
@@ -466,9 +448,10 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbxDescripcion;
         private System.Windows.Forms.Label lblHotel;
-        private System.Windows.Forms.RadioButton rbtInterna;
-        private System.Windows.Forms.RadioButton rbtExterna;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgvEliminarHabitacion;
+        private System.Windows.Forms.ComboBox cbxFrentes;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }

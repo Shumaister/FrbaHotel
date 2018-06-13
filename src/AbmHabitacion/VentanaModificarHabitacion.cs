@@ -39,27 +39,35 @@ namespace FrbaHotel.AbmHabitacion
             tbxNumero.Text = habitacion.numero;
             tbxPiso.Text = habitacion.piso;
             tbxDescripcion.Text = habitacion.descripcion;
-            if (habitacion.frente == "S")
-                rbtExterna.Select();
+            if (bool.Parse(habitacion.estado))
+                rbtActivado.Select();
             else
-                rbtInterna.Select();
+                rbtDesactivado.Select();
             comboBoxCargar(cbxTipoHabitaciones, Database.tipoHabitacionObtenerTodas());
             cbxTipoHabitaciones.SelectedIndex = cbxTipoHabitaciones.Items.IndexOf(habitacion.tipoHabitacion);
+            cbxTipoHabitaciones.Enabled = false;
+            comboBoxCargar(cbxFrentes, Database.habitacionObtenerFrentes());
+            cbxFrentes.SelectedIndex = habitacion.frente == "N" ? 0 : 1; 
         }
 
-        private Habitacion ventanaCrearHabitacionParaModificar()
+        private void ventanaCrearHabitacionParaModificar()
         {
-            Habitacion habitacionModificada = new Habitacion(null, tbxNumero.Text, tbxPiso.Text, rbtExterna.Checked ? "S" : "N", cbxTipoHabitaciones.SelectedItem.ToString(), tbxDescripcion.Text, habitacion.hotel);
-            return habitacionModificada;
+            habitacion.numero = tbxNumero.Text;
+            habitacion.piso = tbxPiso.Text;
+            habitacion.frente = cbxFrentes.SelectedItem.ToString();
+            habitacion.tipoHabitacion = cbxTipoHabitaciones.SelectedItem.ToString();
+            habitacion.descripcion = tbxDescripcion.Text;
+            habitacion.estado = rbtActivado.Checked? "1" : "0";
         }
 
         private void btnModificarGuardar_Click(object sender, EventArgs e)
         {
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
-                Habitacion habitacion = ventanaCrearHabitacionParaModificar();
+                ventanaCrearHabitacionParaModificar();
                 if (Database.habitacionModificadaConExito(habitacion))
                 {
+                    this.Hide();
                     btnModificarLimpiar_Click(sender, e);
                     ventanaHabitacion.ventanaActualizar(sender, e);
                 }
@@ -71,7 +79,7 @@ namespace FrbaHotel.AbmHabitacion
             tbxNumero.Clear();
             tbxPiso.Clear();
             tbxDescripcion.Clear();
-            rbtInterna.Select();
+            cbxFrentes.SelectedIndex = 0;
             cbxTipoHabitaciones.SelectedIndex = 0;
         }
 
