@@ -34,11 +34,19 @@ namespace FrbaHotel.AbmRol
             dataGridViewCargar(dgvEliminarRoles, Database.rolObtenerHabilitadosEnTabla());
         }
 
+        private void ventanaOcultarColumnas()
+        {
+            dgvModificarRoles.Columns["Rol_ID"].Visible = false;
+            dgvModificarRoles.Columns["Rol_Estado"].Visible = false;
+            dgvEliminarRoles.Columns["Rol_ID"].Visible = false;
+        }
+
         //-------------------------------------- Metodos para Eventos ----------------------------
 
         private void VentanaRoles_Load(object sender, EventArgs e)
         {           
             ventanaActualizar();
+            ventanaOcultarColumnas();
             comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodasEnLista());
             dataGridViewAgregarBotonModificar(dgvModificarRoles);
             dataGridViewAgregarBotonEliminar(dgvEliminarRoles);
@@ -119,16 +127,18 @@ namespace FrbaHotel.AbmRol
 
         private Rol ventanaCrearRolParaModificar(DataGridViewCellEventArgs e)
         {
+            string rolID = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_ID"].Value.ToString();
             string rolNombre = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Nombre"].Value.ToString();
-            Rol rol = new Rol(rolNombre);
+            string rolEstado = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Estado"].Value.ToString();
+            Rol rol = new Rol(rolID, rolNombre, null, rolEstado);
             rol.funcionalidades = Database.rolObtenerFuncionalidades(rol);
             return rol;
         }
 
         private Rol ventanaCrearRolParaEliminar(DataGridViewCellEventArgs e)
         {
-            string rolNombre = dgvModificarRoles.Rows[e.RowIndex].Cells["Rol_Nombre"].Value.ToString();
-            return new Rol(rolNombre);
+            string rolID = dgvEliminarRoles.Rows[e.RowIndex].Cells["Rol_ID"].Value.ToString();
+            return new Rol(rolID, null, null, null);
         }
     }
 }

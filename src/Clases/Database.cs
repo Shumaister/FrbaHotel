@@ -299,6 +299,7 @@ namespace FrbaHotel
             else
             {
                 rolAgregar(rol);
+                rol.id = rolObtenerID(rol);
                 rolAgregarFuncionalidades(rol);
                 ventanaInformarExito("El rol fue creado con exito");
                 return true;
@@ -337,11 +338,10 @@ namespace FrbaHotel
 
         public static void rolModificar(Rol rol)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Nombre = @NuevoNombre, Rol_Estado = @NuevoEstado WHERE Rol_ID = @ID");
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Roles SET Rol_Nombre = @Nombre, Rol_Estado = @Estado WHERE Rol_ID = @ID");
             consulta.Parameters.AddWithValue("@ID", rol.id);
             consulta.Parameters.AddWithValue("@Nombre", rol.nombre);
-            consulta.Parameters.AddWithValue("@NuevoNombre", rol.nombre);
-            consulta.Parameters.AddWithValue("@NuevoEstado", rol.estado);
+            consulta.Parameters.AddWithValue("@Estado", rol.estado);
             consultaEjecutar(consulta);
         }
 
@@ -362,7 +362,7 @@ namespace FrbaHotel
         public static void rolAgregarFuncionalidad(Rol rol, string funcionalidad)
         { 
             SqlCommand consulta = consultaCrear("INSERT INTO RIP.Roles_Funcionalidades (RolFuncionalidad_RolID, RolFuncionalidad_FuncionalidadID) VALUES (@RolID, @FuncionalidadID)");
-            consulta.Parameters.AddWithValue("@RolID", rolObtenerID(rol));
+            consulta.Parameters.AddWithValue("@RolID", rol.id);
             consulta.Parameters.AddWithValue("@FuncionalidadID", funcionalidadObtenerID(funcionalidad));
             consultaEjecutar(consulta);
         }
@@ -376,7 +376,7 @@ namespace FrbaHotel
         public static int rolEliminarFuncionalidades(Rol rol)
         {
             SqlCommand consulta = consultaCrear("DELETE FROM RIP.Roles_Funcionalidades WHERE RolFuncionalidad_RolID = @RolID");
-            consulta.Parameters.AddWithValue("@RolID", rolObtenerID(rol));
+            consulta.Parameters.AddWithValue("@RolID", rol.id);
             return consultaEjecutar(consulta);
         }
 
@@ -399,14 +399,6 @@ namespace FrbaHotel
             return Boolean.Parse(consultaObtenerValor(consulta));
         }
 
-        public static bool rolNoTieneEsaFuncionalidad(Rol rol, string funcionalidad)
-        {
-            SqlCommand consulta = consultaCrear("SELECT COUNT(*) FROM RIP.Roles_Funcionalidades WHERE RolFuncionalidad_RolID = @RolID AND RolFuncionalidad_FuncionalidadID = @FuncionalidadID");
-            consulta.Parameters.AddWithValue("@RolID", rolObtenerID(rol));
-            consulta.Parameters.AddWithValue("@FuncionalidadID", funcionalidadObtenerID(funcionalidad));
-            return consultaValorEsIgualA(consultaObtenerValor(consulta), 0);
-        }
-
         public static List<string> rolObtenerFuncionalidades(Rol rol)
         {
             SqlCommand consulta = consultaCrear("SELECT Funcionalidad_Nombre FROM RIP.Funcionalidades JOIN RIP.Roles_Funcionalidades ON Funcionalidad_ID = RolFuncionalidad_FuncionalidadID JOIN RIP.Roles ON RolFuncionalidad_RolID = Rol_ID WHERE Rol_Nombre = @Nombre");
@@ -423,7 +415,7 @@ namespace FrbaHotel
          
         public static DataTable rolObtenerTodosEnTabla()
         {
-            SqlCommand consulta = consultaCrear("SELECT Rol_ID, Rol_Nombre FROM RIP.Roles ORDER BY Rol_ID");
+            SqlCommand consulta = consultaCrear("SELECT Rol_ID, Rol_Nombre, Rol_Estado FROM RIP.Roles ORDER BY Rol_ID");
             return consultaObtenerTabla(consulta);
         }
 
@@ -498,7 +490,6 @@ namespace FrbaHotel
             usuarioAgregarRoles(usuario);
             ventanaInformarExito("El usuario fue modificado con exito");
             return true;
-
         }
 
         public static void usuarioEliminadoConExito(Usuario usuario)
@@ -800,7 +791,6 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@ID", cliente.id);
             return bool.Parse(consultaObtenerValor(consulta));
         }
-
 
         public static DataTable clienteObtenerTodosEnTabla()
         {
