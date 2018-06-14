@@ -38,7 +38,9 @@ namespace FrbaHotel.AbmHotel
 
         private void VentanaEliminarHotel_Load(object sender, EventArgs e)
         {
-            lblHotel.Text = "Hotel: " + hotel.domicilio.pais + " - " + hotel.domicilio.ciudad + " - " + hotel.domicilio.calle + " - " + hotel.domicilio.numeroCalle ;
+            lblHotel.Text = "Hotel: " + hotel.domicilio.pais + " - " + hotel.domicilio.ciudad + " - " + hotel.domicilio.calle + " - " + hotel.domicilio.numeroCalle;
+            calendario.Hide();
+            btnAceptarFecha.Hide();
         }
 
         private void btnElminarGuardar_Click(object sender, EventArgs e)
@@ -52,7 +54,6 @@ namespace FrbaHotel.AbmHotel
                     ventanaHotel.ventanaActualizar(sender, e);
                 }
             }
-
         }
 
         private void btnEliminarLimpiar_Click(object sender, EventArgs e)
@@ -60,47 +61,34 @@ namespace FrbaHotel.AbmHotel
             tbxFechaInicio.Clear();
             tbxFechaFin.Clear();
             tbxMotivo.Clear();
-            tbxFechaInicio.Enabled = true;
-            tbxFechaFin.Enabled = true;
             calendario.Hide();
             btnAceptarFecha.Hide();
         }
 
         private void btnAceptarFecha_Click(object sender, EventArgs e)
         {
-            if (tbxFechaInicio.Enabled)
-            {
+            if (tbxFechaInicio.TabStop)
                 tbxFechaInicio.Text = calendario.SelectionStart.ToShortDateString();
-                tbxFechaFin.Enabled = true;
-            }
             else
-            {
                 tbxFechaFin.Text = calendario.SelectionStart.ToShortDateString();
-                tbxFechaInicio.Enabled = true;
-            }
             calendario.Hide();
             btnAceptarFecha.Hide();
         }
 
-        private void btnSeleccionarFechaIFin_Click(object sender, EventArgs e)
+        private void btnSeleccionarFechaInicio_Click(object sender, EventArgs e)
         {
+            tbxFechaInicio.TabStop = true;
             calendario.Show();
             btnAceptarFecha.Show();
             controladorError.Clear();
         }
 
-        private void btnSeleccionarFechaInicio_Click(object sender, EventArgs e)
+        private void btnSeleccionarFechaIFin_Click(object sender, EventArgs e)
         {
-            tbxFechaFin.Enabled = false;
+            tbxFechaInicio.TabStop = false;
             calendario.Show();
             btnAceptarFecha.Show();
-        }
-
-        private void btnSeleccionarFecha_Click(object sender, EventArgs e)
-        {
-            tbxFechaInicio.Enabled = false;
-            calendario.Show();
-            btnAceptarFecha.Show();
+            controladorError.Clear();
         }
     }
 }

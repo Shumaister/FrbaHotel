@@ -922,6 +922,7 @@
             this.dgvModificarUsuarios.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvModificarUsuarios.Location = new System.Drawing.Point(17, 30);
             this.dgvModificarUsuarios.Name = "dgvModificarUsuarios";
+            this.dgvModificarUsuarios.ReadOnly = true;
             this.dgvModificarUsuarios.RowHeadersVisible = false;
             this.dgvModificarUsuarios.Size = new System.Drawing.Size(745, 471);
             this.dgvModificarUsuarios.TabIndex = 0;
@@ -972,6 +973,7 @@
             this.dgvEliminarUsuarios.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvEliminarUsuarios.Location = new System.Drawing.Point(17, 30);
             this.dgvEliminarUsuarios.Name = "dgvEliminarUsuarios";
+            this.dgvEliminarUsuarios.ReadOnly = true;
             this.dgvEliminarUsuarios.RowHeadersVisible = false;
             this.dgvEliminarUsuarios.Size = new System.Drawing.Size(745, 471);
             this.dgvEliminarUsuarios.TabIndex = 0;

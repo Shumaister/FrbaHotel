@@ -1266,18 +1266,19 @@ namespace FrbaHotel
         {
             if (hotelCerradoTieneReservasEnPeriodo(hotelCerrado))
             {
-                ventanaInformarError("El Hotel posee reservas o huespedes alojados dentro del periodo elegido");
+                ventanaInformarError("No se puede eliminar el hotel ya que posee reservas o huespedes alojados dentro del periodo elegido.");
                 return false;
             }
             hotelCerradoAgregar(hotelCerrado);
             hotelEliminar(hotelCerrado.hotel);
+            ventanaInformarExito("El hotel fue eliminado con exito");
             return true;
         }
 
         public static void hotelCerradoAgregar(HotelCerrado hotelCerrado)
         {
             SqlCommand consulta = consultaCrear("INSERT INTO RIP.HotelesCerrados (HotelCerrado_HotelID, HotelCerrado_FechaInicio, HotelCerrado_FechaFin, HotelCerrado_Motivo) VALUES (@HotelID, @FechaInicio, @FechaFin, @Motivo)");
-            consulta.Parameters.AddWithValue("@HotelID", hotelObtenerIDPorDomicilio(hotelCerrado.hotel));
+            consulta.Parameters.AddWithValue("@HotelID", hotelCerrado.hotel.id);
             consulta.Parameters.AddWithValue("@FechaInicio", hotelCerrado.fechaInicio);
             consulta.Parameters.AddWithValue("@FechaFin", hotelCerrado.fechaFin);
             consulta.Parameters.AddWithValue("@Motivo", hotelCerrado.motivo);

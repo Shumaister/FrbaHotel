@@ -43,10 +43,7 @@ namespace FrbaHotel.AbmHabitacion
             {
                 Habitacion habitacion = ventanaCrearHabitacionParaAgregar();
                 if (Database.habitacionAgregadaConExito(habitacion))
-                {
-                    btnAgregarLimpiar_Click(sender, e);
                     ventanaActualizar(sender, e);
-                }
             }
         }
 

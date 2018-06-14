@@ -343,6 +343,7 @@
             this.dgvModificarHabitacion.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvModificarHabitacion.Location = new System.Drawing.Point(16, 29);
             this.dgvModificarHabitacion.Name = "dgvModificarHabitacion";
+            this.dgvModificarHabitacion.ReadOnly = true;
             this.dgvModificarHabitacion.RowHeadersVisible = false;
             this.dgvModificarHabitacion.Size = new System.Drawing.Size(332, 347);
             this.dgvModificarHabitacion.TabIndex = 0;
@@ -393,6 +394,7 @@
             this.dgvEliminarHabitacion.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvEliminarHabitacion.Location = new System.Drawing.Point(16, 29);
             this.dgvEliminarHabitacion.Name = "dgvEliminarHabitacion";
+            this.dgvEliminarHabitacion.ReadOnly = true;
             this.dgvEliminarHabitacion.RowHeadersVisible = false;
             this.dgvEliminarHabitacion.Size = new System.Drawing.Size(332, 347);
             this.dgvEliminarHabitacion.TabIndex = 0;

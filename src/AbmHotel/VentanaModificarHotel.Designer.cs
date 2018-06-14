@@ -574,7 +574,7 @@
             this.Controls.Add(this.btnGuardarHotel);
             this.Controls.Add(this.btnLimpiarModificar);
             this.Name = "VentanaModificarHotel";
-            this.Text = "VentanaModificarHotel";
+            this.Text = "Modificar Hotel- FRBA Hotel ©";
             this.Load += new System.EventHandler(this.VentanaModificarHotel_Load);
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.btnLimpiarModificar, 0);

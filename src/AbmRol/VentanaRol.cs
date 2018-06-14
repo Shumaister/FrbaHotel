@@ -48,10 +48,7 @@ namespace FrbaHotel.AbmRol
             {
                 Rol rol = ventanaCrearRolParaAgregar();
                 if (Database.rolAgregadoConExito(rol))
-                {
-                    btnLimpiarRol_Click(sender, null);
                     ventanaActualizar();
-                }
             }
         }
 

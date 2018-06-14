@@ -197,13 +197,11 @@ namespace FrbaHotel.AbmHotel
             dgvModificarHotel.Columns["Hotel_ID"].Visible = false;
             dgvModificarHotel.Columns["Domicilio_ID"].Visible = false;
             dgvModificarHotel.Columns["Hotel_Telefono"].Visible = false;
-            dgvModificarHotel.Columns["Hotel_Email"].Visible = false;
             dgvModificarHotel.Columns["Hotel_FechaCreacion"].Visible = false;
             dgvModificarHotel.Columns["Hotel_Estado"].Visible = false;
             dgvEliminarHotel.Columns["Hotel_ID"].Visible = false;
             dgvEliminarHotel.Columns["Domicilio_ID"].Visible = false;
             dgvEliminarHotel.Columns["Hotel_Telefono"].Visible = false;
-            dgvEliminarHotel.Columns["Hotel_Email"].Visible = false;
             dgvEliminarHotel.Columns["Hotel_FechaCreacion"].Visible = false;
             dgvEliminarHotel.Columns["Hotel_Estado"].Visible = false;
         }

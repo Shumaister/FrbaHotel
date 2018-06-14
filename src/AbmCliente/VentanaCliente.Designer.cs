@@ -856,6 +856,7 @@
             this.dgvModificarClientes.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvModificarClientes.Location = new System.Drawing.Point(16, 29);
             this.dgvModificarClientes.Name = "dgvModificarClientes";
+            this.dgvModificarClientes.ReadOnly = true;
             this.dgvModificarClientes.RowHeadersVisible = false;
             this.dgvModificarClientes.Size = new System.Drawing.Size(648, 205);
             this.dgvModificarClientes.TabIndex = 0;
@@ -927,6 +928,7 @@
             this.dgvEliminarClientes.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvEliminarClientes.Location = new System.Drawing.Point(16, 29);
             this.dgvEliminarClientes.Name = "dgvEliminarClientes";
+            this.dgvEliminarClientes.ReadOnly = true;
             this.dgvEliminarClientes.RowHeadersVisible = false;
             this.dgvEliminarClientes.Size = new System.Drawing.Size(648, 203);
             this.dgvEliminarClientes.TabIndex = 0;

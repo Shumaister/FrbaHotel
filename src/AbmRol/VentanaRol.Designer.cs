@@ -254,6 +254,7 @@
             this.dgvModificarRoles.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvModificarRoles.Location = new System.Drawing.Point(19, 31);
             this.dgvModificarRoles.Name = "dgvModificarRoles";
+            this.dgvModificarRoles.ReadOnly = true;
             this.dgvModificarRoles.RowHeadersVisible = false;
             this.dgvModificarRoles.Size = new System.Drawing.Size(329, 308);
             this.dgvModificarRoles.TabIndex = 10;
@@ -304,6 +305,7 @@
             this.dgvEliminarRoles.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvEliminarRoles.Location = new System.Drawing.Point(19, 31);
             this.dgvEliminarRoles.Name = "dgvEliminarRoles";
+            this.dgvEliminarRoles.ReadOnly = true;
             this.dgvEliminarRoles.RowHeadersVisible = false;
             this.dgvEliminarRoles.Size = new System.Drawing.Size(329, 308);
             this.dgvEliminarRoles.TabIndex = 11;

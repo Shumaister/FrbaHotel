@@ -52,7 +52,7 @@
             // logo
             // 
             this.logo.Image = null;
-            this.logo.Location = new System.Drawing.Point(419, 207);
+            this.logo.Location = new System.Drawing.Point(427, 265);
             this.logo.Size = new System.Drawing.Size(22, 35);
             this.logo.Visible = false;
             this.logo.Click += new System.EventHandler(this.logo_Click);
@@ -81,13 +81,16 @@
             // 
             // tbxFechaInicio
             // 
+            this.tbxFechaInicio.Enabled = false;
             this.tbxFechaInicio.Location = new System.Drawing.Point(21, 107);
             this.tbxFechaInicio.Name = "tbxFechaInicio";
             this.tbxFechaInicio.Size = new System.Drawing.Size(100, 20);
             this.tbxFechaInicio.TabIndex = 361;
+            this.tbxFechaInicio.TabStop = false;
             // 
             // tbxFechaFin
             // 
+            this.tbxFechaFin.Enabled = false;
             this.tbxFechaFin.Location = new System.Drawing.Point(21, 173);
             this.tbxFechaFin.Name = "tbxFechaFin";
             this.tbxFechaFin.Size = new System.Drawing.Size(100, 20);
@@ -127,7 +130,7 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.Color.Red;
-            this.label21.Location = new System.Drawing.Point(55, 225);
+            this.label21.Location = new System.Drawing.Point(55, 267);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(17, 22);
             this.label21.TabIndex = 349;
@@ -136,7 +139,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(18, 226);
+            this.label22.Location = new System.Drawing.Point(18, 268);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(39, 13);
             this.label22.TabIndex = 347;
@@ -144,15 +147,15 @@
             // 
             // tbxMotivo
             // 
-            this.tbxMotivo.Location = new System.Drawing.Point(21, 252);
+            this.tbxMotivo.Location = new System.Drawing.Point(21, 294);
             this.tbxMotivo.Multiline = true;
             this.tbxMotivo.Name = "tbxMotivo";
-            this.tbxMotivo.Size = new System.Drawing.Size(443, 137);
+            this.tbxMotivo.Size = new System.Drawing.Size(499, 137);
             this.tbxMotivo.TabIndex = 348;
             // 
             // calendario
             // 
-            this.calendario.Location = new System.Drawing.Point(237, 33);
+            this.calendario.Location = new System.Drawing.Point(252, 80);
             this.calendario.Name = "calendario";
             this.calendario.TabIndex = 367;
             // 
@@ -178,7 +181,7 @@
             // 
             // btnAceptarFecha
             // 
-            this.btnAceptarFecha.Location = new System.Drawing.Point(315, 207);
+            this.btnAceptarFecha.Location = new System.Drawing.Point(332, 254);
             this.btnAceptarFecha.Name = "btnAceptarFecha";
             this.btnAceptarFecha.Size = new System.Drawing.Size(75, 23);
             this.btnAceptarFecha.TabIndex = 370;
@@ -188,7 +191,7 @@
             // 
             // btnElminarGuardar
             // 
-            this.btnElminarGuardar.Location = new System.Drawing.Point(293, 411);
+            this.btnElminarGuardar.Location = new System.Drawing.Point(301, 453);
             this.btnElminarGuardar.Name = "btnElminarGuardar";
             this.btnElminarGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnElminarGuardar.TabIndex = 371;
@@ -198,7 +201,7 @@
             // 
             // btnEliminarLimpiar
             // 
-            this.btnEliminarLimpiar.Location = new System.Drawing.Point(136, 411);
+            this.btnEliminarLimpiar.Location = new System.Drawing.Point(144, 453);
             this.btnEliminarLimpiar.Name = "btnEliminarLimpiar";
             this.btnEliminarLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminarLimpiar.TabIndex = 372;
@@ -219,7 +222,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 447);
+            this.ClientSize = new System.Drawing.Size(558, 493);
             this.Controls.Add(this.lblHotel);
             this.Controls.Add(this.btnEliminarLimpiar);
             this.Controls.Add(this.btnElminarGuardar);
