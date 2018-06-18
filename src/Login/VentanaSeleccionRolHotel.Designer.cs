@@ -43,9 +43,9 @@
             // 
             // btnIngresarRol
             // 
-            this.btnIngresarRol.Location = new System.Drawing.Point(138, 322);
+            this.btnIngresarRol.Location = new System.Drawing.Point(145, 321);
             this.btnIngresarRol.Name = "btnIngresarRol";
-            this.btnIngresarRol.Size = new System.Drawing.Size(91, 23);
+            this.btnIngresarRol.Size = new System.Drawing.Size(91, 28);
             this.btnIngresarRol.TabIndex = 12;
             this.btnIngresarRol.Text = "Ingresar";
             this.btnIngresarRol.UseVisualStyleBackColor = true;
@@ -54,7 +54,7 @@
             // cbxRoles
             // 
             this.cbxRoles.FormattingEnabled = true;
-            this.cbxRoles.Location = new System.Drawing.Point(28, 208);
+            this.cbxRoles.Location = new System.Drawing.Point(30, 282);
             this.cbxRoles.Name = "cbxRoles";
             this.cbxRoles.Size = new System.Drawing.Size(322, 21);
             this.cbxRoles.TabIndex = 11;
@@ -62,16 +62,18 @@
             // lblRol
             // 
             this.lblRol.AutoSize = true;
-            this.lblRol.Location = new System.Drawing.Point(118, 176);
+            this.lblRol.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lblRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRol.Location = new System.Drawing.Point(171, 254);
             this.lblRol.Name = "lblRol";
-            this.lblRol.Size = new System.Drawing.Size(142, 13);
+            this.lblRol.Size = new System.Drawing.Size(34, 13);
             this.lblRol.TabIndex = 10;
-            this.lblRol.Text = "Por favor,  seleccione un rol.";
+            this.lblRol.Text = "Rol  ";
             // 
             // cbxHoteles
             // 
             this.cbxHoteles.FormattingEnabled = true;
-            this.cbxHoteles.Location = new System.Drawing.Point(28, 277);
+            this.cbxHoteles.Location = new System.Drawing.Point(32, 207);
             this.cbxHoteles.Name = "cbxHoteles";
             this.cbxHoteles.Size = new System.Drawing.Size(322, 21);
             this.cbxHoteles.TabIndex = 15;
@@ -79,11 +81,13 @@
             // lblHotel
             // 
             this.lblHotel.AutoSize = true;
-            this.lblHotel.Location = new System.Drawing.Point(116, 248);
+            this.lblHotel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lblHotel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHotel.Location = new System.Drawing.Point(168, 179);
             this.lblHotel.Name = "lblHotel";
-            this.lblHotel.Size = new System.Drawing.Size(154, 13);
+            this.lblHotel.Size = new System.Drawing.Size(37, 13);
             this.lblHotel.TabIndex = 14;
-            this.lblHotel.Text = "Por favor,  seleccione un hotel.";
+            this.lblHotel.Text = "Hotel";
             // 
             // VentanaSeleccionRolHotel
             // 

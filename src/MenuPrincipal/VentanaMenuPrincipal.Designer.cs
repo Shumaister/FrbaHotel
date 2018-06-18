@@ -64,8 +64,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuAdministracion,
             this.menuRecepcion,
-            this.menuCuenta,
-            this.estadisticasToolStripMenuItem});
+            this.estadisticasToolStripMenuItem,
+            this.menuCuenta});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(448, 24);
@@ -138,14 +138,14 @@
             // menuReservas
             // 
             this.menuReservas.Name = "menuReservas";
-            this.menuReservas.Size = new System.Drawing.Size(152, 22);
+            this.menuReservas.Size = new System.Drawing.Size(143, 22);
             this.menuReservas.Text = "Reservas";
             this.menuReservas.Visible = false;
             // 
             // menuFacturas
             // 
             this.menuFacturas.Name = "menuFacturas";
-            this.menuFacturas.Size = new System.Drawing.Size(152, 22);
+            this.menuFacturas.Size = new System.Drawing.Size(143, 22);
             this.menuFacturas.Text = "Facturas";
             this.menuFacturas.Visible = false;
             this.menuFacturas.Click += new System.EventHandler(this.menuFacturas_Click);
@@ -153,7 +153,7 @@
             // menuClientes
             // 
             this.menuClientes.Name = "menuClientes";
-            this.menuClientes.Size = new System.Drawing.Size(152, 22);
+            this.menuClientes.Size = new System.Drawing.Size(143, 22);
             this.menuClientes.Text = "Clientes";
             this.menuClientes.Visible = false;
             this.menuClientes.Click += new System.EventHandler(this.menuClientes_Click);
@@ -161,7 +161,7 @@
             // menuConsumibles
             // 
             this.menuConsumibles.Name = "menuConsumibles";
-            this.menuConsumibles.Size = new System.Drawing.Size(152, 22);
+            this.menuConsumibles.Size = new System.Drawing.Size(143, 22);
             this.menuConsumibles.Text = "Consumibles";
             this.menuConsumibles.Visible = false;
             this.menuConsumibles.Click += new System.EventHandler(this.menuConsumibles_Click);
@@ -169,7 +169,7 @@
             // menuEstadias
             // 
             this.menuEstadias.Name = "menuEstadias";
-            this.menuEstadias.Size = new System.Drawing.Size(152, 22);
+            this.menuEstadias.Size = new System.Drawing.Size(143, 22);
             this.menuEstadias.Text = "Estadias";
             this.menuEstadias.Visible = false;
             // 
