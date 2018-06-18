@@ -154,5 +154,10 @@ namespace FrbaHotel.AbmRol
         }
 
         #endregion
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

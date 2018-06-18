@@ -200,7 +200,7 @@
             this.ClientSize = new System.Drawing.Size(645, 406);
             this.Controls.Add(this.groupBox1);
             this.Name = "VentanaListadoEstadistico";
-            this.Text = "Listados Estadisticos";
+            this.Text = "Listados Estadisticos - FRBA Hotel ©";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);

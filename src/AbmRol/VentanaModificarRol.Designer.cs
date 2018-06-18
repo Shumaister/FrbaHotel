@@ -51,13 +51,13 @@
             // logo
             // 
             this.logo.Image = null;
-            this.logo.Location = new System.Drawing.Point(245, 32);
+            this.logo.Location = new System.Drawing.Point(210, 12);
             this.logo.Size = new System.Drawing.Size(27, 21);
             this.logo.Visible = false;
             // 
             // btnQuitarFuncionalidad
             // 
-            this.btnQuitarFuncionalidad.Location = new System.Drawing.Point(173, 149);
+            this.btnQuitarFuncionalidad.Location = new System.Drawing.Point(191, 167);
             this.btnQuitarFuncionalidad.Name = "btnQuitarFuncionalidad";
             this.btnQuitarFuncionalidad.Size = new System.Drawing.Size(75, 23);
             this.btnQuitarFuncionalidad.TabIndex = 24;
@@ -67,15 +67,15 @@
             // 
             // tbxNombreRol
             // 
-            this.tbxNombreRol.Location = new System.Drawing.Point(30, 62);
+            this.tbxNombreRol.Location = new System.Drawing.Point(30, 75);
             this.tbxNombreRol.Name = "tbxNombreRol";
-            this.tbxNombreRol.Size = new System.Drawing.Size(100, 20);
+            this.tbxNombreRol.Size = new System.Drawing.Size(120, 20);
             this.tbxNombreRol.TabIndex = 23;
             this.tbxNombreRol.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxNombreRol_KeyPress);
             // 
             // btnAgregarFuncionalidad
             // 
-            this.btnAgregarFuncionalidad.Location = new System.Drawing.Point(173, 120);
+            this.btnAgregarFuncionalidad.Location = new System.Drawing.Point(191, 138);
             this.btnAgregarFuncionalidad.Name = "btnAgregarFuncionalidad";
             this.btnAgregarFuncionalidad.Size = new System.Drawing.Size(75, 23);
             this.btnAgregarFuncionalidad.TabIndex = 22;
@@ -86,7 +86,7 @@
             // lbxFuncionalidades
             // 
             this.lbxFuncionalidades.FormattingEnabled = true;
-            this.lbxFuncionalidades.Location = new System.Drawing.Point(30, 168);
+            this.lbxFuncionalidades.Location = new System.Drawing.Point(29, 186);
             this.lbxFuncionalidades.Name = "lbxFuncionalidades";
             this.lbxFuncionalidades.Size = new System.Drawing.Size(120, 95);
             this.lbxFuncionalidades.TabIndex = 21;
@@ -94,7 +94,7 @@
             // 
             // btnGuardarRol
             // 
-            this.btnGuardarRol.Location = new System.Drawing.Point(157, 347);
+            this.btnGuardarRol.Location = new System.Drawing.Point(191, 365);
             this.btnGuardarRol.Name = "btnGuardarRol";
             this.btnGuardarRol.Size = new System.Drawing.Size(75, 23);
             this.btnGuardarRol.TabIndex = 20;
@@ -104,7 +104,7 @@
             // 
             // btnLimpiarRol
             // 
-            this.btnLimpiarRol.Location = new System.Drawing.Point(30, 347);
+            this.btnLimpiarRol.Location = new System.Drawing.Point(29, 365);
             this.btnLimpiarRol.Name = "btnLimpiarRol";
             this.btnLimpiarRol.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiarRol.TabIndex = 19;
@@ -115,7 +115,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 280);
+            this.label3.Location = new System.Drawing.Point(26, 298);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 18;
@@ -124,7 +124,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 96);
+            this.label2.Location = new System.Drawing.Point(26, 114);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 13);
             this.label2.TabIndex = 17;
@@ -133,7 +133,7 @@
             // cbxFuncionalidades
             // 
             this.cbxFuncionalidades.FormattingEnabled = true;
-            this.cbxFuncionalidades.Location = new System.Drawing.Point(30, 122);
+            this.cbxFuncionalidades.Location = new System.Drawing.Point(29, 140);
             this.cbxFuncionalidades.Name = "cbxFuncionalidades";
             this.cbxFuncionalidades.Size = new System.Drawing.Size(121, 21);
             this.cbxFuncionalidades.TabIndex = 16;
@@ -141,7 +141,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 32);
+            this.label1.Location = new System.Drawing.Point(26, 50);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 13;
@@ -152,7 +152,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(68, 32);
+            this.label4.Location = new System.Drawing.Point(67, 50);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(17, 22);
             this.label4.TabIndex = 25;
@@ -163,7 +163,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(110, 95);
+            this.label5.Location = new System.Drawing.Point(109, 113);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(17, 22);
             this.label5.TabIndex = 26;
@@ -174,7 +174,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(65, 279);
+            this.label6.Location = new System.Drawing.Point(64, 297);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(17, 22);
             this.label6.TabIndex = 27;
@@ -185,7 +185,7 @@
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label32.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label32.Location = new System.Drawing.Point(27, 8);
+            this.label32.Location = new System.Drawing.Point(26, 21);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(90, 16);
             this.label32.TabIndex = 264;
@@ -194,7 +194,7 @@
             // rbtRolActivado
             // 
             this.rbtRolActivado.AutoSize = true;
-            this.rbtRolActivado.Location = new System.Drawing.Point(30, 303);
+            this.rbtRolActivado.Location = new System.Drawing.Point(29, 321);
             this.rbtRolActivado.Name = "rbtRolActivado";
             this.rbtRolActivado.Size = new System.Drawing.Size(67, 17);
             this.rbtRolActivado.TabIndex = 14;
@@ -205,7 +205,7 @@
             // rbtRolDesactivado
             // 
             this.rbtRolDesactivado.AutoSize = true;
-            this.rbtRolDesactivado.Location = new System.Drawing.Point(138, 303);
+            this.rbtRolDesactivado.Location = new System.Drawing.Point(113, 321);
             this.rbtRolDesactivado.Name = "rbtRolDesactivado";
             this.rbtRolDesactivado.Size = new System.Drawing.Size(85, 17);
             this.rbtRolDesactivado.TabIndex = 15;
@@ -217,7 +217,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 399);
+            this.ClientSize = new System.Drawing.Size(294, 409);
             this.Controls.Add(this.label32);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
