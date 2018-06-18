@@ -134,6 +134,7 @@
     <Compile Include="Clases\Hotel.cs" />
     <Compile Include="Clases\HotelCerrado.cs" />
     <Compile Include="Clases\LogueoDTO.cs" />
+    <Compile Include="Clases\Regimen.cs" />
     <Compile Include="Clases\Rol.cs" />
     <Compile Include="Clases\Usuario.cs" />
     <Compile Include="FacturarEstadia\VentanaFacturarEstadia.cs">

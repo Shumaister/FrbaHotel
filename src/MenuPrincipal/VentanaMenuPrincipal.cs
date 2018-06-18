@@ -99,7 +99,6 @@ namespace FrbaHotel.Menus
             if (sesion.rol.funcionalidades.Contains("Estadisticas"))
             {
                 this.estadisticasToolStripMenuItem.Visible = true;
-               // menuEstadisticas.Visible = true;
                 usuarioTieneFuncionesDeRecepcion = true;
             }
             if (!usuarioTieneFuncionesDeAdmnistrador)

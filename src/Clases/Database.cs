@@ -1440,10 +1440,47 @@ namespace FrbaHotel
             return consultaObtenerLista(consulta);
         }
 
+        public static bool RegimenAgregadoConExito(Regimen regimen)
+        {
+
+            if (RegimenExiste(regimen))
+            {
+                ventanaInformarError("Ya existe un regimen registrado con ese nombre");
+                return false;
+            }
+            else
+            {
+                RegimenAgregar(regimen);
+                regimen.id = regimenObtenerID(regimen.descripcion);
+                ventanaInformarExito("El regimen fue creado con exito");
+                return true;
+            }
+        }
+
+        public static bool RegimenExiste(Regimen regimen)
+        {
+            SqlCommand consulta = consultaCrear("SELECT COUNT(*) FROM RIP.Regimenes WHERE Regimen_Descripcion = @Nombre");
+            consulta.Parameters.AddWithValue("@Nombre", regimen.descripcion);            
+            return consultaValorEsMayorA(consultaObtenerValor(consulta), 0);
+        }
+
+                
+        public static void RegimenAgregar(Regimen regimen)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Regimenes (Regimen_Descripcion, Regimen_Precio) VALUES (@Desc, @Precio)");
+            consulta.Parameters.AddWithValue("@Desc", regimen.descripcion);
+            consulta.Parameters.AddWithValue("@Precio", regimen.precio);
+            consultaEjecutar(consulta);
+        }
+
+        
+
         #endregion
 
         #region Reserva
 
         #endregion
+
+      
     }
 }

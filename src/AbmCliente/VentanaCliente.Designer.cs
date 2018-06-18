@@ -131,7 +131,7 @@
             // logo
             // 
             this.logo.Image = null;
-            this.logo.Location = new System.Drawing.Point(736, 390);
+            this.logo.Location = new System.Drawing.Point(710, 466);
             this.logo.Size = new System.Drawing.Size(35, 41);
             this.logo.Visible = false;
             // 
@@ -1045,7 +1045,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(772, 503);
+            this.ClientSize = new System.Drawing.Size(764, 477);
             this.Controls.Add(this.tabControl);
             this.Name = "VentanaCliente";
             this.Text = "Clientes - FRBA Hotel ©";

@@ -34,17 +34,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabRoles = new System.Windows.Forms.TabControl();
             this.tabAgregar = new System.Windows.Forms.TabPage();
+            this.tbxPrecioRegimen = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnQuitarFuncionalidad = new System.Windows.Forms.Button();
-            this.tbxNombreRol = new System.Windows.Forms.TextBox();
-            this.btnAgregarFuncionalidad = new System.Windows.Forms.Button();
-            this.lbxFuncionalidades = new System.Windows.Forms.ListBox();
+            this.tbxDescipcionRegimen = new System.Windows.Forms.TextBox();
             this.btnGuardarRegimen = new System.Windows.Forms.Button();
             this.btnLimpiarRol = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.cbxFuncionalidades = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabModificar = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
@@ -75,41 +72,46 @@
             this.tabRoles.Location = new System.Drawing.Point(12, 12);
             this.tabRoles.Name = "tabRoles";
             this.tabRoles.SelectedIndex = 0;
-            this.tabRoles.Size = new System.Drawing.Size(359, 425);
+            this.tabRoles.Size = new System.Drawing.Size(321, 291);
             this.tabRoles.TabIndex = 2;
             // 
             // tabAgregar
             // 
+            this.tabAgregar.Controls.Add(this.tbxPrecioRegimen);
             this.tabAgregar.Controls.Add(this.label32);
             this.tabAgregar.Controls.Add(this.label5);
             this.tabAgregar.Controls.Add(this.label4);
-            this.tabAgregar.Controls.Add(this.btnQuitarFuncionalidad);
-            this.tabAgregar.Controls.Add(this.tbxNombreRol);
-            this.tabAgregar.Controls.Add(this.btnAgregarFuncionalidad);
-            this.tabAgregar.Controls.Add(this.lbxFuncionalidades);
+            this.tabAgregar.Controls.Add(this.tbxDescipcionRegimen);
             this.tabAgregar.Controls.Add(this.btnGuardarRegimen);
             this.tabAgregar.Controls.Add(this.btnLimpiarRol);
             this.tabAgregar.Controls.Add(this.label2);
-            this.tabAgregar.Controls.Add(this.cbxFuncionalidades);
             this.tabAgregar.Controls.Add(this.label1);
             this.tabAgregar.Location = new System.Drawing.Point(4, 22);
             this.tabAgregar.Name = "tabAgregar";
             this.tabAgregar.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAgregar.Size = new System.Drawing.Size(351, 399);
+            this.tabAgregar.Size = new System.Drawing.Size(313, 265);
             this.tabAgregar.TabIndex = 0;
             this.tabAgregar.Text = " Agregar";
             this.tabAgregar.UseVisualStyleBackColor = true;
+            // 
+            // tbxPrecioRegimen
+            // 
+            this.tbxPrecioRegimen.Location = new System.Drawing.Point(45, 163);
+            this.tbxPrecioRegimen.Name = "tbxPrecioRegimen";
+            this.tbxPrecioRegimen.Size = new System.Drawing.Size(121, 20);
+            this.tbxPrecioRegimen.TabIndex = 264;
+            this.tbxPrecioRegimen.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxNumeroCalle_KeyPress);
             // 
             // label32
             // 
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label32.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label32.Location = new System.Drawing.Point(60, 25);
+            this.label32.Location = new System.Drawing.Point(42, 31);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(90, 16);
+            this.label32.Size = new System.Drawing.Size(78, 16);
             this.label32.TabIndex = 263;
-            this.label32.Text = "Datos del Rol";
+            this.label32.Text = "Regimenes";
             this.label32.Click += new System.EventHandler(this.label32_Click);
             // 
             // label5
@@ -117,7 +119,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(143, 127);
+            this.label5.Location = new System.Drawing.Point(76, 138);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(17, 22);
             this.label5.TabIndex = 27;
@@ -128,48 +130,23 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(102, 63);
+            this.label4.Location = new System.Drawing.Point(103, 74);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(17, 22);
             this.label4.TabIndex = 26;
             this.label4.Text = "*";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // btnQuitarFuncionalidad
+            // tbxDescipcionRegimen
             // 
-            this.btnQuitarFuncionalidad.Location = new System.Drawing.Point(224, 155);
-            this.btnQuitarFuncionalidad.Name = "btnQuitarFuncionalidad";
-            this.btnQuitarFuncionalidad.Size = new System.Drawing.Size(75, 23);
-            this.btnQuitarFuncionalidad.TabIndex = 12;
-            this.btnQuitarFuncionalidad.Text = "Quitar";
-            this.btnQuitarFuncionalidad.UseVisualStyleBackColor = true;
-            // 
-            // tbxNombreRol
-            // 
-            this.tbxNombreRol.Location = new System.Drawing.Point(63, 93);
-            this.tbxNombreRol.Name = "tbxNombreRol";
-            this.tbxNombreRol.Size = new System.Drawing.Size(121, 20);
-            this.tbxNombreRol.TabIndex = 11;
-            // 
-            // btnAgregarFuncionalidad
-            // 
-            this.btnAgregarFuncionalidad.Location = new System.Drawing.Point(224, 126);
-            this.btnAgregarFuncionalidad.Name = "btnAgregarFuncionalidad";
-            this.btnAgregarFuncionalidad.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregarFuncionalidad.TabIndex = 10;
-            this.btnAgregarFuncionalidad.Text = "Agregar";
-            this.btnAgregarFuncionalidad.UseVisualStyleBackColor = true;
-            // 
-            // lbxFuncionalidades
-            // 
-            this.lbxFuncionalidades.FormattingEnabled = true;
-            this.lbxFuncionalidades.Location = new System.Drawing.Point(63, 199);
-            this.lbxFuncionalidades.Name = "lbxFuncionalidades";
-            this.lbxFuncionalidades.Size = new System.Drawing.Size(120, 95);
-            this.lbxFuncionalidades.TabIndex = 9;
+            this.tbxDescipcionRegimen.Location = new System.Drawing.Point(45, 104);
+            this.tbxDescipcionRegimen.Name = "tbxDescipcionRegimen";
+            this.tbxDescipcionRegimen.Size = new System.Drawing.Size(121, 20);
+            this.tbxDescipcionRegimen.TabIndex = 11;
             // 
             // btnGuardarRegimen
             // 
-            this.btnGuardarRegimen.Location = new System.Drawing.Point(224, 346);
+            this.btnGuardarRegimen.Location = new System.Drawing.Point(206, 218);
             this.btnGuardarRegimen.Name = "btnGuardarRegimen";
             this.btnGuardarRegimen.Size = new System.Drawing.Size(75, 23);
             this.btnGuardarRegimen.TabIndex = 8;
@@ -179,7 +156,7 @@
             // 
             // btnLimpiarRol
             // 
-            this.btnLimpiarRol.Location = new System.Drawing.Point(63, 346);
+            this.btnLimpiarRol.Location = new System.Drawing.Point(45, 218);
             this.btnLimpiarRol.Name = "btnLimpiarRol";
             this.btnLimpiarRol.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiarRol.TabIndex = 7;
@@ -189,28 +166,20 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(60, 127);
+            this.label2.Location = new System.Drawing.Point(42, 138);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 13);
+            this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Funcionalidades";
-            // 
-            // cbxFuncionalidades
-            // 
-            this.cbxFuncionalidades.FormattingEnabled = true;
-            this.cbxFuncionalidades.Location = new System.Drawing.Point(63, 153);
-            this.cbxFuncionalidades.Name = "cbxFuncionalidades";
-            this.cbxFuncionalidades.Size = new System.Drawing.Size(121, 21);
-            this.cbxFuncionalidades.TabIndex = 4;
+            this.label2.Text = "Precio";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(60, 63);
+            this.label1.Location = new System.Drawing.Point(42, 74);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Nombre";
+            this.label1.Text = "Descripcion";
             // 
             // tabModificar
             // 
@@ -219,7 +188,7 @@
             this.tabModificar.Location = new System.Drawing.Point(4, 22);
             this.tabModificar.Name = "tabModificar";
             this.tabModificar.Padding = new System.Windows.Forms.Padding(3);
-            this.tabModificar.Size = new System.Drawing.Size(351, 399);
+            this.tabModificar.Size = new System.Drawing.Size(313, 265);
             this.tabModificar.TabIndex = 1;
             this.tabModificar.Text = "Modificar";
             this.tabModificar.UseVisualStyleBackColor = true;
@@ -271,7 +240,7 @@
             this.tabEliminar.Location = new System.Drawing.Point(4, 22);
             this.tabEliminar.Name = "tabEliminar";
             this.tabEliminar.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEliminar.Size = new System.Drawing.Size(351, 399);
+            this.tabEliminar.Size = new System.Drawing.Size(313, 265);
             this.tabEliminar.TabIndex = 2;
             this.tabEliminar.Text = "Eliminar";
             this.tabEliminar.UseVisualStyleBackColor = true;
@@ -320,7 +289,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(386, 450);
+            this.ClientSize = new System.Drawing.Size(343, 311);
             this.Controls.Add(this.tabRoles);
             this.Name = "VentanaRegimenes";
             this.Text = "Regimenes - FRBA Hotel ©";
@@ -348,14 +317,10 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnQuitarFuncionalidad;
-        private System.Windows.Forms.TextBox tbxNombreRol;
-        private System.Windows.Forms.Button btnAgregarFuncionalidad;
-        private System.Windows.Forms.ListBox lbxFuncionalidades;
+        private System.Windows.Forms.TextBox tbxDescipcionRegimen;
         private System.Windows.Forms.Button btnGuardarRegimen;
         private System.Windows.Forms.Button btnLimpiarRol;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cbxFuncionalidades;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabModificar;
         private System.Windows.Forms.Label label3;
@@ -363,5 +328,6 @@
         private System.Windows.Forms.TabPage tabEliminar;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView dgvEliminarRoles;
+        private System.Windows.Forms.TextBox tbxPrecioRegimen;
     }
 }
