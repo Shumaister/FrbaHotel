@@ -97,7 +97,8 @@ namespace FrbaHotel.Menus
             }
             if (sesion.rol.funcionalidades.Contains("Estadisticas"))
             {
-                menuEstadisticas.Visible = true;
+                this.estadisticasToolStripMenuItem.Visible = true;
+               // menuEstadisticas.Visible = true;
                 usuarioTieneFuncionesDeRecepcion = true;
             }
             if (!usuarioTieneFuncionesDeAdmnistrador)
@@ -157,7 +158,7 @@ namespace FrbaHotel.Menus
 
         private void menuEstadisticas_Click(object sender, EventArgs e)
         {
-          VentanaListadoEstadistico estadistico = new VentanaListadoEstadistico();
+            VentanaListadoEstadistico estadistico = new VentanaListadoEstadistico();
             estadistico.ShowDialog();
         }
 
@@ -165,6 +166,12 @@ namespace FrbaHotel.Menus
         {
             VentanaFacturarEstadia facturaestadia = new VentanaFacturarEstadia();
             facturaestadia.ShowDialog();
+        }
+
+        private void estadisticasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VentanaListadoEstadistico estadistico = new VentanaListadoEstadistico();
+            estadistico.ShowDialog();
         }
 
     }
