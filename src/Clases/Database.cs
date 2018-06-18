@@ -1473,7 +1473,37 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
-        
+        public static DataTable RegimenesObtenerTodosEnTabla()
+        {
+            SqlCommand consulta = consultaCrear("SELECT * FROM RIP.Regimenes ORDER BY Regimen_ID");
+            return consultaObtenerTabla(consulta);
+        }
+
+        public static DataTable RegimenesObtenerHabilitadosEnTabla()
+        {
+            SqlCommand consulta = consultaCrear("SELECT * FROM RIP.Regimenes WHERE Regimen_Estado = 1 ORDER BY Regimen_ID");
+            return consultaObtenerTabla(consulta);
+        }
+
+        public static void RegimenEliminadoConExito(Regimen regimen)
+        {
+            try
+            {
+                RegimenEliminar(regimen);
+                ventanaInformarExito("El regimen ha sido eliminado con exito");
+            }
+            catch (Exception e)
+            {
+                ventanaInformarError("Se ha producido un error al intentar eliminar el Regimen seleccionado. (" + regimen.id + ").");            
+            }
+        }
+
+        private static void RegimenEliminar(Regimen regimen)
+        {
+            SqlCommand consulta = consultaCrear("DELETE RIP.Regimenes WHERE Regimen_ID = @id");
+            consulta.Parameters.AddWithValue("@id",regimen.id);
+            consultaEjecutar(consulta);
+        }
 
         #endregion
 
@@ -1481,6 +1511,5 @@ namespace FrbaHotel
 
         #endregion
 
-      
     }
 }

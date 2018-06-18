@@ -12,6 +12,11 @@ namespace FrbaHotel.Clases
         public string descripcion { get; set; }
         public string precio { get; set; }
 
+        public Regimen(string id)
+        {
+            this.id = id;
+        }
+
         public Regimen(string d, string p)
         {
             this.descripcion = d;

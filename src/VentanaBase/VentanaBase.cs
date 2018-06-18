@@ -138,7 +138,7 @@ namespace FrbaHotel
         public static void dataGridViewAgregarBoton(DataGridView dataGridView, string textoBoton)
         {
             DataGridViewButtonColumn botonModificar = new DataGridViewButtonColumn();
-            botonModificar.HeaderText = "Seleccionar";
+            botonModificar.HeaderText = "Accion";
             botonModificar.Text = textoBoton;
             botonModificar.UseColumnTextForButtonValue = true;
             dataGridView.Columns.Add(botonModificar);
@@ -146,12 +146,12 @@ namespace FrbaHotel
 
         public static void dataGridViewAgregarBotonModificar(DataGridView dataGridView)
         {
-            VentanaBase.dataGridViewAgregarBoton(dataGridView, "            Modificar          ");
+            VentanaBase.dataGridViewAgregarBoton(dataGridView, "         Modificar       ");
         }
 
         public static void dataGridViewAgregarBotonEliminar(DataGridView dataGridView)
         {
-            VentanaBase.dataGridViewAgregarBoton(dataGridView, "            Eliminar            ");
+            VentanaBase.dataGridViewAgregarBoton(dataGridView, "         Eliminar         ");
         }
 
         #endregion
