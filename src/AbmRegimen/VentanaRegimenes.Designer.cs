@@ -72,7 +72,7 @@
             this.tabRoles.Location = new System.Drawing.Point(12, 12);
             this.tabRoles.Name = "tabRoles";
             this.tabRoles.SelectedIndex = 0;
-            this.tabRoles.Size = new System.Drawing.Size(481, 291);
+            this.tabRoles.Size = new System.Drawing.Size(476, 291);
             this.tabRoles.TabIndex = 2;
             // 
             // tabAgregar
@@ -89,7 +89,7 @@
             this.tabAgregar.Location = new System.Drawing.Point(4, 22);
             this.tabAgregar.Name = "tabAgregar";
             this.tabAgregar.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAgregar.Size = new System.Drawing.Size(473, 265);
+            this.tabAgregar.Size = new System.Drawing.Size(468, 265);
             this.tabAgregar.TabIndex = 0;
             this.tabAgregar.Text = " Agregar";
             this.tabAgregar.UseVisualStyleBackColor = true;
@@ -189,7 +189,7 @@
             this.tabModificar.Location = new System.Drawing.Point(4, 22);
             this.tabModificar.Name = "tabModificar";
             this.tabModificar.Padding = new System.Windows.Forms.Padding(3);
-            this.tabModificar.Size = new System.Drawing.Size(473, 265);
+            this.tabModificar.Size = new System.Drawing.Size(468, 265);
             this.tabModificar.TabIndex = 1;
             this.tabModificar.Text = "Modificar";
             this.tabModificar.UseVisualStyleBackColor = true;
@@ -231,7 +231,7 @@
             this.dgvModificarRegimenes.Name = "dgvModificarRegimenes";
             this.dgvModificarRegimenes.ReadOnly = true;
             this.dgvModificarRegimenes.RowHeadersVisible = false;
-            this.dgvModificarRegimenes.Size = new System.Drawing.Size(461, 228);
+            this.dgvModificarRegimenes.Size = new System.Drawing.Size(456, 228);
             this.dgvModificarRegimenes.TabIndex = 10;
             this.dgvModificarRegimenes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvModificarRegimenes_CellContentClick);
             // 
@@ -242,7 +242,7 @@
             this.tabEliminar.Location = new System.Drawing.Point(4, 22);
             this.tabEliminar.Name = "tabEliminar";
             this.tabEliminar.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEliminar.Size = new System.Drawing.Size(473, 265);
+            this.tabEliminar.Size = new System.Drawing.Size(468, 265);
             this.tabEliminar.TabIndex = 2;
             this.tabEliminar.Text = "Eliminar";
             this.tabEliminar.UseVisualStyleBackColor = true;
@@ -284,7 +284,7 @@
             this.dgvEliminarRegimenes.Name = "dgvEliminarRegimenes";
             this.dgvEliminarRegimenes.ReadOnly = true;
             this.dgvEliminarRegimenes.RowHeadersVisible = false;
-            this.dgvEliminarRegimenes.Size = new System.Drawing.Size(461, 228);
+            this.dgvEliminarRegimenes.Size = new System.Drawing.Size(456, 228);
             this.dgvEliminarRegimenes.TabIndex = 11;
             this.dgvEliminarRegimenes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEliminarRegimenes_CellContentClick);
             // 
@@ -292,7 +292,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 311);
+            this.ClientSize = new System.Drawing.Size(500, 311);
             this.Controls.Add(this.tabRoles);
             this.Name = "VentanaRegimenes";
             this.Text = "Regimenes - FRBA Hotel ©";

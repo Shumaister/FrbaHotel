@@ -1500,7 +1500,7 @@ namespace FrbaHotel
 
         private static void RegimenEliminar(Regimen regimen)
         {
-            SqlCommand consulta = consultaCrear("DELETE RIP.Regimenes WHERE Regimen_ID = @id");
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Regimenes SET Regimen_Estado = 0 WHERE Regimen_ID = @id");
             consulta.Parameters.AddWithValue("@id",regimen.id);
             consultaEjecutar(consulta);
         }
