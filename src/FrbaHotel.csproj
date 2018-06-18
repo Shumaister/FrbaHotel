@@ -90,11 +90,11 @@
     <Compile Include="AbmHotel\VentanaModificarHotel.Designer.cs">
       <DependentUpon>VentanaModificarHotel.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmRegimen\Form1.cs">
+    <Compile Include="AbmRegimen\VentanaRegimenes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmRegimen\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmRegimen\VentanaRegimenes.Designer.cs">
+      <DependentUpon>VentanaRegimenes.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRol\VentanaModificarRol.cs">
       <SubType>Form</SubType>
@@ -232,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmHotel\VentanaModificarHotel.resx">
       <DependentUpon>VentanaModificarHotel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRegimen\VentanaRegimenes.resx">
+      <DependentUpon>VentanaRegimenes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\VentanaModificarRol.resx">
       <DependentUpon>VentanaModificarRol.cs</DependentUpon>

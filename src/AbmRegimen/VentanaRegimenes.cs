@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.AbmRegimen
 {
-    public partial class Form1 : Form
+    public partial class VentanaRegimenes : VentanaBase
     {
-        public Form1()
+        public VentanaRegimenes()
         {
             InitializeComponent();
+        }
+
+        private void btnGuardarRol_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label32_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

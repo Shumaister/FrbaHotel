@@ -16,6 +16,7 @@ using FrbaHotel.Login;
 using FrbaHotel.RegistrarConsumible;
 using FrbaHotel.ListadoEstadistico;
 using FrbaHotel.FacturarEstadia;
+using FrbaHotel.AbmRegimen;
 
 
 namespace FrbaHotel.Menus
@@ -172,6 +173,12 @@ namespace FrbaHotel.Menus
         {
             VentanaListadoEstadistico estadistico = new VentanaListadoEstadistico();
             estadistico.ShowDialog();
+        }
+
+        private void menuRegimenes_Click(object sender, EventArgs e)
+        {
+            VentanaRegimenes ventanaRegimenes = new VentanaRegimenes();
+            ventanaRegimenes.ShowDialog();
         }
 
     }
