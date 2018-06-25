@@ -1,4 +1,6 @@
-﻿using FrbaHotel.Clases;
+﻿using FrbaHotel.AbmCliente;
+using FrbaHotel.AbmUsuario;
+using FrbaHotel.Clases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,6 +30,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             comboBoxCargar(cbxHoteles, Database.reservaObtenerHoteles());
             
             OcultarErrores();
+            groupBox3.Enabled = false;
             groupBox2.Enabled = false;
         }
 
@@ -40,7 +43,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             this.Reserva = new Reserva();
         }
 
-        private int cantidadPersonasSegunTipoHabitacion()
+        private int CantidadPersonasSegunTipoHabitacion()
         {
             int cant;
 
@@ -94,14 +97,51 @@ namespace FrbaHotel.GenerarModificacionReserva
             if (Reserva.Regimen != "Seleccione")
             {
                 this.cbxRegimenEstadiaObligatorio.Enabled = false;
-                int eleccion = this.cbxRegimenEstadia.SelectedIndex;
-                this.cbxRegimenEstadiaObligatorio.SelectedIndex = eleccion;
+                this.cbxRegimenEstadiaObligatorio.Items.Add(this.cbxRegimenEstadia.SelectedItem);
             }
             else
             {
                 comboBoxCargar(cbxRegimenEstadiaObligatorio, Database.ReservaObtenerEstadiasDeHotel(Reserva.Hotel.id));
+                this.cbxRegimenEstadiaObligatorio.Items.Insert(0, "Seleccione");
+                this.cbxRegimenEstadiaObligatorio.SelectionStart = 0;
             }
+
+            ActualizarPrecio();
         }
+
+        private void ActualizarPrecio()
+        {
+            this.lblNumeroPrecioFinal.Text = "U$S " + CuentaPrecioFinal().ToString();
+        }
+
+        private double CuentaPrecioFinal()
+        {
+            double precioBase;
+
+            if (Reserva.Regimen == "Seleccione")
+                precioBase = 1;
+            else
+                precioBase = Database.ReservaObtenerPrecioBase(Reserva.Regimen);
+
+            this.lblTipoRegimen.Text = "U$S " + precioBase;
+
+            double recargaHotel = Database.HotelObtenerCantidadEstrellasHotelPorID(Reserva.Hotel.id) * 42.00;
+
+            this.lblCantHabi.Text = CantidadDeHabitacionesNecesarias.ToString();
+            this.lblPrecioHab.Text = cbxTipoHabitacion.SelectedItem.ToString();
+            this.lblrecargahotel.Text = Database.HotelObtenerCantidadEstrellasHotelPorID(Reserva.Hotel.id).ToString()+" * 42";
+
+            return precioBase * (CantidadDeHabitacionesNecesarias * CantidadPersonasSegunTipoHabitacion()) * recargaHotel;
+        }
+
+        private void irAPaso3()
+        {
+
+            Reserva.Cliente = null;
+            groupBox2.Enabled = false;
+            groupBox3.Enabled = true;
+        }
+
 
         #endregion
 
@@ -149,7 +189,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                 {
                     Reserva.Habitaciones = new List<Habitacion>();
 
-                    for (int i = 0; i <= CantidadDeHabitacionesNecesarias; i++)
+                    for (int i = 0; i < CantidadDeHabitacionesNecesarias; i++)
                     {
                         Reserva.Habitaciones.Add(new Habitacion(ListaIDHabitaciones[i]));
                     }
@@ -184,7 +224,41 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         private void btnConfirmarPrecio_Click(object sender, EventArgs e)
         {
+            if (Reserva.Regimen == "Seleccione")
+            {
+                this.lblErrorPaso2.Visible = true;
+                return;
+            }
 
+            irAPaso3();
+        }
+
+
+        private void cbxRegimenEstadiaObligatorio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Reserva.Regimen = this.cbxRegimenEstadiaObligatorio.SelectedItem.ToString();
+            ActualizarPrecio();
+        }
+
+        private void btnVolverPaso2_Click(object sender, EventArgs e)
+        {
+            this.groupBox3.Enabled = false;
+            this.groupBox2.Enabled = true;
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            VentanaCliente ventanaCliente = new VentanaCliente(Reserva);
+            ventanaCliente.ShowDialog();
+
+            this.lblCliente.Text = " SDFASDFAs";
+        }
+
+
+        private void btnConfirmarReserva_Click(object sender, EventArgs e)
+        {
+            if(Reserva.Cliente != null)
+                MessageBox.Show("Se a registrado con exito su reservar con codigo: 7878789", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         #endregion
@@ -196,7 +270,7 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             CantidadDeHabitacionesNecesarias = 0;
 
-            int cantPersPorHab = cantidadPersonasSegunTipoHabitacion();
+            int cantPersPorHab = CantidadPersonasSegunTipoHabitacion();
 
             int aux = 0;
             int personasSinHabitacion = int.Parse(this.tbxCantidadHuespedes.Text.Trim());
@@ -306,6 +380,11 @@ namespace FrbaHotel.GenerarModificacionReserva
         }
 
         #endregion
+
+
+
+
+
 
   
 

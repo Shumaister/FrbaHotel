@@ -18,5 +18,9 @@ namespace FrbaHotel.Clases
             this.persona = persona;
             this.estado = estado;
         }
+
+        public Cliente()
+        {
+        }
     }
 }

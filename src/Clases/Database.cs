@@ -1097,6 +1097,13 @@ namespace FrbaHotel
             return consultaObtenerValor(consulta);
         }
 
+        public static double HotelObtenerCantidadEstrellasHotelPorID(string p)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Hotel_CantidadEstrellas FROM RIP.Hoteles WHERE Hotel_DomicilioID = @id");
+            consulta.Parameters.AddWithValue("@id", p);
+            return double.Parse(consultaObtenerValor(consulta));
+        }
+
         public static string hotelObtenerIDPorEmail(Hotel hotel)
         {
             SqlCommand consulta = consultaCrear("SELECT Hotel_ID FROM RIP.Hoteles WHERE Hotel_Email = @Email");
@@ -1533,10 +1540,19 @@ namespace FrbaHotel
             return consultaObtenerLista(consulta);
         }
 
+        public static double ReservaObtenerPrecioBase(string p)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Regimen_Precio FROM rip.Regimenes WHERE Regimen_Descripcion = @precio");
+            consulta.Parameters.AddWithValue("@precio", p);
+
+            string precio = consultaObtenerValor(consulta);
+
+            return double.Parse(precio);
+        }
+        
         #endregion
 
 
 
-       
     }
 }

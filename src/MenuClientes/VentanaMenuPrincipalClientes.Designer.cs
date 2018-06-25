@@ -32,6 +32,7 @@
             this.misReservasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevaReservaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificarReservaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelarReservaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -60,7 +61,8 @@
             // 
             this.misReservasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nuevaReservaToolStripMenuItem,
-            this.modificarReservaToolStripMenuItem});
+            this.modificarReservaToolStripMenuItem,
+            this.cancelarReservaToolStripMenuItem});
             this.misReservasToolStripMenuItem.Name = "misReservasToolStripMenuItem";
             this.misReservasToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
             this.misReservasToolStripMenuItem.Text = "Mis Reservas";
@@ -78,6 +80,13 @@
             this.modificarReservaToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.modificarReservaToolStripMenuItem.Text = "Modificar Reserva";
             this.modificarReservaToolStripMenuItem.Click += new System.EventHandler(this.modificarReservaToolStripMenuItem_Click);
+            // 
+            // cancelarReservaToolStripMenuItem
+            // 
+            this.cancelarReservaToolStripMenuItem.Name = "cancelarReservaToolStripMenuItem";
+            this.cancelarReservaToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.cancelarReservaToolStripMenuItem.Text = "Cancelar Reserva";
+            this.cancelarReservaToolStripMenuItem.Click += new System.EventHandler(this.cancelarReservaToolStripMenuItem_Click);
             // 
             // VentanaMenuPrincipalClientes
             // 
@@ -110,5 +119,6 @@
         private System.Windows.Forms.ToolStripMenuItem misReservasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nuevaReservaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modificarReservaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cancelarReservaToolStripMenuItem;
     }
 }

@@ -13,12 +13,24 @@ namespace FrbaHotel.AbmCliente
 {
     public partial class VentanaCliente : VentanaBase
     {
-
-        #region Constructores
+        public Reserva Reserva { get; set; }
         
+        #region Constructores
+
+        public VentanaCliente(Reserva r)
+        {
+            this.Reserva = r;
+            InitializeComponent();
+            this.btnGuardarDesdeReserva.Visible = true;
+            this.btnGuardarCliente.Visible = false;
+
+            // TODO ahcer que las pestanias de modificar eliminar se bloquen o eliminen
+        }
+
         public VentanaCliente()
         {
             InitializeComponent();
+            this.btnGuardarDesdeReserva.Visible = false;
         }
 
         #endregion
@@ -320,5 +332,19 @@ namespace FrbaHotel.AbmCliente
         }
 
         #endregion
+
+        private void btnGuardarDesdeReserva_Click(object sender, EventArgs e)
+        {
+            if (ventanaCamposEstanCompletos(pagAgregar, controladorError))
+            {
+                Cliente cliente = ventanaCrearClienteParaAgregar();
+
+                if (Database.clienteAgregadoConExito(cliente))
+                    ventanaActualizar(sender, e);
+
+                Reserva.Cliente = cliente;
+            }
+        }
+
     }
 }

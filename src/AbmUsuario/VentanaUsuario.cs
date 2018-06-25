@@ -14,13 +14,21 @@ namespace FrbaHotel.AbmUsuario
 {
     public partial class VentanaUsuario : VentanaBase
     {
-        #region Atributos
+        #region Propiedades
 
         Sesion sesion {get; set;}
+        Reserva Reserva { get; set; }
 
         #endregion
 
         #region Constructores
+
+        public VentanaUsuario(Reserva r)
+        {
+            InitializeComponent();
+            this.Reserva = r;
+
+        }
 
         public VentanaUsuario(Sesion sesion)
         {

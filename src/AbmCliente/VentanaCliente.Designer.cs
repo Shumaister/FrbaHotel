@@ -116,6 +116,7 @@
             this.tbxFiltroEmailEliminar = new System.Windows.Forms.TextBox();
             this.btnLimpiarEliminar = new System.Windows.Forms.Button();
             this.btnFiltrarEliminar = new System.Windows.Forms.Button();
+            this.btnGuardarDesdeReserva = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.tabControl.SuspendLayout();
@@ -148,6 +149,7 @@
             // 
             // pagAgregar
             // 
+            this.pagAgregar.Controls.Add(this.btnGuardarDesdeReserva);
             this.pagAgregar.Controls.Add(this.label39);
             this.pagAgregar.Controls.Add(this.label38);
             this.pagAgregar.Controls.Add(this.tbxNacionalidad);
@@ -1041,6 +1043,19 @@
             this.btnFiltrarEliminar.UseVisualStyleBackColor = true;
             this.btnFiltrarEliminar.Click += new System.EventHandler(this.btnFiltrarEliminar_Click);
             // 
+            // btnGuardarDesdeReserva
+            // 
+            this.btnGuardarDesdeReserva.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnGuardarDesdeReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardarDesdeReserva.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnGuardarDesdeReserva.Location = new System.Drawing.Point(569, 353);
+            this.btnGuardarDesdeReserva.Name = "btnGuardarDesdeReserva";
+            this.btnGuardarDesdeReserva.Size = new System.Drawing.Size(107, 40);
+            this.btnGuardarDesdeReserva.TabIndex = 329;
+            this.btnGuardarDesdeReserva.Text = "Guardar";
+            this.btnGuardarDesdeReserva.UseVisualStyleBackColor = false;
+            this.btnGuardarDesdeReserva.Click += new System.EventHandler(this.btnGuardarDesdeReserva_Click);
+            // 
             // VentanaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1155,5 +1170,6 @@
         private System.Windows.Forms.TextBox tbxFiltroEmailEliminar;
         private System.Windows.Forms.Button btnLimpiarEliminar;
         private System.Windows.Forms.Button btnFiltrarEliminar;
+        private System.Windows.Forms.Button btnGuardarDesdeReserva;
     }
 }

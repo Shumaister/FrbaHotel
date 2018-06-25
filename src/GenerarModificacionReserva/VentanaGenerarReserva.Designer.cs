@@ -58,20 +58,36 @@
             this.calendarFin = new System.Windows.Forms.MonthCalendar();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblErrorPaso2 = new System.Windows.Forms.Label();
+            this.lblrecargahotel = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.lblPrecioHab = new System.Windows.Forms.Label();
+            this.lblTipoRegimen = new System.Windows.Forms.Label();
+            this.lblCantHabi = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnConfirmarPrecio = new System.Windows.Forms.Button();
             this.lblNumeroPrecioFinal = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.lblRegimenEstadia = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.cbxRegimenEstadiaObligatorio = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnNuevo = new System.Windows.Forms.Button();
+            this.btnClienteExistente = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
+            this.btnVolverPaso2 = new System.Windows.Forms.Button();
+            this.btnConfirmarReserva = new System.Windows.Forms.Button();
+            this.label35 = new System.Windows.Forms.Label();
+            this.lblCliente = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // logo
@@ -398,11 +414,18 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBox2.Controls.Add(this.lblErrorPaso2);
+            this.groupBox2.Controls.Add(this.lblrecargahotel);
+            this.groupBox2.Controls.Add(this.label20);
+            this.groupBox2.Controls.Add(this.lblPrecioHab);
+            this.groupBox2.Controls.Add(this.lblTipoRegimen);
+            this.groupBox2.Controls.Add(this.lblCantHabi);
+            this.groupBox2.Controls.Add(this.label19);
+            this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.btnConfirmarPrecio);
             this.groupBox2.Controls.Add(this.lblNumeroPrecioFinal);
             this.groupBox2.Controls.Add(this.label17);
-            this.groupBox2.Controls.Add(this.lblRegimenEstadia);
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.cbxRegimenEstadiaObligatorio);
@@ -410,17 +433,106 @@
             this.groupBox2.Controls.Add(this.label31);
             this.groupBox2.Location = new System.Drawing.Point(559, 11);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(629, 275);
+            this.groupBox2.Size = new System.Drawing.Size(629, 364);
             this.groupBox2.TabIndex = 335;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Paso 2";
+            // 
+            // lblErrorPaso2
+            // 
+            this.lblErrorPaso2.AutoSize = true;
+            this.lblErrorPaso2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErrorPaso2.ForeColor = System.Drawing.Color.Red;
+            this.lblErrorPaso2.Location = new System.Drawing.Point(199, 176);
+            this.lblErrorPaso2.Name = "lblErrorPaso2";
+            this.lblErrorPaso2.Size = new System.Drawing.Size(243, 13);
+            this.lblErrorPaso2.TabIndex = 337;
+            this.lblErrorPaso2.Text = "Debe Seleccionar un Regimen de Estadia";
+            this.lblErrorPaso2.Visible = false;
+            // 
+            // lblrecargahotel
+            // 
+            this.lblrecargahotel.AutoSize = true;
+            this.lblrecargahotel.Location = new System.Drawing.Point(407, 148);
+            this.lblrecargahotel.Name = "lblrecargahotel";
+            this.lblrecargahotel.Size = new System.Drawing.Size(10, 13);
+            this.lblrecargahotel.TabIndex = 336;
+            this.lblrecargahotel.Text = "-";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(384, 121);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(116, 13);
+            this.label20.TabIndex = 335;
+            this.label20.Text = "Recarga Estrellas hotel";
+            // 
+            // lblPrecioHab
+            // 
+            this.lblPrecioHab.AutoSize = true;
+            this.lblPrecioHab.Location = new System.Drawing.Point(306, 147);
+            this.lblPrecioHab.Name = "lblPrecioHab";
+            this.lblPrecioHab.Size = new System.Drawing.Size(10, 13);
+            this.lblPrecioHab.TabIndex = 334;
+            this.lblPrecioHab.Text = "-";
+            // 
+            // lblTipoRegimen
+            // 
+            this.lblTipoRegimen.AutoSize = true;
+            this.lblTipoRegimen.Location = new System.Drawing.Point(57, 147);
+            this.lblTipoRegimen.Name = "lblTipoRegimen";
+            this.lblTipoRegimen.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblTipoRegimen.Size = new System.Drawing.Size(10, 13);
+            this.lblTipoRegimen.TabIndex = 333;
+            this.lblTipoRegimen.Text = "-";
+            // 
+            // lblCantHabi
+            // 
+            this.lblCantHabi.AutoSize = true;
+            this.lblCantHabi.Location = new System.Drawing.Point(182, 147);
+            this.lblCantHabi.Name = "lblCantHabi";
+            this.lblCantHabi.Size = new System.Drawing.Size(10, 13);
+            this.lblCantHabi.TabIndex = 332;
+            this.lblCantHabi.Text = "-";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(296, 120);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(82, 13);
+            this.label19.TabIndex = 331;
+            this.label19.Text = "Tipo Habitacion";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(152, 119);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(129, 13);
+            this.label18.TabIndex = 330;
+            this.label18.Text = "Cantidad de Habitaciones";
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.DarkRed;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button1.Location = new System.Drawing.Point(6, 318);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(112, 40);
+            this.button1.TabIndex = 329;
+            this.button1.Text = "Volver a Paso 1";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnConfirmarPrecio
             // 
             this.btnConfirmarPrecio.BackColor = System.Drawing.Color.ForestGreen;
             this.btnConfirmarPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirmarPrecio.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnConfirmarPrecio.Location = new System.Drawing.Point(516, 226);
+            this.btnConfirmarPrecio.Location = new System.Drawing.Point(516, 318);
             this.btnConfirmarPrecio.Name = "btnConfirmarPrecio";
             this.btnConfirmarPrecio.Size = new System.Drawing.Size(107, 40);
             this.btnConfirmarPrecio.TabIndex = 328;
@@ -431,36 +543,26 @@
             // lblNumeroPrecioFinal
             // 
             this.lblNumeroPrecioFinal.AutoSize = true;
-            this.lblNumeroPrecioFinal.Location = new System.Drawing.Point(279, 163);
+            this.lblNumeroPrecioFinal.Location = new System.Drawing.Point(525, 148);
             this.lblNumeroPrecioFinal.Name = "lblNumeroPrecioFinal";
-            this.lblNumeroPrecioFinal.Size = new System.Drawing.Size(61, 13);
+            this.lblNumeroPrecioFinal.Size = new System.Drawing.Size(10, 13);
             this.lblNumeroPrecioFinal.TabIndex = 327;
-            this.lblNumeroPrecioFinal.Text = "unNumerito";
+            this.lblNumeroPrecioFinal.Text = "-";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(38, 163);
+            this.label17.Location = new System.Drawing.Point(24, 119);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(116, 13);
             this.label17.TabIndex = 326;
             this.label17.Text = "Con el Tipo de regimen";
             // 
-            // lblRegimenEstadia
-            // 
-            this.lblRegimenEstadia.AutoSize = true;
-            this.lblRegimenEstadia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRegimenEstadia.Location = new System.Drawing.Point(176, 161);
-            this.lblRegimenEstadia.Name = "lblRegimenEstadia";
-            this.lblRegimenEstadia.Size = new System.Drawing.Size(53, 16);
-            this.lblRegimenEstadia.TabIndex = 325;
-            this.lblRegimenEstadia.Text = "Precio";
-            // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(38, 125);
+            this.label16.Location = new System.Drawing.Point(513, 118);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(91, 16);
             this.label16.TabIndex = 324;
@@ -471,7 +573,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Red;
-            this.label15.Location = new System.Drawing.Point(136, 63);
+            this.label15.Location = new System.Drawing.Point(277, 60);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(17, 22);
             this.label15.TabIndex = 323;
@@ -480,15 +582,16 @@
             // cbxRegimenEstadiaObligatorio
             // 
             this.cbxRegimenEstadiaObligatorio.FormattingEnabled = true;
-            this.cbxRegimenEstadiaObligatorio.Location = new System.Drawing.Point(168, 64);
+            this.cbxRegimenEstadiaObligatorio.Location = new System.Drawing.Point(309, 61);
             this.cbxRegimenEstadiaObligatorio.Name = "cbxRegimenEstadiaObligatorio";
             this.cbxRegimenEstadiaObligatorio.Size = new System.Drawing.Size(153, 21);
             this.cbxRegimenEstadiaObligatorio.TabIndex = 322;
+            this.cbxRegimenEstadiaObligatorio.SelectedIndexChanged += new System.EventHandler(this.cbxRegimenEstadiaObligatorio_SelectedIndexChanged);
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(38, 67);
+            this.label14.Location = new System.Drawing.Point(179, 64);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(102, 13);
             this.label14.TabIndex = 321;
@@ -506,24 +609,105 @@
             this.label31.Text = "Paso 2 - Confirmar Precio";
             this.label31.Click += new System.EventHandler(this.label31_Click);
             // 
-            // button1
+            // groupBox3
             // 
-            this.button1.BackColor = System.Drawing.Color.DarkRed;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Location = new System.Drawing.Point(6, 226);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 40);
-            this.button1.TabIndex = 329;
-            this.button1.Text = "Volver a Paso 1";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.groupBox3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBox3.Controls.Add(this.lblCliente);
+            this.groupBox3.Controls.Add(this.btnNuevo);
+            this.groupBox3.Controls.Add(this.btnClienteExistente);
+            this.groupBox3.Controls.Add(this.label21);
+            this.groupBox3.Controls.Add(this.btnVolverPaso2);
+            this.groupBox3.Controls.Add(this.btnConfirmarReserva);
+            this.groupBox3.Controls.Add(this.label35);
+            this.groupBox3.Location = new System.Drawing.Point(559, 381);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(629, 283);
+            this.groupBox3.TabIndex = 338;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Paso 3";
+            // 
+            // btnNuevo
+            // 
+            this.btnNuevo.BackColor = System.Drawing.SystemColors.Control;
+            this.btnNuevo.Location = new System.Drawing.Point(317, 146);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(85, 28);
+            this.btnNuevo.TabIndex = 332;
+            this.btnNuevo.Text = "Soy nuevo";
+            this.btnNuevo.UseVisualStyleBackColor = false;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
+            // 
+            // btnClienteExistente
+            // 
+            this.btnClienteExistente.BackColor = System.Drawing.SystemColors.Control;
+            this.btnClienteExistente.Location = new System.Drawing.Point(317, 92);
+            this.btnClienteExistente.Name = "btnClienteExistente";
+            this.btnClienteExistente.Size = new System.Drawing.Size(85, 28);
+            this.btnClienteExistente.TabIndex = 331;
+            this.btnClienteExistente.Text = "Ya soy cliente";
+            this.btnClienteExistente.UseVisualStyleBackColor = false;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(108, 100);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(147, 13);
+            this.label21.TabIndex = 330;
+            this.label21.Text = "Ingrese sus datos personales:";
+            // 
+            // btnVolverPaso2
+            // 
+            this.btnVolverPaso2.BackColor = System.Drawing.Color.DarkRed;
+            this.btnVolverPaso2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVolverPaso2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnVolverPaso2.Location = new System.Drawing.Point(6, 235);
+            this.btnVolverPaso2.Name = "btnVolverPaso2";
+            this.btnVolverPaso2.Size = new System.Drawing.Size(112, 40);
+            this.btnVolverPaso2.TabIndex = 329;
+            this.btnVolverPaso2.Text = "Volver a Paso 2";
+            this.btnVolverPaso2.UseVisualStyleBackColor = false;
+            this.btnVolverPaso2.Click += new System.EventHandler(this.btnVolverPaso2_Click);
+            // 
+            // btnConfirmarReserva
+            // 
+            this.btnConfirmarReserva.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnConfirmarReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirmarReserva.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnConfirmarReserva.Location = new System.Drawing.Point(516, 235);
+            this.btnConfirmarReserva.Name = "btnConfirmarReserva";
+            this.btnConfirmarReserva.Size = new System.Drawing.Size(107, 40);
+            this.btnConfirmarReserva.TabIndex = 328;
+            this.btnConfirmarReserva.Text = "Confirmar Reserva!";
+            this.btnConfirmarReserva.UseVisualStyleBackColor = false;
+            this.btnConfirmarReserva.Click += new System.EventHandler(this.btnConfirmarReserva_Click);
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.ForeColor = System.Drawing.Color.DarkBlue;
+            this.label35.Location = new System.Drawing.Point(249, 16);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(166, 16);
+            this.label35.TabIndex = 309;
+            this.label35.Text = "Paso 3 - Confirmar Estadia";
+            // 
+            // lblCliente
+            // 
+            this.lblCliente.AutoSize = true;
+            this.lblCliente.Location = new System.Drawing.Point(249, 203);
+            this.lblCliente.Name = "lblCliente";
+            this.lblCliente.Size = new System.Drawing.Size(147, 13);
+            this.lblCliente.TabIndex = 333;
+            this.lblCliente.Text = "Ingrese sus datos personales:";
             // 
             // VentanaGenerarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 677);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "VentanaGenerarReserva";
@@ -532,12 +716,15 @@
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.groupBox2, 0);
+            this.Controls.SetChildIndex(this.groupBox3, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -578,11 +765,26 @@
         private System.Windows.Forms.Button btnConfirmarPrecio;
         private System.Windows.Forms.Label lblNumeroPrecioFinal;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label lblRegimenEstadia;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox cbxRegimenEstadiaObligatorio;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblPrecioHab;
+        private System.Windows.Forms.Label lblTipoRegimen;
+        private System.Windows.Forms.Label lblCantHabi;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label lblrecargahotel;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label lblErrorPaso2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btnVolverPaso2;
+        private System.Windows.Forms.Button btnConfirmarReserva;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Button btnNuevo;
+        private System.Windows.Forms.Button btnClienteExistente;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label lblCliente;
     }
 }
