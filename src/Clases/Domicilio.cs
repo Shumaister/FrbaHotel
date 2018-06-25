@@ -22,6 +22,8 @@ namespace FrbaHotel
 
         #region Constructores
 
+        public Domicilio() { }
+
         public Domicilio(string id, string pais, string ciudad, string calle, string numeroCalle, string piso, string departamento)
         {
             this.id = id;

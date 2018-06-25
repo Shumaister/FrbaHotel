@@ -77,6 +77,7 @@
             this.cbxHoteles.Name = "cbxHoteles";
             this.cbxHoteles.Size = new System.Drawing.Size(322, 21);
             this.cbxHoteles.TabIndex = 15;
+            this.cbxHoteles.SelectedIndexChanged += new System.EventHandler(this.cbxHoteles_SelectedIndexChanged);
             // 
             // lblHotel
             // 

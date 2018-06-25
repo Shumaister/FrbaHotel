@@ -127,6 +127,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Clases\Cliente.cs" />
+    <Compile Include="Clases\EnumsGenericos.cs" />
+    <Compile Include="Clases\Reserva.cs" />
     <Compile Include="Clases\Database.cs" />
     <Compile Include="Clases\Domicilio.cs" />
     <Compile Include="Clases\Estadia.cs" />

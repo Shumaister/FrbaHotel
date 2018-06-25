@@ -1509,7 +1509,34 @@ namespace FrbaHotel
 
         #region Reserva
 
+        public static List<string> reservaObtenerHoteles()
+        {
+            SqlCommand consulta = consultaCrear("SELECT CONCAT(Domicilio_Pais, '-', Domicilio_Ciudad, '-', Domicilio_Calle, '-', Domicilio_NumeroCalle) FROM RIP.Hoteles JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID");
+            return consultaObtenerLista(consulta);
+        }
+
+        public static List<string> ReservaObtenerEstadiasDeHotel(string p)
+        {
+            SqlCommand consulta = consultaCrear("select r.Regimen_Descripcion from rip.Regimenes r  JOIN rip.Hoteles_Regimenes rh on r.Regimen_ID = rh.HotelRegimen_RegimenID JOIN rip.Hoteles h on h.Hotel_ID = rh.HotelRegimen_HotelID where h.Hotel_ID = @HotelID");
+            consulta.Parameters.AddWithValue("@HotelID", p);
+            return consultaObtenerLista(consulta);
+        }
+
+        public static List<string> ReservaHabitacionesDisponiblesEntre(DateTime fechainicio, DateTime fechafin, string idHotel)
+        {
+            SqlCommand consulta = consultaCrear("select Habitacion_ID from rip.Habitaciones habitaciones where habitaciones.Habitacion_HotelID = @hid and Habitacion_ID not in (select hnd.HabitacionNoDisponible_HabitacionID from rip.HabitacionesNoDisponibles hnd join rip.Habitaciones hab on hab.Habitacion_ID = hnd.HabitacionNoDisponible_HabitacionID join rip.Hoteles hot on hot.Hotel_ID = hab.Habitacion_HotelID where hot.Hotel_ID = @hid and (@fi > hnd.HabitacionNoDisponible_FechaInicio AND @fi < hnd.HabitacionNoDisponible_FechaFin) OR  (@ff > hnd.HabitacionNoDisponible_FechaInicio AND @ff < hnd.HabitacionNoDisponible_FechaFin) )");
+
+            consulta.Parameters.AddWithValue("@fi", fechainicio);
+            consulta.Parameters.AddWithValue("@ff", fechafin);
+            consulta.Parameters.AddWithValue("@hid", idHotel);
+
+            return consultaObtenerLista(consulta);
+        }
+
         #endregion
 
+
+
+       
     }
 }

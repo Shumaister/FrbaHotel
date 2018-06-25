@@ -436,12 +436,10 @@ IF NOT EXISTS (
 )
 BEGIN
 CREATE TABLE [RIP].[HabitacionesNoDisponibles](
-	[HabitacionNoDisponible_ID][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[HabitacionNoDisponible_ReservaID][numeric](18,0) NOT NULL,
 	[HabitacionNoDisponible_HabitacionID][numeric](18,0) NOT NULL,
 	[HabitacionNoDisponible_FechaInicio][datetime] NOT NULL,
 	[HabitacionNoDisponible_FechaFin][datetime] NOT NULL,
-	[HabitacionNoDisponible_Finalizado][bit] DEFAULT 1,
 	CONSTRAINT FK_HAB_NODISPONIBLES_RESERVA FOREIGN KEY ([HabitacionNoDisponible_ReservaID]) REFERENCES [RIP].[Reservas] ([Reserva_ID]),
 	CONSTRAINT FK_HAB_NODISPONIBLES_HABITACION FOREIGN KEY ([HabitacionNoDisponible_HabitacionID])REFERENCES [RIP].[Habitaciones] ([Habitacion_ID])
 )
@@ -777,7 +775,21 @@ ORDER BY 1
 PRINT''
 PRINT '----- Realizando inserts tabla RIP.Estadias_Habitaciones -----'
 INSERT INTO RIP.Estadias_Habitaciones (EstadiaHabitacion_EstadiaID, EstadiaHabitacion_HabitacionID)
-SELECT DISTINCT Estadia_ID, Habitacion_ID 
+SELECT DISTINCT Estadia_ID, Habitacion_ID
+FROM GD_Esquema.Maestra g
+JOIN RIP.Estadias ON Estadia_ReservaID = Reserva_Codigo  
+JOIN RIP.Domicilios ON Domicilio_NumeroCalle = Hotel_Nro_Calle 
+JOIN RIP.Hoteles ON Domicilio_ID = Hotel_DomicilioID 
+JOIN RIP.Habitaciones h ON Hotel_ID = Habitacion_HotelID
+AND g.Habitacion_Numero = h.Habitacion_Numero
+AND g.Habitacion_Piso = h.Habitacion_Piso
+ORDER BY 1
+
+
+PRINT''
+PRINT '----- Realizando inserts tabla RIP.HabitacionesNoDisponibles -----'
+INSERT INTO RIP.HabitacionesNoDisponibles (HabitacionNoDisponible_ReservaID, HabitacionNoDisponible_HabitacionID, HabitacionNoDisponible_FechaInicio, HabitacionNoDisponible_FechaFin)
+SELECT DISTINCT Reserva_Codigo, Habitacion_ID, Reserva_Fecha_Inicio, Estadia_FechaFin
 FROM GD_Esquema.Maestra g
 JOIN RIP.Estadias ON Estadia_ReservaID = Reserva_Codigo  
 JOIN RIP.Domicilios ON Domicilio_NumeroCalle = Hotel_Nro_Calle 

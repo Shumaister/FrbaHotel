@@ -97,5 +97,10 @@ namespace FrbaHotel.Login
             VentanaMenuPrincipal ventanaMenuPrincipal = new VentanaMenuPrincipal(sesion);
             ventanaMenuPrincipal.Show();
         }
+
+        private void cbxHoteles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
