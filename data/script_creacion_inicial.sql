@@ -879,6 +879,9 @@ PRINT '----- Insertando Funcionalidades a los distintos roles -----'
 INSERT INTO RIP.Roles_Funcionalidades (RolFuncionalidad_RolID, RolFuncionalidad_FuncionalidadID)
 VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(2,6),(2,7),(2,8),(2,9),(2,10),(2,11),(3,6)
 
+PRINT''
+PRINT '----- Insertando Usuario "guest" -----'
+INSERT INTO RIP.Usuarios (Usuario_Nombre, Usuario_Contrasenia) VALUES ('guest', HASHBYTES('SHA2_256', 'w23e'))
 
 PRINT''
 PRINT '----- Insertando Usuario "admin" -----'
