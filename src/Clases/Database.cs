@@ -1337,6 +1337,13 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
+        public static string HabitacionTipobyDescripcion(string p)
+        {
+            SqlCommand consulta = consultaCrear("select TipoHabitacion_ID from rip.TiposHabitaciones where TipoHabitacion_Descripcion = @tipo");
+            consulta.Parameters.AddWithValue("@tipo", p);
+            return consultaObtenerValor(consulta);
+        }
+
         public static void habitacionModificar(Habitacion habitacion)
         {
             SqlCommand consulta = consultaCrear("UPDATE RIP.Habitaciones SET Habitacion_Numero = @Numero, Habitacion_Piso = @Piso, Habitacion_Frente = @Frente, Habitacion_Descripcion = @Descripcion, Habitacion_Estado = @Estado WHERE Habitacion_ID = @ID");
@@ -1549,8 +1556,39 @@ namespace FrbaHotel
 
             return double.Parse(precio);
         }
+
+        public static void ReservaSaveReserva(Reserva R)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Reservas (Reserva_ID, Reserva_ClienteID, Reserva_HotelID, Reserva_FechaCreacion, Reserva_FechaInicio, Reserva_FechaFin, Reserva_TipoHabitacionID, Reserva_RegimenID, Reserva_EstadoReservaID, Reserva_UsuarioID) VALUES (@reservacod,@clienteid,@hotelid,@fechacreacion,@fi,@ff,@tipohabitacion,@regimenid,@estadoReserva,@userid)");
+            consulta.Parameters.AddWithValue("@reservacod", R.Codigo);
+            consulta.Parameters.AddWithValue("@clienteid", R.Cliente.id);
+            consulta.Parameters.AddWithValue("@hotelid", R.Hotel.id);
+            consulta.Parameters.AddWithValue("@fechacreacion", DateTime.Now);
+            consulta.Parameters.AddWithValue("@fi", R.FechaInicio);
+            consulta.Parameters.AddWithValue("@ff", R.FechaFin);
+            consulta.Parameters.AddWithValue("@tipohabitacion", R.Habitaciones[0].tipoHabitacion);
+            consulta.Parameters.AddWithValue("@regimenid", regimenObtenerID(R.Regimen));
+            consulta.Parameters.AddWithValue("@estadoReserva", reservaGetIDEstadoReservabyNombre("Reserva correcta"));
+            consulta.Parameters.AddWithValue("@userid", R.Usuario.id);
+
+            consultaEjecutar(consulta);
+        }
+
+        public static string reservaGetIDEstadoReservabyNombre(string nombre)
+        {
+            SqlCommand consulta = consultaCrear("select EstadoReserva_ID from rip.EstadosReservas where EstadoReserva_Descripcion = @des");
+            consulta.Parameters.AddWithValue("@des", nombre);
+            return consultaObtenerValor(consulta);
+        }
         
+        public static string ReservaGenerarCodigo()
+        {
+            SqlCommand consulta = consultaCrear("select MAX(Reserva_ID) from rip.Reservas");
+            return (long.Parse(consultaObtenerValor(consulta)) + 1).ToString();
+        }
+
         #endregion
+
 
 
 

@@ -76,13 +76,13 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblCliente = new System.Windows.Forms.Label();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.btnClienteExistente = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.btnVolverPaso2 = new System.Windows.Forms.Button();
             this.btnConfirmarReserva = new System.Windows.Forms.Button();
             this.label35 = new System.Windows.Forms.Label();
-            this.lblCliente = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -259,7 +259,7 @@
             this.lblErrorPaso1.AutoSize = true;
             this.lblErrorPaso1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblErrorPaso1.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorPaso1.Location = new System.Drawing.Point(90, 549);
+            this.lblErrorPaso1.Location = new System.Drawing.Point(90, 565);
             this.lblErrorPaso1.Name = "lblErrorPaso1";
             this.lblErrorPaso1.Size = new System.Drawing.Size(344, 13);
             this.lblErrorPaso1.TabIndex = 326;
@@ -311,9 +311,10 @@
             // lblResumenReserva
             // 
             this.lblResumenReserva.AutoSize = true;
+            this.lblResumenReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResumenReserva.Location = new System.Drawing.Point(129, 516);
             this.lblResumenReserva.Name = "lblResumenReserva";
-            this.lblResumenReserva.Size = new System.Drawing.Size(10, 13);
+            this.lblResumenReserva.Size = new System.Drawing.Size(11, 16);
             this.lblResumenReserva.TabIndex = 321;
             this.lblResumenReserva.Text = " ";
             // 
@@ -619,12 +620,23 @@
             this.groupBox3.Controls.Add(this.btnVolverPaso2);
             this.groupBox3.Controls.Add(this.btnConfirmarReserva);
             this.groupBox3.Controls.Add(this.label35);
-            this.groupBox3.Location = new System.Drawing.Point(559, 381);
+            this.groupBox3.Location = new System.Drawing.Point(559, 382);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(629, 283);
             this.groupBox3.TabIndex = 338;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Paso 3";
+            // 
+            // lblCliente
+            // 
+            this.lblCliente.AutoSize = true;
+            this.lblCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCliente.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblCliente.Location = new System.Drawing.Point(108, 194);
+            this.lblCliente.Name = "lblCliente";
+            this.lblCliente.Size = new System.Drawing.Size(13, 16);
+            this.lblCliente.TabIndex = 333;
+            this.lblCliente.Text = "-";
             // 
             // btnNuevo
             // 
@@ -692,15 +704,6 @@
             this.label35.Size = new System.Drawing.Size(166, 16);
             this.label35.TabIndex = 309;
             this.label35.Text = "Paso 3 - Confirmar Estadia";
-            // 
-            // lblCliente
-            // 
-            this.lblCliente.AutoSize = true;
-            this.lblCliente.Location = new System.Drawing.Point(249, 203);
-            this.lblCliente.Name = "lblCliente";
-            this.lblCliente.Size = new System.Drawing.Size(147, 13);
-            this.lblCliente.TabIndex = 333;
-            this.lblCliente.Text = "Ingrese sus datos personales:";
             // 
             // VentanaGenerarReserva
             // 

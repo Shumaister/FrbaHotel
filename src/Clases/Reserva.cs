@@ -16,6 +16,7 @@ namespace FrbaHotel.Clases
         public string Regimen { get; set; }
         public List<Habitacion> Habitaciones { get; set; }
         public Cliente Cliente { get; set; }
+        public Usuario Usuario { get ; set; }
 
         public Reserva()
         {

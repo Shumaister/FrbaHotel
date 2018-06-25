@@ -16,6 +16,7 @@ namespace FrbaHotel.GenerarModificacionReserva
     public partial class VentanaGenerarReserva : VentanaBase
     {
         private Reserva Reserva { get; set; }
+        private Usuario Usuario { get; set; }
         private int CantidadDeHabitacionesNecesarias { get; set; }
         private List<string> ListaIDHabitaciones { get; set; }
         private string IdHotel { get; set; }
@@ -25,6 +26,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             InitializeComponent();
 
             Reserva = new Reserva();
+            Usuario = null;
             this.logo.Visible = false;
             
             comboBoxCargar(cbxHoteles, Database.reservaObtenerHoteles());
@@ -142,7 +144,11 @@ namespace FrbaHotel.GenerarModificacionReserva
             groupBox3.Enabled = true;
         }
 
-
+        private void Saludo()
+        {
+            Reserva.Cliente.id = Database.clienteObtenerID(Reserva.Cliente);
+            this.lblCliente.Text = "Ya casi terminamos " + Reserva.Cliente.persona.nombre.ToString() + "! Solo haz click en Confirmar Reserva!";
+        }
         #endregion
 
 
@@ -188,10 +194,10 @@ namespace FrbaHotel.GenerarModificacionReserva
                 if (EsEstadiaValida())
                 {
                     Reserva.Habitaciones = new List<Habitacion>();
-
+                    string tipoHabi = Database.HabitacionTipobyDescripcion(cbxTipoHabitacion.SelectedItem.ToString());
                     for (int i = 0; i < CantidadDeHabitacionesNecesarias; i++)
                     {
-                        Reserva.Habitaciones.Add(new Habitacion(ListaIDHabitaciones[i]));
+                        Reserva.Habitaciones.Add(new Habitacion(ListaIDHabitaciones[i], tipoHabi));
                     }
 
                     Reserva.FechaInicio = calendarInicio.SelectionStart;
@@ -251,14 +257,35 @@ namespace FrbaHotel.GenerarModificacionReserva
             VentanaCliente ventanaCliente = new VentanaCliente(Reserva);
             ventanaCliente.ShowDialog();
 
-            this.lblCliente.Text = " SDFASDFAs";
+            Saludo();
         }
-
 
         private void btnConfirmarReserva_Click(object sender, EventArgs e)
         {
-            if(Reserva.Cliente != null)
-                MessageBox.Show("Se a registrado con exito su reservar con codigo: 7878789", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (Reserva.Cliente != null)
+            {
+                Reserva.Codigo = Database.ReservaGenerarCodigo();
+                
+                if(Usuario == null)
+                {
+                    string id = Database.usuarioObtenerID(new Usuario("guest"));
+                    Reserva.Usuario = new Usuario(id,"guest");
+                }
+                else
+                {
+                    Reserva.Usuario=Usuario;
+                }
+                
+                try
+                {
+                    Database.ReservaSaveReserva(Reserva);
+                    MessageBox.Show("Se a registrado con exito su reservar con codigo: "+Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Se ha producido un error al registrar la reserva, revise los datos ingresados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         #endregion

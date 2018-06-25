@@ -35,5 +35,11 @@ namespace FrbaHotel.Clases
             this.id = id;
         }
 
+        public Habitacion(string p, string tipoHabi)
+        {
+            this.id = p;
+            this.tipoHabitacion = tipoHabi;
+        }
+
     }
 }

@@ -8,6 +8,9 @@ namespace FrbaHotel.Clases
 {
     public class Usuario
     {
+        private string id1;
+        private string p;
+
         #region Atributos
 
         public string id { get; set; }
@@ -44,6 +47,12 @@ namespace FrbaHotel.Clases
         public Usuario(string nombre)
         {
             this.nombre = nombre;
+        }
+
+        public Usuario(string id1, string p)
+        {
+            this.id = id1;
+            this.nombre = p;
         }
 
         #endregion
