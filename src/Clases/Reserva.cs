@@ -10,6 +10,7 @@ namespace FrbaHotel.Clases
     {
         public string Codigo { get; set; }
         public Hotel Hotel { get; set; }
+        public DateTime FechaCreacion { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
         public int CantidadHuespedes { get; set; }

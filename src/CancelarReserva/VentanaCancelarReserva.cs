@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrbaHotel.Clases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +22,8 @@ namespace FrbaHotel.CancelarReserva
         private void IniciarVentana() 
         {
             this.logo.Visible = false;
+            this.lblFecha.Text = "--/--/--";
+            this.lblUsuario.Text = "-";
             this.tbxMotivo.Text = "Ingrese un motivo...";
             this.tbxMotivo.Enabled = false;
             this.btnCancelarReserva.Enabled = false;
@@ -43,7 +46,6 @@ namespace FrbaHotel.CancelarReserva
         {
             if (ventanaCamposEstanCompletos(this.groupBox1, controladorError))
             {
-                //
                 lblErrorIngresoReserva.Text = "algo";
                 btnCancelarReserva.Enabled = true;
             }
@@ -51,24 +53,38 @@ namespace FrbaHotel.CancelarReserva
 
         private void btnIngresoNroReserva_Click(object sender, EventArgs e)
         {
+            this.lblErrorIngresoReserva.Enabled = false;
+
             if (ventanaCamposEstanCompletos(this.groupBox1, controladorError))
             {
                 DateTime hoy = DateTime.Now;
-                /**
-                  if(nuemero reserva es valido) 
-                 *  if(fechainicioreserva >= ayer)
-                 *      cargardatos(reserva)
-                 *   else
-                 *      errorlbl = ya no se puede cancelar cerca de tiempo
-                 * else
-                 *  numero de reserva no valido
-                 *  
-                 * */
+                DateTime ayer = DateTime.Now.AddDays(-1);
+                string numeroReserva = this.tbxNumeroReserva.Text;
+
+                if (Database.ReservaExiste(numeroReserva))
+                {
+                    if (Database.ReservaEsFechaMenor(numeroReserva, ayer))
+                    {
+                        Reserva reserva = Database.ReservaObtenerById(numeroReserva);
+                        this.lblUsuario.Text =  reserva.Usuario.nombre;
+                    }
+                    else
+                    {
+                        this.lblErrorIngresoReserva.Visible = true;
+                        this.lblErrorIngresoReserva.Text = "No es posible cancelar esta reserva. Paso el tiempo limite de reserva.";
+                    }
+                }
+                else
+                {
+                    this.lblErrorIngresoReserva.Visible = true;
+                    this.lblErrorIngresoReserva.Text = "No existe este este numero de reserva.";
+                }
+                    
                 this.tbxNumeroReserva.Enabled = false;
                 this.btnIngresoNroReserva.Enabled = false;
                 this.tbxMotivo.Enabled = true;
                 this.lblFecha.Text = hoy.ToString();
-                btnCancelarReserva.Enabled = true;
+                this.btnCancelarReserva.Enabled = true;
             }
         }
 

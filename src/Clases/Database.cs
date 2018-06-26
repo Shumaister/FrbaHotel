@@ -537,6 +537,13 @@ namespace FrbaHotel
             return consultaObtenerValor(consulta);
         }
 
+        public static string usuarioObtenerNombreByID(string id)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Usuario_Nombre FROM RIP.Usuarios WHERE Usuario_ID = @id");
+            consulta.Parameters.AddWithValue("@id", id);
+            return consultaObtenerValor(consulta);
+        }
+
         public static bool usuarioExiste(Usuario usuario)
         {
             SqlCommand consulta = consultaCrear("SELECT Usuario_Nombre FROM RIP.Usuarios WHERE Usuario_Nombre = @Nombre");
@@ -1454,6 +1461,13 @@ namespace FrbaHotel
             return consultaObtenerLista(consulta);
         }
 
+        public static string regimenObtenerDescripcion(string a)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Regimen_Descripcion FROM RIP.Regimenes where Regimen_ID=@cod");
+            consulta.Parameters.AddWithValue("@cod", a);
+            return consultaObtenerValor(consulta);
+        }
+
         public static bool RegimenAgregadoConExito(Regimen regimen)
         {
 
@@ -1587,8 +1601,44 @@ namespace FrbaHotel
             return (long.Parse(consultaObtenerValor(consulta)) + 1).ToString();
         }
 
-        #endregion
+        public static bool ReservaExiste(string nroReserva)
+        {
+            SqlCommand consulta = consultaCrear("select * from rip.Reservas where Reserva_ID = @IdReserva");
+            consulta.Parameters.AddWithValue("@IdReserva", nroReserva);
+            return (consultaObtenerValor(consulta) != "");
+        }
 
+        public static bool ReservaEsFechaMenor(string p, DateTime hoy)
+        {
+            SqlCommand consulta = consultaCrear("select * from rip.Reservas where Reserva_ID = @IdReserva and Reserva_FechaInicio > @dia");
+            consulta.Parameters.AddWithValue("@IdReserva", p);
+            consulta.Parameters.AddWithValue("@dia", hoy);
+            return (consultaObtenerValor(consulta) != "");
+        }
+
+        public static Reserva ReservaObtenerById(string numeroReserva)
+        {
+            SqlCommand consulta = consultaCrear("select * from rip.Reservas where Reserva_ID = @IdReserva");
+            consulta.Parameters.AddWithValue("@IdReserva", numeroReserva);
+            DataRow linea = consultaObtenerFila(consulta);
+
+            Reserva R = new Reserva();
+            R.Cliente = new Cliente();
+
+            R.Codigo = linea.ItemArray[0].ToString();
+            R.Cliente.id = linea.ItemArray[1].ToString();
+            R.Hotel = new Hotel(linea.ItemArray[2].ToString());
+            R.FechaCreacion = DateTime.Parse(linea.ItemArray[3].ToString());
+            R.FechaInicio = DateTime.Parse(linea.ItemArray[4].ToString());
+            R.FechaFin = DateTime.Parse(linea.ItemArray[5].ToString());
+            // te debo las habitaciones
+            R.Regimen = regimenObtenerDescripcion(linea.ItemArray[7].ToString());
+            R.Usuario = new Usuario(usuarioObtenerNombreByID(linea.ItemArray[9].ToString()));
+
+            return R;
+        }
+
+        #endregion
 
 
 

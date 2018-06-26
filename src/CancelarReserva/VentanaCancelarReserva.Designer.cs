@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.btnCancelarReserva = new System.Windows.Forms.Button();
@@ -42,7 +43,6 @@
             this.tbxNumeroReserva = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -76,6 +76,17 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " ";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.Red;
+            this.label13.Location = new System.Drawing.Point(142, 61);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(17, 22);
+            this.label13.TabIndex = 348;
+            this.label13.Text = "*";
             // 
             // lblFecha
             // 
@@ -161,7 +172,7 @@
             this.lblErrorIngresoReserva.AutoSize = true;
             this.lblErrorIngresoReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblErrorIngresoReserva.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorIngresoReserva.Location = new System.Drawing.Point(44, 104);
+            this.lblErrorIngresoReserva.Location = new System.Drawing.Point(13, 104);
             this.lblErrorIngresoReserva.Name = "lblErrorIngresoReserva";
             this.lblErrorIngresoReserva.Size = new System.Drawing.Size(38, 13);
             this.lblErrorIngresoReserva.TabIndex = 338;
@@ -201,22 +212,11 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label1.Location = new System.Drawing.Point(22, 23);
+            this.label1.Location = new System.Drawing.Point(13, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(117, 16);
             this.label1.TabIndex = 310;
             this.label1.Text = "Cancelar Reserva";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.Red;
-            this.label13.Location = new System.Drawing.Point(142, 61);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(17, 22);
-            this.label13.TabIndex = 348;
-            this.label13.Text = "*";
             // 
             // VentanaCancelarReserva
             // 
