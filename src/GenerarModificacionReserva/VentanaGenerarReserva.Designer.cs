@@ -714,7 +714,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "VentanaGenerarReserva";
-            this.Text = "VentanaGenerarReserva";
+            this.Text = "Generar Reserva - FRBA Hotel ©";
             this.Load += new System.EventHandler(this.VentanaGenerarReserva_Load);
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);

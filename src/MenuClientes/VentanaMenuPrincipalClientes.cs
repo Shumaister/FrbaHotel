@@ -13,6 +13,7 @@ using FrbaHotel.Login;
 using FrbaHotel.RegistrarConsumible;
 using FrbaHotel.GenerarModificacionReserva;
 using FrbaHotel.VentanaEnDesarrollo;
+using FrbaHotel.CancelarReserva;
 
 namespace FrbaHotel.Menus
 {
@@ -53,7 +54,7 @@ namespace FrbaHotel.Menus
 
         private void cancelarReservaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            VentanaDesarrollandose v = new VentanaDesarrollandose();
+            VentanaCancelarReserva v = new VentanaCancelarReserva();
             v.ShowDialog();
         }
     }

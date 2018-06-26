@@ -120,11 +120,11 @@
     <Compile Include="AbmUsuario\VentanaUsuario.Designer.cs">
       <DependentUpon>VentanaUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="CancelarReserva\Form1.cs">
+    <Compile Include="CancelarReserva\VentanaCancelarReserva.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CancelarReserva\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="CancelarReserva\VentanaCancelarReserva.Designer.cs">
+      <DependentUpon>VentanaCancelarReserva.cs</DependentUpon>
     </Compile>
     <Compile Include="Clases\Cliente.cs" />
     <Compile Include="Clases\EnumsGenericos.cs" />
@@ -256,6 +256,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmUsuario\VentanaUsuario.resx">
       <DependentUpon>VentanaUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CancelarReserva\VentanaCancelarReserva.resx">
+      <DependentUpon>VentanaCancelarReserva.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FacturarEstadia\VentanaFacturarEstadia.resx">
       <DependentUpon>VentanaFacturarEstadia.cs</DependentUpon>
