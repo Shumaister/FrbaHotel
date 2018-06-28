@@ -13,10 +13,13 @@ namespace FrbaHotel.CancelarReserva
 {
     public partial class VentanaCancelarReserva : VentanaBase
     {
+        public Usuario Usuario { get; set; }
+
         public VentanaCancelarReserva()
         {
             InitializeComponent();
             this.IniciarVentana();
+            Usuario = new Usuario();
         }
 
         private void IniciarVentana() 
@@ -46,8 +49,10 @@ namespace FrbaHotel.CancelarReserva
         {
             if (ventanaCamposEstanCompletos(this.groupBox1, controladorError))
             {
-                lblErrorIngresoReserva.Text = "algo";
-                btnCancelarReserva.Enabled = true;
+                string motivo = tbxNumeroReserva.Text.Trim(); 
+                string usuario = (Usuario==null)? Database.usuarioObtenerID(new Usuario("guest")) ; Usuario.id.ToString();
+                Reserva Reserva = Database.ReservaObtenerById(this.tbxNumeroReserva.Text);
+                Database.ReservaCancelar(Reserva, motivo usuario);
             }
         }
 

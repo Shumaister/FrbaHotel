@@ -55,6 +55,11 @@ namespace FrbaHotel.Clases
             this.nombre = p;
         }
 
+        public Usuario()
+        {
+            // TODO: Complete member initialization
+        }
+
         #endregion
     }
 }

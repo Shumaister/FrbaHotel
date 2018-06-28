@@ -1638,7 +1638,33 @@ namespace FrbaHotel
             return R;
         }
 
+        public static void ReservaCancelar(Reserva r, string motivo, string usuario)
+        {
+            //select ReservaCancelada_RerservaID, ReservaCancelada_Fecha, ReservaCancelada_UsuarioID, ReservaCancelada_Motivo from rip.ReservasCanceladas
+            SqlCommand query = new SqlCommand();
+            if (motivo == "Ingrese un motivo...")
+            {
+                query = consultaCrear("INSERT INTO RIP.ReservasCanceladas (ReservaCancelada_RerservaID, ReservaCancelada_Fecha, ReservaCancelada_UsuarioID) VALUES ()");
+            }
+            else
+            {
+                query = consultaCrear("INSERT INTO RIP.ReservasCanceladas (ReservaCancelada_RerservaID, ReservaCancelada_Fecha, ReservaCancelada_UsuarioID, ReservaCancelada_Motivo) VALUES ()");
+                query.Parameters.AddWithValue("@motivo", motivo);
+            }
+
+            query.Parameters.AddWithValue("@codigo", r.Codigo);
+            query.Parameters.AddWithValue("@fecha", DateTime.Now);
+            query.Parameters.AddWithValue("@codigo", usuario);
+
+            consultaEjecutar(query);
+     
+            // actualizar habnodiponible
+            // actualizar reserva
+
+        }
+
         #endregion
+
 
 
 
