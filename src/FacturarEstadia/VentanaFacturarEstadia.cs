@@ -117,5 +117,23 @@ namespace FrbaHotel.FacturarEstadia
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            SqlCommand numeroFactura = Database.consultaCrear("select top 1 Factura_ID from rip.Facturas order by 1 desc");
+            string idFactura = Database.consultaObtenerValor(numeroFactura);
+            int nuevaFactura = int.Parse(idFactura) + 1;
+            int diasNoUtilizados = int.Parse(DiasRegimen.Text) - int.Parse(TextDiasUtilizados.Text);      
+
+                  SqlCommand consulta = Database.consultaCrear("insert into rip.Facturas(Factura_ID,Factura_EstadiaID,Factura_DiasUtilizados,Factura_DiasNoUtilizados,Factura_Fecha,Factura_MontoTotal)values(@NumeroFactura,(select Estadia_ID from rip.Estadias join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva),@diasUtilizados,@diasNoUtilizados,getdate(),@Total)");
+                  consulta.Parameters.AddWithValue("@NumeroFactura",nuevaFactura);
+                  consulta.Parameters.AddWithValue("@reserva", int.Parse(CodReserva.Text));
+                  consulta.Parameters.AddWithValue("@diasUtilizados",int.Parse(TextDiasUtilizados.Text));
+                  consulta.Parameters.AddWithValue("@diasNoUtilizados",diasNoUtilizados);
+                  consulta.Parameters.AddWithValue("@Total",Convert.ToDecimal(TotalNumero.Text));
+                  Database.consultaEjecutar(consulta);
+
+        }
     }
 }
