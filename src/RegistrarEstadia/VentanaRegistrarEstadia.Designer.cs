@@ -34,12 +34,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnCheckIn = new System.Windows.Forms.Button();
             this.btnCheckOut = new System.Windows.Forms.Button();
-            this.TextRegimen = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.TextHabitacion = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.TextHotel = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblRegimenDescripcion = new System.Windows.Forms.Label();
+            this.lblRegimen = new System.Windows.Forms.Label();
+            this.lblHotelNombre = new System.Windows.Forms.Label();
+            this.lblHotel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.SuspendLayout();
@@ -78,6 +76,8 @@
             this.tbxNumeroReserva.Name = "tbxNumeroReserva";
             this.tbxNumeroReserva.Size = new System.Drawing.Size(129, 20);
             this.tbxNumeroReserva.TabIndex = 265;
+            this.tbxNumeroReserva.TextChanged += new System.EventHandler(this.tbxNumeroReserva_TextChanged);
+            this.tbxNumeroReserva.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxNumeroReserva_KeyPress);
             // 
             // label1
             // 
@@ -90,84 +90,69 @@
             // 
             // btnCheckIn
             // 
-            this.btnCheckIn.Location = new System.Drawing.Point(89, 226);
+            this.btnCheckIn.Location = new System.Drawing.Point(89, 188);
             this.btnCheckIn.Name = "btnCheckIn";
             this.btnCheckIn.Size = new System.Drawing.Size(75, 23);
             this.btnCheckIn.TabIndex = 268;
             this.btnCheckIn.Text = "Check In";
             this.btnCheckIn.UseVisualStyleBackColor = true;
+            this.btnCheckIn.Click += new System.EventHandler(this.btnCheckIn_Click);
             // 
             // btnCheckOut
             // 
-            this.btnCheckOut.Location = new System.Drawing.Point(203, 226);
+            this.btnCheckOut.Location = new System.Drawing.Point(203, 188);
             this.btnCheckOut.Name = "btnCheckOut";
             this.btnCheckOut.Size = new System.Drawing.Size(75, 23);
             this.btnCheckOut.TabIndex = 269;
             this.btnCheckOut.Text = "Check Out";
             this.btnCheckOut.UseVisualStyleBackColor = true;
+            this.btnCheckOut.Click += new System.EventHandler(this.btnCheckOut_Click);
             // 
-            // TextRegimen
+            // lblRegimenDescripcion
             // 
-            this.TextRegimen.AutoSize = true;
-            this.TextRegimen.Location = new System.Drawing.Point(99, 185);
-            this.TextRegimen.Name = "TextRegimen";
-            this.TextRegimen.Size = new System.Drawing.Size(0, 13);
-            this.TextRegimen.TabIndex = 275;
+            this.lblRegimenDescripcion.AutoSize = true;
+            this.lblRegimenDescripcion.Location = new System.Drawing.Point(88, 147);
+            this.lblRegimenDescripcion.Name = "lblRegimenDescripcion";
+            this.lblRegimenDescripcion.Size = new System.Drawing.Size(63, 13);
+            this.lblRegimenDescripcion.TabIndex = 275;
+            this.lblRegimenDescripcion.Text = "Descripcion";
             // 
-            // label8
+            // lblRegimen
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(33, 185);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(55, 13);
-            this.label8.TabIndex = 274;
-            this.label8.Text = "Regimen :";
+            this.lblRegimen.AutoSize = true;
+            this.lblRegimen.Location = new System.Drawing.Point(33, 147);
+            this.lblRegimen.Name = "lblRegimen";
+            this.lblRegimen.Size = new System.Drawing.Size(55, 13);
+            this.lblRegimen.TabIndex = 274;
+            this.lblRegimen.Text = "Regimen :";
             // 
-            // TextHabitacion
+            // lblHotelNombre
             // 
-            this.TextHabitacion.AutoSize = true;
-            this.TextHabitacion.Location = new System.Drawing.Point(99, 153);
-            this.TextHabitacion.Name = "TextHabitacion";
-            this.TextHabitacion.Size = new System.Drawing.Size(0, 13);
-            this.TextHabitacion.TabIndex = 273;
+            this.lblHotelNombre.AutoSize = true;
+            this.lblHotelNombre.Location = new System.Drawing.Point(73, 119);
+            this.lblHotelNombre.Name = "lblHotelNombre";
+            this.lblHotelNombre.Size = new System.Drawing.Size(44, 13);
+            this.lblHotelNombre.TabIndex = 271;
+            this.lblHotelNombre.Text = "Nombre";
             // 
-            // label6
+            // lblHotel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(33, 153);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 13);
-            this.label6.TabIndex = 272;
-            this.label6.Text = "Habitacion : ";
-            // 
-            // TextHotel
-            // 
-            this.TextHotel.AutoSize = true;
-            this.TextHotel.Location = new System.Drawing.Point(99, 119);
-            this.TextHotel.Name = "TextHotel";
-            this.TextHotel.Size = new System.Drawing.Size(0, 13);
-            this.TextHotel.TabIndex = 271;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 119);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 13);
-            this.label2.TabIndex = 270;
-            this.label2.Text = "Hotel :";
+            this.lblHotel.AutoSize = true;
+            this.lblHotel.Location = new System.Drawing.Point(33, 119);
+            this.lblHotel.Name = "lblHotel";
+            this.lblHotel.Size = new System.Drawing.Size(38, 13);
+            this.lblHotel.TabIndex = 270;
+            this.lblHotel.Text = "Hotel :";
             // 
             // VentanaRegistrarEstadia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 339);
-            this.Controls.Add(this.TextRegimen);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.TextHabitacion);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.TextHotel);
-            this.Controls.Add(this.label2);
+            this.ClientSize = new System.Drawing.Size(355, 233);
+            this.Controls.Add(this.lblRegimenDescripcion);
+            this.Controls.Add(this.lblRegimen);
+            this.Controls.Add(this.lblHotelNombre);
+            this.Controls.Add(this.lblHotel);
             this.Controls.Add(this.btnCheckOut);
             this.Controls.Add(this.btnCheckIn);
             this.Controls.Add(this.label32);
@@ -176,6 +161,7 @@
             this.Controls.Add(this.label1);
             this.Name = "VentanaRegistrarEstadia";
             this.Text = "Registrar estadia - FRBA Hotel ©";
+            this.Load += new System.EventHandler(this.VentanaRegistrarEstadia_Load);
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.tbxNumeroReserva, 0);
@@ -183,12 +169,10 @@
             this.Controls.SetChildIndex(this.label32, 0);
             this.Controls.SetChildIndex(this.btnCheckIn, 0);
             this.Controls.SetChildIndex(this.btnCheckOut, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.TextHotel, 0);
-            this.Controls.SetChildIndex(this.label6, 0);
-            this.Controls.SetChildIndex(this.TextHabitacion, 0);
-            this.Controls.SetChildIndex(this.label8, 0);
-            this.Controls.SetChildIndex(this.TextRegimen, 0);
+            this.Controls.SetChildIndex(this.lblHotel, 0);
+            this.Controls.SetChildIndex(this.lblHotelNombre, 0);
+            this.Controls.SetChildIndex(this.lblRegimen, 0);
+            this.Controls.SetChildIndex(this.lblRegimenDescripcion, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.ResumeLayout(false);
@@ -204,11 +188,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCheckIn;
         private System.Windows.Forms.Button btnCheckOut;
-        private System.Windows.Forms.Label TextRegimen;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label TextHabitacion;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label TextHotel;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblRegimenDescripcion;
+        private System.Windows.Forms.Label lblRegimen;
+        private System.Windows.Forms.Label lblHotelNombre;
+        private System.Windows.Forms.Label lblHotel;
     }
 }

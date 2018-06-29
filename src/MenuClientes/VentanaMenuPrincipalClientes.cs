@@ -12,7 +12,6 @@ using FrbaHotel.AbmUsuario;
 using FrbaHotel.Login;
 using FrbaHotel.RegistrarConsumible;
 using FrbaHotel.GenerarModificacionReserva;
-using FrbaHotel.VentanaEnDesarrollo;
 using FrbaHotel.CancelarReserva;
 
 namespace FrbaHotel.Menus
@@ -48,8 +47,8 @@ namespace FrbaHotel.Menus
 
         private void modificarReservaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            VentanaDesarrollandose v = new VentanaDesarrollandose();
-            v.ShowDialog();
+            //Puse la ventana en desarrollo en la carpeta AbmRegimen ya que va a ser el unico que la va
+            //utilizar, no hace falta tenerlo en una carpeta aparte
         }
 
         private void cancelarReservaToolStripMenuItem_Click(object sender, EventArgs e)

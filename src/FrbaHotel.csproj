@@ -208,6 +208,12 @@
     <Compile Include="RegistrarEstadia\VentanaCrearCliente.Designer.cs">
       <DependentUpon>VentanaCrearCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="RegistrarEstadia\VentanaRegistrarEgreso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistrarEstadia\VentanaRegistrarEgreso.Designer.cs">
+      <DependentUpon>VentanaRegistrarEgreso.cs</DependentUpon>
+    </Compile>
     <Compile Include="RegistrarEstadia\VentanaRegistrarEstadia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,11 +233,11 @@
     <Compile Include="VentanaBase\VentanaBase.Designer.cs">
       <DependentUpon>VentanaBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="VentanaEnDesarrollo\VentanaDesarrollandose.cs">
+    <Compile Include="AbmRegimen\VentanaEnDesarrollo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="VentanaEnDesarrollo\VentanaDesarrollandose.Designer.cs">
-      <DependentUpon>VentanaDesarrollandose.cs</DependentUpon>
+    <Compile Include="AbmRegimen\VentanaEnDesarrollo.Designer.cs">
+      <DependentUpon>VentanaEnDesarrollo.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AbmCliente\VentanaCliente.resx">
       <DependentUpon>VentanaCliente.cs</DependentUpon>
@@ -315,6 +321,9 @@
     <EmbeddedResource Include="RegistrarEstadia\VentanaCrearCliente.resx">
       <DependentUpon>VentanaCrearCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RegistrarEstadia\VentanaRegistrarEgreso.resx">
+      <DependentUpon>VentanaRegistrarEgreso.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RegistrarEstadia\VentanaRegistrarEstadia.resx">
       <DependentUpon>VentanaRegistrarEstadia.cs</DependentUpon>
     </EmbeddedResource>
@@ -324,8 +333,8 @@
     <EmbeddedResource Include="VentanaBase\VentanaBase.resx">
       <DependentUpon>VentanaBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="VentanaEnDesarrollo\VentanaDesarrollandose.resx">
-      <DependentUpon>VentanaDesarrollandose.cs</DependentUpon>
+    <EmbeddedResource Include="AbmRegimen\VentanaEnDesarrollo.resx">
+      <DependentUpon>VentanaEnDesarrollo.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -343,7 +352,9 @@
   <ItemGroup>
     <None Include="Resources\Logo TP.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="VentanaEnDesarrollo\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
