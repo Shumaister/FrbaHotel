@@ -10,19 +10,14 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.RegistrarEstadia
 {
-    public partial class VentanaRegistrarIngreso : VentanaBase
+    public partial class VentanaRegistrarEgreso : VentanaBase
     {
         public string numeroReserva { get; set; }
 
-        public VentanaRegistrarIngreso(string numeroReserva)
+        public VentanaRegistrarEgreso(string numeroReserva)
         {
             InitializeComponent();
             this.numeroReserva = numeroReserva;
-        }
-
-        private void VentanaRegistrarIngreso_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

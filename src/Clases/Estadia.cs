@@ -15,7 +15,6 @@ namespace FrbaHotel.Clases
         public int CantidadHabitaciones { get; set; }
         public int IdTipoEstadia { get; set; }
 
-
         public Estadia()
         { 
         }

@@ -242,7 +242,7 @@ namespace FrbaHotel
         }
 
         #endregion
-       
+
         #region RadioButton
 
         public string radioButtonEstado(RadioButton radioButtonHabilitar)

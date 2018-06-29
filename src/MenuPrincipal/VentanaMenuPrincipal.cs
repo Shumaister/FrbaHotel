@@ -17,7 +17,7 @@ using FrbaHotel.RegistrarConsumible;
 using FrbaHotel.ListadoEstadistico;
 using FrbaHotel.FacturarEstadia;
 using FrbaHotel.AbmRegimen;
-using FrbaHotel.VentanaEnDesarrollo;
+using FrbaHotel.RegistrarEstadia;
 
 namespace FrbaHotel.Menus
 {
@@ -98,7 +98,7 @@ namespace FrbaHotel.Menus
             }
             if (sesion.rol.funcionalidades.Contains("Estadisticas"))
             {
-                this.estadisticasToolStripMenuItem.Visible = true;
+                this.menuEstadisticas.Visible = true;
                 usuarioTieneFuncionesDeRecepcion = true;
             }
             if (!usuarioTieneFuncionesDeAdmnistrador)
@@ -109,78 +109,63 @@ namespace FrbaHotel.Menus
 
         private void menuRoles_Click(object sender, EventArgs e)
         {
-            VentanaRol ventanaRoles = new VentanaRol(sesion);
-            ventanaRoles.ShowDialog();
+            new VentanaRol(sesion).ShowDialog();
         }
 
         private void menuUsuarios_Click(object sender, EventArgs e)
         {
-            VentanaUsuario ventanaUsuarios = new VentanaUsuario(sesion);
-            ventanaUsuarios.ShowDialog();
+            new VentanaUsuario(sesion).ShowDialog();
         }
 
         private void menuHoteles_Click(object sender, EventArgs e)
         {
-            VentanaHotel ventanaHotel = new VentanaHotel();
-            ventanaHotel.ShowDialog();
+             new VentanaHotel().ShowDialog();
         }
 
         private void menuHabitaciones_Click(object sender, EventArgs e)
         {
-            VentanaHabitacion ventanaHabitacion = new VentanaHabitacion(sesion);
-            ventanaHabitacion.ShowDialog();
+            new VentanaHabitacion(sesion).ShowDialog();
         }
 
         private void menuClientes_Click(object sender, EventArgs e)
         {
-            VentanaCliente ventanaCliente = new VentanaCliente();
-            ventanaCliente.ShowDialog();
+            new VentanaCliente().ShowDialog();
+        }
+
+        private void menuConsumibles_Click(object sender, EventArgs e)
+        {
+            new VentanaRegistrarConsumible(sesion).ShowDialog();
+        }
+
+        private void menuEstadisticas_Click(object sender, EventArgs e)
+        {
+            new VentanaListadoEstadistico().ShowDialog();
+        }
+
+        private void menuFacturas_Click(object sender, EventArgs e)
+        {
+            new VentanaFacturarEstadia().ShowDialog();
+        }
+
+        private void menuRegimenes_Click(object sender, EventArgs e)
+        {
+            new VentanaEnDesarrollo().ShowDialog();
+         }
+
+        private void menuEstadias_Click(object sender, EventArgs e)
+        {
+            new VentanaRegistrarEstadia().ShowDialog();
         }
 
         private void menuCambiarContrasenia_Click(object sender, EventArgs e)
         {
-            VentanaCambiarContrasenia ventanaCambiarContrasenia = new VentanaCambiarContrasenia(sesion);
-            ventanaCambiarContrasenia.ShowDialog();
+            new VentanaCambiarContrasenia(sesion).ShowDialog();
         }
 
         private void nenuCerrarSesion_Click(object sender, EventArgs e)
         {
             this.Hide();
-            VentanaLogin ventanaLogin = new VentanaLogin();
-            ventanaLogin.Show();
+            new VentanaLogin().Show();
         }
-
-        private void menuConsumibles_Click(object sender, EventArgs e)
-        {
-            VentanaRegistrarConsumible registrarConsumible = new VentanaRegistrarConsumible(sesion);
-            registrarConsumible.ShowDialog();
-        }
-
-        private void menuEstadisticas_Click(object sender, EventArgs e)
-        {
-            VentanaListadoEstadistico estadistico = new VentanaListadoEstadistico();
-            estadistico.ShowDialog();
-        }
-
-        private void menuFacturas_Click(object sender, EventArgs e)
-        {
-            VentanaFacturarEstadia facturaestadia = new VentanaFacturarEstadia();
-            facturaestadia.ShowDialog();
-        }
-
-        private void estadisticasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            VentanaListadoEstadistico estadistico = new VentanaListadoEstadistico();
-            estadistico.ShowDialog();
-        }
-
-        private void menuRegimenes_Click(object sender, EventArgs e)
-        {
-            //VentanaRegimenes ventanaRegimenes = new VentanaRegimenes();
-            //ventanaRegimenes.ShowDialog();
-            VentanaDesarrollandose v = new VentanaDesarrollandose();
-            v.ShowDialog();
-         }
-
     }
 }

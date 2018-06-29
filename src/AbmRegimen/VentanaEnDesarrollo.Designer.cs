@@ -1,6 +1,6 @@
-﻿namespace FrbaHotel.VentanaEnDesarrollo
+﻿namespace FrbaHotel.AbmRegimen
 {
-    partial class VentanaDesarrollandose
+    partial class VentanaEnDesarrollo
     {
         /// <summary>
         /// Required designer variable.
@@ -71,8 +71,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Name = "VentanaDesarrollandose";
-            this.Text = "VentanaEnDesarrollo";
-            this.Load += new System.EventHandler(this.VentanaEnDesarrollo_Load);
+            this.Text = "Regimenes - FRBA Hotel ©";
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label3, 0);

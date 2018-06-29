@@ -41,7 +41,7 @@
             this.menuClientes = new System.Windows.Forms.ToolStripMenuItem();
             this.menuConsumibles = new System.Windows.Forms.ToolStripMenuItem();
             this.menuEstadias = new System.Windows.Forms.ToolStripMenuItem();
-            this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuEstadisticas = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCuenta = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCambiarContrasenia = new System.Windows.Forms.ToolStripMenuItem();
             this.nenuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,7 +64,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuAdministracion,
             this.menuRecepcion,
-            this.estadisticasToolStripMenuItem,
+            this.menuEstadisticas,
             this.menuCuenta});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -87,7 +87,7 @@
             // menuUsuarios
             // 
             this.menuUsuarios.Name = "menuUsuarios";
-            this.menuUsuarios.Size = new System.Drawing.Size(152, 22);
+            this.menuUsuarios.Size = new System.Drawing.Size(143, 22);
             this.menuUsuarios.Text = "Usuarios";
             this.menuUsuarios.Visible = false;
             this.menuUsuarios.Click += new System.EventHandler(this.menuUsuarios_Click);
@@ -95,7 +95,7 @@
             // menuHoteles
             // 
             this.menuHoteles.Name = "menuHoteles";
-            this.menuHoteles.Size = new System.Drawing.Size(152, 22);
+            this.menuHoteles.Size = new System.Drawing.Size(143, 22);
             this.menuHoteles.Text = "Hoteles";
             this.menuHoteles.Visible = false;
             this.menuHoteles.Click += new System.EventHandler(this.menuHoteles_Click);
@@ -103,7 +103,7 @@
             // menuHabitaciones
             // 
             this.menuHabitaciones.Name = "menuHabitaciones";
-            this.menuHabitaciones.Size = new System.Drawing.Size(152, 22);
+            this.menuHabitaciones.Size = new System.Drawing.Size(143, 22);
             this.menuHabitaciones.Text = "Habitaciones";
             this.menuHabitaciones.Visible = false;
             this.menuHabitaciones.Click += new System.EventHandler(this.menuHabitaciones_Click);
@@ -111,7 +111,7 @@
             // menuRoles
             // 
             this.menuRoles.Name = "menuRoles";
-            this.menuRoles.Size = new System.Drawing.Size(152, 22);
+            this.menuRoles.Size = new System.Drawing.Size(143, 22);
             this.menuRoles.Text = "Roles";
             this.menuRoles.Visible = false;
             this.menuRoles.Click += new System.EventHandler(this.menuRoles_Click);
@@ -119,7 +119,7 @@
             // menuRegimenes
             // 
             this.menuRegimenes.Name = "menuRegimenes";
-            this.menuRegimenes.Size = new System.Drawing.Size(152, 22);
+            this.menuRegimenes.Size = new System.Drawing.Size(143, 22);
             this.menuRegimenes.Text = "Regimenes";
             this.menuRegimenes.Visible = false;
             this.menuRegimenes.Click += new System.EventHandler(this.menuRegimenes_Click);
@@ -173,13 +173,13 @@
             this.menuEstadias.Size = new System.Drawing.Size(143, 22);
             this.menuEstadias.Text = "Estadias";
             this.menuEstadias.Visible = false;
+            this.menuEstadias.Click += new System.EventHandler(this.menuEstadias_Click);
             // 
-            // estadisticasToolStripMenuItem
+            // menuEstadisticas
             // 
-            this.estadisticasToolStripMenuItem.Name = "estadisticasToolStripMenuItem";
-            this.estadisticasToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
-            this.estadisticasToolStripMenuItem.Text = "Estadisticas";
-            this.estadisticasToolStripMenuItem.Click += new System.EventHandler(this.estadisticasToolStripMenuItem_Click);
+            this.menuEstadisticas.Name = "menuEstadisticas";
+            this.menuEstadisticas.Size = new System.Drawing.Size(79, 20);
+            this.menuEstadisticas.Text = "Estadisticas";
             // 
             // menuCuenta
             // 
@@ -247,6 +247,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuCuenta;
         private System.Windows.Forms.ToolStripMenuItem menuCambiarContrasenia;
         private System.Windows.Forms.ToolStripMenuItem nenuCerrarSesion;
-        private System.Windows.Forms.ToolStripMenuItem estadisticasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuEstadisticas;
     }
 }

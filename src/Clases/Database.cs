@@ -1526,7 +1526,7 @@ namespace FrbaHotel
             }
         }
 
-        private static void RegimenEliminar(Regimen regimen)
+        public static void RegimenEliminar(Regimen regimen)
         {
             SqlCommand consulta = consultaCrear("UPDATE RIP.Regimenes SET Regimen_Estado = 0 WHERE Regimen_ID = @id");
             consulta.Parameters.AddWithValue("@id",regimen.id);
@@ -1534,6 +1534,20 @@ namespace FrbaHotel
         }
 
         #endregion
+
+        public static string reservaObtenerHotel(string reservaID)
+        {
+            SqlCommand consulta = Database.consultaCrear("SELECT CONCAT(Domicilio_Pais, '-', Domicilio_Ciudad, '-', Domicilio_Calle, '-', Domicilio_NumeroCalle) FROM RIP.Reservas JOIN RIP.Hoteles ON Reserva_HotelID = Hotel_ID JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID WHERE Reserva_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", reservaID);
+            return Database.consultaObtenerValor(consulta);
+        }
+
+        public static string reservaObtenerRegimen(string reservaID)
+        {
+            SqlCommand consulta = Database.consultaCrear("SELECT Regimen_Descripcion FROM RIP.Reservas JOIN RIP.Regimenes ON Reserva_RegimenID = Regimen_ID WHERE Reserva_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", reservaID);
+            return Database.consultaObtenerValor(consulta);
+        }
 
         #region Reserva
 
