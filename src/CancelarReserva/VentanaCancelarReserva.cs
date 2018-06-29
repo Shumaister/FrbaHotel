@@ -50,9 +50,9 @@ namespace FrbaHotel.CancelarReserva
             if (ventanaCamposEstanCompletos(this.groupBox1, controladorError))
             {
                 string motivo = tbxNumeroReserva.Text.Trim(); 
-                string usuario = (Usuario==null)? Database.usuarioObtenerID(new Usuario("guest")) ; Usuario.id.ToString();
+                string usuario = (Usuario==null)? Database.usuarioObtenerID(new Usuario("guest")) : Usuario.id.ToString();
                 Reserva Reserva = Database.ReservaObtenerById(this.tbxNumeroReserva.Text);
-                Database.ReservaCancelar(Reserva, motivo usuario);
+                Database.ReservaCancelar(Reserva, motivo, usuario);
             }
         }
 

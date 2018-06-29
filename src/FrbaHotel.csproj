@@ -202,13 +202,25 @@
     <Compile Include="RegistrarConsumible\VentanaRegistrarConsumible.Designer.cs">
       <DependentUpon>VentanaRegistrarConsumible.cs</DependentUpon>
     </Compile>
-    <Compile Include="RegistrarEstadia\Form1.cs">
+    <Compile Include="RegistrarEstadia\VentanaCrearCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RegistrarEstadia\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="RegistrarEstadia\VentanaCrearCliente.Designer.cs">
+      <DependentUpon>VentanaCrearCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrarEstadia\VentanaRegistrarEstadia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistrarEstadia\VentanaRegistrarEstadia.Designer.cs">
+      <DependentUpon>VentanaRegistrarEstadia.cs</DependentUpon>
     </Compile>
     <Compile Include="Clases\Sesion.cs" />
+    <Compile Include="RegistrarEstadia\VentanaRegistrarIngreso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistrarEstadia\VentanaRegistrarIngreso.Designer.cs">
+      <DependentUpon>VentanaRegistrarIngreso.cs</DependentUpon>
+    </Compile>
     <Compile Include="VentanaBase\VentanaBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -299,6 +311,15 @@
     </Compile>
     <EmbeddedResource Include="RegistrarConsumible\VentanaRegistrarConsumible.resx">
       <DependentUpon>VentanaRegistrarConsumible.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistrarEstadia\VentanaCrearCliente.resx">
+      <DependentUpon>VentanaCrearCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistrarEstadia\VentanaRegistrarEstadia.resx">
+      <DependentUpon>VentanaRegistrarEstadia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistrarEstadia\VentanaRegistrarIngreso.resx">
+      <DependentUpon>VentanaRegistrarIngreso.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaBase\VentanaBase.resx">
       <DependentUpon>VentanaBase.cs</DependentUpon>

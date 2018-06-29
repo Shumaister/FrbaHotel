@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.RegistrarEstadia
 {
-    public partial class Form1 : Form
+    public partial class VentanaRegistrarIngreso : VentanaBase
     {
-        public Form1()
+        public VentanaRegistrarIngreso()
         {
             InitializeComponent();
+        }
+
+        private void VentanaRegistrarIngreso_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
