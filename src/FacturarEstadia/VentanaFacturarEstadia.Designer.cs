@@ -42,6 +42,7 @@
             this.allInclusive = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.subRegimenPrecio = new System.Windows.Forms.Label();
             this.subRegimen = new System.Windows.Forms.Label();
             this.Total = new System.Windows.Forms.Label();
@@ -49,6 +50,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.TextDiasUtilizados = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -83,7 +87,7 @@
             this.groupBox1.Controls.Add(this.dataConsumibles);
             this.groupBox1.Controls.Add(this.SubTotal);
             this.groupBox1.Controls.Add(this.sub);
-            this.groupBox1.Location = new System.Drawing.Point(12, 53);
+            this.groupBox1.Location = new System.Drawing.Point(12, 129);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(418, 262);
             this.groupBox1.TabIndex = 3;
@@ -130,7 +134,7 @@
             // DiasRegimen
             // 
             this.DiasRegimen.AutoSize = true;
-            this.DiasRegimen.Location = new System.Drawing.Point(165, 34);
+            this.DiasRegimen.Location = new System.Drawing.Point(173, 34);
             this.DiasRegimen.Name = "DiasRegimen";
             this.DiasRegimen.Size = new System.Drawing.Size(86, 13);
             this.DiasRegimen.TabIndex = 22;
@@ -181,6 +185,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.subRegimenPrecio);
             this.groupBox2.Controls.Add(this.subRegimen);
             this.groupBox2.Controls.Add(this.RegimenPrecio);
@@ -189,12 +195,21 @@
             this.groupBox2.Controls.Add(this.allInclusive);
             this.groupBox2.Controls.Add(this.allinclusivecant);
             this.groupBox2.Controls.Add(this.allInclusivePrecio);
-            this.groupBox2.Location = new System.Drawing.Point(15, 321);
+            this.groupBox2.Location = new System.Drawing.Point(15, 397);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(383, 202);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Regimen y Habitación";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(129, 21);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 13);
+            this.label2.TabIndex = 25;
+            this.label2.Text = "Cantidad";
             // 
             // subRegimenPrecio
             // 
@@ -216,7 +231,7 @@
             // Total
             // 
             this.Total.AutoSize = true;
-            this.Total.Location = new System.Drawing.Point(24, 558);
+            this.Total.Location = new System.Drawing.Point(24, 634);
             this.Total.Name = "Total";
             this.Total.Size = new System.Drawing.Size(31, 13);
             this.Total.TabIndex = 25;
@@ -225,7 +240,7 @@
             // TotalNumero
             // 
             this.TotalNumero.AutoSize = true;
-            this.TotalNumero.Location = new System.Drawing.Point(75, 558);
+            this.TotalNumero.Location = new System.Drawing.Point(75, 634);
             this.TotalNumero.Name = "TotalNumero";
             this.TotalNumero.Size = new System.Drawing.Size(44, 13);
             this.TotalNumero.TabIndex = 26;
@@ -234,7 +249,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(180, 558);
+            this.label1.Location = new System.Drawing.Point(180, 634);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(86, 13);
             this.label1.TabIndex = 27;
@@ -246,25 +261,53 @@
             this.comboBox1.Items.AddRange(new object[] {
             "Tarjeta",
             "Efectivo"});
-            this.comboBox1.Location = new System.Drawing.Point(286, 555);
+            this.comboBox1.Location = new System.Drawing.Point(286, 631);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 28;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(452, 555);
+            this.button2.Location = new System.Drawing.Point(452, 631);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 29;
             this.button2.Text = "Pagar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(253, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 13);
+            this.label3.TabIndex = 26;
+            this.label3.Text = "Precio";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 62);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(78, 13);
+            this.label4.TabIndex = 30;
+            this.label4.Text = "Días Utilizados";
+            // 
+            // TextDiasUtilizados
+            // 
+            this.TextDiasUtilizados.Location = new System.Drawing.Point(122, 62);
+            this.TextDiasUtilizados.Name = "TextDiasUtilizados";
+            this.TextDiasUtilizados.Size = new System.Drawing.Size(100, 20);
+            this.TextDiasUtilizados.TabIndex = 31;
             // 
             // VentanaFacturarEstadia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(569, 621);
+            this.ClientSize = new System.Drawing.Size(569, 679);
+            this.Controls.Add(this.TextDiasUtilizados);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
@@ -289,6 +332,8 @@
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.comboBox1, 0);
             this.Controls.SetChildIndex(this.button2, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.TextDiasUtilizados, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -324,5 +369,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox TextDiasUtilizados;
     }
 }
