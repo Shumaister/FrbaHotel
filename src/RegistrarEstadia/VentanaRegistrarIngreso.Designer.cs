@@ -28,33 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnQuitarHuesped = new System.Windows.Forms.Button();
+            this.btnQuitarCliente = new System.Windows.Forms.Button();
             this.lbxHuespedes = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cbxFiltroTipoDocumentoModificar = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnGuardarIngreso = new System.Windows.Forms.Button();
+            this.btnAgregarClienteNuevo = new System.Windows.Forms.Button();
+            this.btnAgregarClienteExistente = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.btnLimpiarModificar = new System.Windows.Forms.Button();
-            this.label37 = new System.Windows.Forms.Label();
-            this.btnFiltrarModificar = new System.Windows.Forms.Button();
-            this.tbxFiltroEmailModificar = new System.Windows.Forms.TextBox();
-            this.tbxFiltroDocumentoModificar = new System.Windows.Forms.TextBox();
-            this.tbxFiltroApellidoModificar = new System.Windows.Forms.TextBox();
-            this.tbxFiltroNombreModificar = new System.Windows.Forms.TextBox();
-            this.dgvClientes = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnCrearCliente = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.lblClienteNombre = new System.Windows.Forms.Label();
+            this.lblClienteDocumento = new System.Windows.Forms.Label();
+            this.lblClienteEmail = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
             // 
             // logo
@@ -64,41 +53,20 @@
             this.logo.Size = new System.Drawing.Size(24, 23);
             this.logo.Visible = false;
             // 
-            // label32
+            // btnQuitarCliente
             // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label32.Location = new System.Drawing.Point(15, 187);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(56, 16);
-            this.label32.TabIndex = 271;
-            this.label32.Text = "Clientes";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(130, 426);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(17, 22);
-            this.label5.TabIndex = 277;
-            this.label5.Text = "*";
-            // 
-            // btnQuitarHuesped
-            // 
-            this.btnQuitarHuesped.Location = new System.Drawing.Point(357, 453);
-            this.btnQuitarHuesped.Name = "btnQuitarHuesped";
-            this.btnQuitarHuesped.Size = new System.Drawing.Size(75, 23);
-            this.btnQuitarHuesped.TabIndex = 276;
-            this.btnQuitarHuesped.Text = "Quitar";
-            this.btnQuitarHuesped.UseVisualStyleBackColor = true;
+            this.btnQuitarCliente.Location = new System.Drawing.Point(347, 229);
+            this.btnQuitarCliente.Name = "btnQuitarCliente";
+            this.btnQuitarCliente.Size = new System.Drawing.Size(142, 23);
+            this.btnQuitarCliente.TabIndex = 276;
+            this.btnQuitarCliente.Text = "Quitar";
+            this.btnQuitarCliente.UseVisualStyleBackColor = true;
+            this.btnQuitarCliente.Click += new System.EventHandler(this.btnQuitarCliente_Click);
             // 
             // lbxHuespedes
             // 
             this.lbxHuespedes.FormattingEnabled = true;
-            this.lbxHuespedes.Location = new System.Drawing.Point(18, 453);
+            this.lbxHuespedes.Location = new System.Drawing.Point(12, 171);
             this.lbxHuespedes.Name = "lbxHuespedes";
             this.lbxHuespedes.Size = new System.Drawing.Size(311, 95);
             this.lbxHuespedes.TabIndex = 274;
@@ -106,236 +74,157 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 426);
+            this.label2.Location = new System.Drawing.Point(9, 144);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(115, 13);
             this.label2.TabIndex = 273;
             this.label2.Text = "Huespedes registrados";
-            // 
-            // cbxFiltroTipoDocumentoModificar
-            // 
-            this.cbxFiltroTipoDocumentoModificar.FormattingEnabled = true;
-            this.cbxFiltroTipoDocumentoModificar.Location = new System.Drawing.Point(523, 52);
-            this.cbxFiltroTipoDocumentoModificar.Name = "cbxFiltroTipoDocumentoModificar";
-            this.cbxFiltroTipoDocumentoModificar.Size = new System.Drawing.Size(121, 21);
-            this.cbxFiltroTipoDocumentoModificar.TabIndex = 291;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(418, 55);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 13);
-            this.label3.TabIndex = 290;
-            this.label3.Text = "Tipo de documento";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(240, 108);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(38, 13);
-            this.label6.TabIndex = 289;
-            this.label6.Text = "E- mail";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(240, 55);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 13);
-            this.label7.TabIndex = 288;
-            this.label7.Text = "Apellido";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(15, 108);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(92, 13);
-            this.label8.TabIndex = 287;
-            this.label8.Text = "N° de Documento";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(15, 56);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(44, 13);
-            this.label9.TabIndex = 286;
-            this.label9.Text = "Nombre";
-            // 
-            // btnLimpiarModificar
-            // 
-            this.btnLimpiarModificar.Location = new System.Drawing.Point(15, 146);
-            this.btnLimpiarModificar.Name = "btnLimpiarModificar";
-            this.btnLimpiarModificar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiarModificar.TabIndex = 285;
-            this.btnLimpiarModificar.Text = "Limpiar";
-            this.btnLimpiarModificar.UseVisualStyleBackColor = true;
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label37.Location = new System.Drawing.Point(12, 18);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(127, 16);
-            this.label37.TabIndex = 284;
-            this.label37.Text = "Filtros de busqueda";
-            // 
-            // btnFiltrarModificar
-            // 
-            this.btnFiltrarModificar.Location = new System.Drawing.Point(569, 146);
-            this.btnFiltrarModificar.Name = "btnFiltrarModificar";
-            this.btnFiltrarModificar.Size = new System.Drawing.Size(75, 23);
-            this.btnFiltrarModificar.TabIndex = 283;
-            this.btnFiltrarModificar.Text = "Filtrar";
-            this.btnFiltrarModificar.UseVisualStyleBackColor = true;
-            // 
-            // tbxFiltroEmailModificar
-            // 
-            this.tbxFiltroEmailModificar.Location = new System.Drawing.Point(290, 105);
-            this.tbxFiltroEmailModificar.Name = "tbxFiltroEmailModificar";
-            this.tbxFiltroEmailModificar.Size = new System.Drawing.Size(100, 20);
-            this.tbxFiltroEmailModificar.TabIndex = 282;
-            // 
-            // tbxFiltroDocumentoModificar
-            // 
-            this.tbxFiltroDocumentoModificar.Location = new System.Drawing.Point(113, 105);
-            this.tbxFiltroDocumentoModificar.Name = "tbxFiltroDocumentoModificar";
-            this.tbxFiltroDocumentoModificar.Size = new System.Drawing.Size(100, 20);
-            this.tbxFiltroDocumentoModificar.TabIndex = 281;
-            // 
-            // tbxFiltroApellidoModificar
-            // 
-            this.tbxFiltroApellidoModificar.Location = new System.Drawing.Point(290, 52);
-            this.tbxFiltroApellidoModificar.Name = "tbxFiltroApellidoModificar";
-            this.tbxFiltroApellidoModificar.Size = new System.Drawing.Size(100, 20);
-            this.tbxFiltroApellidoModificar.TabIndex = 280;
-            // 
-            // tbxFiltroNombreModificar
-            // 
-            this.tbxFiltroNombreModificar.Location = new System.Drawing.Point(113, 53);
-            this.tbxFiltroNombreModificar.Name = "tbxFiltroNombreModificar";
-            this.tbxFiltroNombreModificar.Size = new System.Drawing.Size(100, 20);
-            this.tbxFiltroNombreModificar.TabIndex = 279;
-            // 
-            // dgvClientes
-            // 
-            this.dgvClientes.AllowUserToAddRows = false;
-            this.dgvClientes.AllowUserToDeleteRows = false;
-            this.dgvClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvClientes.Location = new System.Drawing.Point(18, 216);
-            this.dgvClientes.Name = "dgvClientes";
-            this.dgvClientes.ReadOnly = true;
-            this.dgvClientes.RowHeadersVisible = false;
-            this.dgvClientes.Size = new System.Drawing.Size(626, 117);
-            this.dgvClientes.TabIndex = 292;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label1.Location = new System.Drawing.Point(15, 396);
+            this.label1.Location = new System.Drawing.Point(9, 114);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 16);
+            this.label1.Size = new System.Drawing.Size(163, 16);
             this.label1.TabIndex = 293;
-            this.label1.Text = "Huespedes";
+            this.label1.Text = "Acompañantes del cliente";
             // 
-            // btnCrearCliente
+            // btnGuardarIngreso
             // 
-            this.btnCrearCliente.Location = new System.Drawing.Point(19, 354);
-            this.btnCrearCliente.Name = "btnCrearCliente";
-            this.btnCrearCliente.Size = new System.Drawing.Size(88, 23);
-            this.btnCrearCliente.TabIndex = 294;
-            this.btnCrearCliente.Text = "Crear Cliente";
-            this.btnCrearCliente.UseVisualStyleBackColor = true;
+            this.btnGuardarIngreso.Location = new System.Drawing.Point(239, 292);
+            this.btnGuardarIngreso.Name = "btnGuardarIngreso";
+            this.btnGuardarIngreso.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardarIngreso.TabIndex = 295;
+            this.btnGuardarIngreso.Text = "Guardar";
+            this.btnGuardarIngreso.UseVisualStyleBackColor = true;
+            this.btnGuardarIngreso.Click += new System.EventHandler(this.btnGuardarIngreso_Click);
             // 
-            // button1
+            // btnAgregarClienteNuevo
             // 
-            this.button1.Location = new System.Drawing.Point(324, 573);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 295;
-            this.button1.Text = "Registrar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAgregarClienteNuevo.Location = new System.Drawing.Point(347, 171);
+            this.btnAgregarClienteNuevo.Name = "btnAgregarClienteNuevo";
+            this.btnAgregarClienteNuevo.Size = new System.Drawing.Size(142, 23);
+            this.btnAgregarClienteNuevo.TabIndex = 296;
+            this.btnAgregarClienteNuevo.Text = "Agregar nuevo cliente";
+            this.btnAgregarClienteNuevo.UseVisualStyleBackColor = true;
+            this.btnAgregarClienteNuevo.Click += new System.EventHandler(this.btnAgregarClienteNuevo_Click);
+            // 
+            // btnAgregarClienteExistente
+            // 
+            this.btnAgregarClienteExistente.Location = new System.Drawing.Point(347, 200);
+            this.btnAgregarClienteExistente.Name = "btnAgregarClienteExistente";
+            this.btnAgregarClienteExistente.Size = new System.Drawing.Size(142, 23);
+            this.btnAgregarClienteExistente.TabIndex = 297;
+            this.btnAgregarClienteExistente.Text = "Agregar cliente existente";
+            this.btnAgregarClienteExistente.UseVisualStyleBackColor = true;
+            this.btnAgregarClienteExistente.Click += new System.EventHandler(this.btnAgregarClienteExistente_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DarkBlue;
+            this.label3.Location = new System.Drawing.Point(9, 11);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(108, 16);
+            this.label3.TabIndex = 300;
+            this.label3.Text = "Datos del cliente";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 40);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(50, 13);
+            this.label6.TabIndex = 298;
+            this.label6.Text = "Nombre: ";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 64);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(68, 13);
+            this.label4.TabIndex = 301;
+            this.label4.Text = "Documento: ";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(9, 87);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(38, 13);
+            this.label7.TabIndex = 302;
+            this.label7.Text = "Email: ";
+            // 
+            // lblClienteNombre
+            // 
+            this.lblClienteNombre.AutoSize = true;
+            this.lblClienteNombre.Location = new System.Drawing.Point(65, 40);
+            this.lblClienteNombre.Name = "lblClienteNombre";
+            this.lblClienteNombre.Size = new System.Drawing.Size(77, 13);
+            this.lblClienteNombre.TabIndex = 303;
+            this.lblClienteNombre.Text = "Cliente nombre";
+            // 
+            // lblClienteDocumento
+            // 
+            this.lblClienteDocumento.AutoSize = true;
+            this.lblClienteDocumento.Location = new System.Drawing.Point(83, 64);
+            this.lblClienteDocumento.Name = "lblClienteDocumento";
+            this.lblClienteDocumento.Size = new System.Drawing.Size(95, 13);
+            this.lblClienteDocumento.TabIndex = 304;
+            this.lblClienteDocumento.Text = "Cliente documento";
+            // 
+            // lblClienteEmail
+            // 
+            this.lblClienteEmail.AutoSize = true;
+            this.lblClienteEmail.Location = new System.Drawing.Point(53, 87);
+            this.lblClienteEmail.Name = "lblClienteEmail";
+            this.lblClienteEmail.Size = new System.Drawing.Size(66, 13);
+            this.lblClienteEmail.TabIndex = 305;
+            this.lblClienteEmail.Text = "Cliente email";
             // 
             // VentanaRegistrarIngreso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(664, 608);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnCrearCliente);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.dgvClientes);
-            this.Controls.Add(this.cbxFiltroTipoDocumentoModificar);
+            this.ClientSize = new System.Drawing.Size(519, 322);
+            this.Controls.Add(this.lblClienteEmail);
+            this.Controls.Add(this.lblClienteDocumento);
+            this.Controls.Add(this.lblClienteNombre);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.btnLimpiarModificar);
-            this.Controls.Add(this.label37);
-            this.Controls.Add(this.btnFiltrarModificar);
-            this.Controls.Add(this.tbxFiltroEmailModificar);
-            this.Controls.Add(this.tbxFiltroDocumentoModificar);
-            this.Controls.Add(this.tbxFiltroApellidoModificar);
-            this.Controls.Add(this.tbxFiltroNombreModificar);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.btnQuitarHuesped);
+            this.Controls.Add(this.btnAgregarClienteExistente);
+            this.Controls.Add(this.btnAgregarClienteNuevo);
+            this.Controls.Add(this.btnGuardarIngreso);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnQuitarCliente);
             this.Controls.Add(this.lbxHuespedes);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label32);
             this.Name = "VentanaRegistrarIngreso";
             this.Text = "Registrar ingreso - FRBA Hotel ©";
             this.Load += new System.EventHandler(this.VentanaRegistrarIngreso_Load);
-            this.Controls.SetChildIndex(this.label32, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.lbxHuespedes, 0);
-            this.Controls.SetChildIndex(this.btnQuitarHuesped, 0);
-            this.Controls.SetChildIndex(this.label5, 0);
-            this.Controls.SetChildIndex(this.tbxFiltroNombreModificar, 0);
-            this.Controls.SetChildIndex(this.tbxFiltroApellidoModificar, 0);
-            this.Controls.SetChildIndex(this.tbxFiltroDocumentoModificar, 0);
-            this.Controls.SetChildIndex(this.tbxFiltroEmailModificar, 0);
-            this.Controls.SetChildIndex(this.btnFiltrarModificar, 0);
-            this.Controls.SetChildIndex(this.label37, 0);
-            this.Controls.SetChildIndex(this.btnLimpiarModificar, 0);
-            this.Controls.SetChildIndex(this.label9, 0);
-            this.Controls.SetChildIndex(this.label8, 0);
-            this.Controls.SetChildIndex(this.label7, 0);
+            this.Controls.SetChildIndex(this.btnQuitarCliente, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.btnGuardarIngreso, 0);
+            this.Controls.SetChildIndex(this.btnAgregarClienteNuevo, 0);
+            this.Controls.SetChildIndex(this.btnAgregarClienteExistente, 0);
+            this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.cbxFiltroTipoDocumentoModificar, 0);
-            this.Controls.SetChildIndex(this.logo, 0);
-            this.Controls.SetChildIndex(this.dgvClientes, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.btnCrearCliente, 0);
-            this.Controls.SetChildIndex(this.button1, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.label7, 0);
+            this.Controls.SetChildIndex(this.lblClienteNombre, 0);
+            this.Controls.SetChildIndex(this.lblClienteDocumento, 0);
+            this.Controls.SetChildIndex(this.lblClienteEmail, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -343,27 +232,19 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnQuitarHuesped;
+        private System.Windows.Forms.Button btnQuitarCliente;
         private System.Windows.Forms.ListBox lbxHuespedes;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cbxFiltroTipoDocumentoModificar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnGuardarIngreso;
+        private System.Windows.Forms.Button btnAgregarClienteNuevo;
+        private System.Windows.Forms.Button btnAgregarClienteExistente;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button btnLimpiarModificar;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Button btnFiltrarModificar;
-        private System.Windows.Forms.TextBox tbxFiltroEmailModificar;
-        private System.Windows.Forms.TextBox tbxFiltroDocumentoModificar;
-        private System.Windows.Forms.TextBox tbxFiltroApellidoModificar;
-        private System.Windows.Forms.TextBox tbxFiltroNombreModificar;
-        private System.Windows.Forms.DataGridView dgvClientes;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnCrearCliente;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblClienteNombre;
+        private System.Windows.Forms.Label lblClienteDocumento;
+        private System.Windows.Forms.Label lblClienteEmail;
     }
 }

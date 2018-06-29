@@ -126,6 +126,16 @@ namespace FrbaHotel
             return lista;
         }
 
+        public static void listBoxQuitarElemento(ListBox listBox)
+        {
+            if (listBox.SelectedItem != null)
+            {
+                listBox.Items.Remove(listBox.SelectedItem);
+                if (listBox.Items.Count > 0)
+                    listBox.SelectedIndex = 0;
+            }
+        }
+
         #endregion
 
         #region DataGridView
@@ -152,6 +162,11 @@ namespace FrbaHotel
         public static void dataGridViewAgregarBotonEliminar(DataGridView dataGridView)
         {
             VentanaBase.dataGridViewAgregarBoton(dataGridView, "         Eliminar         ");
+        }
+
+        public static void dataGridViewAgregarBotonAgregar(DataGridView dataGridView)
+        {
+            VentanaBase.dataGridViewAgregarBoton(dataGridView, "         Agregar         ");
         }
 
         #endregion

@@ -7,17 +7,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FrbaHotel.Clases;
 
 namespace FrbaHotel.RegistrarEstadia
 {
     public partial class VentanaRegistrarEgreso : VentanaBase
     {
-        public string numeroReserva { get; set; }
+        public Reserva reserva { get; set; }
+        public Usuario usuario { get; set; }
 
-        public VentanaRegistrarEgreso(string numeroReserva)
+        public VentanaRegistrarEgreso(Reserva reserva, Usuario usuario)
         {
             InitializeComponent();
-            this.numeroReserva = numeroReserva;
+            this.reserva = reserva;
+            this.usuario = usuario;
+        }
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            Estadia estadia = new Estadia();
+            estadia.reservaID = reserva.Codigo;
+            estadia.checkOutUsuarioID = usuario.id;
+            Database.estadiaAgregarEgreso(estadia);
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

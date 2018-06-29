@@ -8,28 +8,54 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FrbaHotel.Clases;
+using FrbaHotel.RegistrarEstadia;
+using FrbaHotel.GenerarModificacionReserva;
 
 namespace FrbaHotel.AbmCliente
 {
     public partial class VentanaCliente : VentanaBase
     {
         public Reserva Reserva { get; set; }
+        public VentanaRegistrarIngreso ventanaRegistrarIngreso { get; set; }
+        public string funcion { get; set; }
         
         #region Constructores
 
-        public VentanaCliente(Reserva r)
+        public VentanaCliente(Reserva reserva)
         {
-            this.Reserva = r;
             InitializeComponent();
+            this.Reserva = reserva;
             this.btnGuardarDesdeReserva.Visible = true;
             this.btnGuardarCliente.Visible = false;
+            this.tabControl.TabPages.Remove(pagModificar);
+            this.tabControl.TabPages.Remove(pagEliminar);
+            this.funcion = funcion;
+        }
 
-            // TODO ahcer que las pestanias de modificar eliminar se bloquen o eliminen
+        public VentanaCliente(VentanaRegistrarIngreso ventanaRegistrarIngreso, string funcion)
+        {
+            InitializeComponent();
+            this.ventanaRegistrarIngreso = ventanaRegistrarIngreso;
+            this.funcion = funcion;
+            btnGuardarDesdeReserva.Visible = false;
+            if (funcion == "Nuevo")
+            {
+                tabControl.TabPages.Remove(pagModificar);
+                tabControl.TabPages.Remove(pagEliminar);     
+            }
+            if (funcion == "Existente")
+            {
+                pagModificar.Text = "Buscar";
+                tabControl.TabPages.Remove(pagAgregar);
+                tabControl.TabPages.Remove(pagEliminar);     
+            }
+
         }
 
         public VentanaCliente()
         {
             InitializeComponent();
+            this.funcion = "ABM";
             this.btnGuardarDesdeReserva.Visible = false;
         }
 
@@ -125,8 +151,21 @@ namespace FrbaHotel.AbmCliente
             var senderGrid = (DataGridView)sender;
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                Cliente cliente = ventanaCrearClienteParaModificar(e);
-                new VentanaModificarCliente(this, cliente).ShowDialog();
+                if (funcion == "ABM")
+                {
+                    Cliente cliente = ventanaCrearClienteParaModificar(e);
+                    new VentanaModificarCliente(this, cliente).ShowDialog();
+                }
+                if (funcion == "Buscar")
+                {
+                    Cliente cliente = ventanaCrearClienteParaModificar(e);
+                    if (Database.estadiaVerificarHuesped(cliente, ventanaRegistrarIngreso.huespedes))
+                    {
+                        ventanaRegistrarIngreso.huesped = cliente;
+                    }
+                    
+                    
+                }
             }
         }
 
@@ -192,13 +231,29 @@ namespace FrbaHotel.AbmCliente
 
         private void VentanaCliente_Load(object sender, EventArgs e)
         {
-            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
-            comboBoxCargar(cbxFiltroTipoDocumentoModificar, Database.tipoDocumentoFiltroObtenerTodosEnLista());
-            comboBoxCargar(cbxFiltroTipoDocumentoEliminar, Database.tipoDocumentoFiltroObtenerTodosEnLista());
-            ventanaActualizar(sender, e);
-            dataGridViewAgregarBotonModificar(dgvModificarClientes);
-            dataGridViewAgregarBotonEliminar(dgvEliminarClientes);
-            ventanaOcultarColumnas();
+            if (funcion == "ABM")
+            {
+                comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
+                comboBoxCargar(cbxFiltroTipoDocumentoModificar, Database.tipoDocumentoFiltroObtenerTodosEnLista());
+                comboBoxCargar(cbxFiltroTipoDocumentoEliminar, Database.tipoDocumentoFiltroObtenerTodosEnLista());
+                ventanaActualizar(sender, e);
+                dataGridViewAgregarBotonModificar(dgvModificarClientes);
+                dataGridViewAgregarBotonEliminar(dgvEliminarClientes);
+                ventanaOcultarColumnas();
+            }
+
+            if (funcion == "Nuevo")
+            {
+                comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
+            }
+
+            if (funcion == "Existente")
+            {             
+                comboBoxCargar(cbxFiltroTipoDocumentoModificar, Database.tipoDocumentoFiltroObtenerTodosEnLista());
+                btnFiltrarModificar_Click(sender, e);
+                dataGridViewAgregarBotonAgregar(dgvModificarClientes);
+                ventanaOcultarColumnas();
+            }
         }
 
         private void ventanaOcultarColumnas()

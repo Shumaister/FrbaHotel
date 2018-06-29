@@ -7,21 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FrbaHotel.Clases;
 
 namespace FrbaHotel.RegistrarEstadia
 {
     public partial class VentanaRegistrarEstadia : VentanaBase
     {
-        public VentanaRegistrarEstadia()
+        public Sesion sesion;
+
+        public VentanaRegistrarEstadia(Sesion sesion)
         {
             InitializeComponent();
+            this.sesion = sesion;
         }
 
         private void btnCheckIn_Click(object sender, EventArgs e)
         {
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
-                VentanaRegistrarIngreso ventanaRegistrarIngreso = new VentanaRegistrarIngreso(tbxNumeroReserva.Text);
+                Reserva reserva = Database.ReservaObtenerById(tbxNumeroReserva.Text);
+                VentanaRegistrarIngreso ventanaRegistrarIngreso = new VentanaRegistrarIngreso(reserva, sesion.usuario);
                 ventanaRegistrarIngreso.ShowDialog();
             }
         }
@@ -30,8 +35,9 @@ namespace FrbaHotel.RegistrarEstadia
         {
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
-                VentanaRegistrarEgreso ventanaRegistrarIngreso = new VentanaRegistrarEgreso(tbxNumeroReserva.Text);
-                ventanaRegistrarIngreso.ShowDialog();
+                Reserva reserva = Database.ReservaObtenerById(tbxNumeroReserva.Text);
+                VentanaRegistrarEgreso ventanaRegistrarEgreso = new VentanaRegistrarEgreso(reserva, sesion.usuario);
+                ventanaRegistrarEgreso.ShowDialog();
             }
         }
 

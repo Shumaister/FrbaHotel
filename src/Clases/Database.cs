@@ -1679,7 +1679,71 @@ namespace FrbaHotel
 
         #endregion
 
+        #region Estadia
 
+        public static bool estadiaVerificarHuesped(Cliente cliente, List<string> huespedes)
+        {
+            if (!clienteHabilitado(cliente))
+            {
+                ventanaInformarError("El cliente no se encuentra habilitado");
+                return false;
+            }
+                
+            if(huespedes.Contains(cliente.id))
+            {
+                ventanaInformarError("El cliente ya fue agregado a la lista");
+                return false;
+            }
+            return true;                
+        }
+
+        public static void estadiaAgregarHuespedes(List<string> clientes, string estadiaID)
+        {
+            foreach(string clienteID in clientes)
+            {
+                estadiaAgregarHuesped(clienteID, estadiaID);
+            }
+        }
+
+        public static void estadiaAgregarHuesped(string clienteID, string estadiaID)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Huespedes (Huesped_ClienteID, Huesped_EstadiaID) VALUES (@ClienteID, @EstadiaID)");
+            consulta.Parameters.AddWithValue("@ClienteID", clienteID);
+            consulta.Parameters.AddWithValue("@EstadiaID", estadiaID);
+            consultaEjecutar(consulta);
+        }
+
+        public static void estadiaAgregarIngreso(Estadia estadia)
+        {
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Estadias SET Estadia_FechaInicio = GETDATE(), Estadia_CheckInUsuarioID = @UsuarioID WHERE Estadia_ReservaID = @ReservaID");
+            consulta.Parameters.AddWithValue("@UsuarioID", estadia.checkInUsuarioID);
+            consulta.Parameters.AddWithValue("@ReservaID", estadia.reservaID);
+            consultaEjecutar(consulta);
+        }
+
+        public static void estadiaAgregarEgreso(Estadia estadia)
+        {
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Estadias SET Estadia_FechaFin = GETDATE(), Estadia_CheckOutUsuarioID = @UsuarioID WHERE Estadia_ReservaID = @ReservaID");
+            consulta.Parameters.AddWithValue("@UsuarioID", estadia.checkOutUsuarioID);
+            consulta.Parameters.AddWithValue("@ReservaID", estadia.reservaID);
+            consultaEjecutar(consulta);
+        }
+
+        public static bool estadiaIngresoPermitido(Estadia estadia)
+        {
+            Reserva reserva = ReservaObtenerById(estadia.reservaID);
+            return reserva.FechaInicio.Date == DateTime.Now.Date;
+        }
+
+        public static void estadiaIngresoExitoso(Estadia estadia)
+        {
+            if (estadiaIngresoPermitido(estadia))
+                ventanaInformarExito("El ingreso fue establecido con exito");
+            else
+                ventanaInformarError("No se puede realizar el ingreso antes o despues de la fecha de inicio");
+        }
+        
+        #endregion
 
 
     }

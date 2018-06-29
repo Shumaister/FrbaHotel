@@ -202,12 +202,6 @@
     <Compile Include="RegistrarConsumible\VentanaRegistrarConsumible.Designer.cs">
       <DependentUpon>VentanaRegistrarConsumible.cs</DependentUpon>
     </Compile>
-    <Compile Include="RegistrarEstadia\VentanaCrearCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RegistrarEstadia\VentanaCrearCliente.Designer.cs">
-      <DependentUpon>VentanaCrearCliente.cs</DependentUpon>
-    </Compile>
     <Compile Include="RegistrarEstadia\VentanaRegistrarEgreso.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -317,9 +311,6 @@
     </Compile>
     <EmbeddedResource Include="RegistrarConsumible\VentanaRegistrarConsumible.resx">
       <DependentUpon>VentanaRegistrarConsumible.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RegistrarEstadia\VentanaCrearCliente.resx">
-      <DependentUpon>VentanaCrearCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RegistrarEstadia\VentanaRegistrarEgreso.resx">
       <DependentUpon>VentanaRegistrarEgreso.cs</DependentUpon>

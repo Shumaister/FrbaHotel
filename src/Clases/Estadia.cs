@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace FrbaHotel.Clases
 {
-    class Estadia
+    public class Estadia
     {
-        public int CantidadHuespedes { get; set; }
-        public DateTime FechaInicio { get; set; }
-        public DateTime FechaFin { get; set; }
-        public int CodigoTipoHabitacion { get; set; }
-        public int CantidadHabitaciones { get; set; }
-        public int IdTipoEstadia { get; set; }
+        public string reservaID { get; set; }
+        public DateTime fechaInicio { get; set; }
+        public DateTime fechaFin { get; set; }
+        public string checkInUsuarioID { get; set; }
+        public string checkOutUsuarioID { get; set; }
 
         public Estadia()
         { 
+
         }
 
 
