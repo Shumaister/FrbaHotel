@@ -1600,7 +1600,19 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@userid", R.Usuario.id);
 
             consultaEjecutar(consulta);
+
+            for (int i = 0; i < R.Habitaciones.Count; i++)
+            {
+                SqlCommand consulta2 = consultaCrear("INSERT INTO RIP.HabitacionesNoDisponibles (HabitacionNoDisponible_ReservaID, HabitacionNoDisponible_HabitacionID, HabitacionNoDisponible_FechaInicio, HabitacionNoDisponible_FechaFin) VALUES (@codreserva, @idh, @fi, @ff )");
+                consulta2.Parameters.AddWithValue("@codreserva", int.Parse(R.Codigo));
+                consulta2.Parameters.AddWithValue("@idh", R.Habitaciones[i].id);
+                consulta2.Parameters.AddWithValue("@fi", R.FechaInicio);
+                consulta2.Parameters.AddWithValue("@ff", R.FechaFin);
+                consultaEjecutar(consulta2);
+            }
         }
+
+
 
         public static string reservaGetIDEstadoReservabyNombre(string nombre)
         {

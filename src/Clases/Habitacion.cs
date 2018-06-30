@@ -41,5 +41,10 @@ namespace FrbaHotel.Clases
             this.tipoHabitacion = tipoHabi;
         }
 
+        public Habitacion()
+        {
+            // TODO: Complete member initialization
+        }
+
     }
 }
