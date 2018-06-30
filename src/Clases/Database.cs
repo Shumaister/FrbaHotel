@@ -1559,26 +1559,26 @@ namespace FrbaHotel
             Reserva reserva = new Reserva();
             if (fila != null)
             {
-                reserva.Codigo = (string)fila["Reserva_ID"];
+                reserva.Codigo = ((Decimal)fila["Reserva_ID"]).ToString();
                 reserva.FechaInicio = (DateTime)fila["Reserva_FechaInicio"];
                 reserva.FechaFin = (DateTime)fila["Reserva_FechaFin"];
                 reserva.Regimen = (string)fila["Regimen_Descripcion"];
                 reserva.TipoHabitacion = (string)fila["TipoHabitacion_Descripcion"];
                 reserva.Hotel = new Hotel();
-                reserva.Hotel.id = (string)fila["Reserva_HotelID"];
+                reserva.Hotel.id = ((Decimal)fila["Reserva_HotelID"]).ToString();
                 reserva.Hotel.domicilio = new Domicilio();
                 reserva.Hotel.domicilio.pais = (string)fila["Domicilio_Pais"];
                 reserva.Hotel.domicilio.ciudad = (string)fila["Domicilio_Ciudad"];
                 reserva.Hotel.domicilio.calle = (string)fila["Domicilio_Calle"];
-                reserva.Hotel.domicilio.numeroCalle = (string)fila["Domicilio_NumeroCalle"];
+                reserva.Hotel.domicilio.numeroCalle = ((Decimal)fila["Domicilio_NumeroCalle"]).ToString();
                 reserva.Cliente = new Cliente();
-                reserva.Cliente.id = (string)fila["Reserva_ClienteID"];
+                reserva.Cliente.id = ((Decimal)fila["Reserva_ClienteID"]).ToString();
                 reserva.Cliente.persona = new Persona();
-                reserva.Cliente.persona.nombre = (string)fila["Persona_Nombre"].ToString();
-                reserva.Cliente.persona.apellido = (string)fila["Persona_Apellido"].ToString();
-                reserva.Cliente.persona.tipoDocumento = (string)fila["TipoDocumento_Descripcion"].ToString();
-                reserva.Cliente.persona.numeroDocumento = (string)fila["Persona_NumeroDocumento"].ToString();
-                reserva.Cliente.persona.email = (string)fila["Persona_Email"].ToString();
+                reserva.Cliente.persona.nombre = (string)fila["Persona_Nombre"];
+                reserva.Cliente.persona.apellido = (string)fila["Persona_Apellido"];
+                reserva.Cliente.persona.tipoDocumento = (string)fila["TipoDocumento_Descripcion"];
+                reserva.Cliente.persona.numeroDocumento = ((Decimal)fila["Persona_NumeroDocumento"]).ToString();
+                reserva.Cliente.persona.email = (string)fila["Persona_Email"];
             }
             else
                 reserva = null;
@@ -1751,7 +1751,7 @@ namespace FrbaHotel
 
         public static void estadiaAgregarIngreso(Estadia estadia)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Estadias SET Estadia_FechaInicio = GETDATE(), Estadia_CheckInUsuarioID = @UsuarioID WHERE Estadia_ReservaID = @ReservaID");
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Estadias (Estadia_ReservaID, Estadia_FechaInicio, Estadia_CheckInUsuarioID) VALUES (@ReservaID, GETDATE(), @UsuarioID)");
             consulta.Parameters.AddWithValue("@UsuarioID", estadia.checkInUsuarioID);
             consulta.Parameters.AddWithValue("@ReservaID", estadia.reserva.Codigo);
             consultaEjecutar(consulta);
@@ -1770,7 +1770,7 @@ namespace FrbaHotel
 
         public static bool estadiaIngresoEstaRegistrado(Estadia estadia)
         {
-            SqlCommand consulta = consultaCrear("SELECT Estadia_ReservaID FROM RIP.Estadias WHERE Estadia_ReservaID = @ReservaID AND Estadia_FechaInicio IS NULL");
+            SqlCommand consulta = consultaCrear("SELECT Estadia_ReservaID FROM RIP.Estadias WHERE Estadia_ReservaID = @ReservaID AND Estadia_FechaInicio IS NOT NULL");
             consulta.Parameters.AddWithValue("@ReservaID", estadia.reserva.Codigo);
             return consultaValorExiste(consultaObtenerValor(consulta));
         }
@@ -1811,7 +1811,7 @@ namespace FrbaHotel
 
         public static bool estadiaEgresoEstaRegistrado(Estadia estadia)
         {
-            SqlCommand consulta = consultaCrear("SELECT Estadia_ReservaID FROM RIP.Estadias WHERE Estadia_ReservaID = @ReservaID AND Estadia_FechaInicio IS NULL");
+            SqlCommand consulta = consultaCrear("SELECT Estadia_ReservaID FROM RIP.Estadias WHERE Estadia_ReservaID = @ReservaID AND Estadia_FechaFin IS NOT NULL");
             consulta.Parameters.AddWithValue("@ReservaID", estadia.reserva.Codigo);
             return consultaValorExiste(consultaObtenerValor(consulta));
         }

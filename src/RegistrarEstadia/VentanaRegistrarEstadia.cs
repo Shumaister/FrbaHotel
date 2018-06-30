@@ -28,8 +28,13 @@ namespace FrbaHotel.RegistrarEstadia
                 Estadia estadia = new Estadia();
                 estadia.reserva = Database.reservaObtener(tbxNumeroReserva.Text, sesion.hotel.id);
                 if (estadia.reserva != null)
+                {
                     if (Database.estadiaIngresoValidar(estadia))
                         new VentanaRegistrarIngreso(estadia, sesion).ShowDialog();
+                }
+                else
+                    ventanaInformarError("El codigo de la reserva es invalido");
+
             }
         }
 
@@ -40,8 +45,12 @@ namespace FrbaHotel.RegistrarEstadia
                 Estadia estadia = new Estadia();
                 estadia.reserva = Database.reservaObtener(tbxNumeroReserva.Text, sesion.hotel.id);
                 if (estadia.reserva != null)
+                {
                     if(Database.estadiaEgresoValidar(estadia))
                         new VentanaRegistrarEgreso(estadia, sesion.usuario).ShowDialog();
+                }
+                else
+                    ventanaInformarError("El codigo de la reserva es invalido");
             }
         }
 
