@@ -1664,29 +1664,49 @@ namespace FrbaHotel
             return R;
         }
 
-        public static void ReservaCancelar(Reserva r, string motivo, string usuario)
+        public static void ReservaCancelar(Reserva r, string motivo, string usuario, int estadoReserva)
         {
-            //select ReservaCancelada_RerservaID, ReservaCancelada_Fecha, ReservaCancelada_UsuarioID, ReservaCancelada_Motivo from rip.ReservasCanceladas
             SqlCommand query = new SqlCommand();
             if (motivo == "Ingrese un motivo...")
             {
-                query = consultaCrear("INSERT INTO RIP.ReservasCanceladas (ReservaCancelada_RerservaID, ReservaCancelada_Fecha, ReservaCancelada_UsuarioID) VALUES ()");
+                query = consultaCrear("INSERT INTO RIP.ReservasCanceladas (ReservaCancelada_RerservaID, ReservaCancelada_Fecha, ReservaCancelada_UsuarioID) VALUES (@codigo,@fecha,@usuario)");
             }
             else
             {
-                query = consultaCrear("INSERT INTO RIP.ReservasCanceladas (ReservaCancelada_RerservaID, ReservaCancelada_Fecha, ReservaCancelada_UsuarioID, ReservaCancelada_Motivo) VALUES ()");
+                query = consultaCrear("INSERT INTO RIP.ReservasCanceladas (ReservaCancelada_RerservaID, ReservaCancelada_Fecha, ReservaCancelada_UsuarioID, ReservaCancelada_Motivo) VALUES (@codigo,@fecha,@usuario,@motivo)");
                 query.Parameters.AddWithValue("@motivo", motivo);
             }
 
             query.Parameters.AddWithValue("@codigo", r.Codigo);
             query.Parameters.AddWithValue("@fecha", DateTime.Now);
-            query.Parameters.AddWithValue("@codigo", usuario);
+            query.Parameters.AddWithValue("@usuario", usuario);
 
             consultaEjecutar(query);
-     
-            // actualizar habnodiponible
-            // actualizar reserva
 
+            //actualizo hab no disponibles
+            SqlCommand quer2 = new SqlCommand();
+            quer2 = consultaCrear("UPDATE rip.HabitacionesNoDisponibles set HabitacionNoDisponible_FechaFin = @fe where HabitacionNoDisponible_ReservaID = @codr ");
+            quer2.Parameters.AddWithValue("@codr", r.Codigo);
+            quer2.Parameters.AddWithValue("@fe", DateTime.Now);
+
+            consultaEjecutar(quer2);
+
+            // actualizar reserva
+            SqlCommand Alsamendi = new SqlCommand();
+            Alsamendi = consultaCrear("UPDATE RIP.Reservas set Reserva_EstadoReservaID = @aaaa where Reserva_ID = @codr");
+            Alsamendi.Parameters.AddWithValue("@codr", r.Codigo);
+            Alsamendi.Parameters.AddWithValue("@aaaa", estadoReserva);
+
+
+            consultaEjecutar(Alsamendi);
+
+        }
+
+        public static bool ReservaEstadoValidoParaCancelar(string numeroReserva)
+        {
+            SqlCommand consulta = consultaCrear("select * from rip.Reservas r inner join rip.EstadosReservas e on e.EstadoReserva_ID = r.Reserva_EstadoReservaID where r.Reserva_ID = @idr AND (e.EstadoReserva_Descripcion = 'Reserva correcta' OR e.EstadoReserva_Descripcion = 'Reserva modificada')");
+            consulta.Parameters.AddWithValue("@idr", numeroReserva);
+            return (consultaObtenerValor(consulta) != "");
         }
 
         #endregion
@@ -1756,6 +1776,7 @@ namespace FrbaHotel
         }
         
         #endregion
+
 
 
     }
