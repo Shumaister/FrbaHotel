@@ -1550,27 +1550,38 @@ namespace FrbaHotel
             return Database.consultaObtenerValor(consulta);
         }
 
-        public static DataRow reservaObtenerDatos(string reservaID)
+        public static DataRow reservaObtenerDatos(string reservaID, string hotelID)
         {
-            SqlCommand consulta = Database.consultaCrear("SELECT Reserva_ClienteID, Reserva_FechaInicio, Reserva_FechaFin, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Email FROM RIP.Reservas JOIN RIP.Clientes ON Reserva_ClienteID = Cliente_ID JOIN RIP.Personas ON Cliente_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID WHERE Reserva_ID = @ID");
+            SqlCommand consulta = Database.consultaCrear("SELECT Reserva_ClienteID, Reserva_FechaInicio, Reserva_FechaFin, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Email FROM RIP.Reservas JOIN RIP.Clientes ON Reserva_ClienteID = Cliente_ID JOIN RIP.Personas ON Cliente_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID WHERE Reserva_ID = @ID AND Reserva_HotelID = @HotelID");
             consulta.Parameters.AddWithValue("@ID", reservaID);
+            consulta.Parameters.AddWithValue("@HotelID", hotelID);
             return Database.consultaObtenerFila(consulta);
         }
         
-        public static Reserva reservaObtener(string reservaID)
+        public static Reserva reservaObtener(string reservaID, string hotelID)
         {
             Reserva reserva = new Reserva();
             reserva.Cliente = new Cliente();
+            reserva.Hotel = new Hotel(hotelID);
             reserva.Cliente.persona = new Persona();
-            DataRow fila = reservaObtenerDatos(reservaID);
-            reserva.Codigo = reservaID;
-            reserva.FechaInicio = (DateTime)fila["Reserva_FechaInicio"];
-            reserva.FechaFin = (DateTime)fila["Reserva_FechaFin"];
-            reserva.Cliente.persona.nombre = (string)fila["Persona_Nombre"].ToString();
-            reserva.Cliente.persona.apellido = (string)fila["Persona_Apellido"].ToString();
-            reserva.Cliente.persona.tipoDocumento = (string)fila["TipoDocumento_Descripcion"].ToString();
-            reserva.Cliente.persona.numeroDocumento = (string)fila["Persona_NumeroDocumento"].ToString();
-            reserva.Cliente.persona.email = (string)fila["Persona_Email"].ToString();
+            DataRow fila = reservaObtenerDatos(reservaID, hotelID);
+            if (fila != null)
+            {
+                reserva.Codigo = reservaID;
+                reserva.FechaInicio = (DateTime)fila["Reserva_FechaInicio"];
+                reserva.FechaFin = (DateTime)fila["Reserva_FechaFin"];
+                reserva.Hotel.id = 
+                reserva.Cliente.persona.nombre = (string)fila["Persona_Nombre"].ToString();
+                reserva.Cliente.persona.apellido = (string)fila["Persona_Apellido"].ToString();
+                reserva.Cliente.persona.tipoDocumento = (string)fila["TipoDocumento_Descripcion"].ToString();
+                reserva.Cliente.persona.numeroDocumento = (string)fila["Persona_NumeroDocumento"].ToString();
+                reserva.Cliente.persona.email = (string)fila["Persona_Email"].ToString();
+            }
+            else
+            {
+                reserva.Codigo = null;
+                ventanaInformarError("El codigo de la reserva es invalido");
+            }                
             return reserva;
         }
         
@@ -1787,31 +1798,79 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
-        public static bool estadiaIngresoPermitido(Estadia estadia)
+        public static bool estadiaIngresoPermitido(Estadia estadia, string hotelID)
         {
-            Reserva reserva = reservaObtener(estadia.reservaID);
+            Reserva reserva = reservaObtener(estadia.reservaID, hotelID);
             return reserva.FechaInicio.Date == DateTime.Now.Date;
         }
 
-        public static bool estadiaIngresoExitoso(Estadia estadia)
+        public static bool estadiaEgresoPermitido(Estadia estadia, string hotelID)
         {
-            if (estadiaIngresoPermitido(estadia))
+            Reserva reserva = reservaObtener(estadia.reservaID, hotelID);
+            return DateTime.Now.Date >= reserva.FechaInicio.Date && DateTime.Now.Date <= reserva.FechaFin.Date;
+        }
+
+        public static bool estadiaIngresoEstaRegistrado(Estadia estadia)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Estadia_ReservaID FROM RIP.Estadias WHERE Estadia_ReservaID = @ReservaID AND Estadia_FechaInicio IS NULL");
+            consulta.Parameters.AddWithValue("@ReservaID", estadia.reservaID);
+            return consultaValorExiste(consultaObtenerValor(consulta));
+        }
+
+        public static bool estadiaEgresoEstaRegistrado(Estadia estadia)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Estadia_ReservaID FROM RIP.Estadias WHERE Estadia_ReservaID = @ReservaID AND Estadia_FechaInicio IS NULL");
+            consulta.Parameters.AddWithValue("@ReservaID", estadia.reservaID);
+            return consultaValorExiste(consultaObtenerValor(consulta));
+        }
+
+        public static bool estadiaIngresoValidar(Estadia estadia, string hotelID)
+        {
+            if (estadiaIngresoEstaRegistrado(estadia))
             {
-                estadiaAgregarIngreso(estadia);
-                ventanaInformarExito("El ingreso fue establecido con exito");
-                return true;
-            }
-            else
-            {
-                ventanaInformarError("No se puede realizar el ingreso antes o despues de la fecha de inicio");
+                ventanaInformarError("El ingreso de la estadia ya fue registrado");
                 return false;
             }
+            if (!estadiaIngresoPermitido(estadia, hotelID))
+            {
+                ventanaInformarError("No se puede realizar el ingreso antes o despues de la fecha de inicio de la reserva");
+                return false;
+            }
+            return true;
+        }
 
+        public static bool estadiaEgresoValidar(Estadia estadia, string hotelID)
+        {
+            if (!estadiaIngresoEstaRegistrado(estadia))
+            {
+                ventanaInformarError("El ingreso de la estadia aun no fue registrada");
+                return false;
+            }
+            if (estadiaEgresoEstaRegistrado(estadia))
+            {
+                ventanaInformarError("El egreso de la estadia ya fue registrado");
+                return false;
+            }
+            if (!estadiaEgresoPermitido(estadia, hotelID))
+            {
+                ventanaInformarError("El egreso debe realizarse entre la fecha de inicio y la fecha de fin de la reserva");
+                return false;
+            }
+            return true;
+        }
+
+        public static void estadiaIngresoExitoso(Estadia estadia, string hotelID)
+        {
+            estadiaAgregarIngreso(estadia);
+            ventanaInformarExito("El ingreso de la estadia fue registrado con exito");
+        }
+
+        public static void estadiaEgresoExitoso(Estadia estadia, string hotelID)
+        {
+            estadiaAgregarEgreso(estadia);
+            ventanaInformarExito("El egreso de la estadia fue registrado con exito");
         }
         
         #endregion
-
-
-
     }
 }

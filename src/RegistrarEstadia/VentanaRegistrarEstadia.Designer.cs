@@ -64,7 +64,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(104, 47);
+            this.label4.Location = new System.Drawing.Point(72, 47);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(17, 22);
             this.label4.TabIndex = 266;
@@ -84,17 +84,17 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(33, 47);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 264;
-            this.label1.Text = "N° de reserva";
+            this.label1.Text = "Codigo";
             // 
             // btnCheckIn
             // 
-            this.btnCheckIn.Location = new System.Drawing.Point(89, 188);
+            this.btnCheckIn.Location = new System.Drawing.Point(54, 188);
             this.btnCheckIn.Name = "btnCheckIn";
-            this.btnCheckIn.Size = new System.Drawing.Size(75, 23);
+            this.btnCheckIn.Size = new System.Drawing.Size(110, 23);
             this.btnCheckIn.TabIndex = 268;
-            this.btnCheckIn.Text = "Check In";
+            this.btnCheckIn.Text = "Registrar ingreso";
             this.btnCheckIn.UseVisualStyleBackColor = true;
             this.btnCheckIn.Click += new System.EventHandler(this.btnCheckIn_Click);
             // 
@@ -102,9 +102,9 @@
             // 
             this.btnCheckOut.Location = new System.Drawing.Point(203, 188);
             this.btnCheckOut.Name = "btnCheckOut";
-            this.btnCheckOut.Size = new System.Drawing.Size(75, 23);
+            this.btnCheckOut.Size = new System.Drawing.Size(99, 23);
             this.btnCheckOut.TabIndex = 269;
-            this.btnCheckOut.Text = "Check Out";
+            this.btnCheckOut.Text = "Registrar egreso";
             this.btnCheckOut.UseVisualStyleBackColor = true;
             this.btnCheckOut.Click += new System.EventHandler(this.btnCheckOut_Click);
             // 

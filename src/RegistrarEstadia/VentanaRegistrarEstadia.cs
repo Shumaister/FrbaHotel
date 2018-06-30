@@ -25,9 +25,16 @@ namespace FrbaHotel.RegistrarEstadia
         {
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
-                Reserva reserva = Database.reservaObtener(tbxNumeroReserva.Text);
-                VentanaRegistrarIngreso ventanaRegistrarIngreso = new VentanaRegistrarIngreso(reserva, sesion.usuario);
-                ventanaRegistrarIngreso.ShowDialog();
+                Reserva reserva = Database.reservaObtener(tbxNumeroReserva.Text, sesion.hotel.id);
+                if (reserva.Codigo != null)
+                {
+                    //VER
+                    if (Database.estadiaIngresoValidar(null, sesion.hotel.id))
+                    {
+                        VentanaRegistrarIngreso ventanaRegistrarIngreso = new VentanaRegistrarIngreso(reserva, sesion);
+                        ventanaRegistrarIngreso.ShowDialog();
+                    }
+                }
             }
         }
 
@@ -35,9 +42,16 @@ namespace FrbaHotel.RegistrarEstadia
         {
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
-                Reserva reserva = Database.reservaObtener(tbxNumeroReserva.Text);
-                VentanaRegistrarEgreso ventanaRegistrarEgreso = new VentanaRegistrarEgreso(reserva, sesion.usuario);
-                ventanaRegistrarEgreso.ShowDialog();
+                Reserva reserva = Database.reservaObtener(tbxNumeroReserva.Text, sesion.hotel.id);
+                if (reserva.Codigo != null)
+                {
+                    //VER
+                    if(Database.estadiaEgresoValidar(null, sesion.hotel.id))
+                    {
+                        VentanaRegistrarEgreso ventanaRegistrarEgreso = new VentanaRegistrarEgreso(reserva, sesion.usuario);
+                        ventanaRegistrarEgreso.ShowDialog();
+                    }
+                }
             }
         }
 

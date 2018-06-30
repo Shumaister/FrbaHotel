@@ -14,16 +14,16 @@ namespace FrbaHotel.RegistrarEstadia
 {
     public partial class VentanaRegistrarIngreso : VentanaBase
     {
-        public Usuario usuario { get; set; }
+        public Sesion sesion { get; set; }
         public Reserva reserva { get; set; }
         public Cliente huesped { get; set; }
         public List<string> huespedes { get; set; }
         
-        public VentanaRegistrarIngreso(Reserva reserva, Usuario usuario)
+        public VentanaRegistrarIngreso(Reserva reserva, Sesion sesion)
         {
             InitializeComponent();
             this.reserva = reserva;
-            this.usuario = usuario;
+            this.sesion = sesion;
             this.huespedes = new List<string>();
         }
 
@@ -40,13 +40,9 @@ namespace FrbaHotel.RegistrarEstadia
         {
             Estadia estadia = new Estadia();
             estadia.reservaID = reserva.Codigo;
-            estadia.checkInUsuarioID = Database.usuarioObtenerID(usuario);
-            if (Database.estadiaIngresoExitoso(estadia))
-            {
-                this.Hide();
-            }
-
-
+            estadia.checkInUsuarioID = Database.usuarioObtenerID(sesion.usuario);
+            Database.estadiaIngresoExitoso(estadia, sesion.hotel.id);
+            this.Hide();
         }
 
         private void btnAgregarClienteNuevo_Click(object sender, EventArgs e)
