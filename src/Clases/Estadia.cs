@@ -16,8 +16,8 @@ namespace FrbaHotel.Clases
         public List<string> huespedes { get; set; }
 
         public Estadia()
-        { 
-
+        {
+            huespedes = new List<string>();
         }
 
 

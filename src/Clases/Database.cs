@@ -1871,7 +1871,7 @@ namespace FrbaHotel
 
         public static void estadiaEgresoHuespedes(Estadia estadia)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Huespedes SET Huesped_Presente = 0 WHERE Estadia_ID = @ID");
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Huespedes SET Huesped_Presente = 0 WHERE Huesped_EstadiaID = @ID");
             consulta.Parameters.AddWithValue("@ID", estadiaObtenerID(estadia));
             consultaEjecutar(consulta);
         }

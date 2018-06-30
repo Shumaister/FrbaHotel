@@ -26,7 +26,8 @@ namespace FrbaHotel.RegistrarEstadia
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             estadia.checkOutUsuarioID = Database.usuarioObtenerID(usuario);
-            Database.estadiaAgregarEgreso(estadia);
+            Database.estadiaEgresoExitoso(estadia);
+            this.Hide();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
