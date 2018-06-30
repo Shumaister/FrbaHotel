@@ -504,6 +504,9 @@ CREATE TABLE [RIP].[Huespedes] (
 	[Huesped_ClienteID] [numeric](18,0),
 	[Huesped_EstadiaID] [numeric](18,0),
 	[Huesped_Presente] [bit] DEFAULT 1
+	CONSTRAINT PK_HUESPEDES PRIMARY KEY ([Huesped_ClienteID], [Huesped_EstadiaID]),
+	CONSTRAINT FK_HUESPED_CLIENTE FOREIGN KEY ([Huesped_ClienteID]) REFERENCES [RIP].[Clientes] ([Cliente_ID]),
+	CONSTRAINT FK_HUESPED_ESTADIA FOREIGN KEY ([Huesped_EstadiaID]) REFERENCES [RIP].[Estadias] ([Estadia_ID])
 )
 PRINT '----- Tabla RIP.Huespedes creada -----'
 END
@@ -514,18 +517,18 @@ IF NOT EXISTS (
 	SELECT 1 
 	FROM INFORMATION_SCHEMA.TABLES 
 	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Estadias_Habitaciones' 
+    AND TABLE_NAME = 'Reservas_Habitaciones' 
 	AND TABLE_SCHEMA = 'RIP'
 )
 BEGIN
-CREATE TABLE [RIP].[Estadias_Habitaciones] (
-	[EstadiaHabitacion_EstadiaID] [numeric](18,0) NOT NULL,
-	[EstadiaHabitacion_HabitacionID] [numeric](18,0) NOT NULL,	
-	CONSTRAINT PK_ESTADIA_HABITACION PRIMARY KEY ([EstadiaHabitacion_EstadiaID],[EstadiaHabitacion_HabitacionID]),
-	CONSTRAINT FK_ESTADIA_HABITACION_ESTADIA_ID FOREIGN KEY ([EstadiaHabitacion_EstadiaID]) REFERENCES [RIP].[Estadias] ([Estadia_ID]),
-	CONSTRAINT FK_ESTADIA_HABITACION_HABITACION_ID FOREIGN KEY ([EstadiaHabitacion_HabitacionID]) REFERENCES [RIP].[Habitaciones] ([Habitacion_ID])
+CREATE TABLE [RIP].[Reservas_Habitaciones] (
+	[ReservaHabitacion_ReservaID] [numeric](18,0) NOT NULL,
+	[ReservaHabitacion_HabitacionID] [numeric](18,0) NOT NULL,	
+	CONSTRAINT PK_RESERVA_HABITACION PRIMARY KEY ([ReservaHabitacion_ReservaID],[ReservaHabitacion_HabitacionID]),
+	CONSTRAINT FK_RESERVA_HABITACION_ESTADIA_ID FOREIGN KEY ([ReservaHabitacion_ReservaID]) REFERENCES [RIP].[Reservas] ([Reserva_ID]),
+	CONSTRAINT FK_RESERVA_HABITACION_HABITACION_ID FOREIGN KEY ([ReservaHabitacion_HabitacionID]) REFERENCES [RIP].[Habitaciones] ([Habitacion_ID])
 )
-PRINT '----- Tabla RIP.Estadias_Habitaciones creada -----'
+PRINT '----- Tabla RIP.Reservas_Habitaciones creada -----'
 END
 GO
 
@@ -773,11 +776,10 @@ ORDER BY 1
 
 
 PRINT''
-PRINT '----- Realizando inserts tabla RIP.Estadias_Habitaciones -----'
-INSERT INTO RIP.Estadias_Habitaciones (EstadiaHabitacion_EstadiaID, EstadiaHabitacion_HabitacionID)
-SELECT DISTINCT Estadia_ID, Habitacion_ID
+PRINT '----- Realizando inserts tabla RIP.Reservas_Habitaciones -----'
+INSERT INTO RIP.Reservas_Habitaciones (ReservaHabitacion_ReservaID, ReservaHabitacion_HabitacionID)
+SELECT DISTINCT Reserva_Codigo, Habitacion_ID
 FROM GD_Esquema.Maestra g
-JOIN RIP.Estadias ON Estadia_ReservaID = Reserva_Codigo  
 JOIN RIP.Domicilios ON Domicilio_NumeroCalle = Hotel_Nro_Calle 
 JOIN RIP.Hoteles ON Domicilio_ID = Hotel_DomicilioID 
 JOIN RIP.Habitaciones h ON Hotel_ID = Habitacion_HotelID
