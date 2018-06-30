@@ -19,7 +19,8 @@ namespace FrbaHotel.CancelarReserva
         {
             InitializeComponent();
             this.IniciarVentana();
-            Usuario = new Usuario();
+            string id = Database.usuarioObtenerID(new Usuario("guest"));
+            Usuario = new Usuario(id, "guest");
         }
 
         private void IniciarVentana() 
@@ -50,15 +51,15 @@ namespace FrbaHotel.CancelarReserva
             if (ventanaCamposEstanCompletos(this.groupBox1, controladorError))
             {
                 string motivo = tbxNumeroReserva.Text.Trim(); 
-                string usuario = (Usuario==null)? Database.usuarioObtenerID(new Usuario("guest")) : Usuario.id.ToString();
+                int estadoReserva = (Usuario.nombre == "guest") ? 4 : 3; // 4-cancelada cliente - 3-cancelada recepcion
                 Reserva Reserva = Database.ReservaObtenerById(this.tbxNumeroReserva.Text);
-                Database.ReservaCancelar(Reserva, motivo, usuario);
+                Database.ReservaCancelar(Reserva, motivo, Usuario.id, estadoReserva);
             }
         }
 
         private void btnIngresoNroReserva_Click(object sender, EventArgs e)
         {
-            this.lblErrorIngresoReserva.Enabled = false;
+            this.lblErrorIngresoReserva.Visible = false;
 
             if (ventanaCamposEstanCompletos(this.groupBox1, controladorError))
             {
@@ -70,8 +71,16 @@ namespace FrbaHotel.CancelarReserva
                 {
                     if (Database.ReservaEsFechaMenor(numeroReserva, ayer))
                     {
-                        Reserva reserva = Database.ReservaObtenerById(numeroReserva);
-                        this.lblUsuario.Text =  reserva.Usuario.nombre;
+                        if (Database.ReservaEstadoValidoParaCancelar(numeroReserva))
+                        {
+                            Reserva reserva = Database.ReservaObtenerById(numeroReserva);
+                            this.lblUsuario.Text = reserva.Usuario.nombre;
+                        }
+                        else
+                        {
+                            this.lblErrorIngresoReserva.Visible = true;
+                            this.lblErrorIngresoReserva.Text = "Esta reserva ya esta cancelada.";
+                        }
                     }
                     else
                     {

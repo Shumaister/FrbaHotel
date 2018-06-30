@@ -83,6 +83,7 @@
             this.btnVolverPaso2 = new System.Windows.Forms.Button();
             this.btnConfirmarReserva = new System.Windows.Forms.Button();
             this.label35 = new System.Windows.Forms.Label();
+            this.lblcodreserva = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -613,6 +614,7 @@
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBox3.Controls.Add(this.lblcodreserva);
             this.groupBox3.Controls.Add(this.lblCliente);
             this.groupBox3.Controls.Add(this.btnNuevo);
             this.groupBox3.Controls.Add(this.btnClienteExistente);
@@ -658,6 +660,7 @@
             this.btnClienteExistente.TabIndex = 331;
             this.btnClienteExistente.Text = "Ya soy cliente";
             this.btnClienteExistente.UseVisualStyleBackColor = false;
+            this.btnClienteExistente.Click += new System.EventHandler(this.btnClienteExistente_Click);
             // 
             // label21
             // 
@@ -704,6 +707,17 @@
             this.label35.Size = new System.Drawing.Size(166, 16);
             this.label35.TabIndex = 309;
             this.label35.Text = "Paso 3 - Confirmar Estadia";
+            // 
+            // lblcodreserva
+            // 
+            this.lblcodreserva.AutoSize = true;
+            this.lblcodreserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblcodreserva.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblcodreserva.Location = new System.Drawing.Point(199, 247);
+            this.lblcodreserva.Name = "lblcodreserva";
+            this.lblcodreserva.Size = new System.Drawing.Size(13, 16);
+            this.lblcodreserva.TabIndex = 334;
+            this.lblcodreserva.Text = "-";
             // 
             // VentanaGenerarReserva
             // 
@@ -789,5 +803,6 @@
         private System.Windows.Forms.Button btnClienteExistente;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label lblCliente;
+        private System.Windows.Forms.Label lblcodreserva;
     }
 }

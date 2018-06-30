@@ -71,7 +71,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                         cant = 4;
                         break;
                     }
-                case "Base King":
+                case "King":
                     {
                         cant = 5;
                         break;
@@ -99,7 +99,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             if (Reserva.Regimen != "Seleccione")
             {
                 this.cbxRegimenEstadiaObligatorio.Enabled = false;
-                this.cbxRegimenEstadiaObligatorio.Items.Add(this.cbxRegimenEstadia.SelectedItem);
+                //this.cbxRegimenEstadiaObligatorio.Items.Add(this.cbxRegimenEstadia.SelectedItem);
             }
             else
             {
@@ -138,7 +138,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         private void irAPaso3()
         {
-
+            this.btnNuevo.Enabled = true;
             Reserva.Cliente = null;
             groupBox2.Enabled = false;
             groupBox3.Enabled = true;
@@ -148,6 +148,7 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             Reserva.Cliente.id = Database.clienteObtenerID(Reserva.Cliente);
             this.lblCliente.Text = "Ya casi terminamos " + Reserva.Cliente.persona.nombre.ToString() + "! Solo haz click en Confirmar Reserva!";
+            this.btnNuevo.Enabled = false;
         }
         #endregion
 
@@ -197,7 +198,10 @@ namespace FrbaHotel.GenerarModificacionReserva
                     string tipoHabi = Database.HabitacionTipobyDescripcion(cbxTipoHabitacion.SelectedItem.ToString());
                     for (int i = 0; i < CantidadDeHabitacionesNecesarias; i++)
                     {
-                        Reserva.Habitaciones.Add(new Habitacion(ListaIDHabitaciones[i], tipoHabi));
+                        Habitacion ha = new Habitacion();
+                        ha.id = ListaIDHabitaciones[i];
+                        ha.tipoHabitacion = tipoHabi;
+                        Reserva.Habitaciones.Add(ha);
                     }
 
                     Reserva.FechaInicio = calendarInicio.SelectionStart;
@@ -226,6 +230,7 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             groupBox1.Enabled = true;
             groupBox2.Enabled = false;
+            Reserva.Regimen = "Seleccione";
         }
 
         private void btnConfirmarPrecio_Click(object sender, EventArgs e)
@@ -259,6 +264,11 @@ namespace FrbaHotel.GenerarModificacionReserva
             Saludo();
         }
 
+        private void btnClienteExistente_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnConfirmarReserva_Click(object sender, EventArgs e)
         {
             if (Reserva.Cliente != null)
@@ -278,6 +288,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                 try
                 {
                     Database.ReservaSaveReserva(Reserva);
+                    this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
                     MessageBox.Show("Se a registrado con exito su reservar con codigo: "+Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
@@ -301,6 +312,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             int aux = 0;
             int personasSinHabitacion = int.Parse(this.tbxCantidadHuespedes.Text.Trim());
             bool flag = true;
+
             while (flag)
             {
                 CantidadDeHabitacionesNecesarias += 1;
@@ -309,7 +321,9 @@ namespace FrbaHotel.GenerarModificacionReserva
 
                 if (personasSinHabitacion <= cantPersPorHab)
                 {
-                    CantidadDeHabitacionesNecesarias += 1;
+                    if(personasSinHabitacion != 0)
+                        CantidadDeHabitacionesNecesarias += 1;
+                    
                     flag = false;
                 }
             }
@@ -366,7 +380,6 @@ namespace FrbaHotel.GenerarModificacionReserva
         #endregion
 
 
-
         #region CreadoSinQuerer
 
         private void lblerrorfechas_Click(object sender, EventArgs e)
@@ -407,15 +420,5 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         #endregion
 
-
-
-
-
-
-  
-
-
-
-      
     }
 }
