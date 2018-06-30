@@ -8,7 +8,7 @@ namespace FrbaHotel.Clases
 {
     public class Estadia
     {
-        public string reservaID { get; set; }
+        public Reserva reserva { get; set; }
         public DateTime fechaInicio { get; set; }
         public DateTime fechaFin { get; set; }
         public string checkInUsuarioID { get; set; }

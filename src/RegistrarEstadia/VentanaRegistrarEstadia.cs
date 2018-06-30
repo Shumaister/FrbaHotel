@@ -25,16 +25,11 @@ namespace FrbaHotel.RegistrarEstadia
         {
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
-                Reserva reserva = Database.reservaObtener(tbxNumeroReserva.Text, sesion.hotel.id);
-                if (reserva.Codigo != null)
-                {
-                    //VER
-                    if (Database.estadiaIngresoValidar(null, sesion.hotel.id))
-                    {
-                        VentanaRegistrarIngreso ventanaRegistrarIngreso = new VentanaRegistrarIngreso(reserva, sesion);
-                        ventanaRegistrarIngreso.ShowDialog();
-                    }
-                }
+                Estadia estadia = new Estadia();
+                estadia.reserva = Database.reservaObtener(tbxNumeroReserva.Text, sesion.hotel.id);
+                if (estadia.reserva != null)
+                    if (Database.estadiaIngresoValidar(estadia))
+                        new VentanaRegistrarIngreso(estadia, sesion).ShowDialog();
             }
         }
 
@@ -42,16 +37,11 @@ namespace FrbaHotel.RegistrarEstadia
         {
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
-                Reserva reserva = Database.reservaObtener(tbxNumeroReserva.Text, sesion.hotel.id);
-                if (reserva.Codigo != null)
-                {
-                    //VER
-                    if(Database.estadiaEgresoValidar(null, sesion.hotel.id))
-                    {
-                        VentanaRegistrarEgreso ventanaRegistrarEgreso = new VentanaRegistrarEgreso(reserva, sesion.usuario);
-                        ventanaRegistrarEgreso.ShowDialog();
-                    }
-                }
+                Estadia estadia = new Estadia();
+                estadia.reserva = Database.reservaObtener(tbxNumeroReserva.Text, sesion.hotel.id);
+                if (estadia.reserva != null)
+                    if(Database.estadiaEgresoValidar(estadia))
+                        new VentanaRegistrarEgreso(estadia, sesion.usuario).ShowDialog();
             }
         }
 

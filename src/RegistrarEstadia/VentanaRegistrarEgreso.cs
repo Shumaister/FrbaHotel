@@ -13,20 +13,18 @@ namespace FrbaHotel.RegistrarEstadia
 {
     public partial class VentanaRegistrarEgreso : VentanaBase
     {
-        public Reserva reserva { get; set; }
+        public Estadia estadia { get; set; }
         public Usuario usuario { get; set; }
 
-        public VentanaRegistrarEgreso(Reserva reserva, Usuario usuario)
+        public VentanaRegistrarEgreso(Estadia estadia, Usuario usuario)
         {
             InitializeComponent();
-            this.reserva = reserva;
+            this.estadia = estadia;
             this.usuario = usuario;
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Estadia estadia = new Estadia();
-            estadia.reservaID = reserva.Codigo;
             estadia.checkOutUsuarioID = Database.usuarioObtenerID(usuario);
             Database.estadiaAgregarEgreso(estadia);
         }

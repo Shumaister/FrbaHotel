@@ -22,6 +22,11 @@ namespace FrbaHotel.Clases
 
         //-------------------------------------- Constructores -------------------------------------
 
+        public Hotel()
+        {
+
+        }
+
         public Hotel(string id)
         {
             this.id = id;

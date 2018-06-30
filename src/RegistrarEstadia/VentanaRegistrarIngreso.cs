@@ -15,33 +15,31 @@ namespace FrbaHotel.RegistrarEstadia
     public partial class VentanaRegistrarIngreso : VentanaBase
     {
         public Sesion sesion { get; set; }
-        public Reserva reserva { get; set; }
+        public Estadia estadia { get; set; }
         public Cliente huesped { get; set; }
         public List<string> huespedes { get; set; }
         
-        public VentanaRegistrarIngreso(Reserva reserva, Sesion sesion)
+        public VentanaRegistrarIngreso(Estadia estadia, Sesion sesion)
         {
             InitializeComponent();
-            this.reserva = reserva;
+            this.estadia = estadia;
             this.sesion = sesion;
             this.huespedes = new List<string>();
         }
 
         private void VentanaRegistrarIngreso_Load(object sender, EventArgs e)
         {
-            lblClienteNombre.Text = reserva.Cliente.persona.nombre;
-            lblClienteApellido.Text = reserva.Cliente.persona.apellido;
-            lblTipoDocumento.Text = reserva.Cliente.persona.tipoDocumento;
-            lblClienteDocumento.Text = reserva.Cliente.persona.numeroDocumento;
-            lblClienteEmail.Text = reserva.Cliente.persona.email;
+            lblClienteNombre.Text = estadia.reserva.Cliente.persona.nombre;
+            lblClienteApellido.Text = estadia.reserva.Cliente.persona.apellido;
+            lblTipoDocumento.Text = estadia.reserva.Cliente.persona.tipoDocumento;
+            lblClienteDocumento.Text = estadia.reserva.Cliente.persona.numeroDocumento;
+            lblClienteEmail.Text = estadia.reserva.Cliente.persona.email;
         }
 
         private void btnGuardarIngreso_Click(object sender, EventArgs e)
         {
-            Estadia estadia = new Estadia();
-            estadia.reservaID = reserva.Codigo;
             estadia.checkInUsuarioID = Database.usuarioObtenerID(sesion.usuario);
-            Database.estadiaIngresoExitoso(estadia, sesion.hotel.id);
+            Database.estadiaIngresoExitoso(estadia);
             this.Hide();
         }
 

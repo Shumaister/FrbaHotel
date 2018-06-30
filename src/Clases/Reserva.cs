@@ -15,6 +15,7 @@ namespace FrbaHotel.Clases
         public DateTime FechaFin { get; set; }
         public int CantidadHuespedes { get; set; }
         public string Regimen { get; set; }
+        public string TipoHabitacion { get; set; }
         public List<Habitacion> Habitaciones { get; set; }
         public Cliente Cliente { get; set; }
         public Usuario Usuario { get ; set; }
