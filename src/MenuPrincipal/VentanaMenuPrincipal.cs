@@ -154,7 +154,7 @@ namespace FrbaHotel.Menus
 
         private void menuEstadias_Click(object sender, EventArgs e)
         {
-            new VentanaRegistrarEstadia().ShowDialog();
+            new VentanaRegistrarEstadia(sesion).ShowDialog();
         }
 
         private void menuCambiarContrasenia_Click(object sender, EventArgs e)

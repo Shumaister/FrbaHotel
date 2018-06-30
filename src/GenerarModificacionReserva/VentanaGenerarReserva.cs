@@ -261,7 +261,6 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             VentanaCliente ventanaCliente = new VentanaCliente(Reserva);
             ventanaCliente.ShowDialog();
-
             Saludo();
         }
 

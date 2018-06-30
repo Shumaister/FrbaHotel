@@ -180,6 +180,7 @@
             this.menuEstadisticas.Name = "menuEstadisticas";
             this.menuEstadisticas.Size = new System.Drawing.Size(79, 20);
             this.menuEstadisticas.Text = "Estadisticas";
+            this.menuEstadisticas.Click += new System.EventHandler(this.menuEstadisticas_Click);
             // 
             // menuCuenta
             // 
