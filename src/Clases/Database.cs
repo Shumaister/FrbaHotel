@@ -1892,58 +1892,60 @@ namespace FrbaHotel
             return true;                 
         }
 
-        public static string estadiaObtenerReservaID(Estadia estadia)
+        public static List<string> reservaObtenerHabitacionesEnLista(string reservaID)
         {
-            SqlCommand consulta = consultaCrear("SELECT Estadia_ReservaID FROM RIP.Estadias WHERE Estadia_ID = @ID");
-            consulta.Parameters.AddWithValue("@ID", estadia.id);
-            return consultaObtenerValor(consulta);
-        }
-
-        public static string estadiaObtenerHotel(Estadia estadia, string hotelID)
-        {
-            string reservaID = estadiaObtenerReservaID(estadia);
-            if(reservaID != "")
-                return reservaObtenerHotel(reservaID, hotelID);
-            else
-                return "";
-        }
-
-        public static string estadiaObtenerRegimen(Estadia estadia)
-        {
-            string reservaID = estadiaObtenerReservaID(estadia);
-            if (reservaID != "")
-                return reservaObtenerRegimen(reservaID);
-            else
-                return "";
-        }
-
-        public static List<string> estadiaObtenerHabitacionesEnLista(Estadia estadia)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Habitacion_Numero FROM RIP.Reservas_Habitaciones JOIN RIP.Habitaciones ON ReservaHabitacion_HabitacionID = Habitacion_ID WHERE ReservaHabitacion_ReservaID = @ReservaID");
-            consulta.Parameters.AddWithValue("@ReservaID", estadiaObtenerReservaID(estadia));
+            SqlCommand consulta = consultaCrear("SELECT Habitacion_Numero FROM RIP.HabitacionesNoDisponibles JOIN RIP.Habitaciones ON HabitacionNoDisponible_HabitacionID = Habitacion_ID WHERE HabitacionNoDisponible_ReservaID = @ReservaID");
+            consulta.Parameters.AddWithValue("@ReservaID", reservaID);
             return consultaObtenerLista(consulta);
         }
 
         #endregion
 
-        #region Consumible
+        #region Consumido
 
-        public static DataTable consumidoObtenerDeEstadia(Consumido consumido)
+        public static DataTable consumidoObtenerTodosEnTabla(Consumido consumido)
         {
-            SqlCommand consulta = consultaCrear("SELECT Consumible_Descripcion, Consumido_Cantidad FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumido_ConsumibleID = Consumible_ID WHERE Consumido_EstadiaID = @ID");
+            SqlCommand consulta = consultaCrear("SELECT Consumible_Descripcion, Consumido_Cantidad FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumido_ConsumibleID = Consumible_ID JOIN RIP.Estadias ON Consumido_EstadiaID = Estadia_ID WHERE Consumido_EstadiaID = @ID AND Estadia_FechaInicio IS NOT NULL AND Estadia_FechaFin IS NOT NULL");
             consulta.Parameters.AddWithValue("@ID", consumido.estadiaID);
             return consultaObtenerTabla(consulta);
         }
 
         public static void consumidoAgregar(Consumido consumido)
         {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Consumidos (Consumido_EstadiaID, Consumido_HabitacionID, Consumido_ConsumibleID, Consumido_Cantidad VALUES (@EstadiaID, @HabitacionID, @ConsumibleID, @Cantidad)");
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Consumidos (Consumido_EstadiaID, Consumido_HabitacionID, Consumido_ConsumibleID, Consumido_Cantidad) VALUES (@EstadiaID, @HabitacionID, @ConsumibleID, @Cantidad)");
             consulta.Parameters.AddWithValue("@EstadiaID", consumido.estadiaID);
-            consulta.Parameters.AddWithValue("@HabitacionID", consumido.habitacionID);
+            consulta.Parameters.AddWithValue("@HabitacionID", consumidoObtenerHabitacionID(consumido));
             consulta.Parameters.AddWithValue("@ConsumibleID", consumibleObtenerID(consumido.consumible));
             consulta.Parameters.AddWithValue("@Cantidad", consumido.cantidad);
             consultaEjecutar(consulta);
         }
+
+        public static bool consumidoTodosRegistradosParaEstadia(Consumido consumido)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Consumido_HabitacionID FROM RIP.Consumidos WHERE Consumido_EstadiaID = @EstadiaID AND Consumido_HabitacionID = @HabitacionID");
+            consulta.Parameters.AddWithValue("@EstadiaID", consumido.estadiaID);
+            consulta.Parameters.AddWithValue("@HabitacionID", consumidoObtenerHabitacionID(consumido));
+            return consultaValorExiste(consultaObtenerValor(consulta));
+        }
+
+        public static string consumidoObtenerHabitacionID(Consumido consumido)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Habitacion_ID FROM RIP.Habitaciones WHERE Habitacion_Numero = @Numero AND Habitacion_HotelID = @HotelID");
+            consulta.Parameters.AddWithValue("@Numero", consumido.numeroHabitacion);
+            consulta.Parameters.AddWithValue("@HotelID", consumido.hotelID);
+            return consultaObtenerValor(consulta);
+        }
+
+        public static string consumidoObtenerEstadiaID(Consumido consumido)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Estadia_ID FROM RIP.Estadias WHERE Estadia_ReservaID = @ReservaID");
+            consulta.Parameters.AddWithValue("@ReservaID", consumido.reservaCodigo);
+            return consultaObtenerValor(consulta);
+        }
+
+        #endregion
+
+        #region Consumible
 
         public static List<string> consumibleObtenerTodosEnLista()
         {
@@ -1955,23 +1957,6 @@ namespace FrbaHotel
         {
             SqlCommand consulta = consultaCrear("SELECT Consumible_ID FROM RIP.Consumibles WHERE Consumible_Descripcion = @Descripcion");
             consulta.Parameters.AddWithValue("@Descripcion", consumible);
-            return consultaObtenerValor(consulta);
-        }
-
-        public static bool consumidoRegistradosEnEstadia(string estadiaID, string numeroHabitacion, string hotelID)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Consumido_HabitacionID FROM RIP.Consumidos WHERE Consumido_EstadiaID = @EstadiaID AND Consumido_HabitacionID = @HabitacionID");
-            string habitacionID = consumidoObtenerHabitacionID(numeroHabitacion, hotelID);
-            consulta.Parameters.AddWithValue("@EstadiaID", estadiaID);
-            consulta.Parameters.AddWithValue("@HabitacionID", habitacionID);
-            return consultaValorExiste(consultaObtenerValor(consulta));
-        }
-
-        public static string consumidoObtenerHabitacionID(string numeroHabitacion, string hotelID)
-        {
-            SqlCommand consulta = consultaCrear("SELECT Habitacion_ID FROM RIP.Habitaciones WHERE Habitacion_Numero = @Numero AND Habitacion_HotelID = @HotelID");
-            consulta.Parameters.AddWithValue("@Numero", numeroHabitacion);
-            consulta.Parameters.AddWithValue("@HotelID", hotelID);
             return consultaObtenerValor(consulta);
         }
 

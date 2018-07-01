@@ -134,7 +134,7 @@ namespace FrbaHotel.Menus
 
         private void menuConsumibles_Click(object sender, EventArgs e)
         {
-            new VentanaRegistrarConsumible(sesion).ShowDialog();
+            new VentanaConsumibles(sesion).ShowDialog();
         }
 
         private void menuEstadisticas_Click(object sender, EventArgs e)

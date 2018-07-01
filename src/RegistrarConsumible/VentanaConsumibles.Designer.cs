@@ -1,6 +1,6 @@
 ﻿namespace FrbaHotel.RegistrarConsumible
 {
-    partial class VentanaRegistrarConsumible
+    partial class VentanaConsumibles
     {
         /// <summary>
         /// Required designer variable.
@@ -34,7 +34,7 @@
             this.lblRegimen = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.tbxEstadia = new System.Windows.Forms.TextBox();
+            this.tbxReserva = new System.Windows.Forms.TextBox();
             this.cbxHabitacion = new System.Windows.Forms.ComboBox();
             this.btnRegistrarConsumibles = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -56,9 +56,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 34);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
+            this.label1.Size = new System.Drawing.Size(93, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Codigo";
+            this.label1.Text = "Codigo de reserva";
             // 
             // lblHotel
             // 
@@ -105,14 +105,14 @@
             this.label10.TabIndex = 8;
             this.label10.Text = "Habitacion";
             // 
-            // tbxEstadia
+            // tbxReserva
             // 
-            this.tbxEstadia.Location = new System.Drawing.Point(15, 59);
-            this.tbxEstadia.Name = "tbxEstadia";
-            this.tbxEstadia.Size = new System.Drawing.Size(111, 20);
-            this.tbxEstadia.TabIndex = 11;
-            this.tbxEstadia.TextChanged += new System.EventHandler(this.tbxEstadia_TextChanged);
-            this.tbxEstadia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxEstadia_KeyPress);
+            this.tbxReserva.Location = new System.Drawing.Point(15, 59);
+            this.tbxReserva.Name = "tbxReserva";
+            this.tbxReserva.Size = new System.Drawing.Size(111, 20);
+            this.tbxReserva.TabIndex = 11;
+            this.tbxReserva.TextChanged += new System.EventHandler(this.tbxReserva_TextChanged);
+            this.tbxReserva.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxReserva_KeyPress);
             // 
             // cbxHabitacion
             // 
@@ -148,7 +148,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(51, 34);
+            this.label3.Location = new System.Drawing.Point(107, 34);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(17, 22);
             this.label3.TabIndex = 275;
@@ -175,7 +175,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnRegistrarConsumibles);
             this.Controls.Add(this.cbxHabitacion);
-            this.Controls.Add(this.tbxEstadia);
+            this.Controls.Add(this.tbxReserva);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.lblRegimen);
             this.Controls.Add(this.label8);
@@ -191,7 +191,7 @@
             this.Controls.SetChildIndex(this.label8, 0);
             this.Controls.SetChildIndex(this.lblRegimen, 0);
             this.Controls.SetChildIndex(this.label10, 0);
-            this.Controls.SetChildIndex(this.tbxEstadia, 0);
+            this.Controls.SetChildIndex(this.tbxReserva, 0);
             this.Controls.SetChildIndex(this.cbxHabitacion, 0);
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.btnRegistrarConsumibles, 0);
@@ -213,7 +213,7 @@
         private System.Windows.Forms.Label lblRegimen;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox tbxEstadia;
+        private System.Windows.Forms.TextBox tbxReserva;
         private System.Windows.Forms.ComboBox cbxHabitacion;
         private System.Windows.Forms.Button btnRegistrarConsumibles;
         private System.Windows.Forms.Label label2;

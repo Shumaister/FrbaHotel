@@ -21,61 +21,69 @@ namespace FrbaHotel.RegistrarConsumible
             this.consumido = consumido;
         }
 
-        private void btnAgregarConsumible_Click(object sender, EventArgs e)
-        {
-            if (ventanaCamposEstanCompletos(this, controladorError))
-            {
-                dgvConsumibles.Rows.Add(cbxConsumibles.SelectedItem.ToString(), tbxCantidad.Text);
-                ventanaControlarComboBox(cbxConsumibles);
-            }
-        }
-
-        private void dgvConsumibles_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var senderGrid = (DataGridView)sender;
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
-            {
-                cbxConsumibles.Items.Add(dgvConsumibles.Rows[e.RowIndex].Cells["Consumible_Descripcion"].Value.ToString());
-                cbxConsumibles.Sorted = true;
-                cbxConsumibles.SelectedIndex = 0;
-                dgvConsumibles.Rows.RemoveAt(e.RowIndex);
-            }
-        }
-
-        private void ventanaControlarComboBox(ComboBox comboBox)
-        {
-            if (comboBox.SelectedItem != null)
-            {
-                comboBox.Items.Remove(comboBox.SelectedItem);
-                if (comboBox.Items.Count > 0)
-                    comboBox.SelectedIndex = 0;
-                else
-                    comboBox.ResetText();
-            }
-        }
-
         private void btnLimpiarConsumibles_Click(object sender, EventArgs e)
         {
             tbxCantidad.Clear();
-            dataGridViewCargar(dgvConsumibles, Database.consumidoObtenerDeEstadia(consumido));
-            dgvConsumibles.DataSource = null;
+            comboBoxCargar(cbxConsumibles, Database.consumibleObtenerTodosEnLista());
+            listBoxLimpiar(lbxConsumibles);
         }
 
         private void btnGuardarConsumibles_Click(object sender, EventArgs e)
         {
-            foreach (DataRow fila in dgvConsumibles.Rows)
+            if (lbxConsumibles.Items.Count == 0)
             {
-                consumido.consumible = (string)fila["Consumible_Descripcion"];
-                consumido.cantidad = (string)fila["Consumido_Cantidad"];
+                ventanaInformarError("Debe registrar al menos un consumible");
+                return;
+            }
+            foreach (string dato in lbxConsumibles.Items)
+            {
+                string[] datos = dato.Split('-');
+                consumido.consumible = datos[0];
+                consumido.cantidad = datos[1];
                 Database.consumidoAgregar(consumido);
-            }       
+            }
+            ventanaInformarExito("Los consumibles fueron registrados con exito");
+            this.Hide();
         }
 
         private void VentanaRegistrarConsumibles_Load(object sender, EventArgs e)
         {
             comboBoxCargar(cbxConsumibles, Database.consumibleObtenerTodosEnLista());
-            dataGridViewCargar(dgvConsumibles, Database.consumidoObtenerDeEstadia(consumido));
-            dataGridViewAgregarBoton(dgvConsumibles, "Quitar");
+        }
+
+        private void btnQuitarConsumible_Click(object sender, EventArgs e)
+        {
+            if (lbxConsumibles.SelectedItem != null)
+            {
+                string consumible = lbxConsumibles.SelectedItem.ToString();
+                string[] datos = consumible.Split('-');
+                cbxConsumibles.Items.Add(datos[0]);
+                cbxConsumibles.Sorted = true;
+                lbxConsumibles.Items.Remove(lbxConsumibles.SelectedItem);
+                cbxConsumibles.SelectedIndex = 0;
+                if (lbxConsumibles.Items.Count > 0)
+                    lbxConsumibles.SelectedIndex = 0;
+            }
+        }
+
+        private void btnAgregarConsumible_Click(object sender, EventArgs e)
+        {
+            if (cbxConsumibles.SelectedItem != null)
+            {
+                if (string.IsNullOrWhiteSpace(tbxCantidad.Text))
+                    ventanaInformarError("Debe asignar una cantidad al consumible");
+                else
+                {
+                    lbxConsumibles.Items.Add(cbxConsumibles.SelectedItem + "-" + tbxCantidad.Text);
+                    lbxConsumibles.SelectedIndex = 0;
+                    cbxConsumibles.Items.Remove(cbxConsumibles.SelectedItem);
+                    if (cbxConsumibles.Items.Count > 0)
+                        cbxConsumibles.SelectedIndex = 0;
+                    else
+                        cbxConsumibles.ResetText();
+                }
+
+            }
         }
     }
 }

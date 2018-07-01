@@ -12,11 +12,11 @@ using FrbaHotel.Clases;
 
 namespace FrbaHotel.RegistrarConsumible
 {
-    public partial class VentanaRegistrarConsumible : VentanaBase
+    public partial class VentanaConsumibles : VentanaBase
     {
         public Sesion sesion { get; set; }
 
-        public VentanaRegistrarConsumible(Sesion sesion)
+        public VentanaConsumibles(Sesion sesion)
         {
             InitializeComponent();
             this.sesion = sesion;
@@ -28,17 +28,19 @@ namespace FrbaHotel.RegistrarConsumible
             {
                 if (lblHotel.Text == "Ninguno")
                 {
-                    ventanaInformarError("El codigo de la estadia es invalido");
+                    ventanaInformarError("El codigo de la reserva es invalido");
                     return;
                 }
-                if (Database.consumidoRegistradosEnEstadia(tbxEstadia.Text, cbxHabitacion.SelectedItem.ToString(), sesion.hotel.id))
+                Consumido consumido = new Consumido();               
+                consumido.reservaCodigo = tbxReserva.Text;
+                consumido.numeroHabitacion = cbxHabitacion.SelectedItem.ToString();
+                consumido.hotelID = sesion.hotel.id;
+                consumido.estadiaID = Database.consumidoObtenerEstadiaID(consumido);
+                if (Database.consumidoTodosRegistradosParaEstadia(consumido))
                 {
                     ventanaInformarError("Los consumibles ya fueron registrados");
                     return;
                 }
-                Consumido consumido = new Consumido();
-                consumido.estadiaID = tbxEstadia.Text;
-                consumido.habitacionID = Database.consumidoObtenerHabitacionID(cbxHabitacion.SelectedItem.ToString(), sesion.hotel.id);
                 new VentanaRegistrarConsumibles(consumido).ShowDialog();
             }
         }
@@ -57,30 +59,25 @@ namespace FrbaHotel.RegistrarConsumible
             cbxHabitacion.SelectedIndex = 0;
         }
 
-        private void tbxEstadia_TextChanged(object sender, EventArgs e)
+        private void tbxReserva_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tbxEstadia.Text))
-            {
+            if (string.IsNullOrWhiteSpace(tbxReserva.Text))
                 ventanaEstadiaInvalida();
-            }
             else
             {
-                Estadia estadia = new Estadia();
-                estadia.id = tbxEstadia.Text;
-                string hotelNombre = Database.estadiaObtenerHotel(estadia, sesion.hotel.id);
+                string hotelNombre = Database.reservaObtenerHotel(tbxReserva.Text, sesion.hotel.id);
                 if (hotelNombre != "")
                 {
                     lblHotel.Text = hotelNombre;
-                    lblRegimen.Text = Database.estadiaObtenerRegimen(estadia);
-                    comboBoxCargar(cbxHabitacion, Database.estadiaObtenerHabitacionesEnLista(estadia));
+                    lblRegimen.Text = Database.reservaObtenerRegimen(tbxReserva.Text);
+                    comboBoxCargar(cbxHabitacion, Database.reservaObtenerHabitacionesEnLista(tbxReserva.Text));
                 }
                 else
                     ventanaEstadiaInvalida();
             }
-
         }
 
-        private void tbxEstadia_KeyPress(object sender, KeyPressEventArgs e)
+        private void tbxReserva_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxConfigurarParaNumeros(e);
             controladorError.Clear();
