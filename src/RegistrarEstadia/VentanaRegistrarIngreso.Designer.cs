@@ -166,7 +166,7 @@
             // lblClienteNombre
             // 
             this.lblClienteNombre.AutoSize = true;
-            this.lblClienteNombre.Location = new System.Drawing.Point(65, 40);
+            this.lblClienteNombre.Location = new System.Drawing.Point(120, 40);
             this.lblClienteNombre.Name = "lblClienteNombre";
             this.lblClienteNombre.Size = new System.Drawing.Size(77, 13);
             this.lblClienteNombre.TabIndex = 303;
@@ -175,7 +175,7 @@
             // lblClienteDocumento
             // 
             this.lblClienteDocumento.AutoSize = true;
-            this.lblClienteDocumento.Location = new System.Drawing.Point(83, 108);
+            this.lblClienteDocumento.Location = new System.Drawing.Point(120, 108);
             this.lblClienteDocumento.Name = "lblClienteDocumento";
             this.lblClienteDocumento.Size = new System.Drawing.Size(95, 13);
             this.lblClienteDocumento.TabIndex = 304;
@@ -184,7 +184,7 @@
             // lblClienteEmail
             // 
             this.lblClienteEmail.AutoSize = true;
-            this.lblClienteEmail.Location = new System.Drawing.Point(53, 131);
+            this.lblClienteEmail.Location = new System.Drawing.Point(120, 131);
             this.lblClienteEmail.Name = "lblClienteEmail";
             this.lblClienteEmail.Size = new System.Drawing.Size(66, 13);
             this.lblClienteEmail.TabIndex = 305;
@@ -211,7 +211,7 @@
             // lblClienteApellido
             // 
             this.lblClienteApellido.AutoSize = true;
-            this.lblClienteApellido.Location = new System.Drawing.Point(62, 64);
+            this.lblClienteApellido.Location = new System.Drawing.Point(120, 64);
             this.lblClienteApellido.Name = "lblClienteApellido";
             this.lblClienteApellido.Size = new System.Drawing.Size(78, 13);
             this.lblClienteApellido.TabIndex = 308;
@@ -220,7 +220,7 @@
             // lblTipoDocumento
             // 
             this.lblTipoDocumento.AutoSize = true;
-            this.lblTipoDocumento.Location = new System.Drawing.Point(102, 87);
+            this.lblTipoDocumento.Location = new System.Drawing.Point(120, 87);
             this.lblTipoDocumento.Name = "lblTipoDocumento";
             this.lblTipoDocumento.Size = new System.Drawing.Size(115, 13);
             this.lblTipoDocumento.TabIndex = 309;

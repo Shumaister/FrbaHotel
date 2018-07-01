@@ -28,8 +28,9 @@ namespace FrbaHotel.AbmCliente
             this.btnGuardarDesdeReserva.Visible = true;
             this.btnGuardarCliente.Visible = false;
             this.tabControl.TabPages.Remove(pagModificar);
-            this.tabControl.TabPages.Remove(pagEliminar);
-            this.funcion = funcion;
+            this.tabControl.TabPages.Remove(pagEliminar); 
+            comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
+                
         }
 
         public VentanaCliente(VentanaRegistrarIngreso ventanaRegistrarIngreso, string funcion)
@@ -415,10 +416,13 @@ namespace FrbaHotel.AbmCliente
                 Cliente cliente = ventanaCrearClienteParaAgregar();
 
                 if (Database.clienteAgregadoConExito(cliente))
-                    ventanaActualizar(sender, e);
-
-                Reserva.Cliente = cliente;
+                    Reserva.Cliente = cliente;
             }
+        }
+
+        private void cbxTipoDocumento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
     }

@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.pagAgregar = new System.Windows.Forms.TabPage();
+            this.btnGuardarDesdeReserva = new System.Windows.Forms.Button();
             this.label39 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.tbxNacionalidad = new System.Windows.Forms.TextBox();
@@ -116,7 +117,6 @@
             this.tbxFiltroEmailEliminar = new System.Windows.Forms.TextBox();
             this.btnLimpiarEliminar = new System.Windows.Forms.Button();
             this.btnFiltrarEliminar = new System.Windows.Forms.Button();
-            this.btnGuardarDesdeReserva = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.tabControl.SuspendLayout();
@@ -207,6 +207,19 @@
             this.pagAgregar.TabIndex = 0;
             this.pagAgregar.Text = "Agregar";
             this.pagAgregar.UseVisualStyleBackColor = true;
+            // 
+            // btnGuardarDesdeReserva
+            // 
+            this.btnGuardarDesdeReserva.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnGuardarDesdeReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardarDesdeReserva.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnGuardarDesdeReserva.Location = new System.Drawing.Point(278, 359);
+            this.btnGuardarDesdeReserva.Name = "btnGuardarDesdeReserva";
+            this.btnGuardarDesdeReserva.Size = new System.Drawing.Size(104, 34);
+            this.btnGuardarDesdeReserva.TabIndex = 329;
+            this.btnGuardarDesdeReserva.Text = "Guardar";
+            this.btnGuardarDesdeReserva.UseVisualStyleBackColor = false;
+            this.btnGuardarDesdeReserva.Click += new System.EventHandler(this.btnGuardarDesdeReserva_Click);
             // 
             // label39
             // 
@@ -305,6 +318,7 @@
             this.cbxTipoDocumento.Name = "cbxTipoDocumento";
             this.cbxTipoDocumento.Size = new System.Drawing.Size(100, 21);
             this.cbxTipoDocumento.TabIndex = 282;
+            this.cbxTipoDocumento.SelectedIndexChanged += new System.EventHandler(this.cbxTipoDocumento_SelectedIndexChanged);
             // 
             // label19
             // 
@@ -667,9 +681,9 @@
             // 
             // btnGuardarCliente
             // 
-            this.btnGuardarCliente.Location = new System.Drawing.Point(388, 370);
+            this.btnGuardarCliente.Location = new System.Drawing.Point(388, 359);
             this.btnGuardarCliente.Name = "btnGuardarCliente";
-            this.btnGuardarCliente.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardarCliente.Size = new System.Drawing.Size(90, 34);
             this.btnGuardarCliente.TabIndex = 204;
             this.btnGuardarCliente.Text = "Guardar";
             this.btnGuardarCliente.UseVisualStyleBackColor = true;
@@ -677,9 +691,9 @@
             // 
             // btnLimpiarCliente
             // 
-            this.btnLimpiarCliente.Location = new System.Drawing.Point(250, 370);
+            this.btnLimpiarCliente.Location = new System.Drawing.Point(33, 359);
             this.btnLimpiarCliente.Name = "btnLimpiarCliente";
-            this.btnLimpiarCliente.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiarCliente.Size = new System.Drawing.Size(75, 34);
             this.btnLimpiarCliente.TabIndex = 203;
             this.btnLimpiarCliente.Text = "Limpiar";
             this.btnLimpiarCliente.UseVisualStyleBackColor = true;
@@ -1042,19 +1056,6 @@
             this.btnFiltrarEliminar.Text = "Filtrar";
             this.btnFiltrarEliminar.UseVisualStyleBackColor = true;
             this.btnFiltrarEliminar.Click += new System.EventHandler(this.btnFiltrarEliminar_Click);
-            // 
-            // btnGuardarDesdeReserva
-            // 
-            this.btnGuardarDesdeReserva.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnGuardarDesdeReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardarDesdeReserva.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnGuardarDesdeReserva.Location = new System.Drawing.Point(569, 353);
-            this.btnGuardarDesdeReserva.Name = "btnGuardarDesdeReserva";
-            this.btnGuardarDesdeReserva.Size = new System.Drawing.Size(107, 40);
-            this.btnGuardarDesdeReserva.TabIndex = 329;
-            this.btnGuardarDesdeReserva.Text = "Guardar";
-            this.btnGuardarDesdeReserva.UseVisualStyleBackColor = false;
-            this.btnGuardarDesdeReserva.Click += new System.EventHandler(this.btnGuardarDesdeReserva_Click);
             // 
             // VentanaCliente
             // 

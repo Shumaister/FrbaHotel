@@ -219,11 +219,6 @@ namespace FrbaHotel.GenerarModificacionReserva
                     irAPaso2();
                 }
             }
-            else
-            {
-                LimpiarPaso1();
-            }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -321,7 +316,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 
                 if (personasSinHabitacion <= cantPersPorHab)
                 {
-                    if(personasSinHabitacion != 0)
+                    if(personasSinHabitacion > 0)
                         CantidadDeHabitacionesNecesarias += 1;
                     
                     flag = false;
