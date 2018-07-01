@@ -1314,6 +1314,13 @@ namespace FrbaHotel
             return true;
         }
 
+        public static double HabitacionObtenerPrecioBaseByTipo(string p)
+        {
+            SqlCommand consulta = consultaCrear("select TipoHabitacion_Porcentual from rip.TiposHabitaciones where TipoHabitacion_ID = @tipo");
+            consulta.Parameters.AddWithValue("@tipo", p);
+            return double.Parse(consultaObtenerValor(consulta));
+        }
+
         public static bool habitacionModificadaConExito(Habitacion habitacion)
         {
             if (habitacionExiste(habitacion) && habitacionDistinta(habitacion))
@@ -1660,7 +1667,6 @@ namespace FrbaHotel
             R.FechaInicio = DateTime.Parse(linea.ItemArray[5].ToString());
             R.FechaFin = DateTime.Parse(linea.ItemArray[6].ToString());
             
-            // te debo las habitaciones
             SqlCommand ledezma = consultaCrear("select HabitacionNoDisponible_HabitacionID from rip.HabitacionesNoDisponibles where HabitacionNoDisponible_ReservaID = @IdReserva");
             ledezma.Parameters.AddWithValue("@IdReserva", numeroReserva);
             List<string> idHABs = consultaObtenerLista(ledezma);
@@ -1674,7 +1680,7 @@ namespace FrbaHotel
 
             R.Habitaciones = habitaciones;
 
-                R.Regimen = regimenObtenerDescripcion(linea.ItemArray[8].ToString());
+            R.Regimen = regimenObtenerDescripcion(linea.ItemArray[8].ToString());
             R.Usuario = new Usuario(usuarioObtenerNombreByID(linea.ItemArray[10].ToString()));
 
             return R;
@@ -1991,5 +1997,7 @@ namespace FrbaHotel
         }
 
         #endregion
+
+
     }
 }

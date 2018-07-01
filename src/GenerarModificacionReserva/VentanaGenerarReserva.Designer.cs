@@ -76,6 +76,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblcodreserva = new System.Windows.Forms.Label();
             this.lblCliente = new System.Windows.Forms.Label();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.btnClienteExistente = new System.Windows.Forms.Button();
@@ -83,7 +84,13 @@
             this.btnVolverPaso2 = new System.Windows.Forms.Button();
             this.btnConfirmarReserva = new System.Windows.Forms.Button();
             this.label35 = new System.Windows.Forms.Label();
-            this.lblcodreserva = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.lblcantidaddias = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.lblpreciodiahab = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -416,6 +423,13 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBox2.Controls.Add(this.lblpreciodiahab);
+            this.groupBox2.Controls.Add(this.label26);
+            this.groupBox2.Controls.Add(this.label25);
+            this.groupBox2.Controls.Add(this.label23);
+            this.groupBox2.Controls.Add(this.lblcantidaddias);
+            this.groupBox2.Controls.Add(this.label24);
+            this.groupBox2.Controls.Add(this.label22);
             this.groupBox2.Controls.Add(this.lblErrorPaso2);
             this.groupBox2.Controls.Add(this.lblrecargahotel);
             this.groupBox2.Controls.Add(this.label20);
@@ -439,13 +453,14 @@
             this.groupBox2.TabIndex = 335;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Paso 2";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // lblErrorPaso2
             // 
             this.lblErrorPaso2.AutoSize = true;
             this.lblErrorPaso2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblErrorPaso2.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorPaso2.Location = new System.Drawing.Point(199, 176);
+            this.lblErrorPaso2.Location = new System.Drawing.Point(314, 62);
             this.lblErrorPaso2.Name = "lblErrorPaso2";
             this.lblErrorPaso2.Size = new System.Drawing.Size(243, 13);
             this.lblErrorPaso2.TabIndex = 337;
@@ -455,7 +470,7 @@
             // lblrecargahotel
             // 
             this.lblrecargahotel.AutoSize = true;
-            this.lblrecargahotel.Location = new System.Drawing.Point(407, 148);
+            this.lblrecargahotel.Location = new System.Drawing.Point(348, 185);
             this.lblrecargahotel.Name = "lblrecargahotel";
             this.lblrecargahotel.Size = new System.Drawing.Size(10, 13);
             this.lblrecargahotel.TabIndex = 336;
@@ -464,7 +479,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(384, 121);
+            this.label20.Location = new System.Drawing.Point(192, 185);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(116, 13);
             this.label20.TabIndex = 335;
@@ -473,7 +488,7 @@
             // lblPrecioHab
             // 
             this.lblPrecioHab.AutoSize = true;
-            this.lblPrecioHab.Location = new System.Drawing.Point(306, 147);
+            this.lblPrecioHab.Location = new System.Drawing.Point(348, 138);
             this.lblPrecioHab.Name = "lblPrecioHab";
             this.lblPrecioHab.Size = new System.Drawing.Size(10, 13);
             this.lblPrecioHab.TabIndex = 334;
@@ -482,7 +497,7 @@
             // lblTipoRegimen
             // 
             this.lblTipoRegimen.AutoSize = true;
-            this.lblTipoRegimen.Location = new System.Drawing.Point(57, 147);
+            this.lblTipoRegimen.Location = new System.Drawing.Point(348, 208);
             this.lblTipoRegimen.Name = "lblTipoRegimen";
             this.lblTipoRegimen.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblTipoRegimen.Size = new System.Drawing.Size(10, 13);
@@ -492,7 +507,7 @@
             // lblCantHabi
             // 
             this.lblCantHabi.AutoSize = true;
-            this.lblCantHabi.Location = new System.Drawing.Point(182, 147);
+            this.lblCantHabi.Location = new System.Drawing.Point(348, 162);
             this.lblCantHabi.Name = "lblCantHabi";
             this.lblCantHabi.Size = new System.Drawing.Size(10, 13);
             this.lblCantHabi.TabIndex = 332;
@@ -501,16 +516,16 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(296, 120);
+            this.label19.Location = new System.Drawing.Point(217, 138);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(82, 13);
+            this.label19.Size = new System.Drawing.Size(91, 13);
             this.label19.TabIndex = 331;
-            this.label19.Text = "Tipo Habitacion";
+            this.label19.Text = "Precio Habitacion";
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(152, 119);
+            this.label18.Location = new System.Drawing.Point(179, 162);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(129, 13);
             this.label18.TabIndex = 330;
@@ -545,7 +560,7 @@
             // lblNumeroPrecioFinal
             // 
             this.lblNumeroPrecioFinal.AutoSize = true;
-            this.lblNumeroPrecioFinal.Location = new System.Drawing.Point(525, 148);
+            this.lblNumeroPrecioFinal.Location = new System.Drawing.Point(348, 295);
             this.lblNumeroPrecioFinal.Name = "lblNumeroPrecioFinal";
             this.lblNumeroPrecioFinal.Size = new System.Drawing.Size(10, 13);
             this.lblNumeroPrecioFinal.TabIndex = 327;
@@ -554,17 +569,18 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(24, 119);
+            this.label17.Location = new System.Drawing.Point(226, 208);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(116, 13);
+            this.label17.Size = new System.Drawing.Size(82, 13);
             this.label17.TabIndex = 326;
-            this.label17.Text = "Con el Tipo de regimen";
+            this.label17.Text = "Precio Regimen";
+            this.label17.Click += new System.EventHandler(this.label17_Click);
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(513, 118);
+            this.label16.Location = new System.Drawing.Point(217, 293);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(91, 16);
             this.label16.TabIndex = 324;
@@ -575,7 +591,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Red;
-            this.label15.Location = new System.Drawing.Point(277, 60);
+            this.label15.Location = new System.Drawing.Point(123, 58);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(17, 22);
             this.label15.TabIndex = 323;
@@ -584,7 +600,7 @@
             // cbxRegimenEstadiaObligatorio
             // 
             this.cbxRegimenEstadiaObligatorio.FormattingEnabled = true;
-            this.cbxRegimenEstadiaObligatorio.Location = new System.Drawing.Point(309, 61);
+            this.cbxRegimenEstadiaObligatorio.Location = new System.Drawing.Point(155, 59);
             this.cbxRegimenEstadiaObligatorio.Name = "cbxRegimenEstadiaObligatorio";
             this.cbxRegimenEstadiaObligatorio.Size = new System.Drawing.Size(153, 21);
             this.cbxRegimenEstadiaObligatorio.TabIndex = 322;
@@ -593,7 +609,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(179, 64);
+            this.label14.Location = new System.Drawing.Point(25, 62);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(102, 13);
             this.label14.TabIndex = 321;
@@ -628,6 +644,17 @@
             this.groupBox3.TabIndex = 338;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Paso 3";
+            // 
+            // lblcodreserva
+            // 
+            this.lblcodreserva.AutoSize = true;
+            this.lblcodreserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblcodreserva.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblcodreserva.Location = new System.Drawing.Point(199, 247);
+            this.lblcodreserva.Name = "lblcodreserva";
+            this.lblcodreserva.Size = new System.Drawing.Size(13, 16);
+            this.lblcodreserva.TabIndex = 334;
+            this.lblcodreserva.Text = "-";
             // 
             // lblCliente
             // 
@@ -708,16 +735,73 @@
             this.label35.TabIndex = 309;
             this.label35.Text = "Paso 3 - Confirmar Estadia";
             // 
-            // lblcodreserva
+            // label22
             // 
-            this.lblcodreserva.AutoSize = true;
-            this.lblcodreserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblcodreserva.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblcodreserva.Location = new System.Drawing.Point(199, 247);
-            this.lblcodreserva.Name = "lblcodreserva";
-            this.lblcodreserva.Size = new System.Drawing.Size(13, 16);
-            this.lblcodreserva.TabIndex = 334;
-            this.lblcodreserva.Text = "-";
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(285, 107);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(73, 16);
+            this.label22.TabIndex = 338;
+            this.label22.Text = "Resumen";
+            // 
+            // lblcantidaddias
+            // 
+            this.lblcantidaddias.AutoSize = true;
+            this.lblcantidaddias.Location = new System.Drawing.Point(348, 272);
+            this.lblcantidaddias.Name = "lblcantidaddias";
+            this.lblcantidaddias.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblcantidaddias.Size = new System.Drawing.Size(10, 13);
+            this.lblcantidaddias.TabIndex = 340;
+            this.lblcantidaddias.Text = "-";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(222, 272);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(86, 13);
+            this.label24.TabIndex = 339;
+            this.label24.Text = "Cantidad de dias";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(179, 221);
+            this.label23.Name = "label23";
+            this.label23.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label23.Size = new System.Drawing.Size(136, 13);
+            this.label23.TabIndex = 341;
+            this.label23.Text = "-------------------------------------------";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(348, 221);
+            this.label25.Name = "label25";
+            this.label25.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label25.Size = new System.Drawing.Size(136, 13);
+            this.label25.TabIndex = 342;
+            this.label25.Text = "-------------------------------------------";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(236, 236);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(72, 13);
+            this.label26.TabIndex = 343;
+            this.label26.Text = "Precio por dia";
+            // 
+            // lblpreciodiahab
+            // 
+            this.lblpreciodiahab.AutoSize = true;
+            this.lblpreciodiahab.Location = new System.Drawing.Point(348, 236);
+            this.lblpreciodiahab.Name = "lblpreciodiahab";
+            this.lblpreciodiahab.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblpreciodiahab.Size = new System.Drawing.Size(10, 13);
+            this.lblpreciodiahab.TabIndex = 344;
+            this.lblpreciodiahab.Text = "-";
             // 
             // VentanaGenerarReserva
             // 
@@ -804,5 +888,12 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label lblCliente;
         private System.Windows.Forms.Label lblcodreserva;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label lblpreciodiahab;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label lblcantidaddias;
+        private System.Windows.Forms.Label label24;
     }
 }
