@@ -19,7 +19,8 @@ namespace FrbaHotel.FacturarEstadia
 {
     public partial class VentanaFacturarEstadia : VentanaBase
     {
-        public VentanaFacturarEstadia()
+        public Sesion sesion { get; set; }
+        public VentanaFacturarEstadia(Sesion sesion)
         {
             InitializeComponent();
             comboBox1.SelectedIndex = 0;
@@ -39,19 +40,23 @@ namespace FrbaHotel.FacturarEstadia
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            SqlCommand consulta = Database.consultaCrear("select Consumible_Descripcion 'Consumible',Consumido_Cantidad'Cantidad',Consumible_Precio'Precio',Consumido_Cantidad*Consumible_Precio'Total' from rip.Consumidos join rip.Consumibles on Consumible_ID=Consumido_ConsumibleID join rip.Estadias on Estadia_ID=Consumido_EstadiaID join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva");
-            consulta.Parameters.AddWithValue("@reserva", CodReserva.Text);
+            if (string.IsNullOrEmpty(CodReserva.Text))
+            {
+                MessageBox.Show("Codigo de reserva no valido");
+                return;
+            }
 
+            SqlCommand consulta = Database.consultaCrear("select Consumible_Descripcion 'Consumible',Consumido_Cantidad'Cantidad',Consumible_Precio'Precio',Consumido_Cantidad*Consumible_Precio'Total' from rip.Consumidos join rip.Consumibles on Consumible_ID=Consumido_ConsumibleID join rip.Estadias on Estadia_ID=Consumido_EstadiaID join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva");
+            consulta.Parameters.AddWithValue("@reserva", Double.Parse(CodReserva.Text));
             dataGridViewCargar(dataConsumibles, Database.consultaObtenerTabla(consulta));
 
             SqlCommand consultaDos = Database.consultaCrear("select isnull(DATEDIFF(DAY,Estadia_CheckInUsuarioID,Estadia_CheckOutUsuarioID),0) from rip.Estadias join rip.Reservas on Estadia_ReservaID=Reserva_ID where Reserva_ID=@reserva");
-            consultaDos.Parameters.AddWithValue("@reserva", CodReserva.Text);
+            consultaDos.Parameters.AddWithValue("@reserva", Double.Parse(CodReserva.Text));
             string diasUtilizado = Database.consultaObtenerValor(consultaDos);
             diasUtilizados.Text = diasUtilizado;
 
             SqlCommand reservaExistente = Database.consultaCrear("select Reserva_ID from rip.Reservas where Reserva_ID=@reserva");
-            reservaExistente.Parameters.AddWithValue("@reserva", CodReserva.Text);
+            reservaExistente.Parameters.AddWithValue("@reserva", Double.Parse(CodReserva.Text));
             string idReserva = Database.consultaObtenerValor(reservaExistente);
 
             if (idReserva == "")
@@ -66,12 +71,12 @@ namespace FrbaHotel.FacturarEstadia
 
                 sub.Text = "Subtotal";
                 SqlCommand consultasubtotal = Database.consultaCrear("select sum(Consumido_Cantidad*Consumible_Precio)  from rip.Consumidos join rip.Consumibles on Consumible_ID=Consumido_ConsumibleID join rip.Estadias on Estadia_ID=Consumido_EstadiaID join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva");
-                consultasubtotal.Parameters.AddWithValue("@reserva", CodReserva.Text);
+                consultasubtotal.Parameters.AddWithValue("@reserva", Double.Parse(CodReserva.Text));
                 string subtotal = Database.consultaObtenerValor(consultasubtotal);
                 SubTotal.Text = subtotal;
 
                 SqlCommand consultaRegimen = Database.consultaCrear("select Reserva_RegimenID from rip.Reservas where Reserva_ID=@reserva");
-                consultaRegimen.Parameters.AddWithValue("@reserva", CodReserva.Text);
+                consultaRegimen.Parameters.AddWithValue("@reserva", Double.Parse(CodReserva.Text));
                 string idRegimen = Database.consultaObtenerValor(consultaRegimen);
                 Decimal allinclusive = 0;
                 if (int.Parse(idRegimen) == 1)
@@ -128,7 +133,7 @@ namespace FrbaHotel.FacturarEstadia
             }
 
             SqlCommand reservaYaPaga = Database.consultaCrear("select Factura_ID from rip.Facturas join rip.Estadias on Factura_EstadiaID=Estadia_ID join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva");
-            reservaYaPaga.Parameters.AddWithValue("@reserva", CodReserva.Text);
+            reservaYaPaga.Parameters.AddWithValue("@reserva", Double.Parse(CodReserva.Text));
             string facturaId = Database.consultaObtenerValor(reservaYaPaga);
 
             if (facturaId != "")
@@ -137,7 +142,7 @@ namespace FrbaHotel.FacturarEstadia
                 return;
             }
             SqlCommand sinChekOut = Database.consultaCrear("select DATEDIFF(DAY,Estadia_CheckInUsuarioID,Estadia_CheckOutUsuarioID) from rip.Estadias join rip.Reservas on Estadia_ReservaID=Reserva_ID where Reserva_ID=@reserva");
-            sinChekOut.Parameters.AddWithValue("@reserva", CodReserva.Text);
+            sinChekOut.Parameters.AddWithValue("@reserva", int.Parse(CodReserva.Text));
             string chekOut = Database.consultaObtenerValor(sinChekOut);
 
             if (chekOut =="")

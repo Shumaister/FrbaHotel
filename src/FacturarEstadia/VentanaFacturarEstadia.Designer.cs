@@ -77,6 +77,7 @@
             // CodReserva
             // 
             this.CodReserva.Location = new System.Drawing.Point(122, 16);
+            this.CodReserva.MaxLength = 13;
             this.CodReserva.Name = "CodReserva";
             this.CodReserva.Size = new System.Drawing.Size(100, 20);
             this.CodReserva.TabIndex = 2;
@@ -100,6 +101,7 @@
             this.dataConsumibles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataConsumibles.Location = new System.Drawing.Point(9, 16);
             this.dataConsumibles.Name = "dataConsumibles";
+            this.dataConsumibles.ReadOnly = true;
             this.dataConsumibles.RowHeadersVisible = false;
             this.dataConsumibles.Size = new System.Drawing.Size(403, 227);
             this.dataConsumibles.TabIndex = 19;
