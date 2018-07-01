@@ -125,17 +125,20 @@ namespace FrbaHotel.GenerarModificacionReserva
         private void irAPaso2()
         {
             groupBox2.Enabled = true;
-
+            
+            string anterior = Reserva.Regimen;
+            comboBoxCargar(cbxRegimenEstadiaObligatorio, Database.ReservaObtenerEstadiasDeHotel(Reserva.Hotel.id));
+            this.cbxRegimenEstadiaObligatorio.Items.Insert(0, "Seleccione");
+            Reserva.Regimen = anterior;
+    
             if (Reserva.Regimen != "Seleccione")
             {
                 this.cbxRegimenEstadiaObligatorio.Enabled = false;
-                //this.cbxRegimenEstadiaObligatorio.Items.Add(this.cbxRegimenEstadia.SelectedItem);
+                this.cbxRegimenEstadiaObligatorio.SelectedIndex = this.cbxRegimenEstadia.FindStringExact(Reserva.Regimen);
             }
             else
             {
-                comboBoxCargar(cbxRegimenEstadiaObligatorio, Database.ReservaObtenerEstadiasDeHotel(Reserva.Hotel.id));
-                this.cbxRegimenEstadiaObligatorio.Items.Insert(0, "Seleccione");
-                this.cbxRegimenEstadiaObligatorio.SelectionStart = 0;
+                this.cbxRegimenEstadiaObligatorio.SelectedIndex = 0;
             }
 
             ActualizarPrecio();
@@ -155,15 +158,22 @@ namespace FrbaHotel.GenerarModificacionReserva
             else
                 precioBase = Database.ReservaObtenerPrecioBase(Reserva.Regimen);
 
-            this.lblTipoRegimen.Text = "U$S " + precioBase;
+            this.lblTipoRegimen.Text = "U$S " + precioBase + " (" + Reserva.Regimen + ")";
 
-            double recargaHotel = Database.HotelObtenerCantidadEstrellasHotelPorID(Reserva.Hotel.id) * 42.00;
+            double recargaHotel = Database.HotelObtenerCantidadEstrellasHotelPorID(Reserva.Hotel.id);
+            double precioHab = Database.HabitacionObtenerPrecioBaseByTipo(Reserva.Habitaciones[0].tipoHabitacion);
 
             this.lblCantHabi.Text = CantidadDeHabitacionesNecesarias.ToString();
-            this.lblPrecioHab.Text = cbxTipoHabitacion.SelectedItem.ToString();
-            this.lblrecargahotel.Text = Database.HotelObtenerCantidadEstrellasHotelPorID(Reserva.Hotel.id).ToString()+" * 42";
+            this.lblPrecioHab.Text = "U$S " + precioHab + " (" + cbxTipoHabitacion.SelectedItem.ToString() + ")";
+            this.lblrecargahotel.Text = Database.HotelObtenerCantidadEstrellasHotelPorID(Reserva.Hotel.id).ToString();
 
-            return precioBase * (CantidadDeHabitacionesNecesarias * CantidadPersonasSegunTipoHabitacion()) * recargaHotel;
+            double precioxdia= (precioBase * (precioHab * Reserva.CantidadHuespedes) * recargaHotel);
+            this.lblpreciodiahab.Text = "U$S " + precioxdia.ToString();
+            
+            int dias =(Reserva.FechaFin - Reserva.FechaInicio).Days;
+            this.lblcantidaddias.Text = dias.ToString();
+
+            return precioxdia*dias;
         }
 
         private void irAPaso3()
@@ -219,7 +229,6 @@ namespace FrbaHotel.GenerarModificacionReserva
         private void btnCheckear_Click(object sender, EventArgs e)
         {
             OcultarErrores();
-
 
             if (this.funcion == "ModificaCliente")
             {
@@ -458,7 +467,18 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         }
 
+        private void label17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
         #endregion
+
+
 
     }
 }

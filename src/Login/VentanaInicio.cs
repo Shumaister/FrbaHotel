@@ -31,14 +31,14 @@ namespace FrbaHotel.Login
         {
             this.Hide();
             VentanaLogin ventanaLogin = new VentanaLogin();
-            ventanaLogin.Show();
+            ventanaLogin.ShowDialog();
         }
 
         private void btnCliente_Click(object sender, EventArgs e)
         {
             this.Hide();
             VentanaMenuPrincipalClientes ventanaMenu = new VentanaMenuPrincipalClientes();
-            ventanaMenu.Show();
+            ventanaMenu.ShowDialog();
         }
 
     }
