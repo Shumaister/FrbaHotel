@@ -1351,6 +1351,13 @@ namespace FrbaHotel
             return consultaObtenerValor(consulta);
         }
 
+        public static string HabitacionTipobyID(string p)
+        {
+            SqlCommand consulta = consultaCrear("select TipoHabitacion_Descripcion from rip.TiposHabitaciones where TipoHabitacion_ID = @tipo");
+            consulta.Parameters.AddWithValue("@tipo", p);
+            return consultaObtenerValor(consulta);
+        }
+
         public static void habitacionModificar(Habitacion habitacion)
         {
             SqlCommand consulta = consultaCrear("UPDATE RIP.Habitaciones SET Habitacion_Numero = @Numero, Habitacion_Piso = @Piso, Habitacion_Frente = @Frente, Habitacion_Descripcion = @Descripcion, Habitacion_Estado = @Estado WHERE Habitacion_ID = @ID");
@@ -1652,8 +1659,22 @@ namespace FrbaHotel
             R.FechaCreacion = DateTime.Parse(linea.ItemArray[4].ToString());
             R.FechaInicio = DateTime.Parse(linea.ItemArray[5].ToString());
             R.FechaFin = DateTime.Parse(linea.ItemArray[6].ToString());
+            
             // te debo las habitaciones
-            R.Regimen = regimenObtenerDescripcion(linea.ItemArray[8].ToString());
+            SqlCommand ledezma = consultaCrear("select HabitacionNoDisponible_HabitacionID from rip.HabitacionesNoDisponibles where HabitacionNoDisponible_ReservaID = @IdReserva");
+            ledezma.Parameters.AddWithValue("@IdReserva", numeroReserva);
+            List<string> idHABs = consultaObtenerLista(ledezma);
+            
+            List<Habitacion> habitaciones = new List<Habitacion>();
+            for (int i = 0; i < idHABs.Count; i++)
+            {
+                Habitacion h = new Habitacion(idHABs[i], linea.ItemArray[7].ToString());
+                habitaciones.Add(h);
+            }
+
+            R.Habitaciones = habitaciones;
+
+                R.Regimen = regimenObtenerDescripcion(linea.ItemArray[8].ToString());
             R.Usuario = new Usuario(usuarioObtenerNombreByID(linea.ItemArray[10].ToString()));
 
             return R;
