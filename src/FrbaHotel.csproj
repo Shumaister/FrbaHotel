@@ -127,6 +127,7 @@
       <DependentUpon>VentanaCancelarReserva.cs</DependentUpon>
     </Compile>
     <Compile Include="Clases\Cliente.cs" />
+    <Compile Include="Clases\Consumido.cs" />
     <Compile Include="Clases\EnumsGenericos.cs" />
     <Compile Include="Clases\Reserva.cs" />
     <Compile Include="Clases\Database.cs" />
@@ -201,6 +202,12 @@
     </Compile>
     <Compile Include="RegistrarConsumible\VentanaRegistrarConsumible.Designer.cs">
       <DependentUpon>VentanaRegistrarConsumible.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrarConsumible\VentanaRegistrarConsumibles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistrarConsumible\VentanaRegistrarConsumibles.Designer.cs">
+      <DependentUpon>VentanaRegistrarConsumibles.cs</DependentUpon>
     </Compile>
     <Compile Include="RegistrarEstadia\VentanaRegistrarEgreso.cs">
       <SubType>Form</SubType>
@@ -311,6 +318,9 @@
     </Compile>
     <EmbeddedResource Include="RegistrarConsumible\VentanaRegistrarConsumible.resx">
       <DependentUpon>VentanaRegistrarConsumible.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistrarConsumible\VentanaRegistrarConsumibles.resx">
+      <DependentUpon>VentanaRegistrarConsumibles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RegistrarEstadia\VentanaRegistrarEgreso.resx">
       <DependentUpon>VentanaRegistrarEgreso.cs</DependentUpon>
