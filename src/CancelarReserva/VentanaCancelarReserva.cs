@@ -45,7 +45,6 @@ namespace FrbaHotel.CancelarReserva
             controladorError.Clear();
         }
 
-
         private void btnCancelarReserva_Click(object sender, EventArgs e)
         {
             if (ventanaCamposEstanCompletos(this.groupBox1, controladorError))
@@ -54,6 +53,8 @@ namespace FrbaHotel.CancelarReserva
                 int estadoReserva = (Usuario.nombre == "guest") ? 4 : 3; // 4-cancelada cliente - 3-cancelada recepcion
                 Reserva Reserva = Database.ReservaObtenerById(this.tbxNumeroReserva.Text);
                 Database.ReservaCancelar(Reserva, motivo, Usuario.id, estadoReserva);
+                MessageBox.Show("Se a canelado con exito su reservar con codigo: " + this.tbxNumeroReserva.Text, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
             }
         }
 

@@ -42,13 +42,34 @@ namespace FrbaHotel.GenerarModificacionReserva
         public VentanaGenerarReserva(Reserva reserva, string p)
         {
             InitializeComponent();
-
             this.Reserva = reserva;
             this.funcion = p;
+            
+            comboBoxCargar(cbxHoteles, Database.reservaObtenerHoteles());
+
+            OcultarErrores();
+            groupBox3.Enabled = false;
+            groupBox2.Enabled = false;
+            
+            cargarReservaAModificar();
         }
 
         #region FuncionesAuxiliares
 
+        private void cargarReservaAModificar()
+        {
+
+            this.cbxHoteles.SelectedIndex = cbxHoteles.FindStringExact(Database.reservaObtenerHotelbyID(Reserva.Hotel.id));
+            // poner el tipo de hbaitacion de la reserva    cbxTipoHabitacion --- ACA HAY QUE CAMBIAR TODA LA LOGIA DE LA CONSULTA PARA MODIFICAAAAAAR
+            this.tbxCantidadHuespedes.Text = Reserva.CantidadHuespedes.ToString();
+            this.lblFechaFin.Text = Reserva.FechaFin.ToString();
+            this.lblFechaInicio.Text = Reserva.FechaInicio.ToString();
+            this.cbxRegimenEstadia.SelectedIndex = cbxRegimenEstadia.FindStringExact(Database.reservaObtenerRegimen(Reserva.Codigo));
+            // metodo de reserva elegir
+
+        }
+
+       
         private void LimpiarPaso1()
         {
             this.tbxCantidadHuespedes.Clear();

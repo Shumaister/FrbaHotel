@@ -56,6 +56,11 @@ namespace FrbaHotel.GenerarModificacionReserva
                         this.lblErrorIngresoReserva.Text = "No es posible modificar esta reserva. Paso el tiempo limite.";
                     }
                 }
+                else
+                {
+                    this.lblErrorIngresoReserva.Visible = true;
+                    this.lblErrorIngresoReserva.Text = "No existe este numero de reserva.";
+                }
             }
         }
 
