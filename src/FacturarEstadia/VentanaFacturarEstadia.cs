@@ -22,7 +22,7 @@ namespace FrbaHotel.FacturarEstadia
         public VentanaFacturarEstadia()
         {
             InitializeComponent();
-
+            comboBox1.SelectedIndex = 0;
             sub.Text = "";
         }
 
@@ -42,12 +42,13 @@ namespace FrbaHotel.FacturarEstadia
             
             SqlCommand consulta = Database.consultaCrear("select Consumible_Descripcion 'Consumible',Consumido_Cantidad'Cantidad',Consumible_Precio'Precio',Consumido_Cantidad*Consumible_Precio'Total' from rip.Consumidos join rip.Consumibles on Consumible_ID=Consumido_ConsumibleID join rip.Estadias on Estadia_ID=Consumido_EstadiaID join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva");
             consulta.Parameters.AddWithValue("@reserva", CodReserva.Text);
-            SqlCommand cantidadDeConsumibles = Database.consultaCrear("select Count(Consumible_Descripcion) from rip.Consumidos join rip.Consumibles on Consumible_ID=Consumido_ConsumibleID join rip.Estadias on Estadia_ID=Consumido_EstadiaID join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva");
-            cantidadDeConsumibles.Parameters.AddWithValue("@reserva", CodReserva.Text);
-            string cantidadConsumibles = Database.consultaObtenerValor(cantidadDeConsumibles);
-
 
             dataGridViewCargar(dataConsumibles, Database.consultaObtenerTabla(consulta));
+
+            SqlCommand consultaDos = Database.consultaCrear("select isnull(DATEDIFF(DAY,Estadia_CheckInUsuarioID,Estadia_CheckOutUsuarioID),0) from rip.Estadias join rip.Reservas on Estadia_ReservaID=Reserva_ID where Reserva_ID=@reserva");
+            consultaDos.Parameters.AddWithValue("@reserva", CodReserva.Text);
+            string diasUtilizado = Database.consultaObtenerValor(consultaDos);
+            diasUtilizados.Text = diasUtilizado;
 
             SqlCommand reservaExistente = Database.consultaCrear("select Reserva_ID from rip.Reservas where Reserva_ID=@reserva");
             reservaExistente.Parameters.AddWithValue("@reserva", CodReserva.Text);
@@ -120,19 +121,76 @@ namespace FrbaHotel.FacturarEstadia
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (CodReserva.Text.Trim() == "")
+            {
+                MessageBox.Show("Faltan completar campos obligatorios", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            SqlCommand reservaYaPaga = Database.consultaCrear("select Factura_ID from rip.Facturas join rip.Estadias on Factura_EstadiaID=Estadia_ID join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva");
+            reservaYaPaga.Parameters.AddWithValue("@reserva", CodReserva.Text);
+            string facturaId = Database.consultaObtenerValor(reservaYaPaga);
+
+            if (facturaId != "")
+            {
+                MessageBox.Show("Factura ya paga", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            SqlCommand sinChekOut = Database.consultaCrear("select DATEDIFF(DAY,Estadia_CheckInUsuarioID,Estadia_CheckOutUsuarioID) from rip.Estadias join rip.Reservas on Estadia_ReservaID=Reserva_ID where Reserva_ID=@reserva");
+            sinChekOut.Parameters.AddWithValue("@reserva", CodReserva.Text);
+            string chekOut = Database.consultaObtenerValor(sinChekOut);
+
+            if (chekOut =="")
+            {
+                MessageBox.Show("Sin ChekOut", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             SqlCommand numeroFactura = Database.consultaCrear("select top 1 Factura_ID from rip.Facturas order by 1 desc");
             string idFactura = Database.consultaObtenerValor(numeroFactura);
             int nuevaFactura = int.Parse(idFactura) + 1;
-            int diasNoUtilizados = int.Parse(DiasRegimen.Text) - int.Parse(TextDiasUtilizados.Text);      
+            int diasNoUtilizados = int.Parse(DiasRegimen.Text) - int.Parse(diasUtilizados.Text);
+            int index = comboBox1.SelectedIndex;
+            switch (index)
 
-                  SqlCommand consulta = Database.consultaCrear("insert into rip.Facturas(Factura_ID,Factura_EstadiaID,Factura_DiasUtilizados,Factura_DiasNoUtilizados,Factura_Fecha,Factura_MontoTotal)values(@NumeroFactura,(select Estadia_ID from rip.Estadias join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva),@diasUtilizados,@diasNoUtilizados,getdate(),@Total)");
-                  consulta.Parameters.AddWithValue("@NumeroFactura",nuevaFactura);
-                  consulta.Parameters.AddWithValue("@reserva", int.Parse(CodReserva.Text));
-                  consulta.Parameters.AddWithValue("@diasUtilizados",int.Parse(TextDiasUtilizados.Text));
-                  consulta.Parameters.AddWithValue("@diasNoUtilizados",diasNoUtilizados);
-                  consulta.Parameters.AddWithValue("@Total",Convert.ToDecimal(TotalNumero.Text));
-                  Database.consultaEjecutar(consulta);
+            { 
+                case 0: {
+
+                    SqlCommand InsertFactura = Database.consultaCrear("insert into rip.Facturas(Factura_ID,Factura_EstadiaID,Factura_DiasUtilizados,Factura_DiasNoUtilizados,Factura_Fecha,Factura_MontoTotal,Factura_FormaPagoID)values(@NumeroFactura,(select Estadia_ID from rip.Estadias join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva),@diasUtilizados,@diasNoUtilizados,getdate(),@Total,2)");
+                  InsertFactura.Parameters.AddWithValue("@NumeroFactura",nuevaFactura);
+                  InsertFactura.Parameters.AddWithValue("@reserva", int.Parse(CodReserva.Text));
+                  InsertFactura.Parameters.AddWithValue("@diasUtilizados",int.Parse(diasUtilizados.Text));
+                  InsertFactura.Parameters.AddWithValue("@diasNoUtilizados",diasNoUtilizados);
+                  InsertFactura.Parameters.AddWithValue("@Total",Convert.ToDecimal(TotalNumero.Text));
+                  Database.consultaEjecutar(InsertFactura);
+                
+                };
+                    break;
+
+                case 1:
+                    {
+
+                        SqlCommand InsertFactura = Database.consultaCrear("insert into rip.Facturas(Factura_ID,Factura_EstadiaID,Factura_DiasUtilizados,Factura_DiasNoUtilizados,Factura_Fecha,Factura_MontoTotal,Factura_FormaPagoID)values(@NumeroFactura,(select Estadia_ID from rip.Estadias join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva),@diasUtilizados,@diasNoUtilizados,getdate(),@Total,1)");
+                        InsertFactura.Parameters.AddWithValue("@NumeroFactura", nuevaFactura);
+                        InsertFactura.Parameters.AddWithValue("@reserva", int.Parse(CodReserva.Text));
+                        InsertFactura.Parameters.AddWithValue("@diasUtilizados", int.Parse(diasUtilizados.Text));
+                        InsertFactura.Parameters.AddWithValue("@diasNoUtilizados", diasNoUtilizados);
+                        InsertFactura.Parameters.AddWithValue("@Total", Convert.ToDecimal(TotalNumero.Text));
+                        Database.consultaEjecutar(InsertFactura);
+
+                    };
+                    break;
+            }
+
+
+                  SqlCommand insertItemFacturas = Database.consultaCrear("insert into rip.ItemsFacturas(ItemFactura_FacturaID,ItemFactura_ConsumidoID,ItemFactura_Cantidad) select @idFactura,Consumido_ID,Consumido_Cantidad from rip.Consumidos join rip.Consumibles on Consumible_ID=Consumido_ConsumibleID join rip.Estadias on Estadia_ID=Consumido_EstadiaID join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva");
+                  insertItemFacturas.Parameters.AddWithValue("@idFactura", nuevaFactura);
+                  insertItemFacturas.Parameters.AddWithValue("@reserva", CodReserva.Text);
+                  Database.consultaEjecutar(insertItemFacturas);
+
+
+                  MessageBox.Show("Pago realizado correctamente, Factura N°"+nuevaFactura+" ", "Error", MessageBoxButtons.OK);
+
 
         }
     }
