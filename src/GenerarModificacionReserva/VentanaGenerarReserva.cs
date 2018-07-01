@@ -15,6 +15,9 @@ namespace FrbaHotel.GenerarModificacionReserva
 {
     public partial class VentanaGenerarReserva : VentanaBase
     {
+        private string funcion;
+        private string p;
+
         public Reserva Reserva { get; set; }
         private Usuario Usuario { get; set; }
         private int CantidadDeHabitacionesNecesarias { get; set; }
@@ -34,6 +37,14 @@ namespace FrbaHotel.GenerarModificacionReserva
             OcultarErrores();
             groupBox3.Enabled = false;
             groupBox2.Enabled = false;
+        }
+
+        public VentanaGenerarReserva(Reserva reserva, string p)
+        {
+            InitializeComponent();
+
+            this.Reserva = reserva;
+            this.funcion = p;
         }
 
         #region FuncionesAuxiliares
@@ -261,7 +272,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         private void btnClienteExistente_Click(object sender, EventArgs e)
         {
-            new VentanaCliente(this, "Buscar").ShowDialog();
+            new VentanaCliente(this, "BuscarDesdeReserva").ShowDialog();
             Saludo();
         }
 

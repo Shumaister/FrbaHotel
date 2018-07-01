@@ -71,7 +71,7 @@ namespace FrbaHotel.CancelarReserva
                 {
                     if (Database.ReservaEsFechaMenor(numeroReserva, ayer))
                     {
-                        if (Database.ReservaEstadoValidoParaCancelar(numeroReserva))
+                        if (Database.ReservaEstadoValidoParaCancelarModificar(numeroReserva))
                         {
                             Reserva reserva = Database.ReservaObtenerById(numeroReserva);
                             this.lblUsuario.Text = reserva.Usuario.nombre;
@@ -91,7 +91,7 @@ namespace FrbaHotel.CancelarReserva
                 else
                 {
                     this.lblErrorIngresoReserva.Visible = true;
-                    this.lblErrorIngresoReserva.Text = "No existe este este numero de reserva.";
+                    this.lblErrorIngresoReserva.Text = "No existe este numero de reserva.";
                 }
                     
                 this.tbxNumeroReserva.Enabled = false;

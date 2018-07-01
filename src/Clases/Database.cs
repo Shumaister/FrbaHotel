@@ -1738,7 +1738,7 @@ namespace FrbaHotel
 
         }
 
-        public static bool ReservaEstadoValidoParaCancelar(string numeroReserva)
+        public static bool ReservaEstadoValidoParaCancelarModificar(string numeroReserva)
         {
             SqlCommand consulta = consultaCrear("select * from rip.Reservas r inner join rip.EstadosReservas e on e.EstadoReserva_ID = r.Reserva_EstadoReservaID where r.Reserva_ID = @idr AND (e.EstadoReserva_Descripcion = 'Reserva correcta' OR e.EstadoReserva_Descripcion = 'Reserva modificada')");
             consulta.Parameters.AddWithValue("@idr", numeroReserva);

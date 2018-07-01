@@ -47,8 +47,8 @@ namespace FrbaHotel.Menus
 
         private void modificarReservaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Puse la ventana en desarrollo en la carpeta AbmRegimen ya que va a ser el unico que la va
-            //utilizar, no hace falta tenerlo en una carpeta aparte
+            IngresarNumeroReservaModificar ven = new IngresarNumeroReservaModificar();
+            ven.ShowDialog(); 
         }
 
         private void cancelarReservaToolStripMenuItem_Click(object sender, EventArgs e)
