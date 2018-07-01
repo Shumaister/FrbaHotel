@@ -54,7 +54,6 @@ namespace FrbaHotel.ListadoEstadistico
                 {
                     case 0:
                         {
-
                             SqlCommand consulta = Database.consultaCrear("select top 5 CONCAT(Domicilio_Ciudad,' ',Domicilio_Calle,' ',Domicilio_NumeroCalle)'Hotel',count(Reserva_ID)'Cantidad de reservas canceladas' from rip.Reservas join rip.ReservasCanceladas on Reserva_ID=ReservaCancelada_RerservaID join rip.Hoteles on Hotel_ID=Reserva_HotelID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID where YEAR(ReservaCancelada_Fecha)=@anio and DATEPART(QUARTER,ReservaCancelada_Fecha)=@trimestre group by Domicilio_NumeroCalle,Domicilio_Ciudad,domicilio_calle order by 2 desc");
                             consulta.Parameters.AddWithValue("@anio", anio);
                             consulta.Parameters.AddWithValue("@trimestre", trimestre);
