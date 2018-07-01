@@ -15,7 +15,10 @@ namespace FrbaHotel.GenerarModificacionReserva
 {
     public partial class VentanaGenerarReserva : VentanaBase
     {
-        private Reserva Reserva { get; set; }
+        private string funcion;
+        private string p;
+
+        public Reserva Reserva { get; set; }
         private Usuario Usuario { get; set; }
         private int CantidadDeHabitacionesNecesarias { get; set; }
         private List<string> ListaIDHabitaciones { get; set; }
@@ -34,6 +37,14 @@ namespace FrbaHotel.GenerarModificacionReserva
             OcultarErrores();
             groupBox3.Enabled = false;
             groupBox2.Enabled = false;
+        }
+
+        public VentanaGenerarReserva(Reserva reserva, string p)
+        {
+            InitializeComponent();
+
+            this.Reserva = reserva;
+            this.funcion = p;
         }
 
         #region FuncionesAuxiliares
@@ -219,11 +230,6 @@ namespace FrbaHotel.GenerarModificacionReserva
                     irAPaso2();
                 }
             }
-            else
-            {
-                LimpiarPaso1();
-            }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -266,7 +272,8 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         private void btnClienteExistente_Click(object sender, EventArgs e)
         {
-
+            new VentanaCliente(this, "BuscarDesdeReserva").ShowDialog();
+            Saludo();
         }
 
         private void btnConfirmarReserva_Click(object sender, EventArgs e)
@@ -321,7 +328,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 
                 if (personasSinHabitacion <= cantPersPorHab)
                 {
-                    if(personasSinHabitacion != 0)
+                    if(personasSinHabitacion > 0)
                         CantidadDeHabitacionesNecesarias += 1;
                     
                     flag = false;
