@@ -70,7 +70,7 @@ namespace FrbaHotel.FacturarEstadia
                 allInclusivePrecio.Text = "";
 
                 sub.Text = "Subtotal";
-                SqlCommand consultasubtotal = Database.consultaCrear("select sum(Consumido_Cantidad*Consumible_Precio)  from rip.Consumidos join rip.Consumibles on Consumible_ID=Consumido_ConsumibleID join rip.Estadias on Estadia_ID=Consumido_EstadiaID join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva");
+                SqlCommand consultasubtotal = Database.consultaCrear("select isnull(sum(Consumido_Cantidad*Consumible_Precio),0)  from rip.Consumidos join rip.Consumibles on Consumible_ID=Consumido_ConsumibleID join rip.Estadias on Estadia_ID=Consumido_EstadiaID join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva");
                 consultasubtotal.Parameters.AddWithValue("@reserva", Double.Parse(CodReserva.Text));
                 string subtotal = Database.consultaObtenerValor(consultasubtotal);
                 SubTotal.Text = subtotal;
@@ -100,8 +100,7 @@ namespace FrbaHotel.FacturarEstadia
                Decimal diasInt = Convert.ToDecimal(DiasRegimen.Text);
                Decimal regimenPrecioInt = Convert.ToDecimal(RegimenPrecio.Text);
                Decimal subtotalInt = allinclusive;
-               subRegimenPrecio.Text = Convert.ToString((diasInt * regimenPrecioInt) + (subtotalInt ));
-
+               subRegimenPrecio.Text = Convert.ToString((diasInt * regimenPrecioInt) + (subtotalInt ));               
                TotalNumero.Text = Convert.ToString(Convert.ToDecimal(subRegimenPrecio.Text)+ Convert.ToDecimal(subtotal));
             }
             
