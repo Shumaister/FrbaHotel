@@ -1975,7 +1975,7 @@ namespace FrbaHotel
 
         public static string consumidoObtenerEstadiaID(Consumido consumido)
         {
-            SqlCommand consulta = consultaCrear("SELECT Estadia_ID FROM RIP.Estadias WHERE Estadia_ReservaID = @ReservaID");
+            SqlCommand consulta = consultaCrear("SELECT Estadia_ID FROM RIP.Estadias WHERE Estadia_ReservaID = @ReservaID AND Estadia_FechaInicio IS NOT NULL AND Estadia_FechaFin IS NOT NULL");
             consulta.Parameters.AddWithValue("@ReservaID", consumido.reservaCodigo);
             return consultaObtenerValor(consulta);
         }
