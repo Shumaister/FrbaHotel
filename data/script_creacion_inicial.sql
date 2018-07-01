@@ -918,3 +918,7 @@ INSERT INTO RIP.Usuarios_Roles(UsuarioRol_UsuarioID, UsuarioRol_RolID) VALUES ((
 PRINT''
 PRINT '----- Insertando Hoteles para "admin" -----'
 INSERT INTO RIP.Usuarios_Hoteles (UsuarioHotel_HotelID, UsuarioHotel_UsuarioID) SELECT Hotel_ID,(SELECT Usuario_ID FROM RIP.Usuarios WHERE Usuario_Nombre = 'admin') FROM RIP.Hoteles WHERE Hotel_ID = 1 OR Hotel_ID = 2
+
+PRINT''
+PRINT '----- Insertando Formas de pago -----'
+INSERT into rip.FormasPagos(FormaPago_Descripcion) values ('Efectivo'),('Tarjeta de Credito')
