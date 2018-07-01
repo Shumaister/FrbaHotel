@@ -15,6 +15,8 @@ namespace FrbaHotel.AbmCliente
 {
     public partial class VentanaCliente : VentanaBase
     {
+        public VentanaGenerarReserva ventanaGenerarReserva;
+
         public Reserva Reserva { get; set; }
         public VentanaRegistrarIngreso ventanaRegistrarIngreso { get; set; }
         public string funcion { get; set; }
@@ -58,6 +60,20 @@ namespace FrbaHotel.AbmCliente
             InitializeComponent();
             this.funcion = "ABM";
             this.btnGuardarDesdeReserva.Visible = false;
+        }
+
+        public VentanaCliente(VentanaGenerarReserva ventanaGenerarReserva, string p)
+        {
+            InitializeComponent();
+            this.funcion = p;
+            if (funcion == "BuscarDesdeReserva")
+            {
+                pagModificar.Text = "Buscar";
+                tabControl.TabPages.Remove(pagAgregar);
+                tabControl.TabPages.Remove(pagEliminar);
+            }
+
+            this.ventanaGenerarReserva = ventanaGenerarReserva;
         }
 
         #endregion
@@ -175,7 +191,11 @@ namespace FrbaHotel.AbmCliente
                         ventanaRegistrarIngreso.huesped = cliente;
                         this.Hide();
                     }
-                                     
+                }
+                if (funcion == "BuscarDesdeReserva")
+                {
+                    ventanaGenerarReserva.Reserva.Cliente = ventanaCrearClienteParaModificar(e);
+                    this.Hide();
                 }
             }
         }
@@ -258,7 +278,7 @@ namespace FrbaHotel.AbmCliente
                 comboBoxCargar(cbxTipoDocumento, Database.tipoDocumentoObtenerTodosEnLista());
             }
 
-            if (funcion == "Buscar")
+            if (funcion == "Buscar" || funcion == "BuscarDesdeReserva")
             {             
                 comboBoxCargar(cbxFiltroTipoDocumentoModificar, Database.tipoDocumentoFiltroObtenerTodosEnLista());
                 btnFiltrarModificar_Click(sender, e);
@@ -416,7 +436,10 @@ namespace FrbaHotel.AbmCliente
                 Cliente cliente = ventanaCrearClienteParaAgregar();
 
                 if (Database.clienteAgregadoConExito(cliente))
+                {
                     Reserva.Cliente = cliente;
+                    this.Hide();
+                }
             }
         }
 
