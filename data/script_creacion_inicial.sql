@@ -160,7 +160,8 @@ CREATE TABLE [RIP].[Personas] (
 	[Persona_FechaNacimiento] [datetime],
 	[Persona_DomicilioID] [numeric](18,0),
 	[Persona_Telefono] [numeric](18,0),
-	[Persona_Email] [nvarchar](255), 
+	[Persona_Email] [nvarchar](255),
+	[Persona_DatoCorrupto] [bit] DEFAULT 0
 	CONSTRAINT FK_PERSONA_TIPO_DOCUMENTO FOREIGN KEY ([Persona_TipoDocumentoID]) REFERENCES [RIP].[TiposDocumentos] ([TipoDocumento_ID]),
 	CONSTRAINT FK_PERSONA_DOMICILIO FOREIGN KEY ([Persona_DomicilioID]) REFERENCES [RIP].[Domicilios] ([Domicilio_ID])
 	
@@ -224,6 +225,7 @@ CREATE TABLE [RIP].[Clientes] (
 	[Cliente_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[Cliente_PersonaID] [numeric](18,0),
 	[Cliente_Estado] [bit] DEFAULT 1,
+	[Cliente_DatoCorrupto] [bit] DEFAULT 0
 	CONSTRAINT FK_CLIENTES_PERSONA FOREIGN KEY ([Cliente_PersonaID]) REFERENCES [RIP].[Personas] ([Persona_ID])
 )
 PRINT '----- Tabla RIP.Clientes creada -----'
@@ -494,6 +496,7 @@ PRINT '----- Tabla RIP.Estadias creada -----'
 END
 GO
 
+
 IF NOT EXISTS (
 	SELECT 1 
 	FROM INFORMATION_SCHEMA.TABLES 
@@ -511,26 +514,6 @@ CREATE TABLE [RIP].[Huespedes] (
 	CONSTRAINT FK_HUESPED_ESTADIA FOREIGN KEY ([Huesped_EstadiaID]) REFERENCES [RIP].[Estadias] ([Estadia_ID])
 )
 PRINT '----- Tabla RIP.Huespedes creada -----'
-END
-GO
-
-
-IF NOT EXISTS (
-	SELECT 1 
-	FROM INFORMATION_SCHEMA.TABLES 
-	WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND TABLE_NAME = 'Reservas_Habitaciones' 
-	AND TABLE_SCHEMA = 'RIP'
-)
-BEGIN
-CREATE TABLE [RIP].[Reservas_Habitaciones] (
-	[ReservaHabitacion_ReservaID] [numeric](18,0) NOT NULL,
-	[ReservaHabitacion_HabitacionID] [numeric](18,0) NOT NULL,	
-	CONSTRAINT PK_RESERVA_HABITACION PRIMARY KEY ([ReservaHabitacion_ReservaID],[ReservaHabitacion_HabitacionID]),
-	CONSTRAINT FK_RESERVA_HABITACION_ESTADIA_ID FOREIGN KEY ([ReservaHabitacion_ReservaID]) REFERENCES [RIP].[Reservas] ([Reserva_ID]),
-	CONSTRAINT FK_RESERVA_HABITACION_HABITACION_ID FOREIGN KEY ([ReservaHabitacion_HabitacionID]) REFERENCES [RIP].[Habitaciones] ([Habitacion_ID])
-)
-PRINT '----- Tabla RIP.Reservas_Habitaciones creada -----'
 END
 GO
 
@@ -778,19 +761,6 @@ ORDER BY 1
 
 
 PRINT''
-PRINT '----- Realizando inserts tabla RIP.Reservas_Habitaciones -----'
-INSERT INTO RIP.Reservas_Habitaciones (ReservaHabitacion_ReservaID, ReservaHabitacion_HabitacionID)
-SELECT DISTINCT Reserva_Codigo, Habitacion_ID
-FROM GD_Esquema.Maestra g
-JOIN RIP.Domicilios ON Domicilio_NumeroCalle = Hotel_Nro_Calle 
-JOIN RIP.Hoteles ON Domicilio_ID = Hotel_DomicilioID 
-JOIN RIP.Habitaciones h ON Hotel_ID = Habitacion_HotelID
-AND g.Habitacion_Numero = h.Habitacion_Numero
-AND g.Habitacion_Piso = h.Habitacion_Piso
-ORDER BY 1
-
-
-PRINT''
 PRINT '----- Realizando inserts tabla RIP.HabitacionesNoDisponibles -----'
 INSERT INTO RIP.HabitacionesNoDisponibles (HabitacionNoDisponible_ReservaID, HabitacionNoDisponible_HabitacionID, HabitacionNoDisponible_FechaInicio, HabitacionNoDisponible_FechaFin)
 SELECT DISTINCT Reserva_Codigo, Habitacion_ID, Reserva_Fecha_Inicio, Estadia_FechaFin
@@ -802,8 +772,8 @@ JOIN RIP.Habitaciones h ON Hotel_ID = Habitacion_HotelID
 AND g.Habitacion_Numero = h.Habitacion_Numero
 AND g.Habitacion_Piso = h.Habitacion_Piso
 ORDER BY 1
+UPDATE RIP.HabitacionesNoDisponibles SET HabitacionNoDisponible_Finalizada = 1 WHERE HabitacionNoDisponible_FechaFin <= GETDATE()
 
-UPDATE rip.HabitacionesNoDisponibles set HabitacionNoDisponible_Finalizada = 1 where HabitacionNoDisponible_FechaFin <= GETDATE()
 
 PRINT''
 PRINT '----- Realizando inserts tabla RIP.Huespedes -----'

@@ -322,7 +322,7 @@
             this.Controls.Add(this.CodReserva);
             this.Controls.Add(this.CodReservaL);
             this.Name = "VentanaFacturarEstadia";
-            this.Text = "VentanaFacturarEstadia";
+            this.Text = "Facturas - FRBA Hotel ©";
             this.Load += new System.EventHandler(this.VentanaFacturarEstadia_Load);
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.CodReservaL, 0);
