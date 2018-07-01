@@ -60,15 +60,13 @@ namespace FrbaHotel.Login
 
         private void ventanaConfigurarParaRol()
         {
-            lblHotel.Hide();
-            cbxHoteles.Hide();
+            cbxHoteles.Enabled = false;
             this.Show();
         }
 
         private void ventanaConfigurarParaHotel()
         {
-            cbxRoles.Hide();
-            lblRol.Hide();
+            cbxRoles.Enabled = false;
             this.Show();
         }
 
@@ -96,11 +94,6 @@ namespace FrbaHotel.Login
             ventanaConfigurarSesion();
             VentanaMenuPrincipal ventanaMenuPrincipal = new VentanaMenuPrincipal(sesion);
             ventanaMenuPrincipal.Show();
-        }
-
-        private void cbxHoteles_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -18,6 +18,7 @@ using FrbaHotel.ListadoEstadistico;
 using FrbaHotel.FacturarEstadia;
 using FrbaHotel.AbmRegimen;
 using FrbaHotel.RegistrarEstadia;
+using FrbaHotel.MenuPrincipal;
 
 namespace FrbaHotel.Menus
 {
@@ -166,6 +167,11 @@ namespace FrbaHotel.Menus
         {
             this.Hide();
             new VentanaLogin().Show();
+        }
+
+        private void menuDetallesDeSesion_Click(object sender, EventArgs e)
+        {
+            new VentanaDetallesDeSesion(sesion).ShowDialog();
         }
     }
 }

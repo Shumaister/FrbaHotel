@@ -194,6 +194,12 @@
     <Compile Include="MenuPrincipal\VentanaCambiarContrasenia.Designer.cs">
       <DependentUpon>VentanaCambiarContrasenia.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenuPrincipal\VentanaDetallesDeSesion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuPrincipal\VentanaDetallesDeSesion.Designer.cs">
+      <DependentUpon>VentanaDetallesDeSesion.cs</DependentUpon>
+    </Compile>
     <Compile Include="MenuPrincipal\VentanaMenuPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -311,6 +317,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal\VentanaCambiarContrasenia.resx">
       <DependentUpon>VentanaCambiarContrasenia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuPrincipal\VentanaDetallesDeSesion.resx">
+      <DependentUpon>VentanaDetallesDeSesion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal\VentanaMenuPrincipal.resx">
       <DependentUpon>VentanaMenuPrincipal.cs</DependentUpon>

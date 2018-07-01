@@ -39,13 +39,13 @@
             // 
             // logo
             // 
-            this.logo.Location = new System.Drawing.Point(106, 12);
+            this.logo.Location = new System.Drawing.Point(97, 12);
             // 
             // btnIngresarRol
             // 
-            this.btnIngresarRol.Location = new System.Drawing.Point(145, 321);
+            this.btnIngresarRol.Location = new System.Drawing.Point(150, 291);
             this.btnIngresarRol.Name = "btnIngresarRol";
-            this.btnIngresarRol.Size = new System.Drawing.Size(91, 28);
+            this.btnIngresarRol.Size = new System.Drawing.Size(75, 23);
             this.btnIngresarRol.TabIndex = 12;
             this.btnIngresarRol.Text = "Ingresar";
             this.btnIngresarRol.UseVisualStyleBackColor = true;
@@ -54,7 +54,7 @@
             // cbxRoles
             // 
             this.cbxRoles.FormattingEnabled = true;
-            this.cbxRoles.Location = new System.Drawing.Point(30, 282);
+            this.cbxRoles.Location = new System.Drawing.Point(21, 251);
             this.cbxRoles.Name = "cbxRoles";
             this.cbxRoles.Size = new System.Drawing.Size(322, 21);
             this.cbxRoles.TabIndex = 11;
@@ -63,30 +63,29 @@
             // 
             this.lblRol.AutoSize = true;
             this.lblRol.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.lblRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRol.Location = new System.Drawing.Point(171, 254);
+            this.lblRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRol.Location = new System.Drawing.Point(170, 223);
             this.lblRol.Name = "lblRol";
-            this.lblRol.Size = new System.Drawing.Size(34, 13);
+            this.lblRol.Size = new System.Drawing.Size(29, 13);
             this.lblRol.TabIndex = 10;
             this.lblRol.Text = "Rol  ";
             // 
             // cbxHoteles
             // 
             this.cbxHoteles.FormattingEnabled = true;
-            this.cbxHoteles.Location = new System.Drawing.Point(32, 207);
+            this.cbxHoteles.Location = new System.Drawing.Point(21, 189);
             this.cbxHoteles.Name = "cbxHoteles";
             this.cbxHoteles.Size = new System.Drawing.Size(322, 21);
             this.cbxHoteles.TabIndex = 15;
-            this.cbxHoteles.SelectedIndexChanged += new System.EventHandler(this.cbxHoteles_SelectedIndexChanged);
             // 
             // lblHotel
             // 
             this.lblHotel.AutoSize = true;
             this.lblHotel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.lblHotel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHotel.Location = new System.Drawing.Point(168, 179);
+            this.lblHotel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHotel.Location = new System.Drawing.Point(167, 165);
             this.lblHotel.Name = "lblHotel";
-            this.lblHotel.Size = new System.Drawing.Size(37, 13);
+            this.lblHotel.Size = new System.Drawing.Size(32, 13);
             this.lblHotel.TabIndex = 14;
             this.lblHotel.Text = "Hotel";
             // 
@@ -95,7 +94,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(382, 361);
+            this.ClientSize = new System.Drawing.Size(368, 336);
             this.Controls.Add(this.cbxHoteles);
             this.Controls.Add(this.lblHotel);
             this.Controls.Add(this.btnIngresarRol);

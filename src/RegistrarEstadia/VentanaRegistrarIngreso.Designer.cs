@@ -46,6 +46,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lblClienteApellido = new System.Windows.Forms.Label();
             this.lblTipoDocumento = new System.Windows.Forms.Label();
+            this.lblCantidadHuespedes = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.SuspendLayout();
@@ -80,9 +82,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(9, 190);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(115, 13);
+            this.label2.Size = new System.Drawing.Size(113, 13);
             this.label2.TabIndex = 273;
-            this.label2.Text = "Huespedes registrados";
+            this.label2.Text = "Huespedes a registrar:";
             // 
             // label1
             // 
@@ -226,11 +228,31 @@
             this.lblTipoDocumento.TabIndex = 309;
             this.lblTipoDocumento.Text = "Cliente tipo documento";
             // 
+            // lblCantidadHuespedes
+            // 
+            this.lblCantidadHuespedes.AutoSize = true;
+            this.lblCantidadHuespedes.Location = new System.Drawing.Point(128, 190);
+            this.lblCantidadHuespedes.Name = "lblCantidadHuespedes";
+            this.lblCantidadHuespedes.Size = new System.Drawing.Size(19, 13);
+            this.lblCantidadHuespedes.TabIndex = 310;
+            this.lblCantidadHuespedes.Text = "N°";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(163, 190);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(132, 13);
+            this.label9.TabIndex = 311;
+            this.label9.Text = "(El cliente ya esta incluido)";
+            // 
             // VentanaRegistrarIngreso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(519, 378);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.lblCantidadHuespedes);
             this.Controls.Add(this.lblTipoDocumento);
             this.Controls.Add(this.lblClienteApellido);
             this.Controls.Add(this.label5);
@@ -271,6 +293,8 @@
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.lblClienteApellido, 0);
             this.Controls.SetChildIndex(this.lblTipoDocumento, 0);
+            this.Controls.SetChildIndex(this.lblCantidadHuespedes, 0);
+            this.Controls.SetChildIndex(this.label9, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.ResumeLayout(false);
@@ -298,5 +322,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblClienteApellido;
         private System.Windows.Forms.Label lblTipoDocumento;
+        private System.Windows.Forms.Label lblCantidadHuespedes;
+        private System.Windows.Forms.Label label9;
     }
 }

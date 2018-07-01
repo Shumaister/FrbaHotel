@@ -113,11 +113,11 @@
             this.label1.TabIndex = 267;
             this.label1.Text = "Usuario";
             // 
-            // VentanaAjustesDeCuenta
+            // VentanaCambiarContrasenia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(309, 261);
+            this.ClientSize = new System.Drawing.Size(324, 261);
             this.Controls.Add(this.tbxNombreUsuario);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label32);
@@ -125,8 +125,8 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.btnGuardarContrasenia);
-            this.Name = "VentanaAjustesDeCuenta";
-            this.Text = "Ajustes de Cuenta - FRBA Hotel ©";
+            this.Name = "VentanaCambiarContrasenia";
+            this.Text = "Cambiar contraseña - FRBA Hotel ©";
             this.Load += new System.EventHandler(this.VentanaAjustesDeCuenta_Load);
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.btnGuardarContrasenia, 0);
