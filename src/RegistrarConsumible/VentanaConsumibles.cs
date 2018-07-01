@@ -36,6 +36,11 @@ namespace FrbaHotel.RegistrarConsumible
                 consumido.numeroHabitacion = cbxHabitacion.SelectedItem.ToString();
                 consumido.hotelID = sesion.hotel.id;
                 consumido.estadiaID = Database.consumidoObtenerEstadiaID(consumido);
+                if (consumido.estadiaID == "")
+                {
+                    ventanaInformarError("La estadia aun no tiene registrado el ingreso o el egreso");
+                    return;
+                }
                 if (Database.consumidoTodosRegistradosParaEstadia(consumido))
                 {
                     ventanaInformarError("Los consumibles ya fueron registrados");
