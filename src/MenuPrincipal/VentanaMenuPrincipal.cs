@@ -144,7 +144,7 @@ namespace FrbaHotel.Menus
 
         private void menuFacturas_Click(object sender, EventArgs e)
         {
-            new VentanaFacturarEstadia().ShowDialog();
+            new VentanaFacturarEstadia(sesion).ShowDialog();
         }
 
         private void menuRegimenes_Click(object sender, EventArgs e)

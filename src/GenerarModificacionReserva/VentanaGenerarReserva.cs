@@ -31,24 +31,43 @@ namespace FrbaHotel.GenerarModificacionReserva
             Reserva = new Reserva();
             Usuario = null;
             this.logo.Visible = false;
-            
+            this.funcion = "Crear";
+
             comboBoxCargar(cbxHoteles, Database.reservaObtenerHoteles());
             
             OcultarErrores();
             groupBox3.Enabled = false;
             groupBox2.Enabled = false;
-        }
+                    }
 
         public VentanaGenerarReserva(Reserva reserva, string p)
         {
             InitializeComponent();
-
             this.Reserva = reserva;
             this.funcion = p;
+            
+            comboBoxCargar(cbxHoteles, Database.reservaObtenerHoteles());
+
+            OcultarErrores();
+            groupBox3.Enabled = false;
+            groupBox2.Enabled = false;
+            
+            cargarReservaAModificar();
         }
 
         #region FuncionesAuxiliares
 
+        private void cargarReservaAModificar()
+        {
+            this.cbxHoteles.SelectedIndex = cbxHoteles.FindStringExact(Database.reservaObtenerHotelbyID(Reserva.Hotel.id));
+            this.cbxTipoHabitacion.SelectedIndex = cbxTipoHabitacion.FindStringExact(Database.HabitacionTipobyID(Reserva.Habitaciones[0].tipoHabitacion));
+            this.tbxCantidadHuespedes.Text = Reserva.CantidadHuespedes.ToString();
+            this.lblFechaFin.Text = Reserva.FechaFin.ToString();
+            this.lblFechaInicio.Text = Reserva.FechaInicio.ToString();
+            this.cbxRegimenEstadia.SelectedIndex = cbxRegimenEstadia.FindStringExact(Database.reservaObtenerRegimen(Reserva.Codigo));
+        }
+
+       
         private void LimpiarPaso1()
         {
             this.tbxCantidadHuespedes.Clear();
@@ -201,35 +220,49 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             OcultarErrores();
 
-            if (CamposCompletos())
+
+            if (this.funcion == "ModificaCliente")
             {
-                if (EsEstadiaValida())
+                ModificarReserva();
+            }
+            else
+            {
+                if (CamposCompletos())
                 {
-                    Reserva.Habitaciones = new List<Habitacion>();
-                    string tipoHabi = Database.HabitacionTipobyDescripcion(cbxTipoHabitacion.SelectedItem.ToString());
-                    for (int i = 0; i < CantidadDeHabitacionesNecesarias; i++)
+                    if (EsEstadiaValida())
                     {
-                        Habitacion ha = new Habitacion();
-                        ha.id = ListaIDHabitaciones[i];
-                        ha.tipoHabitacion = tipoHabi;
-                        Reserva.Habitaciones.Add(ha);
+                        Reserva.Habitaciones = new List<Habitacion>();
+                        string tipoHabi = Database.HabitacionTipobyDescripcion(cbxTipoHabitacion.SelectedItem.ToString());
+                        for (int i = 0; i < CantidadDeHabitacionesNecesarias; i++)
+                        {
+                            Habitacion ha = new Habitacion();
+                            ha.id = ListaIDHabitaciones[i];
+                            ha.tipoHabitacion = tipoHabi;
+                            Reserva.Habitaciones.Add(ha);
+                        }
+
+                        Reserva.FechaInicio = calendarInicio.SelectionStart;
+                        Reserva.FechaFin = calendarFin.SelectionStart;
+
+                        Reserva.CantidadHuespedes = int.Parse(this.tbxCantidadHuespedes.Text.Trim());
+
+                        Reserva.Regimen = cbxRegimenEstadia.SelectedItem.ToString();
+
+                        Reserva.Hotel = new Hotel(IdHotel);
+
+                        lblResumenReserva.Text = "Para la cantidad de " + Reserva.CantidadHuespedes + " huespedes,\nCon fecha inicio: " + Reserva.FechaInicio.ToShortDateString() + " con fecha fin: " + Reserva.FechaFin.ToShortDateString() + "\nNecesitara " + CantidadDeHabitacionesNecesarias.ToString() + " habitaciones " + cbxTipoHabitacion.SelectedItem.ToString();
+
+                        groupBox1.Enabled = false;
+                        irAPaso2();
                     }
-
-                    Reserva.FechaInicio = calendarInicio.SelectionStart;
-                    Reserva.FechaFin = calendarFin.SelectionStart;
-                    
-                    Reserva.CantidadHuespedes = int.Parse(this.tbxCantidadHuespedes.Text.Trim());
-
-                    Reserva.Regimen= cbxRegimenEstadia.SelectedItem.ToString();
-
-                    Reserva.Hotel = new Hotel(IdHotel);
-
-                    lblResumenReserva.Text = "Para la cantidad de " + Reserva.CantidadHuespedes + " huespedes,\nCon fecha inicio: " + Reserva.FechaInicio.ToShortDateString() + " con fecha fin: " + Reserva.FechaFin.ToShortDateString() +"\nNecesitara "+CantidadDeHabitacionesNecesarias.ToString()+" habitaciones "+cbxTipoHabitacion.SelectedItem.ToString();
-
-                    groupBox1.Enabled = false;
-                    irAPaso2();
                 }
             }
+        }
+
+        private void ModificarReserva()
+        {
+            //if (EsEstadiaValida())
+            //{ }
         }
 
         private void button1_Click(object sender, EventArgs e)
