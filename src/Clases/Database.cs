@@ -1534,57 +1534,7 @@ namespace FrbaHotel
         }
 
         #endregion
-
-        public static string reservaObtenerHotel(string reservaID, string hotelID)
-        {
-            SqlCommand consulta = Database.consultaCrear("SELECT CONCAT(Domicilio_Pais, '-', Domicilio_Ciudad, '-', Domicilio_Calle, '-', Domicilio_NumeroCalle) FROM RIP.Reservas JOIN RIP.Hoteles ON Reserva_HotelID = Hotel_ID JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID WHERE Reserva_ID = @ID AND Reserva_HotelID = @HotelID");
-            consulta.Parameters.AddWithValue("@ID", reservaID);
-            consulta.Parameters.AddWithValue("@HotelID", hotelID);
-            return Database.consultaObtenerValor(consulta);
-        }
-
-        public static string reservaObtenerRegimen(string reservaID)
-        {
-            SqlCommand consulta = Database.consultaCrear("SELECT Regimen_Descripcion FROM RIP.Reservas JOIN RIP.Regimenes ON Reserva_RegimenID = Regimen_ID WHERE Reserva_ID = @ID");
-            consulta.Parameters.AddWithValue("@ID", reservaID);
-            return Database.consultaObtenerValor(consulta);
-        }
-        
-        public static Reserva reservaObtener(string reservaID, string hotelID)
-        {
-            SqlCommand consulta = Database.consultaCrear("SELECT Reserva_ID, Reserva_ClienteID, Reserva_HotelID, Reserva_FechaInicio, Reserva_FechaFin, TipoHabitacion_Descripcion, Regimen_Descripcion, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Email, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle FROM RIP.Reservas JOIN RIP.Clientes ON Reserva_ClienteID = Cliente_ID JOIN RIP.Personas ON Cliente_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Hoteles ON Reserva_HotelID = Hotel_ID JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID JOIN RIP.Regimenes ON Reserva_RegimenID = Regimen_ID JOIN RIP.TiposHabitaciones ON Reserva_TipoHabitacionID = TipoHabitacion_ID WHERE Reserva_ID = @ID AND Reserva_HotelID = @HotelID");
-            consulta.Parameters.AddWithValue("@ID", reservaID);
-            consulta.Parameters.AddWithValue("@HotelID", hotelID);
-            DataRow fila = Database.consultaObtenerFila(consulta);
-            Reserva reserva = new Reserva();
-            if (fila != null)
-            {
-                reserva.Codigo = ((Decimal)fila["Reserva_ID"]).ToString();
-                reserva.FechaInicio = (DateTime)fila["Reserva_FechaInicio"];
-                reserva.FechaFin = (DateTime)fila["Reserva_FechaFin"];
-                reserva.Regimen = (string)fila["Regimen_Descripcion"];
-                reserva.TipoHabitacion = (string)fila["TipoHabitacion_Descripcion"];
-                reserva.Hotel = new Hotel();
-                reserva.Hotel.id = ((Decimal)fila["Reserva_HotelID"]).ToString();
-                reserva.Hotel.domicilio = new Domicilio();
-                reserva.Hotel.domicilio.pais = (string)fila["Domicilio_Pais"];
-                reserva.Hotel.domicilio.ciudad = (string)fila["Domicilio_Ciudad"];
-                reserva.Hotel.domicilio.calle = (string)fila["Domicilio_Calle"];
-                reserva.Hotel.domicilio.numeroCalle = ((Decimal)fila["Domicilio_NumeroCalle"]).ToString();
-                reserva.Cliente = new Cliente();
-                reserva.Cliente.id = ((Decimal)fila["Reserva_ClienteID"]).ToString();
-                reserva.Cliente.persona = new Persona();
-                reserva.Cliente.persona.nombre = (string)fila["Persona_Nombre"];
-                reserva.Cliente.persona.apellido = (string)fila["Persona_Apellido"];
-                reserva.Cliente.persona.tipoDocumento = (string)fila["TipoDocumento_Descripcion"];
-                reserva.Cliente.persona.numeroDocumento = ((Decimal)fila["Persona_NumeroDocumento"]).ToString();
-                reserva.Cliente.persona.email = (string)fila["Persona_Email"];
-            }
-            else
-                reserva = null;
-            return reserva;
-        }
-        
+    
         #region Reserva
 
         public static List<string> reservaObtenerHoteles()
@@ -1744,6 +1694,56 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@idr", numeroReserva);
             return (consultaObtenerValor(consulta) != "");
         }
+        
+        public static string reservaObtenerHotel(string reservaID, string hotelID)
+        {
+            SqlCommand consulta = Database.consultaCrear("SELECT CONCAT(Domicilio_Pais, '-', Domicilio_Ciudad, '-', Domicilio_Calle, '-', Domicilio_NumeroCalle) FROM RIP.Reservas JOIN RIP.Hoteles ON Reserva_HotelID = Hotel_ID JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID WHERE Reserva_ID = @ID AND Reserva_HotelID = @HotelID");
+            consulta.Parameters.AddWithValue("@ID", reservaID);
+            consulta.Parameters.AddWithValue("@HotelID", hotelID);
+            return Database.consultaObtenerValor(consulta);
+        }
+
+        public static string reservaObtenerRegimen(string reservaID)
+        {
+            SqlCommand consulta = Database.consultaCrear("SELECT Regimen_Descripcion FROM RIP.Reservas JOIN RIP.Regimenes ON Reserva_RegimenID = Regimen_ID WHERE Reserva_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", reservaID);
+            return Database.consultaObtenerValor(consulta);
+        }
+
+        public static Reserva reservaObtener(string reservaID, string hotelID)
+        {
+            SqlCommand consulta = Database.consultaCrear("SELECT Reserva_ID, Reserva_ClienteID, Reserva_HotelID, Reserva_FechaInicio, Reserva_FechaFin, TipoHabitacion_Descripcion, Regimen_Descripcion, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Email, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle FROM RIP.Reservas JOIN RIP.Clientes ON Reserva_ClienteID = Cliente_ID JOIN RIP.Personas ON Cliente_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Hoteles ON Reserva_HotelID = Hotel_ID JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID JOIN RIP.Regimenes ON Reserva_RegimenID = Regimen_ID JOIN RIP.TiposHabitaciones ON Reserva_TipoHabitacionID = TipoHabitacion_ID WHERE Reserva_ID = @ID AND Reserva_HotelID = @HotelID");
+            consulta.Parameters.AddWithValue("@ID", reservaID);
+            consulta.Parameters.AddWithValue("@HotelID", hotelID);
+            DataRow fila = Database.consultaObtenerFila(consulta);
+            Reserva reserva = new Reserva();
+            if (fila != null)
+            {
+                reserva.Codigo = ((Decimal)fila["Reserva_ID"]).ToString();
+                reserva.FechaInicio = (DateTime)fila["Reserva_FechaInicio"];
+                reserva.FechaFin = (DateTime)fila["Reserva_FechaFin"];
+                reserva.Regimen = (string)fila["Regimen_Descripcion"];
+                reserva.TipoHabitacion = (string)fila["TipoHabitacion_Descripcion"];
+                reserva.Hotel = new Hotel();
+                reserva.Hotel.id = ((Decimal)fila["Reserva_HotelID"]).ToString();
+                reserva.Hotel.domicilio = new Domicilio();
+                reserva.Hotel.domicilio.pais = (string)fila["Domicilio_Pais"];
+                reserva.Hotel.domicilio.ciudad = (string)fila["Domicilio_Ciudad"];
+                reserva.Hotel.domicilio.calle = (string)fila["Domicilio_Calle"];
+                reserva.Hotel.domicilio.numeroCalle = ((Decimal)fila["Domicilio_NumeroCalle"]).ToString();
+                reserva.Cliente = new Cliente();
+                reserva.Cliente.id = ((Decimal)fila["Reserva_ClienteID"]).ToString();
+                reserva.Cliente.persona = new Persona();
+                reserva.Cliente.persona.nombre = (string)fila["Persona_Nombre"];
+                reserva.Cliente.persona.apellido = (string)fila["Persona_Apellido"];
+                reserva.Cliente.persona.tipoDocumento = (string)fila["TipoDocumento_Descripcion"];
+                reserva.Cliente.persona.numeroDocumento = ((Decimal)fila["Persona_NumeroDocumento"]).ToString();
+                reserva.Cliente.persona.email = (string)fila["Persona_Email"];
+            }
+            else
+                reserva = null;
+            return reserva;
+        }
 
         #endregion
 
@@ -1889,8 +1889,92 @@ namespace FrbaHotel
                 ventanaInformarError("El cliente ya fue agregado a la lista");
                 return false;
             }
-            return true;                
+            return true;                 
         }
+
+        public static string estadiaObtenerReservaID(Estadia estadia)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Estadia_ReservaID FROM RIP.Estadias WHERE Estadia_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", estadia.id);
+            return consultaObtenerValor(consulta);
+        }
+
+        public static string estadiaObtenerHotel(Estadia estadia, string hotelID)
+        {
+            string reservaID = estadiaObtenerReservaID(estadia);
+            if(reservaID != "")
+                return reservaObtenerHotel(reservaID, hotelID);
+            else
+                return "";
+        }
+
+        public static string estadiaObtenerRegimen(Estadia estadia)
+        {
+            string reservaID = estadiaObtenerReservaID(estadia);
+            if (reservaID != "")
+                return reservaObtenerRegimen(reservaID);
+            else
+                return "";
+        }
+
+        public static List<string> estadiaObtenerHabitacionesEnLista(Estadia estadia)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Habitacion_Numero FROM RIP.Reservas_Habitaciones JOIN RIP.Habitaciones ON ReservaHabitacion_HabitacionID = Habitacion_ID WHERE ReservaHabitacion_ReservaID = @ReservaID");
+            consulta.Parameters.AddWithValue("@ReservaID", estadiaObtenerReservaID(estadia));
+            return consultaObtenerLista(consulta);
+        }
+
+        #endregion
+
+        #region Consumible
+
+        public static DataTable consumidoObtenerDeEstadia(Consumido consumido)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Consumible_Descripcion, Consumido_Cantidad FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumido_ConsumibleID = Consumible_ID WHERE Consumido_EstadiaID = @ID");
+            consulta.Parameters.AddWithValue("@ID", consumido.estadiaID);
+            return consultaObtenerTabla(consulta);
+        }
+
+        public static void consumidoAgregar(Consumido consumido)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Consumidos (Consumido_EstadiaID, Consumido_HabitacionID, Consumido_ConsumibleID, Consumido_Cantidad VALUES (@EstadiaID, @HabitacionID, @ConsumibleID, @Cantidad)");
+            consulta.Parameters.AddWithValue("@EstadiaID", consumido.estadiaID);
+            consulta.Parameters.AddWithValue("@HabitacionID", consumido.habitacionID);
+            consulta.Parameters.AddWithValue("@ConsumibleID", consumibleObtenerID(consumido.consumible));
+            consulta.Parameters.AddWithValue("@Cantidad", consumido.cantidad);
+            consultaEjecutar(consulta);
+        }
+
+        public static List<string> consumibleObtenerTodosEnLista()
+        {
+            SqlCommand consulta = consultaCrear("SELECT Consumible_Descripcion FROM RIP.Consumibles");
+            return consultaObtenerLista(consulta);
+        }
+
+        public static string consumibleObtenerID(string consumible)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Consumible_ID FROM RIP.Consumibles WHERE Consumible_Descripcion = @Descripcion");
+            consulta.Parameters.AddWithValue("@Descripcion", consumible);
+            return consultaObtenerValor(consulta);
+        }
+
+        public static bool consumidoRegistradosEnEstadia(string estadiaID, string numeroHabitacion, string hotelID)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Consumido_HabitacionID FROM RIP.Consumidos WHERE Consumido_EstadiaID = @EstadiaID AND Consumido_HabitacionID = @HabitacionID");
+            string habitacionID = consumidoObtenerHabitacionID(numeroHabitacion, hotelID);
+            consulta.Parameters.AddWithValue("@EstadiaID", estadiaID);
+            consulta.Parameters.AddWithValue("@HabitacionID", habitacionID);
+            return consultaValorExiste(consultaObtenerValor(consulta));
+        }
+
+        public static string consumidoObtenerHabitacionID(string numeroHabitacion, string hotelID)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Habitacion_ID FROM RIP.Habitaciones WHERE Habitacion_Numero = @Numero AND Habitacion_HotelID = @HotelID");
+            consulta.Parameters.AddWithValue("@Numero", numeroHabitacion);
+            consulta.Parameters.AddWithValue("@HotelID", hotelID);
+            return consultaObtenerValor(consulta);
+        }
+
         #endregion
     }
 }
