@@ -53,6 +53,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.diasUtilizados = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -187,6 +191,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.subRegimenPrecio);
@@ -225,7 +233,7 @@
             // subRegimenPrecio
             // 
             this.subRegimenPrecio.AutoSize = true;
-            this.subRegimenPrecio.Location = new System.Drawing.Point(302, 148);
+            this.subRegimenPrecio.Location = new System.Drawing.Point(302, 168);
             this.subRegimenPrecio.Name = "subRegimenPrecio";
             this.subRegimenPrecio.Size = new System.Drawing.Size(0, 13);
             this.subRegimenPrecio.TabIndex = 24;
@@ -233,7 +241,7 @@
             // subRegimen
             // 
             this.subRegimen.AutoSize = true;
-            this.subRegimen.Location = new System.Drawing.Point(222, 148);
+            this.subRegimen.Location = new System.Drawing.Point(222, 168);
             this.subRegimen.Name = "subRegimen";
             this.subRegimen.Size = new System.Drawing.Size(46, 13);
             this.subRegimen.TabIndex = 19;
@@ -303,6 +311,42 @@
             this.diasUtilizados.Name = "diasUtilizados";
             this.diasUtilizados.Size = new System.Drawing.Size(0, 13);
             this.diasUtilizados.TabIndex = 31;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 113);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 13);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "Tipo Habitacion";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(129, 113);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(58, 13);
+            this.label6.TabIndex = 28;
+            this.label6.Text = "Porcentual";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(129, 147);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(103, 13);
+            this.label7.TabIndex = 30;
+            this.label7.Text = "CantidadHuespedes";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(9, 147);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(61, 13);
+            this.label8.TabIndex = 29;
+            this.label8.Text = "Huespedes";
             // 
             // VentanaFacturarEstadia
             // 
@@ -376,5 +420,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label diasUtilizados;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }
