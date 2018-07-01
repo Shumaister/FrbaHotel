@@ -1748,7 +1748,7 @@ namespace FrbaHotel
 
         public static Reserva reservaObtener(string reservaID, string hotelID)
         {
-            SqlCommand consulta = Database.consultaCrear("SELECT Reserva_ID, Reserva_ClienteID, Reserva_HotelID, Reserva_FechaInicio, Reserva_FechaFin, TipoHabitacion_Descripcion, Regimen_Descripcion, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Email, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle FROM RIP.Reservas JOIN RIP.Clientes ON Reserva_ClienteID = Cliente_ID JOIN RIP.Personas ON Cliente_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Hoteles ON Reserva_HotelID = Hotel_ID JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID JOIN RIP.Regimenes ON Reserva_RegimenID = Regimen_ID JOIN RIP.TiposHabitaciones ON Reserva_TipoHabitacionID = TipoHabitacion_ID WHERE Reserva_ID = @ID AND Reserva_HotelID = @HotelID");
+            SqlCommand consulta = Database.consultaCrear("SELECT Reserva_ID, Reserva_ClienteID, Reserva_HotelID, Reserva_FechaInicio, Reserva_FechaFin, Reserva_CantidadHuespedes, TipoHabitacion_Descripcion, Regimen_Descripcion, Persona_Nombre, Persona_Apellido, TipoDocumento_Descripcion, Persona_NumeroDocumento, Persona_Email, Domicilio_Pais, Domicilio_Ciudad, Domicilio_Calle, Domicilio_NumeroCalle FROM RIP.Reservas JOIN RIP.Clientes ON Reserva_ClienteID = Cliente_ID JOIN RIP.Personas ON Cliente_PersonaID = Persona_ID JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID JOIN RIP.Hoteles ON Reserva_HotelID = Hotel_ID JOIN RIP.Domicilios ON Hotel_DomicilioID = Domicilio_ID JOIN RIP.Regimenes ON Reserva_RegimenID = Regimen_ID JOIN RIP.TiposHabitaciones ON Reserva_TipoHabitacionID = TipoHabitacion_ID WHERE Reserva_ID = @ID AND Reserva_HotelID = @HotelID");
             consulta.Parameters.AddWithValue("@ID", reservaID);
             consulta.Parameters.AddWithValue("@HotelID", hotelID);
             DataRow fila = Database.consultaObtenerFila(consulta);
@@ -1760,6 +1760,7 @@ namespace FrbaHotel
                 reserva.FechaFin = (DateTime)fila["Reserva_FechaFin"];
                 reserva.Regimen = (string)fila["Regimen_Descripcion"];
                 reserva.TipoHabitacion = (string)fila["TipoHabitacion_Descripcion"];
+                reserva.CantidadHuespedes = fila["Reserva_CantidadHuespedes"] == DBNull.Value ? 0 : Decimal.ToInt32((Decimal)fila["Reserva_CantidadHuespedes"]);
                 reserva.Hotel = new Hotel();
                 reserva.Hotel.id = ((Decimal)fila["Reserva_HotelID"]).ToString();
                 reserva.Hotel.domicilio = new Domicilio();
