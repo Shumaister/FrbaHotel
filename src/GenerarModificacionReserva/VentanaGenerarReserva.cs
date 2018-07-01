@@ -19,6 +19,11 @@ namespace FrbaHotel.GenerarModificacionReserva
         private string p;
 
         public Reserva Reserva { get; set; }
+        public Reserva ReservaOriginal { get; set; }
+
+        public Cliente Cliente { get; set; }
+
+
         private Usuario Usuario { get; set; }
         private int CantidadDeHabitacionesNecesarias { get; set; }
         private List<string> ListaIDHabitaciones { get; set; }
@@ -38,14 +43,16 @@ namespace FrbaHotel.GenerarModificacionReserva
             OcultarErrores();
             groupBox3.Enabled = false;
             groupBox2.Enabled = false;
-                    }
+       }
 
         public VentanaGenerarReserva(Reserva reserva, string p)
         {
             InitializeComponent();
             this.Reserva = reserva;
+            this.ReservaOriginal = reserva;
             this.funcion = p;
-            
+            this.Cliente = Database.ReservaObtenerClienteByIdReserva(ReservaOriginal.Codigo);
+            this.ReservaOriginal.Cliente = Database.ReservaObtenerClienteByIdReserva(ReservaOriginal.Codigo);
             comboBoxCargar(cbxHoteles, Database.reservaObtenerHoteles());
 
             OcultarErrores();
@@ -62,9 +69,11 @@ namespace FrbaHotel.GenerarModificacionReserva
             this.cbxHoteles.SelectedIndex = cbxHoteles.FindStringExact(Database.reservaObtenerHotelbyID(Reserva.Hotel.id));
             this.cbxTipoHabitacion.SelectedIndex = cbxTipoHabitacion.FindStringExact(Database.HabitacionTipobyID(Reserva.Habitaciones[0].tipoHabitacion));
             this.tbxCantidadHuespedes.Text = Reserva.CantidadHuespedes.ToString();
-            this.lblFechaFin.Text = Reserva.FechaFin.ToString();
-            this.lblFechaInicio.Text = Reserva.FechaInicio.ToString();
+            //this.lblFechaFin.Text = Reserva.FechaFin.ToString();
+            //this.lblFechaInicio.Text = Reserva.FechaInicio.ToString();
             this.cbxRegimenEstadia.SelectedIndex = cbxRegimenEstadia.FindStringExact(Database.reservaObtenerRegimen(Reserva.Codigo));
+            this.calendarInicio.SelectionStart = ReservaOriginal.FechaInicio;
+            this.calendarFin.SelectionStart = ReservaOriginal.FechaFin;
         }
 
        
@@ -182,6 +191,14 @@ namespace FrbaHotel.GenerarModificacionReserva
             Reserva.Cliente = null;
             groupBox2.Enabled = false;
             groupBox3.Enabled = true;
+
+            if (funcion == "ModificaCliente")
+            {
+                this.btnNuevo.Enabled = false;
+                this.btnClienteExistente.Enabled = false;
+                this.ReservaOriginal.Cliente = this.Cliente;
+                this.lblCliente.Text = "Ya casi terminamos " + ReservaOriginal.Cliente.persona.nombre.ToString() + "! Solo haz click en Confirmar Reserva!";
+            }
         }
 
         private void Saludo()
@@ -190,6 +207,41 @@ namespace FrbaHotel.GenerarModificacionReserva
             this.lblCliente.Text = "Ya casi terminamos " + Reserva.Cliente.persona.nombre.ToString() + "! Solo haz click en Confirmar Reserva!";
             this.btnNuevo.Enabled = false;
         }
+
+        private void ModificarReserva()
+        {
+            if (CamposCompletos())
+            {
+                if (EsEstadiaValidaModificacion())
+                {
+                    Reserva.Habitaciones = new List<Habitacion>();
+                    string tipoHabi = Database.HabitacionTipobyDescripcion(cbxTipoHabitacion.SelectedItem.ToString());
+                    for (int i = 0; i < CantidadDeHabitacionesNecesarias; i++)
+                    {
+                        Habitacion ha = new Habitacion();
+                        ha.id = ListaIDHabitaciones[i];
+                        ha.tipoHabitacion = tipoHabi;
+                        Reserva.Habitaciones.Add(ha);
+                    }
+
+                    Reserva.FechaInicio = calendarInicio.SelectionStart;
+                    Reserva.FechaFin = calendarFin.SelectionStart;
+
+                    Reserva.CantidadHuespedes = int.Parse(this.tbxCantidadHuespedes.Text.Trim());
+
+                    Reserva.Regimen = cbxRegimenEstadia.SelectedItem.ToString();
+
+                    Reserva.Hotel = new Hotel(IdHotel);
+
+                    lblResumenReserva.Text = "Para la cantidad de " + Reserva.CantidadHuespedes + " huespedes,\nCon fecha inicio: " + Reserva.FechaInicio.ToShortDateString() + " con fecha fin: " + Reserva.FechaFin.ToShortDateString() + "\nNecesitara " + CantidadDeHabitacionesNecesarias.ToString() + " habitaciones " + cbxTipoHabitacion.SelectedItem.ToString();
+
+                    groupBox1.Enabled = false;
+                    irAPaso2();
+                }
+            }
+        }
+
+
         #endregion
 
 
@@ -268,11 +320,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             }
         }
 
-        private void ModificarReserva()
-        {
-            //if (EsEstadiaValida())
-            //{ }
-        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -320,25 +368,44 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         private void btnConfirmarReserva_Click(object sender, EventArgs e)
         {
-            if (Reserva.Cliente != null)
+            if (funcion != "ModificaCliente")
             {
-                Reserva.Codigo = Database.ReservaGenerarCodigo();
-                
-                if(Usuario == null)
+                if (Reserva.Cliente != null)
                 {
-                    string id = Database.usuarioObtenerID(new Usuario("guest"));
-                    Reserva.Usuario = new Usuario(id,"guest");
+                    Reserva.Codigo = Database.ReservaGenerarCodigo();
+
+                    if (Usuario == null)
+                    {
+                        string id = Database.usuarioObtenerID(new Usuario("guest"));
+                        Reserva.Usuario = new Usuario(id, "guest");
+                    }
+                    else
+                    {
+                        Reserva.Usuario = Usuario;
+                    }
+
+                    try
+                    {
+                        Database.ReservaSaveReserva(Reserva);
+                        this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
+                        MessageBox.Show("Se a registrado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Se ha producido un error al registrar la reserva, revise los datos ingresados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
-                {
-                    Reserva.Usuario=Usuario;
-                }
-                
+            }
+            else
+            {
+                Reserva.Usuario.id = Database.usuarioObtenerID(Reserva.Usuario);
+                Reserva.Cliente = ReservaOriginal.Cliente;
+                Reserva.Cliente.id = Database.clienteObtenerIDPersona(Reserva.Cliente.persona.id);
                 try
                 {
                     Database.ReservaSaveReserva(Reserva);
                     this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
-                    MessageBox.Show("Se a registrado con exito su reservar con codigo: "+Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Se a modificado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -358,7 +425,6 @@ namespace FrbaHotel.GenerarModificacionReserva
 
             int cantPersPorHab = CantidadPersonasSegunTipoHabitacion();
 
-            int aux = 0;
             int personasSinHabitacion = int.Parse(this.tbxCantidadHuespedes.Text.Trim());
             bool flag = true;
 
@@ -388,6 +454,51 @@ namespace FrbaHotel.GenerarModificacionReserva
             IdHotel = Database.hotelObtenerIDPorDomicilio(hotel);
 
             ListaIDHabitaciones = Database.ReservaHabitacionesDisponiblesEntre(this.calendarInicio.SelectionStart, this.calendarFin.SelectionStart, IdHotel);
+
+            if (ListaIDHabitaciones.Count < CantidadDeHabitacionesNecesarias)
+            {
+                lblErroHabitacionesHotel.Visible = true;
+                return false;
+            }
+            return true;
+        }
+
+        private bool EsEstadiaValidaModificacion()
+        {
+            CantidadDeHabitacionesNecesarias = 0;
+
+            int cantPersPorHab = CantidadPersonasSegunTipoHabitacion();
+
+            int aux = 0;
+            int personasSinHabitacion = int.Parse(this.tbxCantidadHuespedes.Text.Trim());
+            bool flag = true;
+
+            while (flag)
+            {
+                CantidadDeHabitacionesNecesarias += 1;
+
+                personasSinHabitacion = personasSinHabitacion - cantPersPorHab;
+
+                if (personasSinHabitacion <= cantPersPorHab)
+                {
+                    if (personasSinHabitacion > 0)
+                        CantidadDeHabitacionesNecesarias += 1;
+
+                    flag = false;
+                }
+            }
+
+            string domicilioPelado = cbxHoteles.SelectedItem.ToString();
+            Domicilio domicilio = new Domicilio();
+            domicilio.pais = domicilioPelado.Split('-')[0].Trim();
+            domicilio.ciudad = domicilioPelado.Split('-')[1].Trim();
+            domicilio.calle = domicilioPelado.Split('-')[2].Trim();
+            domicilio.numeroCalle = domicilioPelado.Split('-')[3].Trim();
+
+            Hotel hotel = new Hotel(domicilio);
+            IdHotel = Database.hotelObtenerIDPorDomicilio(hotel);
+
+            ListaIDHabitaciones = Database.ReservaHabitacionesModificacionDisponiblesEntre(this.calendarInicio.SelectionStart, this.calendarFin.SelectionStart, IdHotel, ReservaOriginal.Codigo);
 
             if (ListaIDHabitaciones.Count < CantidadDeHabitacionesNecesarias)
             {

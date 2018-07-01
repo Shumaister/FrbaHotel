@@ -768,6 +768,13 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@ID", cliente.id);
             consultaEjecutar(consulta);
         }
+        
+        public static string clienteObtenerIDPersona(string p)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Cliente_ID FROM RIP.Clientes WHERE Cliente_PersonaID = @PersonaID");
+            consulta.Parameters.AddWithValue("@PersonaID", p);
+            return consultaObtenerValor(consulta);
+        }
 
         public static string clienteObtenerID(Cliente cliente)
         {
@@ -1594,6 +1601,16 @@ namespace FrbaHotel
 
         public static void ReservaSaveReserva(Reserva R)
         {
+            // estas lineas sirven en cado de la modificacion, borro los registros y los creo de nuevo
+            SqlCommand borrahab = consultaCrear("DELETE rip.HabitacionesNoDisponibles where HabitacionNoDisponible_ReservaID = @codr");
+            borrahab.Parameters.AddWithValue("@codr", int.Parse(R.Codigo));
+            consultaEjecutar(borrahab);
+
+            SqlCommand borrare = consultaCrear("DELETE rip.Reservas where Reserva_ID = @codr");
+            borrare.Parameters.AddWithValue("@codr", int.Parse(R.Codigo));
+            consultaEjecutar(borrare);
+
+            // creacion de la estadia
             SqlCommand consulta = consultaCrear("INSERT INTO RIP.Reservas (Reserva_ID, Reserva_ClienteID, Reserva_HotelID, Reserva_CantidadHuespedes, Reserva_FechaCreacion, Reserva_FechaInicio, Reserva_FechaFin, Reserva_TipoHabitacionID, Reserva_RegimenID, Reserva_EstadoReservaID, Reserva_UsuarioID) VALUES (@reservacod,@clienteid,@hotelid,@rch,@fechacreacion,@fi,@ff,@tipohabitacion,@regimenid,@estadoReserva,@userid)");
             consulta.Parameters.AddWithValue("@reservacod", R.Codigo);
             consulta.Parameters.AddWithValue("@clienteid", R.Cliente.id);
@@ -1608,7 +1625,8 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@userid", R.Usuario.id);
 
             consultaEjecutar(consulta);
-
+            
+            // creacion de hab reservadas en no disponible
             for (int i = 0; i < R.Habitaciones.Count; i++)
             {
                 SqlCommand consulta2 = consultaCrear("INSERT INTO RIP.HabitacionesNoDisponibles (HabitacionNoDisponible_ReservaID, HabitacionNoDisponible_HabitacionID, HabitacionNoDisponible_FechaInicio, HabitacionNoDisponible_FechaFin) VALUES (@codreserva, @idh, @fi, @ff )");
@@ -1779,6 +1797,34 @@ namespace FrbaHotel
             else
                 reserva = null;
             return reserva;
+        }
+
+        public static List<string> ReservaHabitacionesModificacionDisponiblesEntre(DateTime fi, DateTime ff, string IdHotel, string codReserva)
+        {
+            SqlCommand consulta = consultaCrear("select Habitacion_ID from rip.Habitaciones habitaciones where habitaciones.Habitacion_HotelID = @hid and Habitacion_ID not in (select hnd.HabitacionNoDisponible_HabitacionID from rip.HabitacionesNoDisponibles hnd join rip.Habitaciones hab on hab.Habitacion_ID = hnd.HabitacionNoDisponible_HabitacionID join rip.Hoteles hot on hot.Hotel_ID = hab.Habitacion_HotelID where hot.Hotel_ID = @hid and hnd.HabitacionNoDisponible_ReservaID != @cod and hnd.HabitacionNoDisponible_Finalizada = 0 and (@fi > hnd.HabitacionNoDisponible_FechaInicio AND @fi < hnd.HabitacionNoDisponible_FechaFin) OR  (@ff > hnd.HabitacionNoDisponible_FechaInicio AND @ff < hnd.HabitacionNoDisponible_FechaFin) )");
+
+            consulta.Parameters.AddWithValue("@fi", fi);
+            consulta.Parameters.AddWithValue("@ff", fi);
+            consulta.Parameters.AddWithValue("@hid", IdHotel);
+            consulta.Parameters.AddWithValue("@cod", codReserva);
+
+            return consultaObtenerLista(consulta);
+        }
+
+        internal static Cliente ReservaObtenerClienteByIdReserva(string p)
+        {
+            SqlCommand consulta = consultaCrear("select * from rip.Personas p join rip.Clientes c on c.Cliente_PersonaID = p.Persona_ID join rip.Reservas r on r.Reserva_ClienteID = c.Cliente_ID where r.Reserva_ID = @codr ");
+            consulta.Parameters.AddWithValue("@codr", p);
+            DataRow linea = consultaObtenerFila(consulta);
+
+            Cliente C = new Cliente();
+
+            C.persona = new Persona();
+
+            C.persona.id =  linea.ItemArray[0].ToString();
+            C.persona.nombre = linea.ItemArray[1].ToString();
+
+            return C;
         }
 
         #endregion
@@ -1997,7 +2043,6 @@ namespace FrbaHotel
         }
 
         #endregion
-
 
     }
 }
