@@ -408,6 +408,7 @@ CREATE TABLE [RIP].[Reservas] (
 	[Reserva_ID] [numeric](18,0) NOT NULL PRIMARY KEY,
 	[Reserva_ClienteID] [numeric](18,0),
 	[Reserva_HotelID] [numeric](18,0),
+	[Reserva_CantidadHuespedes] [numeric](18,0),
 	[Reserva_FechaCreacion] [datetime],
 	[Reserva_FechaInicio] [datetime],
 	[Reserva_FechaFin] [datetime],
@@ -440,6 +441,7 @@ CREATE TABLE [RIP].[HabitacionesNoDisponibles](
 	[HabitacionNoDisponible_HabitacionID][numeric](18,0) NOT NULL,
 	[HabitacionNoDisponible_FechaInicio][datetime] NOT NULL,
 	[HabitacionNoDisponible_FechaFin][datetime] NOT NULL,
+	[HabitacionNoDisponible_Finalizada][bit] DEFAULT 0 NOT NULL,
 	CONSTRAINT FK_HAB_NODISPONIBLES_RESERVA FOREIGN KEY ([HabitacionNoDisponible_ReservaID]) REFERENCES [RIP].[Reservas] ([Reserva_ID]),
 	CONSTRAINT FK_HAB_NODISPONIBLES_HABITACION FOREIGN KEY ([HabitacionNoDisponible_HabitacionID])REFERENCES [RIP].[Habitaciones] ([Habitacion_ID])
 )
@@ -801,6 +803,7 @@ AND g.Habitacion_Numero = h.Habitacion_Numero
 AND g.Habitacion_Piso = h.Habitacion_Piso
 ORDER BY 1
 
+UPDATE rip.HabitacionesNoDisponibles set HabitacionNoDisponible_Finalizada = 1 where HabitacionNoDisponible_FechaFin <= GETDATE()
 
 PRINT''
 PRINT '----- Realizando inserts tabla RIP.Huespedes -----'
