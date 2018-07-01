@@ -39,12 +39,12 @@
             // 
             // logo
             // 
-            this.logo.Location = new System.Drawing.Point(94, 12);
+            this.logo.Location = new System.Drawing.Point(49, 12);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(65, 181);
+            this.label1.Location = new System.Drawing.Point(21, 163);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(234, 13);
             this.label1.TabIndex = 1;
@@ -54,7 +54,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(111, 260);
+            this.label2.Location = new System.Drawing.Point(76, 263);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(124, 15);
             this.label2.TabIndex = 2;
@@ -63,7 +63,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(95, 283);
+            this.label3.Location = new System.Drawing.Point(60, 286);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(158, 13);
             this.label3.TabIndex = 3;
@@ -71,9 +71,9 @@
             // 
             // btnCliente
             // 
-            this.btnCliente.Location = new System.Drawing.Point(86, 213);
+            this.btnCliente.Location = new System.Drawing.Point(75, 192);
             this.btnCliente.Name = "btnCliente";
-            this.btnCliente.Size = new System.Drawing.Size(75, 23);
+            this.btnCliente.Size = new System.Drawing.Size(125, 23);
             this.btnCliente.TabIndex = 4;
             this.btnCliente.Text = "Cliente";
             this.btnCliente.UseVisualStyleBackColor = true;
@@ -81,9 +81,9 @@
             // 
             // btnUsuario
             // 
-            this.btnUsuario.Location = new System.Drawing.Point(198, 213);
+            this.btnUsuario.Location = new System.Drawing.Point(75, 224);
             this.btnUsuario.Name = "btnUsuario";
-            this.btnUsuario.Size = new System.Drawing.Size(75, 23);
+            this.btnUsuario.Size = new System.Drawing.Size(125, 23);
             this.btnUsuario.TabIndex = 5;
             this.btnUsuario.Text = "Usuario";
             this.btnUsuario.UseVisualStyleBackColor = true;
@@ -93,7 +93,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 322);
+            this.ClientSize = new System.Drawing.Size(274, 310);
             this.Controls.Add(this.btnUsuario);
             this.Controls.Add(this.btnCliente);
             this.Controls.Add(this.label3);

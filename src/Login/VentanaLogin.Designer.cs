@@ -42,33 +42,33 @@
             // 
             // logo
             // 
-            this.logo.Location = new System.Drawing.Point(60, 13);
+            this.logo.Location = new System.Drawing.Point(40, 12);
             // 
             // lblUsuario
             // 
             this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsuario.Location = new System.Drawing.Point(80, 193);
+            this.lblUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsuario.Location = new System.Drawing.Point(60, 175);
             this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(50, 13);
+            this.lblUsuario.Size = new System.Drawing.Size(43, 13);
             this.lblUsuario.TabIndex = 16;
             this.lblUsuario.Text = "Usuario";
             // 
             // lblContrasenia
             // 
             this.lblContrasenia.AutoSize = true;
-            this.lblContrasenia.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblContrasenia.Location = new System.Drawing.Point(80, 257);
+            this.lblContrasenia.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblContrasenia.Location = new System.Drawing.Point(60, 234);
             this.lblContrasenia.Name = "lblContrasenia";
-            this.lblContrasenia.Size = new System.Drawing.Size(71, 13);
+            this.lblContrasenia.Size = new System.Drawing.Size(61, 13);
             this.lblContrasenia.TabIndex = 17;
             this.lblContrasenia.Text = "Contraseña";
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(105, 349);
+            this.btnLogin.Location = new System.Drawing.Point(89, 306);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(89, 34);
+            this.btnLogin.Size = new System.Drawing.Size(75, 23);
             this.btnLogin.TabIndex = 20;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -77,18 +77,18 @@
             // lblErrorLogueo
             // 
             this.lblErrorLogueo.AutoSize = true;
-            this.lblErrorLogueo.Font = new System.Drawing.Font("Modern No. 20", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErrorLogueo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblErrorLogueo.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorLogueo.Location = new System.Drawing.Point(80, 317);
+            this.lblErrorLogueo.Location = new System.Drawing.Point(73, 158);
             this.lblErrorLogueo.Name = "lblErrorLogueo";
-            this.lblErrorLogueo.Size = new System.Drawing.Size(117, 15);
+            this.lblErrorLogueo.Size = new System.Drawing.Size(101, 13);
             this.lblErrorLogueo.TabIndex = 21;
             this.lblErrorLogueo.Text = "El usuario no existe.";
             this.lblErrorLogueo.Visible = false;
             // 
             // txbUser
             // 
-            this.txbUser.Location = new System.Drawing.Point(83, 218);
+            this.txbUser.Location = new System.Drawing.Point(63, 200);
             this.txbUser.Name = "txbUser";
             this.txbUser.Size = new System.Drawing.Size(131, 20);
             this.txbUser.TabIndex = 22;
@@ -96,7 +96,7 @@
             // 
             // txbPass
             // 
-            this.txbPass.Location = new System.Drawing.Point(83, 283);
+            this.txbPass.Location = new System.Drawing.Point(63, 260);
             this.txbPass.Name = "txbPass";
             this.txbPass.Size = new System.Drawing.Size(131, 20);
             this.txbPass.TabIndex = 23;
@@ -108,7 +108,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(136, 193);
+            this.label4.Location = new System.Drawing.Point(100, 175);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(17, 22);
             this.label4.TabIndex = 27;
@@ -119,7 +119,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(157, 257);
+            this.label1.Location = new System.Drawing.Point(118, 234);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(17, 22);
             this.label1.TabIndex = 28;
@@ -129,7 +129,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(299, 395);
+            this.ClientSize = new System.Drawing.Size(252, 344);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txbPass);
