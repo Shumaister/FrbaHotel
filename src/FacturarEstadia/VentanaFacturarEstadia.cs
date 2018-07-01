@@ -196,7 +196,7 @@ namespace FrbaHotel.FacturarEstadia
                         InsertFactura.Parameters.AddWithValue("@diasUtilizados", int.Parse(diasUtilizados.Text));
                         InsertFactura.Parameters.AddWithValue("@diasNoUtilizados", diasNoUtilizados);
                         InsertFactura.Parameters.AddWithValue("@Total", Convert.ToDecimal(TotalNumero.Text));
-                        InsertFactura.Parameters.AddWithValue("@fecha", "getdate()");
+                        InsertFactura.Parameters.AddWithValue("@fecha", "convert(datetime,getdate(),121)");
                         Database.consultaEjecutar(InsertFactura);
 
                     };
@@ -205,12 +205,13 @@ namespace FrbaHotel.FacturarEstadia
                 case 1:
                     {
 
-                        SqlCommand InsertFactura = Database.consultaCrear("insert into rip.Facturas(Factura_ID,Factura_EstadiaID,Factura_DiasUtilizados,Factura_DiasNoUtilizados,Factura_Fecha,Factura_MontoTotal,Factura_FormaPagoID)values(@NumeroFactura,(select Estadia_ID from rip.Estadias join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva),@diasUtilizados,@diasNoUtilizados,getdate(),@Total,1)");
+                        SqlCommand InsertFactura = Database.consultaCrear("insert into rip.Facturas(Factura_ID,Factura_EstadiaID,Factura_DiasUtilizados,Factura_DiasNoUtilizados,Factura_Fecha,Factura_MontoTotal,Factura_FormaPagoID)values(@NumeroFactura,(select Estadia_ID from rip.Estadias join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva),@diasUtilizados,@diasNoUtilizados,@fecha,@Total,1)");
                         InsertFactura.Parameters.AddWithValue("@NumeroFactura", nuevaFactura);
                         InsertFactura.Parameters.AddWithValue("@reserva", int.Parse(CodReserva.Text));
                         InsertFactura.Parameters.AddWithValue("@diasUtilizados", int.Parse(diasUtilizados.Text));
                         InsertFactura.Parameters.AddWithValue("@diasNoUtilizados", diasNoUtilizados);
                         InsertFactura.Parameters.AddWithValue("@Total", Convert.ToDecimal(TotalNumero.Text));
+                        InsertFactura.Parameters.AddWithValue("@fecha", "convert(datetime,getdate(),121)");
                         Database.consultaEjecutar(InsertFactura);
 
                     };
