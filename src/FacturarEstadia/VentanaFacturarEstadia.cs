@@ -183,13 +183,13 @@ namespace FrbaHotel.FacturarEstadia
             }
 
 
-                  SqlCommand insertItemFacturas = Database.consultaCrear("insert into rip.ItemsFacturas(ItemFactura_FacturaID,ItemFactura_ConsumidoID,ItemFactura_Cantidad) select @idFactura,Consumido_ID,Consumido_Cantidad from rip.Consumidos join rip.Consumibles on Consumible_ID=Consumido_ConsumibleID join rip.Estadias on Estadia_ID=Consumido_EstadiaID join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva");
+            SqlCommand insertItemFacturas = Database.consultaCrear("insert into rip.ItemsFacturas(ItemFactura_FacturaID,ItemFactura_ConsumidoID,ItemFactura_Cantidad,ItemFactura_Monto) select @idFactura,Consumido_ID,Consumido_Cantidad,Consumido_Cantidad*Consumible_Precio from rip.Consumidos join rip.Consumibles on Consumible_ID=Consumido_ConsumibleID join rip.Estadias on Estadia_ID=Consumido_EstadiaID join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva");
                   insertItemFacturas.Parameters.AddWithValue("@idFactura", nuevaFactura);
                   insertItemFacturas.Parameters.AddWithValue("@reserva", CodReserva.Text);
                   Database.consultaEjecutar(insertItemFacturas);
 
 
-                  MessageBox.Show("Pago realizado correctamente, Factura N°"+nuevaFactura+" ", "Error", MessageBoxButtons.OK);
+                  MessageBox.Show("Pago realizado correctamente, Factura N°"+nuevaFactura+" ","Info", MessageBoxButtons.OK);
 
 
         }
