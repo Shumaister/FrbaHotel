@@ -45,6 +45,7 @@
             this.menuCuenta = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCambiarContrasenia = new System.Windows.Forms.ToolStripMenuItem();
             this.nenuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuDetallesDeSesion = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -185,6 +186,7 @@
             // menuCuenta
             // 
             this.menuCuenta.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuDetallesDeSesion,
             this.menuCambiarContrasenia,
             this.nenuCerrarSesion});
             this.menuCuenta.Name = "menuCuenta";
@@ -204,6 +206,13 @@
             this.nenuCerrarSesion.Size = new System.Drawing.Size(180, 22);
             this.nenuCerrarSesion.Text = "Cerrar sesion";
             this.nenuCerrarSesion.Click += new System.EventHandler(this.nenuCerrarSesion_Click);
+            // 
+            // menuDetallesDeSesion
+            // 
+            this.menuDetallesDeSesion.Name = "menuDetallesDeSesion";
+            this.menuDetallesDeSesion.Size = new System.Drawing.Size(180, 22);
+            this.menuDetallesDeSesion.Text = "Detalles de sesion";
+            this.menuDetallesDeSesion.Click += new System.EventHandler(this.menuDetallesDeSesion_Click);
             // 
             // VentanaMenuPrincipal
             // 
@@ -249,5 +258,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuCambiarContrasenia;
         private System.Windows.Forms.ToolStripMenuItem nenuCerrarSesion;
         private System.Windows.Forms.ToolStripMenuItem menuEstadisticas;
+        private System.Windows.Forms.ToolStripMenuItem menuDetallesDeSesion;
     }
 }
