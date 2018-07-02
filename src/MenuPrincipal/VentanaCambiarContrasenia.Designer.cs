@@ -70,7 +70,7 @@
             // tbxContrasenia
             // 
             this.tbxContrasenia.Location = new System.Drawing.Point(81, 149);
-            this.tbxContrasenia.MaxLength = 254;
+            this.tbxContrasenia.MaxLength = 99;
             this.tbxContrasenia.Name = "tbxContrasenia";
             this.tbxContrasenia.Size = new System.Drawing.Size(149, 20);
             this.tbxContrasenia.TabIndex = 264;

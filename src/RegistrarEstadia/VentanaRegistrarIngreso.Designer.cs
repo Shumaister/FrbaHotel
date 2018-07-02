@@ -82,9 +82,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(9, 190);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 13);
+            this.label2.Size = new System.Drawing.Size(120, 13);
             this.label2.TabIndex = 273;
-            this.label2.Text = "Huespedes a registrar:";
+            this.label2.Text = "Huespedes sin registrar:";
             // 
             // label1
             // 
@@ -240,11 +240,11 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(163, 190);
+            this.label9.Location = new System.Drawing.Point(154, 190);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(132, 13);
+            this.label9.Size = new System.Drawing.Size(142, 13);
             this.label9.TabIndex = 311;
-            this.label9.Text = "(El cliente ya esta incluido)";
+            this.label9.Text = "(El cliente ya esta registrado)";
             // 
             // VentanaRegistrarIngreso
             // 

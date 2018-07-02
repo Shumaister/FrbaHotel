@@ -24,7 +24,7 @@ namespace FrbaHotel.RegistrarEstadia
             InitializeComponent();
             this.estadia = estadia;
             this.sesion = sesion;
-            this.cantidadHuespedes = 1;
+            this.cantidadHuespedes = estadia.reserva.CantidadHuespedes-1;
         }
 
         private void VentanaRegistrarIngreso_Load(object sender, EventArgs e)
@@ -46,25 +46,25 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void btnAgregarClienteNuevo_Click(object sender, EventArgs e)
         {
-            if (cantidadHuespedes < estadia.reserva.CantidadHuespedes)
+            if (cantidadHuespedes > 0)
             {
                 new VentanaCliente(this, "Nuevo").ShowDialog();
                 ventanaAgregarHuesped();
             }
             else
-                ventanaInformarError("No se puede registrar una cantidad mayor de huespedes que la especificada en la reserva");
+                ventanaInformarError("Ya no quedan huespedes sin registrar");
 
         }
 
         private void btnAgregarClienteExistente_Click(object sender, EventArgs e)
         {
-            if (cantidadHuespedes < estadia.reserva.CantidadHuespedes)
+            if (cantidadHuespedes > 0)
             {
                 new VentanaCliente(this, "Buscar").ShowDialog();
                 ventanaAgregarHuesped();
             }
             else
-                ventanaInformarError("No se puede registrar una cantidad mayor de huespedes que la especificada en la reserva");
+                ventanaInformarError("Ya no quedan huespedes sin registrar");
         }
 
         private void ventanaAgregarHuesped()
@@ -74,7 +74,7 @@ namespace FrbaHotel.RegistrarEstadia
                 lbxHuespedes.Items.Add(huesped.persona.nombre + "-" + huesped.persona.apellido + "-" + huesped.persona.tipoDocumento + "-" + huesped.persona.numeroDocumento + "-" + huesped.persona.email);
                 estadia.huespedes.Add(Database.clienteObtenerID(huesped));
                 huesped = null;
-                cantidadHuespedes++;
+                cantidadHuespedes--;
                 lblCantidadHuespedes.Text = cantidadHuespedes.ToString();
             }
         }
@@ -90,7 +90,7 @@ namespace FrbaHotel.RegistrarEstadia
                 cliente.persona.email = clienteDatos[4];
                 estadia.huespedes.Remove(Database.clienteObtenerID(cliente));
                 listBoxQuitarElemento(lbxHuespedes);
-                cantidadHuespedes--;
+                cantidadHuespedes++;
                 lblCantidadHuespedes.Text = cantidadHuespedes.ToString();
             }
 

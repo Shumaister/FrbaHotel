@@ -98,7 +98,7 @@
             // txbPass
             // 
             this.txbPass.Location = new System.Drawing.Point(63, 260);
-            this.txbPass.MaxLength = 254;
+            this.txbPass.MaxLength = 99;
             this.txbPass.Name = "txbPass";
             this.txbPass.Size = new System.Drawing.Size(131, 20);
             this.txbPass.TabIndex = 23;

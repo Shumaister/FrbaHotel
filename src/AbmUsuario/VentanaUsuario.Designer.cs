@@ -741,7 +741,7 @@
             // tbxContrasena
             // 
             this.tbxContrasena.Location = new System.Drawing.Point(31, 112);
-            this.tbxContrasena.MaxLength = 254;
+            this.tbxContrasena.MaxLength = 99;
             this.tbxContrasena.Name = "tbxContrasena";
             this.tbxContrasena.Size = new System.Drawing.Size(100, 20);
             this.tbxContrasena.TabIndex = 234;

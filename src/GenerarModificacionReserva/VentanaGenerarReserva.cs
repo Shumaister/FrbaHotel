@@ -482,7 +482,8 @@ namespace FrbaHotel.GenerarModificacionReserva
                     {
                         Database.ReservaSaveReserva(Reserva);
                         this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
-                        MessageBox.Show("Se a registrado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Se ha registrado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Hide();
                     }
                     catch (Exception ex)
                     {
