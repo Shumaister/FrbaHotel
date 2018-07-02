@@ -44,14 +44,14 @@ namespace FrbaHotel.FacturarEstadia
         {
             if (string.IsNullOrEmpty(CodReserva.Text))
             {
-                MessageBox.Show("Codigo de reserva no valido");
+                MessageBox.Show("Debe ingresar un numero de reserva.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             Regex reg = new Regex(@"^[0-9]+$");
 
             if (!reg.IsMatch(CodReserva.Text))
             {
-                MessageBox.Show("La reserva tiene caracteres invalidos");
+                MessageBox.Show("La reserva tiene caracteres invalidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -228,6 +228,12 @@ namespace FrbaHotel.FacturarEstadia
             MessageBox.Show("Pago realizado correctamente, Factura N°" + nuevaFactura + " ", "Info", MessageBoxButtons.OK);
 
 
+        }
+
+        private void CodReserva_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBoxConfigurarParaNumeros(e);
+            controladorError.Clear();
         }
     }
 }
