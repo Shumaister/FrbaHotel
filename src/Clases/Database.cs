@@ -1277,6 +1277,15 @@ namespace FrbaHotel
             return consultaObtenerTabla(consulta);
         }
 
+        public static bool hotelAlgunaReservaActualConEseRegimen(Hotel hotel, string regimen)
+        {
+#warning ver
+            SqlCommand consulta = consultaCrear("SELECT Reserva_ID FROM RIP.Reservas WHERE Reserva_HotelID = @HotelID AND Reserva_RegimenID = @RegimenID AND (Reserva_FechaInicio >= CONVERT(datetime,GETDATE(),121) OR Reserva_FechaFin >= CONVERT(datetime,GETDATE(),121))");
+            consulta.Parameters.AddWithValue("@HotelID", hotel.id);
+            consulta.Parameters.AddWithValue("@RegimenID", regimenObtenerID(regimen));
+            return consultaValorExiste(consultaObtenerValor(consulta));
+        }
+
         #endregion
 
         #region HotelCerrado

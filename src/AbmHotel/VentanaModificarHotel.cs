@@ -87,6 +87,11 @@ namespace FrbaHotel.AbmHotel
 
         private void btnQuitarRegimen_Click(object sender, EventArgs e)
         {
+            if (Database.hotelAlgunaReservaActualConEseRegimen(hotel, lbxRegimenes.SelectedItem.ToString()))
+            {
+                ventanaInformarError("No se puede quitar el regimen ya que existen estadias actuales o reservas futuras que tienen ese regimen");
+                return;
+            }
             buttonQuitarComboBoxListBox(cbxRegimenes, lbxRegimenes);
         }
 
