@@ -263,7 +263,26 @@ namespace FrbaHotel.GenerarModificacionReserva
                 this.btnClienteExistente.Enabled = false;
                 this.ReservaOriginal.Cliente = this.Cliente;
             }
+        }
 
+        private void CargarCliente()
+        {
+            try
+            {
+                if (funcion == "CreaUsuario" || funcion == "ModificaUsuario")
+                {
+                    Saludo();
+                    this.lblCliente.Text = "La reserva es generada a nombre del cliente " + Reserva.Cliente.persona.nombre;
+                }
+                else
+                {
+                    Saludo();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Recuerde que debe ingresar obligatoriamiente quien es el cliente de la reserva.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Saludo()
@@ -422,31 +441,16 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             VentanaCliente ventanaCliente = new VentanaCliente(Reserva);
             ventanaCliente.ShowDialog();
-            
-            if (funcion == "CreaUsuario" || funcion == "ModificaUsuario")
-            {
-                Saludo();
-                this.lblCliente.Text = "La reserva es generada a nombre del cliente " + Reserva.Cliente.persona.nombre;
-            }
-            else
-            {
-                Saludo();
-            }
+
+            CargarCliente();
         }
+
 
         private void btnClienteExistente_Click(object sender, EventArgs e)
         {
             new VentanaCliente(this, "BuscarDesdeReserva").ShowDialog();
 
-            if (funcion == "CreaUsuario" || funcion == "ModificaUsuario")
-            {
-                Saludo();
-                this.lblCliente.Text = "La reserva es generada a nombre del cliente " + Reserva.Cliente.persona.nombre;
-            }
-            else 
-            {
-                Saludo();
-            }
+            CargarCliente();
         }
 
         private void btnConfirmarReserva_Click(object sender, EventArgs e)
