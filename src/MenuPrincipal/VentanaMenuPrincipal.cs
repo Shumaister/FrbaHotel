@@ -194,7 +194,7 @@ namespace FrbaHotel.Menus
 
         private void nuevaReservaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            VentanaGenerarReserva ven = new VentanaGenerarReserva();
+            VentanaGenerarReserva ven = new VentanaGenerarReserva(sesion);
             ven.ShowDialog(); 
         }
 

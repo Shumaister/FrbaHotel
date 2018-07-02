@@ -58,6 +58,13 @@
             this.calendarFin = new System.Windows.Forms.MonthCalendar();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblpreciodiahab = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.lblcantidaddias = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.lblErrorPaso2 = new System.Windows.Forms.Label();
             this.lblrecargahotel = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -84,13 +91,6 @@
             this.btnVolverPaso2 = new System.Windows.Forms.Button();
             this.btnConfirmarReserva = new System.Windows.Forms.Button();
             this.label35 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.lblcantidaddias = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.lblpreciodiahab = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -455,6 +455,74 @@
             this.groupBox2.Text = "Paso 2";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // lblpreciodiahab
+            // 
+            this.lblpreciodiahab.AutoSize = true;
+            this.lblpreciodiahab.Location = new System.Drawing.Point(348, 236);
+            this.lblpreciodiahab.Name = "lblpreciodiahab";
+            this.lblpreciodiahab.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblpreciodiahab.Size = new System.Drawing.Size(10, 13);
+            this.lblpreciodiahab.TabIndex = 344;
+            this.lblpreciodiahab.Text = "-";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(236, 236);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(72, 13);
+            this.label26.TabIndex = 343;
+            this.label26.Text = "Precio por dia";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(348, 221);
+            this.label25.Name = "label25";
+            this.label25.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label25.Size = new System.Drawing.Size(136, 13);
+            this.label25.TabIndex = 342;
+            this.label25.Text = "-------------------------------------------";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(179, 221);
+            this.label23.Name = "label23";
+            this.label23.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label23.Size = new System.Drawing.Size(136, 13);
+            this.label23.TabIndex = 341;
+            this.label23.Text = "-------------------------------------------";
+            // 
+            // lblcantidaddias
+            // 
+            this.lblcantidaddias.AutoSize = true;
+            this.lblcantidaddias.Location = new System.Drawing.Point(348, 272);
+            this.lblcantidaddias.Name = "lblcantidaddias";
+            this.lblcantidaddias.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblcantidaddias.Size = new System.Drawing.Size(10, 13);
+            this.lblcantidaddias.TabIndex = 340;
+            this.lblcantidaddias.Text = "-";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(222, 272);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(86, 13);
+            this.label24.TabIndex = 339;
+            this.label24.Text = "Cantidad de dias";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(285, 107);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(73, 16);
+            this.label22.TabIndex = 338;
+            this.label22.Text = "Resumen";
+            // 
             // lblErrorPaso2
             // 
             this.lblErrorPaso2.AutoSize = true;
@@ -734,74 +802,6 @@
             this.label35.Size = new System.Drawing.Size(166, 16);
             this.label35.TabIndex = 309;
             this.label35.Text = "Paso 3 - Confirmar Estadia";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(285, 107);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(73, 16);
-            this.label22.TabIndex = 338;
-            this.label22.Text = "Resumen";
-            // 
-            // lblcantidaddias
-            // 
-            this.lblcantidaddias.AutoSize = true;
-            this.lblcantidaddias.Location = new System.Drawing.Point(348, 272);
-            this.lblcantidaddias.Name = "lblcantidaddias";
-            this.lblcantidaddias.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblcantidaddias.Size = new System.Drawing.Size(10, 13);
-            this.lblcantidaddias.TabIndex = 340;
-            this.lblcantidaddias.Text = "-";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(222, 272);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(86, 13);
-            this.label24.TabIndex = 339;
-            this.label24.Text = "Cantidad de dias";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(179, 221);
-            this.label23.Name = "label23";
-            this.label23.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label23.Size = new System.Drawing.Size(136, 13);
-            this.label23.TabIndex = 341;
-            this.label23.Text = "-------------------------------------------";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(348, 221);
-            this.label25.Name = "label25";
-            this.label25.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label25.Size = new System.Drawing.Size(136, 13);
-            this.label25.TabIndex = 342;
-            this.label25.Text = "-------------------------------------------";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(236, 236);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(72, 13);
-            this.label26.TabIndex = 343;
-            this.label26.Text = "Precio por dia";
-            // 
-            // lblpreciodiahab
-            // 
-            this.lblpreciodiahab.AutoSize = true;
-            this.lblpreciodiahab.Location = new System.Drawing.Point(348, 236);
-            this.lblpreciodiahab.Name = "lblpreciodiahab";
-            this.lblpreciodiahab.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblpreciodiahab.Size = new System.Drawing.Size(10, 13);
-            this.lblpreciodiahab.TabIndex = 344;
-            this.lblpreciodiahab.Text = "-";
             // 
             // VentanaGenerarReserva
             // 
