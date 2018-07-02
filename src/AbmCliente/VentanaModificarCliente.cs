@@ -58,7 +58,7 @@ namespace FrbaHotel.AbmCliente
 
         private void ventanaCrearClienteModificado()
         {
-            cliente.estado = radioButtonEstado(rbtActivado);
+            //cliente.estado = radioButtonEstado(rbtActivado);
             cliente.persona.nombre = tbxNombre.Text;
             cliente.persona.apellido = tbxApellido.Text;
             cliente.persona.tipoDocumento = cbxTipoDocumento.SelectedItem.ToString();

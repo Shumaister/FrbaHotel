@@ -173,6 +173,18 @@ namespace FrbaHotel
 
         #region Button
 
+        public static void buttonHabilitarActivar(Button button)
+        {
+            button.Enabled = true;
+            button.Text = "Habilitar";
+        }
+
+        public static void buttonHabilitarDesactivar(Button button)
+        {
+            button.Enabled = false;
+            button.Text = "Habilitado";
+        }
+
         public static void buttonAgregarComboBoxListBox(ComboBox comboBox, ListBox listBox)
         {
             if (comboBox.SelectedItem != null)
@@ -258,8 +270,6 @@ namespace FrbaHotel
 
         #endregion
 
-        #region RadioButton
-
         public string radioButtonEstado(RadioButton radioButtonHabilitar)
         {
             if (radioButtonHabilitar.Checked)
@@ -267,7 +277,5 @@ namespace FrbaHotel
             else
                 return "0";
         }
-
-        #endregion
     }
 }

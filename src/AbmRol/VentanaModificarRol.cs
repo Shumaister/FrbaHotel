@@ -17,6 +17,7 @@ namespace FrbaHotel.AbmRol
 
         VentanaRol ventanaRol {get; set;}
         Rol rol {get; set;}
+        bool HabilitadoDesdeInicio { get; set; }
 
         #endregion
 
@@ -27,6 +28,7 @@ namespace FrbaHotel.AbmRol
             InitializeComponent();
             this.ventanaRol = ventanaRol;
             this.rol = rol;
+            this.HabilitadoDesdeInicio = false;
         }
 
         #endregion
@@ -39,7 +41,7 @@ namespace FrbaHotel.AbmRol
             foreach (string funcionalidad in lbxFuncionalidades.Items)
                 funcionalidades.Add(funcionalidad);
             rol.nombre = tbxNombreRol.Text;
-            rol.estado = rbtRolActivado.Checked ? "1" : "0";
+            rol.estado = btnHabilitar.Enabled? "0" : "1";
             rol.funcionalidades = funcionalidades;
         }
 
@@ -66,7 +68,10 @@ namespace FrbaHotel.AbmRol
             listBoxLimpiar(lbxFuncionalidades);
             comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodasEnLista());
             tbxNombreRol.Clear();
-            rbtRolActivado.Select();
+            if (!this.HabilitadoDesdeInicio)
+            {
+                buttonHabilitarActivar(btnHabilitar);
+            }
             controladorError.Clear();
         }
 
@@ -80,9 +85,10 @@ namespace FrbaHotel.AbmRol
             listBoxCargar(lbxFuncionalidades, rol.funcionalidades);
             comboBoxCargar(cbxFuncionalidades, Database.rolObtenerFuncionalidadesFaltantes(rol));
             if (bool.Parse(rol.estado))
-                rbtRolActivado.Select();
-            else
-                rbtRolDesactivado.Select();          
+            {
+                this.HabilitadoDesdeInicio = true;
+                buttonHabilitarDesactivar(btnHabilitar);
+            }      
         }
 
         private void tbxNombreRol_KeyPress(object sender, KeyPressEventArgs e)
@@ -107,5 +113,10 @@ namespace FrbaHotel.AbmRol
         }
 
         #endregion
+
+        private void btnHabilitar_Click(object sender, EventArgs e)
+        {
+            buttonHabilitarDesactivar(btnHabilitar);
+        }
     }
 }

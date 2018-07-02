@@ -34,16 +34,14 @@
             this.lbxFuncionalidades = new System.Windows.Forms.ListBox();
             this.btnGuardarRol = new System.Windows.Forms.Button();
             this.btnLimpiarRol = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cbxFuncionalidades = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
-            this.rbtRolActivado = new System.Windows.Forms.RadioButton();
-            this.rbtRolDesactivado = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnHabilitar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.SuspendLayout();
@@ -112,15 +110,6 @@
             this.btnLimpiarRol.UseVisualStyleBackColor = true;
             this.btnLimpiarRol.Click += new System.EventHandler(this.btnLimpiarRol_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 298);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "Estado";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -170,17 +159,6 @@
             this.label5.TabIndex = 26;
             this.label5.Text = "*";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(64, 297);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(17, 22);
-            this.label6.TabIndex = 27;
-            this.label6.Text = "*";
-            // 
             // label32
             // 
             this.label32.AutoSize = true;
@@ -192,35 +170,32 @@
             this.label32.TabIndex = 264;
             this.label32.Text = "Datos del Rol";
             // 
-            // rbtRolActivado
+            // label3
             // 
-            this.rbtRolActivado.AutoSize = true;
-            this.rbtRolActivado.Location = new System.Drawing.Point(29, 321);
-            this.rbtRolActivado.Name = "rbtRolActivado";
-            this.rbtRolActivado.Size = new System.Drawing.Size(67, 17);
-            this.rbtRolActivado.TabIndex = 14;
-            this.rbtRolActivado.TabStop = true;
-            this.rbtRolActivado.Text = "Activado";
-            this.rbtRolActivado.UseVisualStyleBackColor = true;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(26, 307);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Estado";
             // 
-            // rbtRolDesactivado
+            // btnHabilitar
             // 
-            this.rbtRolDesactivado.AutoSize = true;
-            this.rbtRolDesactivado.Location = new System.Drawing.Point(113, 321);
-            this.rbtRolDesactivado.Name = "rbtRolDesactivado";
-            this.rbtRolDesactivado.Size = new System.Drawing.Size(85, 17);
-            this.rbtRolDesactivado.TabIndex = 15;
-            this.rbtRolDesactivado.TabStop = true;
-            this.rbtRolDesactivado.Text = "Desactivado";
-            this.rbtRolDesactivado.UseVisualStyleBackColor = true;
+            this.btnHabilitar.Location = new System.Drawing.Point(75, 302);
+            this.btnHabilitar.Name = "btnHabilitar";
+            this.btnHabilitar.Size = new System.Drawing.Size(75, 23);
+            this.btnHabilitar.TabIndex = 266;
+            this.btnHabilitar.Text = "Habilitar";
+            this.btnHabilitar.UseVisualStyleBackColor = true;
+            this.btnHabilitar.Click += new System.EventHandler(this.btnHabilitar_Click);
             // 
             // VentanaModificarRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(294, 409);
+            this.Controls.Add(this.btnHabilitar);
             this.Controls.Add(this.label32);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnQuitarFuncionalidad);
@@ -232,15 +207,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbxFuncionalidades);
-            this.Controls.Add(this.rbtRolDesactivado);
-            this.Controls.Add(this.rbtRolActivado);
             this.Controls.Add(this.label1);
             this.Name = "VentanaModificarRol";
             this.Text = "Modificar Rol - FRBA Hotel ©";
             this.Load += new System.EventHandler(this.VentanaModificarRol_Load);
             this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.rbtRolActivado, 0);
-            this.Controls.SetChildIndex(this.rbtRolDesactivado, 0);
             this.Controls.SetChildIndex(this.cbxFuncionalidades, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label3, 0);
@@ -252,8 +223,8 @@
             this.Controls.SetChildIndex(this.btnQuitarFuncionalidad, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.label5, 0);
-            this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.label32, 0);
+            this.Controls.SetChildIndex(this.btnHabilitar, 0);
             this.Controls.SetChildIndex(this.logo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
@@ -270,15 +241,13 @@
         private System.Windows.Forms.ListBox lbxFuncionalidades;
         private System.Windows.Forms.Button btnGuardarRol;
         private System.Windows.Forms.Button btnLimpiarRol;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbxFuncionalidades;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.RadioButton rbtRolActivado;
-        private System.Windows.Forms.RadioButton rbtRolDesactivado;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnHabilitar;
     }
 }
