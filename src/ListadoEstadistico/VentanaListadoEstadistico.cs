@@ -74,7 +74,7 @@ namespace FrbaHotel.ListadoEstadistico
 
                     };
                     break;
-                case 3://Clientes cumplidores
+                case 3:
                     {
 
                         SqlCommand consulta = Database.consultaCrear("select distinct top 5 CONCAT(Domicilio_Ciudad,' ',Domicilio_Calle,' ',Domicilio_NumeroCalle) 'Hotel',Habitacion_Numero,DATEDIFF(day,Estadia_FechaInicio,Estadia_FechaFin)'Dias utilizados',(select COUNT(HabitacionNoDisponible_HabitacionID)'Cantidad de veces utilizadas' from rip.HabitacionesNoDisponibles where a.HabitacionNoDisponible_HabitacionID=HabitacionNoDisponible_HabitacionID group by HabitacionNoDisponible_HabitacionID)'Cantidad de veces utilizadas' from rip.Reservas join rip.HabitacionesNoDisponibles a on Reserva_ID=HabitacionNoDisponible_ReservaID join rip.Habitaciones on HabitacionNoDisponible_HabitacionID=Habitacion_ID join rip.Hoteles on Habitacion_HotelID=Hotel_ID join rip.Domicilios on Domicilio_ID=Hotel_DomicilioID join rip.Estadias on Estadia_ReservaID=Reserva_ID where YEAR(Estadia_FechaInicio)=@anio and DATEPART(QUARTER,Estadia_FechaInicio)=@trimestre  group by Domicilio_Ciudad,Domicilio_Calle,habitacion_Numero,Domicilio_NumeroCalle,Estadia_FechaInicio,Estadia_FechaFin,a.HabitacionNoDisponible_HabitacionID order by 4 desc,3 desc");

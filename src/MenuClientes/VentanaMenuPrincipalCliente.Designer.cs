@@ -125,6 +125,7 @@
             this.Name = "VentanaMenuPrincipalCliente";
             this.Text = "Menu Principal - FRBA Hotel ©";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.VentanaMenuPrincipalCliente_FormClosed);
+            this.Load += new System.EventHandler(this.VentanaMenuPrincipalCliente_Load);
             this.Controls.SetChildIndex(this.btnCrear, 0);
             this.Controls.SetChildIndex(this.btnModificar, 0);
             this.Controls.SetChildIndex(this.btnCancelar, 0);
