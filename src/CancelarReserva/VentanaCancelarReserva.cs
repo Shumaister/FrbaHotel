@@ -13,6 +13,8 @@ namespace FrbaHotel.CancelarReserva
 {
     public partial class VentanaCancelarReserva : VentanaBase
     {
+        private Sesion sesion;
+
         public Usuario Usuario { get; set; }
 
         public VentanaCancelarReserva()
@@ -21,6 +23,12 @@ namespace FrbaHotel.CancelarReserva
             this.IniciarVentana();
             string id = Database.usuarioObtenerID(new Usuario("guest"));
             Usuario = new Usuario(id, "guest");
+        }
+
+        public VentanaCancelarReserva(Sesion sesion)
+        {
+            // TODO: Complete member initialization
+            this.sesion = sesion;
         }
 
         private void IniciarVentana() 

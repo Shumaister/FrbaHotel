@@ -13,11 +13,19 @@ namespace FrbaHotel.GenerarModificacionReserva
 {
     public partial class IngresarNumeroReservaModificar : VentanaBase
     {
+        private Sesion sesion;
+
         public IngresarNumeroReservaModificar()
         {
             InitializeComponent();
 
             this.lblErrorIngresoReserva.Visible = false;
+        }
+
+        public IngresarNumeroReservaModificar(Sesion sesion)
+        {
+            // TODO: Complete member initialization
+            this.sesion = sesion;
         }
 
         private void IngresarNumeroReservaModificar_Load(object sender, EventArgs e)
