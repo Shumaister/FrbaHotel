@@ -16,19 +16,16 @@ namespace FrbaHotel.GenerarModificacionReserva
     public partial class VentanaGenerarReserva : VentanaBase
     {
         private string funcion;
-        private string p;
         private Sesion Sesion;
-
         public Reserva Reserva { get; set; }
         public Reserva ReservaOriginal { get; set; }
-
         public Cliente Cliente { get; set; }
-
-
         private Usuario Usuario { get; set; }
         private int CantidadDeHabitacionesNecesarias { get; set; }
         private List<string> ListaIDHabitaciones { get; set; }
         private string IdHotel { get; set; }
+
+        #region Constructores
 
         public VentanaGenerarReserva()
         {
@@ -85,6 +82,36 @@ namespace FrbaHotel.GenerarModificacionReserva
             groupBox2.Enabled = false;
         }
 
+        public VentanaGenerarReserva(Sesion sesion, Clases.Reserva reserva, string p)
+        {
+            this.Sesion = sesion;
+            this.Reserva = reserva;
+            this.funcion = p;
+            this.Usuario = sesion.usuario;
+
+            InitializeComponent();
+            this.ReservaOriginal = reserva;
+            
+            this.Cliente = Database.ReservaObtenerClienteByIdReserva(ReservaOriginal.Codigo);
+            this.ReservaOriginal.Cliente = Database.ReservaObtenerClienteByIdReserva(ReservaOriginal.Codigo);
+
+            string hotelloguea = Sesion.hotel.domicilio.pais + "-" + Sesion.hotel.domicilio.ciudad + "-" + Sesion.hotel.domicilio.calle + "-" + Sesion.hotel.domicilio.numeroCalle;
+            List<string> h = new List<string>();
+            h.Add(hotelloguea);
+
+            comboBoxCargar(cbxHoteles, h);
+            this.cbxHoteles.Enabled = false;
+
+
+            OcultarErrores();
+            groupBox3.Enabled = false;
+            groupBox2.Enabled = false;
+
+            cargarReservaAModificar();        
+        }
+
+        #endregion
+
         #region FuncionesAuxiliares
 
         private void cargarReservaAModificar()
@@ -92,8 +119,6 @@ namespace FrbaHotel.GenerarModificacionReserva
             this.cbxHoteles.SelectedIndex = cbxHoteles.FindStringExact(Database.reservaObtenerHotelbyID(Reserva.Hotel.id));
             this.cbxTipoHabitacion.SelectedIndex = cbxTipoHabitacion.FindStringExact(Database.HabitacionTipobyID(Reserva.Habitaciones[0].tipoHabitacion));
             this.tbxCantidadHuespedes.Text = Reserva.CantidadHuespedes.ToString();
-            //this.lblFechaFin.Text = Reserva.FechaFin.ToString();
-            //this.lblFechaInicio.Text = Reserva.FechaInicio.ToString();
             this.cbxRegimenEstadia.SelectedIndex = cbxRegimenEstadia.FindStringExact(Database.reservaObtenerRegimen(Reserva.Codigo));
             this.calendarInicio.SelectionStart = ReservaOriginal.FechaInicio;
             this.calendarFin.SelectionStart = ReservaOriginal.FechaFin;
@@ -227,6 +252,36 @@ namespace FrbaHotel.GenerarModificacionReserva
                 this.btnNuevo.Text = "Nuevo Cliente";
                 this.btnClienteExistente.Text = "Ya es Cliente";
                 this.lblCliente.Text = "La reserva es generada con el usuario " + Sesion.usuario.nombre;
+            }
+            if (funcion == "ModificaUsuario")
+            {
+                this.btnNuevo.Text = "Nuevo Cliente";
+                this.btnClienteExistente.Text = "Ya es Cliente";
+                this.lblCliente.Text = "La reserva es generada con el usuario " + Sesion.usuario.nombre;
+
+                this.btnNuevo.Enabled = false;
+                this.btnClienteExistente.Enabled = false;
+                this.ReservaOriginal.Cliente = this.Cliente;
+            }
+        }
+
+        private void CargarCliente()
+        {
+            try
+            {
+                if (funcion == "CreaUsuario" || funcion == "ModificaUsuario")
+                {
+                    Saludo();
+                    this.lblCliente.Text = "La reserva es generada a nombre del cliente " + Reserva.Cliente.persona.nombre;
+                }
+                else
+                {
+                    Saludo();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Recuerde que debe ingresar obligatoriamiente quien es el cliente de la reserva.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -386,35 +441,49 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             VentanaCliente ventanaCliente = new VentanaCliente(Reserva);
             ventanaCliente.ShowDialog();
-            
-            if (funcion == "CreaUsuario" || funcion == "ModificaUsuario")
-            {
-                Saludo();
-                this.lblCliente.Text = "La reserva es generada a nombre del cliente " + Reserva.Cliente.persona.nombre;
-            }
-            else
-            {
-                Saludo();
-            }
+
+            CargarCliente();
         }
+
 
         private void btnClienteExistente_Click(object sender, EventArgs e)
         {
             new VentanaCliente(this, "BuscarDesdeReserva").ShowDialog();
 
-            if (funcion == "CreaUsuario" || funcion == "ModificaUsuario")
-            {
-                Saludo();
-                this.lblCliente.Text = "La reserva es generada a nombre del cliente " + Reserva.Cliente.persona.nombre;
-            }
-            else 
-            {
-                Saludo();
-            }
+            CargarCliente();
         }
 
         private void btnConfirmarReserva_Click(object sender, EventArgs e)
         {
+            if (funcion == "Crear")
+            {
+                if (Reserva.Cliente != null)
+                {
+                    Reserva.Codigo = Database.ReservaGenerarCodigo();
+
+                    if (Usuario == null)
+                    {
+                        string id = Database.usuarioObtenerID(new Usuario("guest"));
+                        Reserva.Usuario = new Usuario(id, "guest");
+                    }
+                    else
+                    {
+                        Reserva.Usuario = Usuario;
+                    }
+
+                    try
+                    {
+                        Database.ReservaSaveReserva(Reserva);
+                        this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
+                        MessageBox.Show("Se a registrado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Se ha producido un error al registrar la reserva, revise los datos ingresados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+
             if (funcion == "ModificaCliente")
             {
                 Reserva.Usuario.id = Database.usuarioObtenerID(Reserva.Usuario);
@@ -449,33 +518,21 @@ namespace FrbaHotel.GenerarModificacionReserva
                     MessageBox.Show("Se ha producido un error al registrar la reserva, revise los datos ingresados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            
-            if (funcion == "Crear")
+
+            if (funcion == "ModificaUsuario")
             {
-                if (Reserva.Cliente != null)
+                Reserva.Usuario = Usuario;
+                Reserva.Cliente = ReservaOriginal.Cliente;
+                Reserva.Cliente.id = Database.clienteObtenerIDPersona(Reserva.Cliente.persona.id);
+                try
                 {
-                    Reserva.Codigo = Database.ReservaGenerarCodigo();
-
-                    if (Usuario == null)
-                    {
-                        string id = Database.usuarioObtenerID(new Usuario("guest"));
-                        Reserva.Usuario = new Usuario(id, "guest");
-                    }
-                    else
-                    {
-                        Reserva.Usuario = Usuario;
-                    }
-
-                    try
-                    {
-                        Database.ReservaSaveReserva(Reserva);
-                        this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
-                        MessageBox.Show("Se a registrado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Se ha producido un error al registrar la reserva, revise los datos ingresados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    Database.ReservaSaveReserva(Reserva);
+                    this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
+                    MessageBox.Show("Se a modificado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Se ha producido un error al registrar la reserva, revise los datos ingresados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

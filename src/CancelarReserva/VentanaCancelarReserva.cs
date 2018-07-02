@@ -14,8 +14,8 @@ namespace FrbaHotel.CancelarReserva
     public partial class VentanaCancelarReserva : VentanaBase
     {
         private Sesion sesion;
-
         public Usuario Usuario { get; set; }
+        private bool esCliente;
 
         public VentanaCancelarReserva()
         {
@@ -23,12 +23,16 @@ namespace FrbaHotel.CancelarReserva
             this.IniciarVentana();
             string id = Database.usuarioObtenerID(new Usuario("guest"));
             Usuario = new Usuario(id, "guest");
+            esCliente = true;
         }
 
         public VentanaCancelarReserva(Sesion sesion)
         {
-            // TODO: Complete member initialization
+            InitializeComponent();
+            this.IniciarVentana();
             this.sesion = sesion;
+            Usuario = sesion.usuario;
+            esCliente = false;
         }
 
         private void IniciarVentana() 
@@ -82,8 +86,24 @@ namespace FrbaHotel.CancelarReserva
                     {
                         if (Database.ReservaEstadoValidoParaCancelarModificar(numeroReserva))
                         {
-                            Reserva reserva = Database.ReservaObtenerById(numeroReserva);
-                            this.lblUsuario.Text = reserva.Usuario.nombre;
+                            if (esCliente)
+                            {
+                                Reserva reserva = Database.ReservaObtenerById(numeroReserva);
+                                this.lblUsuario.Text = reserva.Usuario.nombre;
+                            }
+                            else
+                            {
+                                if (Database.ReservaEsDeMiHotel(numeroReserva, sesion.hotel.id))
+                                {
+                                    Reserva reserva = Database.ReservaObtenerById(numeroReserva);
+                                    this.lblUsuario.Text = reserva.Usuario.nombre;
+                                }
+                                else
+                                {
+                                    this.lblErrorIngresoReserva.Visible = true;
+                                    this.lblErrorIngresoReserva.Text = "Esta reserva no pertenece a este hotel.";
+                                }
+                            }
                         }
                         else
                         {
