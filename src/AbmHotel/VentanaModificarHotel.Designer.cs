@@ -206,6 +206,7 @@
             // 
             this.tbxFechaCreacion.Enabled = false;
             this.tbxFechaCreacion.Location = new System.Drawing.Point(40, 176);
+            this.tbxFechaCreacion.MaxLength = 254;
             this.tbxFechaCreacion.Name = "tbxFechaCreacion";
             this.tbxFechaCreacion.ReadOnly = true;
             this.tbxFechaCreacion.Size = new System.Drawing.Size(100, 20);
@@ -234,6 +235,7 @@
             // tbxNombre
             // 
             this.tbxNombre.Location = new System.Drawing.Point(40, 62);
+            this.tbxNombre.MaxLength = 254;
             this.tbxNombre.Name = "tbxNombre";
             this.tbxNombre.Size = new System.Drawing.Size(100, 20);
             this.tbxNombre.TabIndex = 317;
@@ -242,6 +244,7 @@
             // tbxEstrellas
             // 
             this.tbxEstrellas.Location = new System.Drawing.Point(40, 116);
+            this.tbxEstrellas.MaxLength = 17;
             this.tbxEstrellas.Name = "tbxEstrellas";
             this.tbxEstrellas.Size = new System.Drawing.Size(100, 20);
             this.tbxEstrellas.TabIndex = 320;
@@ -321,6 +324,7 @@
             // tbxNumeroCalle
             // 
             this.tbxNumeroCalle.Location = new System.Drawing.Point(423, 116);
+            this.tbxNumeroCalle.MaxLength = 17;
             this.tbxNumeroCalle.Name = "tbxNumeroCalle";
             this.tbxNumeroCalle.Size = new System.Drawing.Size(100, 20);
             this.tbxNumeroCalle.TabIndex = 312;
@@ -349,6 +353,7 @@
             // tbxCalle
             // 
             this.tbxCalle.Location = new System.Drawing.Point(284, 116);
+            this.tbxCalle.MaxLength = 254;
             this.tbxCalle.Name = "tbxCalle";
             this.tbxCalle.Size = new System.Drawing.Size(100, 20);
             this.tbxCalle.TabIndex = 309;
@@ -377,6 +382,7 @@
             // tbxCiudad
             // 
             this.tbxCiudad.Location = new System.Drawing.Point(424, 60);
+            this.tbxCiudad.MaxLength = 254;
             this.tbxCiudad.Name = "tbxCiudad";
             this.tbxCiudad.Size = new System.Drawing.Size(100, 20);
             this.tbxCiudad.TabIndex = 306;
@@ -405,6 +411,7 @@
             // tbxPais
             // 
             this.tbxPais.Location = new System.Drawing.Point(284, 60);
+            this.tbxPais.MaxLength = 254;
             this.tbxPais.Name = "tbxPais";
             this.tbxPais.Size = new System.Drawing.Size(100, 20);
             this.tbxPais.TabIndex = 303;
@@ -424,6 +431,7 @@
             // tbxTelefono
             // 
             this.tbxTelefono.Location = new System.Drawing.Point(286, 204);
+            this.tbxTelefono.MaxLength = 17;
             this.tbxTelefono.Name = "tbxTelefono";
             this.tbxTelefono.Size = new System.Drawing.Size(100, 20);
             this.tbxTelefono.TabIndex = 300;
@@ -461,6 +469,7 @@
             // tbxEmail
             // 
             this.tbxEmail.Location = new System.Drawing.Point(424, 202);
+            this.tbxEmail.MaxLength = 254;
             this.tbxEmail.Name = "tbxEmail";
             this.tbxEmail.ShortcutsEnabled = false;
             this.tbxEmail.Size = new System.Drawing.Size(99, 20);

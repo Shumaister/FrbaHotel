@@ -132,7 +132,7 @@
             // tbxMotivo
             // 
             this.tbxMotivo.Location = new System.Drawing.Point(174, 295);
-            this.tbxMotivo.MaxLength = 250;
+            this.tbxMotivo.MaxLength = 254;
             this.tbxMotivo.Multiline = true;
             this.tbxMotivo.Name = "tbxMotivo";
             this.tbxMotivo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;

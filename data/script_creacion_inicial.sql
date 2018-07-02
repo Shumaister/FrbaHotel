@@ -120,7 +120,7 @@ CREATE TABLE [RIP].[Domicilios] (
 	[Domicilio_Calle] [nvarchar](255),
 	[Domicilio_NumeroCalle] [numeric](18,0),
 	[Domicilio_Piso] [numeric](18,0),
-	[Domicilio_Departamento] [nvarchar](255),
+	[Domicilio_Departamento] [nvarchar](50),
 )
 PRINT '----- Tabla RIP.Domicilios creada -----'
 END
@@ -181,7 +181,7 @@ IF NOT EXISTS (
 BEGIN
 CREATE TABLE [RIP].[Usuarios] (
 	[Usuario_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[Usuario_Nombre] [nvarchar](50) NOT NULL,
+	[Usuario_Nombre] [nvarchar](255) NOT NULL,
 	[Usuario_Contrasenia] [varbinary](100) NOT NULL,
 	[Usuario_IntentosFallidos] [int] DEFAULT 0,
 	[Usuario_PersonaID] [numeric](18,0),
@@ -370,7 +370,7 @@ CREATE TABLE [RIP].[Habitaciones] (
 	[Habitacion_HotelID] [numeric](18,0),
 	[Habitacion_Numero] [numeric](18,0),
 	[Habitacion_Piso] [numeric](18,0),
-	[Habitacion_Frente] [nvarchar](255),
+	[Habitacion_Frente] [nvarchar](50),
 	[Habitacion_TipoHabitacionID] [numeric](18,0),
 	[Habitacion_Descripcion] [nvarchar](255),
 	[Habitacion_Estado] [bit] DEFAULT 1,

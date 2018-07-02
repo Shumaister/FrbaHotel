@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.pagAgregar = new System.Windows.Forms.TabPage();
             this.label13 = new System.Windows.Forms.Label();
@@ -309,6 +309,7 @@
             // 
             this.tbxFechaCreacion.Enabled = false;
             this.tbxFechaCreacion.Location = new System.Drawing.Point(33, 179);
+            this.tbxFechaCreacion.MaxLength = 254;
             this.tbxFechaCreacion.Name = "tbxFechaCreacion";
             this.tbxFechaCreacion.ReadOnly = true;
             this.tbxFechaCreacion.Size = new System.Drawing.Size(100, 20);
@@ -337,6 +338,7 @@
             // tbxNombre
             // 
             this.tbxNombre.Location = new System.Drawing.Point(33, 65);
+            this.tbxNombre.MaxLength = 254;
             this.tbxNombre.Name = "tbxNombre";
             this.tbxNombre.Size = new System.Drawing.Size(100, 20);
             this.tbxNombre.TabIndex = 269;
@@ -345,6 +347,7 @@
             // tbxEstrellas
             // 
             this.tbxEstrellas.Location = new System.Drawing.Point(33, 119);
+            this.tbxEstrellas.MaxLength = 17;
             this.tbxEstrellas.Name = "tbxEstrellas";
             this.tbxEstrellas.Size = new System.Drawing.Size(100, 20);
             this.tbxEstrellas.TabIndex = 274;
@@ -424,6 +427,7 @@
             // tbxNumeroCalle
             // 
             this.tbxNumeroCalle.Location = new System.Drawing.Point(416, 119);
+            this.tbxNumeroCalle.MaxLength = 17;
             this.tbxNumeroCalle.Name = "tbxNumeroCalle";
             this.tbxNumeroCalle.Size = new System.Drawing.Size(100, 20);
             this.tbxNumeroCalle.TabIndex = 256;
@@ -452,6 +456,7 @@
             // tbxCalle
             // 
             this.tbxCalle.Location = new System.Drawing.Point(277, 119);
+            this.tbxCalle.MaxLength = 254;
             this.tbxCalle.Name = "tbxCalle";
             this.tbxCalle.Size = new System.Drawing.Size(100, 20);
             this.tbxCalle.TabIndex = 253;
@@ -480,6 +485,7 @@
             // tbxCiudad
             // 
             this.tbxCiudad.Location = new System.Drawing.Point(417, 63);
+            this.tbxCiudad.MaxLength = 254;
             this.tbxCiudad.Name = "tbxCiudad";
             this.tbxCiudad.Size = new System.Drawing.Size(100, 20);
             this.tbxCiudad.TabIndex = 250;
@@ -508,6 +514,7 @@
             // tbxPais
             // 
             this.tbxPais.Location = new System.Drawing.Point(277, 63);
+            this.tbxPais.MaxLength = 254;
             this.tbxPais.Name = "tbxPais";
             this.tbxPais.Size = new System.Drawing.Size(100, 20);
             this.tbxPais.TabIndex = 223;
@@ -527,6 +534,7 @@
             // tbxTelefono
             // 
             this.tbxTelefono.Location = new System.Drawing.Point(279, 207);
+            this.tbxTelefono.MaxLength = 17;
             this.tbxTelefono.Name = "tbxTelefono";
             this.tbxTelefono.Size = new System.Drawing.Size(100, 20);
             this.tbxTelefono.TabIndex = 220;
@@ -564,6 +572,7 @@
             // tbxEmail
             // 
             this.tbxEmail.Location = new System.Drawing.Point(417, 205);
+            this.tbxEmail.MaxLength = 254;
             this.tbxEmail.Name = "tbxEmail";
             this.tbxEmail.ShortcutsEnabled = false;
             this.tbxEmail.Size = new System.Drawing.Size(99, 20);
@@ -682,6 +691,7 @@
             // tbxModificarFiltroPais
             // 
             this.tbxModificarFiltroPais.Location = new System.Drawing.Point(349, 96);
+            this.tbxModificarFiltroPais.MaxLength = 254;
             this.tbxModificarFiltroPais.Name = "tbxModificarFiltroPais";
             this.tbxModificarFiltroPais.Size = new System.Drawing.Size(100, 20);
             this.tbxModificarFiltroPais.TabIndex = 6;
@@ -690,6 +700,7 @@
             // tbxModificarFiltroEstrellas
             // 
             this.tbxModificarFiltroEstrellas.Location = new System.Drawing.Point(156, 96);
+            this.tbxModificarFiltroEstrellas.MaxLength = 17;
             this.tbxModificarFiltroEstrellas.Name = "tbxModificarFiltroEstrellas";
             this.tbxModificarFiltroEstrellas.Size = new System.Drawing.Size(100, 20);
             this.tbxModificarFiltroEstrellas.TabIndex = 5;
@@ -698,6 +709,7 @@
             // tbxModificarFiltroCiudad
             // 
             this.tbxModificarFiltroCiudad.Location = new System.Drawing.Point(349, 43);
+            this.tbxModificarFiltroCiudad.MaxLength = 254;
             this.tbxModificarFiltroCiudad.Name = "tbxModificarFiltroCiudad";
             this.tbxModificarFiltroCiudad.Size = new System.Drawing.Size(100, 20);
             this.tbxModificarFiltroCiudad.TabIndex = 4;
@@ -706,6 +718,7 @@
             // tbxModificarFiltroNombre
             // 
             this.tbxModificarFiltroNombre.Location = new System.Drawing.Point(156, 44);
+            this.tbxModificarFiltroNombre.MaxLength = 254;
             this.tbxModificarFiltroNombre.Name = "tbxModificarFiltroNombre";
             this.tbxModificarFiltroNombre.Size = new System.Drawing.Size(100, 20);
             this.tbxModificarFiltroNombre.TabIndex = 3;
@@ -726,23 +739,23 @@
             this.dgvModificarHotel.AllowUserToAddRows = false;
             this.dgvModificarHotel.AllowUserToDeleteRows = false;
             this.dgvModificarHotel.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvModificarHotel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvModificarHotel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvModificarHotel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvModificarHotel.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvModificarHotel.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvModificarHotel.Location = new System.Drawing.Point(16, 29);
             this.dgvModificarHotel.Name = "dgvModificarHotel";
             this.dgvModificarHotel.ReadOnly = true;
@@ -843,6 +856,7 @@
             // tbxEliminarFiltroPais
             // 
             this.tbxEliminarFiltroPais.Location = new System.Drawing.Point(349, 96);
+            this.tbxEliminarFiltroPais.MaxLength = 254;
             this.tbxEliminarFiltroPais.Name = "tbxEliminarFiltroPais";
             this.tbxEliminarFiltroPais.Size = new System.Drawing.Size(100, 20);
             this.tbxEliminarFiltroPais.TabIndex = 276;
@@ -851,6 +865,7 @@
             // tbxEliminarFiltroEstrellas
             // 
             this.tbxEliminarFiltroEstrellas.Location = new System.Drawing.Point(156, 96);
+            this.tbxEliminarFiltroEstrellas.MaxLength = 17;
             this.tbxEliminarFiltroEstrellas.Name = "tbxEliminarFiltroEstrellas";
             this.tbxEliminarFiltroEstrellas.Size = new System.Drawing.Size(100, 20);
             this.tbxEliminarFiltroEstrellas.TabIndex = 275;
@@ -859,6 +874,7 @@
             // tbxEliminarFiltroCiudad
             // 
             this.tbxEliminarFiltroCiudad.Location = new System.Drawing.Point(349, 43);
+            this.tbxEliminarFiltroCiudad.MaxLength = 254;
             this.tbxEliminarFiltroCiudad.Name = "tbxEliminarFiltroCiudad";
             this.tbxEliminarFiltroCiudad.Size = new System.Drawing.Size(100, 20);
             this.tbxEliminarFiltroCiudad.TabIndex = 274;
@@ -867,6 +883,7 @@
             // tbxEliminarFiltroNombre
             // 
             this.tbxEliminarFiltroNombre.Location = new System.Drawing.Point(156, 44);
+            this.tbxEliminarFiltroNombre.MaxLength = 254;
             this.tbxEliminarFiltroNombre.Name = "tbxEliminarFiltroNombre";
             this.tbxEliminarFiltroNombre.Size = new System.Drawing.Size(100, 20);
             this.tbxEliminarFiltroNombre.TabIndex = 273;
@@ -887,23 +904,23 @@
             this.dgvEliminarHotel.AllowUserToAddRows = false;
             this.dgvEliminarHotel.AllowUserToDeleteRows = false;
             this.dgvEliminarHotel.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEliminarHotel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEliminarHotel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvEliminarHotel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEliminarHotel.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEliminarHotel.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvEliminarHotel.Location = new System.Drawing.Point(16, 29);
             this.dgvEliminarHotel.Name = "dgvEliminarHotel";
             this.dgvEliminarHotel.ReadOnly = true;

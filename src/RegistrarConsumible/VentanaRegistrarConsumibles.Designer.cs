@@ -76,6 +76,7 @@
             // tbxCantidad
             // 
             this.tbxCantidad.Location = new System.Drawing.Point(162, 70);
+            this.tbxCantidad.MaxLength = 17;
             this.tbxCantidad.Name = "tbxCantidad";
             this.tbxCantidad.ShortcutsEnabled = false;
             this.tbxCantidad.Size = new System.Drawing.Size(75, 20);

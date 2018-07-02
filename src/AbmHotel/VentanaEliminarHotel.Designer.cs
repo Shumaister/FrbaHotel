@@ -82,6 +82,7 @@
             // 
             this.tbxFechaInicio.Enabled = false;
             this.tbxFechaInicio.Location = new System.Drawing.Point(21, 107);
+            this.tbxFechaInicio.MaxLength = 254;
             this.tbxFechaInicio.Name = "tbxFechaInicio";
             this.tbxFechaInicio.Size = new System.Drawing.Size(100, 20);
             this.tbxFechaInicio.TabIndex = 361;
@@ -91,6 +92,7 @@
             // 
             this.tbxFechaFin.Enabled = false;
             this.tbxFechaFin.Location = new System.Drawing.Point(21, 173);
+            this.tbxFechaFin.MaxLength = 254;
             this.tbxFechaFin.Name = "tbxFechaFin";
             this.tbxFechaFin.Size = new System.Drawing.Size(100, 20);
             this.tbxFechaFin.TabIndex = 364;
@@ -147,6 +149,7 @@
             // tbxMotivo
             // 
             this.tbxMotivo.Location = new System.Drawing.Point(21, 294);
+            this.tbxMotivo.MaxLength = 254;
             this.tbxMotivo.Multiline = true;
             this.tbxMotivo.Name = "tbxMotivo";
             this.tbxMotivo.Size = new System.Drawing.Size(499, 137);

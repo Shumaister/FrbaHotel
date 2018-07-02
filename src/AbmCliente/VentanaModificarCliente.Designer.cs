@@ -116,6 +116,7 @@
             // tbxNacionalidad
             // 
             this.tbxNacionalidad.Location = new System.Drawing.Point(24, 301);
+            this.tbxNacionalidad.MaxLength = 254;
             this.tbxNacionalidad.Name = "tbxNacionalidad";
             this.tbxNacionalidad.Size = new System.Drawing.Size(100, 20);
             this.tbxNacionalidad.TabIndex = 338;
@@ -205,6 +206,7 @@
             // 
             this.tbxFechaNacimiento.Enabled = false;
             this.tbxFechaNacimiento.Location = new System.Drawing.Point(164, 69);
+            this.tbxFechaNacimiento.MaxLength = 254;
             this.tbxFechaNacimiento.Name = "tbxFechaNacimiento";
             this.tbxFechaNacimiento.ReadOnly = true;
             this.tbxFechaNacimiento.Size = new System.Drawing.Size(100, 20);
@@ -233,6 +235,7 @@
             // tbxDocumento
             // 
             this.tbxDocumento.Location = new System.Drawing.Point(24, 240);
+            this.tbxDocumento.MaxLength = 17;
             this.tbxDocumento.Name = "tbxDocumento";
             this.tbxDocumento.Size = new System.Drawing.Size(100, 20);
             this.tbxDocumento.TabIndex = 327;
@@ -261,6 +264,7 @@
             // tbxNombre
             // 
             this.tbxNombre.Location = new System.Drawing.Point(24, 69);
+            this.tbxNombre.MaxLength = 254;
             this.tbxNombre.Name = "tbxNombre";
             this.tbxNombre.Size = new System.Drawing.Size(100, 20);
             this.tbxNombre.TabIndex = 319;
@@ -269,6 +273,7 @@
             // tbxApellido
             // 
             this.tbxApellido.Location = new System.Drawing.Point(24, 123);
+            this.tbxApellido.MaxLength = 254;
             this.tbxApellido.Name = "tbxApellido";
             this.tbxApellido.Size = new System.Drawing.Size(100, 20);
             this.tbxApellido.TabIndex = 324;
@@ -375,6 +380,7 @@
             // tbxPiso
             // 
             this.tbxPiso.Location = new System.Drawing.Point(430, 177);
+            this.tbxPiso.MaxLength = 17;
             this.tbxPiso.Name = "tbxPiso";
             this.tbxPiso.Size = new System.Drawing.Size(100, 20);
             this.tbxPiso.TabIndex = 313;
@@ -403,6 +409,7 @@
             // tbxNumeroCalle
             // 
             this.tbxNumeroCalle.Location = new System.Drawing.Point(570, 121);
+            this.tbxNumeroCalle.MaxLength = 17;
             this.tbxNumeroCalle.Name = "tbxNumeroCalle";
             this.tbxNumeroCalle.Size = new System.Drawing.Size(100, 20);
             this.tbxNumeroCalle.TabIndex = 310;
@@ -431,6 +438,7 @@
             // tbxCalle
             // 
             this.tbxCalle.Location = new System.Drawing.Point(430, 123);
+            this.tbxCalle.MaxLength = 254;
             this.tbxCalle.Name = "tbxCalle";
             this.tbxCalle.Size = new System.Drawing.Size(100, 20);
             this.tbxCalle.TabIndex = 307;
@@ -459,6 +467,7 @@
             // tbxCiudad
             // 
             this.tbxCiudad.Location = new System.Drawing.Point(570, 67);
+            this.tbxCiudad.MaxLength = 254;
             this.tbxCiudad.Name = "tbxCiudad";
             this.tbxCiudad.Size = new System.Drawing.Size(100, 20);
             this.tbxCiudad.TabIndex = 304;
@@ -487,6 +496,7 @@
             // tbxPais
             // 
             this.tbxPais.Location = new System.Drawing.Point(430, 67);
+            this.tbxPais.MaxLength = 254;
             this.tbxPais.Name = "tbxPais";
             this.tbxPais.Size = new System.Drawing.Size(100, 20);
             this.tbxPais.TabIndex = 301;
@@ -506,6 +516,7 @@
             // tbxTelefono
             // 
             this.tbxTelefono.Location = new System.Drawing.Point(430, 256);
+            this.tbxTelefono.MaxLength = 17;
             this.tbxTelefono.Name = "tbxTelefono";
             this.tbxTelefono.Size = new System.Drawing.Size(100, 20);
             this.tbxTelefono.TabIndex = 298;
@@ -543,6 +554,7 @@
             // tbxEmail
             // 
             this.tbxEmail.Location = new System.Drawing.Point(568, 254);
+            this.tbxEmail.MaxLength = 254;
             this.tbxEmail.Name = "tbxEmail";
             this.tbxEmail.ShortcutsEnabled = false;
             this.tbxEmail.Size = new System.Drawing.Size(99, 20);

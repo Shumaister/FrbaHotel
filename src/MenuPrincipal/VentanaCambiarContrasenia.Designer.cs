@@ -70,6 +70,7 @@
             // tbxContrasenia
             // 
             this.tbxContrasenia.Location = new System.Drawing.Point(81, 149);
+            this.tbxContrasenia.MaxLength = 254;
             this.tbxContrasenia.Name = "tbxContrasenia";
             this.tbxContrasenia.Size = new System.Drawing.Size(149, 20);
             this.tbxContrasenia.TabIndex = 264;
@@ -100,6 +101,7 @@
             // 
             this.tbxNombreUsuario.Enabled = false;
             this.tbxNombreUsuario.Location = new System.Drawing.Point(81, 76);
+            this.tbxNombreUsuario.MaxLength = 254;
             this.tbxNombreUsuario.Name = "tbxNombreUsuario";
             this.tbxNombreUsuario.Size = new System.Drawing.Size(149, 20);
             this.tbxNombreUsuario.TabIndex = 268;

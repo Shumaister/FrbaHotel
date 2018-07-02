@@ -89,6 +89,7 @@
             // txbUser
             // 
             this.txbUser.Location = new System.Drawing.Point(63, 200);
+            this.txbUser.MaxLength = 254;
             this.txbUser.Name = "txbUser";
             this.txbUser.Size = new System.Drawing.Size(131, 20);
             this.txbUser.TabIndex = 22;
@@ -97,6 +98,7 @@
             // txbPass
             // 
             this.txbPass.Location = new System.Drawing.Point(63, 260);
+            this.txbPass.MaxLength = 254;
             this.txbPass.Name = "txbPass";
             this.txbPass.Size = new System.Drawing.Size(131, 20);
             this.txbPass.TabIndex = 23;

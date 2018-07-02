@@ -188,6 +188,7 @@
             // tbxDescripcion
             // 
             this.tbxDescripcion.Location = new System.Drawing.Point(29, 217);
+            this.tbxDescripcion.MaxLength = 254;
             this.tbxDescripcion.Multiline = true;
             this.tbxDescripcion.Name = "tbxDescripcion";
             this.tbxDescripcion.Size = new System.Drawing.Size(306, 138);
@@ -238,6 +239,7 @@
             // tbxNumero
             // 
             this.tbxNumero.Location = new System.Drawing.Point(29, 92);
+            this.tbxNumero.MaxLength = 17;
             this.tbxNumero.Name = "tbxNumero";
             this.tbxNumero.Size = new System.Drawing.Size(100, 20);
             this.tbxNumero.TabIndex = 269;
@@ -246,6 +248,7 @@
             // tbxPiso
             // 
             this.tbxPiso.Location = new System.Drawing.Point(29, 153);
+            this.tbxPiso.MaxLength = 17;
             this.tbxPiso.Name = "tbxPiso";
             this.tbxPiso.Size = new System.Drawing.Size(100, 20);
             this.tbxPiso.TabIndex = 274;

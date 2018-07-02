@@ -113,7 +113,7 @@
             // tbxCantidadHuespedes
             // 
             this.tbxCantidadHuespedes.Location = new System.Drawing.Point(261, 151);
-            this.tbxCantidadHuespedes.MaxLength = 100;
+            this.tbxCantidadHuespedes.MaxLength = 17;
             this.tbxCantidadHuespedes.Name = "tbxCantidadHuespedes";
             this.tbxCantidadHuespedes.Size = new System.Drawing.Size(124, 20);
             this.tbxCantidadHuespedes.TabIndex = 291;

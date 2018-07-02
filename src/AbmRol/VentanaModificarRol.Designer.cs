@@ -66,6 +66,7 @@
             // tbxNombreRol
             // 
             this.tbxNombreRol.Location = new System.Drawing.Point(30, 75);
+            this.tbxNombreRol.MaxLength = 254;
             this.tbxNombreRol.Name = "tbxNombreRol";
             this.tbxNombreRol.Size = new System.Drawing.Size(120, 20);
             this.tbxNombreRol.TabIndex = 23;

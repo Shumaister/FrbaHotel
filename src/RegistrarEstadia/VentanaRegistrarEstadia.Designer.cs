@@ -73,6 +73,7 @@
             // tbxNumeroReserva
             // 
             this.tbxNumeroReserva.Location = new System.Drawing.Point(36, 77);
+            this.tbxNumeroReserva.MaxLength = 17;
             this.tbxNumeroReserva.Name = "tbxNumeroReserva";
             this.tbxNumeroReserva.Size = new System.Drawing.Size(129, 20);
             this.tbxNumeroReserva.TabIndex = 265;
