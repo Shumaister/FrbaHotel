@@ -864,7 +864,7 @@ namespace FrbaHotel
 
         public static void personaAgregar(Persona persona)
         {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Personas (Persona_Nombre, Persona_Apellido, Persona_TipoDocumentoID, Persona_NumeroDocumento, Persona_FechaNacimiento, Persona_Nacionalidad, Persona_DomicilioID, Persona_Telefono, Persona_Email) VALUES (@Nombre, @Apellido, @TipoDocumentoID, @NumeroDocumento, @FechaNacimiento, @Nacionalidad, @DomicilioID, @Telefono, @Email)");
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Personas (Persona_Nombre, Persona_Apellido, Persona_TipoDocumentoID, Persona_NumeroDocumento, Persona_FechaNacimiento, Persona_Nacionalidad, Persona_DomicilioID, Persona_Telefono, Persona_Email) VALUES (@Nombre, @Apellido, @TipoDocumentoID, @NumeroDocumento, CONVERT(datetime,@FechaNacimiento,121), @Nacionalidad, @DomicilioID, @Telefono, @Email)");
             consulta.Parameters.AddWithValue("@Nombre", persona.nombre);
             consulta.Parameters.AddWithValue("@Apellido", persona.apellido);
             consulta.Parameters.AddWithValue("@TipoDocumentoID", tipoDocumentoObtenerID(persona.tipoDocumento));
@@ -879,7 +879,7 @@ namespace FrbaHotel
 
         public static void personaModificar(Persona persona)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Personas SET Persona_Nombre = @Nombre, Persona_Apellido = @Apellido, Persona_TipoDocumentoID = @TipoDocumentoID, Persona_NumeroDocumento = @NumeroDocumento, Persona_FechaNacimiento = @FechaNacimiento, Persona_Nacionalidad = @Nacionalidad, Persona_DomicilioID = @DomicilioID, Persona_Telefono = @Telefono, Persona_Email = @Email WHERE Persona_ID = @ID");
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Personas SET Persona_Nombre = @Nombre, Persona_Apellido = @Apellido, Persona_TipoDocumentoID = @TipoDocumentoID, Persona_NumeroDocumento = @NumeroDocumento, Persona_FechaNacimiento = CONVERT(datetime,@FechaNacimiento,121), Persona_Nacionalidad = @Nacionalidad, Persona_DomicilioID = @DomicilioID, Persona_Telefono = @Telefono, Persona_Email = @Email WHERE Persona_ID = @ID");
             consulta.Parameters.AddWithValue("@ID", persona.id);
             consulta.Parameters.AddWithValue("@Nombre", persona.nombre);
             consulta.Parameters.AddWithValue("@Apellido", persona.apellido);
@@ -1066,7 +1066,7 @@ namespace FrbaHotel
 
         public static void hotelAgregar(Hotel hotel)
         {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Hoteles (Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_DomicilioID, Hotel_Telefono, Hotel_Email, Hotel_FechaCreacion) VALUES (@Nombre, @CantidadEstrellas, @DomicilioID, @Telefono, @Email, @FechaCreacion)");
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Hoteles (Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_DomicilioID, Hotel_Telefono, Hotel_Email, Hotel_FechaCreacion) VALUES (@Nombre, @CantidadEstrellas, @DomicilioID, @Telefono, @Email, CONVERT(datetime,@FechaCreacion,121)");
             consulta.Parameters.AddWithValue("@Nombre", hotel.nombre);
             consulta.Parameters.AddWithValue("@CantidadEstrellas", hotel.cantidadEstrellas);
             consulta.Parameters.AddWithValue("@DomicilioID", domicilioHotelObtenerID(hotel.domicilio));
@@ -1078,7 +1078,7 @@ namespace FrbaHotel
 
         public static void hotelModificar(Hotel hotel)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Hoteles SET Hotel_Nombre = @Nombre, Hotel_CantidadEstrellas = @CantidadEstrellas, Hotel_DomicilioID = @DomicilioID, Hotel_Telefono = @Telefono, Hotel_Email = @Email, Hotel_FechaCreacion = @FechaCreacion, Hotel_Estado = @Estado WHERE Hotel_ID = @ID");
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Hoteles SET Hotel_Nombre = @Nombre, Hotel_CantidadEstrellas = @CantidadEstrellas, Hotel_DomicilioID = @DomicilioID, Hotel_Telefono = @Telefono, Hotel_Email = @Email, Hotel_FechaCreacion = CONVERT(datetime,@FechaCreacion,121), Hotel_Estado = @Estado WHERE Hotel_ID = @ID");
             consulta.Parameters.AddWithValue("@ID", hotel.id);
             consulta.Parameters.AddWithValue("@Nombre", hotel.nombre);
             consulta.Parameters.AddWithValue("@CantidadEstrellas", hotel.cantidadEstrellas);
@@ -1283,7 +1283,7 @@ namespace FrbaHotel
 
         public static bool hotelCerradoTieneReservasEnPeriodo(HotelCerrado hotelCerrado)
         {
-            SqlCommand consulta = consultaCrear("SELECT COUNT(Reserva_ID) FROM RIP.Reservas WHERE Reserva_HotelID = @ID AND ((Reserva_FechaInicio BETWEEN @FechaInicio AND @FechaFin OR Reserva_FechaFin BETWEEN @FechaInicio AND @FechaFin) OR (Reserva_FechaInicio <= @FechaInicio AND Reserva_FechaFin >= @FechaFin))");
+            SqlCommand consulta = consultaCrear("SELECT COUNT(Reserva_ID) FROM RIP.Reservas WHERE Reserva_HotelID = @ID AND ((Reserva_FechaInicio BETWEEN CONVERT(datetime,@FechaInicio,121) AND CONVERT(datetime,@FechaFin,121) OR Reserva_FechaFin BETWEEN CONVERT(datetime,@FechaInicio,121) AND CONVERT(datetime,@FechaFin,121) OR (Reserva_FechaInicio <= CONVERT(datetime,@FechaInicio,121) AND Reserva_FechaFin >= CONVERT(datetime,@FechaFin,121)))");
             consulta.Parameters.AddWithValue("@ID", hotelCerrado.hotel.id);
             consulta.Parameters.AddWithValue("@FechaInicio", hotelCerrado.fechaInicio);
             consulta.Parameters.AddWithValue("@FechaFin", hotelCerrado.fechaFin);
@@ -1305,7 +1305,7 @@ namespace FrbaHotel
 
         public static void hotelCerradoAgregar(HotelCerrado hotelCerrado)
         {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.HotelesCerrados (HotelCerrado_HotelID, HotelCerrado_FechaInicio, HotelCerrado_FechaFin, HotelCerrado_Motivo) VALUES (@HotelID, @FechaInicio, @FechaFin, @Motivo)");
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.HotelesCerrados (HotelCerrado_HotelID, HotelCerrado_FechaInicio, HotelCerrado_FechaFin, HotelCerrado_Motivo) VALUES (@HotelID, CONVERT(datetime, @FechaInicio, 121), CONVERT(datetime, @FechaFin, 121), @Motivo)");
             consulta.Parameters.AddWithValue("@HotelID", hotelCerrado.hotel.id);
             consulta.Parameters.AddWithValue("@FechaInicio", hotelCerrado.fechaInicio);
             consulta.Parameters.AddWithValue("@FechaFin", hotelCerrado.fechaFin);
@@ -1848,7 +1848,7 @@ namespace FrbaHotel
 
         public static void estadiaAgregarIngreso(Estadia estadia)
         {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Estadias (Estadia_ReservaID, Estadia_FechaInicio, Estadia_CheckInUsuarioID) VALUES (@ReservaID, GETDATE(), @UsuarioID)");
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Estadias (Estadia_ReservaID, Estadia_FechaInicio, Estadia_CheckInUsuarioID) VALUES (@ReservaID, CONVERT(datetime,GETDATE(),121), @UsuarioID)");
             consulta.Parameters.AddWithValue("@UsuarioID", estadia.checkInUsuarioID);
             consulta.Parameters.AddWithValue("@ReservaID", estadia.reserva.Codigo);
             consultaEjecutar(consulta);
@@ -1898,7 +1898,7 @@ namespace FrbaHotel
 
         public static void estadiaAgregarEgreso(Estadia estadia)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Estadias SET Estadia_FechaFin = GETDATE(), Estadia_CheckOutUsuarioID = @UsuarioID WHERE Estadia_ReservaID = @ReservaID");
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Estadias SET Estadia_FechaFin = CONVERT(datetime,GETDATE(),121), Estadia_CheckOutUsuarioID = @UsuarioID WHERE Estadia_ReservaID = @ReservaID");
             consulta.Parameters.AddWithValue("@UsuarioID", estadia.checkOutUsuarioID);
             consulta.Parameters.AddWithValue("@ReservaID", estadia.reserva.Codigo);
             consultaEjecutar(consulta);
