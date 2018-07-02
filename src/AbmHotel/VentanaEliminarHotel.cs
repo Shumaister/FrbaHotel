@@ -31,14 +31,10 @@ namespace FrbaHotel.AbmHotel
 
         #endregion
 
-        private void logo_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void VentanaEliminarHotel_Load(object sender, EventArgs e)
         {
             lblHotel.Text = "Hotel: " + hotel.domicilio.pais + " - " + hotel.domicilio.ciudad + " - " + hotel.domicilio.calle + " - " + hotel.domicilio.numeroCalle;
+            calendario.MinDate = DateTime.Now;
             calendario.Hide();
             btnAceptarFecha.Hide();
         }
@@ -47,6 +43,11 @@ namespace FrbaHotel.AbmHotel
         {
             if (ventanaCamposEstanCompletos(this, controladorError))
             {
+                if (DateTime.Parse(tbxFechaFin.Text) <= DateTime.Parse(tbxFechaInicio.Text))
+                {
+                    ventanaInformarError("La fecha de fin debe ser posterior a la fecha de inicio");
+                    return;
+                }
                 HotelCerrado hotelCerrado = new HotelCerrado(hotel, DateTime.Parse(tbxFechaInicio.Text), DateTime.Parse(tbxFechaFin.Text), tbxMotivo.Text);
                 if (Database.hotelCerradoAgregadoConExito(hotelCerrado))
                 {

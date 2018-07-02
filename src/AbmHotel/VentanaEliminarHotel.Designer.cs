@@ -55,7 +55,6 @@
             this.logo.Location = new System.Drawing.Point(427, 265);
             this.logo.Size = new System.Drawing.Size(22, 35);
             this.logo.Visible = false;
-            this.logo.Click += new System.EventHandler(this.logo_Click);
             // 
             // label32
             // 

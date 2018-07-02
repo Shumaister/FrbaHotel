@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FrbaHotel.MenuClientes;
 
 namespace FrbaHotel.Login
 {
@@ -37,7 +38,7 @@ namespace FrbaHotel.Login
         private void btnCliente_Click(object sender, EventArgs e)
         {
             this.Hide();
-            VentanaMenuPrincipalClientes ventanaMenu = new VentanaMenuPrincipalClientes();
+            VentanaMenuPrincipalCliente ventanaMenu = new VentanaMenuPrincipalCliente();
             ventanaMenu.ShowDialog();
         }
 

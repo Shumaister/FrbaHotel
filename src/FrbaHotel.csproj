@@ -182,11 +182,11 @@
     <Compile Include="Login\VentanaSeleccionRolHotel.Designer.cs">
       <DependentUpon>VentanaSeleccionRolHotel.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuClientes\VentanaMenuPrincipalClientes.cs">
+    <Compile Include="MenuClientes\VentanaMenuPrincipalCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MenuClientes\VentanaMenuPrincipalClientes.Designer.cs">
-      <DependentUpon>VentanaMenuPrincipalClientes.cs</DependentUpon>
+    <Compile Include="MenuClientes\VentanaMenuPrincipalCliente.Designer.cs">
+      <DependentUpon>VentanaMenuPrincipalCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuPrincipal\VentanaCambiarContrasenia.cs">
       <SubType>Form</SubType>
@@ -312,8 +312,8 @@
     <EmbeddedResource Include="Login\VentanaSeleccionRolHotel.resx">
       <DependentUpon>VentanaSeleccionRolHotel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuClientes\VentanaMenuPrincipalClientes.resx">
-      <DependentUpon>VentanaMenuPrincipalClientes.cs</DependentUpon>
+    <EmbeddedResource Include="MenuClientes\VentanaMenuPrincipalCliente.resx">
+      <DependentUpon>VentanaMenuPrincipalCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal\VentanaCambiarContrasenia.resx">
       <DependentUpon>VentanaCambiarContrasenia.cs</DependentUpon>

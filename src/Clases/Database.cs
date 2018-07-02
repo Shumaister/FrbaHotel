@@ -1283,7 +1283,7 @@ namespace FrbaHotel
 
         public static bool hotelCerradoTieneReservasEnPeriodo(HotelCerrado hotelCerrado)
         {
-            SqlCommand consulta = consultaCrear("SELECT COUNT(Reserva_ID) FROM RIP.Reservas WHERE Reserva_HotelID = @ID AND ((Reserva_FechaInicio BETWEEN CONVERT(datetime,@FechaInicio,121) AND CONVERT(datetime,@FechaFin,121) OR Reserva_FechaFin BETWEEN CONVERT(datetime,@FechaInicio,121) AND CONVERT(datetime,@FechaFin,121) OR (Reserva_FechaInicio <= CONVERT(datetime,@FechaInicio,121) AND Reserva_FechaFin >= CONVERT(datetime,@FechaFin,121)))");
+            SqlCommand consulta = consultaCrear("SELECT COUNT(Reserva_ID) FROM RIP.Reservas WHERE Reserva_HotelID = @ID AND ((Reserva_FechaInicio BETWEEN CONVERT(datetime,@FechaInicio,121) AND CONVERT(datetime,@FechaFin,121) OR Reserva_FechaFin BETWEEN CONVERT(datetime,@FechaInicio,121) AND CONVERT(datetime,@FechaFin,121)) OR (Reserva_FechaInicio <= CONVERT(datetime,@FechaInicio,121) AND Reserva_FechaFin >= CONVERT(datetime,@FechaFin,121)))");
             consulta.Parameters.AddWithValue("@ID", hotelCerrado.hotel.id);
             consulta.Parameters.AddWithValue("@FechaInicio", hotelCerrado.fechaInicio);
             consulta.Parameters.AddWithValue("@FechaFin", hotelCerrado.fechaFin);
@@ -1587,7 +1587,7 @@ namespace FrbaHotel
 
         public static List<string> ReservaHabitacionesDisponiblesEntre(DateTime fechainicio, DateTime fechafin, string idHotel)
         {
-            SqlCommand consulta = consultaCrear("select Habitacion_ID from rip.Habitaciones habitaciones where habitaciones.Habitacion_HotelID = @hid and Habitacion_ID not in (select hnd.HabitacionNoDisponible_HabitacionID from rip.HabitacionesNoDisponibles hnd join rip.Habitaciones hab on hab.Habitacion_ID = hnd.HabitacionNoDisponible_HabitacionID join rip.Hoteles hot on hot.Hotel_ID = hab.Habitacion_HotelID where hot.Hotel_ID = @hid and hnd.HabitacionNoDisponible_Finalizada = 0 and (@fi > hnd.HabitacionNoDisponible_FechaInicio AND @fi < hnd.HabitacionNoDisponible_FechaFin) OR  (@ff > hnd.HabitacionNoDisponible_FechaInicio AND @ff < hnd.HabitacionNoDisponible_FechaFin) )");
+            SqlCommand consulta = consultaCrear("select Habitacion_ID from rip.Habitaciones habitaciones where habitaciones.Habitacion_HotelID = @hid and Habitacion_ID not in (select hnd.HabitacionNoDisponible_HabitacionID from rip.HabitacionesNoDisponibles hnd join rip.Habitaciones hab on hab.Habitacion_ID = hnd.HabitacionNoDisponible_HabitacionID join rip.Hoteles hot on hot.Hotel_ID = hab.Habitacion_HotelID where hot.Hotel_ID = @hid and hnd.HabitacionNoDisponible_Finalizada = 0 and (CONVERT(datetime,@fi,121) > hnd.HabitacionNoDisponible_FechaInicio AND CONVERT(datetime,@fi,121) < hnd.HabitacionNoDisponible_FechaFin) OR  (CONVERT(datetime,@ff,121) > hnd.HabitacionNoDisponible_FechaInicio AND CONVERT(datetime,@ff,121) < hnd.HabitacionNoDisponible_FechaFin) )");
 
             consulta.Parameters.AddWithValue("@fi", fechainicio);
             consulta.Parameters.AddWithValue("@ff", fechafin);
@@ -1618,7 +1618,7 @@ namespace FrbaHotel
             consultaEjecutar(borrare);
 
             // creacion de la estadia
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Reservas (Reserva_ID, Reserva_ClienteID, Reserva_HotelID, Reserva_CantidadHuespedes, Reserva_FechaCreacion, Reserva_FechaInicio, Reserva_FechaFin, Reserva_TipoHabitacionID, Reserva_RegimenID, Reserva_EstadoReservaID, Reserva_UsuarioID) VALUES (@reservacod,@clienteid,@hotelid,@rch,@fechacreacion,@fi,@ff,@tipohabitacion,@regimenid,@estadoReserva,@userid)");
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Reservas (Reserva_ID, Reserva_ClienteID, Reserva_HotelID, Reserva_CantidadHuespedes, Reserva_FechaCreacion, Reserva_FechaInicio, Reserva_FechaFin, Reserva_TipoHabitacionID, Reserva_RegimenID, Reserva_EstadoReservaID, Reserva_UsuarioID) VALUES (@reservacod,@clienteid,@hotelid,@rch,CONVERT(datetime,@fechacreacion,121),CONVERT(datetime,@fi,121),CONVERT(datetime,@ff,121),@tipohabitacion,@regimenid,@estadoReserva,@userid)");
             consulta.Parameters.AddWithValue("@reservacod", R.Codigo);
             consulta.Parameters.AddWithValue("@clienteid", R.Cliente.id);
             consulta.Parameters.AddWithValue("@hotelid", R.Hotel.id);
@@ -1636,7 +1636,7 @@ namespace FrbaHotel
             // creacion de hab reservadas en no disponible
             for (int i = 0; i < R.Habitaciones.Count; i++)
             {
-                SqlCommand consulta2 = consultaCrear("INSERT INTO RIP.HabitacionesNoDisponibles (HabitacionNoDisponible_ReservaID, HabitacionNoDisponible_HabitacionID, HabitacionNoDisponible_FechaInicio, HabitacionNoDisponible_FechaFin) VALUES (@codreserva, @idh, @fi, @ff )");
+                SqlCommand consulta2 = consultaCrear("INSERT INTO RIP.HabitacionesNoDisponibles (HabitacionNoDisponible_ReservaID, HabitacionNoDisponible_HabitacionID, HabitacionNoDisponible_FechaInicio, HabitacionNoDisponible_FechaFin) VALUES (@codreserva, @idh, CONVERT(datetime,@fi,121), CONVERT(datetime,@ff,121))");
                 consulta2.Parameters.AddWithValue("@codreserva", int.Parse(R.Codigo));
                 consulta2.Parameters.AddWithValue("@idh", R.Habitaciones[i].id);
                 consulta2.Parameters.AddWithValue("@fi", R.FechaInicio);
@@ -1669,7 +1669,7 @@ namespace FrbaHotel
 
         public static bool ReservaEsFechaMenor(string p, DateTime hoy)
         {
-            SqlCommand consulta = consultaCrear("select * from rip.Reservas where Reserva_ID = @IdReserva and Reserva_FechaInicio > @dia");
+            SqlCommand consulta = consultaCrear("select * from rip.Reservas where Reserva_ID = @IdReserva and Reserva_FechaInicio > CONVERT(datetime,@dia,121)");
             consulta.Parameters.AddWithValue("@IdReserva", p);
             consulta.Parameters.AddWithValue("@dia", hoy);
             return (consultaObtenerValor(consulta) != "");
@@ -1716,11 +1716,11 @@ namespace FrbaHotel
             SqlCommand query = new SqlCommand();
             if (motivo == "Ingrese un motivo...")
             {
-                query = consultaCrear("INSERT INTO RIP.ReservasCanceladas (ReservaCancelada_RerservaID, ReservaCancelada_Fecha, ReservaCancelada_UsuarioID) VALUES (@codigo,@fecha,@usuario)");
+                query = consultaCrear("INSERT INTO RIP.ReservasCanceladas (ReservaCancelada_RerservaID, ReservaCancelada_Fecha, ReservaCancelada_UsuarioID) VALUES (@codigo,CONVERT(datetime,@fecha,121),@usuario)");
             }
             else
             {
-                query = consultaCrear("INSERT INTO RIP.ReservasCanceladas (ReservaCancelada_RerservaID, ReservaCancelada_Fecha, ReservaCancelada_UsuarioID, ReservaCancelada_Motivo) VALUES (@codigo,@fecha,@usuario,@motivo)");
+                query = consultaCrear("INSERT INTO RIP.ReservasCanceladas (ReservaCancelada_RerservaID, ReservaCancelada_Fecha, ReservaCancelada_UsuarioID, ReservaCancelada_Motivo) VALUES (@codigo,CONVERT(datetime,@fecha,121),@usuario,@motivo)");
                 query.Parameters.AddWithValue("@motivo", motivo);
             }
 
@@ -1732,7 +1732,7 @@ namespace FrbaHotel
 
             //actualizo hab no disponibles
             SqlCommand quer2 = new SqlCommand();
-            quer2 = consultaCrear("UPDATE rip.HabitacionesNoDisponibles set HabitacionNoDisponible_FechaFin = @fe, HabitacionNoDisponible_Finalizada = 1  where HabitacionNoDisponible_ReservaID = @codr ");
+            quer2 = consultaCrear("UPDATE rip.HabitacionesNoDisponibles set HabitacionNoDisponible_FechaFin = CONVERT(datetime,@fe,121), HabitacionNoDisponible_Finalizada = 1  where HabitacionNoDisponible_ReservaID = @codr ");
             quer2.Parameters.AddWithValue("@codr", r.Codigo);
             quer2.Parameters.AddWithValue("@fe", DateTime.Now);
 
@@ -1809,7 +1809,7 @@ namespace FrbaHotel
 
         public static List<string> ReservaHabitacionesModificacionDisponiblesEntre(DateTime fi, DateTime ff, string IdHotel, string codReserva)
         {
-            SqlCommand consulta = consultaCrear("select Habitacion_ID from rip.Habitaciones habitaciones where habitaciones.Habitacion_HotelID = @hid and Habitacion_ID not in (select hnd.HabitacionNoDisponible_HabitacionID from rip.HabitacionesNoDisponibles hnd join rip.Habitaciones hab on hab.Habitacion_ID = hnd.HabitacionNoDisponible_HabitacionID join rip.Hoteles hot on hot.Hotel_ID = hab.Habitacion_HotelID where hot.Hotel_ID = @hid and hnd.HabitacionNoDisponible_ReservaID != @cod and hnd.HabitacionNoDisponible_Finalizada = 0 and (@fi > hnd.HabitacionNoDisponible_FechaInicio AND @fi < hnd.HabitacionNoDisponible_FechaFin) OR  (@ff > hnd.HabitacionNoDisponible_FechaInicio AND @ff < hnd.HabitacionNoDisponible_FechaFin) )");
+            SqlCommand consulta = consultaCrear("select Habitacion_ID from rip.Habitaciones habitaciones where habitaciones.Habitacion_HotelID = @hid and Habitacion_ID not in (select hnd.HabitacionNoDisponible_HabitacionID from rip.HabitacionesNoDisponibles hnd join rip.Habitaciones hab on hab.Habitacion_ID = hnd.HabitacionNoDisponible_HabitacionID join rip.Hoteles hot on hot.Hotel_ID = hab.Habitacion_HotelID where hot.Hotel_ID = @hid and hnd.HabitacionNoDisponible_ReservaID != @cod and hnd.HabitacionNoDisponible_Finalizada = 0 and (CONVERT(datetime,@fi,121) > hnd.HabitacionNoDisponible_FechaInicio AND CONVERT(datetime,@fi,121) < hnd.HabitacionNoDisponible_FechaFin) OR  (CONVERT(datetime,@ff,121) > hnd.HabitacionNoDisponible_FechaInicio AND CONVERT(datetime,@ff,121) < hnd.HabitacionNoDisponible_FechaFin))");
 
             consulta.Parameters.AddWithValue("@fi", fi);
             consulta.Parameters.AddWithValue("@ff", fi);
