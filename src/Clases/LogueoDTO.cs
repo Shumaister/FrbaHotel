@@ -46,7 +46,7 @@ namespace FrbaHotel.Clases
         public LogueoDTO informarBloqueo()
         {
             exito = false;
-            mensaje = "Usuario bloqueado.";
+            mensaje = "Usuario deshabilitado.";
             return this;
         }
     }

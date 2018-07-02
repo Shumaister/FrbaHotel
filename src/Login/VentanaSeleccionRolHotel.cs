@@ -77,8 +77,8 @@ namespace FrbaHotel.Login
 
         public void ventanaConfigurarSesion()
         {
-            #warning Hacer que devuelve un rol y hotel completos
             sesion.rol = new Rol(cbxRoles.SelectedItem.ToString());
+            sesion.rol.id = Database.rolObtenerID(sesion.rol);
             sesion.hotel = Database.hotelObtenerDesdeNombre(cbxHoteles.SelectedItem.ToString());
             sesion.rol.funcionalidades = Database.rolObtenerFuncionalidades(sesion.rol);
         }

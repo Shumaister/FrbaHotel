@@ -26,7 +26,7 @@ namespace FrbaHotel.Menus
     {
         //-------------------------------------- Atributos -------------------------------------
         
-        Sesion sesion { get; set; }
+        public Sesion sesion { get; set; }
 
         //-------------------------------------- Constructores -------------------------------------
 
@@ -43,8 +43,26 @@ namespace FrbaHotel.Menus
             Application.Exit();
         }
 
-        private void VentanaMenuPrincipal_Load(object sender, EventArgs e)
+        public void ventanaReiniciar()
         {
+            menuAdministracion.Visible = true;
+            menuRecepcion.Visible = true;
+            menuUsuarios.Visible = false;
+            menuHoteles.Visible = false;
+            menuHabitaciones.Visible = false;
+            menuRoles.Visible = false;
+            menuRegimenes.Visible = false;
+            menuReservas.Visible = false;
+            menuFacturas.Visible = false;
+            menuClientes.Visible = false;
+            menuConsumibles.Visible = false;
+            menuEstadias.Visible = false;
+            menuEstadisticas.Visible = false;
+        }
+
+        public void VentanaMenuPrincipal_Load(object sender, EventArgs e)
+        {
+            ventanaReiniciar();
             bool usuarioTieneFuncionesDeAdmnistrador = false;
             bool usuarioTieneFuncionesDeRecepcion = false;          
             if (sesion.rol.funcionalidades.Contains("Usuarios"))
@@ -98,10 +116,8 @@ namespace FrbaHotel.Menus
                 usuarioTieneFuncionesDeRecepcion = true;
             }
             if (sesion.rol.funcionalidades.Contains("Estadisticas"))
-            {
-                this.menuEstadisticas.Visible = true;
-                usuarioTieneFuncionesDeRecepcion = true;
-            }
+                menuEstadisticas.Visible = true;
+
             if (!usuarioTieneFuncionesDeAdmnistrador)
                 menuAdministracion.Visible = false;
             if (!usuarioTieneFuncionesDeRecepcion)
@@ -110,17 +126,17 @@ namespace FrbaHotel.Menus
 
         private void menuRoles_Click(object sender, EventArgs e)
         {
-            new VentanaRol(sesion).ShowDialog();
+            new VentanaRol(this).ShowDialog();
         }
 
         private void menuUsuarios_Click(object sender, EventArgs e)
         {
-            new VentanaUsuario(sesion).ShowDialog();
+            new VentanaUsuario(this).ShowDialog();
         }
 
         private void menuHoteles_Click(object sender, EventArgs e)
         {
-             new VentanaHotel().ShowDialog();
+             new VentanaHotel(this).ShowDialog();
         }
 
         private void menuHabitaciones_Click(object sender, EventArgs e)

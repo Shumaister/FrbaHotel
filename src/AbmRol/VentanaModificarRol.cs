@@ -52,6 +52,11 @@ namespace FrbaHotel.AbmRol
                 {
                     this.Hide();
                     ventanaRol.ventanaActualizar();
+                    if (rol.id == ventanaRol.ventanaMenuPrincipal.sesion.rol.id)
+                    {
+                        ventanaRol.ventanaMenuPrincipal.sesion.rol = this.rol;
+                        ventanaRol.ventanaMenuPrincipalActualizar();
+                    }
                 }
             }
         }

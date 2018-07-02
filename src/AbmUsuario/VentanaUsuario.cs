@@ -9,6 +9,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FrbaHotel.Clases;
+using FrbaHotel.Menus;
+using FrbaHotel.Login;
 
 namespace FrbaHotel.AbmUsuario
 {
@@ -16,7 +18,7 @@ namespace FrbaHotel.AbmUsuario
     {
         #region Propiedades
 
-        Sesion sesion {get; set;}
+        public VentanaMenuPrincipal ventanaMenuPrincipal { get; set; }
         Reserva Reserva { get; set; }
 
         #endregion
@@ -30,10 +32,10 @@ namespace FrbaHotel.AbmUsuario
 
         }
 
-        public VentanaUsuario(Sesion sesion)
+        public VentanaUsuario(VentanaMenuPrincipal ventanaMenuPrincipal)
         {
             InitializeComponent();
-            this.sesion = sesion;
+            this.ventanaMenuPrincipal = ventanaMenuPrincipal;
         }
         
         #endregion
@@ -163,7 +165,53 @@ namespace FrbaHotel.AbmUsuario
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
                 Usuario usuario = ventanaCrearUsuarioParaModificar(e);
-                new VentanaModificarUsuario(this, sesion, usuario).ShowDialog();
+                new VentanaModificarUsuario(this, usuario).ShowDialog();
+            }
+        }
+
+        public bool ventanaUsuarioTieneElRol()
+        {
+            bool resultado = false;
+            foreach (Rol rol in ventanaMenuPrincipal.sesion.usuario.roles)
+                if (rol.nombre == ventanaMenuPrincipal.sesion.rol.nombre)
+                    resultado = true;
+            return resultado;
+        }
+
+        public bool ventanaUsuarioTieneElHotel()
+        {
+            bool resultado = false;
+            foreach (Hotel hotel in ventanaMenuPrincipal.sesion.usuario.hoteles)
+                if (Database.hotelObtenerIDPorDomicilio(hotel) == ventanaMenuPrincipal.sesion.hotel.id)
+                    resultado = true;
+            return resultado;
+        }
+
+        public void ventanaMenuPrincipalActualizar()
+        {
+            if (ventanaMenuPrincipal.sesion.usuario.estado == "0")
+            {
+                this.Hide();
+                ventanaMenuPrincipal.Hide();
+                ventanaInformarError("El usuario fue deshabilitado");
+                new VentanaLogin().Show();
+                return;
+            }
+            if (!ventanaUsuarioTieneElRol())
+            {
+                this.Hide();
+                ventanaMenuPrincipal.Hide();
+                ventanaInformarError("El usuario ya no posee el rol con el que se logueo");
+                new VentanaLogin().Show();
+                return;
+            }
+            if (!ventanaUsuarioTieneElHotel())
+            {
+                this.Hide();
+                ventanaMenuPrincipal.Hide();
+                ventanaInformarError("El usuario ya no posee el hotel con el que se logueo");
+                new VentanaLogin().Show();
+                return;
             }
         }
 
@@ -180,6 +228,13 @@ namespace FrbaHotel.AbmUsuario
                 Usuario usuario = new Usuario(id, null, null, null, null);
                 Database.usuarioEliminadoConExito(usuario);
                 ventanaActualizar();
+                if (usuario.id == ventanaMenuPrincipal.sesion.usuario.id)
+                {
+                    this.Hide();
+                    ventanaMenuPrincipal.Hide();
+                    ventanaInformarError("El usuario fue deshabilitado");
+                    new VentanaLogin().Show();
+                }
             }
         }
 
@@ -200,8 +255,8 @@ namespace FrbaHotel.AbmUsuario
 
         public void ventanaActualizar()
         {
-            dataGridViewCargar(dgvModificarUsuarios, Database.hotelObtenerUsuariosEnTabla(sesion.hotel));
-            dataGridViewCargar(dgvEliminarUsuarios, Database.hotelObtenerUsuariosHabilitadosEnTabla(sesion.hotel));
+            dataGridViewCargar(dgvModificarUsuarios, Database.hotelObtenerUsuariosEnTabla(ventanaMenuPrincipal.sesion.hotel));
+            dataGridViewCargar(dgvEliminarUsuarios, Database.hotelObtenerUsuariosHabilitadosEnTabla(ventanaMenuPrincipal.sesion.hotel));
         }
 
         public void ventanaOcultarColumnas()

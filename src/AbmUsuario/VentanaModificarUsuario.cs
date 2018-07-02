@@ -17,18 +17,16 @@ namespace FrbaHotel.AbmUsuario
         #region Atributos
 
         VentanaUsuario ventanaUsuario {get; set;}
-        Sesion sesion { get; set; }
         Usuario usuario { get; set; }
 
         #endregion
 
         #region Constructores
 
-        public VentanaModificarUsuario(VentanaUsuario ventanaUsuario, Sesion sesion, Usuario usuario)
+        public VentanaModificarUsuario(VentanaUsuario ventanaUsuario, Usuario usuario)
         {
             InitializeComponent();
             this.ventanaUsuario = ventanaUsuario;
-            this.sesion = sesion;
             this.usuario = usuario;
         }
 
@@ -121,6 +119,11 @@ namespace FrbaHotel.AbmUsuario
                 {
                     this.Hide();
                     ventanaUsuario.ventanaActualizar();
+                    if (usuario.id == ventanaUsuario.ventanaMenuPrincipal.sesion.usuario.id)
+                    {
+                        ventanaUsuario.ventanaMenuPrincipal.sesion.usuario = this.usuario;
+                        ventanaUsuario.ventanaMenuPrincipalActualizar();
+                    }
                 }
             }
         }

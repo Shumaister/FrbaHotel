@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FrbaHotel.Menus;
 using FrbaHotel.Clases;
+using FrbaHotel.Login;
 
 namespace FrbaHotel.AbmRol
 { 
@@ -16,16 +17,16 @@ namespace FrbaHotel.AbmRol
     {
         #region Atributos
 
-        public Sesion sesion { get; set; }
+        public VentanaMenuPrincipal ventanaMenuPrincipal {get; set;}
 
         #endregion
 
         #region Constructores
 
-        public VentanaRol(Sesion sesion)
+        public VentanaRol(VentanaMenuPrincipal ventanaMenuPrincipal)
         {
             InitializeComponent();
-            this.sesion = sesion;
+            this.ventanaMenuPrincipal = ventanaMenuPrincipal;
         }
 
         #endregion
@@ -85,6 +86,24 @@ namespace FrbaHotel.AbmRol
             }
         }
 
+        public void ventanaMenuPrincipalActualizar()
+        {
+            if(ventanaMenuPrincipal.sesion.rol.estado == "0")
+            {
+                this.Hide();
+                ventanaMenuPrincipal.Hide();
+                ventanaInformarError("El rol fue deshabilitado");
+                new VentanaLogin().Show();
+                return;
+            }
+            if (!ventanaMenuPrincipal.sesion.rol.funcionalidades.Contains("Roles"))
+            {
+                this.Hide();
+                ventanaInformarError("El rol ya no posee la funcionalidad 'Roles'");
+            }
+            ventanaMenuPrincipal.VentanaMenuPrincipal_Load(null, null);
+        }
+
         #endregion
 
         #region Eliminar
@@ -103,6 +122,13 @@ namespace FrbaHotel.AbmRol
                 Rol rol = ventanaCrearRolParaEliminar(e);
                 Database.rolEliminadoConExito(rol);
                 ventanaActualizar();
+                if(ventanaMenuPrincipal.sesion.rol.id == rol.id)
+                {
+                    this.Hide();
+                    ventanaMenuPrincipal.Hide();
+                    ventanaInformarError("El rol fue deshabilitado");
+                    new VentanaLogin().Show();
+                }
             }
         }
 
@@ -154,10 +180,5 @@ namespace FrbaHotel.AbmRol
         }
 
         #endregion
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

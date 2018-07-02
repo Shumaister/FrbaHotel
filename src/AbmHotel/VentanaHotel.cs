@@ -8,17 +8,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FrbaHotel.Clases;
+using FrbaHotel.Menus;
 
 namespace FrbaHotel.AbmHotel
 {
     public partial class VentanaHotel : VentanaBase
     {
 
+        #region Atributos
+
+        VentanaMenuPrincipal ventanaMenuPrincipal { get; set; }
+
+        #endregion
+
         #region Constructores
-        
-        public VentanaHotel()
+
+        public VentanaHotel(VentanaMenuPrincipal ventanaMenuPrincipal)
         {
             InitializeComponent();
+            this.ventanaMenuPrincipal = ventanaMenuPrincipal;
         }
 
         #endregion

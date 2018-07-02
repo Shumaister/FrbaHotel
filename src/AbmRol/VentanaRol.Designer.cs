@@ -240,7 +240,6 @@
             this.label3.Size = new System.Drawing.Size(44, 16);
             this.label3.TabIndex = 264;
             this.label3.Text = "Roles";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // dgvModificarRoles
             // 

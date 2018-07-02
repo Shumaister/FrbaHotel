@@ -63,6 +63,7 @@ namespace FrbaHotel.Login
             this.Hide();
             string nombreUsuario = logueo.mensaje;
             Usuario usuario = new Usuario(nombreUsuario);
+            usuario.id = Database.usuarioObtenerID(usuario);
             Sesion sesion = new Sesion(usuario, Database.usuarioObtenerHotelesEnLista(usuario), Database.usuarioObtenerRolesEnLista(usuario));
             VentanaSeleccionRolHotel ventanaSeleccionRol = new VentanaSeleccionRolHotel(sesion);
         }
