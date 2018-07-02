@@ -203,6 +203,7 @@
             // 
             // cbxHoteles
             // 
+            this.cbxHoteles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxHoteles.FormattingEnabled = true;
             this.cbxHoteles.Location = new System.Drawing.Point(261, 64);
             this.cbxHoteles.Name = "cbxHoteles";
@@ -328,6 +329,7 @@
             // 
             // cbxRegimenEstadia
             // 
+            this.cbxRegimenEstadia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxRegimenEstadia.FormattingEnabled = true;
             this.cbxRegimenEstadia.Location = new System.Drawing.Point(261, 205);
             this.cbxRegimenEstadia.Name = "cbxRegimenEstadia";
@@ -346,6 +348,7 @@
             // 
             // cbxTipoHabitacion
             // 
+            this.cbxTipoHabitacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxTipoHabitacion.FormattingEnabled = true;
             this.cbxTipoHabitacion.Location = new System.Drawing.Point(261, 107);
             this.cbxTipoHabitacion.Name = "cbxTipoHabitacion";
@@ -667,6 +670,7 @@
             // 
             // cbxRegimenEstadiaObligatorio
             // 
+            this.cbxRegimenEstadiaObligatorio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxRegimenEstadiaObligatorio.FormattingEnabled = true;
             this.cbxRegimenEstadiaObligatorio.Location = new System.Drawing.Point(155, 59);
             this.cbxRegimenEstadiaObligatorio.Name = "cbxRegimenEstadiaObligatorio";

@@ -1835,6 +1835,14 @@ namespace FrbaHotel
             return C;
         }
 
+        public static bool ReservaEsDeMiHotel(string numeroReserva, string idhotel)
+        {
+            SqlCommand consulta = consultaCrear("SELECT * FROM RIP.Reservas WHERE Reserva_ID = @idr AND Reserva_HotelID = @hid");
+            consulta.Parameters.AddWithValue("@idr", numeroReserva);
+            consulta.Parameters.AddWithValue("@hid", idhotel);
+            return consultaValorExiste(consultaObtenerValor(consulta));
+        }
+
         #endregion
 
         #region Estadia
@@ -1989,6 +1997,7 @@ namespace FrbaHotel
             return consultaObtenerLista(consulta);
         }
 
+
         #endregion
 
         #region Consumido
@@ -2051,6 +2060,7 @@ namespace FrbaHotel
         }
 
         #endregion
+
 
     }
 }
