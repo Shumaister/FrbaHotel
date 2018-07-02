@@ -19,6 +19,8 @@ using FrbaHotel.FacturarEstadia;
 using FrbaHotel.AbmRegimen;
 using FrbaHotel.RegistrarEstadia;
 using FrbaHotel.MenuPrincipal;
+using FrbaHotel.GenerarModificacionReserva;
+using FrbaHotel.CancelarReserva;
 
 namespace FrbaHotel.Menus
 {
@@ -189,5 +191,26 @@ namespace FrbaHotel.Menus
         {
             new VentanaDetallesDeSesion(sesion).ShowDialog();
         }
+
+        private void nuevaReservaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VentanaGenerarReserva ven = new VentanaGenerarReserva();
+            ven.ShowDialog(); 
+        }
+
+        private void modificarReservaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IngresarNumeroReservaModificar ven = new IngresarNumeroReservaModificar();
+            ven.ShowDialog();
+        }
+
+        private void cancelarResrvaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           VentanaCancelarReserva v = new VentanaCancelarReserva();
+           v.ShowDialog();
+        }
+
+
+         
     }
 }
