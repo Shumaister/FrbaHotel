@@ -48,8 +48,7 @@ namespace FrbaHotel.ListadoEstadistico
             switch (tipo)
             {
                 case 0:
-                    {
-                        SqlCommand consulta = Database.consultaCrear("select top 5 CONCAT(Domicilio_Ciudad,' ',Domicilio_Calle,' ',Domicilio_NumeroCalle)'Hotel',count(Reserva_ID)'Cantidad de reservas canceladas' from rip.Reservas join rip.ReservasCanceladas on Reserva_ID=ReservaCancelada_RerservaID join rip.Hoteles on Hotel_ID=Reserva_HotelID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID where YEAR(ReservaCancelada_Fecha)=@anio and DATEPART(QUARTER,ReservaCancelada_Fecha)=@trimestre group by Domicilio_NumeroCalle,Domicilio_Ciudad,domicilio_calle order by 2 desc");
+                    {    SqlCommand consulta = Database.consultaCrear("select top 5 CONCAT(Domicilio_Ciudad,' ',Domicilio_Calle,' ',Domicilio_NumeroCalle)'Hotel',count(Reserva_ID)'Cantidad de reservas canceladas' from rip.Reservas join rip.ReservasCanceladas on Reserva_ID=ReservaCancelada_RerservaID join rip.Hoteles on Hotel_ID=Reserva_HotelID join rip.Domicilios on Hotel_DomicilioID=Domicilio_ID where YEAR(ReservaCancelada_Fecha)=@anio and DATEPART(QUARTER,ReservaCancelada_Fecha)=@trimestre group by Domicilio_NumeroCalle,Domicilio_Ciudad,domicilio_calle order by 2 desc");
                         consulta.Parameters.AddWithValue("@anio", anio);
                         consulta.Parameters.AddWithValue("@trimestre", trimestre);
                         dataGridViewCargar(dataGridEstadisticas, Database.consultaObtenerTabla(consulta));
@@ -71,13 +70,13 @@ namespace FrbaHotel.ListadoEstadistico
                         consulta.Parameters.AddWithValue("@anio", anio);
                         consulta.Parameters.AddWithValue("@trimestre", trimestre);
                         dataGridViewCargar(dataGridEstadisticas, Database.consultaObtenerTabla(consulta));
-
+                        
                     };
                     break;
-                case 3://Clientes cumplidores
+                case 3:
                     {
-
-                        SqlCommand consulta = Database.consultaCrear("select distinct top 5 CONCAT(Domicilio_Ciudad,' ',Domicilio_Calle,' ',Domicilio_NumeroCalle) 'Hotel',Habitacion_Numero,DATEDIFF(day,Estadia_FechaInicio,Estadia_FechaFin)'Dias utilizados',(select COUNT(HabitacionNoDisponible_HabitacionID)'Cantidad de veces utilizadas' from rip.HabitacionesNoDisponibles where a.HabitacionNoDisponible_HabitacionID=HabitacionNoDisponible_HabitacionID group by HabitacionNoDisponible_HabitacionID)'Cantidad de veces utilizadas' from rip.Reservas join rip.HabitacionesNoDisponibles a on Reserva_ID=HabitacionNoDisponible_ReservaID join rip.Habitaciones on HabitacionNoDisponible_HabitacionID=Habitacion_ID join rip.Hoteles on Habitacion_HotelID=Hotel_ID join rip.Domicilios on Domicilio_ID=Hotel_DomicilioID join rip.Estadias on Estadia_ReservaID=Reserva_ID where YEAR(Estadia_FechaInicio)=@anio and DATEPART(QUARTER,Estadia_FechaInicio)=@trimestre  group by Domicilio_Ciudad,Domicilio_Calle,habitacion_Numero,Domicilio_NumeroCalle,Estadia_FechaInicio,Estadia_FechaFin,a.HabitacionNoDisponible_HabitacionID order by 4 desc,3 desc");
+                      
+                        SqlCommand consulta = Database.consultaCrear(" select top 5 CONCAT(Domicilio_Ciudad,' ',Domicilio_Calle,' ',Domicilio_NumeroCalle) 'Hotel',Habitacion_Numero'N° Habitación',DATEDIFF(day,Estadia_FechaInicio,Estadia_FechaFin)'Dias utilizados',(select COUNT(HabitacionNoDisponible_HabitacionID)'Cantidad de veces utilizadas' from rip.HabitacionesNoDisponibles where a.HabitacionNoDisponible_HabitacionID=HabitacionNoDisponible_HabitacionID group by HabitacionNoDisponible_HabitacionID)'Cantidad de veces utilizadas' from rip.Estadias join rip.Reservas on Reserva_ID=Estadia_ReservaID join rip.Hoteles on Reserva_HotelID=Hotel_ID  join rip.Domicilios on Domicilio_ID=Hotel_DomicilioID  join rip.HabitacionesNoDisponibles a on Reserva_ID=HabitacionNoDisponible_ReservaID join rip.Habitaciones on Habitacion_ID=HabitacionNoDisponible_HabitacionID where YEAR(Estadia_FechaInicio)=@anio and DATEPART(QUARTER,Estadia_FechaInicio)=@trimestre order by 3 desc,4 desc");
                         consulta.Parameters.AddWithValue("@anio", anio);
                         consulta.Parameters.AddWithValue("@trimestre", trimestre);
                         dataGridViewCargar(dataGridEstadisticas, Database.consultaObtenerTabla(consulta));

@@ -10,6 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Security.Cryptography;
+using System.Data.SqlTypes;
 
 namespace FrbaHotel.GenerarModificacionReserva
 {
@@ -41,6 +44,8 @@ namespace FrbaHotel.GenerarModificacionReserva
             OcultarErrores();
             groupBox3.Enabled = false;
             groupBox2.Enabled = false;
+            SqlCommand updateReservas = Database.consultaCrear("update rip.Reservas set Reserva_EstadoReservaID=5 where YEAR(GETDATE())>=YEAR(Reserva_FechaInicio) and MONTH(GETDATE())>=MONTH(Reserva_FechaInicio) and DAY(GETDATE())>DAY(Reserva_FechaInicio) and (Reserva_EstadoReservaID!=6 or Reserva_EstadoReservaID is null)");
+            Database.consultaEjecutar(updateReservas);
        }
 
         public VentanaGenerarReserva(Reserva reserva, string p)
@@ -672,8 +677,8 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         private void VentanaGenerarReserva_Load(object sender, EventArgs e)
         {
-
-
+            SqlCommand updateReservas = Database.consultaCrear("update rip.Reservas set Reserva_EstadoReservaID=5 where YEAR(GETDATE())>=YEAR(Reserva_FechaInicio) and MONTH(GETDATE())>=MONTH(Reserva_FechaInicio) and DAY(GETDATE())>DAY(Reserva_FechaInicio) and (Reserva_EstadoReservaID!=6 or Reserva_EstadoReservaID is null)");
+            Database.consultaEjecutar(updateReservas);
         }
 
         private void label3_Click(object sender, EventArgs e)

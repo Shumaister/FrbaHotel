@@ -60,7 +60,7 @@ namespace FrbaHotel.FacturarEstadia
             consulta.Parameters.AddWithValue("@reserva", Double.Parse(CodReserva.Text));
             dataGridViewCargar(dataConsumibles, Database.consultaObtenerTabla(consulta));
 
-            SqlCommand consultaDos = Database.consultaCrear("select isnull(DATEDIFF(DAY,Estadia_CheckInUsuarioID,Estadia_CheckOutUsuarioID),0) from rip.Estadias join rip.Reservas on Estadia_ReservaID=Reserva_ID where Reserva_ID=@reserva");
+            SqlCommand consultaDos = Database.consultaCrear("select isnull(DATEDIFF(DAY,Estadia_FechaInicio,Estadia_FechaFin),0) from rip.Estadias join rip.Reservas on Estadia_ReservaID=Reserva_ID where Reserva_ID=@reserva");
             consultaDos.Parameters.AddWithValue("@reserva", Double.Parse(CodReserva.Text));
             string diasUtilizado = Database.consultaObtenerValor(consultaDos);
             diasUtilizados.Text = diasUtilizado;
