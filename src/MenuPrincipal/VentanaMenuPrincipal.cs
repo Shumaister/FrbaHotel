@@ -194,23 +194,20 @@ namespace FrbaHotel.Menus
 
         private void nuevaReservaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            VentanaGenerarReserva ven = new VentanaGenerarReserva();
+            VentanaGenerarReserva ven = new VentanaGenerarReserva(sesion);
             ven.ShowDialog(); 
         }
 
         private void modificarReservaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IngresarNumeroReservaModificar ven = new IngresarNumeroReservaModificar();
+            IngresarNumeroReservaModificar ven = new IngresarNumeroReservaModificar(sesion);
             ven.ShowDialog();
         }
 
         private void cancelarResrvaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           VentanaCancelarReserva v = new VentanaCancelarReserva();
-           v.ShowDialog();
+            VentanaCancelarReserva v = new VentanaCancelarReserva(sesion);
+            v.ShowDialog();
         }
-
-
-         
     }
 }
