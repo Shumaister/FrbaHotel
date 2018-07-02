@@ -1236,6 +1236,13 @@ namespace FrbaHotel
             return hotel;
         }
 
+        public static bool hotelHabilitado(Hotel hotel)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Hotel_Estado FROM RIP.Hoteles WHERE Hotel_ID = @ID");
+            consulta.Parameters.AddWithValue("@ID", hotel.id);
+            return Boolean.Parse(consultaObtenerValor(consulta));
+        }
+
         public static DataTable hotelFiltrarParaModificar(Hotel hotel)
         {
             string filtroNombre = string.IsNullOrEmpty(hotel.nombre) ? "" : hotel.nombre;
@@ -1849,7 +1856,7 @@ namespace FrbaHotel
 
         public static void estadiaAgregarReservaConIngreso(Estadia estadia)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Reservas SET Reserva_EstadoReservaID = 4 WHERE Reserva_ID = @ReservaID");
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Reservas SET Reserva_EstadoReservaID = 6 WHERE Reserva_ID = @ReservaID");
             consulta.Parameters.AddWithValue("@ReservaID", estadia.reserva.Codigo);
             consultaEjecutar(consulta);
         }

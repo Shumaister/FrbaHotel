@@ -43,7 +43,12 @@ namespace FrbaHotel.Login
         {
             ventanaCargarRolesYHoteles();
             if (sesion.usuarioTrabajaEnUnSoloHotel() && sesion.usuarioTieneUnSoloRol())
-                ventanaAbrirMenuPrincipal();
+            {
+                btnIngresarRol_Click(null, null);
+                if (!Database.rolEstaHabilitado(sesion.rol) || !Database.hotelHabilitado(sesion.hotel))
+                    new VentanaLogin().Show();
+            }
+                
             else if (sesion.usuarioTrabajaEnUnSoloHotel() && sesion.usuarioTieneVariosRoles())
                 ventanaConfigurarParaRol();
             else if (sesion.usuarioTrabajaEnVariosHoteles() && sesion.usuarioTieneUnSoloRol())
@@ -85,15 +90,19 @@ namespace FrbaHotel.Login
 
         private void btnIngresarRol_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            ventanaAbrirMenuPrincipal();
-        }
-
-        private void ventanaAbrirMenuPrincipal()
-        {
             ventanaConfigurarSesion();
-            VentanaMenuPrincipal ventanaMenuPrincipal = new VentanaMenuPrincipal(sesion);
-            ventanaMenuPrincipal.Show();
+            if (!Database.rolEstaHabilitado(sesion.rol))
+            {
+                ventanaInformarError("El rol esta deshabilitado");
+                return;
+            }
+            if (!Database.hotelHabilitado(sesion.hotel))
+            {
+                ventanaInformarError("El hotel esta deshabilitado");
+                return;
+            }
+            this.Hide();
+            new VentanaMenuPrincipal(sesion).Show();
         }
     }
 }

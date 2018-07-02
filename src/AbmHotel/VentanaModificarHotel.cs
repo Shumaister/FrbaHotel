@@ -60,6 +60,8 @@ namespace FrbaHotel.AbmHotel
                 {
                     this.Hide();
                     ventanaHotel.ventanaActualizar(sender, e);
+                    if (hotel.id == ventanaHotel.ventanaMenuPrincipal.sesion.hotel.id && hotel.estado == "0")
+                        ventanaHotel.ventanaMenuPrincipalActualizar();
                 }                  
             }
         }

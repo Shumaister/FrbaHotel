@@ -52,6 +52,8 @@ namespace FrbaHotel.AbmHotel
                 {
                     this.Hide();
                     ventanaHotel.ventanaActualizar(sender, e);
+                    if(hotelCerrado.hotel.id == ventanaHotel.ventanaMenuPrincipal.sesion.hotel.id)
+                        ventanaHotel.ventanaMenuPrincipalActualizar();
                 }
             }
         }

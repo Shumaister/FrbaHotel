@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FrbaHotel.Clases;
 using FrbaHotel.Menus;
+using FrbaHotel.Login;
 
 namespace FrbaHotel.AbmHotel
 {
@@ -17,7 +18,7 @@ namespace FrbaHotel.AbmHotel
 
         #region Atributos
 
-        VentanaMenuPrincipal ventanaMenuPrincipal { get; set; }
+        public VentanaMenuPrincipal ventanaMenuPrincipal { get; set; }
 
         #endregion
 
@@ -39,6 +40,15 @@ namespace FrbaHotel.AbmHotel
             Domicilio domicilio = new Domicilio(null, tbxPais.Text, tbxCiudad.Text, tbxCalle.Text, tbxNumeroCalle.Text);
             Hotel hotel = new Hotel(null, tbxNombre.Text, tbxEstrellas.Text, DateTime.Parse(tbxFechaCreacion.Text), tbxEmail.Text, tbxTelefono.Text, domicilio, listBoxExtraerItemsEnLista(lbxRegimenes), null);
             return hotel;
+        }
+
+        public void ventanaMenuPrincipalActualizar()
+        {
+            this.Hide();
+            ventanaMenuPrincipal.Hide();
+            ventanaInformarError("El hotel fue deshabilitado");
+            new VentanaLogin().Show();
+            return;
         }
 
         private void btnGuardarHotel_Click(object sender, EventArgs e)
