@@ -53,6 +53,7 @@
             // 
             // cbxRoles
             // 
+            this.cbxRoles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxRoles.FormattingEnabled = true;
             this.cbxRoles.Location = new System.Drawing.Point(21, 251);
             this.cbxRoles.Name = "cbxRoles";
@@ -72,6 +73,7 @@
             // 
             // cbxHoteles
             // 
+            this.cbxHoteles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxHoteles.FormattingEnabled = true;
             this.cbxHoteles.Location = new System.Drawing.Point(21, 189);
             this.cbxHoteles.Name = "cbxHoteles";

@@ -116,6 +116,7 @@
             // 
             // cbxHabitacion
             // 
+            this.cbxHabitacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxHabitacion.FormattingEnabled = true;
             this.cbxHabitacion.Location = new System.Drawing.Point(15, 168);
             this.cbxHabitacion.Name = "cbxHabitacion";
@@ -165,7 +166,7 @@
             this.label32.TabIndex = 276;
             this.label32.Text = "Estadia";
             // 
-            // VentanaRegistrarConsumible
+            // VentanaConsumibles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -182,7 +183,7 @@
             this.Controls.Add(this.lblHotel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
-            this.Name = "VentanaRegistrarConsumible";
+            this.Name = "VentanaConsumibles";
             this.Text = "Consumibles - FRBA Hotel ©";
             this.Load += new System.EventHandler(this.VentanaRegistrarConsumible_Load);
             this.Controls.SetChildIndex(this.label1, 0);

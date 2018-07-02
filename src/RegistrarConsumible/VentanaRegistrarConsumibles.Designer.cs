@@ -122,6 +122,7 @@
             // 
             // cbxConsumibles
             // 
+            this.cbxConsumibles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxConsumibles.FormattingEnabled = true;
             this.cbxConsumibles.Location = new System.Drawing.Point(19, 70);
             this.cbxConsumibles.Name = "cbxConsumibles";

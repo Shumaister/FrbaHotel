@@ -273,7 +273,7 @@
             // 
             // btnGuardarFecha
             // 
-            this.btnGuardarFecha.Location = new System.Drawing.Point(231, 260);
+            this.btnGuardarFecha.Location = new System.Drawing.Point(227, 267);
             this.btnGuardarFecha.Name = "btnGuardarFecha";
             this.btnGuardarFecha.Size = new System.Drawing.Size(75, 23);
             this.btnGuardarFecha.TabIndex = 286;
@@ -313,6 +313,7 @@
             // 
             // cbxTipoDocumento
             // 
+            this.cbxTipoDocumento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxTipoDocumento.FormattingEnabled = true;
             this.cbxTipoDocumento.Location = new System.Drawing.Point(33, 176);
             this.cbxTipoDocumento.Name = "cbxTipoDocumento";
@@ -681,7 +682,7 @@
             // 
             // btnGuardarCliente
             // 
-            this.btnGuardarCliente.Location = new System.Drawing.Point(388, 359);
+            this.btnGuardarCliente.Location = new System.Drawing.Point(470, 359);
             this.btnGuardarCliente.Name = "btnGuardarCliente";
             this.btnGuardarCliente.Size = new System.Drawing.Size(90, 34);
             this.btnGuardarCliente.TabIndex = 204;
@@ -691,7 +692,7 @@
             // 
             // btnLimpiarCliente
             // 
-            this.btnLimpiarCliente.Location = new System.Drawing.Point(33, 359);
+            this.btnLimpiarCliente.Location = new System.Drawing.Point(41, 359);
             this.btnLimpiarCliente.Name = "btnLimpiarCliente";
             this.btnLimpiarCliente.Size = new System.Drawing.Size(75, 34);
             this.btnLimpiarCliente.TabIndex = 203;
@@ -725,6 +726,7 @@
             // 
             // cbxFiltroTipoDocumentoModificar
             // 
+            this.cbxFiltroTipoDocumentoModificar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxFiltroTipoDocumentoModificar.FormattingEnabled = true;
             this.cbxFiltroTipoDocumentoModificar.Location = new System.Drawing.Point(537, 42);
             this.cbxFiltroTipoDocumentoModificar.Name = "cbxFiltroTipoDocumentoModificar";
@@ -904,6 +906,7 @@
             // 
             // cbxFiltroTipoDocumentoEliminar
             // 
+            this.cbxFiltroTipoDocumentoEliminar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxFiltroTipoDocumentoEliminar.FormattingEnabled = true;
             this.cbxFiltroTipoDocumentoEliminar.Location = new System.Drawing.Point(537, 42);
             this.cbxFiltroTipoDocumentoEliminar.Name = "cbxFiltroTipoDocumentoEliminar";

@@ -120,6 +120,7 @@
             // 
             // cbxFrentes
             // 
+            this.cbxFrentes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxFrentes.FormattingEnabled = true;
             this.cbxFrentes.Location = new System.Drawing.Point(161, 153);
             this.cbxFrentes.Name = "cbxFrentes";
@@ -157,6 +158,7 @@
             // 
             // cbxTipoHabitaciones
             // 
+            this.cbxTipoHabitaciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxTipoHabitaciones.FormattingEnabled = true;
             this.cbxTipoHabitaciones.Location = new System.Drawing.Point(161, 92);
             this.cbxTipoHabitaciones.Name = "cbxTipoHabitaciones";

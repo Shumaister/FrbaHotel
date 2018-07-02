@@ -315,6 +315,7 @@
             // 
             // cbxRoles
             // 
+            this.cbxRoles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxRoles.FormattingEnabled = true;
             this.cbxRoles.Location = new System.Drawing.Point(159, 62);
             this.cbxRoles.Name = "cbxRoles";
@@ -354,6 +355,7 @@
             // 
             // cbxHoteles
             // 
+            this.cbxHoteles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxHoteles.FormattingEnabled = true;
             this.cbxHoteles.Location = new System.Drawing.Point(432, 63);
             this.cbxHoteles.Name = "cbxHoteles";
@@ -459,6 +461,7 @@
             // 
             // cbxTipoDocumento
             // 
+            this.cbxTipoDocumento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxTipoDocumento.FormattingEnabled = true;
             this.cbxTipoDocumento.Location = new System.Drawing.Point(24, 346);
             this.cbxTipoDocumento.Name = "cbxTipoDocumento";

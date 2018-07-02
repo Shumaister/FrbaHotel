@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.añoNUD = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
-            this.dataGridEstadisticas = new System.Windows.Forms.DataGridView();
             this.cmbTrimestre = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.cmbTipo = new System.Windows.Forms.ComboBox();
@@ -38,6 +39,7 @@
             this.label32 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnConsultar = new System.Windows.Forms.Button();
+            this.dataGridEstadisticas = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.añoNUD)).BeginInit();
@@ -47,7 +49,7 @@
             // logo
             // 
             this.logo.Image = null;
-            this.logo.Location = new System.Drawing.Point(533, 279);
+            this.logo.Location = new System.Drawing.Point(468, 287);
             this.logo.Size = new System.Drawing.Size(29, 36);
             // 
             // añoNUD
@@ -83,23 +85,9 @@
             this.label15.TabIndex = 16;
             this.label15.Text = "Año:";
             // 
-            // dataGridEstadisticas
-            // 
-            this.dataGridEstadisticas.AllowUserToAddRows = false;
-            this.dataGridEstadisticas.AllowUserToDeleteRows = false;
-            this.dataGridEstadisticas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridEstadisticas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridEstadisticas.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridEstadisticas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridEstadisticas.GridColor = System.Drawing.SystemColors.Window;
-            this.dataGridEstadisticas.Location = new System.Drawing.Point(23, 341);
-            this.dataGridEstadisticas.Name = "dataGridEstadisticas";
-            this.dataGridEstadisticas.ReadOnly = true;
-            this.dataGridEstadisticas.Size = new System.Drawing.Size(539, 125);
-            this.dataGridEstadisticas.TabIndex = 11;
-            // 
             // cmbTrimestre
             // 
+            this.cmbTrimestre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTrimestre.FormattingEnabled = true;
             this.cmbTrimestre.Items.AddRange(new object[] {
             "Enero-Marzo",
@@ -108,9 +96,8 @@
             "Octubre-Diciembre"});
             this.cmbTrimestre.Location = new System.Drawing.Point(23, 146);
             this.cmbTrimestre.Name = "cmbTrimestre";
-            this.cmbTrimestre.Size = new System.Drawing.Size(366, 21);
+            this.cmbTrimestre.Size = new System.Drawing.Size(450, 21);
             this.cmbTrimestre.TabIndex = 10;
-            this.cmbTrimestre.Text = "Seleccione";
             // 
             // label16
             // 
@@ -124,18 +111,18 @@
             // 
             // cmbTipo
             // 
+            this.cmbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipo.FormattingEnabled = true;
             this.cmbTipo.Items.AddRange(new object[] {
-            "Hoteles con mayor cantidad de reservas canceladas.",
-            "Hoteles con mayor cantidad de consumibles facturados.",
-            "Hoteles con mayor cantidad de días fuera de servicio.",
-            "Habitaciones con mayor cantidad de días y veces que fueron ocupadas.",
-            "Cliente con mayor cantidad de puntos."});
+            "Hoteles según mayor cantidad de reservas canceladas",
+            "Hoteles según mayor cantidad de consumibles facturados",
+            "Hoteles según mayor cantidad de días fuera de servicio",
+            "Habitaciones según mayor cantidad de días y veces ocupadas",
+            "Clientes según mayor cantidad de puntos"});
             this.cmbTipo.Location = new System.Drawing.Point(25, 76);
             this.cmbTipo.Name = "cmbTipo";
-            this.cmbTipo.Size = new System.Drawing.Size(366, 21);
+            this.cmbTipo.Size = new System.Drawing.Size(448, 21);
             this.cmbTipo.TabIndex = 7;
-            this.cmbTipo.Text = "Seleccione...";
             this.cmbTipo.SelectedIndexChanged += new System.EventHandler(this.cmbTipo_SelectedIndexChanged);
             // 
             // label17
@@ -180,17 +167,47 @@
             this.btnConsultar.UseVisualStyleBackColor = true;
             this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
+            // dataGridEstadisticas
+            // 
+            this.dataGridEstadisticas.AllowUserToAddRows = false;
+            this.dataGridEstadisticas.AllowUserToDeleteRows = false;
+            this.dataGridEstadisticas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridEstadisticas.BackgroundColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridEstadisticas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridEstadisticas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridEstadisticas.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridEstadisticas.Location = new System.Drawing.Point(25, 338);
+            this.dataGridEstadisticas.Name = "dataGridEstadisticas";
+            this.dataGridEstadisticas.ReadOnly = true;
+            this.dataGridEstadisticas.RowHeadersVisible = false;
+            this.dataGridEstadisticas.Size = new System.Drawing.Size(604, 168);
+            this.dataGridEstadisticas.TabIndex = 288;
+            // 
             // VentanaListadoEstadistico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(608, 534);
+            this.ClientSize = new System.Drawing.Size(657, 535);
+            this.Controls.Add(this.dataGridEstadisticas);
             this.Controls.Add(this.btnConsultar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label32);
             this.Controls.Add(this.añoNUD);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.dataGridEstadisticas);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.cmbTipo);
             this.Controls.Add(this.cmbTrimestre);
@@ -202,13 +219,13 @@
             this.Controls.SetChildIndex(this.cmbTrimestre, 0);
             this.Controls.SetChildIndex(this.cmbTipo, 0);
             this.Controls.SetChildIndex(this.label17, 0);
-            this.Controls.SetChildIndex(this.dataGridEstadisticas, 0);
             this.Controls.SetChildIndex(this.label15, 0);
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.añoNUD, 0);
             this.Controls.SetChildIndex(this.label32, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.btnConsultar, 0);
+            this.Controls.SetChildIndex(this.dataGridEstadisticas, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.añoNUD)).EndInit();
@@ -221,7 +238,6 @@
         #endregion
 
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.DataGridView dataGridEstadisticas;
         private System.Windows.Forms.ComboBox cmbTrimestre;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox cmbTipo;
@@ -230,5 +246,6 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnConsultar;
+        private System.Windows.Forms.DataGridView dataGridEstadisticas;
     }
 }

@@ -106,6 +106,7 @@
             // 
             // cbxRegimenes
             // 
+            this.cbxRegimenes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxRegimenes.FormattingEnabled = true;
             this.cbxRegimenes.Location = new System.Drawing.Point(288, 293);
             this.cbxRegimenes.Name = "cbxRegimenes";

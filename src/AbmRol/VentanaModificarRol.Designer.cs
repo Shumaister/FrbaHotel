@@ -132,6 +132,7 @@
             // 
             // cbxFuncionalidades
             // 
+            this.cbxFuncionalidades.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxFuncionalidades.FormattingEnabled = true;
             this.cbxFuncionalidades.Location = new System.Drawing.Point(29, 140);
             this.cbxFuncionalidades.Name = "cbxFuncionalidades";

@@ -185,6 +185,7 @@
             // 
             // cbxTipoDocumento
             // 
+            this.cbxTipoDocumento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxTipoDocumento.FormattingEnabled = true;
             this.cbxTipoDocumento.Location = new System.Drawing.Point(24, 180);
             this.cbxTipoDocumento.Name = "cbxTipoDocumento";
