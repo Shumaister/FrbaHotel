@@ -239,6 +239,7 @@
             this.tbxNombre.Name = "tbxNombre";
             this.tbxNombre.Size = new System.Drawing.Size(100, 20);
             this.tbxNombre.TabIndex = 317;
+            this.tbxNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxNombre_KeyPress);
             // 
             // tbxEstrellas
             // 
@@ -246,6 +247,7 @@
             this.tbxEstrellas.Name = "tbxEstrellas";
             this.tbxEstrellas.Size = new System.Drawing.Size(100, 20);
             this.tbxEstrellas.TabIndex = 320;
+            this.tbxEstrellas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxEstrellas_KeyPress);
             // 
             // label8
             // 
@@ -324,6 +326,7 @@
             this.tbxNumeroCalle.Name = "tbxNumeroCalle";
             this.tbxNumeroCalle.Size = new System.Drawing.Size(100, 20);
             this.tbxNumeroCalle.TabIndex = 312;
+            this.tbxNumeroCalle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxNumeroCalle_KeyPress);
             // 
             // label30
             // 
@@ -351,6 +354,7 @@
             this.tbxCalle.Name = "tbxCalle";
             this.tbxCalle.Size = new System.Drawing.Size(100, 20);
             this.tbxCalle.TabIndex = 309;
+            this.tbxCalle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCalle_KeyPress);
             // 
             // label26
             // 
@@ -378,6 +382,7 @@
             this.tbxCiudad.Name = "tbxCiudad";
             this.tbxCiudad.Size = new System.Drawing.Size(100, 20);
             this.tbxCiudad.TabIndex = 306;
+            this.tbxCiudad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCiudad_KeyPress);
             // 
             // label21
             // 
@@ -405,6 +410,7 @@
             this.tbxPais.Name = "tbxPais";
             this.tbxPais.Size = new System.Drawing.Size(100, 20);
             this.tbxPais.TabIndex = 303;
+            this.tbxPais.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxPais_KeyPress);
             // 
             // label15
             // 
@@ -423,6 +429,7 @@
             this.tbxTelefono.Name = "tbxTelefono";
             this.tbxTelefono.Size = new System.Drawing.Size(100, 20);
             this.tbxTelefono.TabIndex = 300;
+            this.tbxTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxTelefono_KeyPress);
             // 
             // label16
             // 

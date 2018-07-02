@@ -1028,7 +1028,7 @@ namespace FrbaHotel
             }
             domicilioHotelAgregar(hotel.domicilio);
             hotelAgregar(hotel);
-
+            hotelAgregarRegimenes(hotel);
             ventanaInformarExito("El hotel fue creado con exito");
             return true;
         }
@@ -1066,7 +1066,7 @@ namespace FrbaHotel
 
         public static void hotelAgregar(Hotel hotel)
         {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Hoteles (Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_DomicilioID, Hotel_Telefono, Hotel_Email, Hotel_FechaCreacion) VALUES (@Nombre, @CantidadEstrellas, @DomicilioID, @Telefono, @Email, CONVERT(datetime,@FechaCreacion,121)");
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Hoteles (Hotel_Nombre, Hotel_CantidadEstrellas, Hotel_DomicilioID, Hotel_Telefono, Hotel_Email, Hotel_FechaCreacion) VALUES (@Nombre, @CantidadEstrellas, @DomicilioID, @Telefono, @Email, CONVERT(datetime,@FechaCreacion,121))");
             consulta.Parameters.AddWithValue("@Nombre", hotel.nombre);
             consulta.Parameters.AddWithValue("@CantidadEstrellas", hotel.cantidadEstrellas);
             consulta.Parameters.AddWithValue("@DomicilioID", domicilioHotelObtenerID(hotel.domicilio));
@@ -1277,10 +1277,9 @@ namespace FrbaHotel
             return consultaObtenerTabla(consulta);
         }
 
-        public static bool hotelAlgunaReservaActualConEseRegimen(Hotel hotel, string regimen)
+        public static bool hotelHayReservasActivasConEseRegimen(Hotel hotel, string regimen)
         {
-#warning ver
-            SqlCommand consulta = consultaCrear("SELECT Reserva_ID FROM RIP.Reservas WHERE Reserva_HotelID = @HotelID AND Reserva_RegimenID = @RegimenID AND (Reserva_FechaInicio >= CONVERT(datetime,GETDATE(),121) OR Reserva_FechaFin >= CONVERT(datetime,GETDATE(),121))");
+            SqlCommand consulta = consultaCrear("SELECT Reserva_ID FROM RIP.Reservas JOIN RIP.Estadias ON Reserva_ID = Estadia_ReservaID WHERE Reserva_HotelID = @HotelID AND Reserva_RegimenID = @RegimenID AND (Reserva_FechaInicio >= CONVERT(datetime,GETDATE(),121) OR Estadia_FechaFin IS NULL)");
             consulta.Parameters.AddWithValue("@HotelID", hotel.id);
             consulta.Parameters.AddWithValue("@RegimenID", regimenObtenerID(regimen));
             return consultaValorExiste(consultaObtenerValor(consulta));
@@ -1290,18 +1289,18 @@ namespace FrbaHotel
 
         #region HotelCerrado
 
-        public static bool hotelCerradoTieneReservasEnPeriodo(HotelCerrado hotelCerrado)
+        public static bool hotelCerradoHayReservasActivasEnElPeriodo(HotelCerrado hotelCerrado)
         {
-            SqlCommand consulta = consultaCrear("SELECT COUNT(Reserva_ID) FROM RIP.Reservas WHERE Reserva_HotelID = @ID AND ((Reserva_FechaInicio BETWEEN CONVERT(datetime,@FechaInicio,121) AND CONVERT(datetime,@FechaFin,121) OR Reserva_FechaFin BETWEEN CONVERT(datetime,@FechaInicio,121) AND CONVERT(datetime,@FechaFin,121)) OR (Reserva_FechaInicio <= CONVERT(datetime,@FechaInicio,121) AND Reserva_FechaFin >= CONVERT(datetime,@FechaFin,121)))");
+            SqlCommand consulta = consultaCrear("SELECT Reserva_ID FROM RIP.Reservas JOIN RIP.Estadias ON Reserva_ID= Estadia_ReservaID WHERE Reserva_HotelID = @ID AND ((Reserva_FechaInicio BETWEEN CONVERT(datetime,@FechaInicio,121) AND CONVERT(datetime,@FechaFin,121)) OR Estadia_FechaFin IS NULL)");
             consulta.Parameters.AddWithValue("@ID", hotelCerrado.hotel.id);
             consulta.Parameters.AddWithValue("@FechaInicio", hotelCerrado.fechaInicio);
             consulta.Parameters.AddWithValue("@FechaFin", hotelCerrado.fechaFin);
-            return consultaValorEsMayorA(consultaObtenerValor(consulta), 0);
+            return consultaValorExiste(consultaObtenerValor(consulta));
         }
 
         public static bool hotelCerradoAgregadoConExito(HotelCerrado hotelCerrado)
         {
-            if (hotelCerradoTieneReservasEnPeriodo(hotelCerrado))
+            if (hotelCerradoHayReservasActivasEnElPeriodo(hotelCerrado))
             {
                 ventanaInformarError("No se puede eliminar el hotel ya que posee reservas o huespedes alojados dentro del periodo elegido.");
                 return false;
