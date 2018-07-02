@@ -87,7 +87,7 @@ namespace FrbaHotel.AbmHotel
 
         private void btnQuitarRegimen_Click(object sender, EventArgs e)
         {
-            if (Database.hotelAlgunaReservaActualConEseRegimen(hotel, lbxRegimenes.SelectedItem.ToString()))
+            if (Database.hotelHayReservasActivasConEseRegimen(hotel, lbxRegimenes.SelectedItem.ToString()))
             {
                 ventanaInformarError("No se puede quitar el regimen ya que existen estadias actuales o reservas futuras que tienen ese regimen");
                 return;
@@ -140,7 +140,7 @@ namespace FrbaHotel.AbmHotel
 
         private void tbxNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
-            textBoxConfigurarParaLetras(e);
+            textBoxConfigurarParaLetrasYNumeros(e);
             controladorError.Clear();
         }
 

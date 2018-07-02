@@ -61,7 +61,7 @@ IF NOT EXISTS (
 BEGIN
 CREATE TABLE [RIP].[Roles] (
 	[Rol_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[Rol_Nombre] [nvarchar](50) CONSTRAINT UQ_NOMBRE_ROLES UNIQUE NOT NULL,
+	[Rol_Nombre] [nvarchar](255) CONSTRAINT UQ_NOMBRE_ROLES UNIQUE NOT NULL,
 	[Rol_Estado] [bit] DEFAULT 1
 )
 PRINT '----- Tabla RIP.Roles creada -----'
@@ -79,7 +79,7 @@ IF NOT EXISTS (
 BEGIN
 CREATE TABLE [RIP].[Funcionalidades] (
 	[Funcionalidad_ID][numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[Funcionalidad_Nombre] [nvarchar](50) NOT NULL
+	[Funcionalidad_Nombre] [nvarchar](255) NOT NULL
 )
 PRINT '----- Tabla RIP.Funcionalidades creada -----'
 END
@@ -120,7 +120,7 @@ CREATE TABLE [RIP].[Domicilios] (
 	[Domicilio_Calle] [nvarchar](255),
 	[Domicilio_NumeroCalle] [numeric](18,0),
 	[Domicilio_Piso] [numeric](18,0),
-	[Domicilio_Departamento] [nvarchar](50),
+	[Domicilio_Departamento] [nvarchar](255),
 )
 PRINT '----- Tabla RIP.Domicilios creada -----'
 END
@@ -136,7 +136,7 @@ IF NOT EXISTS (
 BEGIN
 CREATE TABLE [RIP].[TiposDocumentos] (
 	[TipoDocumento_ID] [numeric](18,0) NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[TipoDocumento_Descripcion] [nvarchar](15) CONSTRAINT UQ_DESC_TIPODOCUMENTO UNIQUE NOT NULL
+	[TipoDocumento_Descripcion] [nvarchar](255) CONSTRAINT UQ_DESC_TIPODOCUMENTO UNIQUE NOT NULL
 )
 PRINT '----- Tabla RIP.TiposDocumentos creada -----'
 END
@@ -370,7 +370,7 @@ CREATE TABLE [RIP].[Habitaciones] (
 	[Habitacion_HotelID] [numeric](18,0),
 	[Habitacion_Numero] [numeric](18,0),
 	[Habitacion_Piso] [numeric](18,0),
-	[Habitacion_Frente] [nvarchar](50),
+	[Habitacion_Frente] [nvarchar](255),
 	[Habitacion_TipoHabitacionID] [numeric](18,0),
 	[Habitacion_Descripcion] [nvarchar](255),
 	[Habitacion_Estado] [bit] DEFAULT 1,
