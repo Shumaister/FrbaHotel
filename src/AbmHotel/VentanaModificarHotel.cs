@@ -18,6 +18,7 @@ namespace FrbaHotel.AbmHotel
 
         public VentanaHotel ventanaHotel { get; set; }
         public Hotel hotel { get; set; }
+        bool HabilitadoDesdeInicio { get; set; }
         
         #endregion
 
@@ -28,6 +29,7 @@ namespace FrbaHotel.AbmHotel
             InitializeComponent();
             this.ventanaHotel = ventanaHotel;
             this.hotel = hotel;
+            this.HabilitadoDesdeInicio = false;
         }
 
         #endregion
@@ -46,9 +48,10 @@ namespace FrbaHotel.AbmHotel
             tbxCalle.Text = hotel.domicilio.calle;
             tbxNumeroCalle.Text = hotel.domicilio.numeroCalle;
             if (bool.Parse(hotel.estado))
-                rbtActivado.Select();
-            else
-                rbtDesactivado.Select();
+            {
+                this.HabilitadoDesdeInicio = true;
+                buttonHabilitarDesactivar(btnHabilitar);
+            }
         }
 
         private void btnGuardarHotel_Click(object sender, EventArgs e)
@@ -77,7 +80,7 @@ namespace FrbaHotel.AbmHotel
             hotel.email = tbxEmail.Text;
             hotel.telefono = tbxTelefono.Text;
             hotel.regimenes = listBoxExtraerItemsEnLista(lbxRegimenes);
-            hotel.estado = radioButtonEstado(rbtActivado);
+            hotel.estado = btnHabilitar.Enabled ? "0" : "1";
         }
 
         private void btnAgregarRegimen_Click(object sender, EventArgs e)
@@ -125,6 +128,8 @@ namespace FrbaHotel.AbmHotel
             listBoxLimpiar(lbxRegimenes);
             calendario.Hide();
             btnGuardarFecha.Hide();
+            if (!this.HabilitadoDesdeInicio)
+                buttonHabilitarActivar(btnHabilitar);
         }
 
         #endregion
@@ -180,5 +185,10 @@ namespace FrbaHotel.AbmHotel
             controladorError.Clear();
         }
         #endregion
+
+        private void btnHabilitar_Click(object sender, EventArgs e)
+        {
+            buttonHabilitarDesactivar(btnHabilitar);
+        }
     }
 }

@@ -46,11 +46,9 @@
             this.lblHotel = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.rbtActivado = new System.Windows.Forms.RadioButton();
-            this.rbtDesactivado = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.cbxFrentes = new System.Windows.Forms.ComboBox();
+            this.btnHabilitar = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.SuspendLayout();
@@ -235,48 +233,6 @@
             this.label10.TabIndex = 320;
             this.label10.Text = "Vista";
             // 
-            // rbtActivado
-            // 
-            this.rbtActivado.AutoSize = true;
-            this.rbtActivado.Location = new System.Drawing.Point(30, 228);
-            this.rbtActivado.Name = "rbtActivado";
-            this.rbtActivado.Size = new System.Drawing.Size(72, 17);
-            this.rbtActivado.TabIndex = 327;
-            this.rbtActivado.TabStop = true;
-            this.rbtActivado.Text = "Habilitado";
-            this.rbtActivado.UseVisualStyleBackColor = true;
-            // 
-            // rbtDesactivado
-            // 
-            this.rbtDesactivado.AutoSize = true;
-            this.rbtDesactivado.Location = new System.Drawing.Point(129, 228);
-            this.rbtDesactivado.Name = "rbtDesactivado";
-            this.rbtDesactivado.Size = new System.Drawing.Size(89, 17);
-            this.rbtDesactivado.TabIndex = 326;
-            this.rbtDesactivado.TabStop = true;
-            this.rbtDesactivado.Text = "Deshabilitado";
-            this.rbtDesactivado.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(66, 199);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 22);
-            this.label1.TabIndex = 325;
-            this.label1.Text = "*";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 200);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 13);
-            this.label2.TabIndex = 324;
-            this.label2.Text = "Estado";
-            // 
             // cbxFrentes
             // 
             this.cbxFrentes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -286,16 +242,33 @@
             this.cbxFrentes.Size = new System.Drawing.Size(149, 21);
             this.cbxFrentes.TabIndex = 328;
             // 
+            // btnHabilitar
+            // 
+            this.btnHabilitar.Location = new System.Drawing.Point(73, 216);
+            this.btnHabilitar.Name = "btnHabilitar";
+            this.btnHabilitar.Size = new System.Drawing.Size(75, 23);
+            this.btnHabilitar.TabIndex = 330;
+            this.btnHabilitar.Text = "Habilitar";
+            this.btnHabilitar.UseVisualStyleBackColor = true;
+            this.btnHabilitar.Click += new System.EventHandler(this.btnHabilitar_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(24, 221);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 329;
+            this.label3.Text = "Estado";
+            // 
             // VentanaModificarHabitacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(369, 485);
+            this.Controls.Add(this.btnHabilitar);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.cbxFrentes);
-            this.Controls.Add(this.rbtActivado);
-            this.Controls.Add(this.rbtDesactivado);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.lblHotel);
@@ -336,11 +309,9 @@
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.label10, 0);
             this.Controls.SetChildIndex(this.label9, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.rbtDesactivado, 0);
-            this.Controls.SetChildIndex(this.rbtActivado, 0);
             this.Controls.SetChildIndex(this.cbxFrentes, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.btnHabilitar, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.ResumeLayout(false);
@@ -368,10 +339,8 @@
         private System.Windows.Forms.Label lblHotel;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.RadioButton rbtActivado;
-        private System.Windows.Forms.RadioButton rbtDesactivado;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbxFrentes;
+        private System.Windows.Forms.Button btnHabilitar;
+        private System.Windows.Forms.Label label3;
     }
 }

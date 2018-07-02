@@ -18,6 +18,7 @@ namespace FrbaHotel.AbmUsuario
 
         VentanaUsuario ventanaUsuario {get; set;}
         Usuario usuario { get; set; }
+        bool HabilitadoDesdeInicio { get; set; }
 
         #endregion
 
@@ -28,6 +29,7 @@ namespace FrbaHotel.AbmUsuario
             InitializeComponent();
             this.ventanaUsuario = ventanaUsuario;
             this.usuario = usuario;
+            this.HabilitadoDesdeInicio = false;
         }
 
         #endregion
@@ -58,9 +60,10 @@ namespace FrbaHotel.AbmUsuario
             tbxPiso.Text = usuario.persona.domicilio.piso;
             tbxDepartamento.Text = usuario.persona.domicilio.departamento;
             if (bool.Parse(usuario.estado))
-                rbtActivado.Select();
-            else
-                rbtDesactivado.Select();
+            {
+                this.HabilitadoDesdeInicio = true;
+                buttonHabilitarDesactivar(btnHabilitar);
+            }   
         }
 
         private List<Hotel> ventanaObtenerHotelesSeleccionados()
@@ -92,7 +95,7 @@ namespace FrbaHotel.AbmUsuario
             usuario.persona.tipoDocumento = cbxTipoDocumento.SelectedItem.ToString();
             usuario.nombre = tbxUsuario.Text;
             usuario.contrasenia = tbxContrasena.Text;
-            usuario.estado = radioButtonEstado(rbtActivado);
+            usuario.estado = btnHabilitar.Enabled ? "0" : "1";
             usuario.persona.nombre = tbxNombre.Text;
             usuario.persona.apellido = tbxApellido.Text;
             usuario.persona.numeroDocumento = tbxDocumento.Text;
@@ -153,6 +156,8 @@ namespace FrbaHotel.AbmUsuario
             controladorError.Clear();
             calendario.Hide();
             btnGuardarFecha.Hide();
+            if (!this.HabilitadoDesdeInicio)
+                buttonHabilitarActivar(btnHabilitar);
         }
 
         private void btnSeleccionarFecha_Click(object sender, EventArgs e)
@@ -286,5 +291,10 @@ namespace FrbaHotel.AbmUsuario
         }
 
         #endregion
+
+        private void btnHabilitar_Click(object sender, EventArgs e)
+        {
+            buttonHabilitarDesactivar(btnHabilitar);
+        }
     }   
 }

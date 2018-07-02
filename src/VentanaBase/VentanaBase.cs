@@ -270,12 +270,5 @@ namespace FrbaHotel
 
         #endregion
 
-        public string radioButtonEstado(RadioButton radioButtonHabilitar)
-        {
-            if (radioButtonHabilitar.Checked)
-                return "1";
-            else
-                return "0";
-        }
     }
 }

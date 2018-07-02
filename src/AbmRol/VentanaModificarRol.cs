@@ -69,9 +69,7 @@ namespace FrbaHotel.AbmRol
             comboBoxCargar(cbxFuncionalidades, Database.funcionalidadObtenerTodasEnLista());
             tbxNombreRol.Clear();
             if (!this.HabilitadoDesdeInicio)
-            {
                 buttonHabilitarActivar(btnHabilitar);
-            }
             controladorError.Clear();
         }
 

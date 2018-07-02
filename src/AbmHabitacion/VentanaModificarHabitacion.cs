@@ -17,6 +17,7 @@ namespace FrbaHotel.AbmHabitacion
 
         public VentanaHabitacion ventanaHabitacion { get; set; }
         public Habitacion habitacion { get; set; }
+        bool HabilitadoDesdeInicio { get; set; }
 
         #endregion
 
@@ -27,6 +28,7 @@ namespace FrbaHotel.AbmHabitacion
             InitializeComponent();
             this.ventanaHabitacion = ventanaHabitacion;
             this.habitacion = habitacion;
+            this.HabilitadoDesdeInicio = false;
         }
 
         #endregion
@@ -40,9 +42,10 @@ namespace FrbaHotel.AbmHabitacion
             tbxPiso.Text = habitacion.piso;
             tbxDescripcion.Text = habitacion.descripcion;
             if (bool.Parse(habitacion.estado))
-                rbtActivado.Select();
-            else
-                rbtDesactivado.Select();
+            {
+                this.HabilitadoDesdeInicio = true;
+                buttonHabilitarDesactivar(btnHabilitar);
+            }
             comboBoxCargar(cbxTipoHabitaciones, Database.tipoHabitacionObtenerTodasEnLista());
             cbxTipoHabitaciones.SelectedIndex = cbxTipoHabitaciones.Items.IndexOf(habitacion.tipoHabitacion);
             cbxTipoHabitaciones.Enabled = false;
@@ -57,7 +60,7 @@ namespace FrbaHotel.AbmHabitacion
             habitacion.frente = cbxFrentes.SelectedItem.ToString();
             habitacion.tipoHabitacion = cbxTipoHabitaciones.SelectedItem.ToString();
             habitacion.descripcion = tbxDescripcion.Text;
-            habitacion.estado = rbtActivado.Checked? "1" : "0";
+            habitacion.estado = btnHabilitar.Enabled ? "0" : "1";
         }
 
         private void btnModificarGuardar_Click(object sender, EventArgs e)
@@ -80,7 +83,8 @@ namespace FrbaHotel.AbmHabitacion
             tbxPiso.Clear();
             tbxDescripcion.Clear();
             cbxFrentes.SelectedIndex = 0;
-            cbxTipoHabitaciones.SelectedIndex = 0;
+            if (!this.HabilitadoDesdeInicio)
+                buttonHabilitarActivar(btnHabilitar);
         }
 
         #endregion
@@ -100,5 +104,10 @@ namespace FrbaHotel.AbmHabitacion
         }
 
         #endregion
+
+        private void btnHabilitar_Click(object sender, EventArgs e)
+        {
+            buttonHabilitarDesactivar(btnHabilitar);
+        }
     }
 }

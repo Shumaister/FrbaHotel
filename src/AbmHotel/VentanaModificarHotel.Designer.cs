@@ -70,10 +70,8 @@
             this.tbxEmail = new System.Windows.Forms.TextBox();
             this.btnGuardarHotel = new System.Windows.Forms.Button();
             this.btnLimpiarModificar = new System.Windows.Forms.Button();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.rbtDesactivado = new System.Windows.Forms.RadioButton();
-            this.rbtActivado = new System.Windows.Forms.RadioButton();
+            this.btnHabilitar = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.SuspendLayout();
@@ -488,57 +486,32 @@
             this.btnLimpiarModificar.UseVisualStyleBackColor = true;
             this.btnLimpiarModificar.Click += new System.EventHandler(this.btnLimpiarModificar_Click);
             // 
-            // label41
+            // btnHabilitar
             // 
-            this.label41.AutoSize = true;
-            this.label41.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.ForeColor = System.Drawing.Color.Red;
-            this.label41.Location = new System.Drawing.Point(325, 412);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(17, 22);
-            this.label41.TabIndex = 349;
-            this.label41.Text = "*";
+            this.btnHabilitar.Location = new System.Drawing.Point(334, 426);
+            this.btnHabilitar.Name = "btnHabilitar";
+            this.btnHabilitar.Size = new System.Drawing.Size(75, 23);
+            this.btnHabilitar.TabIndex = 351;
+            this.btnHabilitar.Text = "Habilitar";
+            this.btnHabilitar.UseVisualStyleBackColor = true;
+            this.btnHabilitar.Click += new System.EventHandler(this.btnHabilitar_Click);
             // 
-            // label42
+            // label3
             // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(285, 412);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(40, 13);
-            this.label42.TabIndex = 348;
-            this.label42.Text = "Estado";
-            // 
-            // rbtDesactivado
-            // 
-            this.rbtDesactivado.AutoSize = true;
-            this.rbtDesactivado.Location = new System.Drawing.Point(396, 445);
-            this.rbtDesactivado.Name = "rbtDesactivado";
-            this.rbtDesactivado.Size = new System.Drawing.Size(85, 17);
-            this.rbtDesactivado.TabIndex = 347;
-            this.rbtDesactivado.TabStop = true;
-            this.rbtDesactivado.Text = "Desactivado";
-            this.rbtDesactivado.UseVisualStyleBackColor = true;
-            // 
-            // rbtActivado
-            // 
-            this.rbtActivado.AutoSize = true;
-            this.rbtActivado.Location = new System.Drawing.Point(288, 445);
-            this.rbtActivado.Name = "rbtActivado";
-            this.rbtActivado.Size = new System.Drawing.Size(67, 17);
-            this.rbtActivado.TabIndex = 346;
-            this.rbtActivado.TabStop = true;
-            this.rbtActivado.Text = "Activado";
-            this.rbtActivado.UseVisualStyleBackColor = true;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(285, 431);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 350;
+            this.label3.Text = "Estado";
             // 
             // VentanaModificarHotel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(554, 526);
-            this.Controls.Add(this.label41);
-            this.Controls.Add(this.label42);
-            this.Controls.Add(this.rbtDesactivado);
-            this.Controls.Add(this.rbtActivado);
+            this.Controls.Add(this.btnHabilitar);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.lbxRegimenes);
             this.Controls.Add(this.cbxRegimenes);
@@ -627,10 +600,8 @@
             this.Controls.SetChildIndex(this.cbxRegimenes, 0);
             this.Controls.SetChildIndex(this.lbxRegimenes, 0);
             this.Controls.SetChildIndex(this.label13, 0);
-            this.Controls.SetChildIndex(this.rbtActivado, 0);
-            this.Controls.SetChildIndex(this.rbtDesactivado, 0);
-            this.Controls.SetChildIndex(this.label42, 0);
-            this.Controls.SetChildIndex(this.label41, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.btnHabilitar, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.ResumeLayout(false);
@@ -682,9 +653,7 @@
         private System.Windows.Forms.TextBox tbxEmail;
         private System.Windows.Forms.Button btnGuardarHotel;
         private System.Windows.Forms.Button btnLimpiarModificar;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Label label42;
-        private System.Windows.Forms.RadioButton rbtDesactivado;
-        private System.Windows.Forms.RadioButton rbtActivado;
+        private System.Windows.Forms.Button btnHabilitar;
+        private System.Windows.Forms.Label label3;
     }
 }
