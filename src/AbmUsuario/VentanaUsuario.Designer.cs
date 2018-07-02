@@ -284,6 +284,7 @@
             // 
             this.calendario.Location = new System.Drawing.Point(157, 278);
             this.calendario.Name = "calendario";
+            this.calendario.ShowToday = false;
             this.calendario.TabIndex = 285;
             this.calendario.Visible = false;
             // 

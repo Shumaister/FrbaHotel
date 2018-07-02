@@ -1279,9 +1279,10 @@ namespace FrbaHotel
 
         public static bool hotelHayReservasActivasConEseRegimen(Hotel hotel, string regimen)
         {
-            SqlCommand consulta = consultaCrear("SELECT Reserva_ID FROM RIP.Reservas JOIN RIP.Estadias ON Reserva_ID = Estadia_ReservaID WHERE Reserva_HotelID = @HotelID AND Reserva_RegimenID = @RegimenID AND (Reserva_FechaInicio >= CONVERT(datetime,GETDATE(),121) OR Estadia_FechaFin IS NULL)");
+            SqlCommand consulta = consultaCrear("SELECT Reserva_ID FROM RIP.Reservas JOIN RIP.Estadias ON Reserva_ID = Estadia_ReservaID WHERE Reserva_HotelID = @HotelID AND Reserva_RegimenID = @RegimenID AND (Reserva_FechaInicio >= CONVERT(datetime,@FechaInicio,121) OR Estadia_FechaFin IS NULL)");
             consulta.Parameters.AddWithValue("@HotelID", hotel.id);
             consulta.Parameters.AddWithValue("@RegimenID", regimenObtenerID(regimen));
+            consulta.Parameters.AddWithValue("@FechaInicio", ConfigurationManager.AppSettings["fechaSistema"]);
             return consultaValorExiste(consultaObtenerValor(consulta));
         }
 
@@ -1631,7 +1632,7 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@clienteid", R.Cliente.id);
             consulta.Parameters.AddWithValue("@hotelid", R.Hotel.id);
             consulta.Parameters.AddWithValue("@rch", R.CantidadHuespedes);
-            consulta.Parameters.AddWithValue("@fechacreacion", DateTime.Now);
+            consulta.Parameters.AddWithValue("@fechacreacion", DateTime.Parse(ConfigurationManager.AppSettings["fechaSistema"]));
             consulta.Parameters.AddWithValue("@fi", R.FechaInicio);
             consulta.Parameters.AddWithValue("@ff", R.FechaFin);
             consulta.Parameters.AddWithValue("@tipohabitacion", R.Habitaciones[0].tipoHabitacion);
@@ -1733,7 +1734,7 @@ namespace FrbaHotel
             }
 
             query.Parameters.AddWithValue("@codigo", r.Codigo);
-            query.Parameters.AddWithValue("@fecha", DateTime.Now);
+            query.Parameters.AddWithValue("@fecha", DateTime.Parse(ConfigurationManager.AppSettings["fechaSistema"]));
             query.Parameters.AddWithValue("@usuario", usuario);
 
             consultaEjecutar(query);
@@ -1742,7 +1743,7 @@ namespace FrbaHotel
             SqlCommand quer2 = new SqlCommand();
             quer2 = consultaCrear("UPDATE rip.HabitacionesNoDisponibles set HabitacionNoDisponible_FechaFin = CONVERT(datetime,@fe,121), HabitacionNoDisponible_Finalizada = 1  where HabitacionNoDisponible_ReservaID = @codr ");
             quer2.Parameters.AddWithValue("@codr", r.Codigo);
-            quer2.Parameters.AddWithValue("@fe", DateTime.Now);
+            quer2.Parameters.AddWithValue("@fe", DateTime.Parse(ConfigurationManager.AppSettings["fechaSistema"]));
 
             consultaEjecutar(quer2);
 
@@ -1864,9 +1865,10 @@ namespace FrbaHotel
 
         public static void estadiaAgregarIngreso(Estadia estadia)
         {
-            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Estadias (Estadia_ReservaID, Estadia_FechaInicio, Estadia_CheckInUsuarioID) VALUES (@ReservaID, CONVERT(datetime,GETDATE(),121), @UsuarioID)");
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Estadias (Estadia_ReservaID, Estadia_FechaInicio, Estadia_CheckInUsuarioID) VALUES (@ReservaID, CONVERT(datetime,@FechaInicio,121), @UsuarioID)");
             consulta.Parameters.AddWithValue("@UsuarioID", estadia.checkInUsuarioID);
             consulta.Parameters.AddWithValue("@ReservaID", estadia.reserva.Codigo);
+            consulta.Parameters.AddWithValue("@FechaInicio", ConfigurationManager.AppSettings["fechaSistema"]);
             consultaEjecutar(consulta);
         }
 
@@ -1887,7 +1889,7 @@ namespace FrbaHotel
 
         public static bool estadiaIngresoPermitido(Estadia estadia)
         {
-            return estadia.reserva.FechaInicio.Date == DateTime.Now.Date;
+            return estadia.reserva.FechaInicio.Date == DateTime.Parse(ConfigurationManager.AppSettings["fechaSistema"]).Date;
         }
 
         public static bool estadiaIngresoEstaRegistrado(Estadia estadia)
@@ -1914,9 +1916,10 @@ namespace FrbaHotel
 
         public static void estadiaAgregarEgreso(Estadia estadia)
         {
-            SqlCommand consulta = consultaCrear("UPDATE RIP.Estadias SET Estadia_FechaFin = CONVERT(datetime,GETDATE(),121), Estadia_CheckOutUsuarioID = @UsuarioID WHERE Estadia_ReservaID = @ReservaID");
+            SqlCommand consulta = consultaCrear("UPDATE RIP.Estadias SET Estadia_FechaFin = CONVERT(datetime,@FechaFin,121), Estadia_CheckOutUsuarioID = @UsuarioID WHERE Estadia_ReservaID = @ReservaID");
             consulta.Parameters.AddWithValue("@UsuarioID", estadia.checkOutUsuarioID);
             consulta.Parameters.AddWithValue("@ReservaID", estadia.reserva.Codigo);
+            consulta.Parameters.AddWithValue("@FechaFin", ConfigurationManager.AppSettings["fechaSistema"]);
             consultaEjecutar(consulta);
         }
 
@@ -1929,7 +1932,7 @@ namespace FrbaHotel
 
         public static bool estadiaEgresoPermitido(Estadia estadia)
         {
-            return DateTime.Now.Date >= estadia.reserva.FechaInicio.Date && DateTime.Now.Date <= estadia.reserva.FechaFin.Date;
+            return DateTime.Parse(ConfigurationManager.AppSettings["fechaSistema"]).Date >= estadia.reserva.FechaInicio.Date && DateTime.Parse(ConfigurationManager.AppSettings["fechaSistema"]).Date <= estadia.reserva.FechaFin.Date;
         }
 
         public static bool estadiaEgresoEstaRegistrado(Estadia estadia)

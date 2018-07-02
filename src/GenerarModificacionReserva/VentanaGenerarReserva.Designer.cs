@@ -107,6 +107,7 @@
             // 
             this.calendarInicio.Location = new System.Drawing.Point(16, 308);
             this.calendarInicio.Name = "calendarInicio";
+            this.calendarInicio.ShowToday = false;
             this.calendarInicio.TabIndex = 307;
             this.calendarInicio.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.calendarInicio_DateChanged);
             // 
@@ -411,6 +412,7 @@
             // 
             this.calendarFin.Location = new System.Drawing.Point(288, 308);
             this.calendarFin.Name = "calendarFin";
+            this.calendarFin.ShowToday = false;
             this.calendarFin.TabIndex = 311;
             this.calendarFin.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 

@@ -159,6 +159,7 @@
             // 
             this.calendario.Location = new System.Drawing.Point(252, 80);
             this.calendario.Name = "calendario";
+            this.calendario.ShowToday = false;
             this.calendario.TabIndex = 367;
             // 
             // btnSeleccionarFechaInicio

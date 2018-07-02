@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 using FrbaHotel.Clases;
 
 namespace FrbaHotel.AbmHotel
@@ -34,7 +35,7 @@ namespace FrbaHotel.AbmHotel
         private void VentanaEliminarHotel_Load(object sender, EventArgs e)
         {
             lblHotel.Text = "Hotel: " + hotel.domicilio.pais + " - " + hotel.domicilio.ciudad + " - " + hotel.domicilio.calle + " - " + hotel.domicilio.numeroCalle;
-            calendario.MinDate = DateTime.Now;
+            calendario.MinDate = DateTime.Parse(ConfigurationManager.AppSettings["fechaSistema"]);
             calendario.Hide();
             btnAceptarFecha.Hide();
         }

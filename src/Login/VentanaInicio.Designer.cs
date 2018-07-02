@@ -71,9 +71,9 @@
             // 
             // btnCliente
             // 
-            this.btnCliente.Location = new System.Drawing.Point(75, 192);
+            this.btnCliente.Location = new System.Drawing.Point(49, 207);
             this.btnCliente.Name = "btnCliente";
-            this.btnCliente.Size = new System.Drawing.Size(125, 23);
+            this.btnCliente.Size = new System.Drawing.Size(75, 23);
             this.btnCliente.TabIndex = 4;
             this.btnCliente.Text = "Cliente";
             this.btnCliente.UseVisualStyleBackColor = true;
@@ -81,9 +81,9 @@
             // 
             // btnUsuario
             // 
-            this.btnUsuario.Location = new System.Drawing.Point(75, 224);
+            this.btnUsuario.Location = new System.Drawing.Point(146, 207);
             this.btnUsuario.Name = "btnUsuario";
-            this.btnUsuario.Size = new System.Drawing.Size(125, 23);
+            this.btnUsuario.Size = new System.Drawing.Size(75, 23);
             this.btnUsuario.TabIndex = 5;
             this.btnUsuario.Text = "Usuario";
             this.btnUsuario.UseVisualStyleBackColor = true;

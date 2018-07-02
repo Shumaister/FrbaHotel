@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace FrbaHotel.CancelarReserva
 {
@@ -76,8 +77,8 @@ namespace FrbaHotel.CancelarReserva
 
             if (ventanaCamposEstanCompletos(this.groupBox1, controladorError))
             {
-                DateTime hoy = DateTime.Now;
-                DateTime ayer = DateTime.Now.AddDays(-1);
+                DateTime hoy = DateTime.Parse(ConfigurationManager.AppSettings["fechaSistema"]); 
+                DateTime ayer = DateTime.Parse(ConfigurationManager.AppSettings["fechaSistema"]).AddDays(-1);
                 string numeroReserva = this.tbxNumeroReserva.Text;
 
                 if (Database.ReservaExiste(numeroReserva))
