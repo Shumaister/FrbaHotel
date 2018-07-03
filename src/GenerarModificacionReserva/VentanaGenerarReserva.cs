@@ -45,9 +45,6 @@ namespace FrbaHotel.GenerarModificacionReserva
             OcultarErrores();
             groupBox3.Enabled = false;
             groupBox2.Enabled = false;
-            SqlCommand updateReservas = Database.consultaCrear("update rip.Reservas set Reserva_EstadoReservaID=5 where YEAR(CONVERT(datetime,@FechaActual,121))>=YEAR(Reserva_FechaInicio) and MONTH(CONVERT(datetime,@FechaActual,121))>=MONTH(Reserva_FechaInicio) and DAY(CONVERT(datetime,@FechaActual,121))>DAY(Reserva_FechaInicio) and (Reserva_EstadoReservaID!=6 or Reserva_EstadoReservaID is null)");
-            updateReservas.Parameters.AddWithValue("@FechaActual", ConfigurationManager.AppSettings["fechaSistema"]);
-            Database.consultaEjecutar(updateReservas);
        }
 
         public VentanaGenerarReserva(Reserva reserva, string p)
