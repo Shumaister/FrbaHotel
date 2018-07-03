@@ -58,6 +58,8 @@
             this.calendarFin = new System.Windows.Forms.MonthCalendar();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
             this.lblpreciodiahab = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
@@ -428,6 +430,8 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBox2.Controls.Add(this.label27);
+            this.groupBox2.Controls.Add(this.label28);
             this.groupBox2.Controls.Add(this.lblpreciodiahab);
             this.groupBox2.Controls.Add(this.label26);
             this.groupBox2.Controls.Add(this.label25);
@@ -460,10 +464,30 @@
             this.groupBox2.Text = "Paso 2";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(348, 277);
+            this.label27.Name = "label27";
+            this.label27.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label27.Size = new System.Drawing.Size(136, 13);
+            this.label27.TabIndex = 346;
+            this.label27.Text = "-------------------------------------------";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(190, 277);
+            this.label28.Name = "label28";
+            this.label28.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label28.Size = new System.Drawing.Size(136, 13);
+            this.label28.TabIndex = 345;
+            this.label28.Text = "-------------------------------------------";
+            // 
             // lblpreciodiahab
             // 
             this.lblpreciodiahab.AutoSize = true;
-            this.lblpreciodiahab.Location = new System.Drawing.Point(348, 236);
+            this.lblpreciodiahab.Location = new System.Drawing.Point(348, 238);
             this.lblpreciodiahab.Name = "lblpreciodiahab";
             this.lblpreciodiahab.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblpreciodiahab.Size = new System.Drawing.Size(10, 13);
@@ -473,7 +497,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(236, 236);
+            this.label26.Location = new System.Drawing.Point(190, 238);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(72, 13);
             this.label26.TabIndex = 343;
@@ -492,7 +516,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(179, 221);
+            this.label23.Location = new System.Drawing.Point(190, 221);
             this.label23.Name = "label23";
             this.label23.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label23.Size = new System.Drawing.Size(136, 13);
@@ -502,7 +526,7 @@
             // lblcantidaddias
             // 
             this.lblcantidaddias.AutoSize = true;
-            this.lblcantidaddias.Location = new System.Drawing.Point(348, 272);
+            this.lblcantidaddias.Location = new System.Drawing.Point(348, 259);
             this.lblcantidaddias.Name = "lblcantidaddias";
             this.lblcantidaddias.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblcantidaddias.Size = new System.Drawing.Size(10, 13);
@@ -512,7 +536,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(222, 272);
+            this.label24.Location = new System.Drawing.Point(190, 259);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(86, 13);
             this.label24.TabIndex = 339;
@@ -552,11 +576,11 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(192, 185);
+            this.label20.Location = new System.Drawing.Point(190, 185);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(116, 13);
+            this.label20.Size = new System.Drawing.Size(118, 13);
             this.label20.TabIndex = 335;
-            this.label20.Text = "Recarga Estrellas hotel";
+            this.label20.Text = "Recarga Estrellas Hotel";
             // 
             // lblPrecioHab
             // 
@@ -589,7 +613,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(217, 138);
+            this.label19.Location = new System.Drawing.Point(190, 138);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(91, 13);
             this.label19.TabIndex = 331;
@@ -598,11 +622,11 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(179, 162);
+            this.label18.Location = new System.Drawing.Point(190, 162);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(129, 13);
+            this.label18.Size = new System.Drawing.Size(121, 13);
             this.label18.TabIndex = 330;
-            this.label18.Text = "Cantidad de Habitaciones";
+            this.label18.Text = "Cantidad de Huespedes";
             // 
             // button1
             // 
@@ -633,16 +657,17 @@
             // lblNumeroPrecioFinal
             // 
             this.lblNumeroPrecioFinal.AutoSize = true;
-            this.lblNumeroPrecioFinal.Location = new System.Drawing.Point(348, 295);
+            this.lblNumeroPrecioFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumeroPrecioFinal.Location = new System.Drawing.Point(348, 298);
             this.lblNumeroPrecioFinal.Name = "lblNumeroPrecioFinal";
-            this.lblNumeroPrecioFinal.Size = new System.Drawing.Size(10, 13);
+            this.lblNumeroPrecioFinal.Size = new System.Drawing.Size(13, 16);
             this.lblNumeroPrecioFinal.TabIndex = 327;
             this.lblNumeroPrecioFinal.Text = "-";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(226, 208);
+            this.label17.Location = new System.Drawing.Point(190, 208);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(82, 13);
             this.label17.TabIndex = 326;
@@ -653,7 +678,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(217, 293);
+            this.label16.Location = new System.Drawing.Point(190, 298);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(91, 16);
             this.label16.TabIndex = 324;
@@ -664,7 +689,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Red;
-            this.label15.Location = new System.Drawing.Point(123, 58);
+            this.label15.Location = new System.Drawing.Point(125, 61);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(17, 22);
             this.label15.TabIndex = 323;
@@ -820,10 +845,10 @@
             this.Name = "VentanaGenerarReserva";
             this.Text = "Generar Reserva - FRBA Hotel ©";
             this.Load += new System.EventHandler(this.VentanaGenerarReserva_Load);
-            this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.groupBox2, 0);
             this.Controls.SetChildIndex(this.groupBox3, 0);
+            this.Controls.SetChildIndex(this.logo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -898,8 +923,10 @@
         private System.Windows.Forms.Label lblpreciodiahab;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label lblcantidaddias;
         private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label23;
     }
 }

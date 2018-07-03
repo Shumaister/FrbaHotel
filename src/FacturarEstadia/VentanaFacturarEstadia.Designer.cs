@@ -29,367 +29,531 @@
         private void InitializeComponent()
         {
             this.CodReservaL = new System.Windows.Forms.Label();
-            this.CodReserva = new System.Windows.Forms.TextBox();
+            this.tbxReserva = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataConsumibles = new System.Windows.Forms.DataGridView();
-            this.SubTotal = new System.Windows.Forms.Label();
-            this.sub = new System.Windows.Forms.Label();
-            this.RegimenPrecio = new System.Windows.Forms.Label();
-            this.DiasRegimen = new System.Windows.Forms.Label();
-            this.Regimen = new System.Windows.Forms.Label();
-            this.allInclusivePrecio = new System.Windows.Forms.Label();
-            this.allinclusivecant = new System.Windows.Forms.Label();
-            this.allInclusive = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.subRegimenPrecio = new System.Windows.Forms.Label();
-            this.subRegimen = new System.Windows.Forms.Label();
-            this.Total = new System.Windows.Forms.Label();
-            this.TotalNumero = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.dgvConsumibles = new System.Windows.Forms.DataGridView();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.diasUtilizados = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.lblDescuentoRegimen = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lblMontoTotal = new System.Windows.Forms.Label();
+            this.lblMontoTotalEstadia = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.lblMontoTotalConsumibles = new System.Windows.Forms.Label();
+            this.lblCantidadHuespedes = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lblPrecioRegimen = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.lblPrecioHabitacion = new System.Windows.Forms.Label();
+            this.lblMontoEstadiaDia = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.lblRecargaEstrellas = new System.Windows.Forms.Label();
+            this.lblCantidadDias = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblDiasNoUtilizados = new System.Windows.Forms.Label();
+            this.lblDiasUtilizados = new System.Windows.Forms.Label();
+            this.lblRegimen = new System.Windows.Forms.Label();
+            this.lblHotel = new System.Windows.Forms.Label();
+            this.btnPagar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbxFormasPagos = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataConsumibles)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConsumibles)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // logo
             // 
-            this.logo.Location = new System.Drawing.Point(649, -3);
-            this.logo.Size = new System.Drawing.Size(10, 19);
+            this.logo.Image = null;
+            this.logo.Location = new System.Drawing.Point(755, 41);
+            this.logo.Size = new System.Drawing.Size(21, 19);
             // 
             // CodReservaL
             // 
             this.CodReservaL.AutoSize = true;
-            this.CodReservaL.Location = new System.Drawing.Point(34, 37);
+            this.CodReservaL.Location = new System.Drawing.Point(24, 23);
             this.CodReservaL.Name = "CodReservaL";
             this.CodReservaL.Size = new System.Drawing.Size(104, 13);
             this.CodReservaL.TabIndex = 1;
             this.CodReservaL.Text = "Codigo de Reserva :";
             // 
-            // CodReserva
+            // tbxReserva
             // 
-            this.CodReserva.Location = new System.Drawing.Point(170, 34);
-            this.CodReserva.MaxLength = 18;
-            this.CodReserva.Name = "CodReserva";
-            this.CodReserva.Size = new System.Drawing.Size(125, 20);
-            this.CodReserva.TabIndex = 2;
-            this.CodReserva.TextChanged += new System.EventHandler(this.CodReserva_TextChanged);
-            this.CodReserva.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CodReserva_KeyPress);
+            this.tbxReserva.Location = new System.Drawing.Point(27, 50);
+            this.tbxReserva.MaxLength = 18;
+            this.tbxReserva.Name = "tbxReserva";
+            this.tbxReserva.Size = new System.Drawing.Size(125, 20);
+            this.tbxReserva.TabIndex = 2;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dataConsumibles);
-            this.groupBox1.Controls.Add(this.SubTotal);
-            this.groupBox1.Controls.Add(this.sub);
-            this.groupBox1.Location = new System.Drawing.Point(34, 110);
+            this.groupBox1.Controls.Add(this.dgvConsumibles);
+            this.groupBox1.Location = new System.Drawing.Point(18, 247);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(418, 262);
+            this.groupBox1.Size = new System.Drawing.Size(444, 292);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Detalle Factura";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            this.groupBox1.Text = "Productos consumidos";
             // 
-            // dataConsumibles
+            // dgvConsumibles
             // 
-            this.dataConsumibles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataConsumibles.Location = new System.Drawing.Point(9, 16);
-            this.dataConsumibles.Name = "dataConsumibles";
-            this.dataConsumibles.ReadOnly = true;
-            this.dataConsumibles.RowHeadersVisible = false;
-            this.dataConsumibles.Size = new System.Drawing.Size(403, 227);
-            this.dataConsumibles.TabIndex = 19;
+            this.dgvConsumibles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvConsumibles.Location = new System.Drawing.Point(18, 35);
+            this.dgvConsumibles.Name = "dgvConsumibles";
+            this.dgvConsumibles.ReadOnly = true;
+            this.dgvConsumibles.RowHeadersVisible = false;
+            this.dgvConsumibles.Size = new System.Drawing.Size(403, 227);
+            this.dgvConsumibles.TabIndex = 19;
             // 
-            // SubTotal
+            // btnBuscar
             // 
-            this.SubTotal.AutoSize = true;
-            this.SubTotal.Location = new System.Drawing.Point(305, 246);
-            this.SubTotal.Name = "SubTotal";
-            this.SubTotal.Size = new System.Drawing.Size(0, 13);
-            this.SubTotal.TabIndex = 6;
-            // 
-            // sub
-            // 
-            this.sub.AutoSize = true;
-            this.sub.Location = new System.Drawing.Point(225, 246);
-            this.sub.Name = "sub";
-            this.sub.Size = new System.Drawing.Size(46, 13);
-            this.sub.TabIndex = 5;
-            this.sub.Text = "Subtotal";
-            this.sub.Click += new System.EventHandler(this.sub_Click);
-            // 
-            // RegimenPrecio
-            // 
-            this.RegimenPrecio.AutoSize = true;
-            this.RegimenPrecio.Location = new System.Drawing.Point(265, 34);
-            this.RegimenPrecio.Name = "RegimenPrecio";
-            this.RegimenPrecio.Size = new System.Drawing.Size(37, 13);
-            this.RegimenPrecio.TabIndex = 23;
-            this.RegimenPrecio.Text = "Precio";
-            // 
-            // DiasRegimen
-            // 
-            this.DiasRegimen.AutoSize = true;
-            this.DiasRegimen.Location = new System.Drawing.Point(173, 34);
-            this.DiasRegimen.Name = "DiasRegimen";
-            this.DiasRegimen.Size = new System.Drawing.Size(86, 13);
-            this.DiasRegimen.TabIndex = 22;
-            this.DiasRegimen.Text = "Cantidad de dias";
-            // 
-            // Regimen
-            // 
-            this.Regimen.AutoSize = true;
-            this.Regimen.Location = new System.Drawing.Point(9, 34);
-            this.Regimen.Name = "Regimen";
-            this.Regimen.Size = new System.Drawing.Size(49, 13);
-            this.Regimen.TabIndex = 5;
-            this.Regimen.Text = "Regimen";
-            // 
-            // allInclusivePrecio
-            // 
-            this.allInclusivePrecio.AutoSize = true;
-            this.allInclusivePrecio.Location = new System.Drawing.Point(268, 73);
-            this.allInclusivePrecio.Name = "allInclusivePrecio";
-            this.allInclusivePrecio.Size = new System.Drawing.Size(0, 13);
-            this.allInclusivePrecio.TabIndex = 21;
-            // 
-            // allinclusivecant
-            // 
-            this.allinclusivecant.AutoSize = true;
-            this.allinclusivecant.Location = new System.Drawing.Point(178, 73);
-            this.allinclusivecant.Name = "allinclusivecant";
-            this.allinclusivecant.Size = new System.Drawing.Size(0, 13);
-            this.allinclusivecant.TabIndex = 20;
-            // 
-            // allInclusive
-            // 
-            this.allInclusive.AutoSize = true;
-            this.allInclusive.Location = new System.Drawing.Point(9, 74);
-            this.allInclusive.Name = "allInclusive";
-            this.allInclusive.Size = new System.Drawing.Size(0, 13);
-            this.allInclusive.TabIndex = 19;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(371, 32);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Buscar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.subRegimenPrecio);
-            this.groupBox2.Controls.Add(this.subRegimen);
-            this.groupBox2.Controls.Add(this.RegimenPrecio);
-            this.groupBox2.Controls.Add(this.Regimen);
-            this.groupBox2.Controls.Add(this.DiasRegimen);
-            this.groupBox2.Controls.Add(this.allInclusive);
-            this.groupBox2.Controls.Add(this.allinclusivecant);
-            this.groupBox2.Controls.Add(this.allInclusivePrecio);
-            this.groupBox2.Location = new System.Drawing.Point(27, 396);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(419, 202);
-            this.groupBox2.TabIndex = 24;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Regimen y Habitación";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(129, 147);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(103, 13);
-            this.label7.TabIndex = 30;
-            this.label7.Text = "CantidadHuespedes";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 147);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(61, 13);
-            this.label8.TabIndex = 29;
-            this.label8.Text = "Huespedes";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(129, 113);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 13);
-            this.label6.TabIndex = 28;
-            this.label6.Text = "Porcentual";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 113);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 13);
-            this.label5.TabIndex = 27;
-            this.label5.Text = "Tipo Habitacion";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(253, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 13);
-            this.label3.TabIndex = 26;
-            this.label3.Text = "Precio";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(129, 21);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 25;
-            this.label2.Text = "Cantidad";
-            // 
-            // subRegimenPrecio
-            // 
-            this.subRegimenPrecio.AutoSize = true;
-            this.subRegimenPrecio.Location = new System.Drawing.Point(302, 168);
-            this.subRegimenPrecio.Name = "subRegimenPrecio";
-            this.subRegimenPrecio.Size = new System.Drawing.Size(0, 13);
-            this.subRegimenPrecio.TabIndex = 24;
-            // 
-            // subRegimen
-            // 
-            this.subRegimen.AutoSize = true;
-            this.subRegimen.Location = new System.Drawing.Point(222, 168);
-            this.subRegimen.Name = "subRegimen";
-            this.subRegimen.Size = new System.Drawing.Size(46, 13);
-            this.subRegimen.TabIndex = 19;
-            this.subRegimen.Text = "Subtotal";
-            // 
-            // Total
-            // 
-            this.Total.AutoSize = true;
-            this.Total.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Total.Location = new System.Drawing.Point(25, 634);
-            this.Total.Name = "Total";
-            this.Total.Size = new System.Drawing.Size(46, 18);
-            this.Total.TabIndex = 25;
-            this.Total.Text = "Total";
-            // 
-            // TotalNumero
-            // 
-            this.TotalNumero.AutoSize = true;
-            this.TotalNumero.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TotalNumero.Location = new System.Drawing.Point(96, 634);
-            this.TotalNumero.Name = "TotalNumero";
-            this.TotalNumero.Size = new System.Drawing.Size(68, 18);
-            this.TotalNumero.TabIndex = 26;
-            this.TotalNumero.Text = "Numero";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(219, 638);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 13);
-            this.label1.TabIndex = 27;
-            this.label1.Text = "Metodo de Pago";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Tarjeta",
-            "Efectivo"});
-            this.comboBox1.Location = new System.Drawing.Point(325, 635);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 28;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(211, 689);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 38);
-            this.button2.TabIndex = 29;
-            this.button2.Text = "Pagar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnBuscar.Location = new System.Drawing.Point(174, 50);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 4;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.tbxBuscar_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(34, 78);
+            this.label4.Location = new System.Drawing.Point(11, 80);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 13);
+            this.label4.Size = new System.Drawing.Size(79, 13);
             this.label4.TabIndex = 30;
-            this.label4.Text = "Días Utilizados";
+            this.label4.Text = "Días utilizados:";
             // 
-            // diasUtilizados
+            // label23
             // 
-            this.diasUtilizados.AutoSize = true;
-            this.diasUtilizados.Location = new System.Drawing.Point(144, 77);
-            this.diasUtilizados.Name = "diasUtilizados";
-            this.diasUtilizados.Size = new System.Drawing.Size(0, 13);
-            this.diasUtilizados.TabIndex = 31;
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(11, 110);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(94, 13);
+            this.label23.TabIndex = 374;
+            this.label23.Text = "Días no utilizados:";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(11, 25);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(35, 13);
+            this.label25.TabIndex = 375;
+            this.label25.Text = "Hotel:";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(11, 52);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(52, 13);
+            this.label28.TabIndex = 376;
+            this.label28.Text = "Regimen:";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label21);
+            this.groupBox3.Controls.Add(this.label22);
+            this.groupBox3.Controls.Add(this.label15);
+            this.groupBox3.Controls.Add(this.label16);
+            this.groupBox3.Controls.Add(this.lblDescuentoRegimen);
+            this.groupBox3.Controls.Add(this.label17);
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Controls.Add(this.lblMontoTotal);
+            this.groupBox3.Controls.Add(this.lblMontoTotalEstadia);
+            this.groupBox3.Controls.Add(this.label18);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.label19);
+            this.groupBox3.Controls.Add(this.lblMontoTotalConsumibles);
+            this.groupBox3.Controls.Add(this.lblCantidadHuespedes);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.lblPrecioRegimen);
+            this.groupBox3.Controls.Add(this.label27);
+            this.groupBox3.Controls.Add(this.lblPrecioHabitacion);
+            this.groupBox3.Controls.Add(this.lblMontoEstadiaDia);
+            this.groupBox3.Controls.Add(this.label20);
+            this.groupBox3.Controls.Add(this.label26);
+            this.groupBox3.Controls.Add(this.lblRecargaEstrellas);
+            this.groupBox3.Controls.Add(this.lblCantidadDias);
+            this.groupBox3.Controls.Add(this.label24);
+            this.groupBox3.Location = new System.Drawing.Point(488, 87);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(351, 363);
+            this.groupBox3.TabIndex = 377;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Detalles de Factura";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(24, 298);
+            this.label21.Name = "label21";
+            this.label21.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label21.Size = new System.Drawing.Size(313, 13);
+            this.label21.TabIndex = 401;
+            this.label21.Text = "---------------------------------------------------------------------------------" +
+    "---------------------";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(119, 27);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(83, 16);
+            this.label22.TabIndex = 388;
+            this.label22.Text = "RESUMEN";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(24, 145);
+            this.label15.Name = "label15";
+            this.label15.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label15.Size = new System.Drawing.Size(313, 13);
+            this.label15.TabIndex = 400;
+            this.label15.Text = "---------------------------------------------------------------------------------" +
+    "---------------------";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(24, 318);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(116, 16);
+            this.label16.TabIndex = 378;
+            this.label16.Text = "MONTO TOTAL";
+            // 
+            // lblDescuentoRegimen
+            // 
+            this.lblDescuentoRegimen.AutoSize = true;
+            this.lblDescuentoRegimen.Location = new System.Drawing.Point(182, 276);
+            this.lblDescuentoRegimen.Name = "lblDescuentoRegimen";
+            this.lblDescuentoRegimen.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblDescuentoRegimen.Size = new System.Drawing.Size(10, 13);
+            this.lblDescuentoRegimen.TabIndex = 399;
+            this.lblDescuentoRegimen.Text = "-";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(24, 128);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(82, 13);
+            this.label17.TabIndex = 379;
+            this.label17.Text = "Precio Regimen";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(24, 276);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(122, 13);
+            this.label14.TabIndex = 398;
+            this.label14.Text = "Descuento por Regimen";
+            // 
+            // lblMontoTotal
+            // 
+            this.lblMontoTotal.AutoSize = true;
+            this.lblMontoTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMontoTotal.Location = new System.Drawing.Point(182, 318);
+            this.lblMontoTotal.Name = "lblMontoTotal";
+            this.lblMontoTotal.Size = new System.Drawing.Size(13, 16);
+            this.lblMontoTotal.TabIndex = 380;
+            this.lblMontoTotal.Text = "-";
+            // 
+            // lblMontoTotalEstadia
+            // 
+            this.lblMontoTotalEstadia.AutoSize = true;
+            this.lblMontoTotalEstadia.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMontoTotalEstadia.Location = new System.Drawing.Point(182, 227);
+            this.lblMontoTotalEstadia.Name = "lblMontoTotalEstadia";
+            this.lblMontoTotalEstadia.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblMontoTotalEstadia.Size = new System.Drawing.Size(11, 13);
+            this.lblMontoTotalEstadia.TabIndex = 397;
+            this.lblMontoTotalEstadia.Text = "-";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(24, 82);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(121, 13);
+            this.label18.TabIndex = 381;
+            this.label18.Text = "Cantidad de Huespedes";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(24, 227);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(121, 13);
+            this.label10.TabIndex = 396;
+            this.label10.Text = "Monto Total Estadia";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(24, 58);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(91, 13);
+            this.label19.TabIndex = 382;
+            this.label19.Text = "Precio Habitacion";
+            // 
+            // lblMontoTotalConsumibles
+            // 
+            this.lblMontoTotalConsumibles.AutoSize = true;
+            this.lblMontoTotalConsumibles.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMontoTotalConsumibles.Location = new System.Drawing.Point(182, 251);
+            this.lblMontoTotalConsumibles.Name = "lblMontoTotalConsumibles";
+            this.lblMontoTotalConsumibles.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblMontoTotalConsumibles.Size = new System.Drawing.Size(11, 13);
+            this.lblMontoTotalConsumibles.TabIndex = 395;
+            this.lblMontoTotalConsumibles.Text = "-";
+            // 
+            // lblCantidadHuespedes
+            // 
+            this.lblCantidadHuespedes.AutoSize = true;
+            this.lblCantidadHuespedes.Location = new System.Drawing.Point(182, 82);
+            this.lblCantidadHuespedes.Name = "lblCantidadHuespedes";
+            this.lblCantidadHuespedes.Size = new System.Drawing.Size(10, 13);
+            this.lblCantidadHuespedes.TabIndex = 383;
+            this.lblCantidadHuespedes.Text = "-";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(24, 251);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(149, 13);
+            this.label12.TabIndex = 394;
+            this.label12.Text = "Monto Total Consumibles";
+            // 
+            // lblPrecioRegimen
+            // 
+            this.lblPrecioRegimen.AutoSize = true;
+            this.lblPrecioRegimen.Location = new System.Drawing.Point(182, 128);
+            this.lblPrecioRegimen.Name = "lblPrecioRegimen";
+            this.lblPrecioRegimen.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblPrecioRegimen.Size = new System.Drawing.Size(10, 13);
+            this.lblPrecioRegimen.TabIndex = 384;
+            this.lblPrecioRegimen.Text = "-";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(24, 207);
+            this.label27.Name = "label27";
+            this.label27.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label27.Size = new System.Drawing.Size(313, 13);
+            this.label27.TabIndex = 393;
+            this.label27.Text = "---------------------------------------------------------------------------------" +
+    "---------------------";
+            // 
+            // lblPrecioHabitacion
+            // 
+            this.lblPrecioHabitacion.AutoSize = true;
+            this.lblPrecioHabitacion.Location = new System.Drawing.Point(182, 58);
+            this.lblPrecioHabitacion.Name = "lblPrecioHabitacion";
+            this.lblPrecioHabitacion.Size = new System.Drawing.Size(10, 13);
+            this.lblPrecioHabitacion.TabIndex = 385;
+            this.lblPrecioHabitacion.Text = "-";
+            // 
+            // lblMontoEstadiaDia
+            // 
+            this.lblMontoEstadiaDia.AutoSize = true;
+            this.lblMontoEstadiaDia.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMontoEstadiaDia.Location = new System.Drawing.Point(182, 164);
+            this.lblMontoEstadiaDia.Name = "lblMontoEstadiaDia";
+            this.lblMontoEstadiaDia.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblMontoEstadiaDia.Size = new System.Drawing.Size(11, 13);
+            this.lblMontoEstadiaDia.TabIndex = 392;
+            this.lblMontoEstadiaDia.Text = "-";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(24, 105);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(118, 13);
+            this.label20.TabIndex = 386;
+            this.label20.Text = "Recarga Estrellas Hotel";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(24, 164);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(130, 13);
+            this.label26.TabIndex = 391;
+            this.label26.Text = "Monto estadia por dia";
+            // 
+            // lblRecargaEstrellas
+            // 
+            this.lblRecargaEstrellas.AutoSize = true;
+            this.lblRecargaEstrellas.Location = new System.Drawing.Point(182, 105);
+            this.lblRecargaEstrellas.Name = "lblRecargaEstrellas";
+            this.lblRecargaEstrellas.Size = new System.Drawing.Size(10, 13);
+            this.lblRecargaEstrellas.TabIndex = 387;
+            this.lblRecargaEstrellas.Text = "-";
+            // 
+            // lblCantidadDias
+            // 
+            this.lblCantidadDias.AutoSize = true;
+            this.lblCantidadDias.Location = new System.Drawing.Point(182, 185);
+            this.lblCantidadDias.Name = "lblCantidadDias";
+            this.lblCantidadDias.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblCantidadDias.Size = new System.Drawing.Size(10, 13);
+            this.lblCantidadDias.TabIndex = 390;
+            this.lblCantidadDias.Text = "-";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(24, 185);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(86, 13);
+            this.label24.TabIndex = 389;
+            this.label24.Text = "Cantidad de dias";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lblDiasNoUtilizados);
+            this.groupBox2.Controls.Add(this.lblDiasUtilizados);
+            this.groupBox2.Controls.Add(this.lblRegimen);
+            this.groupBox2.Controls.Add(this.lblHotel);
+            this.groupBox2.Controls.Add(this.label25);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label28);
+            this.groupBox2.Controls.Add(this.label23);
+            this.groupBox2.Location = new System.Drawing.Point(18, 87);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(444, 142);
+            this.groupBox2.TabIndex = 378;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Datos de Estadia";
+            // 
+            // lblDiasNoUtilizados
+            // 
+            this.lblDiasNoUtilizados.AutoSize = true;
+            this.lblDiasNoUtilizados.Location = new System.Drawing.Point(111, 110);
+            this.lblDiasNoUtilizados.Name = "lblDiasNoUtilizados";
+            this.lblDiasNoUtilizados.Size = new System.Drawing.Size(10, 13);
+            this.lblDiasNoUtilizados.TabIndex = 386;
+            this.lblDiasNoUtilizados.Text = "-";
+            // 
+            // lblDiasUtilizados
+            // 
+            this.lblDiasUtilizados.AutoSize = true;
+            this.lblDiasUtilizados.Location = new System.Drawing.Point(96, 80);
+            this.lblDiasUtilizados.Name = "lblDiasUtilizados";
+            this.lblDiasUtilizados.Size = new System.Drawing.Size(10, 13);
+            this.lblDiasUtilizados.TabIndex = 385;
+            this.lblDiasUtilizados.Text = "-";
+            // 
+            // lblRegimen
+            // 
+            this.lblRegimen.AutoSize = true;
+            this.lblRegimen.Location = new System.Drawing.Point(69, 52);
+            this.lblRegimen.Name = "lblRegimen";
+            this.lblRegimen.Size = new System.Drawing.Size(10, 13);
+            this.lblRegimen.TabIndex = 384;
+            this.lblRegimen.Text = "-";
+            // 
+            // lblHotel
+            // 
+            this.lblHotel.AutoSize = true;
+            this.lblHotel.Location = new System.Drawing.Point(52, 26);
+            this.lblHotel.Name = "lblHotel";
+            this.lblHotel.Size = new System.Drawing.Size(10, 13);
+            this.lblHotel.TabIndex = 383;
+            this.lblHotel.Text = "-";
+            // 
+            // btnPagar
+            // 
+            this.btnPagar.Location = new System.Drawing.Point(673, 501);
+            this.btnPagar.Name = "btnPagar";
+            this.btnPagar.Size = new System.Drawing.Size(75, 27);
+            this.btnPagar.TabIndex = 383;
+            this.btnPagar.Text = "Pagar";
+            this.btnPagar.UseVisualStyleBackColor = true;
+            this.btnPagar.Click += new System.EventHandler(this.btnPagar_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(494, 475);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 13);
+            this.label1.TabIndex = 384;
+            this.label1.Text = "Forma de Pago";
+            // 
+            // cbxFormasPagos
+            // 
+            this.cbxFormasPagos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxFormasPagos.FormattingEnabled = true;
+            this.cbxFormasPagos.Items.AddRange(new object[] {
+            "Tarjeta",
+            "Efectivo"});
+            this.cbxFormasPagos.Location = new System.Drawing.Point(497, 507);
+            this.cbxFormasPagos.Name = "cbxFormasPagos";
+            this.cbxFormasPagos.Size = new System.Drawing.Size(131, 21);
+            this.cbxFormasPagos.TabIndex = 385;
             // 
             // VentanaFacturarEstadia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(491, 739);
-            this.Controls.Add(this.diasUtilizados);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.comboBox1);
+            this.ClientSize = new System.Drawing.Size(861, 571);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.TotalNumero);
-            this.Controls.Add(this.Total);
+            this.Controls.Add(this.cbxFormasPagos);
+            this.Controls.Add(this.btnPagar);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.CodReserva);
+            this.Controls.Add(this.tbxReserva);
             this.Controls.Add(this.CodReservaL);
             this.Name = "VentanaFacturarEstadia";
             this.Text = "Facturas - FRBA Hotel ©";
             this.Load += new System.EventHandler(this.VentanaFacturarEstadia_Load);
             this.Controls.SetChildIndex(this.logo, 0);
             this.Controls.SetChildIndex(this.CodReservaL, 0);
-            this.Controls.SetChildIndex(this.CodReserva, 0);
+            this.Controls.SetChildIndex(this.tbxReserva, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
-            this.Controls.SetChildIndex(this.button1, 0);
+            this.Controls.SetChildIndex(this.btnBuscar, 0);
+            this.Controls.SetChildIndex(this.groupBox3, 0);
             this.Controls.SetChildIndex(this.groupBox2, 0);
-            this.Controls.SetChildIndex(this.Total, 0);
-            this.Controls.SetChildIndex(this.TotalNumero, 0);
+            this.Controls.SetChildIndex(this.btnPagar, 0);
+            this.Controls.SetChildIndex(this.cbxFormasPagos, 0);
             this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.comboBox1, 0);
-            this.Controls.SetChildIndex(this.button2, 0);
-            this.Controls.SetChildIndex(this.label4, 0);
-            this.Controls.SetChildIndex(this.diasUtilizados, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataConsumibles)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConsumibles)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -400,33 +564,46 @@
         #endregion
 
         private System.Windows.Forms.Label CodReservaL;
-        private System.Windows.Forms.TextBox CodReserva;
+        private System.Windows.Forms.TextBox tbxReserva;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label sub;
-        private System.Windows.Forms.Label SubTotal;
-        private System.Windows.Forms.Label allInclusivePrecio;
-        private System.Windows.Forms.Label allinclusivecant;
-        private System.Windows.Forms.Label allInclusive;
-        private System.Windows.Forms.Label RegimenPrecio;
-        private System.Windows.Forms.Label DiasRegimen;
-        private System.Windows.Forms.Label Regimen;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label subRegimen;
-        private System.Windows.Forms.Label subRegimenPrecio;
-        private System.Windows.Forms.Label Total;
-        private System.Windows.Forms.Label TotalNumero;
-        private System.Windows.Forms.DataGridView dataConsumibles;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.DataGridView dgvConsumibles;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label diasUtilizados;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label lblDescuentoRegimen;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblMontoTotal;
+        private System.Windows.Forms.Label lblMontoTotalEstadia;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label lblMontoTotalConsumibles;
+        private System.Windows.Forms.Label lblCantidadHuespedes;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lblPrecioRegimen;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label lblPrecioHabitacion;
+        private System.Windows.Forms.Label lblMontoEstadiaDia;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label lblRecargaEstrellas;
+        private System.Windows.Forms.Label lblCantidadDias;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btnPagar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbxFormasPagos;
+        private System.Windows.Forms.Label lblDiasNoUtilizados;
+        private System.Windows.Forms.Label lblDiasUtilizados;
+        private System.Windows.Forms.Label lblRegimen;
+        private System.Windows.Forms.Label lblHotel;
     }
 }

@@ -129,6 +129,7 @@
     <Compile Include="Clases\Cliente.cs" />
     <Compile Include="Clases\Consumido.cs" />
     <Compile Include="Clases\EnumsGenericos.cs" />
+    <Compile Include="Clases\Factura.cs" />
     <Compile Include="Clases\Reserva.cs" />
     <Compile Include="Clases\Database.cs" />
     <Compile Include="Clases\Domicilio.cs" />

@@ -227,7 +227,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             double recargaHotel = Database.HotelObtenerCantidadEstrellasHotelPorID(Reserva.Hotel.id);
             double precioHab = Database.HabitacionObtenerPrecioBaseByTipo(Reserva.Habitaciones[0].tipoHabitacion);
 
-            this.lblCantHabi.Text = CantidadDeHabitacionesNecesarias.ToString();
+            this.lblCantHabi.Text = Reserva.CantidadHuespedes.ToString();
             this.lblPrecioHab.Text = "U$S " + precioHab + " (" + cbxTipoHabitacion.SelectedItem.ToString() + ")";
             this.lblrecargahotel.Text = Database.HotelObtenerCantidadEstrellasHotelPorID(Reserva.Hotel.id).ToString();
 
