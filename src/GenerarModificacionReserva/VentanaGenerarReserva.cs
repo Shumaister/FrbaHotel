@@ -45,9 +45,6 @@ namespace FrbaHotel.GenerarModificacionReserva
             OcultarErrores();
             groupBox3.Enabled = false;
             groupBox2.Enabled = false;
-            SqlCommand updateReservas = Database.consultaCrear("update rip.Reservas set Reserva_EstadoReservaID=5 where YEAR(CONVERT(datetime,@FechaActual,121))>=YEAR(Reserva_FechaInicio) and MONTH(CONVERT(datetime,@FechaActual,121))>=MONTH(Reserva_FechaInicio) and DAY(CONVERT(datetime,@FechaActual,121))>DAY(Reserva_FechaInicio) and (Reserva_EstadoReservaID!=6 or Reserva_EstadoReservaID is null)");
-            updateReservas.Parameters.AddWithValue("@FechaActual", ConfigurationManager.AppSettings["fechaSistema"]);
-            Database.consultaEjecutar(updateReservas);
        }
 
         public VentanaGenerarReserva(Reserva reserva, string p)
@@ -483,7 +480,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                         Database.ReservaSaveReserva(Reserva);
                         this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
                         MessageBox.Show("Se ha registrado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Hide();
+                        Cerrar();
                     }
                     catch (Exception ex)
                     {
@@ -501,7 +498,8 @@ namespace FrbaHotel.GenerarModificacionReserva
                 {
                     Database.ReservaSaveReserva(Reserva);
                     this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
-                    MessageBox.Show("Se a modificado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Se ha modificado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Cerrar();                
                 }
                 catch (Exception ex)
                 {
@@ -519,7 +517,8 @@ namespace FrbaHotel.GenerarModificacionReserva
                 {
                     Database.ReservaSaveReserva(Reserva);
                     this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
-                    MessageBox.Show("Se a registrado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Se ha registrado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Cerrar();
                 }
                 catch (Exception ex)
                 {
@@ -536,13 +535,21 @@ namespace FrbaHotel.GenerarModificacionReserva
                 {
                     Database.ReservaSaveReserva(Reserva);
                     this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
-                    MessageBox.Show("Se a modificado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Se ha modificado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Cerrar();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Se ha producido un error al registrar la reserva, revise los datos ingresados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void Cerrar()
+        {
+            this.btnClienteExistente.Enabled = false;
+            this.btnVolverPaso2.Enabled = false;
+            this.btnConfirmarReserva.Enabled = false;
         }
 
         #endregion
@@ -584,7 +591,9 @@ namespace FrbaHotel.GenerarModificacionReserva
             Hotel hotel = new Hotel(domicilio);
             IdHotel = Database.hotelObtenerIDPorDomicilio(hotel);
 
-            ListaIDHabitaciones = Database.ReservaHabitacionesDisponiblesEntre(this.calendarInicio.SelectionStart, this.calendarFin.SelectionStart, IdHotel);
+            string tipoHAB = Database.HabitacionTipobyDescripcion(cbxTipoHabitacion.SelectedItem.ToString());
+
+            ListaIDHabitaciones = Database.ReservaHabitacionesDisponiblesEntre(this.calendarInicio.SelectionStart, this.calendarFin.SelectionStart, IdHotel, tipoHAB);
 
             if (ListaIDHabitaciones.Count < CantidadDeHabitacionesNecesarias)
             {

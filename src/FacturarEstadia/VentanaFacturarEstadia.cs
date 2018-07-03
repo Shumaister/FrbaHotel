@@ -169,5 +169,10 @@ namespace FrbaHotel.FacturarEstadia
             btnPagar.Enabled = false;
             cbxFormasPagos.Enabled = false;
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

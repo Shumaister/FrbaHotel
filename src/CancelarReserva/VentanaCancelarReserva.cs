@@ -62,12 +62,19 @@ namespace FrbaHotel.CancelarReserva
         {
             if (ventanaCamposEstanCompletos(this.groupBox1, controladorError))
             {
-                string motivo = this.tbxMotivo.Text.Trim(); 
-                int estadoReserva = (Usuario.nombre == "guest") ? 4 : 3; // 4-cancelada cliente - 3-cancelada recepcion
-                Reserva Reserva = Database.ReservaObtenerById(this.tbxNumeroReserva.Text);
-                Database.ReservaCancelar(Reserva, motivo, Usuario.id, estadoReserva);
-                MessageBox.Show("Se a canelado con exito su reservar con codigo: " + this.tbxNumeroReserva.Text, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                try
+                {
+                    string motivo = this.tbxMotivo.Text.Trim();
+                    int estadoReserva = (Usuario.nombre == "guest") ? 4 : 3; // 4-cancelada cliente - 3-cancelada recepcion
+                    Reserva Reserva = Database.ReservaObtenerById(this.tbxNumeroReserva.Text);
+                    Database.ReservaCancelar(Reserva, motivo, Usuario.id, estadoReserva);
+                    MessageBox.Show("Se ha cancelado con exito su reservar con codigo: " + this.tbxNumeroReserva.Text, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("No se ha podido cancelar la reserva, debido a que la misma se ecnuentra en un estado inconsistente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -115,7 +122,7 @@ namespace FrbaHotel.CancelarReserva
                     else
                     {
                         this.lblErrorIngresoReserva.Visible = true;
-                        this.lblErrorIngresoReserva.Text = "No es posible cancelar esta reserva. Paso el tiempo limite de reserva.";
+                        this.lblErrorIngresoReserva.Text = "No es posible cancelar esta reserva. Paso el tiempo limite.";
                     }
                 }
                 else

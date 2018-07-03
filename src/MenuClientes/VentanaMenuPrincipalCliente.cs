@@ -45,8 +45,6 @@ namespace FrbaHotel.MenuClientes
 
         private void VentanaMenuPrincipalCliente_Load(object sender, EventArgs e)
         {
-            SqlCommand updateReservas = Database.consultaCrear("update rip.Reservas set Reserva_EstadoReservaID=5 where YEAR(GETDATE())>=YEAR(Reserva_FechaInicio) and MONTH(GETDATE())>=MONTH(Reserva_FechaInicio) and DAY(GETDATE())>DAY(Reserva_FechaInicio) and (Reserva_EstadoReservaID!=6 or Reserva_EstadoReservaID is null)");
-            Database.consultaEjecutar(updateReservas);
         }
     }
 }
