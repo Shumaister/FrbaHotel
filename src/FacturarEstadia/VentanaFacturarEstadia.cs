@@ -29,8 +29,7 @@ namespace FrbaHotel.FacturarEstadia
         }
 
         private void ventanaObtenerDatos()
-        {
-            factura.estadia.id = Database.estadiaObtenerID(factura.estadia);
+        {           
             factura.diasUtilizados = Database.estadiaObtenerDiasUtilizados(factura.estadia);
             factura.diasNoUtilizados = Database.estadiaObtenerDiasNoUtilizados(factura.estadia);
 
@@ -87,13 +86,17 @@ namespace FrbaHotel.FacturarEstadia
                     ventanaInformarError("La estadia aun no fue finalizada");
                     return;
                 }
-                if (Database.consumidoTodosRegistradosParaEstadia(consumido))
+                if (!Database.consumidoEstadiaConConsumiblesRegistrados(consumido))
                 {
-                    ventanaInformarError("Los consumibles ya fueron registrados");
+                    ventanaInformarError("Los consumibles aun no fueron registrados");
                     return;
                 }
+                factura.estadia.id = consumido.estadiaID;
+                factura.estadia.reserva.Codigo = consumido.reservaCodigo;
                 ventanaObtenerDatos();
-                dataGridViewCargar(dgvConsumibles, Database.estadiaObtenerConsumidosHabitacionEnTabla(factura.estadia));
+                dataGridViewCargar(dgvConsumibles, Database.consumidoObtenerConsumiblesEnTabla(consumido));
+                btnPagar.Enabled = true;
+                cbxFormasPagos.Enabled = true;
             }
         }
 
@@ -114,6 +117,7 @@ namespace FrbaHotel.FacturarEstadia
             factura.estadia = new Estadia();
             factura.estadia.reserva = new Reserva();
             comboBoxCargar(cbxFormasPagos, Database.formaPagoObtenerTodasEnLista());
+            ventanaEstadiaInvalida();
         }
 
         private void tbxReserva_TextChanged(object sender, EventArgs e)
@@ -143,6 +147,8 @@ namespace FrbaHotel.FacturarEstadia
             cbxHabitacion.Items.Clear();
             cbxHabitacion.Items.Add("Ninguna");
             cbxHabitacion.SelectedIndex = 0;
+            btnPagar.Enabled = false;
+            cbxFormasPagos.Enabled = false;
         }
     }
 }

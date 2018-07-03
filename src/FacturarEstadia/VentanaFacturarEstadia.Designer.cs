@@ -220,7 +220,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(264, 347);
+            this.label2.Location = new System.Drawing.Point(252, 346);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label2.Size = new System.Drawing.Size(11, 13);
@@ -333,7 +333,7 @@
             // 
             this.lblDescuentoRegimen.AutoSize = true;
             this.lblDescuentoRegimen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescuentoRegimen.Location = new System.Drawing.Point(279, 347);
+            this.lblDescuentoRegimen.Location = new System.Drawing.Point(267, 346);
             this.lblDescuentoRegimen.Name = "lblDescuentoRegimen";
             this.lblDescuentoRegimen.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblDescuentoRegimen.Size = new System.Drawing.Size(11, 13);

@@ -41,7 +41,7 @@ namespace FrbaHotel.RegistrarConsumible
                     ventanaInformarError("La estadia aun no tiene registrado el ingreso o el egreso");
                     return;
                 }
-                if (Database.consumidoTodosRegistradosParaEstadia(consumido))
+                if (Database.consumidoEstadiaConConsumiblesRegistrados(consumido))
                 {
                     ventanaInformarError("Los consumibles ya fueron registrados");
                     return;
