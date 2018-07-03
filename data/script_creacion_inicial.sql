@@ -856,7 +856,7 @@ VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(2,6)
 
 PRINT''
 PRINT '----- Insertando Consumible Estadia y Descuento All Inclusive -----'
-INSERT INTO RIP.Consumibles (Consumible_ID, Consumible_Descripcion, Consumible_Precio) VALUES (0, 'Estadia por dias utilizados', 0), (1, 'Estadia por no dias utilizados',  0), (2, 'Descuento All Inclusive', 0)
+INSERT INTO RIP.Consumibles (Consumible_ID, Consumible_Descripcion, Consumible_Precio) VALUES (0, 'Estadia por dias utilizados', 0), (1, 'Estadia por dias no utilizados',  0), (2, 'Descuento All Inclusive', 0)
 UPDATE RIP.Consumidos SET Consumido_ConsumibleID = 0 WHERE Consumido_ConsumibleID IS NULL
 
 PRINT''

@@ -2030,6 +2030,37 @@ namespace FrbaHotel
             consultaEjecutar(consulta);
         }
 
+        public static void consumidoAgregarOtros(Consumido consumido)
+        {
+            consumidoAgregarEstadiaDiasUtilizados(consumido);
+            consumidoAgregarEstadiaDiasNoUtilizados(consumido);
+            consumidoAgregarEstadiaDescuentoAllInclusive(consumido);
+        }
+
+        public static void consumidoAgregarEstadiaDiasUtilizados(Consumido consumido)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Consumidos (Consumido_EstadiaID, Consumido_HabitacionID, Consumido_ConsumibleID, Consumido_Cantidad) VALUES (@EstadiaID, @HabitacionID, 0, 0)");
+            consulta.Parameters.AddWithValue("@EstadiaID", consumido.estadiaID);
+            consulta.Parameters.AddWithValue("@HabitacionID", consumidoObtenerHabitacionID(consumido));
+            consultaEjecutar(consulta);
+        }
+
+        public static void consumidoAgregarEstadiaDiasNoUtilizados(Consumido consumido)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Consumidos (Consumido_EstadiaID, Consumido_HabitacionID, Consumido_ConsumibleID, Consumido_Cantidad) VALUES (@EstadiaID, @HabitacionID, 1, 0)");
+            consulta.Parameters.AddWithValue("@EstadiaID", consumido.estadiaID);
+            consulta.Parameters.AddWithValue("@HabitacionID", consumidoObtenerHabitacionID(consumido));
+            consultaEjecutar(consulta);
+        }
+
+        public static void consumidoAgregarEstadiaDescuentoAllInclusive(Consumido consumido)
+        {
+            SqlCommand consulta = consultaCrear("INSERT INTO RIP.Consumidos (Consumido_EstadiaID, Consumido_HabitacionID, Consumido_ConsumibleID, Consumido_Cantidad) VALUES (@EstadiaID, @HabitacionID, 2, 0)");
+            consulta.Parameters.AddWithValue("@EstadiaID", consumido.estadiaID);
+            consulta.Parameters.AddWithValue("@HabitacionID", consumidoObtenerHabitacionID(consumido));
+            consultaEjecutar(consulta);
+        }
+
         public static bool consumidoTodosRegistradosParaEstadia(Consumido consumido)
         {
             SqlCommand consulta = consultaCrear("SELECT Consumido_HabitacionID FROM RIP.Consumidos WHERE Consumido_EstadiaID = @EstadiaID AND Consumido_HabitacionID = @HabitacionID");
@@ -2074,16 +2105,16 @@ namespace FrbaHotel
 
         #region Factura
 
-        public static DataTable estadiaObtenerConsumidosEnTabla(Estadia estadia)
+        public static DataTable estadiaObtenerConsumidosHabitacionEnTabla(Estadia estadia)
         {
-            SqlCommand consulta = Database.consultaCrear("SELECT Habitacion_Numero AS 'Habitacion', Consumible_Descripcion AS 'Consumido', Consumido_Cantidad AS 'Cantidad', Consumible_Precio AS 'Precio', (Consumido_Cantidad * Consumible_Precio) AS 'Total' FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumible_ID = Consumido_ConsumibleID JOIN RIP.Habitaciones ON Consumido_HabitacionID = Habitacion_ID JOIN RIP.Estadias ON Estadia_ID = Consumido_EstadiaID WHERE Estadia_ReservaID = @ReservaID AND Consumible_ID != 1, AND Consumible_ID != 2 AND Consumible_ID != 3");
+            SqlCommand consulta = Database.consultaCrear("SELECT Consumible_Descripcion AS 'Consumido', Consumido_Cantidad AS 'Cantidad', Consumible_Precio AS 'Precio', (Consumido_Cantidad * Consumible_Precio) AS 'Total' FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumible_ID = Consumido_ConsumibleID JOIN RIP.Estadias ON Estadia_ID = Consumido_EstadiaID WHERE Estadia_ReservaID = @ReservaID AND Estadia_HabitacionID = @HabitacionID AND Consumible_ID != 0 AND Consumible_ID != 1 AND Consumible_ID != 2");
             consulta.Parameters.AddWithValue("@ReservaID", estadia.reserva.Codigo);
             return consultaObtenerTabla(consulta);
         }
         
         public static string facturaObtenerMontoConsumidos(Factura factura)
         {
-            SqlCommand consulta = Database.consultaCrear("SELECT SUM(Consumido_Cantidad * Consumible_Precio) FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumible_ID = Consumido_ConsumibleID JOIN RIP.Estadias ON Estadia_ID = Consumido_EstadiaID WHERE Estadia_ReservaID = @ReservaID WHERE Consumible_ID != 1 AND Consumible != 2 AND Consumible != 3");
+            SqlCommand consulta = Database.consultaCrear("SELECT SUM(Consumido_Cantidad * Consumible_Precio) FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumible_ID = Consumido_ConsumibleID JOIN RIP.Estadias ON Estadia_ID = Consumido_EstadiaID WHERE Estadia_ReservaID = @ReservaID AND Consumible_ID != 0 AND Consumible_ID != 1 AND Consumible_ID != 2");
             consulta.Parameters.AddWithValue("@ReservaID", factura.estadia.reserva.Codigo);
             return consultaObtenerValor(consulta);
         }
@@ -2133,7 +2164,7 @@ namespace FrbaHotel
         {
             SqlCommand consulta = Database.consultaCrear("INSERT RIP.ItemsFacturas (ItemFactura_FacturaID, ItemFactura_ConsumidoID, ItemFactura_Cantidad, ItemFactura_Monto) SELECT @FacturaID, Consumido_ID, Consumido_Cantidad, @Monto FROM RIP.Consumidos JOIN RIP.Estadias ON Estadia_ID = Consumido_EstadiaID WHERE Estadia_ReservaID = @ReservaID");
             consulta.Parameters.AddWithValue("@FacturaID", factura.id);
-            consulta.Parameters.AddWithValue("@Monto", factura.montoEstadiaDia * Decimal.Parse(factura.diasUtilizados));
+            consulta.Parameters.AddWithValue("@Monto", factura.montoEstadiaDiasUtilizados);
             consulta.Parameters.AddWithValue("@ReservaID", factura.estadia.reserva.Codigo);
             Database.consultaEjecutar(consulta);
         }
@@ -2142,7 +2173,7 @@ namespace FrbaHotel
         {
             SqlCommand consulta = Database.consultaCrear("INSERT RIP.ItemsFacturas (ItemFactura_FacturaID, ItemFactura_ConsumidoID, ItemFactura_Cantidad, ItemFactura_Monto) SELECT @FacturaID, Consumido_ID, Consumido_Cantidad, @Monto FROM RIP.Consumidos JOIN RIP.Estadias ON Estadia_ID = Consumido_EstadiaID WHERE Estadia_ReservaID = @ReservaID");
             consulta.Parameters.AddWithValue("@FacturaID", factura.id);
-            consulta.Parameters.AddWithValue("@Monto", factura.montoEstadiaDia * Decimal.Parse(factura.diasNoUtilizados));
+            consulta.Parameters.AddWithValue("@Monto", factura.montoEstadiaDiasNoUtilizados);
             consulta.Parameters.AddWithValue("@ReservaID", factura.estadia.reserva.Codigo);
             Database.consultaEjecutar(consulta);
         }
@@ -2151,7 +2182,7 @@ namespace FrbaHotel
         {
             SqlCommand consulta = Database.consultaCrear("INSERT RIP.ItemsFacturas (ItemFactura_FacturaID, ItemFactura_ConsumidoID, ItemFactura_Cantidad, ItemFactura_Monto) SELECT @FacturaID, Consumido_ID, Consumido_Cantidad, (Consumido_Cantidad * Consumible_Precio) FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumible_ID = Consumido_ConsumibleID JOIN RIP.Estadias ON Estadia_ID = Consumido_EstadiaID WHERE Estadia_ReservaID = @ReservaID");
             consulta.Parameters.AddWithValue("@FacturaID", factura.id);
-            consulta.Parameters.AddWithValue("@Monto", Decimal.Parse("-" + Database.facturaObtenerMontoConsumidos(factura)));
+            consulta.Parameters.AddWithValue("@Monto", factura.montoConsumibles * Convert.ToDecimal("-1"));
             consulta.Parameters.AddWithValue("@ReservaID", factura.estadia.reserva.Codigo);
             Database.consultaEjecutar(consulta);
         }
@@ -2230,11 +2261,6 @@ namespace FrbaHotel
             if (facturaPagada(factura))
             {
                 ventanaInformarError("La factura ya fue pagada");
-                return;
-            }
-            if (estadiaFinalizada(factura.estadia))
-            {
-                ventanaInformarError("La estadia aun no esta finalizada");
                 return;
             }
             facturaAgregar(factura);

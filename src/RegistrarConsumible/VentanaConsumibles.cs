@@ -76,6 +76,8 @@ namespace FrbaHotel.RegistrarConsumible
                     lblHotel.Text = hotelNombre;
                     lblRegimen.Text = Database.reservaObtenerRegimen(tbxReserva.Text);
                     comboBoxCargar(cbxHabitacion, Database.reservaObtenerHabitacionesEnLista(tbxReserva.Text));
+                    if (cbxHabitacion.Items.Count == 0)
+                        ventanaEstadiaInvalida();
                 }
                 else
                     ventanaEstadiaInvalida();

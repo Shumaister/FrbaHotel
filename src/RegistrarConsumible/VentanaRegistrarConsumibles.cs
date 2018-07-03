@@ -30,11 +30,6 @@ namespace FrbaHotel.RegistrarConsumible
 
         private void btnGuardarConsumibles_Click(object sender, EventArgs e)
         {
-            if (lbxConsumibles.Items.Count == 0)
-            {
-                ventanaInformarError("Debe registrar al menos un consumible");
-                return;
-            }
             foreach (string dato in lbxConsumibles.Items)
             {
                 string[] datos = dato.Split('-');
@@ -42,6 +37,7 @@ namespace FrbaHotel.RegistrarConsumible
                 consumido.cantidad = datos[1];
                 Database.consumidoAgregar(consumido);
             }
+            Database.consumidoAgregarOtros(consumido);
             ventanaInformarExito("Los consumibles fueron registrados con exito");
             this.Hide();
         }
