@@ -42,7 +42,7 @@ namespace FrbaHotel.FacturarEstadia
             Decimal montoEstadiaDia = precioRegimen * recargaEstrellas * cantidadHuespedes * precioHabitacion;
             Decimal cantidadDias = Convert.ToDecimal(Database.facturaObtenerCantidadDias(factura));
             Decimal montoTotalEstadia = montoEstadiaDia * cantidadDias;
-            Decimal montoTotalConsumibles = Convert.ToDecimal("0");//Convert.ToDecimal(Database.facturaObtenerMontoConsumidos(factura));
+            Decimal montoTotalConsumibles = Convert.ToDecimal(Database.facturaObtenerMontoConsumidos(factura));
             Decimal descuentoRegimen = Database.reservaTieneRegimenAllInclusive(tbxReserva.Text)? montoTotalConsumibles : Convert.ToDecimal("0");
             Decimal montoTotal = montoTotalEstadia + montoTotalConsumibles - descuentoRegimen;
 
@@ -57,6 +57,7 @@ namespace FrbaHotel.FacturarEstadia
             lblDescuentoRegimen.Text = descuentoRegimen.ToString();
             lblMontoTotal.Text = montoTotal.ToString();
 
+            factura.montoEstadiaDia = montoEstadiaDia;
             factura.diasUtilizados = Database.estadiaObtenerDiasUtilizados(factura.estadia);
             factura.diasNoUtilizados = Database.estadiaObtenerDiasNoUtilizados(factura.estadia);
             factura.formaPago = cbxFormasPagos.SelectedItem.ToString();

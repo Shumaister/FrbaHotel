@@ -2076,20 +2076,18 @@ namespace FrbaHotel
 
         public static DataTable estadiaObtenerConsumidosEnTabla(Estadia estadia)
         {
-            SqlCommand consulta = Database.consultaCrear("SELECT Habitacion_Numero AS 'Habitacion', Consumible_Descripcion AS 'Consumible', Consumido_Cantidad AS 'Cantidad', Consumible_Precio AS 'Precio', (Consumido_Cantidad * Consumible_Precio) AS 'Total' FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumible_ID = Consumido_ConsumibleID JOIN RIP.Habitaciones ON Consumido_HabitacionID = Habitacion_ID JOIN RIP.Estadias ON Estadia_ID = Consumido_EstadiaID WHERE Estadia_ReservaID = @ReservaID");
+            SqlCommand consulta = Database.consultaCrear("SELECT Habitacion_Numero AS 'Habitacion', Consumible_Descripcion AS 'Consumido', Consumido_Cantidad AS 'Cantidad', Consumible_Precio AS 'Precio', (Consumido_Cantidad * Consumible_Precio) AS 'Total' FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumible_ID = Consumido_ConsumibleID JOIN RIP.Habitaciones ON Consumido_HabitacionID = Habitacion_ID JOIN RIP.Estadias ON Estadia_ID = Consumido_EstadiaID WHERE Estadia_ReservaID = @ReservaID AND Consumible_ID != 1, AND Consumible_ID != 2 AND Consumible_ID != 3");
             consulta.Parameters.AddWithValue("@ReservaID", estadia.reserva.Codigo);
             return consultaObtenerTabla(consulta);
         }
-        /*
+        
         public static string facturaObtenerMontoConsumidos(Factura factura)
         {
-            SqlCommand consulta = Database.consultaCrear("SELECT SUM(ISNULL(Consumible)) FROM RIP.Estadias WHERE Estadia_ReservaID = @ReservaID");
-            consulta.Parameters.AddWithValue("@ReservaID", estadia.reserva.Codigo);
+            SqlCommand consulta = Database.consultaCrear("SELECT SUM(Consumido_Cantidad * Consumible_Precio) FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumible_ID = Consumido_ConsumibleID JOIN RIP.Estadias ON Estadia_ID = Consumido_EstadiaID WHERE Estadia_ReservaID = @ReservaID WHERE Consumible_ID != 1 AND Consumible != 2 AND Consumible != 3");
+            consulta.Parameters.AddWithValue("@ReservaID", factura.estadia.reserva.Codigo);
             return consultaObtenerValor(consulta);
         }
-        */
         
-
         public static string estadiaObtenerDiasUtilizados(Estadia estadia)
         {
             SqlCommand consulta = Database.consultaCrear("SELECT DATEDIFF(DAY, Estadia_FechaInicio, Estadia_FechaFin) FROM RIP.Estadias WHERE Estadia_ReservaID = @ReservaID");
@@ -2103,8 +2101,6 @@ namespace FrbaHotel
             consulta.Parameters.AddWithValue("@ID", estadia.reserva.Codigo);
             return consultaObtenerValor(consulta);
         }
-
-
 
         public static void facturaAgregar(Factura factura)
         {
@@ -2125,14 +2121,39 @@ namespace FrbaHotel
             return consultaObtenerValor(consulta);
         }
 
-        public static void itemFacturaAgregar()
+        public static void itemFacturaAgregarConsumible(Factura factura)
         {
-            /*
-            SqlCommand insertItemFacturas = Database.consultaCrear("insert into rip.ItemsFacturas(ItemFactura_FacturaID,ItemFactura_ConsumidoID,ItemFactura_Cantidad,ItemFactura_Monto) select @idFactura,Consumido_ID,Consumido_Cantidad,Consumido_Cantidad*Consumible_Precio from rip.Consumidos join rip.Consumibles on Consumible_ID=Consumido_ConsumibleID join rip.Estadias on Estadia_ID=Consumido_EstadiaID join rip.Reservas on Reserva_ID=Estadia_ReservaID where Reserva_ID=@reserva");
-            insertItemFacturas.Parameters.AddWithValue("@idFactura", nuevaFactura);
-            insertItemFacturas.Parameters.AddWithValue("@reserva", CodReserva.Text);
-            Database.consultaEjecutar(insertItemFacturas);
-             * */
+            SqlCommand consulta = Database.consultaCrear("INSERT RIP.ItemsFacturas (ItemFactura_FacturaID, ItemFactura_ConsumidoID, ItemFactura_Cantidad, ItemFactura_Monto) SELECT @FacturaID, Consumido_ID, Consumido_Cantidad, (Consumido_Cantidad * Consumible_Precio) FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumible_ID = Consumido_ConsumibleID JOIN RIP.Estadias ON Estadia_ID = Consumido_EstadiaID WHERE Estadia_ReservaID = @ReservaID");
+            consulta.Parameters.AddWithValue("@FacturaID", factura.id);
+            consulta.Parameters.AddWithValue("@ReservaID", factura.estadia.reserva.Codigo);
+            Database.consultaEjecutar(consulta);
+        }
+
+        public static void itemFacturaAgregarEstadiaPorDiasUtilizados(Factura factura)
+        {
+            SqlCommand consulta = Database.consultaCrear("INSERT RIP.ItemsFacturas (ItemFactura_FacturaID, ItemFactura_ConsumidoID, ItemFactura_Cantidad, ItemFactura_Monto) SELECT @FacturaID, Consumido_ID, Consumido_Cantidad, @Monto FROM RIP.Consumidos JOIN RIP.Estadias ON Estadia_ID = Consumido_EstadiaID WHERE Estadia_ReservaID = @ReservaID");
+            consulta.Parameters.AddWithValue("@FacturaID", factura.id);
+            consulta.Parameters.AddWithValue("@Monto", factura.montoEstadiaDia * Decimal.Parse(factura.diasUtilizados));
+            consulta.Parameters.AddWithValue("@ReservaID", factura.estadia.reserva.Codigo);
+            Database.consultaEjecutar(consulta);
+        }
+
+        public static void itemFacturaAgregarEstadiaPorDiasNoUtilizados(Factura factura)
+        {
+            SqlCommand consulta = Database.consultaCrear("INSERT RIP.ItemsFacturas (ItemFactura_FacturaID, ItemFactura_ConsumidoID, ItemFactura_Cantidad, ItemFactura_Monto) SELECT @FacturaID, Consumido_ID, Consumido_Cantidad, @Monto FROM RIP.Consumidos JOIN RIP.Estadias ON Estadia_ID = Consumido_EstadiaID WHERE Estadia_ReservaID = @ReservaID");
+            consulta.Parameters.AddWithValue("@FacturaID", factura.id);
+            consulta.Parameters.AddWithValue("@Monto", factura.montoEstadiaDia * Decimal.Parse(factura.diasNoUtilizados));
+            consulta.Parameters.AddWithValue("@ReservaID", factura.estadia.reserva.Codigo);
+            Database.consultaEjecutar(consulta);
+        }
+
+        public static void itemFacturaAgregarDescuentoAllInclusive(Factura factura)
+        {
+            SqlCommand consulta = Database.consultaCrear("INSERT RIP.ItemsFacturas (ItemFactura_FacturaID, ItemFactura_ConsumidoID, ItemFactura_Cantidad, ItemFactura_Monto) SELECT @FacturaID, Consumido_ID, Consumido_Cantidad, (Consumido_Cantidad * Consumible_Precio) FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumible_ID = Consumido_ConsumibleID JOIN RIP.Estadias ON Estadia_ID = Consumido_EstadiaID WHERE Estadia_ReservaID = @ReservaID");
+            consulta.Parameters.AddWithValue("@FacturaID", factura.id);
+            consulta.Parameters.AddWithValue("@Monto", Decimal.Parse("-" + Database.facturaObtenerMontoConsumidos(factura)));
+            consulta.Parameters.AddWithValue("@ReservaID", factura.estadia.reserva.Codigo);
+            Database.consultaEjecutar(consulta);
         }
 
         public static bool estadiaFinalizada(Estadia estadia)
@@ -2158,7 +2179,7 @@ namespace FrbaHotel
 
         public static string facturaObtenerCantidadHuespedes(Factura factura)
         {
-            SqlCommand consulta = Database.consultaCrear("SELECT Reserva_CantidadHuespedes FROM RIP.Reservas WHERE Reserva_ID = @ID");
+            SqlCommand consulta = Database.consultaCrear("SELECT ISNULL(Reserva_CantidadHuespedes,0) FROM RIP.Reservas WHERE Reserva_ID = @ID");
             consulta.Parameters.AddWithValue("@ID", factura.estadia.reserva.Codigo);
             return consultaObtenerValor(consulta);
         }
@@ -2181,6 +2202,13 @@ namespace FrbaHotel
         {
             SqlCommand consulta = Database.consultaCrear("SELECT DATEDIFF(DAY, Reserva_FechaInicio, Reserva_FechaFin) FROM RIP.Reservas WHERE Reserva_ID = @ID");
             consulta.Parameters.AddWithValue("@ID", factura.estadia.reserva.Codigo);
+            return consultaObtenerValor(consulta);
+        }
+
+        public static string facturaObtenerID(Factura factura)
+        {
+            SqlCommand consulta = Database.consultaCrear("SELECT Factura_ID FROM RIP.Facturas WHERE Factura_EstadiaID = @EstadiaID");
+            consulta.Parameters.AddWithValue("@EstadiaID", factura.estadia.id);
             return consultaObtenerValor(consulta);
         }
 
@@ -2210,6 +2238,11 @@ namespace FrbaHotel
                 return;
             }
             facturaAgregar(factura);
+            factura.id = facturaObtenerID(factura);
+            itemFacturaAgregarConsumible(factura);
+            itemFacturaAgregarEstadiaPorDiasUtilizados(factura);
+            itemFacturaAgregarEstadiaPorDiasUtilizados(factura);
+            itemFacturaAgregarDescuentoAllInclusive(factura);
         }
 
         

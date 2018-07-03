@@ -10,6 +10,7 @@ namespace FrbaHotel.Clases
     {
         public string id { get; set; }
         public Estadia estadia { get; set; }
+        public Decimal montoEstadiaDia { get; set; }
         public string diasUtilizados { get; set; }
         public string diasNoUtilizados { get; set; }
         public string montoTotal { get; set; }
