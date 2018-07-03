@@ -803,7 +803,8 @@ namespace FrbaHotel
             "Domicilio_Piso, Domicilio_Departamento FROM RIP.Clientes " + 
             "JOIN RIP.Personas ON Cliente_PersonaID = Persona_ID " +
             "JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID " + 
-            "JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID WHERE " +          
+            "JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID WHERE " +  
+            "Cliente_Estado = 1 AND "+
             "Persona_Nombre LIKE '" + cliente.persona.nombre + "%' AND " +
             "Persona_Apellido LIKE '" + cliente.persona.apellido + "%' AND " +
             "Persona_Email LIKE '" + cliente.persona.email + "%'" +
@@ -1594,13 +1595,19 @@ namespace FrbaHotel
             return consultaObtenerLista(consulta);
         }
 
-        public static List<string> ReservaHabitacionesDisponiblesEntre(DateTime fechainicio, DateTime fechafin, string idHotel)
+        public static List<string> ReservaHabitacionesDisponiblesEntre(DateTime fechainicio, DateTime fechafin, string idHotel, string tipohab)
         {
-            SqlCommand consulta = consultaCrear("select Habitacion_ID from rip.Habitaciones habitaciones where habitaciones.Habitacion_HotelID = @hid and Habitacion_ID not in (select hnd.HabitacionNoDisponible_HabitacionID from rip.HabitacionesNoDisponibles hnd join rip.Habitaciones hab on hab.Habitacion_ID = hnd.HabitacionNoDisponible_HabitacionID join rip.Hoteles hot on hot.Hotel_ID = hab.Habitacion_HotelID where hot.Hotel_ID = @hid and hnd.HabitacionNoDisponible_Finalizada = 0 and (CONVERT(datetime,@fi,121) > hnd.HabitacionNoDisponible_FechaInicio AND CONVERT(datetime,@fi,121) < hnd.HabitacionNoDisponible_FechaFin) OR  (CONVERT(datetime,@ff,121) > hnd.HabitacionNoDisponible_FechaInicio AND CONVERT(datetime,@ff,121) < hnd.HabitacionNoDisponible_FechaFin) )");
+            string esto = "select Habitacion_ID from rip.Habitaciones habitaciones where habitaciones.Habitacion_HotelID = @hid and habitaciones.Habitacion_TipoHabitacionID = @tipoH and Habitacion_ID not in  ( select distinct hnd.HabitacionNoDisponible_HabitacionID from rip.HabitacionesNoDisponibles hnd join rip.Habitaciones hab on hab.Habitacion_ID = hnd.HabitacionNoDisponible_HabitacionID join rip.Hoteles hot on hot.Hotel_ID = hab.Habitacion_HotelID where hot.Hotel_ID = @hid and hnd.HabitacionNoDisponible_Finalizada = 0 and	( ( CONVERT(datetime,@fi,121) > hnd.HabitacionNoDisponible_FechaInicio AND CONVERT(datetime,@fi,121) < hnd.HabitacionNoDisponible_FechaFin ) OR ( CONVERT(datetime,@ff,121) > hnd.HabitacionNoDisponible_FechaInicio AND CONVERT(datetime,@ff,121) < hnd.HabitacionNoDisponible_FechaFin) ) )";
+            SqlCommand consulta = consultaCrear(esto);
 
-            consulta.Parameters.AddWithValue("@fi", fechainicio);
-            consulta.Parameters.AddWithValue("@ff", fechafin);
+
+            string newDate = fechainicio.ToString("yyyy-MM-dd h:mm:ss.fff");
+            string newDate2 = fechafin.ToString("yyyy-MM-dd h:mm:ss.fff");
+
+            consulta.Parameters.AddWithValue("@fi", newDate);
+            consulta.Parameters.AddWithValue("@ff", newDate2);
             consulta.Parameters.AddWithValue("@hid", idHotel);
+            consulta.Parameters.AddWithValue("@tipoH", tipohab);
 
             return consultaObtenerLista(consulta);
         }

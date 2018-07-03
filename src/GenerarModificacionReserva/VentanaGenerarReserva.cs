@@ -591,7 +591,9 @@ namespace FrbaHotel.GenerarModificacionReserva
             Hotel hotel = new Hotel(domicilio);
             IdHotel = Database.hotelObtenerIDPorDomicilio(hotel);
 
-            ListaIDHabitaciones = Database.ReservaHabitacionesDisponiblesEntre(this.calendarInicio.SelectionStart, this.calendarFin.SelectionStart, IdHotel);
+            string tipoHAB = Database.HabitacionTipobyDescripcion(cbxTipoHabitacion.SelectedItem.ToString());
+
+            ListaIDHabitaciones = Database.ReservaHabitacionesDisponiblesEntre(this.calendarInicio.SelectionStart, this.calendarFin.SelectionStart, IdHotel, tipoHAB);
 
             if (ListaIDHabitaciones.Count < CantidadDeHabitacionesNecesarias)
             {
