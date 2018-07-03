@@ -1597,9 +1597,8 @@ namespace FrbaHotel
 
         public static List<string> ReservaHabitacionesDisponiblesEntre(DateTime fechainicio, DateTime fechafin, string idHotel, string tipohab)
         {
-            string esto = "select Habitacion_ID from rip.Habitaciones habitaciones where habitaciones.Habitacion_HotelID = @hid and habitaciones.Habitacion_TipoHabitacionID = @tipoH and Habitacion_ID not in  ( select distinct hnd.HabitacionNoDisponible_HabitacionID from rip.HabitacionesNoDisponibles hnd join rip.Habitaciones hab on hab.Habitacion_ID = hnd.HabitacionNoDisponible_HabitacionID join rip.Hoteles hot on hot.Hotel_ID = hab.Habitacion_HotelID where hot.Hotel_ID = @hid and hnd.HabitacionNoDisponible_Finalizada = 0 and	( ( CONVERT(datetime,@fi,121) > hnd.HabitacionNoDisponible_FechaInicio AND CONVERT(datetime,@fi,121) < hnd.HabitacionNoDisponible_FechaFin ) OR ( CONVERT(datetime,@ff,121) > hnd.HabitacionNoDisponible_FechaInicio AND CONVERT(datetime,@ff,121) < hnd.HabitacionNoDisponible_FechaFin) ) )";
+            string esto = "select Habitacion_ID from rip.Habitaciones habitaciones join rip.Hoteles hote on habitaciones.Habitacion_HotelID = hote.Hotel_ID where hote.Hotel_Estado = 1 and habitaciones.Habitacion_HotelID = @hid and habitaciones.Habitacion_TipoHabitacionID = @tipoH and habitaciones.Habitacion_Estado = 1 and Habitacion_ID not in  ( select distinct hnd.HabitacionNoDisponible_HabitacionID from rip.HabitacionesNoDisponibles hnd join rip.Habitaciones hab on hab.Habitacion_ID = hnd.HabitacionNoDisponible_HabitacionID join rip.Hoteles hot on hot.Hotel_ID = hab.Habitacion_HotelID where hot.Hotel_ID = @hid and hnd.HabitacionNoDisponible_Finalizada = 0 and	( ( CONVERT(datetime,@fi,121) > hnd.HabitacionNoDisponible_FechaInicio AND CONVERT(datetime,@fi,121) < hnd.HabitacionNoDisponible_FechaFin ) OR ( CONVERT(datetime,@ff,121) > hnd.HabitacionNoDisponible_FechaInicio AND CONVERT(datetime,@ff,121) < hnd.HabitacionNoDisponible_FechaFin) ) )";
             SqlCommand consulta = consultaCrear(esto);
-
 
             string newDate = fechainicio.ToString("yyyy-MM-dd h:mm:ss.fff");
             string newDate2 = fechafin.ToString("yyyy-MM-dd h:mm:ss.fff");
