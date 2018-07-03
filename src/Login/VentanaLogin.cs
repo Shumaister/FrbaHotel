@@ -34,7 +34,7 @@ namespace FrbaHotel.Login
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (ventanaCamposEstanCompletos(this, controladorError))
+            if (ventanaCamposEstanCompletos(this, controladorError) && this.txbUser.Text != "guest")
             {
                 LogueoDTO logueo = Database.loginAutenticar(txbUser.Text, txbPass.Text);
                 if (logueo.exito)
