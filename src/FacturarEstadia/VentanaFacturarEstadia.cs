@@ -63,6 +63,7 @@ namespace FrbaHotel.FacturarEstadia
             lblMontoEstadiaDiasNoUtilizados.Text = montoEstadiaDiasNoUtilizados.ToString();
             lblMontoTotalEstadia.Text = montoTotalEstadia.ToString();
             lblMontoTotalConsumibles.Text = montoTotalConsumibles.ToString();
+            lblTotalConsumibles.Text = montoTotalConsumibles.ToString();
             lblDescuentoRegimen.Text = descuentoRegimen.ToString();
             lblMontoTotal.Text = montoTotal.ToString();
         }

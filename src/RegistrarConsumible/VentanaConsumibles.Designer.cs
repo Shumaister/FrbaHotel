@@ -63,7 +63,7 @@
             // lblHotel
             // 
             this.lblHotel.AutoSize = true;
-            this.lblHotel.Location = new System.Drawing.Point(56, 90);
+            this.lblHotel.Location = new System.Drawing.Point(73, 90);
             this.lblHotel.Name = "lblHotel";
             this.lblHotel.Size = new System.Drawing.Size(73, 13);
             this.lblHotel.TabIndex = 3;
@@ -110,7 +110,7 @@
             this.tbxReserva.Location = new System.Drawing.Point(15, 59);
             this.tbxReserva.MaxLength = 17;
             this.tbxReserva.Name = "tbxReserva";
-            this.tbxReserva.Size = new System.Drawing.Size(111, 20);
+            this.tbxReserva.Size = new System.Drawing.Size(109, 20);
             this.tbxReserva.TabIndex = 11;
             this.tbxReserva.TextChanged += new System.EventHandler(this.tbxReserva_TextChanged);
             this.tbxReserva.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxReserva_KeyPress);
@@ -121,14 +121,14 @@
             this.cbxHabitacion.FormattingEnabled = true;
             this.cbxHabitacion.Location = new System.Drawing.Point(15, 168);
             this.cbxHabitacion.Name = "cbxHabitacion";
-            this.cbxHabitacion.Size = new System.Drawing.Size(111, 21);
+            this.cbxHabitacion.Size = new System.Drawing.Size(109, 21);
             this.cbxHabitacion.TabIndex = 12;
             // 
             // btnRegistrarConsumibles
             // 
-            this.btnRegistrarConsumibles.Location = new System.Drawing.Point(84, 212);
+            this.btnRegistrarConsumibles.Location = new System.Drawing.Point(133, 208);
             this.btnRegistrarConsumibles.Name = "btnRegistrarConsumibles";
-            this.btnRegistrarConsumibles.Size = new System.Drawing.Size(129, 23);
+            this.btnRegistrarConsumibles.Size = new System.Drawing.Size(129, 32);
             this.btnRegistrarConsumibles.TabIndex = 15;
             this.btnRegistrarConsumibles.Text = "Registrar consumibles";
             this.btnRegistrarConsumibles.UseVisualStyleBackColor = true;
@@ -171,7 +171,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(293, 252);
+            this.ClientSize = new System.Drawing.Size(378, 260);
             this.Controls.Add(this.label32);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);

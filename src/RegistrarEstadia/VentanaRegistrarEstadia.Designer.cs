@@ -53,7 +53,7 @@
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label32.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label32.Location = new System.Drawing.Point(33, 17);
+            this.label32.Location = new System.Drawing.Point(22, 17);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(132, 16);
             this.label32.TabIndex = 267;
@@ -64,7 +64,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(72, 47);
+            this.label4.Location = new System.Drawing.Point(61, 47);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(17, 22);
             this.label4.TabIndex = 266;
@@ -72,7 +72,7 @@
             // 
             // tbxNumeroReserva
             // 
-            this.tbxNumeroReserva.Location = new System.Drawing.Point(36, 77);
+            this.tbxNumeroReserva.Location = new System.Drawing.Point(25, 77);
             this.tbxNumeroReserva.MaxLength = 17;
             this.tbxNumeroReserva.Name = "tbxNumeroReserva";
             this.tbxNumeroReserva.Size = new System.Drawing.Size(129, 20);
@@ -83,7 +83,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 47);
+            this.label1.Location = new System.Drawing.Point(22, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 264;
@@ -91,9 +91,9 @@
             // 
             // btnCheckIn
             // 
-            this.btnCheckIn.Location = new System.Drawing.Point(54, 188);
+            this.btnCheckIn.Location = new System.Drawing.Point(43, 188);
             this.btnCheckIn.Name = "btnCheckIn";
-            this.btnCheckIn.Size = new System.Drawing.Size(110, 23);
+            this.btnCheckIn.Size = new System.Drawing.Size(110, 34);
             this.btnCheckIn.TabIndex = 268;
             this.btnCheckIn.Text = "Registrar ingreso";
             this.btnCheckIn.UseVisualStyleBackColor = true;
@@ -101,9 +101,9 @@
             // 
             // btnCheckOut
             // 
-            this.btnCheckOut.Location = new System.Drawing.Point(203, 188);
+            this.btnCheckOut.Location = new System.Drawing.Point(192, 188);
             this.btnCheckOut.Name = "btnCheckOut";
-            this.btnCheckOut.Size = new System.Drawing.Size(99, 23);
+            this.btnCheckOut.Size = new System.Drawing.Size(99, 34);
             this.btnCheckOut.TabIndex = 269;
             this.btnCheckOut.Text = "Registrar egreso";
             this.btnCheckOut.UseVisualStyleBackColor = true;
@@ -112,7 +112,7 @@
             // lblRegimenDescripcion
             // 
             this.lblRegimenDescripcion.AutoSize = true;
-            this.lblRegimenDescripcion.Location = new System.Drawing.Point(88, 147);
+            this.lblRegimenDescripcion.Location = new System.Drawing.Point(83, 147);
             this.lblRegimenDescripcion.Name = "lblRegimenDescripcion";
             this.lblRegimenDescripcion.Size = new System.Drawing.Size(63, 13);
             this.lblRegimenDescripcion.TabIndex = 275;
@@ -121,7 +121,7 @@
             // lblRegimen
             // 
             this.lblRegimen.AutoSize = true;
-            this.lblRegimen.Location = new System.Drawing.Point(33, 147);
+            this.lblRegimen.Location = new System.Drawing.Point(22, 147);
             this.lblRegimen.Name = "lblRegimen";
             this.lblRegimen.Size = new System.Drawing.Size(55, 13);
             this.lblRegimen.TabIndex = 274;
@@ -130,7 +130,7 @@
             // lblHotelNombre
             // 
             this.lblHotelNombre.AutoSize = true;
-            this.lblHotelNombre.Location = new System.Drawing.Point(73, 119);
+            this.lblHotelNombre.Location = new System.Drawing.Point(83, 119);
             this.lblHotelNombre.Name = "lblHotelNombre";
             this.lblHotelNombre.Size = new System.Drawing.Size(44, 13);
             this.lblHotelNombre.TabIndex = 271;
@@ -139,7 +139,7 @@
             // lblHotel
             // 
             this.lblHotel.AutoSize = true;
-            this.lblHotel.Location = new System.Drawing.Point(33, 119);
+            this.lblHotel.Location = new System.Drawing.Point(22, 119);
             this.lblHotel.Name = "lblHotel";
             this.lblHotel.Size = new System.Drawing.Size(38, 13);
             this.lblHotel.TabIndex = 270;
@@ -149,7 +149,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 233);
+            this.ClientSize = new System.Drawing.Size(355, 251);
             this.Controls.Add(this.lblRegimenDescripcion);
             this.Controls.Add(this.lblRegimen);
             this.Controls.Add(this.lblHotelNombre);
