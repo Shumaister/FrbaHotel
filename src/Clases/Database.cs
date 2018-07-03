@@ -1945,7 +1945,15 @@ namespace FrbaHotel
         {
             estadiaAgregarEgreso(estadia);
             estadiaEgresoHuespedes(estadia);
+            estadiaLiberarHabitaciones(estadia);
             ventanaInformarExito("El egreso de la estadia fue registrado con exito");
+        }
+
+        private static void estadiaLiberarHabitaciones(Estadia estadia)
+        {
+            SqlCommand liberarHabitaciones = consultaCrear("update rip.HabitacionesNoDisponibles set HabitacionNoDisponible_Finalizada = 1 where HabitacionNoDisponible_ReservaID = (select top 1 r.Reserva_ID from rip.Estadias e join rip.Reservas r on e.Estadia_ReservaID = r.Reserva_ID where e.Estadia_ID = @eid)");
+            liberarHabitaciones.Parameters.AddWithValue("@eid", estadiaObtenerID(estadia));
+            consultaEjecutar(liberarHabitaciones);
         }
 
         public static bool estadiaEgresoPermitido(Estadia estadia)
