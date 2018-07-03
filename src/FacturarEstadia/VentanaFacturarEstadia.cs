@@ -96,17 +96,16 @@ namespace FrbaHotel.FacturarEstadia
                 }
                 Consumido consumido = new Consumido();
                 consumido.reservaCodigo = tbxReserva.Text;
-                consumido.numeroHabitacion = cbxHabitacion.SelectedItem.ToString();
                 consumido.hotelID = sesion.hotel.id;
                 consumido.estadiaID = Database.consumidoObtenerEstadiaID(consumido);
                 if (consumido.estadiaID == "")
                 {
-                    ventanaInformarError("La estadia aun no fue finalizada");
+                    ventanaInformarError("La estadia no fue finalizada");
                     return;
                 }
                 if (!Database.consumidoEstadiaConConsumiblesRegistrados(consumido))
                 {
-                    ventanaInformarError("Los consumibles aun no fueron registrados");
+                    ventanaInformarError("Hay habitaciones de la estadia sin consumibles registrados");
                     return;
                 }
                 factura.estadia.id = consumido.estadiaID;
@@ -150,9 +149,6 @@ namespace FrbaHotel.FacturarEstadia
                 {
                     lblHotel.Text = hotelNombre;
                     lblRegimen.Text = Database.reservaObtenerRegimen(tbxReserva.Text);
-                    comboBoxCargar(cbxHabitacion, Database.reservaObtenerHabitacionesEnLista(tbxReserva.Text));
-                    if (cbxHabitacion.Items.Count == 0)
-                        ventanaEstadiaInvalida();
                 }
                 else
                     ventanaEstadiaInvalida();
@@ -163,9 +159,6 @@ namespace FrbaHotel.FacturarEstadia
         {
             lblHotel.Text = "Ninguno";
             lblRegimen.Text = "Ninguno";
-            cbxHabitacion.Items.Clear();
-            cbxHabitacion.Items.Add("Ninguna");
-            cbxHabitacion.SelectedIndex = 0;
             btnPagar.Enabled = false;
             cbxFormasPagos.Enabled = false;
         }

@@ -2034,7 +2034,14 @@ namespace FrbaHotel
             return true;                 
         }
 
-        public static List<string> reservaObtenerHabitacionesEnLista(string reservaID)
+        public static List<string> reservaObtenerHabitacionesPorIDEnLista(string reservaID)
+        {
+            SqlCommand consulta = consultaCrear("SELECT HabitacionNoDisponible_HabitacionID FROM RIP.HabitacionesNoDisponibles JOIN RIP.Habitaciones ON HabitacionNoDisponible_HabitacionID = Habitacion_ID WHERE HabitacionNoDisponible_ReservaID = @ReservaID");
+            consulta.Parameters.AddWithValue("@ReservaID", reservaID);
+            return consultaObtenerLista(consulta);
+        }
+
+        public static List<string> reservaObtenerHabitacionesPorNumeroEnLista(string reservaID)
         {
             SqlCommand consulta = consultaCrear("SELECT Habitacion_Numero FROM RIP.HabitacionesNoDisponibles JOIN RIP.Habitaciones ON HabitacionNoDisponible_HabitacionID = Habitacion_ID WHERE HabitacionNoDisponible_ReservaID = @ReservaID");
             consulta.Parameters.AddWithValue("@ReservaID", reservaID);
@@ -2068,9 +2075,8 @@ namespace FrbaHotel
 
         public static DataTable consumidoObtenerConsumiblesEnTabla(Consumido consumido)
         {
-            SqlCommand consulta = Database.consultaCrear("SELECT Consumible_Descripcion AS 'Consumido', Consumido_Cantidad AS 'Cantidad', Consumible_Precio AS 'Precio', (Consumido_Cantidad * Consumible_Precio) AS 'Total' FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumible_ID = Consumido_ConsumibleID WHERE Consumido_EstadiaID = @EstadiaID AND Consumido_HabitacionID = @HabitacionID AND Consumible_ID > 2");
+            SqlCommand consulta = Database.consultaCrear("SELECT Habitacion_Numero AS 'Habitacion', Consumible_Descripcion AS 'Consumido', Consumido_Cantidad AS 'Cantidad', Consumible_Precio AS 'Precio', (Consumido_Cantidad * Consumible_Precio) AS 'Total' FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumible_ID = Consumido_ConsumibleID JOIN RIP.Habitaciones ON Consumido_HabitacionID = Habitacion_ID WHERE Consumido_EstadiaID = @EstadiaID AND Consumible_ID > 2");
             consulta.Parameters.AddWithValue("@EstadiaID", consumido.estadiaID);
-            consulta.Parameters.AddWithValue("@HabitacionID", consumidoObtenerHabitacionID(consumido));
             return consultaObtenerTabla(consulta);
         }
 
@@ -2086,9 +2092,12 @@ namespace FrbaHotel
 
         public static void consumidoAgregarOtros(Consumido consumido)
         {
-            consumidoAgregarEstadiaDiasUtilizados(consumido);
-            consumidoAgregarEstadiaDiasNoUtilizados(consumido);
-            consumidoAgregarEstadiaDescuentoAllInclusive(consumido);
+            if(!consumidoEstadiaPorDiasUtilizadosAgregado(consumido))
+                consumidoAgregarEstadiaDiasUtilizados(consumido);
+            if (!consumidoEstadiaPorDiasNoUtilizadosAgregado(consumido))
+                consumidoAgregarEstadiaDiasNoUtilizados(consumido);
+            if (!consumidoEstadiaPorAllInclusiveAgregado(consumido))
+                consumidoAgregarEstadiaDescuentoAllInclusive(consumido);
         }
 
         public static void consumidoAgregarEstadiaDiasUtilizados(Consumido consumido)
@@ -2117,6 +2126,15 @@ namespace FrbaHotel
 
         public static bool consumidoEstadiaConConsumiblesRegistrados(Consumido consumido)
         {
+            List<string> habitaciones = reservaObtenerHabitacionesPorIDEnLista(consumido.reservaCodigo);
+            foreach (string habitacionID in habitaciones)
+                if(!consumidoHabitacionConConsumiblesRegistradosSimple(consumido, habitacionID))
+                    return false;
+            return true;
+        }
+
+        public static bool consumidoHabitacionConConsumiblesRegistrados(Consumido consumido)
+        {
             SqlCommand consulta = consultaCrear("SELECT Consumido_HabitacionID FROM RIP.Consumidos WHERE Consumido_EstadiaID = @EstadiaID AND Consumido_HabitacionID = @HabitacionID");
             consulta.Parameters.AddWithValue("@EstadiaID", consumido.estadiaID);
             consulta.Parameters.AddWithValue("@HabitacionID", consumidoObtenerHabitacionID(consumido));
@@ -2136,6 +2154,14 @@ namespace FrbaHotel
             SqlCommand consulta = consultaCrear("SELECT Estadia_ID FROM RIP.Estadias WHERE Estadia_ReservaID = @ReservaID AND Estadia_FechaInicio IS NOT NULL AND Estadia_FechaFin IS NOT NULL");
             consulta.Parameters.AddWithValue("@ReservaID", consumido.reservaCodigo);
             return consultaObtenerValor(consulta);
+        }
+
+        public static bool consumidoHabitacionConConsumiblesRegistradosSimple(Consumido consumido, string habitacionID)
+        {
+            SqlCommand consulta = consultaCrear("SELECT Consumido_HabitacionID FROM RIP.Consumidos WHERE Consumido_EstadiaID = @EstadiaID AND Consumido_HabitacionID = @HabitacionID");
+            consulta.Parameters.AddWithValue("@EstadiaID", consumido.estadiaID);
+            consulta.Parameters.AddWithValue("@HabitacionID", habitacionID);
+            return consultaValorExiste(consultaObtenerValor(consulta));
         }
 
         #endregion
@@ -2250,6 +2276,27 @@ namespace FrbaHotel
             itemFacturaAgregarEstadiaPorDiasUtilizados(factura);
             itemFacturaAgregarDescuentoAllInclusive(factura);
             ventanaInformarExito("La factura fue pagada con exito");
+        }
+
+        public static bool consumidoEstadiaPorDiasUtilizadosAgregado(Consumido consumido)
+        {
+            SqlCommand consulta = Database.consultaCrear("SELECT Consumido_ID FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumible_ID = Consumido_ConsumibleID WHERE Consumido_EstadiaID = @EstadiaID AND Consumible_ID = 0");
+            consulta.Parameters.AddWithValue("@EstadiaID", consumido.estadiaID);
+            return consultaValorExiste(consultaObtenerValor(consulta));
+        }
+
+        public static bool consumidoEstadiaPorDiasNoUtilizadosAgregado(Consumido consumido)
+        {
+            SqlCommand consulta = Database.consultaCrear("SELECT Consumido_ID FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumible_ID = Consumido_ConsumibleID WHERE Consumido_EstadiaID = @EstadiaID AND Consumible_ID = 1");
+            consulta.Parameters.AddWithValue("@EstadiaID", consumido.estadiaID);
+            return consultaValorExiste(consultaObtenerValor(consulta));
+        }
+
+        public static bool consumidoEstadiaPorAllInclusiveAgregado(Consumido consumido)
+        {
+            SqlCommand consulta = Database.consultaCrear("SELECT Consumido_ID FROM RIP.Consumidos JOIN RIP.Consumibles ON Consumible_ID = Consumido_ConsumibleID WHERE Consumido_EstadiaID = @EstadiaID AND Consumible_ID = 2");
+            consulta.Parameters.AddWithValue("@EstadiaID", consumido.estadiaID);
+            return consultaValorExiste(consultaObtenerValor(consulta));
         }
 
         #endregion

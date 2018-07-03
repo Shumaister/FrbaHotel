@@ -41,7 +41,7 @@ namespace FrbaHotel.RegistrarConsumible
                     ventanaInformarError("La estadia aun no tiene registrado el ingreso o el egreso");
                     return;
                 }
-                if (Database.consumidoEstadiaConConsumiblesRegistrados(consumido))
+                if (Database.consumidoHabitacionConConsumiblesRegistrados(consumido))
                 {
                     ventanaInformarError("Los consumibles ya fueron registrados");
                     return;
@@ -75,7 +75,7 @@ namespace FrbaHotel.RegistrarConsumible
                 {
                     lblHotel.Text = hotelNombre;
                     lblRegimen.Text = Database.reservaObtenerRegimen(tbxReserva.Text);
-                    comboBoxCargar(cbxHabitacion, Database.reservaObtenerHabitacionesEnLista(tbxReserva.Text));
+                    comboBoxCargar(cbxHabitacion, Database.reservaObtenerHabitacionesPorNumeroEnLista(tbxReserva.Text));
                     if (cbxHabitacion.Items.Count == 0)
                         ventanaEstadiaInvalida();
                 }

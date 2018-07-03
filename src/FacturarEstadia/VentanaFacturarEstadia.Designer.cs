@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.CodReservaL = new System.Windows.Forms.Label();
             this.tbxReserva = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -73,9 +75,6 @@
             this.btnPagar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cbxFormasPagos = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cbxHabitacion = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
@@ -115,24 +114,43 @@
             this.groupBox1.Controls.Add(this.dgvConsumibles);
             this.groupBox1.Location = new System.Drawing.Point(18, 192);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(444, 217);
+            this.groupBox1.Size = new System.Drawing.Size(444, 230);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Productos consumidos";
             // 
             // dgvConsumibles
             // 
+            this.dgvConsumibles.AllowUserToAddRows = false;
+            this.dgvConsumibles.AllowUserToDeleteRows = false;
+            this.dgvConsumibles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvConsumibles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvConsumibles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvConsumibles.Location = new System.Drawing.Point(18, 35);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvConsumibles.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvConsumibles.Location = new System.Drawing.Point(18, 30);
             this.dgvConsumibles.Name = "dgvConsumibles";
             this.dgvConsumibles.ReadOnly = true;
             this.dgvConsumibles.RowHeadersVisible = false;
-            this.dgvConsumibles.Size = new System.Drawing.Size(403, 149);
-            this.dgvConsumibles.TabIndex = 19;
+            this.dgvConsumibles.Size = new System.Drawing.Size(410, 182);
+            this.dgvConsumibles.TabIndex = 1;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(342, 50);
+            this.btnBuscar.Location = new System.Drawing.Point(180, 50);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 4;
@@ -551,7 +569,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(87, 437);
+            this.label1.Location = new System.Drawing.Point(87, 441);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 13);
             this.label1.TabIndex = 384;
@@ -568,35 +586,6 @@
             this.cbxFormasPagos.Name = "cbxFormasPagos";
             this.cbxFormasPagos.Size = new System.Drawing.Size(131, 21);
             this.cbxFormasPagos.TabIndex = 385;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(244, 25);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(17, 22);
-            this.label5.TabIndex = 388;
-            this.label5.Text = "*";
-            // 
-            // cbxHabitacion
-            // 
-            this.cbxHabitacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxHabitacion.FormattingEnabled = true;
-            this.cbxHabitacion.Location = new System.Drawing.Point(190, 50);
-            this.cbxHabitacion.Name = "cbxHabitacion";
-            this.cbxHabitacion.Size = new System.Drawing.Size(111, 21);
-            this.cbxHabitacion.TabIndex = 387;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(187, 25);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(58, 13);
-            this.label7.TabIndex = 386;
-            this.label7.Text = "Habitacion";
             // 
             // label8
             // 
@@ -615,9 +604,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(892, 541);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.cbxHabitacion);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbxFormasPagos);
             this.Controls.Add(this.btnPagar);
@@ -640,9 +626,6 @@
             this.Controls.SetChildIndex(this.cbxFormasPagos, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.logo, 0);
-            this.Controls.SetChildIndex(this.label7, 0);
-            this.Controls.SetChildIndex(this.cbxHabitacion, 0);
-            this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.label8, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
@@ -663,7 +646,6 @@
         private System.Windows.Forms.TextBox tbxReserva;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.DataGridView dgvConsumibles;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label25;
@@ -704,9 +686,7 @@
         private System.Windows.Forms.Label lblMontoEstadiaDiasUtilizados;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cbxHabitacion;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DataGridView dgvConsumibles;
     }
 }
