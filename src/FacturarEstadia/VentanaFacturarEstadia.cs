@@ -67,6 +67,24 @@ namespace FrbaHotel.FacturarEstadia
             lblMontoTotal.Text = montoTotal.ToString();
         }
 
+        private void ventanaLimpiar()
+        {
+            lblPrecioHabitacion.Text = "-";
+            lblCantidadHuespedes.Text = "-";
+            lblRecargaEstrellas.Text = "-";
+            lblPrecioRegimen.Text = "-";
+            lblMontoEstadiaDia.Text = "-";
+            lblDiasUtilizados.Text = "-";
+            lblDiasNoUtilizados.Text = "-";
+            lblMontoEstadiaDiasUtilizados.Text = "-";
+            lblMontoEstadiaDiasNoUtilizados.Text = "-";
+            lblMontoTotalEstadia.Text = "-";
+            lblMontoTotalConsumibles.Text = "-";
+            lblDescuentoRegimen.Text = "-";
+            lblMontoTotal.Text = "-";
+            dgvConsumibles.DataSource = null;
+        }
+
         private void tbxBuscar_Click(object sender, EventArgs e)
         {
             if (ventanaCamposEstanCompletos(this, controladorError))
@@ -122,6 +140,7 @@ namespace FrbaHotel.FacturarEstadia
 
         private void tbxReserva_TextChanged(object sender, EventArgs e)
         {
+            ventanaLimpiar();
             if (string.IsNullOrWhiteSpace(tbxReserva.Text))
                 ventanaEstadiaInvalida();
             else
