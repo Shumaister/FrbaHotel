@@ -777,7 +777,7 @@
             this.btnVolverPaso2.BackColor = System.Drawing.Color.DarkRed;
             this.btnVolverPaso2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVolverPaso2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnVolverPaso2.Location = new System.Drawing.Point(6, 235);
+            this.btnVolverPaso2.Location = new System.Drawing.Point(6, 232);
             this.btnVolverPaso2.Name = "btnVolverPaso2";
             this.btnVolverPaso2.Size = new System.Drawing.Size(112, 40);
             this.btnVolverPaso2.TabIndex = 329;
@@ -790,7 +790,7 @@
             this.btnConfirmarReserva.BackColor = System.Drawing.Color.SteelBlue;
             this.btnConfirmarReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirmarReserva.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnConfirmarReserva.Location = new System.Drawing.Point(516, 235);
+            this.btnConfirmarReserva.Location = new System.Drawing.Point(516, 232);
             this.btnConfirmarReserva.Name = "btnConfirmarReserva";
             this.btnConfirmarReserva.Size = new System.Drawing.Size(107, 40);
             this.btnConfirmarReserva.TabIndex = 328;

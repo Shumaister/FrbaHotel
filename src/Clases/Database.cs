@@ -1652,9 +1652,16 @@ namespace FrbaHotel
                 consulta2.Parameters.AddWithValue("@ff", R.FechaFin);
                 consultaEjecutar(consulta2);
             }
+
+            ReservaActualizarReservasVencidas();
         }
 
-
+        private static void ReservaActualizarReservasVencidas()
+        {
+            SqlCommand updateReservas = consultaCrear("update rip.Reservas set Reserva_EstadoReservaID=5 where YEAR(CONVERT(datetime,@FechaActual,121))>=YEAR(Reserva_FechaInicio) and MONTH(CONVERT(datetime,@FechaActual,121))>=MONTH(Reserva_FechaInicio) and DAY(CONVERT(datetime,@FechaActual,121))>DAY(Reserva_FechaInicio) and (Reserva_EstadoReservaID!=6 or Reserva_EstadoReservaID is null)");
+            updateReservas.Parameters.AddWithValue("@FechaActual", ConfigurationManager.AppSettings["fechaSistema"]);
+            consultaEjecutar(updateReservas);
+        }
 
         public static string reservaGetIDEstadoReservabyNombre(string nombre)
         {

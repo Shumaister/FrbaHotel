@@ -57,6 +57,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.diasUtilizados = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -66,13 +68,13 @@
             // 
             // logo
             // 
-            this.logo.Location = new System.Drawing.Point(649, -3);
-            this.logo.Size = new System.Drawing.Size(10, 19);
+            this.logo.Location = new System.Drawing.Point(797, 12);
+            this.logo.Size = new System.Drawing.Size(72, 55);
             // 
             // CodReservaL
             // 
             this.CodReservaL.AutoSize = true;
-            this.CodReservaL.Location = new System.Drawing.Point(34, 37);
+            this.CodReservaL.Location = new System.Drawing.Point(12, 50);
             this.CodReservaL.Name = "CodReservaL";
             this.CodReservaL.Size = new System.Drawing.Size(104, 13);
             this.CodReservaL.TabIndex = 1;
@@ -80,7 +82,7 @@
             // 
             // CodReserva
             // 
-            this.CodReserva.Location = new System.Drawing.Point(170, 34);
+            this.CodReserva.Location = new System.Drawing.Point(140, 47);
             this.CodReserva.MaxLength = 18;
             this.CodReserva.Name = "CodReserva";
             this.CodReserva.Size = new System.Drawing.Size(125, 20);
@@ -93,9 +95,9 @@
             this.groupBox1.Controls.Add(this.dataConsumibles);
             this.groupBox1.Controls.Add(this.SubTotal);
             this.groupBox1.Controls.Add(this.sub);
-            this.groupBox1.Location = new System.Drawing.Point(34, 110);
+            this.groupBox1.Location = new System.Drawing.Point(12, 103);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(418, 262);
+            this.groupBox1.Size = new System.Drawing.Size(418, 374);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Detalle Factura";
@@ -108,7 +110,7 @@
             this.dataConsumibles.Name = "dataConsumibles";
             this.dataConsumibles.ReadOnly = true;
             this.dataConsumibles.RowHeadersVisible = false;
-            this.dataConsumibles.Size = new System.Drawing.Size(403, 227);
+            this.dataConsumibles.Size = new System.Drawing.Size(403, 337);
             this.dataConsumibles.TabIndex = 19;
             // 
             // SubTotal
@@ -122,7 +124,7 @@
             // sub
             // 
             this.sub.AutoSize = true;
-            this.sub.Location = new System.Drawing.Point(225, 246);
+            this.sub.Location = new System.Drawing.Point(228, 356);
             this.sub.Name = "sub";
             this.sub.Size = new System.Drawing.Size(46, 13);
             this.sub.TabIndex = 5;
@@ -132,7 +134,7 @@
             // RegimenPrecio
             // 
             this.RegimenPrecio.AutoSize = true;
-            this.RegimenPrecio.Location = new System.Drawing.Point(265, 34);
+            this.RegimenPrecio.Location = new System.Drawing.Point(265, 47);
             this.RegimenPrecio.Name = "RegimenPrecio";
             this.RegimenPrecio.Size = new System.Drawing.Size(37, 13);
             this.RegimenPrecio.TabIndex = 23;
@@ -141,7 +143,7 @@
             // DiasRegimen
             // 
             this.DiasRegimen.AutoSize = true;
-            this.DiasRegimen.Location = new System.Drawing.Point(173, 34);
+            this.DiasRegimen.Location = new System.Drawing.Point(173, 47);
             this.DiasRegimen.Name = "DiasRegimen";
             this.DiasRegimen.Size = new System.Drawing.Size(86, 13);
             this.DiasRegimen.TabIndex = 22;
@@ -150,7 +152,7 @@
             // Regimen
             // 
             this.Regimen.AutoSize = true;
-            this.Regimen.Location = new System.Drawing.Point(9, 34);
+            this.Regimen.Location = new System.Drawing.Point(9, 47);
             this.Regimen.Name = "Regimen";
             this.Regimen.Size = new System.Drawing.Size(49, 13);
             this.Regimen.TabIndex = 5;
@@ -159,7 +161,7 @@
             // allInclusivePrecio
             // 
             this.allInclusivePrecio.AutoSize = true;
-            this.allInclusivePrecio.Location = new System.Drawing.Point(268, 73);
+            this.allInclusivePrecio.Location = new System.Drawing.Point(268, 86);
             this.allInclusivePrecio.Name = "allInclusivePrecio";
             this.allInclusivePrecio.Size = new System.Drawing.Size(0, 13);
             this.allInclusivePrecio.TabIndex = 21;
@@ -167,7 +169,7 @@
             // allinclusivecant
             // 
             this.allinclusivecant.AutoSize = true;
-            this.allinclusivecant.Location = new System.Drawing.Point(178, 73);
+            this.allinclusivecant.Location = new System.Drawing.Point(178, 86);
             this.allinclusivecant.Name = "allinclusivecant";
             this.allinclusivecant.Size = new System.Drawing.Size(0, 13);
             this.allinclusivecant.TabIndex = 20;
@@ -182,7 +184,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(371, 32);
+            this.button1.Location = new System.Drawing.Point(286, 44);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -192,6 +194,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label6);
@@ -206,9 +209,9 @@
             this.groupBox2.Controls.Add(this.allInclusive);
             this.groupBox2.Controls.Add(this.allinclusivecant);
             this.groupBox2.Controls.Add(this.allInclusivePrecio);
-            this.groupBox2.Location = new System.Drawing.Point(27, 396);
+            this.groupBox2.Location = new System.Drawing.Point(449, 103);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(419, 202);
+            this.groupBox2.Size = new System.Drawing.Size(419, 220);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Regimen y Habitación";
@@ -216,7 +219,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(129, 147);
+            this.label7.Location = new System.Drawing.Point(129, 168);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(103, 13);
             this.label7.TabIndex = 30;
@@ -225,7 +228,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 147);
+            this.label8.Location = new System.Drawing.Point(9, 168);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(61, 13);
             this.label8.TabIndex = 29;
@@ -234,7 +237,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(129, 113);
+            this.label6.Location = new System.Drawing.Point(129, 121);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(58, 13);
             this.label6.TabIndex = 28;
@@ -243,7 +246,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 113);
+            this.label5.Location = new System.Drawing.Point(9, 121);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(82, 13);
             this.label5.TabIndex = 27;
@@ -252,7 +255,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(253, 16);
+            this.label3.Location = new System.Drawing.Point(253, 29);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 26;
@@ -261,11 +264,12 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(129, 21);
+            this.label2.Location = new System.Drawing.Point(129, 34);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 25;
             this.label2.Text = "Cantidad";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // subRegimenPrecio
             // 
@@ -278,7 +282,7 @@
             // subRegimen
             // 
             this.subRegimen.AutoSize = true;
-            this.subRegimen.Location = new System.Drawing.Point(222, 168);
+            this.subRegimen.Location = new System.Drawing.Point(222, 189);
             this.subRegimen.Name = "subRegimen";
             this.subRegimen.Size = new System.Drawing.Size(46, 13);
             this.subRegimen.TabIndex = 19;
@@ -288,7 +292,7 @@
             // 
             this.Total.AutoSize = true;
             this.Total.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Total.Location = new System.Drawing.Point(25, 634);
+            this.Total.Location = new System.Drawing.Point(461, 416);
             this.Total.Name = "Total";
             this.Total.Size = new System.Drawing.Size(46, 18);
             this.Total.TabIndex = 25;
@@ -298,7 +302,7 @@
             // 
             this.TotalNumero.AutoSize = true;
             this.TotalNumero.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TotalNumero.Location = new System.Drawing.Point(96, 634);
+            this.TotalNumero.Location = new System.Drawing.Point(600, 416);
             this.TotalNumero.Name = "TotalNumero";
             this.TotalNumero.Size = new System.Drawing.Size(68, 18);
             this.TotalNumero.TabIndex = 26;
@@ -307,7 +311,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(219, 638);
+            this.label1.Location = new System.Drawing.Point(458, 349);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(86, 13);
             this.label1.TabIndex = 27;
@@ -320,25 +324,27 @@
             this.comboBox1.Items.AddRange(new object[] {
             "Tarjeta",
             "Efectivo"});
-            this.comboBox1.Location = new System.Drawing.Point(325, 635);
+            this.comboBox1.Location = new System.Drawing.Point(557, 346);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.Size = new System.Drawing.Size(104, 21);
             this.comboBox1.TabIndex = 28;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(211, 689);
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(772, 432);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 38);
+            this.button2.Size = new System.Drawing.Size(97, 40);
             this.button2.TabIndex = 29;
             this.button2.Text = "Pagar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(34, 78);
+            this.label4.Location = new System.Drawing.Point(12, 77);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 30;
@@ -347,16 +353,40 @@
             // diasUtilizados
             // 
             this.diasUtilizados.AutoSize = true;
-            this.diasUtilizados.Location = new System.Drawing.Point(144, 77);
+            this.diasUtilizados.Location = new System.Drawing.Point(122, 76);
             this.diasUtilizados.Name = "diasUtilizados";
             this.diasUtilizados.Size = new System.Drawing.Size(0, 13);
             this.diasUtilizados.TabIndex = 31;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(554, 416);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(40, 18);
+            this.label9.TabIndex = 32;
+            this.label9.Text = "U$S";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.DarkBlue;
+            this.label10.Location = new System.Drawing.Point(12, 18);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(112, 16);
+            this.label10.TabIndex = 311;
+            this.label10.Text = "Facturar Reserva";
             // 
             // VentanaFacturarEstadia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(491, 739);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(881, 483);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.diasUtilizados);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.button2);
@@ -385,6 +415,8 @@
             this.Controls.SetChildIndex(this.button2, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.diasUtilizados, 0);
+            this.Controls.SetChildIndex(this.label9, 0);
+            this.Controls.SetChildIndex(this.label10, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -428,5 +460,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }

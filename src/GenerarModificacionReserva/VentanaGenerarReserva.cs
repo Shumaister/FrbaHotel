@@ -483,7 +483,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                         Database.ReservaSaveReserva(Reserva);
                         this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
                         MessageBox.Show("Se ha registrado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Hide();
+                        Cerrar();
                     }
                     catch (Exception ex)
                     {
@@ -502,6 +502,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                     Database.ReservaSaveReserva(Reserva);
                     this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
                     MessageBox.Show("Se a modificado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Cerrar();                
                 }
                 catch (Exception ex)
                 {
@@ -520,6 +521,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                     Database.ReservaSaveReserva(Reserva);
                     this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
                     MessageBox.Show("Se a registrado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Cerrar();
                 }
                 catch (Exception ex)
                 {
@@ -537,12 +539,20 @@ namespace FrbaHotel.GenerarModificacionReserva
                     Database.ReservaSaveReserva(Reserva);
                     this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
                     MessageBox.Show("Se a modificado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Cerrar();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Se ha producido un error al registrar la reserva, revise los datos ingresados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void Cerrar()
+        {
+            this.btnClienteExistente.Enabled = false;
+            this.btnVolverPaso2.Enabled = false;
+            this.btnConfirmarReserva.Enabled = false;
         }
 
         #endregion
