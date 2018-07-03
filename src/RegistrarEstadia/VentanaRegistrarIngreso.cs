@@ -40,8 +40,14 @@ namespace FrbaHotel.RegistrarEstadia
         private void btnGuardarIngreso_Click(object sender, EventArgs e)
         {
             estadia.checkInUsuarioID = Database.usuarioObtenerID(sesion.usuario);
-            Database.estadiaIngresoExitoso(estadia);
-            this.Hide();
+            if (cantidadHuespedes == 0)
+            {
+                Database.estadiaIngresoExitoso(estadia);
+                this.Hide();
+            }
+            else
+                ventanaInformarError("Hay huespedes sin registrar");
+
         }
 
         private void btnAgregarClienteNuevo_Click(object sender, EventArgs e)

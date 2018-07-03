@@ -226,15 +226,12 @@ namespace FrbaHotel.AbmUsuario
             {
                 string id = dgvEliminarUsuarios.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString();
                 Usuario usuario = new Usuario(id, null, null, null, null);
-                Database.usuarioEliminadoConExito(usuario);
+                if (usuario.id != ventanaMenuPrincipal.sesion.usuario.id)
+                    Database.usuarioEliminadoConExito(usuario);
+                else
+                    ventanaInformarError("El usuario no puede eliminarse a si mismo");          
                 ventanaActualizar();
-                if (usuario.id == ventanaMenuPrincipal.sesion.usuario.id)
-                {
-                    this.Hide();
-                    ventanaMenuPrincipal.Hide();
-                    ventanaInformarError("El usuario fue deshabilitado");
-                    new VentanaLogin().Show();
-                }
+
             }
         }
 
