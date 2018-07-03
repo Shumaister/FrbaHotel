@@ -1665,9 +1665,13 @@ namespace FrbaHotel
 
         private static void ReservaActualizarReservasVencidas()
         {
-            SqlCommand updateReservas = consultaCrear("update rip.Reservas set Reserva_EstadoReservaID=5 where YEAR(CONVERT(datetime,@FechaActual,121))>=YEAR(Reserva_FechaInicio) and MONTH(CONVERT(datetime,@FechaActual,121))>=MONTH(Reserva_FechaInicio) and DAY(CONVERT(datetime,@FechaActual,121))>DAY(Reserva_FechaInicio) and (Reserva_EstadoReservaID!=6 or Reserva_EstadoReservaID is null)");
-            updateReservas.Parameters.AddWithValue("@FechaActual", ConfigurationManager.AppSettings["fechaSistema"]);
+            SqlCommand updateReservas = consultaCrear("UPDATE rip.Reservas set Reserva_EstadoReservaID = 5 where Reserva_ID not in (select Estadia_ReservaID from rip.Estadias) and Reserva_FechaInicio < CONVERT(datetime,@fecha,121)");
+            updateReservas.Parameters.AddWithValue("@fecha", ConfigurationManager.AppSettings["fechaSistema"]);
             consultaEjecutar(updateReservas);
+
+            SqlCommand liberarHabitaciones = consultaCrear("update rip.HabitacionesNoDisponibles set HabitacionNoDisponible_Finalizada = 1 where HabitacionNoDisponible_ReservaID in ( select r.Reserva_ID from rip.Reservas r where r.Reserva_ID not in (select Estadia_ReservaID from rip.Estadias) and Reserva_FechaInicio <  CONVERT(datetime,@fecha,121) )");
+            liberarHabitaciones.Parameters.AddWithValue("@fecha", ConfigurationManager.AppSettings["fechaSistema"]);
+            consultaEjecutar(liberarHabitaciones);
         }
 
         public static string reservaGetIDEstadoReservabyNombre(string nombre)
