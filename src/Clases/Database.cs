@@ -1358,10 +1358,36 @@ namespace FrbaHotel
             return true;
         }
 
-        public static void habitacionEliminadaConExito(Habitacion habitacion)
+        public static bool habitacionEstaReservada(Habitacion habitacion)
         {
+            SqlCommand consulta = consultaCrear("SELECT HabitacionNoDisponible_ReservaID FROM RIP.HabitacionesNoDisponibles WHERE HabitacionNoDisponible_HabitacionID = @HabitacionID AND HabitacionNoDisponible_FechaInicio >= CONVERT(datetime,@FechaActual,121) AND HabitacionNoDisponible_Finalizada = 0");
+            consulta.Parameters.AddWithValue("@HabitacionID", habitacion.id);
+            consulta.Parameters.AddWithValue("@FechaActual", ConfigurationManager.AppSettings["fechaSistema"]);
+            return consultaValorExiste(consultaObtenerValor(consulta));
+        }
+
+        public static bool habitacionEstaOcupada(Habitacion habitacion)
+        {
+            SqlCommand consulta = consultaCrear("SELECT HabitacionNoDisponible_ReservaID FROM RIP.HabitacionesNoDisponibles JOIN RIP.Estadias ON  HabitacionNoDisponible_ReservaID = Estadia_ReservaID  WHERE HabitacionNoDisponible_HabitacionID = @HabitacionID AND Estadia_FechaInicio IS NOT NULL AND Estadia_FechaFin IS NULL");
+            consulta.Parameters.AddWithValue("@HabitacionID", habitacion.id);
+            return consultaValorExiste(consultaObtenerValor(consulta));
+        }
+
+        public static bool habitacionEliminadaConExito(Habitacion habitacion)
+        {
+            if (habitacionEstaOcupada(habitacion))
+            {
+                ventanaInformarError("No se puede eliminar la habitacion ya que esta ocupada");
+                return false;
+            }
+            if (habitacionEstaReservada(habitacion))
+            {
+                ventanaInformarError("No se puede eliminar la habitacion ya que esta reservada");
+                return false;
+            }
             habitacionEliminar(habitacion);
             ventanaInformarExito("La habitacion fue eliminada con exito");
+            return true;
         }
 
         public static void habitacionAgregar(Habitacion habitacion)

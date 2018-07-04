@@ -535,10 +535,10 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label26.Location = new System.Drawing.Point(24, 164);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(109, 13);
+            this.label26.Size = new System.Drawing.Size(130, 13);
             this.label26.TabIndex = 391;
             this.label26.Text = "Monto estadia por dia";
             // 

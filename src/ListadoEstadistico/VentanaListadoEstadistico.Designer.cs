@@ -61,7 +61,7 @@
             0,
             0});
             this.añoNUD.Minimum = new decimal(new int[] {
-            2016,
+            2015,
             0,
             0,
             0});

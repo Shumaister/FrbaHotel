@@ -57,7 +57,7 @@ namespace FrbaHotel.AbmHabitacion
         {
             habitacion.numero = tbxNumero.Text;
             habitacion.piso = tbxPiso.Text;
-            habitacion.frente = cbxFrentes.SelectedItem.ToString();
+            habitacion.frente = cbxFrentes.SelectedItem.ToString() == "Interna" ? "N" : "S";
             habitacion.tipoHabitacion = cbxTipoHabitaciones.SelectedItem.ToString();
             habitacion.descripcion = tbxDescripcion.Text;
             habitacion.estado = btnHabilitar.Enabled ? "0" : "1";

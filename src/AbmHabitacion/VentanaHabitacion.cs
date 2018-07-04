@@ -101,8 +101,8 @@ namespace FrbaHotel.AbmHabitacion
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
                 Habitacion habitacion = ventanaCrearHabitacionParaEliminar(e);
-                Database.habitacionEliminadaConExito(habitacion);
-                ventanaActualizar(sender, e);
+                if(Database.habitacionEliminadaConExito(habitacion))
+                    ventanaActualizar(sender, e);
             }
         }
 
