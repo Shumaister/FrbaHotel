@@ -1,9 +1,14 @@
 # TP GDD 2018
 
+CURSO: K3014
 
-Integrantes:
+GRUPO: RIP
 
-- Maiori Gabriel
-- Moreira Tomas
-- Poma Dario
-- Villanueva Matias
+INTEGRANTES:
+
+MAIORI, GABRIEL	   ---   1556540
+MOREIRA, TOMÁS	   ---   1561273
+POMA, DARÍO	   ---   1556502
+VILLANUEVA, MATÍAS ---	 1559837
+
+EMAIL REPRESENTANTE: gabrielmaiori@gmail.com
