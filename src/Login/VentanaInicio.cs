@@ -42,5 +42,6 @@ namespace FrbaHotel.Login
             ventanaMenu.ShowDialog();
         }
 
+
     }
 }

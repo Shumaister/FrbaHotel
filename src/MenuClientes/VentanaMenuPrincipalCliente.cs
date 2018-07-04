@@ -12,6 +12,7 @@ using FrbaHotel.CancelarReserva;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Data.SqlTypes;
+using FrbaHotel.Login;
 
 namespace FrbaHotel.MenuClientes
 {
@@ -40,7 +41,7 @@ namespace FrbaHotel.MenuClientes
 
         private void VentanaMenuPrincipalCliente_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            new VentanaInicio().Show();
         }
 
         private void VentanaMenuPrincipalCliente_Load(object sender, EventArgs e)

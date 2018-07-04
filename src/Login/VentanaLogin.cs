@@ -29,7 +29,7 @@ namespace FrbaHotel.Login
 
         private void VentanaLogin_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            new VentanaInicio().Show();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

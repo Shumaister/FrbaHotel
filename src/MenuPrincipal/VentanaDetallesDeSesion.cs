@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace FrbaHotel.MenuPrincipal
 {
@@ -25,6 +26,8 @@ namespace FrbaHotel.MenuPrincipal
             lblUsuario.Text = sesion.usuario.nombre;
             lblHotel.Text = sesion.hotel.domicilio.pais + "-" + sesion.hotel.domicilio.ciudad + "-" + sesion.hotel.domicilio.calle + "-" + sesion.hotel.domicilio.numeroCalle;
             lblRol.Text = sesion.rol.nombre;
+            DateTime fechaSistema = DateTime.Parse(ConfigurationManager.AppSettings["fechaSistema"]);
+            lblFecha.Text = fechaSistema.Day.ToString() + "/" + fechaSistema.Month.ToString() + "/" + fechaSistema.Year.ToString();          
         }
     }
 }

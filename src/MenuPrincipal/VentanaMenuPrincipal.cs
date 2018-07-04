@@ -42,7 +42,7 @@ namespace FrbaHotel.Menus
 
         private void VentanaMenuPrincipal_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            new VentanaInicio().Show();
         }
 
         public void ventanaReiniciar()

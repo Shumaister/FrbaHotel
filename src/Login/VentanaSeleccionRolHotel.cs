@@ -36,7 +36,7 @@ namespace FrbaHotel.Login
 
         private void VentanaSeleccionRol_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            new VentanaInicio().Show();
         }
 
         private void ventanaConfigurar()

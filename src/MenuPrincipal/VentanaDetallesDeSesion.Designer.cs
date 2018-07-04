@@ -37,6 +37,8 @@
             this.label32 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.lblFecha = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).BeginInit();
             this.SuspendLayout();
@@ -80,7 +82,7 @@
             // lblHotel
             // 
             this.lblHotel.AutoSize = true;
-            this.lblHotel.Location = new System.Drawing.Point(66, 230);
+            this.lblHotel.Location = new System.Drawing.Point(73, 230);
             this.lblHotel.Name = "lblHotel";
             this.lblHotel.Size = new System.Drawing.Size(83, 13);
             this.lblHotel.TabIndex = 5;
@@ -89,7 +91,7 @@
             // lblRol
             // 
             this.lblRol.AutoSize = true;
-            this.lblRol.Location = new System.Drawing.Point(65, 262);
+            this.lblRol.Location = new System.Drawing.Point(73, 262);
             this.lblRol.Name = "lblRol";
             this.lblRol.Size = new System.Drawing.Size(66, 13);
             this.lblRol.TabIndex = 6;
@@ -109,7 +111,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(90, 327);
+            this.label4.Location = new System.Drawing.Point(90, 362);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(158, 13);
             this.label4.TabIndex = 266;
@@ -119,17 +121,37 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(106, 304);
+            this.label5.Location = new System.Drawing.Point(106, 339);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(124, 15);
             this.label5.TabIndex = 265;
             this.label5.Text = "FRBA HOTEL © 2018";
             // 
+            // lblFecha
+            // 
+            this.lblFecha.AutoSize = true;
+            this.lblFecha.Location = new System.Drawing.Point(73, 294);
+            this.lblFecha.Name = "lblFecha";
+            this.lblFecha.Size = new System.Drawing.Size(78, 13);
+            this.lblFecha.TabIndex = 268;
+            this.lblFecha.Text = "Fecha_sistema";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(24, 294);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(40, 13);
+            this.label7.TabIndex = 267;
+            this.label7.Text = "Fecha:";
+            // 
             // VentanaDetallesDeSesion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 368);
+            this.ClientSize = new System.Drawing.Size(355, 393);
+            this.Controls.Add(this.lblFecha);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label32);
@@ -152,6 +174,8 @@
             this.Controls.SetChildIndex(this.label32, 0);
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.label7, 0);
+            this.Controls.SetChildIndex(this.lblFecha, 0);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controladorError)).EndInit();
             this.ResumeLayout(false);
@@ -170,5 +194,7 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblFecha;
+        private System.Windows.Forms.Label label7;
     }
 }

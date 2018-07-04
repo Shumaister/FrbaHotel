@@ -48,7 +48,7 @@
             this.btnCrear.BackColor = System.Drawing.Color.ForestGreen;
             this.btnCrear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCrear.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCrear.Location = new System.Drawing.Point(66, 234);
+            this.btnCrear.Location = new System.Drawing.Point(67, 234);
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(172, 40);
             this.btnCrear.TabIndex = 329;
@@ -61,7 +61,7 @@
             this.btnModificar.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModificar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnModificar.Location = new System.Drawing.Point(66, 293);
+            this.btnModificar.Location = new System.Drawing.Point(67, 293);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(172, 40);
             this.btnModificar.TabIndex = 330;
@@ -74,7 +74,7 @@
             this.btnCancelar.BackColor = System.Drawing.Color.DarkRed;
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCancelar.Location = new System.Drawing.Point(66, 351);
+            this.btnCancelar.Location = new System.Drawing.Point(67, 351);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(172, 40);
             this.btnCancelar.TabIndex = 331;
@@ -95,7 +95,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(67, 449);
+            this.label4.Location = new System.Drawing.Point(74, 439);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(158, 13);
             this.label4.TabIndex = 336;
@@ -105,7 +105,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(83, 429);
+            this.label5.Location = new System.Drawing.Point(90, 419);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(124, 15);
             this.label5.TabIndex = 335;
