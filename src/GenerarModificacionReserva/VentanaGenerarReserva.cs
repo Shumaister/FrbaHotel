@@ -459,21 +459,61 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         private void btnConfirmarReserva_Click(object sender, EventArgs e)
         {
-            if (funcion == "Crear")
+            try
             {
-                if (Reserva.Cliente != null)
+                if (funcion == "Crear")
+                {
+                    if (Reserva.Cliente != null)
+                    {
+                        Reserva.Codigo = Database.ReservaGenerarCodigo();
+
+                        if (Usuario == null)
+                        {
+                            string id = Database.usuarioObtenerID(new Usuario("guest"));
+                            Reserva.Usuario = new Usuario(id, "guest");
+                        }
+                        else
+                        {
+                            Reserva.Usuario = Usuario;
+                        }
+
+                        try
+                        {
+                            Database.ReservaSaveReserva(Reserva);
+                            this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
+                            MessageBox.Show("Se ha registrado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Cerrar();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Se ha producido un error al registrar la reserva, revise los datos ingresados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+
+                if (funcion == "ModificaCliente")
+                {
+                    Reserva.Usuario.id = Database.usuarioObtenerID(Reserva.Usuario);
+                    Reserva.Cliente = ReservaOriginal.Cliente;
+                    Reserva.Cliente.id = Database.clienteObtenerIDPersona(Reserva.Cliente.persona.id);
+                    try
+                    {
+                        Database.ReservaSaveReserva(Reserva);
+                        this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
+                        MessageBox.Show("Se ha modificado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Cerrar();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Se ha producido un error al registrar la reserva, revise los datos ingresados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+                if (funcion == "CreaUsuario")
                 {
                     Reserva.Codigo = Database.ReservaGenerarCodigo();
 
-                    if (Usuario == null)
-                    {
-                        string id = Database.usuarioObtenerID(new Usuario("guest"));
-                        Reserva.Usuario = new Usuario(id, "guest");
-                    }
-                    else
-                    {
-                        Reserva.Usuario = Usuario;
-                    }
+                    Reserva.Usuario = Usuario;
 
                     try
                     {
@@ -487,61 +527,29 @@ namespace FrbaHotel.GenerarModificacionReserva
                         MessageBox.Show("Se ha producido un error al registrar la reserva, revise los datos ingresados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-            }
 
-            if (funcion == "ModificaCliente")
-            {
-                Reserva.Usuario.id = Database.usuarioObtenerID(Reserva.Usuario);
-                Reserva.Cliente = ReservaOriginal.Cliente;
-                Reserva.Cliente.id = Database.clienteObtenerIDPersona(Reserva.Cliente.persona.id);
-                try
+                if (funcion == "ModificaUsuario")
                 {
-                    Database.ReservaSaveReserva(Reserva);
-                    this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
-                    MessageBox.Show("Se ha modificado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Cerrar();                
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Se ha producido un error al registrar la reserva, revise los datos ingresados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-
-            if (funcion == "CreaUsuario")
-            {
-                Reserva.Codigo = Database.ReservaGenerarCodigo();
-
-                Reserva.Usuario = Usuario;
-
-                try
-                {
-                    Database.ReservaSaveReserva(Reserva);
-                    this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
-                    MessageBox.Show("Se ha registrado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Cerrar();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Se ha producido un error al registrar la reserva, revise los datos ingresados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Reserva.Usuario = Usuario;
+                    Reserva.Cliente = ReservaOriginal.Cliente;
+                    Reserva.Cliente.id = Database.clienteObtenerIDPersona(Reserva.Cliente.persona.id);
+                    try
+                    {
+                        Database.ReservaSaveReserva(Reserva);
+                        this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
+                        MessageBox.Show("Se ha modificado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Cerrar();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Se ha producido un error al registrar la reserva, revise los datos ingresados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
-
-            if (funcion == "ModificaUsuario")
+            catch (Exception)
             {
-                Reserva.Usuario = Usuario;
-                Reserva.Cliente = ReservaOriginal.Cliente;
-                Reserva.Cliente.id = Database.clienteObtenerIDPersona(Reserva.Cliente.persona.id);
-                try
-                {
-                    Database.ReservaSaveReserva(Reserva);
-                    this.lblcodreserva.Text = "Su codigo de reserva es: " + Reserva.Codigo;
-                    MessageBox.Show("Se ha modificado con exito su reserva con codigo: " + Reserva.Codigo, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Cerrar();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Se ha producido un error al registrar la reserva, revise los datos ingresados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Se ha producido un error al registrar la reserva, recuerde ingresar cliente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                   
             }
         }
 
