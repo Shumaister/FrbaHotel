@@ -805,6 +805,7 @@ namespace FrbaHotel
             "JOIN RIP.TiposDocumentos ON Persona_TipoDocumentoID = TipoDocumento_ID " + 
             "JOIN RIP.Domicilios ON Persona_DomicilioID = Domicilio_ID WHERE " +  
             "Cliente_Estado = 1 AND "+
+            "Persona_DatoCorrupto = 0 AND "+
             "Persona_Nombre LIKE '" + cliente.persona.nombre + "%' AND " +
             "Persona_Apellido LIKE '" + cliente.persona.apellido + "%' AND " +
             "Persona_Email LIKE '" + cliente.persona.email + "%'" +
