@@ -721,8 +721,10 @@ JOIN RIP.Personas ON Persona_NumeroDocumento = Cliente_Pasaporte_Nro
 AND Persona_Email = Cliente_Mail
 ORDER BY 1
 
--- Pongo como corruptos a los clientes que repiten correo email
+-- Pongo como corruptos a los clientes que repiten correo email y numero de pasaporte
 update rip.Personas set Persona_DatoCorrupto = 1 where Persona_Email in (select Persona_Email from rip.Personas group by Persona_Email having COUNT(Persona_Email)>1)
+update rip.Personas set Persona_DatoCorrupto = 1 where Persona_NumeroDocumento in (  select Persona_NumeroDocumento from rip.Personas group by Persona_NumeroDocumento, Persona_TipoDocumentoID having COUNT(Persona_NumeroDocumento)>1 )
+
 
 PRINT''
 PRINT '----- Realizando inserts tabla RIP.Hoteles_Regimenes -----'
